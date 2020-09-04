@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-09-04 Fri 08:38 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CalcCheck</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Musa Al-hassy" />
+<meta name="description" content="Abrdiged Lecture Notes"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link href="https://alhassy.github.io/org-notes-style.css" rel="stylesheet" type="text/css" />
+<link href="https://alhassy.github.io/floating-toc.css" rel="stylesheet" type="text/css" />
+
+        <style>
+        /* From: https://endlessparentheses.com/public/css/endless.css */
+        /* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
+        kbd
+        {
+          -moz-border-radius: 6px;
+          -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          background-color: #f7f7f7;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          color: #333;
+          display: inline-block;
+          font-family: 'Droid Sans Mono', monospace;
+          font-size: 80%;
+          font-weight: normal;
+          line-height: inherit;
+          margin: 0 .1em;
+          padding: .08em .4em;
+          text-shadow: 0 1px 0 #fff;
+          word-spacing: -4px;
+
+          box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/tooltipster.bundle.min.css"/>
+
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css" />
+
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-1.10.0.min.js"%3E%3C/script%3E'));
+            }
+        </script>
+
+         <script type="text/javascript"            src="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+
+          <script>
+                 $(document).ready(function() {
+                     $('.tooltip').tooltipster({
+                         theme: 'tooltipster-punk',
+                         contentAsHTML: true,
+                         animation: 'grow',
+                         delay: [100,500],
+                         // trigger: 'click'
+                         trigger: 'custom',
+                         triggerOpen: {
+                             mouseenter: true
+                         },
+                         triggerClose: {
+                             originClick: true,
+                             scroll: true
+                         }
+         });
+                 });
+             </script>
+
+        <style>
+           abbr {color: red;}
+
+           .tooltip { border-bottom: 1px dotted #000;
+                      color:red;
+                      text-decoration: none;}
+        </style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">CalcCheck
+<br />
+<span class="subtitle">Abrdiged Lecture Notes</span>
+</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#">1. <a href="#">Calculational Proofs</a></a></li>
+<li><a href="#Intro">2. <a href="#Intro">Intro</a></a></li>
+<li><a href="#CalcCheck-Manual">3. <a href="#CalcCheck-Manual">CalcCheck Usage Hints</a></a>
+<ul>
+<li><a href="#Calculational-Steps">3.1. <a href="#Calculational-Steps">Calculational Steps</a></a></li>
+<li><a href="#shape-of-calculations">3.2. <a href="#shape-of-calculations">The Shape of Calculations</a></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<p style="display:none">\[
+\def\BEGINstep{ \langle }
+\def\ENDstep{ \rangle }
+\newcommand{\step}[2][=]{ \\ #1 \;\; &amp; \qquad \color{maroon}{\BEGINstep \text{ #2 } \ENDstep} \\ &amp; }
+\newenvironment{calc}{\begin{align*} &amp; }{\end{align*}}
+
+
+
+\def\true{\mathsf{true}}
+\def\false{\mathsf{false}}
+
+\]</p>
+
+<div id="outline-container-orgf1a5154" class="outline-2">
+<h2 id=""><span class="section-number-2">1</span> <a href="#">Calculational Proofs</a></h2>
+<div class="outline-text-2" id="text-">
+<p>
+We advocate <b>calculational proofs</b> in which reasoning is goal directed
+and justified by simple axiomatic laws that can be checked syntactically
+rather than semantically.
+</p>
+
+\begin{calc}
+x
+\step{ reason for x = y }
+y
+\step[\leq]{ reason for y < z }
+z
+\end{calc}
+
+<p>
+The brief calculation above shows \(x ≤ z\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3434aa4" class="outline-2">
+<h2 id="Intro"><span class="section-number-2">2</span> <a href="#Intro">Intro</a></h2>
+<div class="outline-text-2" id="text-Intro">
+<ol class="org-ol">
+<li><p>
+<b>Discrete Mathematics</b>
+includes logic (calculational reasoning), (data) sets, functions, relations,
+graphs, inductive types, and more.
+</p>
+
+<p>
+Conscious and fluent use of the language of (discrete) mathematics
+is the foundation for precise specification and rigorous reasoning
+in Computer Science and Software Engineering
+</p></li>
+
+<li><b>Goal</b>: Understand the mechanics of mathematical expressions and proof.</li>
+
+<li><p>
+<a id="orgafd0f28">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
+</p>
+
+<p>
+<a id="org85a9e7b">Predicate</a>: <a href="#orgafd0f28">Propositional</a> statement about some subjects.
+</p></li>
+
+<li><p>
+<a id="org8666b32">Calculus</a>: Formalised reasoning through calculation.
+</p>
+
+<p>
+‘Hand wavy’ English arguments tend to favour <i>case analysis</i>
+   &#x2014;considering what could happen in each possible scenario&#x2014;
+   which increases exponentially with each variable; in contrast,
+   equality-based calculation is much simpler since it delegates
+   intricate case analysis into codifed algebraic laws.
+</p>
+
+<p>
+E.g., Portia's Suitor's Dilemma has 4 unknowns, each being either true or false,
+and so has \(2^4\) many possible scenarios to consider. Whereas a
+calculation solving the problem can be formed in less than 10 super simple
+lines.
+</p></li>
+
+<li><p>
+<a href="http://calccheck.mcmaster.ca/">CalcCheck</a>: A proof checker for the logic of “A Logical Approach to
+Discrete Math” (‘LADM’).
+</p>
+<ul class="org-ul">
+<li>It <i>checks</i> your arguments in a notation similar to that of the book.</li>
+<li><b>You can check your work before handing it in.</b></li>
+<li>You can formalise your own theorems from other books and check them
+&#x2014;unlimited exercises!</li>
+</ul>
+
+<div class="org-center">
+<p>
+<code>Control + Alt + Enter</code> to check a cell.
+</p>
+</div>
+
+<ul class="org-ul">
+<li><a href="http://calccheck.mcmaster.ca/CalcCheckDoc/">CalcCheckDoc</a> - Documentation including syntax hints and theorem lists</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org173df24" class="outline-2">
+<h2 id="CalcCheck-Manual"><span class="section-number-2">3</span> <a href="#CalcCheck-Manual">CalcCheck Usage Hints</a></h2>
+<div class="outline-text-2" id="text-CalcCheck-Manual">
+</div>
+
+
+<div id="outline-container-orgd98cd9a" class="outline-3">
+<h3 id="Calculational-Steps"><span class="section-number-3">3.1</span> <a href="#Calculational-Steps">Calculational Steps</a></h3>
+<div class="outline-text-3" id="text-Calculational-Steps">
+<p>
+For clarifying terminology, here is an example <b><a id="org27b0a8c">calculation step</a></b>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-calccheck">    x + 2
+  =<span style="color: #FCCE7B;">&#10216; &#8220;Symmetry of +&#8221; &#10217;</span>
+    2 + x
+</pre>
+</div>
+
+<p>
+The part between the hint brackets “⟨” and “⟩” is called the hint for this
+<a href="#org27b0a8c">calculation step</a>, and it serves to justify that the expression before (x + 2) is
+related via the relation denoted by the calculation operator (=) with the
+expression after (2 + x). So, altogether, in this case the hint “Symmetry of +”
+is expected to justify the proposition x + 2 = 2 + x (and it does).
+</p>
+
+<ul class="org-ul">
+<li>Use <code>\&lt;</code> and <code>\&gt;</code> to enter the hint delimiters <code>⟨</code> and <code>⟩</code>.</li>
+</ul>
+
+<p>
+In general, a hint may contain several <b><a id="org48961ea">hint item</a>s</b>; for now, only one <a href="#org48961ea">hint
+item</a> will be allowed per hint, and the only kinds of hint you can use here are:
+</p>
+
+<p>
+Theorem references: These can be
+</p>
+<ul class="org-ul">
+<li>theorem names in pretty double quotes, such as <code>“Unary minus”</code>,
+<ul class="org-ul">
+<li>Enter the quotes with <code>\ldq + TAB</code> and <code>\rdq + TAB</code>, for ‘l’eft and ‘r’ight ‘d’ouble ‘q’uotes.</li>
+<li>After starting a theorem name, press <code>TAB</code> to see <b>possible completions</b>.</li>
+<li>E.g., both <code>\ldq + TAB + Dist + TAB</code> and <code>"Dist + TAB</code> yield the completion
+list for theorems whose names begin with <code>Dist</code>, such as <i>distributivity laws</i>.</li>
+</ul></li>
+<li>theorem numbers, which are always enclosed in parentheses, such as <code>(15.5b)</code></li>
+<li><p>
+combinations of both, which narrow down the selection of theorems to their
+intersection; this is currently mostly useful to disambiguate while still
+documenting the proof via the theorem name:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-calccheck">&#8220;Distributivity of &#183; over -&#8221; (15.29b)
+</pre>
+</div>
+
+<p>
+In that particular case, omitting the number would still be accepted, but the
+system then may explore the unused (15.29a) before it is successful with
+(15.29b).
+</p></li>
+
+<li><i>Basic facts</i> such as: <code>Fact `5 · 6 = 30`</code> . The expression between the backticks
+here has to consist entirely of literals and operators for which built-in
+evaluation is enabled. In particular, expressions containing variables are not
+accepted for <code>Fact</code>; writing <code>Fact `x · 0 = 0`</code> will only get you an unjustified
+step.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7529f9b" class="outline-3">
+<h3 id="shape-of-calculations"><span class="section-number-3">3.2</span> <a href="#shape-of-calculations">The Shape of Calculations</a></h3>
+<div class="outline-text-3" id="text-shape-of-calculations">
+<p>
+Below is an <i>exploratory calculation</i> that <i>begins with a richly structured
+known assumption</i> and <i>proceeds with the sole goal of simplification</i>.  Happily,
+the exploration ends somewhere fruitful and so we decide to <b>name the result
+of the calculation</b> using the (case sensitive clause) <code>This proves: Theorem “⟪name⟫”:
+   ⟪result⟫</code> &#x2014;with no indentation. However, the exploration may not end
+anywhere useful, and so we may keep it around for further study but need not
+name it; as such <code>This prove …</code> is <i>optional</i>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-calccheck"><span style="color: #5cEfFF;">Calculation</span>:
+    S &#8801; (S &#8801; &#172; G)  &#8212; This is &#8220;Inscription on silver casket&#8221;
+  &#8801;<span style="color: #FCCE7B;">&#10216; &#8220;Reflexivity of &#8801;&#8221; &#10217;</span>
+    S &#8801; S &#8801; &#172; G
+  &#8801;<span style="color: #FCCE7B;">&#10216; &#8220;Symmetry of &#8801;&#8221; &#10217;</span>
+    &#172; G
+  &#8801;<span style="color: #FCCE7B;">&#10216; &#8220;Inscription on gold casket&#8221; &#10217;</span>
+    &#172; &#172; gc
+  &#8801;<span style="color: #FCCE7B;">&#10216; &#8220;Double negation&#8221; &#10217;</span>
+    gc
+This proves: Fact &#8220;location of the portrait&#8221;: gc
+</pre>
+</div>
+
+<p>
+The following qualifiers behave the same, it is only the <i>user</i> who
+treats them different, such as treating ‘corollaries’ as consequences
+of grander ‘theorems’.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>Fact</code></td>
+<td class="org-left"><code>Theorem</code></td>
+<td class="org-left"><code>Lemma</code></td>
+<td class="org-left"><code>Corollary</code></td>
+<td class="org-left"><code>Proposition</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The use of a <code>— This is “𝒳”</code> clause is to abbreviate
+calculations that whose first step is as follows:
+</p>
+<div class="org-src-container">
+<pre class="src src-calccheck">   true
+ =<span style="color: #FCCE7B;">&#10216; &#8220;&#119987;&#8221; &#10217;</span>
+</pre>
+</div>
+<p>
+Such calculations are intended to begin with a known, <code>true</code>, result and derive
+new information from it.
+</p>
+<ul class="org-ul">
+<li>Enter <code>\---</code> to obtain the em-dash.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Musa Al-hassy</p>
+<p class="date">Created: 2020-09-04 Fri 08:38</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
