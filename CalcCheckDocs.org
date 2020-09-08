@@ -1,0 +1,1683 @@
+#+TITLE: CalcCheck Reference
+#+AUTHOR: [[http://www.cas.mcmaster.ca/~alhassm/][Musa Al-hassy]]
+#+EMAIL: alhassy@gmail.com
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+
+# For LaTeX PDF generation, toggle the following lines.
+# #+OPTIONS: toc:nil
+#+OPTIONS:   H:4 num:nil toc:2
+
+
+# Make HTML
+# (f-move (org-html-export-to-html) "~/github_calccheck/Docs.html")
+
+* Why The Calculational Method and CalcCheck
+  :PROPERTIES:
+  :CUSTOM_ID: Why-The-Calculational-Method-and-CalcCheck
+  :END:
+
+The pragmatic efficiency of employing the calculational approach for education is well known and is argued
+in a few places. Notable mentions include,
+
++ /A Logical Approach to Discrete Math/, or LADM, by Gries and Schneider, the text book used for teaching logic and discrete mathematics
+  at [[http://www.cas.mcmaster.ca/cas/0template1.php?909][McMaster University in Computing and Software]] for the past seven years.
++ /Program Construction — Calculating Implementations from Specifications/, by Roland Backhouse and it is essentially
+  the LADM applied to software design; and it is has been the text book for [[http://www.cas.mcmaster.ca/~alhassm/][Computer Science 3EA3: Specifications and Correctness]].
++ /Principles and Applications of Algorithmic Problem Solving/, a study in Nottingham supporting using the calculational
+  approach. Online at http://joaoff.com/publications/2009/feedback-calculational/feedback-calculational.pdf
++ *Youtube Video:*
+  [[https://youtu.be/t39wHoFHbvY][A Calculational Proof :: The square root of 2 is irrational]] ---with
+  CalcCheck
+
+What is CalcCheck? It is a proof checker for equational-style proofs.
+Checking proofs is easy enough for being automated; whereas finding proofs is hard and in general requires humans.
+
+Originally, the system used LaTeX input and feedback was presented with Unicode to  the terminal and to HTML.
+Now, the system is in-browser with Unicode support, code completion, coloured errors, and more.
+
+It has an impressive similarity to the programming language [[http://mazzo.li/posts/AgdaSort.html][Agda]] in that it supports
+Unicode mixfix identifiers and allows
+users to implement their own theories and use them. E.g., there is no need to use the theories of LADM.
+
+
+From [[https://link.springer.com/chapter/10.1007/978-3-642-25379-9_17][The Teaching Tool CalcCheck: A Proof-Checker for Gries and Schneider’s “Logical Approach to Discrete Math”]],
+#+BEGIN_QUOTE
+Students following a first-year course based on [[http://www.springer.com/us/book/9780387941158][Gries and Schneider's LADM textbook]] had frequently been asking: “How can I know whether my solution is good?”
+
+We now report on the development of a proof-checker designed to answer exactly that question, while intentionally not helping to find the solutions in the first place. CalcCheck provides detailed feedback to LaTeX-formatted calculational proofs, and thus helps students to develop confidence in their own skills in “rigorous mathematical writing”.
+
+Gries and Schneider's book emphasises rigorous development of mathematical results, while striking one particular compromise between full formality and customary, more informal, mathematical practises, and thus teaches aspects of both. This is one source of several unusual requirements for a mechanised proof-checker; other interesting aspects arise from details of their notational conventions.
+#+END_QUOTE
+
+* A Brief Glance at the CalcCheck Language
+  :PROPERTIES:
+  :CUSTOM_ID: A-Brief-Glance-at-the-CalcCheck-Language
+  :END:
+
+We look at a formal proof in the language and make some remarks that will be expanded on in other sections.
+
+Recall that,
+
++ An equational calculation consists of a sequence of expressions, each on a line (or several lines) of it own, and these expressions are separated by hint lines.
+
++ A hint line contains an equality symbol (later also other symbols) immediately followed by a hint enclosed in angle brackets `⟨' and `⟩'.
+
+For example, ---in UTF-8 encoding---,
+
+#+BEGIN_EXAMPLE
+Theorem (15.17) “Self-inverse of unary minus”: - (- a) = a
+Proof:
+    - (- a)
+  =⟨ “Identity of +”                     ⟩
+    0 + - (- a)
+  =⟨ “Unary minus”
+    — silently using associativity of +  ⟩
+    a + (- a) + - (- a)
+  =⟨ “Unary minus”
+    — silently using symmetry of +       ⟩
+    a + 0
+  =⟨ “Identity of +”                     ⟩
+    a
+#+END_EXAMPLE
+
+** Overall Structure
+   :PROPERTIES:
+   :CUSTOM_ID: Overall-Structure
+   :END:
++ The theorem being proven is given both a number and a name; we may provide more names if we wish.
+
++ The keywords =Theorem= and =Proof= are not indented at all.
+
++ Everything that is part of the theorem needs to be either after the keyword =Theorem=, or indented by at least two spaces on the following lines.
+
++ Proofs by calculation start on the line after the =Proof:=, and every part of the calculation needs to be indented by at least two spaces.
+
+** Hint Level
+   :PROPERTIES:
+   :CUSTOM_ID: Hint-Level
+   :END:
+
++ The hint must be surrounded by spaces: There needs to be at least one space after the opening hint bracket, and at least one space before the closing hint bracket.
+
++ The recommended style for the current calculations is to indent the hint lines by two spaces (from the parent keyword), and indent the expression lines by four spaces (from the parent).
+
+  - The expressions in a calculation need to be indented at least two spaces more than the equality symbols of the hint lines.
+
++ Simple hints consist of theorem names or theorem numbers, separated by commas or by keyword =and=.
+  - Theorem numbers following the style of LADM are delimited by parentheses and consist of numbers, dots, and occasional letters. Examples: =(15.17)=, =(15.25a)=. The enclosure always consists of round parentheses, and there are never any space characters inside.
+
++ Theorem names are delimited by opening and closing double quote characters “ and ”.
+
++ A hint may contain a /comment/ via the `—' token; entered =\---=.
+
+** More on Hints
+   :PROPERTIES:
+   :CUSTOM_ID: More-on-Hints
+   :END:
+
++ A calculation may have an arbitrary number of steps, however one should always strive to find nice, short
+  proofs ---this should become easier with practice.
+  - At times, exceptionally lengthy proofs may incur grading penalties.
+
++ A single hint step may have any number of justifications, separated by commas or =and=.
+  - If too many are provided, the system may /time out/ and request you to =Split proof into smaller steps!=
+  - A hint is to convey how one expression transforms into another, so they are usually not more than 3 justifications.
+  - At times, for learning purposes, we may restrict the number of hints to be 1.
+    + In such a scenario, even though only one theorem reference is allowed, that theorem may be applied more than once in that step.
+    + Using 2 hints, for example, results in: =Only 1 item allowed per hint, but 2 items encountered!=
+
+** Unicode Identifiers and a Template
+   :PROPERTIES:
+   :CUSTOM_ID: Unicode-Identifiers-and-a-Template
+   :END:
+
+Multi-letter variable names are supported in a rather liberal way. Therefore, spaces around operators are necessary almost everywhere.
+
+  - E.g., the application of a unary minus symbol to a name is rendered =- x=, without the space =-x= is a name!
+
+A helpful idea when programming is that of /sanity checks/: Checking your progress periodically. The same holds for proving.
+When one declares their theorem, they may want to immediately write down the structure of the proof-body. To do so they may
+use (non-special) /variable/ =?= ---or any other variable they like--- and /special hint token/ =?= to get their template going:
+#+BEGIN_EXAMPLE
+Theorem “My Result”: lhs = rhs
+Proof:
+   lhs
+  =⟨ ? ⟩
+    ?
+  =⟨ ? ⟩
+   rhs
+#+END_EXAMPLE
+So one may use the special hint =?= and the non-special variable name =?= to make /holes/ in their calculation as they are constructing it.
+One immediate benefit is to be able to proof-check, or syntax-check, one's progress.
+
+Type-checking the above results in the middle expression =?= to be coloured blue since it is a variable name, and for the two hints =?= we see
+#+BEGIN_EXAMPLE
+— CalcCheck: “?” does not prove anything!
+— CalcCheck: Not-yet-implemented hint item encountered.
+— CalcCheck: Incomplete hint, not checked.
+#+END_EXAMPLE
+
+# Once more: Expressions in a calculation are indented four spaces from the parent keyword, while hint justifications are indented only two from the parent.
+
+* CalcCheck_Web
+  :PROPERTIES:
+  :CUSTOM_ID: CalcCheck-Web
+  :END:
+
+This section tries to help you getting started with the /web interface aspects/ of CalcCheck_Web.
+
+There are two kinds of cells:
+
++ Code cells :: are intended for the formal CalcCheck content.
+  - They are displayed as a cell box containing two boxes, which are currently displayed side-by-side: The left box is the text entry area, and the right box shows CalcCheck output.
+
++ MarkDown cells :: are intended for natural-language documentation and explanations.
+  - They are displayed as a cell box containing just one box.
+  - MarkDown cells either show the MarkDown source on a /light green background/ in an entry box, or the generated HTML in a box that cannot be edited.
+  - Sending a source cell with =Ctrl-ENTER= generates HTML on the server, and then displays that.
+
+Each cell is in one of the following two modes:
++ Edit mode :: The cursor is active in the text area, and the text area is displayed in a lighter colour lighter than label to the left.
+  - Clicking on a text entry area forces a cell into edit mode.
+  - If the current cell is in edit mode, then the text area has focus, and you have a cursor (or selection) there.
++ Command mode :: The label to the left is lighter.
+  - Clicking on the label to the left forces a cell into command mode.
+  - If the current cell is in command mode, then the outer box has focus, and a slightly thicker line than the outer boxes of the other cells.
+
++ Pressing the =Enter= key switches the current cell from command mode into edit mode.
++ Pressing the =Esc= key switches the current cell from edit mode into command mode.
+
+The following key bindings work the same in both modes:
+
+** Key Bindings for both modes
+   :PROPERTIES:
+   :CUSTOM_ID: Key-Bindings-for-both-modes
+   :END:
+
+| Ctrl-Enter | performs a syntax check on the contents of all code cells before and up to the current cell.
+| Ctrl-Alt-Enter | performs proof checks on the contents of all code cells before and up to the current cell.
+| Shift-Ctrl-v | (for visible spaces) toggles display of initial spaces on each line as “␣” characters.
+| Ctrl-/ | splits the cell at the current cursor point.
+| Ctrl-s | saves the notebook on the server, ONLY if you are logged in via Avenue.
+(Links for reloading the last three saved versions are displayed when you load the notebook again later.)
+
+** Key Bindings for /command mode/
+   :PROPERTIES:
+   :CUSTOM_ID: Key-Bindings-for-command-mode
+   :END:
+
+| Enter		| enters edit mode
+| a		| inserts a code cell above the current cell
+| A		| inserts a MarkDown cell above the current cell
+| b		| inserts a code cell below the current cell
+| B		| inserts a MarkDown cell below the current cell
+| x		| clears the output area for current code cell
+| Ctrl-x	| clears the output areas for all code cells
+| d		| deletes the current cell, with a confirmation dialogue — there is no “undo”
+| DownArrow	| shifts focus onto the next cell
+| UpArrow	| shifts focus onto the previous cell
+
+** Key Bindings for /edit mode/
+   :PROPERTIES:
+   :CUSTOM_ID: Key-Bindings-for-edit-mode
+   :END:
+| Esc   | enters command mode
+| \     | brings up symbol completion menu, see below
+| TAB   | If there is a left double quote (“) or a normal double quote character (") at least three characters to the
+left of the cursor, TAB brings up the theorem name completion menu if those charaters are the start
+of at least one theorem name.
+
+** Completion menus
+   :PROPERTIES:
+   :CUSTOM_ID: Completion-menus
+   :END:
+
+Completion menus are mostly “normal menus”.
+| Any key starting some options | narrows down to only those options
+| Enter | selects the current option
+| TAB | If there is an option requiring no further input, then that is selected.
+Otherwise, if all current options  start with the same non-empty prefix,
+then the longest such prefix needs not be typed anymore.
+
+
+(Visual feedback for this latter functionality is not yet there.)
+
+The /symbol completion menu/ displays besides each symbol the sequence of characters to be input for obtaining it. For many symbols, their LaTeX macro is one of the possibilities.
+
+** Standard Browser Bindings
+   :PROPERTIES:
+   :CUSTOM_ID: Standard-Browser-Bindings
+   :END:
+
+Some standard functionality of your browser and/or windowing system will typically still be available, including:
+|Ctrl-a | selects all contents of current cell
+|Ctrl-x | cuts selected contents (to an internal clipboard)
+|Ctrl-c | copies selected contents (to the clipboard)
+|Ctrl-v | pastes the clipboard contents
+
+If you are using the X11 window system (that is, essentially if you are on Linux or FreeBSD/PC-BSD/OpenBSD), you also have
+selection by =MouseLeft-down-and-drag= and paste by =MouseMiddle-click=.
+
+** Identifier Colouring
+   :PROPERTIES:
+   :CUSTOM_ID: Identifier-Colouring
+   :END:
+Existing names are coloured yellow, variable names are in blue ---in the proof checked output.
+
+- This explains why, for example, =- n= is a valid expression when working with naturals:
+    The unary minus symbol is interpreted as a function variable!
+
+- Remember that variable names may be (almost) any whitespace-free sequence of symbols.
+
+** Inputting Special Characters
+   :PROPERTIES:
+   :CUSTOM_ID: Inputting-Special-Characters
+   :END:
+
+These special characters can be entered via character completion, which is triggered by typing a backslash (“\”). Special keystrokes in that mode:
+
++ =“ESC”= Removes the popup and the material typed so far, including the backslash (if it is still displayed).
++ =“Ctrl-SPACE”= Leaves the text in the current state, removing the popup.
++ =“ENTER”= If the menu is displayed, uses the current selection; otherwise leaves the text in the current state, but adding a line break, removing the popup.
++ =“BACK_SPACE”= Undoes the narrowing of options performed by the previously-typed character. If only the backslash had been typed, removes that and the popup.
+# ??
+# Key “k” from the options displayed between brackets “[ ]”:
+# ??
+# Other key “k”:
+# Removes the popup and leaves the text in the current state, also inserting k.
+# ??
++ =“TAB”= If an extension of the currently typed prefix is common to all still-active options, narrow down to the maximal such extension. Otherwise, display the menu.
+
+** Sample Unicode Input Sequences
+   :PROPERTIES:
+   :CUSTOM_ID: Sample-Unicode-Input-Sequences
+   :END:
+
+# Some important symbols (if this does not display correctly, choose Unicode (UTF-8) character encoding in your browser):
+#
+#+begin_parallel org
+| _Symbol_ |    _Key sequence(s)_
+| ⟨	 | =\<, \langle, \beginhint=
+| ⟩	 | =\>, \langle, \endhint=
+| “	 | =\``, \ldquo=
+| ”	 | =\'', \rdquo=
+| ·	 | =\., \cdot=
+| ≤	 | =\leq=
+| ≥	 | =\geq=
+| 𝔹	 | =\BB, \bool=
+| ℕ	 | =\NN, \nat=
+| ℤ	 | =\ZZ, \int=
+| ℚ	 | =\QQ, \rat=
+| ℝ	 | =\RR, \real=
+| ℙ	 | =\PP, \powerset=
+| ≡	 | ====, =\equiv=
+| ¬	 | =\lnot=
+| ∨	 | =\lor=
+| ∧	 | =\land=
+| ⇒	 | =\implies, \=>=
+| —	 | =\----=
+| ∀	 | =\forall=
+| ∃	 | =\exists=
+| ∑	 | =\sum=
+| ∏	 | =\product=
+| ↓	 | =\min=
+| ↑	 | =\max=
+# | ⟪	 | =\<<=
+# | ⟫	 | =\>>=
+
+@@latex: \columnbreak@@
+
+| _Symbol_  |   _Key sequence(s)_
+| 𝜖	    | =\eps=
+| ε         | =\epsilon=
+| ∈        | =\in=
+| ∋        | =\ni, \haselement=
+| ⊆        | =\subseteq=
+| ⊂        | =\subset=
+| ⊃        | =\supset=
+| ⌢         | =\catenate, \++=
+| ∩        | =\intersection=
+| ∪        | =\union=
+| 𝑼         | =\universe=
+| ❙        | =\with=
+| •         | =\spot=
+| ₁¹, ₂², …, ₉⁹ | =\_1 \^1, \_2 \^2, \_9 \^9=
+| ₙ          | =\_n=
+| ⨾         | =\;=
+| αβγζ      | =\alpha \beta \gamma \zeta=
+
+
+The majority of =CalcCheck= input sequences correspond to their standard LaTeX counterparts.
+
+#+end_parallel
+
+* Elementary uses of CalcCheck
+  :PROPERTIES:
+  :CUSTOM_ID: Elementary-uses-of-CalcCheck
+  :END:
+
+Here we cover the most basic constructions to get going with the CalcCheck system.
+Later parts introduce syntactic sugar to expand on these constructs and improve
+clarity for readers of proofs as well as writers of proofs.
+
+**   =By, Declaration, Explanation= and =Axiom=-atisation
+   :PROPERTIES:
+   :CUSTOM_ID: By-Declaration-Explanation-and-Axiom-atisation
+   :END:
+
+ To showcase the keywords in the section title, we begin with a puzzle:
+
+ #+BEGIN_QUOTE
+ You and a friend are playing a game where you arrange a collection of balls in the shape of a right-angle triangle
+ such that the /i/-th row has precisely /i/-many balls in it. How many balls do you need to make a triangle with 100
+ rows?
+ #+END_QUOTE
+
+ Our setup has the naturals formed from =0= and the successor operation =S=;
+ #+BEGIN_EXAMPLE
+ Declaration: T : ℕ → ℕ
+ Explanation: T n := “the area of our discrete triangles.”
+
+ Axiom “Super Small Triangle” “Definition of T on 0”: T 0 = 0
+ Axiom “Triangle with new base” “Definition of T on `S`”: T (S n) = (S n) + T n
+ #+END_EXAMPLE
+
+ Notice that
+ + Declaration :: We introduced a name =T= to assist in our calculation.
+ + Explanation :: We gave a colloquial English explanation to document what it represents when evaluated.
+ + Axiom :: We defined it inductively and gave alternate names for the clauses for the sake of readability.
+   - Axioms need to be chosen carefully! Too strong and you may prove anything you want, including =false=;
+     too weak and you will not be able to make progress in your problem.
+
+ - Important :: All colons, part of a keyword phrase, cannot be preceded by a space.
+   - This includes =Theorem “X”:, Proof:, Axiom “A_1” “A_2” ⋯ “A_N”:, Explanation:, Declaration:=
+   - In the previous item, the =A_i= denote the alternate names for the axiom being declared.
+
+ To wrap-up the example: We know from grade school that a triangle’s area is half its height times its base and so aim to use this to solve
+ our problem. Since multiplication is less messy than the non-associative division, we remove divisions in-favour of
+ multiplications to obtain the conjecture that =2 · T n = n · (n + 1)=.
+ This candidate solution can be verified by =induction=, which is covered in a later section.
+
+ As another example, we show how (a variant of) the natural numbers may be defined:
+ #+BEGIN_EXAMPLE
+ Declaration: Nat  : Type
+ Declaration: Zero : Nat
+ Declaration: Succ : Nat → Nat
+ #+END_EXAMPLE
+
+ Observe
+ + The type =Type= serves to introduce new types.
+ + The second declaration serves to show that the declared type is non-empty.
+ + The third declaration provides us with a method to construct /possibly/ new elements
+   from existing elements.
+   - /Possibly/ new-elements since we are not guaranteed that =Succ n ≠ n=.
+   - This is an /axiomatic/ definition: We have only what we see, what we declared.
+   - This is not an /inductive/ definition: We are not given an induction principle for the type.
+
+ However, the built-in naturals do come with an induction principle and helpful syntactic-sugar for performing
+ =induction= proofs ---more on this later.
+
+ We can always express additional axioms for our defined types; e.g.,
+ #+BEGIN_EXAMPLE
+ Axiom “Cancellation of Succ” “Succ injectivity”: Succ m = Succ n  ≡  m = n
+ Axiom “Zero is not Succ” “0≠+1”: Zero = Succ n  ≡  false
+ #+END_EXAMPLE
+
+ Recall that we can have /unicode identifiers/ for names.
+
+ #+BEGIN_EXAMPLE
+ Theorem “0≠1”: Zero ≠ Succ Zero
+ Proof: By “0≠+1” and “Definition of ≠” and (3.15)  — i.e. ¬ p ≡ p ≡ false
+ #+END_EXAMPLE
+
+ Finally, the =By= syntax allows us to take a simple proof and render it in one-line:
+ We ignore the expressions in a calculation and merely list the hints.
+ - This is a good idea when a result is an instance of a more general result or is two or three clear steps.
+ - This is not a good idea when a result is many steps or the steps are unclear and seeing the expressions would
+   assist in understanding the proof.
+
+** Adventuring with =Calculation=
+   :PROPERTIES:
+   :CUSTOM_ID: Adventuring-with-Calculation
+   :END:
+ # =Calculation, Declaration, Explanation=, and Commentation
+
+ Sometimes we do not have a particular theorem we wish to prove, but are rather attempting to solve a problem by manipulating some given data. In such a case, the =Theorem= keyword is inappropriate since we do not know what we are aiming at calculating. Instead we use the =Calculation= keyword. If later we wish to name the result of our calculation for referencing purposes, we may append the calculational proof with the key-phrase =This proves “My new result”=.
+
+ We shall provide an example to illustrate this keyword, and along the way we again showcase the keywords of the previous section.
+ + =Declaration=, to bring a typed name into scope
+ + =Explanation=, to document a name.
+ + — is entered via =\---= and it permits a one-line /comment/ within a hint.
+   - This comment token must be followed by a space.
+
+ The example: Adapted from Raymond Smullyan’s /Alice in Puzzleland/,
+ #+BEGIN_QUOTE
+ “How about making us some nice tarts?” the King of Hearts asked the Queen of Hearts one cool summer
+ day.
+
+ “I can’t!” shouted the Queen. “A necessary item has been stolen!”
+
+ “Really! said the King. ‘This is quite serious! Who stole it?”
+
+ “How do you expect me to know who stole it? If I knew, I would have had it back long ago and the
+ miscreant’s head in the bargain!”
+
+ Well, the King had his soldiers scout around for the missing item, and it was found in the house of the March
+ Hare, the Mad Hatter, and the Dormouse. All three were promptly arrested and tried.
+
+ The puzzle is to deduce the criminal(s) from what the defendants have to say and the findings of the investigators
+ that found them.
+
+ The defendants had the following to say:
+   | March Hare: | /The Hatter stole it./ |
+   | Mad Hatter: | ---said nothing---     |
+   | Dormouse :  | ---said nothing---     |
+
+ As subsequent investigation revealed, only one of the three had stolen the flour, and he was the only one of the
+ three who told the truth.
+ #+END_QUOTE
+
+ There is no =Theorem= to prove, but a =Calculation= may be performed provided we furnish ourselves with a sufficient setup.
+
+ We begin my formalising the candidates of the crime,
+ #+BEGIN_SRC
+ Declaration: R, H, M : 𝔹
+ Explanation: R := “the `R`abbit, the March Hare, stole the item”
+ Explanation: H := “the `H`uman, the Mad Hatter, stole the item”
+ Explanation: M := “the `M`ouse, the Dourmouse, stole the item”
+ #+END_Src
+
+ Then we explicitly clarify what was said,
+ | March Hare: |  H
+ | Mad Hatter: |  ---
+ | Dormouse:  |  ---
+
+ The investigation’s findings are the only true things we have, so we being there.
+ That /only one of the three had stolen the flour/ means we have =R ≢ H ≢ M=, and that the thief /was the only
+ one of the three who told the truth/ means that the rabbit –the only one whose statement we know– is the thief
+ precisely if what he claims is true; i.e., =R ≡ H=.
+
+ With these formalisation in hand, we calculate,
+ #+BEGIN_SRC
+ Calculation:
+     (R ≡ H) ∧ (R ≢ H ≢ M)
+   ≡⟨ “Definition of ≢” and “Double Negation”
+      — silently using associativity of ≢ ⟩
+     (R ≡ H) ∧ (R ≡ H ≡ M)
+   ≡⟨ “Substitution” and “Identity of ≡” ⟩
+     (R ≡ H) ∧ M
+   ⇒⟨ “Weakening” ⟩
+     M
+ This proves: Theorem “Deducing the Criminal”: (R ≡ H) ∧ (R ≢ H ≢ M)  ⇒  M
+ #+END_SRC
+
+ Hence the thief is the `M`ouse: The Dormouse stole the flour.
+
+ @@latex: \nopar@@
+ Note that =“Substitution”= above refers to a theorem of propositional logic, namely \\ $e = f ∧ E[z := e] \;\;≡\;\; e = f ∧ E[z := f]$,
+ not the keyword =Substitution= which provides a rewrite rule for terms of the shape /E[x := expr]/.
+
+** Rigid Matching with =with=
+   :PROPERTIES:
+   :CUSTOM_ID: Rigid-Matching-with-with
+   :END:
+ # Indicating Substitutions for Theorem References in CalcCheck Hints
+
+ Here we document how a theorem mentioned in a hint is applied in a particular case, a substitution can be provided following the keyword =with=.
+
+ For example,
+ #+BEGIN_SRC
+ Theorem (15.19): -(a + b) = (- a) + (- b)
+ Proof:
+     -(a + b)
+   =⟨ (15.20) with `a := a + b` ⟩
+     - 1 · (a + b)
+   =⟨ “Distributivity of · over +” with `a, b, c := - 1, a, b` ⟩
+     - 1 · a + - 1 · b
+   =⟨ (15.20) with `a := a` ⟩
+     - a + - 1 · b
+   =⟨ (15.20) with `a := b` ⟩
+     - a + - b
+ #+END_SRC
+
+ Note:
+
+ + There are spaces around =with=.
+
+ + The substitution is surrounded by backquotes (=`=).
+   - On most keyboards, the backquote is in the upper left corner, on the same key as the tilde (=~=).
+   - Other quote-like characters will not work.
+   - The use of backquotes here is following the MarkDown convention, according to which code pieces embedded in English sentences are surrounded by backquotes.
+
+ + The substitution notation is that of LADM: $\mathsf{variables} :\!= \mathsf{expressions}$
+   - The variable list has the same length as the expression list.
+   - No variable occurs twice in the variable list.
+   - The “becomes” symbol $:\!=$ is obtained via the symbol completion sequence ~\:=~ (backslash-colon-equal).
+   - Writing two-character sequence colon-equal /:=/ will not work; the one-character becomes $:\!=$ must be used.
+
+ When CalcCheck is invoked “with rigid matching”:
+ + All theorem variables in a hint justification need to be substituted possibly in the form =a:=a=.
+ + Otherwise, messages like =Rule variable `a` not substituted!= will be produced when proof checking.
+ + When a theorem is invoked with a particular substitution then it may be applied more than once in that step
+   but all such applications would need to be with that substitution.
+
+** Textual =Substitution=
+   :PROPERTIES:
+   :CUSTOM_ID: Textual-Substitution
+   :END:
+
+ Let =E= and =R= expressions and let =x= be a variable. We write =E[x∶=R]= denote an expression that is the same as =E= but with all occurrences of =x= replaced by =(R)=.
+ - This concept allows one to define /function application/ where a `function' is an alias for a particular expression.
+ - This concept is integral in /evaluating programs/ in (functional) programming languages.
+ - In general, =R= and =x= may be lists of expressions and distinct variables, respectively, of the same length, then the result =E[x:=R]= is the /simultaneous replacement/ of variables =x= by
+   corresponding expressions =R=. @@latex: \\@@ Python, for example, has a similar feature: Concurrent assignment.
+
+ Applying a substitution is performed with the =Substitution= keyword; as in
+
+ #+BEGIN_EXAMPLE
+ Calculation:
+     (3 · x + y)[y := x + 2]
+   =⟨ Substitution ⟩
+     3 · x + (x + 2)
+   =⟨ “Reflexivity of =” ⟩
+     3 · x + x + 2
+   =⟨ “Identity of ·” ⟩
+     3 · x + 1 · x + 2
+   =⟨ “Distributivity of · over +” ⟩
+     (3 + 1) · x + 2
+   =⟨ Evaluation ⟩
+     4 · x + 2
+ #+END_EXAMPLE
+
+ + Steps that just omit unnecessary parentheses can be explained with =“Reflexivity of =”= as hint.
+ + Just as with =with=, the /becomes/ symbol must be used rather than colon-equal /:= /  !
+
+ To see that a sequential substitution differs from a simultaneous one, consider working out the following,
+ #+BEGIN_EXAMPLE
+ Calculation:
+     (2 · x + 3 · y)[x := y + 7][y := x + 6]
+
+ Calculation:
+     (2 · x + 3 · y)[x, y := y + 7, x + 6]
+ #+END_EXAMPLE
+
+** Rewriting with =Evaluation=
+   :PROPERTIES:
+   :CUSTOM_ID: Rewriting-with-Evaluation
+   :END:
+
+ The =Evaluation= keyword rewrites integer expressions having /no variables/ as integer values.
+ For example, @@latex: \\@@ =(3 - 2) · x= is rewritten to =1 · x= since the integer expression =3 - 2= reduces to =1=.
+ Moreover, the rewrite does not continue any further to, say, =x= since =1 · x = x= involves a variable and so must be proven as a theorem
+ and then invoked in a hint by its name.
+
+ We shall demonstrate these ideas by solving a system of integer equations in a very constrained way.
+
+ Given the system
+ #+BEGIN_SRC
+ Declaration: r, s : ℤ
+
+ Axiom (1): 5 · r + 8 · s = 49
+ Axiom (2): 6 · r + 7 · s = 51
+ #+END_SRC
+ We attempt to solve for one of the unknowns: ---the numbers on the side are for commentary purposes only---
+ #+BEGIN_EXAMPLE -n
+ Calculation:
+     r
+   =⟨ “Identity of ·” ⟩
+     1 · r
+   =⟨ Evaluation ⟩
+     (6 - 5) · r
+   =⟨ “Distributivity of · over -” ⟩
+     6 · r - 5 · r
+   =⟨ “Subtraction” ⟩
+     6 · r + -(5 · r)
+   =⟨ “Identity of +” ⟩
+     6 · r + 0 + -(5 · r) + 0
+   =⟨ “Unary minus” and “Distributivity of unary minus over +” ⟩
+     6 · r + 7 · s + -(7 · s) + -(5 · r + 8 · s) + 8 · s
+   =⟨ (2) and (1) ⟩
+     51 + -(7 · s) + - 49 + 8 · s
+   =⟨ Evaluation and (15.22)
+      — (15.22): a · (- b) = - (a · b) ⟩
+    (- 7) · s + 8 · s + 2
+   =⟨ “Distributivity of · over +” and Evaluation and “Identity of ·” ⟩
+     s + 2
+ This proves: Theorem “`r` in terms of `s`”: r = s + 2
+ #+END_EXAMPLE
+
+ Observe
+
+ + Line 3 could not have been an =Evaluation= since there the expression being rewritten contains variables.
+ + Line 5 rewrites only the integer subexpression that does not contain any free variables.
+ + Line 15 references the axioms by the numbers assigned to them.
+ + Line 18 is a comment to remind the reader the statement of LADM's theorem =(15.22)=.
+ + Line 22 gives a name to the result of this calculation so that it can be used in further calculations, such as to prove =s = 3= and =r = 5=.
+
+ At times, the keyword =Evaluation= is not permitted as a justification; it is disabled.
+
+**   =—  This is= Saves the Day, or two lines
+   :PROPERTIES:
+   :CUSTOM_ID: This-is-Saves-the-Day-or-two-lines
+   :END:
+
+ One way to show a statement is a theorem is by proving that it equivales an existing theorem.
+ This short-circuiting of a calculation occurs by appending the final line of a calculation
+ with =— This is <<theorem reference here>>=. That is, this syntax justifies the other end of an ≡-chain.
+
+   - This is not a a usual comment!
+   - The spacing and capitalisation in =—  This is= is fixed.
+   - It currently only parses with /only single spaces/ around =This= and =is=.
+
+ For example, if we have a theorem =“q is a Theorem”= that proves statement =q=,
+ then we could prove a statement =p= is true as follows,
+ #+BEGIN_EXAMPLE
+ Theorem “p is a theorem”: p
+ Proof:
+     p
+   ≡⟨ hint ⟩
+     …
+   ≡⟨ hint ⟩
+     q  —  This is “q is a Theorem”
+ #+END_EXAMPLE
+ This really saves us two lines since it is equivalent to,
+ #+BEGIN_EXAMPLE
+ Theorem “p is a theorem”: p
+ Proof:
+     p
+   ≡⟨ hint ⟩
+     …
+   ≡⟨ hint ⟩
+     q
+   ≡⟨ “q is a Theorem” ⟩
+     true
+ #+END_EXAMPLE
+
+ Why do these templates suffice to prove =p= is a theorem when the
+ calculations explicitly prove =p ≡ true=? It is the =“Identity of ≡”=
+ which states =(p ≡ true) ≡ p= that permits this.
+
+ Like all identity statements, this rule implies that occurrences of /“≡ true”/,
+ or /“true ≡”/, in an expression are redundant and so are eliminated unless there
+ is a compelling reason otherwise.
+
+ Note that =true= is itself a theorem: It is LADM's theorem (3.4).
+ As such, we could append the previous calculation with
+ =— This is (3.4)=, however this would be redundant and should not be performed.
+ As such, the =“Identity of ≡”= is tantamount to saying that no /“— This is”/ syntax
+ is required for =true=, the least interesting theorem.
+
+ *Warning* The =— This is= syntax currently does not work with keyword =Assumption= nor =induction hypothesis=.
+
+** Automatic Associativity and Symmetry
+   :PROPERTIES:
+   :CUSTOM_ID: Automatic-Associativity-and-Symmetry
+   :END:
+
+CalcCheck allows us to reason /up to symmetry and associativity/: If an operation has been to be proven to have one of these properties,
+then it can be admitted to CalcCheck's rewrite rules and no explicit call to such a result is henceforth necessary.
+- Making symmetry and associativity steps explicit is always allowed; it is sometimes very useful for readability.
+- For learning purposes, such features are sometimes /disabled!/ E.g., /Exercise 1.4/ and /Assignment 1.3/.
+
+For example, if we define addition
+#+BEGIN_EXAMPLE
+Declaration: _+_ : ℕ → ℕ → ℕ
+
+Axiom “Definition of +”
+      “Left-identity of +”
+      “Definition of + for 0”:        0 + n = n
+Axiom “Definition of +”
+      “Addition of successor”
+      “Definition of + for `S`”:  (S m) + n = S (m + n)
+#+END_EXAMPLE
+
+( Note that we are using multiple aliases for the particular definition clauses for readability purposes. )
+
+Then if we can realise
+#+BEGIN_EXAMPLE
+Theorem “Associativity of +”: (a + b) + c = a + (b + c)
+Proof: ?
+#+END_EXAMPLE
+
+Then we can set the properties to be implicit:
+#+BEGIN_EXAMPLE
+Activate associativity property “Associativity of +”
+#+END_EXAMPLE
+
+Now calculations involving addition needn not both explicit calls to this theorem.
+
+In a similar fashion,
+#+BEGIN_EXAMPLE
+Theorem “Symmetry of +”: m + n = n + m
+Proof: ?
+
+Activate symmetry property “Symmetry of +”
+#+END_EXAMPLE
+
+**   =induction= Proofs
+   :PROPERTIES:
+   :CUSTOM_ID: induction-Proofs
+   :END:
+
+ For an expression =P=, an induction proof looks as follows:
+ #+BEGIN_EXAMPLE
+ Theorem: P
+ Proof:
+   By induction on `m ∶ ℕ`:
+   Base case:
+     Proof for P[m := 0]
+   Induction step:
+     Proof for P[m := S m] using Induction hypothesis P
+ #+END_EXAMPLE
+ #  ---note that there is no space befor the colon.
+
+ For example, with the setup
+ #+BEGIN_SRC
+ Declaration: _≤_ : ℕ → ℕ → 𝔹
+
+ Axiom “Zero is least element”:           0 ≤ a
+ Axiom “Isotony of successor”:          S a ≤ S b  ≡  a ≤ b
+ Axiom “Successor is not at most zero”: S a ≤ 0    ≡ false
+
+ Theorem “Zero is unique least element”:    a ≤ 0  ≡  a = 0
+ #+END_SRC
+ We can show that mutually contained numbers are necessarily equivalent.
+ #+BEGIN_EXAMPLE
+ Theorem “Antisymmetry of ≤”: a ≤ b ⇒ b ≤ a ⇒ a = b
+ Proof:
+   By induction on `a : ℕ`:
+     Base case `0 ≤ b ⇒ b ≤ 0 ⇒ 0 = b`:
+         0 ≤ b ⇒ b ≤ 0 ⇒ 0 = b
+       ≡⟨ “Zero is unique least element” ⟩
+         0 ≤ b ⇒ b = 0 ⇒ 0 = b
+       ≡⟨ “Reflexivity of ⇒” ⟩
+         0 ≤ b ⇒ true
+       ≡⟨ “Right-zero of ⇒” ⟩
+         true
+     Induction step `S a ≤ b ⇒ b ≤ S a ⇒ S a = b`:
+       By induction on `b : ℕ`:
+         Base case `S a ≤ 0 ⇒ 0 ≤ S a ⇒ S a = 0`:
+             S a ≤ 0 ⇒ 0 ≤ S a ⇒ S a = 0
+           ≡⟨ “Zero is least element” ⟩
+             S a ≤ 0 ⇒ true ⇒ S a = 0
+           ≡⟨ “Left-Identity of ⇒” ⟩
+             S a ≤ 0 ⇒ S a = 0
+           ≡⟨ “Zero is unique least element” ⟩
+             S a = 0 ⇒ S a = 0
+           ≡⟨ “Reflexivity of ⇒” ⟩
+             true
+         Induction step `S a ≤ S b ⇒ S b ≤ S a ⇒ S a = S b`:
+             S a ≤ S b ⇒ S b ≤ S a ⇒ S a = S b
+           ≡⟨ “Isotony of successor” ⟩
+             a ≤ b ⇒ b ≤ a ⇒ S a = S b
+           ≡⟨ “Cancellation of `S`”⟩
+             a ≤ b ⇒ b ≤ a ⇒ a = b
+           ≡⟨ induction hypothesis `a ≤ b ⇒ b ≤ a ⇒ a = b` ⟩
+             true
+ #+END_EXAMPLE
+ Observe
+
+ + We performed a double induction since the definition of containment `≤' is defined inductively on both arguments.
+
+ + This is an involved proof and so we /communicated/ our intentions to the system at each proof obligation by
+   indicating our proof goal in =`= back-ticks =`=.
+
+ + A double induction means that the key-phrase =induction hypothesis= is /ambiguous/; we communicate which one we want to utilise by enclosing the hypothesis in =`= back-ticks. =`=
+
+ Similar to some programming languages, recall that the CalcCheck system is indentation and case sensitive.
+
+#+NAME: \part{Advanced Features}
+#+BEGIN_EXPORT latex
+\part{Advanced Features}
+
+In this section we show how conventional proof styles
+can be adapted into the CalcCheck system.
+In-particular we show a variety of new syntactical constructs
+as well as how their services can be obtained in the core language
+from the previous part.
+#+END_EXPORT
+
+* Extending the left-column
+  :PROPERTIES:
+  :CUSTOM_ID: Extending-the-left-column
+  :END:
+
+Leibniz ---substituting equals for equals---
+can be formulated as the =“Substitution”= principle:
+\[ e = f ∧ E[z :\!= e] \quad≡\quad e = f ∧ E[z :\!= f] \]
+
+This rule permits us, for any relation =_∼_=, to take a proof of the shape
+#+BEGIN_EXAMPLE
+Theorem: a ∼ c
+Proof:
+    a ∼ c
+  ≡⟨ “Identity of ∧” and “Hint why a = b” ⟩
+    a = b  ∧ a ∼ c
+  ≡⟨ “Substiution” ⟩
+    a = b ∧ b ∼ c
+  ≡⟨ “Hint why b ∼ c” and “Hint why a = b”  and “Identity of ∧” ⟩
+    true
+#+END_EXAMPLE
+and render it more succinctly as
+#+BEGIN_EXAMPLE
+Theorem: a ∼ c
+Proof:
+    a
+  =⟨ “Hint why a = b” ⟩
+    b
+  ∼⟨ “Hint why b ∼ c” ⟩
+    c
+#+END_EXAMPLE
+
++ This relaxed proof demonstrates =a = b ∧ b ∼ c=
++ By Leibniz, this yields =a = b ∧ a ∼ c=
++ Then by weakening, /p ∧ q ⇒ q/, this yields =a ∼ c=.
+
+As it stands, we can have only /one/ occurrence of the relation =_∼_= in the left-column since
+we are not ensured that multiple occurrences can be “glued” into a single one.
+Hence, relations =_∼_= proven to be transitive, @@latex: \newline@@ =x ∼ y ∧ y ∼ z ⇒ x ∼ z=, can appear multiple
+times in the left-column of a calculation.
+
+#+NAME: minimal working examples
+#+begin_parallel haskell
+_Minimal working example for transitive relations:_
+#+BEGIN_EXAMPLE
+Declaration: X : Type
+
+Precedence 25 for: _~_
+Declaration: _~_ : X → X → 𝔹
+
+Axiom “Transitivity of ~”:
+   (x ~ y) ∧ (y ~ z) ⇒ (x ~ z)
+
+Activate transitivity property
+   “Transitivity of ~”
+
+Declaration: P, A, Q, B, R : X
+Axiom (0): P = A
+Axiom (1): A ~ B
+Axiom (2): B = Q
+Axiom (3): Q ~ R
+
+Theorem “T0”: P ~ R
+Proof:
+    P
+  =⟨ (0) ⟩
+    A
+  ~⟨ (1) ⟩
+    B
+  =⟨ (2) ⟩
+    Q
+  ~⟨ (3) ⟩
+    R
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+_Minimal working example for *non*-transitive relations:_
+#+BEGIN_EXAMPLE
+Declaration: X : Type
+
+Precedence 25 for: _~_
+Declaration: _~_ : X → X → 𝔹
+
+Declaration: P, A, Q, B : X
+Axiom (0): P = A
+Axiom (1): A ~ B
+Axiom (2): B = Q
+
+Theorem “T1”: P ~ Q
+Proof:
+    P
+  =⟨ (0) ⟩
+    A
+  ~⟨ (1) ⟩
+    B
+  =⟨ (2) ⟩
+    Q
+#+END_EXAMPLE
+
+
+The calculational style is valid for any non-transitive relation /as long as it occurs only *once*/
+in the left-column.
+
+#+end_parallel
+
++ In-practice, the =Axiom='s seen here are actually =Theorem='s.
++ Without the =Activate transitivity property “Transitivity of ~”= our proof for =“T0”= will not
+  go through: The calculation will have proven =(P ~ B) ∧ (B ~ R)= and will not /automatically/
+  rewrite this into =P ~ R= since the transitivity property has not been activated.
+  Instead we obtain the red error message /CalcCheck: Could not match calculation with stated goal./
++ If =~⟨ ? ⟩= occurs twice in a calculation for /non/-transitive =~= ---i.e., above in the right side---
+  as in the proof of =“T0”=, then the proof yields =(P ~ B) ∧ (B ~ R)= which would imply =P ~ R= if
+  the relation =~= were transitive.
+  In such cases the system reports /Could not match calculation with stated goal/,
+  which is justified since the former is a conjunction that could not be reduced to an expression
+   involving only a single =~=.
+
+* COMMENT The symbols that can occur in the left-column in CalcCheck calculations include {\large fix this!}
+  :PROPERTIES:
+  :CUSTOM_ID: COMMENT-The-symbols-that-can-occur-in-the-left-column-in-CalcCheck-calculations-include-large-fix-this
+  :END:
+| =    | Equality    |
+| ≡    | Equivalence |
+| ⇒, ⇐ | Implication |
+| ≤, < | Order       |
+
+Note that there is no automatic conversion of `⇐', so if your calculation includes `⇐'  steps, you will normally need to invoke =“Definition of ⇐”= or =“Consequence”=. Similarly for `<'.
+
+Examples of such scenario can be found with the =“∃-Introduction”= rule below.
+
+* Discharging provisos with =with=
+  :PROPERTIES:
+  :CUSTOM_ID: Discharging-provisos-with-with
+  :END:
+
+It is a common scenario that we can prove certain results /provided/ some constraints are satisfied.
+CalcCheck overloads the =with= combinator to act as syntactic sugar for discharging the premises of
+such theorems when one wishes to utilise their result within a calculation.
+
+** The most elementary application
+   :PROPERTIES:
+   :CUSTOM_ID: The-most-elementary-application
+   :END:
+
+For example, suppose that we have a function =f= that when applied to any argument =x= is the same as another
+function =g= applied to any argument =y= /provided/ =x= and =y= satisfy some given property =P=.
+Then, we can use this result in a calculation as follows:
+#
+#+begin_parallel latex
+#+BEGIN_EXAMPLE
+Declaration: Src, Tgt : Type
+Declaration: f, g : Src → Tgt
+Declaration: P : Src → Src → 𝔹
+
+Axiom “Fact”: P x y ⇒ f x = g y
+Axiom “Hint why `P x y` is true”: P x y
+
+Declaration: a, b : Tgt
+Declaration: x, y : Src
+Axiom “Hint why a = f x”: a = f x
+Axiom “Hint why g y = b”: g y = b
+
+Theorem: a = b
+Proof:
+    a
+  =⟨ “Hint why a = f x” ⟩
+    f x
+  =⟨ “Fact” with “Hint why `P x y` is true” ⟩
+    g y
+  =⟨ “Hint why g y = b” ⟩
+    b
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+_Comparison_
+#+BEGIN_EXAMPLE
+Declaration: P, Q : 𝔹
+Axiom “F”: P ⇒ Q
+Axiom “X”: P
+
+Theorem: Q
+Proof: By “F” with “X”
+#+END_EXAMPLE
+
+
+Notice that the =with= syntax acts like the function application operation:
+If we construe /P/ and /Q/ as types then we have /f : P → Q/ and /x : P/  implies /f x : Q/,
+just as =“F” with “X”= is a proof of proposition =Q=.
+
+Without the syntactic sugar:
+#+BEGIN_EXAMPLE
+Theorem: Q
+Proof:
+    Q
+  ⇐⟨ “Consequence” and “Modus ponens” ⟩
+    P ∧ (P ⇒ Q)
+  ≡⟨ “F”, “X”, and “Idempotency of ∧” ⟩
+    true
+#+END_EXAMPLE
+
+#+end_parallel
+
+** Simplifying laws to obtain particular instances with =with=
+   :PROPERTIES:
+   :CUSTOM_ID: Simplifying-laws-to-obtain-particular-instances-with-with
+   :END:
+
+# + =“Cancellation of ∙” with 13 ≠ 0 by Evaluation=
+# Theorem “Isotony of +”: a + b ≤ a + c  ≡  b ≤ c
+#
+A tremendously powerful usage of the =with= feature is to use /one side of an equivalence/ in a calculation when the other side can be discharged. Needless to say, this is nothing more than syntactic sugar of modus ponens and weakening.
+
+#
+#+begin_scriptsize  haskell
+#+ATTR_LATEX: :options [3]
+#+begin_parallel
+_Setup_
+
+Here are the pieces required to ensure the neighbouring snippets to be minimal working examples.
+
+In-practice the =Axiom='s here are =Theorem='s or =Subproof='s.
+
+#+BEGIN_EXAMPLE
+Declaration: X : Type
+
+Precedence 45 for: _~_
+Declaration: _~_ : X → X → 𝔹
+
+Declaration: P : 𝔹
+Declaration: r, s, t, u : X
+
+Axiom “Fact”: P ≡ (s ~ t)
+Axiom “Hint why P is true”: P ≡ true
+Axiom “Hint why t = u”: t = u
+Axiom “Hint why r = s”: r = s
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+_Verbose Plain CalcCheck_
+#+BEGIN_EXAMPLE
+Theorem: r ~ u
+Proof:
+    r ~ u
+  ⇐⟨ “Consequence” with “Weakening” ⟩
+       r = s  ∧  t = u
+    ∧  r ~ u
+  ≡⟨ Substitution ⟩
+      r = s  ∧  t = u
+    ∧ (x ~ y)[x ≔ r][y ≔ u]
+  ≡⟨ “Replacement” and Substitution ⟩
+      r = s  ∧  t = u ∧ s ~ t
+  ≡⟨ “Hint why r = s” and “Identity of ∧” ⟩
+    (s ~ t) ∧ t = u
+  ≡⟨ “Hint why t = u” and “Identity of ∧” ⟩
+    s ~ t
+  ≡⟨ “Fact” ⟩
+    P
+  ≡⟨ “Hint why P is true” ⟩
+    true
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+_Sweetened with sugar_
+#+BEGIN_EXAMPLE
+
+Theorem: r ~ u
+Proof:
+    r
+  =⟨ “Hint why r = s” ⟩
+    s
+  ~⟨ “Fact” with “Hint why P is true” ⟩
+    t
+  =⟨ “Hint why t = u” ⟩
+    u
+
+#+END_EXAMPLE
+#+BEGIN_QUOTE
+---Recall that relations can be used in the left-column.---
+#+END_QUOTE
+#+end_parallel
+#+end_scriptsize
+
+**   =with= associates to the right
+   :PROPERTIES:
+   :CUSTOM_ID: with-associates-to-the-right
+   :END:
+
+The keyword =with= is right-associative:
+ That is, =X with Y with Z= essentially parses as =X with (Y with Z)=.
+  - This happens when we wish to use the result of =X= whose
+    proviso is the consequent of =Y=
+    and =Y= itself has a proviso which must be discharged.
+# minimal working examples
+#+begin_scriptsize haskell
+#+ATTR_LATEX: :options [3]
+#+begin_parallel
+_Discharging for a relation_
+#+BEGIN_EXAMPLE
+Declaration: T : Type
+Precedence 45 for: _~_
+Declaration: _~_ : T → T → 𝔹
+
+Declaration: pre, proviso, pre : 𝔹
+Axiom “X”: pre ⇒ (lhs ~ rhs)
+Axiom “Y”: proviso ⇒ pre
+Axiom “Z”: proviso
+
+Calculation:
+    lhs
+  ~⟨ “X” with “Y” with “Z” ⟩
+    rhs
+This proves: Theorem “Neat”: lhs ~ rhs
+#+END_EXAMPLE
+_Discharging Implication Provisos_
+#+BEGIN_EXAMPLE
+Declaration: pre, proviso, pre, pos : 𝔹
+Axiom “X”: pre ⇒ pos
+Axiom “Y”: proviso ⇒ pre
+Axiom “Z”: proviso
+
+Theorem: pos
+Proof: By “X” with “Y” with “Z”
+#+END_EXAMPLE
+_Discharging equivalences_
+#+BEGIN_EXAMPLE
+Declaration: pre, proviso, pre, pos : 𝔹
+Axiom “X”: pre ≡ pos
+Axiom “Y”: proviso ≡ pre
+Axiom “Z”: proviso
+
+Theorem: pos
+Proof: By “X” with “Y” with “Z”
+#+END_EXAMPLE
+#+end_parallel
+#+end_scriptsize
+
+At times we do not wish to make an auxiliary lemma that may be trivial and only
+  serve to discharge a proviso, in such cases we may provide the proof directly
+  in the calculation.
+  - E.g., above we could have had ==⟨ “X” with “Y” with Subproof for `proviso`: <<proof here>> ⟩=.
+  - The final section on =Subproof='s shows an example of this nature.
+
+** Discharging /multiple/ obligations with =with=
+   :PROPERTIES:
+   :CUSTOM_ID: Discharging-multiple-obligations-with-with
+   :END:
+
+Here we show an example of how multiple provisos can be discharged.
+
+Recall that conjunction is order-preserving ---a proof is shown in the =Subproof= sections---
+#+BEGIN_EXAMPLE
+Theorem “Monotonicity of ∧”: (p ⇒ p') ⇒ (q ⇒ q') ⇒ ((p ∧ q) ⇒ (p' ∧ q'))
+#+END_EXAMPLE
+
+Let us apply such a monotonicity law:
+
+#+BEGIN_EXAMPLE
+Theorem (3.76e) “Weakening”: p ∧ q ⇒ (p ∨ r) ∧ q
+Proof:
+    p ∧ q
+  ⇒⟨ “Left-monotonicity of ∧” with (3.76a) and “Left-identity of ⇒” ⟩
+    (p ∨ r) ∧ q
+#+END_EXAMPLE
+
+What will be going on here behind the scenes is essentially the following:
+
+#+BEGIN_EXAMPLE
+Theorem (3.76e) “Weakening”: p ∧ q ⇒ (p ∨ r) ∧ q
+Proof:
+    p ∧ q ⇒ (p ∨ r) ∧ q
+  ≡⟨ “Left-identity of ⇒” ⟩
+    true ⇒ (p ∧ q ⇒ (p ∨ r) ∧ q)
+  ≡⟨ (3.76a) ⟩
+    (p ⇒ p ∨ r) ⇒ (p ∧ q ⇒ (p ∨ r) ∧ q)
+    — This is “Left-monotonicity of ∧”
+#+END_EXAMPLE
+
+*   =Assuming= the Antecedent
+  :PROPERTIES:
+  :CUSTOM_ID: Assuming-the-Antecedent
+  :END:
+
+# consider adding more onto the remark about substitution keyword not being applicable to assumptions.
+
+A common practice in mathematics is to prove an implication =P ⇒ Q= by assuming the “antecedent” =P= and proving the “consequent” =Q=. That is, we momentarily take =P= to be a given truth, thereby equivalent to =true=, and its variables as immutable (/non-substitutable!/) constants, then utilise this extra knowledge in the aim of proving the truth of =Q=.
+
+** The Sugar
+   :PROPERTIES:
+   :CUSTOM_ID: The-Sugar
+   :END:
+
+Leibniz, for the Booleans, along with the identity of equivalence gives us the following rule
+\[ p \qquad⇒\qquad E[z :\!= p] \;=\; E[z :\!= true] \]
+# Since implication distributes over equivalence, we also have it named =“Replace by `true`”= in the form
+# \[ p ⇒ E[z :\!= p] \quad≡\quad p ⇒ E[z :\!= true] \]
+This rule justifies the common practice in mathematics in which one proves an implication
+$P ⇒ Q$ by momentarily thinking of $P$ as equivalent to $true$ and then attempting to
+prove $Q$ with this added knowledge.
+
+CalcCheck caters to this common scenario by allowing us to take proofs such as that on the left
+side and render them more clearly as that on the right:
+#
+#+begin_scriptsize  haskell
+#+ATTR_LATEX: :options [3]
+#+begin_parallel
+_Plain CalcCheck_
+#+BEGIN_EXAMPLE
+Theorem: p ⇒ q ⇒ (p ≡ q)
+Proof:
+    p ⇒ q ⇒ (p ≡ q)
+  ≡⟨ Substitution ⟩
+    p ⇒ (q ⇒ (p ≡ q)[q := q])[p := p]
+  ≡⟨ “Replace by `true`” — performed twice
+    and Substitution ⟩
+    p ⇒ q ⇒ (true ≡ true)
+  ≡⟨ “Reflexivity of ≡”
+    and “Right-zero of ⇒” ⟩
+    true
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+_Sweetened with Sugar_
+#+BEGIN_EXAMPLE
+Theorem: p ⇒ q ⇒ (p ≡ q)
+Proof:
+  Assuming `p`:
+    Assuming `q`:
+        p
+      ≡⟨ Assumption `p` ⟩
+        true
+      ≡⟨ Assumption `q` ⟩
+        q
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+_More syntactic Sugar_
+#+BEGIN_EXAMPLE
+Theorem: p ⇒ q ⇒ (p ≡ q)
+Proof:
+  Assuming `p`, `q`:
+      p
+    ≡⟨ Assumption `p` ⟩
+      true
+    ≡⟨ Assumption `q` ⟩
+      q
+#+END_EXAMPLE
+#+end_parallel
+#+end_scriptsize
+
++ Note that the keyword =Assumption= necessarily takes an argument /enclosed/ in back-quotes!
+
+  - *Important* There must be a space after each comma in an =Assuming= clause.
+  - Otherwise a syntax error.
+
++ With the relaxed approach, we can be less verbose.
+
+  - Not only is this clearer to communicate, it also lessens the technical burden on the reader (and   writer!).
+
++ We may want to /name/ assumptions if they are lengthy or would make the proof clearer.
+  - This can be performed by giving the =Assuming= keyword a name, enclosed in quotes,
+    before the actual assumption; e.g., =Assuming “p is true” `p`:=.
+  - Named assumptions can be invoked as usual or by using their name, e.g., =Assumption “p is true”=.
+
++ Just as the “Proof” syntax is hierarchical, so is the “Assuming” syntax. For example, a proof of a  nested implication =P ⇒ (Q ⇒ R)= can be presented using nested “Assuming” sub-proofs as in the
+  middle snippet above.
+
++ To reduce nesting and indentation, consecutive /unnamed/ suppositions can be placed in one level, as in the right-most snippet above.
+
+#  - To reduce nesting and indentation, we also allow lists of assumptions in a single “Assuming” header: ???
+
+** Assuming Conjunctions
+   :PROPERTIES:
+   :CUSTOM_ID: Assuming-Conjunctions
+   :END:
+
+However, by “Shunting” (3.65), proving =P ⇒ (Q ⇒ R)= is tantamount to proving =P ∧ Q ⇒ R=, and so we might consider to use such proofs also for this kind of theorem. This is currently not directly supported, however the extensibility syntax =Using= gives a work-around,
+
+#+BEGIN_EXAMPLE
+Theorem: p ∧ q ⇒ (p ≡ q)
+Proof:
+  Using “Shunting”:
+    Subproof for `p ⇒ q ⇒ (p ≡ q)`:
+      Assuming `p`, `q`:
+          p
+        =⟨ Assumption `p` ⟩
+          true
+        =⟨ Assumption `q` ⟩
+          q
+#+END_EXAMPLE
+
+( More on the =Using= and =Subproof= syntax later. )
+
+Of course such a hierarchical approach has its limits and at times if there are many involved sub-proofs, then it may be prudent to make them first-class lemmas or theorems in their own right. Among other things, this will make it easier for the reader to follow the exposition.
+
+** Two worked-out examples
+   :PROPERTIES:
+   :CUSTOM_ID: Two-worked-out-examples
+   :END:
+
+LADM shows examples where assumptions are used in a modified shape; one way to achieve this is by modification using “with” to rewrite the assumption using some other laws:
+
+#+begin_scriptsize haskell
+#+begin_parallel
+#+BEGIN_EXAMPLE
+Theorem (4.3) “Left-monotonicity of ∧”:
+  (p ⇒ q) ⇒ ( (p ∧ r) ⇒ (q ∧ r) )
+Proof:
+  Assuming `p ⇒ q`:
+      p ∧ r
+    ≡⟨ Assumption `p ⇒ q`
+        with “Definition of ⇒” `p ⇒ q ≡ p ∧ q ≡ p` ⟩
+      p ∧ q ∧ r
+    ⇒⟨ “Weakening” ⟩
+      q ∧ r
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+#+BEGIN_EXAMPLE
+Axiom “Cancellation of ·”: c ≠ 0 ⇒ (c · a = c · b  ≡  a = b)
+
+Theorem “Non-zero multiplication”: a ≠ 0 ⇒ b ≠ 0 ⇒ a · b ≠ 0
+Proof:
+  Assuming `a ≠ 0`, `b ≠ 0`:
+      a · b ≠ 0
+    ≡⟨ “Definition of ≠” ⟩
+      ¬ (a · b = 0)
+    ≡⟨ “Zero of ·” ⟩
+      ¬ (a · b = a · 0)
+    ≡⟨ “Cancellation of ·” with assumption `a ≠ 0` ⟩
+      ¬ (b = 0)
+    ≡⟨ “Definition of ≠”, Assumption `b ≠ 0` ⟩
+      true
+#+END_EXAMPLE
+#+end_parallel
+#+end_scriptsize
+For the right side,
+- In the third step, the implicit renaming of the variables to fit the context
+  renders =Axiom “Cancellation of ·”= as =a ≠ 0 ⇒ (a · 0 = a · b  ≡  0 = b)=.
+- Then the =with= discharges the proviso to give us the rule =a · 0 = a · b  ≡  0 = b=,
+  which is then used to rewrite the third expression into the fourth.
+
+* Subproof
+  :PROPERTIES:
+  :CUSTOM_ID: Subproof
+  :END:
+
+When calculating it is common that we require an auxiliary result to progress or we
+could prove such a result in-place while doing the necessary bookkeeping to carry
+the context-along. The latter is clunky since it carries the context while only
+a certain subexpression is being altered for some time. The former is not much better
+since it requires the introduction of new =Theorem='s whose purpose is limited.
+
+An alternative is to prove a result or simplify an expression /in-place/.
+
+#
+#+begin_parallel latex
+_Using new syntax_
+#+BEGIN_EXAMPLE
+Calculation:
+  ⋮
+    E[z ≔ F]
+  =⟨ Subproof for `F = G`:
+          F
+        =⟨ ? ⟩
+          G
+    ⟩
+    E[z ≔ G]
+  ⋮
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+_Without =Subproof=_
+#+BEGIN_EXAMPLE
+Theorem “Helper”: F = G
+Proof: ?
+
+Calculation:
+  ⋮
+    E[z ≔ F]
+  =⟨ “Helper” ⟩
+    E[z ≔ G]
+  ⋮
+#+END_EXAMPLE
+#+end_parallel
+
++ Delete the vdots, ⋮, to obtain minimal working examples.
+
++ The sub-proof body currently still needs to start on a new line and indented inside the hint, and the hint end `⟩' must also be on a new line, indented not more than the start of the sub-proof body.
+
+:Hide:
+
+Where a =Subproof= is the only item in a hint, the =for= and the explicit sub-proof goal are not necessary.
+If the =Subproof= proves the current item, then the explicit =for= and proof-goal may be omitted.
+#+BEGIN_EXAMPLE
+Calculation:
+    ⋮
+    E
+  ≡⟨ Subproof:
+        E
+      ≡⟨ ? ⟩
+        true
+    ⟩
+    true
+#+END_EXAMPLE
+
+We will soon see how this construct can be combined effectively with =with= to discharge proof obligations.
+:End:
+
+** Example of =Assuming= within a =Subproof=
+   :PROPERTIES:
+   :CUSTOM_ID: Example-of-Assuming-within-a-Subproof
+   :END:
+
+Rather than do an =Assuming= immediately ---which would be more elegant and readable---, for the sake of example, we modify the antecedents before assuming them, which pushes the =Assuming= structure into a sub-proof inside a calculation hint:
+
+#+BEGIN_EXAMPLE
+Theorem “Monotonicity of ∧”: (p ⇒ p') ⇒ (q ⇒ q') ⇒ ( (p ∧ q) ⇒ (p' ∧ q') )
+Proof:
+    (p ⇒ p') ⇒ (q ⇒ q') ⇒ ((p ∧ q) ⇒ (p' ∧ q'))
+  ≡⟨ “Definition of ⇒” (3.60) ⟩
+    (p ∧ p' ≡ p) ⇒ (q ∧ q' ≡ q) ⇒ ((p ∧ q) ⇒ (p' ∧ q'))
+  ≡⟨ Subproof:
+    Assuming `p ∧ p' ≡ p`, `q ∧ q' ≡ q`:
+        p ∧ q
+      ≡⟨ Assumption `p ∧ p' ≡ p` ⟩
+        p ∧ p' ∧ q
+      ≡⟨ Assumption `q ∧ q' ≡ q` ⟩
+        p ∧ p' ∧ q ∧ q'
+      ⇒⟨ “Weakening” ⟩
+        p' ∧ q'
+    ⟩
+    true
+#+END_EXAMPLE
+
+Where a =Subproof= is the only item in a hint, the =for= and the explicit sub-proof goal are not necessary. However, the sub-proof body currently still needs to start on a new line, and indented inside the hint, and the hint end =⟩= must also be on a new line, indented not more than the start of the sub-proof body.
+
+** Discharging a proof obligation in-place
+   :PROPERTIES:
+   :CUSTOM_ID: Discharging-a-proof-obligation-in-place
+   :END:
+
+The following silly calculation shows the
+various forms of proof presentation are still valid in a subproof setting. In-particular,
+we can satisfy an obligation in-place rather than as some previously proven result.
+#+BEGIN_EXAMPLE
+Theorem “Monotony of ·”: b ≤ c ⇒ a · b ≤ a · c
+Theorem “Antitony of -”: b ≤ c ⇒ a - c ≤ a - b
+
+Theorem “Silly”: 6 · (12 - S n) ≤ 7 · (12 - n)
+Proof:
+     6 · (12 - S n)
+  =⟨ Evaluation ⟩
+    (10 - 4) · (12 - S n)
+  ≤⟨ “Monotony of ·”
+        with “Antitony of -”
+        with subproof for `3 ≤ 4`: By Evaluation ⟩
+    (10 - 3) · (12 - S n)
+  ≤⟨ “Monotony of ·”
+        with “Antitony of -”
+        with subproof for `n ≤ S n`:
+          By induction on `n : ℕ`:
+            Base case `0 ≤ S 0`: By “Zero is least element”
+            Induction step `S n ≤ S (S n)`:
+               S n ≤ S (S n)
+              ≡⟨ “Isotony of successor” ⟩
+               n ≤ S n
+              ≡⟨ induction hypothesis ⟩
+               true
+   ⟩
+    (10 - 3) · (12 - n)
+  =⟨ Evaluation ⟩
+    7 · (12 - n)
+#+END_EXAMPLE
+
+Recall that the =with= keyword associates to the right.
+
+* Proving universals using =For any=
+  :PROPERTIES:
+  :CUSTOM_ID: Proving-universals-using-For-any
+  :END:
+
+It often happens that we need to prove statements of the form
+=(∀ x • P)=, ``Metatheorem (9.16)'' of LADM ensures that it suffices to prove
+=P=. We mark this transition between the logic and ambient language using the =For any= syntax:
+#
+#+begin_parallel latex
+_Simple form_
+#+BEGIN_EXAMPLE
+Theorem: ∀ x • P
+Proof:
+  For any `x`:
+    ?
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+_General form_
+#+BEGIN_EXAMPLE
+Theorem: ∀ x ❙ R • P
+Proof:
+  For any `x` satisfying `R`:
+    ?
+#+END_EXAMPLE
+#+end_parallel
++ Where =?= is a proof for =P=.
+
+* Extensiblity: =Using= theorems as proof methods
+  :PROPERTIES:
+  :CUSTOM_ID: Extensiblity-Using-theorems-as-proof-methods
+  :END:
+
+Sometimes a concept is defined in such a way that it is difficult and awkward to prove
+properties about it and but there is some extensional view of the concept that admits
+formuale more amicable to calculation -- c.f., indirect equality.
+Alternatively, there may not be an obvious way
+to prove a result but if we reshape it then we may end up with a proof-obligation whose
+form immediately suggests a proof approach -- c.f., induction.
+
+The =Using= syntax allows us to move from a general shape to a the more specific or calculation-friendly shape and proof that in-order to prove our initial goal.
+
+** Indirect Equality
+   :PROPERTIES:
+   :CUSTOM_ID: Indirect-Equality
+   :END:
+
+The usual minimum operation can be defined by conditional but that would result in case-analysis proofs
+and so an alternative is to define it by its /relation to other numbers/:
+#+BEGIN_EXAMPLE
+Declaration: _↓_ : ℤ → ℤ → ℤ
+Axiom “Definition of ↓”: z ≤ x ↓ y  ≡  z ≤ x ∧ z ≤ y
+#+END_EXAMPLE
+
+Suppose we now wish to prove the minimum is a symmetric operation: =x ↓ y = y ↓ x=.
+The definition gives us no clear indication how to proceed, however in the presence of an
+anti-symmetric order `≤' we can prove
+
+#+BEGIN_EXAMPLE
+Theorem (15.47) “Indirect Equality from below”:
+  a = b  ≡  (∀ z • z ≤ a  ≡  z ≤ b)
+#+END_EXAMPLE
+( Proof shown in a following sub-section! )
+
+Now we use _this_ result as it gives us a more calculation-friendly formula to work with:
+#
+#+begin_scriptsize haskell
+#+begin_parallel
+_Plain CalcCheck_
+#+BEGIN_EXAMPLE
+Theorem (15.54) “Symmetry of ↓”:  x ↓ y = y ↓ x
+Proof:
+    x ↓ y = y ↓ x
+  ≡⟨ “Indirect Equality from below” ⟩
+    ∀ z • z ≤ x ↓ y  ≡  z ≤ y ↓ x
+  ≡⟨ Subproof for `∀ z • z ≤ x ↓ y  ≡  z ≤ y ↓ x`:
+      For any `z`:
+          z ≤ x ↓ y
+        ≡⟨ “Definition of ↓” ⟩
+          z ≤ x ∧ z ≤ y
+        ≡⟨ “Symmetry of ∧” ⟩
+          z ≤ y ∧ z ≤ x
+        ≡⟨ “Definition of ↓” ⟩
+          z ≤ y ↓ x
+   ⟩
+    true
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+_Slight Sweetener_
+#+BEGIN_EXAMPLE
+Theorem (15.54) “Symmetry of ↓”:  x ↓ y = y ↓ x
+Proof:
+  Using “Indirect Equality from below”:
+    Subproof for `∀ z • z ≤ x ↓ y  ≡  z ≤ y ↓ x`:
+      For any `z`:
+          z ≤ x ↓ y
+        ≡⟨ “Definition of ↓” ⟩
+          z ≤ x ∧ z ≤ y
+        ≡⟨ “Symmetry of ∧” ⟩
+          z ≤ y ∧ z ≤ x
+        ≡⟨ “Definition of ↓” ⟩
+          z ≤ y ↓ x
+#+END_EXAMPLE
+#+end_parallel
+#+end_scriptsize
+
+The syntactic sugar makes the proof easier to write and easier to read & understand.
+
+** Mutual Implication
+   :PROPERTIES:
+   :CUSTOM_ID: Mutual-Implication
+   :END:
+
+Sometimes we have to prove =p ≡ q= and the sides are sufficiently different that we are unable
+to massage one of them so as to transform it to the other. In such situations, we appeal to
+#+BEGIN_EXAMPLE
+Theorem  “Mutual implication”: p ≡ q ≡ (p ⇒ q) ∧ (q ⇒ p)
+#+END_EXAMPLE
+
+Two examples follow,
+
+#
+#+begin_scriptsize haskell
+#+begin_parallel latex
+_(15.47) “Indirect Equality from below”_
+#+BEGIN_EXAMPLE
+Theorem: a = b  ≡  (∀ z • z ≤ a  ≡  z ≤ b)
+Proof:
+  Using “Mutual implication”:
+    Subproof for `a = b  ⇒  (∀ z • z ≤ a  ≡  z ≤ b)`:
+      Assuming `a = b`:
+        For any `z`:
+          By Assumption `a = b`
+    Subproof for `(∀ z • z ≤ a  ≡  z ≤ b)  ⇒  a = b`:
+      Assuming “A” `(∀ z • z ≤ a  ≡  z ≤ b)`:
+           a = b
+        ≡⟨ “Antisymmetry of ≤” ⟩
+           a ≤ b  ∧  b ≤ a
+        ≡⟨ Assumption “A” ⟩
+           a ≤ a  ∧  b ≤ b
+        ≡⟨ “Reflexivity of ≤”, “Idempotency of ∧” ⟩
+           true
+#+END_EXAMPLE
+@@latex: \columnbreak@@
+_(15.44A) “Trichotomy — A”_
+#+BEGIN_EXAMPLE
+Theorem: a < b  ≡  a = b  ≡  a > b
+Proof:
+  Using “Mutual implication”:
+    Subproof for `a = b  ⇒  (a < b  ≡  a > b)`:
+      Assuming `a = b`:
+          a < b
+        ≡⟨ “Converse of <”, Assumption `a = b` ⟩
+          a > b
+    Subproof for `(a < b  ≡  a > b) ⇒ a = b`:
+        a < b  ≡  a > b
+      ≡⟨ “Definition of <”, “Definition of >” ⟩
+        pos (b - a) ≡ pos (a - b)
+      ≡⟨ (15.17), (15.19), “Subtraction” ⟩
+        pos (b - a) ≡ pos (- (b - a))
+      ⇒⟨ (15.33c) ⟩
+        b - a = 0
+      ≡⟨ “Cancellation of +” ⟩
+        b - a + a = 0 + a
+      ≡⟨ “Identity of +”, “Subtraction”, “Unary minus” ⟩
+        a = b
+#+END_EXAMPLE
+#+end_parallel
+#+end_scriptsize

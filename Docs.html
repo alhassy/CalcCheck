@@ -1,0 +1,2809 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-09-08 Tue 17:28 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CalcCheck Reference</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="[[http://www.cas.mcmaster.ca/~alhassm/][Musa Al-hassy]]" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+
+        <style>
+        /* From: https://endlessparentheses.com/public/css/endless.css */
+        /* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
+        kbd
+        {
+          -moz-border-radius: 6px;
+          -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          background-color: #f7f7f7;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          color: #333;
+          display: inline-block;
+          font-family: 'Droid Sans Mono', monospace;
+          font-size: 80%;
+          font-weight: normal;
+          line-height: inherit;
+          margin: 0 .1em;
+          padding: .08em .4em;
+          text-shadow: 0 1px 0 #fff;
+          word-spacing: -4px;
+
+          box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/tooltipster.bundle.min.css"/>
+
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css" />
+
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-1.10.0.min.js"%3E%3C/script%3E'));
+            }
+        </script>
+
+         <script type="text/javascript"            src="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+
+          <script>
+                 $(document).ready(function() {
+                     $('.tooltip').tooltipster({
+                         theme: 'tooltipster-punk',
+                         contentAsHTML: true,
+                         animation: 'grow',
+                         delay: [100,500],
+                         // trigger: 'click'
+                         trigger: 'custom',
+                         triggerOpen: {
+                             mouseenter: true
+                         },
+                         triggerClose: {
+                             originClick: true,
+                             scroll: true
+                         }
+         });
+                 });
+             </script>
+
+        <style>
+           abbr {color: red;}
+
+           .tooltip { border-bottom: 1px dotted #000;
+                      color:red;
+                      text-decoration: none;}
+        </style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">CalcCheck Reference</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#Why-The-Calculational-Method-and-CalcCheck"><a href="#Why-The-Calculational-Method-and-CalcCheck">Why The Calculational Method and CalcCheck</a></a></li>
+<li><a href="#A-Brief-Glance-at-the-CalcCheck-Language"><a href="#A-Brief-Glance-at-the-CalcCheck-Language">A Brief Glance at the CalcCheck Language</a></a>
+<ul>
+<li><a href="#Overall-Structure"><a href="#Overall-Structure">Overall Structure</a></a></li>
+<li><a href="#Hint-Level"><a href="#Hint-Level">Hint Level</a></a></li>
+<li><a href="#More-on-Hints"><a href="#More-on-Hints">More on Hints</a></a></li>
+<li><a href="#Unicode-Identifiers-and-a-Template"><a href="#Unicode-Identifiers-and-a-Template">Unicode Identifiers and a Template</a></a></li>
+</ul>
+</li>
+<li><a href="#CalcCheck-Web"><a href="#CalcCheck-Web">CalcCheck<sub>Web</sub></a></a>
+<ul>
+<li><a href="#Key-Bindings-for-both-modes"><a href="#Key-Bindings-for-both-modes">Key Bindings for both modes</a></a></li>
+<li><a href="#Key-Bindings-for-command-mode"><a href="#Key-Bindings-for-command-mode">Key Bindings for <i>command mode</i></a></a></li>
+<li><a href="#Key-Bindings-for-edit-mode"><a href="#Key-Bindings-for-edit-mode">Key Bindings for <i>edit mode</i></a></a></li>
+<li><a href="#Completion-menus"><a href="#Completion-menus">Completion menus</a></a></li>
+<li><a href="#Standard-Browser-Bindings"><a href="#Standard-Browser-Bindings">Standard Browser Bindings</a></a></li>
+<li><a href="#Identifier-Colouring"><a href="#Identifier-Colouring">Identifier Colouring</a></a></li>
+<li><a href="#Inputting-Special-Characters"><a href="#Inputting-Special-Characters">Inputting Special Characters</a></a></li>
+<li><a href="#Sample-Unicode-Input-Sequences"><a href="#Sample-Unicode-Input-Sequences">Sample Unicode Input Sequences</a></a></li>
+</ul>
+</li>
+<li><a href="#Elementary-uses-of-CalcCheck"><a href="#Elementary-uses-of-CalcCheck">Elementary uses of CalcCheck</a></a>
+<ul>
+<li><a href="#By-Declaration-Explanation-and-Axiom-atisation"><a href="#By-Declaration-Explanation-and-Axiom-atisation">  <code>By, Declaration, Explanation</code> and <code>Axiom</code>-atisation</a></a></li>
+<li><a href="#Adventuring-with-Calculation"><a href="#Adventuring-with-Calculation">Adventuring with <code>Calculation</code></a></a></li>
+<li><a href="#Rigid-Matching-with-with"><a href="#Rigid-Matching-with-with">Rigid Matching with <code>with</code></a></a></li>
+<li><a href="#Textual-Substitution"><a href="#Textual-Substitution">Textual <code>Substitution</code></a></a></li>
+<li><a href="#Rewriting-with-Evaluation"><a href="#Rewriting-with-Evaluation">Rewriting with <code>Evaluation</code></a></a></li>
+<li><a href="#This-is-Saves-the-Day-or-two-lines"><a href="#This-is-Saves-the-Day-or-two-lines">  <code>—  This is</code> Saves the Day, or two lines</a></a></li>
+<li><a href="#Automatic-Associativity-and-Symmetry"><a href="#Automatic-Associativity-and-Symmetry">Automatic Associativity and Symmetry</a></a></li>
+<li><a href="#induction-Proofs"><a href="#induction-Proofs">  <code>induction</code> Proofs</a></a></li>
+</ul>
+</li>
+<li><a href="#Extending-the-left-column"><a href="#Extending-the-left-column">Extending the left-column</a></a></li>
+<li><a href="#Discharging-provisos-with-with"><a href="#Discharging-provisos-with-with">Discharging provisos with <code>with</code></a></a>
+<ul>
+<li><a href="#The-most-elementary-application"><a href="#The-most-elementary-application">The most elementary application</a></a></li>
+<li><a href="#Simplifying-laws-to-obtain-particular-instances-with-with"><a href="#Simplifying-laws-to-obtain-particular-instances-with-with">Simplifying laws to obtain particular instances with <code>with</code></a></a></li>
+<li><a href="#with-associates-to-the-right"><a href="#with-associates-to-the-right">  <code>with</code> associates to the right</a></a></li>
+<li><a href="#Discharging-multiple-obligations-with-with"><a href="#Discharging-multiple-obligations-with-with">Discharging <i>multiple</i> obligations with <code>with</code></a></a></li>
+</ul>
+</li>
+<li><a href="#Assuming-the-Antecedent"><a href="#Assuming-the-Antecedent">  <code>Assuming</code> the Antecedent</a></a>
+<ul>
+<li><a href="#The-Sugar"><a href="#The-Sugar">The Sugar</a></a></li>
+<li><a href="#Assuming-Conjunctions"><a href="#Assuming-Conjunctions">Assuming Conjunctions</a></a></li>
+<li><a href="#Two-worked-out-examples"><a href="#Two-worked-out-examples">Two worked-out examples</a></a></li>
+</ul>
+</li>
+<li><a href="#Subproof"><a href="#Subproof">Subproof</a></a>
+<ul>
+<li><a href="#Example-of-Assuming-within-a-Subproof"><a href="#Example-of-Assuming-within-a-Subproof">Example of <code>Assuming</code> within a <code>Subproof</code></a></a></li>
+<li><a href="#Discharging-a-proof-obligation-in-place"><a href="#Discharging-a-proof-obligation-in-place">Discharging a proof obligation in-place</a></a></li>
+</ul>
+</li>
+<li><a href="#Proving-universals-using-For-any"><a href="#Proving-universals-using-For-any">Proving universals using <code>For any</code></a></a></li>
+<li><a href="#Extensiblity-Using-theorems-as-proof-methods"><a href="#Extensiblity-Using-theorems-as-proof-methods">Extensiblity: <code>Using</code> theorems as proof methods</a></a>
+<ul>
+<li><a href="#Indirect-Equality"><a href="#Indirect-Equality">Indirect Equality</a></a></li>
+<li><a href="#Mutual-Implication"><a href="#Mutual-Implication">Mutual Implication</a></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9917be2" class="outline-2">
+<h2 id="Why-The-Calculational-Method-and-CalcCheck"><a href="#Why-The-Calculational-Method-and-CalcCheck">Why The Calculational Method and CalcCheck</a></h2>
+<div class="outline-text-2" id="text-Why-The-Calculational-Method-and-CalcCheck">
+<p>
+The pragmatic efficiency of employing the calculational approach for education is well known and is argued
+in a few places. Notable mentions include,
+</p>
+
+<ul class="org-ul">
+<li><i>A Logical Approach to Discrete Math</i>, or LADM, by Gries and Schneider, the text book used for teaching logic and discrete mathematics
+at <a href="http://www.cas.mcmaster.ca/cas/0template1.php?909">McMaster University in Computing and Software</a> for the past seven years.</li>
+<li><i>Program Construction — Calculating Implementations from Specifications</i>, by Roland Backhouse and it is essentially
+the LADM applied to software design; and it is has been the text book for <a href="http://www.cas.mcmaster.ca/~alhassm/">Computer Science 3EA3: Specifications and Correctness</a>.</li>
+<li><i>Principles and Applications of Algorithmic Problem Solving</i>, a study in Nottingham supporting using the calculational
+approach. Online at <a href="http://joaoff.com/publications/2009/feedback-calculational/feedback-calculational.pdf">http://joaoff.com/publications/2009/feedback-calculational/feedback-calculational.pdf</a></li>
+<li><b>Youtube Video:</b>
+<a href="https://youtu.be/t39wHoFHbvY">A Calculational Proof :: The square root of 2 is irrational</a> &#x2014;with
+CalcCheck</li>
+</ul>
+
+<p>
+What is CalcCheck? It is a proof checker for equational-style proofs.
+Checking proofs is easy enough for being automated; whereas finding proofs is hard and in general requires humans.
+</p>
+
+<p>
+Originally, the system used LaTeX input and feedback was presented with Unicode to  the terminal and to HTML.
+Now, the system is in-browser with Unicode support, code completion, coloured errors, and more.
+</p>
+
+<p>
+It has an impressive similarity to the programming language <a href="http://mazzo.li/posts/AgdaSort.html">Agda</a> in that it supports
+Unicode mixfix identifiers and allows
+users to implement their own theories and use them. E.g., there is no need to use the theories of LADM.
+</p>
+
+
+<p>
+From <a href="https://link.springer.com/chapter/10.1007/978-3-642-25379-9_17">The Teaching Tool CalcCheck: A Proof-Checker for Gries and Schneider’s “Logical Approach to Discrete Math”</a>,
+</p>
+<blockquote>
+<p>
+Students following a first-year course based on <a href="http://www.springer.com/us/book/9780387941158">Gries and Schneider's LADM textbook</a> had frequently been asking: “How can I know whether my solution is good?”
+</p>
+
+<p>
+We now report on the development of a proof-checker designed to answer exactly that question, while intentionally not helping to find the solutions in the first place. CalcCheck provides detailed feedback to LaTeX-formatted calculational proofs, and thus helps students to develop confidence in their own skills in “rigorous mathematical writing”.
+</p>
+
+<p>
+Gries and Schneider's book emphasises rigorous development of mathematical results, while striking one particular compromise between full formality and customary, more informal, mathematical practises, and thus teaches aspects of both. This is one source of several unusual requirements for a mechanised proof-checker; other interesting aspects arise from details of their notational conventions.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org443e05d" class="outline-2">
+<h2 id="A-Brief-Glance-at-the-CalcCheck-Language"><a href="#A-Brief-Glance-at-the-CalcCheck-Language">A Brief Glance at the CalcCheck Language</a></h2>
+<div class="outline-text-2" id="text-A-Brief-Glance-at-the-CalcCheck-Language">
+<p>
+We look at a formal proof in the language and make some remarks that will be expanded on in other sections.
+</p>
+
+<p>
+Recall that,
+</p>
+
+<ul class="org-ul">
+<li>An equational calculation consists of a sequence of expressions, each on a line (or several lines) of it own, and these expressions are separated by hint lines.</li>
+
+<li>A hint line contains an equality symbol (later also other symbols) immediately followed by a hint enclosed in angle brackets `⟨' and `⟩'.</li>
+</ul>
+
+<p>
+For example, &#x2014;in UTF-8 encoding&#x2014;,
+</p>
+
+<pre class="example">
+Theorem (15.17) “Self-inverse of unary minus”: - (- a) = a
+Proof:
+    - (- a)
+  =⟨ “Identity of +”                     ⟩
+    0 + - (- a)
+  =⟨ “Unary minus”
+    — silently using associativity of +  ⟩
+    a + (- a) + - (- a)
+  =⟨ “Unary minus”
+    — silently using symmetry of +       ⟩
+    a + 0
+  =⟨ “Identity of +”                     ⟩
+    a
+</pre>
+</div>
+
+<div id="outline-container-orgc25bda6" class="outline-3">
+<h3 id="Overall-Structure"><a href="#Overall-Structure">Overall Structure</a></h3>
+<div class="outline-text-3" id="text-Overall-Structure">
+<ul class="org-ul">
+<li>The theorem being proven is given both a number and a name; we may provide more names if we wish.</li>
+
+<li>The keywords <code>Theorem</code> and <code>Proof</code> are not indented at all.</li>
+
+<li>Everything that is part of the theorem needs to be either after the keyword <code>Theorem</code>, or indented by at least two spaces on the following lines.</li>
+
+<li>Proofs by calculation start on the line after the <code>Proof:</code>, and every part of the calculation needs to be indented by at least two spaces.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgdd59a6b" class="outline-3">
+<h3 id="Hint-Level"><a href="#Hint-Level">Hint Level</a></h3>
+<div class="outline-text-3" id="text-Hint-Level">
+<ul class="org-ul">
+<li>The hint must be surrounded by spaces: There needs to be at least one space after the opening hint bracket, and at least one space before the closing hint bracket.</li>
+
+<li>The recommended style for the current calculations is to indent the hint lines by two spaces (from the parent keyword), and indent the expression lines by four spaces (from the parent).
+
+<ul class="org-ul">
+<li>The expressions in a calculation need to be indented at least two spaces more than the equality symbols of the hint lines.</li>
+</ul></li>
+
+<li>Simple hints consist of theorem names or theorem numbers, separated by commas or by keyword <code>and</code>.
+<ul class="org-ul">
+<li>Theorem numbers following the style of LADM are delimited by parentheses and consist of numbers, dots, and occasional letters. Examples: <code>(15.17)</code>, <code>(15.25a)</code>. The enclosure always consists of round parentheses, and there are never any space characters inside.</li>
+</ul></li>
+
+<li>Theorem names are delimited by opening and closing double quote characters “ and ”.</li>
+
+<li>A hint may contain a <i>comment</i> via the `—' token; entered <code>\---</code>.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga4d5958" class="outline-3">
+<h3 id="More-on-Hints"><a href="#More-on-Hints">More on Hints</a></h3>
+<div class="outline-text-3" id="text-More-on-Hints">
+<ul class="org-ul">
+<li>A calculation may have an arbitrary number of steps, however one should always strive to find nice, short
+proofs &#x2014;this should become easier with practice.
+<ul class="org-ul">
+<li>At times, exceptionally lengthy proofs may incur grading penalties.</li>
+</ul></li>
+
+<li>A single hint step may have any number of justifications, separated by commas or <code>and</code>.
+<ul class="org-ul">
+<li>If too many are provided, the system may <i>time out</i> and request you to <code>Split proof into smaller steps!</code></li>
+<li>A hint is to convey how one expression transforms into another, so they are usually not more than 3 justifications.</li>
+<li>At times, for learning purposes, we may restrict the number of hints to be 1.
+<ul class="org-ul">
+<li>In such a scenario, even though only one theorem reference is allowed, that theorem may be applied more than once in that step.</li>
+<li>Using 2 hints, for example, results in: <code>Only 1 item allowed per hint, but 2 items encountered!</code></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org96c83d8" class="outline-3">
+<h3 id="Unicode-Identifiers-and-a-Template"><a href="#Unicode-Identifiers-and-a-Template">Unicode Identifiers and a Template</a></h3>
+<div class="outline-text-3" id="text-Unicode-Identifiers-and-a-Template">
+<p>
+Multi-letter variable names are supported in a rather liberal way. Therefore, spaces around operators are necessary almost everywhere.
+</p>
+
+<ul class="org-ul">
+<li>E.g., the application of a unary minus symbol to a name is rendered <code>- x</code>, without the space <code>-x</code> is a name!</li>
+</ul>
+
+<p>
+A helpful idea when programming is that of <i>sanity checks</i>: Checking your progress periodically. The same holds for proving.
+When one declares their theorem, they may want to immediately write down the structure of the proof-body. To do so they may
+use (non-special) <i>variable</i> <code>?</code> &#x2014;or any other variable they like&#x2014; and <i>special hint token</i> <code>?</code> to get their template going:
+</p>
+<pre class="example">
+Theorem “My Result”: lhs = rhs
+Proof:
+   lhs
+  =⟨ ? ⟩
+    ?
+  =⟨ ? ⟩
+   rhs
+</pre>
+<p>
+So one may use the special hint <code>?</code> and the non-special variable name <code>?</code> to make <i>holes</i> in their calculation as they are constructing it.
+One immediate benefit is to be able to proof-check, or syntax-check, one's progress.
+</p>
+
+<p>
+Type-checking the above results in the middle expression <code>?</code> to be coloured blue since it is a variable name, and for the two hints <code>?</code> we see
+</p>
+<pre class="example">
+— CalcCheck: “?” does not prove anything!
+— CalcCheck: Not-yet-implemented hint item encountered.
+— CalcCheck: Incomplete hint, not checked.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgda0a291" class="outline-2">
+<h2 id="CalcCheck-Web"><a href="#CalcCheck-Web">CalcCheck<sub>Web</sub></a></h2>
+<div class="outline-text-2" id="text-CalcCheck-Web">
+<p>
+This section tries to help you getting started with the <i>web interface aspects</i> of CalcCheck<sub>Web</sub>.
+</p>
+
+<p>
+There are two kinds of cells:
+</p>
+
+<dl class="org-dl">
+<dt>Code cells</dt><dd>are intended for the formal CalcCheck content.
+<ul class="org-ul">
+<li>They are displayed as a cell box containing two boxes, which are currently displayed side-by-side: The left box is the text entry area, and the right box shows CalcCheck output.</li>
+</ul></dd>
+
+<dt>MarkDown cells</dt><dd>are intended for natural-language documentation and explanations.
+<ul class="org-ul">
+<li>They are displayed as a cell box containing just one box.</li>
+<li>MarkDown cells either show the MarkDown source on a <i>light green background</i> in an entry box, or the generated HTML in a box that cannot be edited.</li>
+<li>Sending a source cell with <code>Ctrl-ENTER</code> generates HTML on the server, and then displays that.</li>
+</ul></dd>
+</dl>
+
+<p>
+Each cell is in one of the following two modes:
+</p>
+<dl class="org-dl">
+<dt>Edit mode</dt><dd>The cursor is active in the text area, and the text area is displayed in a lighter colour lighter than label to the left.
+<ul class="org-ul">
+<li>Clicking on a text entry area forces a cell into edit mode.</li>
+<li>If the current cell is in edit mode, then the text area has focus, and you have a cursor (or selection) there.</li>
+</ul></dd>
+<dt>Command mode</dt><dd>The label to the left is lighter.
+<ul class="org-ul">
+<li>Clicking on the label to the left forces a cell into command mode.</li>
+<li>If the current cell is in command mode, then the outer box has focus, and a slightly thicker line than the outer boxes of the other cells.</li>
+</ul></dd>
+
+<dt>(no term)</dt><dd>Pressing the <code>Enter</code> key switches the current cell from command mode into edit mode.</dd>
+<dt>(no term)</dt><dd>Pressing the <code>Esc</code> key switches the current cell from edit mode into command mode.</dd>
+</dl>
+
+<p>
+The following key bindings work the same in both modes:
+</p>
+</div>
+
+<div id="outline-container-org14b7da7" class="outline-3">
+<h3 id="Key-Bindings-for-both-modes"><a href="#Key-Bindings-for-both-modes">Key Bindings for both modes</a></h3>
+<div class="outline-text-3" id="text-Key-Bindings-for-both-modes">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Ctrl-Enter</td>
+<td class="org-left">performs a syntax check on the contents of all code cells before and up to the current cell.</td>
+</tr>
+
+<tr>
+<td class="org-left">Ctrl-Alt-Enter</td>
+<td class="org-left">performs proof checks on the contents of all code cells before and up to the current cell.</td>
+</tr>
+
+<tr>
+<td class="org-left">Shift-Ctrl-v</td>
+<td class="org-left">(for visible spaces) toggles display of initial spaces on each line as “␣” characters.</td>
+</tr>
+
+<tr>
+<td class="org-left">Ctrl-/</td>
+<td class="org-left">splits the cell at the current cursor point.</td>
+</tr>
+
+<tr>
+<td class="org-left">Ctrl-s</td>
+<td class="org-left">saves the notebook on the server, ONLY if you are logged in via Avenue.</td>
+</tr>
+</tbody>
+</table>
+<p>
+(Links for reloading the last three saved versions are displayed when you load the notebook again later.)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgec76698" class="outline-3">
+<h3 id="Key-Bindings-for-command-mode"><a href="#Key-Bindings-for-command-mode">Key Bindings for <i>command mode</i></a></h3>
+<div class="outline-text-3" id="text-Key-Bindings-for-command-mode">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Enter</td>
+<td class="org-left">enters edit mode</td>
+</tr>
+
+<tr>
+<td class="org-left">a</td>
+<td class="org-left">inserts a code cell above the current cell</td>
+</tr>
+
+<tr>
+<td class="org-left">A</td>
+<td class="org-left">inserts a MarkDown cell above the current cell</td>
+</tr>
+
+<tr>
+<td class="org-left">b</td>
+<td class="org-left">inserts a code cell below the current cell</td>
+</tr>
+
+<tr>
+<td class="org-left">B</td>
+<td class="org-left">inserts a MarkDown cell below the current cell</td>
+</tr>
+
+<tr>
+<td class="org-left">x</td>
+<td class="org-left">clears the output area for current code cell</td>
+</tr>
+
+<tr>
+<td class="org-left">Ctrl-x</td>
+<td class="org-left">clears the output areas for all code cells</td>
+</tr>
+
+<tr>
+<td class="org-left">d</td>
+<td class="org-left">deletes the current cell, with a confirmation dialogue — there is no “undo”</td>
+</tr>
+
+<tr>
+<td class="org-left">DownArrow</td>
+<td class="org-left">shifts focus onto the next cell</td>
+</tr>
+
+<tr>
+<td class="org-left">UpArrow</td>
+<td class="org-left">shifts focus onto the previous cell</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org0eeb2aa" class="outline-3">
+<h3 id="Key-Bindings-for-edit-mode"><a href="#Key-Bindings-for-edit-mode">Key Bindings for <i>edit mode</i></a></h3>
+<div class="outline-text-3" id="text-Key-Bindings-for-edit-mode">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Esc</td>
+<td class="org-left">enters command mode</td>
+</tr>
+
+<tr>
+<td class="org-left">\</td>
+<td class="org-left">brings up symbol completion menu, see below</td>
+</tr>
+
+<tr>
+<td class="org-left">TAB</td>
+<td class="org-left">If there is a left double quote (“) or a normal double quote character (") at least three characters to the</td>
+</tr>
+</tbody>
+</table>
+<p>
+left of the cursor, TAB brings up the theorem name completion menu if those charaters are the start
+of at least one theorem name.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb5d7e3a" class="outline-3">
+<h3 id="Completion-menus"><a href="#Completion-menus">Completion menus</a></h3>
+<div class="outline-text-3" id="text-Completion-menus">
+<p>
+Completion menus are mostly “normal menus”.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Any key starting some options</td>
+<td class="org-left">narrows down to only those options</td>
+</tr>
+
+<tr>
+<td class="org-left">Enter</td>
+<td class="org-left">selects the current option</td>
+</tr>
+
+<tr>
+<td class="org-left">TAB</td>
+<td class="org-left">If there is an option requiring no further input, then that is selected.</td>
+</tr>
+</tbody>
+</table>
+<p>
+Otherwise, if all current options  start with the same non-empty prefix,
+then the longest such prefix needs not be typed anymore.
+</p>
+
+
+<p>
+(Visual feedback for this latter functionality is not yet there.)
+</p>
+
+<p>
+The <i>symbol completion menu</i> displays besides each symbol the sequence of characters to be input for obtaining it. For many symbols, their LaTeX macro is one of the possibilities.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org94185cd" class="outline-3">
+<h3 id="Standard-Browser-Bindings"><a href="#Standard-Browser-Bindings">Standard Browser Bindings</a></h3>
+<div class="outline-text-3" id="text-Standard-Browser-Bindings">
+<p>
+Some standard functionality of your browser and/or windowing system will typically still be available, including:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Ctrl-a</td>
+<td class="org-left">selects all contents of current cell</td>
+</tr>
+
+<tr>
+<td class="org-left">Ctrl-x</td>
+<td class="org-left">cuts selected contents (to an internal clipboard)</td>
+</tr>
+
+<tr>
+<td class="org-left">Ctrl-c</td>
+<td class="org-left">copies selected contents (to the clipboard)</td>
+</tr>
+
+<tr>
+<td class="org-left">Ctrl-v</td>
+<td class="org-left">pastes the clipboard contents</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+If you are using the X11 window system (that is, essentially if you are on Linux or FreeBSD/PC-BSD/OpenBSD), you also have
+selection by <code>MouseLeft-down-and-drag</code> and paste by <code>MouseMiddle-click</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga1d6436" class="outline-3">
+<h3 id="Identifier-Colouring"><a href="#Identifier-Colouring">Identifier Colouring</a></h3>
+<div class="outline-text-3" id="text-Identifier-Colouring">
+<p>
+Existing names are coloured yellow, variable names are in blue &#x2014;in the proof checked output.
+</p>
+
+<ul class="org-ul">
+<li>This explains why, for example, <code>- n</code> is a valid expression when working with naturals:
+The unary minus symbol is interpreted as a function variable!</li>
+
+<li>Remember that variable names may be (almost) any whitespace-free sequence of symbols.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc3506c3" class="outline-3">
+<h3 id="Inputting-Special-Characters"><a href="#Inputting-Special-Characters">Inputting Special Characters</a></h3>
+<div class="outline-text-3" id="text-Inputting-Special-Characters">
+<p>
+These special characters can be entered via character completion, which is triggered by typing a backslash (“\”). Special keystrokes in that mode:
+</p>
+
+<ul class="org-ul">
+<li><code>“ESC”</code> Removes the popup and the material typed so far, including the backslash (if it is still displayed).</li>
+<li><code>“Ctrl-SPACE”</code> Leaves the text in the current state, removing the popup.</li>
+<li><code>“ENTER”</code> If the menu is displayed, uses the current selection; otherwise leaves the text in the current state, but adding a line break, removing the popup.</li>
+<li><code>“BACK_SPACE”</code> Undoes the narrowing of options performed by the previously-typed character. If only the backslash had been typed, removes that and the popup.</li>
+</ul>
+
+<ul class="org-ul">
+<li><code>“TAB”</code> If an extension of the currently typed prefix is common to all still-active options, narrow down to the maximal such extension. Otherwise, display the menu.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf0f3ab9" class="outline-3">
+<h3 id="Sample-Unicode-Input-Sequences"><a href="#Sample-Unicode-Input-Sequences">Sample Unicode Input Sequences</a></h3>
+<div class="outline-text-3" id="text-Sample-Unicode-Input-Sequences">
+<div style="column-rule-style:solid;column-count:2;"<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><span class="underline">Symbol</span></td>
+<td class="org-left"><span class="underline">Key sequence(s)</span></td>
+</tr>
+
+<tr>
+<td class="org-left">⟨</td>
+<td class="org-left"><code>\&lt;, \langle, \beginhint</code></td>
+</tr>
+
+<tr>
+<td class="org-left">⟩</td>
+<td class="org-left"><code>\&gt;, \langle, \endhint</code></td>
+</tr>
+
+<tr>
+<td class="org-left">“</td>
+<td class="org-left"><code>\``, \ldquo</code></td>
+</tr>
+
+<tr>
+<td class="org-left">”</td>
+<td class="org-left"><code>\'', \rdquo</code></td>
+</tr>
+
+<tr>
+<td class="org-left">·</td>
+<td class="org-left"><code>\., \cdot</code></td>
+</tr>
+
+<tr>
+<td class="org-left">≤</td>
+<td class="org-left"><code>\leq</code></td>
+</tr>
+
+<tr>
+<td class="org-left">≥</td>
+<td class="org-left"><code>\geq</code></td>
+</tr>
+
+<tr>
+<td class="org-left">𝔹</td>
+<td class="org-left"><code>\BB, \bool</code></td>
+</tr>
+
+<tr>
+<td class="org-left">ℕ</td>
+<td class="org-left"><code>\NN, \nat</code></td>
+</tr>
+
+<tr>
+<td class="org-left">ℤ</td>
+<td class="org-left"><code>\ZZ, \int</code></td>
+</tr>
+
+<tr>
+<td class="org-left">ℚ</td>
+<td class="org-left"><code>\QQ, \rat</code></td>
+</tr>
+
+<tr>
+<td class="org-left">ℝ</td>
+<td class="org-left"><code>\RR, \real</code></td>
+</tr>
+
+<tr>
+<td class="org-left">ℙ</td>
+<td class="org-left"><code>\PP, \powerset</code></td>
+</tr>
+
+<tr>
+<td class="org-left">≡</td>
+<td class="org-left"><code>==</code>, <code>\equiv</code></td>
+</tr>
+
+<tr>
+<td class="org-left">¬</td>
+<td class="org-left"><code>\lnot</code></td>
+</tr>
+
+<tr>
+<td class="org-left">∨</td>
+<td class="org-left"><code>\lor</code></td>
+</tr>
+
+<tr>
+<td class="org-left">∧</td>
+<td class="org-left"><code>\land</code></td>
+</tr>
+
+<tr>
+<td class="org-left">⇒</td>
+<td class="org-left"><code>\implies, \=&gt;</code></td>
+</tr>
+
+<tr>
+<td class="org-left">—</td>
+<td class="org-left"><code>\----</code></td>
+</tr>
+
+<tr>
+<td class="org-left">∀</td>
+<td class="org-left"><code>\forall</code></td>
+</tr>
+
+<tr>
+<td class="org-left">∃</td>
+<td class="org-left"><code>\exists</code></td>
+</tr>
+
+<tr>
+<td class="org-left">∑</td>
+<td class="org-left"><code>\sum</code></td>
+</tr>
+
+<tr>
+<td class="org-left">∏</td>
+<td class="org-left"><code>\product</code></td>
+</tr>
+
+<tr>
+<td class="org-left">↓</td>
+<td class="org-left"><code>\min</code></td>
+</tr>
+
+<tr>
+<td class="org-left">↑</td>
+<td class="org-left"><code>\max</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><span class="underline">Symbol</span></td>
+<td class="org-left"><span class="underline">Key sequence(s)</span></td>
+</tr>
+
+<tr>
+<td class="org-left">𝜖</td>
+<td class="org-left"><code>\eps</code></td>
+</tr>
+
+<tr>
+<td class="org-left">ε</td>
+<td class="org-left"><code>\epsilon</code></td>
+</tr>
+
+<tr>
+<td class="org-left">∈</td>
+<td class="org-left"><code>\in</code></td>
+</tr>
+
+<tr>
+<td class="org-left">∋</td>
+<td class="org-left"><code>\ni, \haselement</code></td>
+</tr>
+
+<tr>
+<td class="org-left">⊆</td>
+<td class="org-left"><code>\subseteq</code></td>
+</tr>
+
+<tr>
+<td class="org-left">⊂</td>
+<td class="org-left"><code>\subset</code></td>
+</tr>
+
+<tr>
+<td class="org-left">⊃</td>
+<td class="org-left"><code>\supset</code></td>
+</tr>
+
+<tr>
+<td class="org-left">⌢</td>
+<td class="org-left"><code>\catenate, \++</code></td>
+</tr>
+
+<tr>
+<td class="org-left">∩</td>
+<td class="org-left"><code>\intersection</code></td>
+</tr>
+
+<tr>
+<td class="org-left">∪</td>
+<td class="org-left"><code>\union</code></td>
+</tr>
+
+<tr>
+<td class="org-left">𝑼</td>
+<td class="org-left"><code>\universe</code></td>
+</tr>
+
+<tr>
+<td class="org-left">❙</td>
+<td class="org-left"><code>\with</code></td>
+</tr>
+
+<tr>
+<td class="org-left">•</td>
+<td class="org-left"><code>\spot</code></td>
+</tr>
+
+<tr>
+<td class="org-left">₁¹, ₂², …, ₉⁹</td>
+<td class="org-left"><code>\_1 \^1, \_2 \^2, \_9 \^9</code></td>
+</tr>
+
+<tr>
+<td class="org-left">ₙ</td>
+<td class="org-left"><code>\_n</code></td>
+</tr>
+
+<tr>
+<td class="org-left">⨾</td>
+<td class="org-left"><code>\;</code></td>
+</tr>
+
+<tr>
+<td class="org-left">αβγζ</td>
+<td class="org-left"><code>\alpha \beta \gamma \zeta</code></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+The majority of <code>CalcCheck</code> input sequences correspond to their standard LaTeX counterparts.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc73bcc5" class="outline-2">
+<h2 id="Elementary-uses-of-CalcCheck"><a href="#Elementary-uses-of-CalcCheck">Elementary uses of CalcCheck</a></h2>
+<div class="outline-text-2" id="text-Elementary-uses-of-CalcCheck">
+<p>
+Here we cover the most basic constructions to get going with the CalcCheck system.
+Later parts introduce syntactic sugar to expand on these constructs and improve
+clarity for readers of proofs as well as writers of proofs.
+</p>
+</div>
+
+<div id="outline-container-orge30e297" class="outline-3">
+<h3 id="By-Declaration-Explanation-and-Axiom-atisation"><a href="#By-Declaration-Explanation-and-Axiom-atisation">  <code>By, Declaration, Explanation</code> and <code>Axiom</code>-atisation</a></h3>
+<div class="outline-text-3" id="text-By-Declaration-Explanation-and-Axiom-atisation">
+<p>
+To showcase the keywords in the section title, we begin with a puzzle:
+</p>
+
+<blockquote>
+<p>
+You and a friend are playing a game where you arrange a collection of balls in the shape of a right-angle triangle
+such that the <i>i</i>-th row has precisely <i>i</i>-many balls in it. How many balls do you need to make a triangle with 100
+rows?
+</p>
+</blockquote>
+
+<p>
+Our setup has the naturals formed from <code>0</code> and the successor operation <code>S</code>;
+</p>
+<pre class="example">
+ Declaration: T : ℕ → ℕ
+ Explanation: T n := “the area of our discrete triangles.”
+
+ Axiom “Super Small Triangle” “Definition of T on 0”: T 0 = 0
+ Axiom “Triangle with new base” “Definition of T on `S`”: T (S n) = (S n) + T n
+</pre>
+
+<p>
+Notice that
+</p>
+<dl class="org-dl">
+<dt>Declaration</dt><dd>We introduced a name <code>T</code> to assist in our calculation.</dd>
+<dt>Explanation</dt><dd>We gave a colloquial English explanation to document what it represents when evaluated.</dd>
+<dt>Axiom</dt><dd>We defined it inductively and gave alternate names for the clauses for the sake of readability.
+<ul class="org-ul">
+<li>Axioms need to be chosen carefully! Too strong and you may prove anything you want, including <code>false</code>;
+too weak and you will not be able to make progress in your problem.</li>
+</ul></dd>
+
+<dt>Important</dt><dd>All colons, part of a keyword phrase, cannot be preceded by a space.
+<ul class="org-ul">
+<li>This includes <code>Theorem “X”:, Proof:, Axiom “A_1” “A_2” ⋯ “A_N”:, Explanation:, Declaration:</code></li>
+<li>In the previous item, the <code>A_i</code> denote the alternate names for the axiom being declared.</li>
+</ul></dd>
+</dl>
+
+<p>
+To wrap-up the example: We know from grade school that a triangle’s area is half its height times its base and so aim to use this to solve
+our problem. Since multiplication is less messy than the non-associative division, we remove divisions in-favour of
+multiplications to obtain the conjecture that <code>2 · T n = n · (n + 1)</code>.
+This candidate solution can be verified by <code>induction</code>, which is covered in a later section.
+</p>
+
+<p>
+As another example, we show how (a variant of) the natural numbers may be defined:
+</p>
+<pre class="example">
+ Declaration: Nat  : Type
+ Declaration: Zero : Nat
+ Declaration: Succ : Nat → Nat
+</pre>
+
+<p>
+Observe
+</p>
+<ul class="org-ul">
+<li>The type <code>Type</code> serves to introduce new types.</li>
+<li>The second declaration serves to show that the declared type is non-empty.</li>
+<li>The third declaration provides us with a method to construct <i>possibly</i> new elements
+from existing elements.
+<ul class="org-ul">
+<li><i>Possibly</i> new-elements since we are not guaranteed that <code>Succ n ≠ n</code>.</li>
+<li>This is an <i>axiomatic</i> definition: We have only what we see, what we declared.</li>
+<li>This is not an <i>inductive</i> definition: We are not given an induction principle for the type.</li>
+</ul></li>
+</ul>
+
+<p>
+However, the built-in naturals do come with an induction principle and helpful syntactic-sugar for performing
+<code>induction</code> proofs &#x2014;more on this later.
+</p>
+
+<p>
+We can always express additional axioms for our defined types; e.g.,
+</p>
+<pre class="example">
+ Axiom “Cancellation of Succ” “Succ injectivity”: Succ m = Succ n  ≡  m = n
+ Axiom “Zero is not Succ” “0≠+1”: Zero = Succ n  ≡  false
+</pre>
+
+<p>
+Recall that we can have <i>unicode identifiers</i> for names.
+</p>
+
+<pre class="example">
+ Theorem “0≠1”: Zero ≠ Succ Zero
+ Proof: By “0≠+1” and “Definition of ≠” and (3.15)  — i.e. ¬ p ≡ p ≡ false
+</pre>
+
+<p>
+Finally, the <code>By</code> syntax allows us to take a simple proof and render it in one-line:
+We ignore the expressions in a calculation and merely list the hints.
+</p>
+<ul class="org-ul">
+<li>This is a good idea when a result is an instance of a more general result or is two or three clear steps.</li>
+<li>This is not a good idea when a result is many steps or the steps are unclear and seeing the expressions would
+assist in understanding the proof.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9dfc816" class="outline-3">
+<h3 id="Adventuring-with-Calculation"><a href="#Adventuring-with-Calculation">Adventuring with <code>Calculation</code></a></h3>
+<div class="outline-text-3" id="text-Adventuring-with-Calculation">
+<p>
+Sometimes we do not have a particular theorem we wish to prove, but are rather attempting to solve a problem by manipulating some given data. In such a case, the <code>Theorem</code> keyword is inappropriate since we do not know what we are aiming at calculating. Instead we use the <code>Calculation</code> keyword. If later we wish to name the result of our calculation for referencing purposes, we may append the calculational proof with the key-phrase <code>This proves “My new result”</code>.
+</p>
+
+<p>
+We shall provide an example to illustrate this keyword, and along the way we again showcase the keywords of the previous section.
+</p>
+<ul class="org-ul">
+<li><code>Declaration</code>, to bring a typed name into scope</li>
+<li><code>Explanation</code>, to document a name.</li>
+<li>— is entered via <code>\---</code> and it permits a one-line <i>comment</i> within a hint.
+<ul class="org-ul">
+<li>This comment token must be followed by a space.</li>
+</ul></li>
+</ul>
+
+<p>
+The example: Adapted from Raymond Smullyan’s <i>Alice in Puzzleland</i>,
+</p>
+<blockquote>
+<p>
+“How about making us some nice tarts?” the King of Hearts asked the Queen of Hearts one cool summer
+day.
+</p>
+
+<p>
+“I can’t!” shouted the Queen. “A necessary item has been stolen!”
+</p>
+
+<p>
+“Really! said the King. ‘This is quite serious! Who stole it?”
+</p>
+
+<p>
+“How do you expect me to know who stole it? If I knew, I would have had it back long ago and the
+miscreant’s head in the bargain!”
+</p>
+
+<p>
+Well, the King had his soldiers scout around for the missing item, and it was found in the house of the March
+Hare, the Mad Hatter, and the Dormouse. All three were promptly arrested and tried.
+</p>
+
+<p>
+The puzzle is to deduce the criminal(s) from what the defendants have to say and the findings of the investigators
+that found them.
+</p>
+
+<p>
+The defendants had the following to say:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">March Hare:</td>
+<td class="org-left"><i>The Hatter stole it.</i></td>
+</tr>
+
+<tr>
+<td class="org-left">Mad Hatter:</td>
+<td class="org-left">&#x2014;said nothing---</td>
+</tr>
+
+<tr>
+<td class="org-left">Dormouse :</td>
+<td class="org-left">&#x2014;said nothing---</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+As subsequent investigation revealed, only one of the three had stolen the flour, and he was the only one of the
+three who told the truth.
+</p>
+</blockquote>
+
+<p>
+There is no <code>Theorem</code> to prove, but a <code>Calculation</code> may be performed provided we furnish ourselves with a sufficient setup.
+</p>
+
+<p>
+We begin my formalising the candidates of the crime,
+</p>
+<pre class="example">
+ Declaration: R, H, M : 𝔹
+ Explanation: R := “the `R`abbit, the March Hare, stole the item”
+ Explanation: H := “the `H`uman, the Mad Hatter, stole the item”
+ Explanation: M := “the `M`ouse, the Dourmouse, stole the item”
+</pre>
+
+<p>
+Then we explicitly clarify what was said,
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">March Hare:</td>
+<td class="org-left">H</td>
+</tr>
+
+<tr>
+<td class="org-left">Mad Hatter:</td>
+<td class="org-left">---</td>
+</tr>
+
+<tr>
+<td class="org-left">Dormouse:</td>
+<td class="org-left">---</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The investigation’s findings are the only true things we have, so we being there.
+That <i>only one of the three had stolen the flour</i> means we have <code>R ≢ H ≢ M</code>, and that the thief <i>was the only
+one of the three who told the truth</i> means that the rabbit –the only one whose statement we know– is the thief
+precisely if what he claims is true; i.e., <code>R ≡ H</code>.
+</p>
+
+<p>
+With these formalisation in hand, we calculate,
+</p>
+<pre class="example">
+ Calculation:
+     (R ≡ H) ∧ (R ≢ H ≢ M)
+   ≡⟨ “Definition of ≢” and “Double Negation”
+      — silently using associativity of ≢ ⟩
+     (R ≡ H) ∧ (R ≡ H ≡ M)
+   ≡⟨ “Substitution” and “Identity of ≡” ⟩
+     (R ≡ H) ∧ M
+   ⇒⟨ “Weakening” ⟩
+     M
+ This proves: Theorem “Deducing the Criminal”: (R ≡ H) ∧ (R ≢ H ≢ M)  ⇒  M
+</pre>
+
+<p>
+Hence the thief is the `M`ouse: The Dormouse stole the flour.
+</p>
+
+<p>
+
+Note that <code>“Substitution”</code> above refers to a theorem of propositional logic, namely \\ \(e = f ∧ E[z := e] \;\;≡\;\; e = f ∧ E[z := f]\),
+not the keyword <code>Substitution</code> which provides a rewrite rule for terms of the shape <i>E[x := expr]</i>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org23b7c18" class="outline-3">
+<h3 id="Rigid-Matching-with-with"><a href="#Rigid-Matching-with-with">Rigid Matching with <code>with</code></a></h3>
+<div class="outline-text-3" id="text-Rigid-Matching-with-with">
+<p>
+Here we document how a theorem mentioned in a hint is applied in a particular case, a substitution can be provided following the keyword <code>with</code>.
+</p>
+
+<p>
+For example,
+</p>
+<pre class="example">
+ Theorem (15.19): -(a + b) = (- a) + (- b)
+ Proof:
+     -(a + b)
+   =⟨ (15.20) with `a := a + b` ⟩
+     - 1 · (a + b)
+   =⟨ “Distributivity of · over +” with `a, b, c := - 1, a, b` ⟩
+     - 1 · a + - 1 · b
+   =⟨ (15.20) with `a := a` ⟩
+     - a + - 1 · b
+   =⟨ (15.20) with `a := b` ⟩
+     - a + - b
+</pre>
+
+<p>
+Note:
+</p>
+
+<ul class="org-ul">
+<li>There are spaces around <code>with</code>.</li>
+
+<li>The substitution is surrounded by backquotes (<code>`</code>).
+<ul class="org-ul">
+<li>On most keyboards, the backquote is in the upper left corner, on the same key as the tilde (<code>~</code>).</li>
+<li>Other quote-like characters will not work.</li>
+<li>The use of backquotes here is following the MarkDown convention, according to which code pieces embedded in English sentences are surrounded by backquotes.</li>
+</ul></li>
+
+<li>The substitution notation is that of LADM: \(\mathsf{variables} :\!= \mathsf{expressions}\)
+<ul class="org-ul">
+<li>The variable list has the same length as the expression list.</li>
+<li>No variable occurs twice in the variable list.</li>
+<li>The “becomes” symbol \(:\!=\) is obtained via the symbol completion sequence <code>\:=</code> (backslash-colon-equal).</li>
+<li>Writing two-character sequence colon-equal <i>:=</i> will not work; the one-character becomes \(:\!=\) must be used.</li>
+</ul></li>
+</ul>
+
+<p>
+When CalcCheck is invoked “with rigid matching”:
+</p>
+<ul class="org-ul">
+<li>All theorem variables in a hint justification need to be substituted possibly in the form <code>a:=a</code>.</li>
+<li>Otherwise, messages like <code>Rule variable `a` not substituted!</code> will be produced when proof checking.</li>
+<li>When a theorem is invoked with a particular substitution then it may be applied more than once in that step
+but all such applications would need to be with that substitution.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7230bcc" class="outline-3">
+<h3 id="Textual-Substitution"><a href="#Textual-Substitution">Textual <code>Substitution</code></a></h3>
+<div class="outline-text-3" id="text-Textual-Substitution">
+<p>
+Let <code>E</code> and <code>R</code> expressions and let <code>x</code> be a variable. We write <code>E[x∶=R]</code> denote an expression that is the same as <code>E</code> but with all occurrences of <code>x</code> replaced by <code>(R)</code>.
+</p>
+<ul class="org-ul">
+<li>This concept allows one to define <i>function application</i> where a `function' is an alias for a particular expression.</li>
+<li>This concept is integral in <i>evaluating programs</i> in (functional) programming languages.</li>
+<li>In general, <code>R</code> and <code>x</code> may be lists of expressions and distinct variables, respectively, of the same length, then the result <code>E[x:=R]</code> is the <i>simultaneous replacement</i> of variables <code>x</code> by
+corresponding expressions <code>R</code>.  Python, for example, has a similar feature: Concurrent assignment.</li>
+</ul>
+
+<p>
+Applying a substitution is performed with the <code>Substitution</code> keyword; as in
+</p>
+
+<pre class="example">
+ Calculation:
+     (3 · x + y)[y := x + 2]
+   =⟨ Substitution ⟩
+     3 · x + (x + 2)
+   =⟨ “Reflexivity of =” ⟩
+     3 · x + x + 2
+   =⟨ “Identity of ·” ⟩
+     3 · x + 1 · x + 2
+   =⟨ “Distributivity of · over +” ⟩
+     (3 + 1) · x + 2
+   =⟨ Evaluation ⟩
+     4 · x + 2
+</pre>
+
+<ul class="org-ul">
+<li>Steps that just omit unnecessary parentheses can be explained with <code>“Reflexivity of =”</code> as hint.</li>
+<li>Just as with <code>with</code>, the <i>becomes</i> symbol must be used rather than colon-equal /:= /  !</li>
+</ul>
+
+<p>
+To see that a sequential substitution differs from a simultaneous one, consider working out the following,
+</p>
+<pre class="example">
+ Calculation:
+     (2 · x + 3 · y)[x := y + 7][y := x + 6]
+
+ Calculation:
+     (2 · x + 3 · y)[x, y := y + 7, x + 6]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgefb7a3e" class="outline-3">
+<h3 id="Rewriting-with-Evaluation"><a href="#Rewriting-with-Evaluation">Rewriting with <code>Evaluation</code></a></h3>
+<div class="outline-text-3" id="text-Rewriting-with-Evaluation">
+<p>
+The <code>Evaluation</code> keyword rewrites integer expressions having <i>no variables</i> as integer values.
+For example,  <code>(3 - 2) · x</code> is rewritten to <code>1 · x</code> since the integer expression <code>3 - 2</code> reduces to <code>1</code>.
+Moreover, the rewrite does not continue any further to, say, <code>x</code> since <code>1 · x = x</code> involves a variable and so must be proven as a theorem
+and then invoked in a hint by its name.
+</p>
+
+<p>
+We shall demonstrate these ideas by solving a system of integer equations in a very constrained way.
+</p>
+
+<p>
+Given the system
+</p>
+<pre class="example">
+ Declaration: r, s : ℤ
+
+ Axiom (1): 5 · r + 8 · s = 49
+ Axiom (2): 6 · r + 7 · s = 51
+</pre>
+<p>
+We attempt to solve for one of the unknowns: &#x2014;the numbers on the side are for commentary purposes only&#x2014;
+</p>
+<pre class="example">
+<span class="linenr"> 1: </span> Calculation:
+<span class="linenr"> 2: </span>     r
+<span class="linenr"> 3: </span>   =⟨ “Identity of ·” ⟩
+<span class="linenr"> 4: </span>     1 · r
+<span class="linenr"> 5: </span>   =⟨ Evaluation ⟩
+<span class="linenr"> 6: </span>     (6 - 5) · r
+<span class="linenr"> 7: </span>   =⟨ “Distributivity of · over -” ⟩
+<span class="linenr"> 8: </span>     6 · r - 5 · r
+<span class="linenr"> 9: </span>   =⟨ “Subtraction” ⟩
+<span class="linenr">10: </span>     6 · r + -(5 · r)
+<span class="linenr">11: </span>   =⟨ “Identity of +” ⟩
+<span class="linenr">12: </span>     6 · r + 0 + -(5 · r) + 0
+<span class="linenr">13: </span>   =⟨ “Unary minus” and “Distributivity of unary minus over +” ⟩
+<span class="linenr">14: </span>     6 · r + 7 · s + -(7 · s) + -(5 · r + 8 · s) + 8 · s
+<span class="linenr">15: </span>   =⟨ (2) and (1) ⟩
+<span class="linenr">16: </span>     51 + -(7 · s) + - 49 + 8 · s
+<span class="linenr">17: </span>   =⟨ Evaluation and (15.22)
+<span class="linenr">18: </span>      — (15.22): a · (- b) = - (a · b) ⟩
+<span class="linenr">19: </span>    (- 7) · s + 8 · s + 2
+<span class="linenr">20: </span>   =⟨ “Distributivity of · over +” and Evaluation and “Identity of ·” ⟩
+<span class="linenr">21: </span>     s + 2
+<span class="linenr">22: </span> This proves: Theorem “`r` in terms of `s`”: r = s + 2
+</pre>
+
+<p>
+Observe
+</p>
+
+<ul class="org-ul">
+<li>Line 3 could not have been an <code>Evaluation</code> since there the expression being rewritten contains variables.</li>
+<li>Line 5 rewrites only the integer subexpression that does not contain any free variables.</li>
+<li>Line 15 references the axioms by the numbers assigned to them.</li>
+<li>Line 18 is a comment to remind the reader the statement of LADM's theorem <code>(15.22)</code>.</li>
+<li>Line 22 gives a name to the result of this calculation so that it can be used in further calculations, such as to prove <code>s = 3</code> and <code>r = 5</code>.</li>
+</ul>
+
+<p>
+At times, the keyword <code>Evaluation</code> is not permitted as a justification; it is disabled.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfec6b46" class="outline-3">
+<h3 id="This-is-Saves-the-Day-or-two-lines"><a href="#This-is-Saves-the-Day-or-two-lines">  <code>—  This is</code> Saves the Day, or two lines</a></h3>
+<div class="outline-text-3" id="text-This-is-Saves-the-Day-or-two-lines">
+<p>
+One way to show a statement is a theorem is by proving that it equivales an existing theorem.
+This short-circuiting of a calculation occurs by appending the final line of a calculation
+with <code>— This is &lt;&lt;theorem reference here&gt;&gt;</code>. That is, this syntax justifies the other end of an ≡-chain.
+</p>
+
+<ul class="org-ul">
+<li>This is not a a usual comment!</li>
+<li>The spacing and capitalisation in <code>—  This is</code> is fixed.</li>
+<li>It currently only parses with <i>only single spaces</i> around <code>This</code> and <code>is</code>.</li>
+</ul>
+
+<p>
+For example, if we have a theorem <code>“q is a Theorem”</code> that proves statement <code>q</code>,
+then we could prove a statement <code>p</code> is true as follows,
+</p>
+<pre class="example">
+ Theorem “p is a theorem”: p
+ Proof:
+     p
+   ≡⟨ hint ⟩
+     …
+   ≡⟨ hint ⟩
+     q  —  This is “q is a Theorem”
+</pre>
+<p>
+This really saves us two lines since it is equivalent to,
+</p>
+<pre class="example">
+ Theorem “p is a theorem”: p
+ Proof:
+     p
+   ≡⟨ hint ⟩
+     …
+   ≡⟨ hint ⟩
+     q
+   ≡⟨ “q is a Theorem” ⟩
+     true
+</pre>
+
+<p>
+Why do these templates suffice to prove <code>p</code> is a theorem when the
+calculations explicitly prove <code>p ≡ true</code>? It is the <code>“Identity of ≡”</code>
+which states <code>(p ≡ true) ≡ p</code> that permits this.
+</p>
+
+<p>
+Like all identity statements, this rule implies that occurrences of <i>“≡ true”</i>,
+or <i>“true ≡”</i>, in an expression are redundant and so are eliminated unless there
+is a compelling reason otherwise.
+</p>
+
+<p>
+Note that <code>true</code> is itself a theorem: It is LADM's theorem (3.4).
+As such, we could append the previous calculation with
+<code>— This is (3.4)</code>, however this would be redundant and should not be performed.
+As such, the <code>“Identity of ≡”</code> is tantamount to saying that no <i>“— This is”</i> syntax
+is required for <code>true</code>, the least interesting theorem.
+</p>
+
+<p>
+<b>Warning</b> The <code>— This is</code> syntax currently does not work with keyword <code>Assumption</code> nor <code>induction hypothesis</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org16ea837" class="outline-3">
+<h3 id="Automatic-Associativity-and-Symmetry"><a href="#Automatic-Associativity-and-Symmetry">Automatic Associativity and Symmetry</a></h3>
+<div class="outline-text-3" id="text-Automatic-Associativity-and-Symmetry">
+<p>
+CalcCheck allows us to reason <i>up to symmetry and associativity</i>: If an operation has been to be proven to have one of these properties,
+then it can be admitted to CalcCheck's rewrite rules and no explicit call to such a result is henceforth necessary.
+</p>
+<ul class="org-ul">
+<li>Making symmetry and associativity steps explicit is always allowed; it is sometimes very useful for readability.</li>
+<li>For learning purposes, such features are sometimes <i>disabled!</i> E.g., <i>Exercise 1.4</i> and <i>Assignment 1.3</i>.</li>
+</ul>
+
+<p>
+For example, if we define addition
+</p>
+<pre class="example">
+Declaration: _+_ : ℕ → ℕ → ℕ
+
+Axiom “Definition of +”
+      “Left-identity of +”
+      “Definition of + for 0”:        0 + n = n
+Axiom “Definition of +”
+      “Addition of successor”
+      “Definition of + for `S`”:  (S m) + n = S (m + n)
+</pre>
+
+<p>
+( Note that we are using multiple aliases for the particular definition clauses for readability purposes. )
+</p>
+
+<p>
+Then if we can realise
+</p>
+<pre class="example">
+Theorem “Associativity of +”: (a + b) + c = a + (b + c)
+Proof: ?
+</pre>
+
+<p>
+Then we can set the properties to be implicit:
+</p>
+<pre class="example">
+Activate associativity property “Associativity of +”
+</pre>
+
+<p>
+Now calculations involving addition needn not both explicit calls to this theorem.
+</p>
+
+<p>
+In a similar fashion,
+</p>
+<pre class="example">
+Theorem “Symmetry of +”: m + n = n + m
+Proof: ?
+
+Activate symmetry property “Symmetry of +”
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org455fe2e" class="outline-3">
+<h3 id="induction-Proofs"><a href="#induction-Proofs">  <code>induction</code> Proofs</a></h3>
+<div class="outline-text-3" id="text-induction-Proofs">
+<p>
+For an expression <code>P</code>, an induction proof looks as follows:
+</p>
+<pre class="example">
+ Theorem: P
+ Proof:
+   By induction on `m ∶ ℕ`:
+   Base case:
+     Proof for P[m := 0]
+   Induction step:
+     Proof for P[m := S m] using Induction hypothesis P
+</pre>
+
+<p>
+For example, with the setup
+</p>
+<pre class="example">
+ Declaration: _≤_ : ℕ → ℕ → 𝔹
+
+ Axiom “Zero is least element”:           0 ≤ a
+ Axiom “Isotony of successor”:          S a ≤ S b  ≡  a ≤ b
+ Axiom “Successor is not at most zero”: S a ≤ 0    ≡ false
+
+ Theorem “Zero is unique least element”:    a ≤ 0  ≡  a = 0
+</pre>
+<p>
+We can show that mutually contained numbers are necessarily equivalent.
+</p>
+<pre class="example">
+ Theorem “Antisymmetry of ≤”: a ≤ b ⇒ b ≤ a ⇒ a = b
+ Proof:
+   By induction on `a : ℕ`:
+     Base case `0 ≤ b ⇒ b ≤ 0 ⇒ 0 = b`:
+         0 ≤ b ⇒ b ≤ 0 ⇒ 0 = b
+       ≡⟨ “Zero is unique least element” ⟩
+         0 ≤ b ⇒ b = 0 ⇒ 0 = b
+       ≡⟨ “Reflexivity of ⇒” ⟩
+         0 ≤ b ⇒ true
+       ≡⟨ “Right-zero of ⇒” ⟩
+         true
+     Induction step `S a ≤ b ⇒ b ≤ S a ⇒ S a = b`:
+       By induction on `b : ℕ`:
+         Base case `S a ≤ 0 ⇒ 0 ≤ S a ⇒ S a = 0`:
+             S a ≤ 0 ⇒ 0 ≤ S a ⇒ S a = 0
+           ≡⟨ “Zero is least element” ⟩
+             S a ≤ 0 ⇒ true ⇒ S a = 0
+           ≡⟨ “Left-Identity of ⇒” ⟩
+             S a ≤ 0 ⇒ S a = 0
+           ≡⟨ “Zero is unique least element” ⟩
+             S a = 0 ⇒ S a = 0
+           ≡⟨ “Reflexivity of ⇒” ⟩
+             true
+         Induction step `S a ≤ S b ⇒ S b ≤ S a ⇒ S a = S b`:
+             S a ≤ S b ⇒ S b ≤ S a ⇒ S a = S b
+           ≡⟨ “Isotony of successor” ⟩
+             a ≤ b ⇒ b ≤ a ⇒ S a = S b
+           ≡⟨ “Cancellation of `S`”⟩
+             a ≤ b ⇒ b ≤ a ⇒ a = b
+           ≡⟨ induction hypothesis `a ≤ b ⇒ b ≤ a ⇒ a = b` ⟩
+             true
+</pre>
+<p>
+Observe
+</p>
+
+<ul class="org-ul">
+<li>We performed a double induction since the definition of containment `≤' is defined inductively on both arguments.</li>
+
+<li>This is an involved proof and so we <i>communicated</i> our intentions to the system at each proof obligation by
+indicating our proof goal in <code>`</code> back-ticks <code>`</code>.</li>
+
+<li>A double induction means that the key-phrase <code>induction hypothesis</code> is <i>ambiguous</i>; we communicate which one we want to utilise by enclosing the hypothesis in <code>`</code> back-ticks. <code>`</code></li>
+</ul>
+
+<p>
+Similar to some programming languages, recall that the CalcCheck system is indentation and case sensitive.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgff4c1cb" class="outline-2">
+<h2 id="Extending-the-left-column"><a href="#Extending-the-left-column">Extending the left-column</a></h2>
+<div class="outline-text-2" id="text-Extending-the-left-column">
+<p>
+Leibniz &#x2014;substituting equals for equals&#x2014;
+can be formulated as the <code>“Substitution”</code> principle:
+\[ e = f ∧ E[z :\!= e] \quad≡\quad e = f ∧ E[z :\!= f] \]
+</p>
+
+<p>
+This rule permits us, for any relation <code>_∼_</code>, to take a proof of the shape
+</p>
+<pre class="example">
+Theorem: a ∼ c
+Proof:
+    a ∼ c
+  ≡⟨ “Identity of ∧” and “Hint why a = b” ⟩
+    a = b  ∧ a ∼ c
+  ≡⟨ “Substiution” ⟩
+    a = b ∧ b ∼ c
+  ≡⟨ “Hint why b ∼ c” and “Hint why a = b”  and “Identity of ∧” ⟩
+    true
+</pre>
+<p>
+and render it more succinctly as
+</p>
+<pre class="example">
+Theorem: a ∼ c
+Proof:
+    a
+  =⟨ “Hint why a = b” ⟩
+    b
+  ∼⟨ “Hint why b ∼ c” ⟩
+    c
+</pre>
+
+<ul class="org-ul">
+<li>This relaxed proof demonstrates <code>a = b ∧ b ∼ c</code></li>
+<li>By Leibniz, this yields <code>a = b ∧ a ∼ c</code></li>
+<li>Then by weakening, <i>p ∧ q ⇒ q</i>, this yields <code>a ∼ c</code>.</li>
+</ul>
+
+<p>
+As it stands, we can have only <i>one</i> occurrence of the relation <code>_∼_</code> in the left-column since
+we are not ensured that multiple occurrences can be “glued” into a single one.
+Hence, relations <code>_∼_</code> proven to be transitive,  <code>x ∼ y ∧ y ∼ z ⇒ x ∼ z</code>, can appear multiple
+times in the left-column of a calculation.
+</p>
+
+<div style="column-rule-style:solid;column-count:2;"<p>
+<span class="underline">Minimal working example for transitive relations:</span>
+</p>
+<pre class="example">
+Declaration: X : Type
+
+Precedence 25 for: _~_
+Declaration: _~_ : X → X → 𝔹
+
+Axiom “Transitivity of ~”:
+   (x ~ y) ∧ (y ~ z) ⇒ (x ~ z)
+
+Activate transitivity property
+   “Transitivity of ~”
+
+Declaration: P, A, Q, B, R : X
+Axiom (0): P = A
+Axiom (1): A ~ B
+Axiom (2): B = Q
+Axiom (3): Q ~ R
+
+Theorem “T0”: P ~ R
+Proof:
+    P
+  =⟨ (0) ⟩
+    A
+  ~⟨ (1) ⟩
+    B
+  =⟨ (2) ⟩
+    Q
+  ~⟨ (3) ⟩
+    R
+</pre>
+<p>
+
+<span class="underline">Minimal working example for <b>non</b>-transitive relations:</span>
+</p>
+<pre class="example">
+Declaration: X : Type
+
+Precedence 25 for: _~_
+Declaration: _~_ : X → X → 𝔹
+
+Declaration: P, A, Q, B : X
+Axiom (0): P = A
+Axiom (1): A ~ B
+Axiom (2): B = Q
+
+Theorem “T1”: P ~ Q
+Proof:
+    P
+  =⟨ (0) ⟩
+    A
+  ~⟨ (1) ⟩
+    B
+  =⟨ (2) ⟩
+    Q
+</pre>
+
+
+<p>
+The calculational style is valid for any non-transitive relation <i>as long as it occurs only <b>once</b></i>
+in the left-column.
+</p>
+</div>
+
+<ul class="org-ul">
+<li>In-practice, the <code>Axiom</code>'s seen here are actually <code>Theorem</code>'s.</li>
+<li>Without the <code>Activate transitivity property “Transitivity of ~”</code> our proof for <code>“T0”</code> will not
+go through: The calculation will have proven <code>(P ~ B) ∧ (B ~ R)</code> and will not <i>automatically</i>
+rewrite this into <code>P ~ R</code> since the transitivity property has not been activated.
+Instead we obtain the red error message <i>CalcCheck: Could not match calculation with stated goal.</i></li>
+<li>If <code>~⟨ ? ⟩</code> occurs twice in a calculation for <i>non</i>-transitive <code>~</code> &#x2014;i.e., above in the right side&#x2014;
+as in the proof of <code>“T0”</code>, then the proof yields <code>(P ~ B) ∧ (B ~ R)</code> which would imply <code>P ~ R</code> if
+the relation <code>~</code> were transitive.
+In such cases the system reports <i>Could not match calculation with stated goal</i>,
+which is justified since the former is a conjunction that could not be reduced to an expression
+ involving only a single <code>~</code>.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org412702a" class="outline-2">
+<h2 id="Discharging-provisos-with-with"><a href="#Discharging-provisos-with-with">Discharging provisos with <code>with</code></a></h2>
+<div class="outline-text-2" id="text-Discharging-provisos-with-with">
+<p>
+It is a common scenario that we can prove certain results <i>provided</i> some constraints are satisfied.
+CalcCheck overloads the <code>with</code> combinator to act as syntactic sugar for discharging the premises of
+such theorems when one wishes to utilise their result within a calculation.
+</p>
+</div>
+
+<div id="outline-container-orgdadbf45" class="outline-3">
+<h3 id="The-most-elementary-application"><a href="#The-most-elementary-application">The most elementary application</a></h3>
+<div class="outline-text-3" id="text-The-most-elementary-application">
+<p>
+For example, suppose that we have a function <code>f</code> that when applied to any argument <code>x</code> is the same as another
+function <code>g</code> applied to any argument <code>y</code> <i>provided</i> <code>x</code> and <code>y</code> satisfy some given property <code>P</code>.
+Then, we can use this result in a calculation as follows:
+</p>
+
+<div style="column-rule-style:solid;column-count:2;"<pre class="example">
+Declaration: Src, Tgt : Type
+Declaration: f, g : Src → Tgt
+Declaration: P : Src → Src → 𝔹
+
+Axiom “Fact”: P x y ⇒ f x = g y
+Axiom “Hint why `P x y` is true”: P x y
+
+Declaration: a, b : Tgt
+Declaration: x, y : Src
+Axiom “Hint why a = f x”: a = f x
+Axiom “Hint why g y = b”: g y = b
+
+Theorem: a = b
+Proof:
+    a
+  =⟨ “Hint why a = f x” ⟩
+    f x
+  =⟨ “Fact” with “Hint why `P x y` is true” ⟩
+    g y
+  =⟨ “Hint why g y = b” ⟩
+    b
+</pre>
+<p>
+
+<span class="underline">Comparison</span>
+</p>
+<pre class="example">
+Declaration: P, Q : 𝔹
+Axiom “F”: P ⇒ Q
+Axiom “X”: P
+
+Theorem: Q
+Proof: By “F” with “X”
+</pre>
+
+
+<p>
+Notice that the <code>with</code> syntax acts like the function application operation:
+If we construe <i>P</i> and <i>Q</i> as types then we have <i>f : P → Q</i> and <i>x : P</i>  implies <i>f x : Q</i>,
+just as <code>“F” with “X”</code> is a proof of proposition <code>Q</code>.
+</p>
+
+<p>
+Without the syntactic sugar:
+</p>
+<pre class="example">
+Theorem: Q
+Proof:
+    Q
+  ⇐⟨ “Consequence” and “Modus ponens” ⟩
+    P ∧ (P ⇒ Q)
+  ≡⟨ “F”, “X”, and “Idempotency of ∧” ⟩
+    true
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org60950fa" class="outline-3">
+<h3 id="Simplifying-laws-to-obtain-particular-instances-with-with"><a href="#Simplifying-laws-to-obtain-particular-instances-with-with">Simplifying laws to obtain particular instances with <code>with</code></a></h3>
+<div class="outline-text-3" id="text-Simplifying-laws-to-obtain-particular-instances-with-with">
+<p>
+A tremendously powerful usage of the <code>with</code> feature is to use <i>one side of an equivalence</i> in a calculation when the other side can be discharged. Needless to say, this is nothing more than syntactic sugar of modus ponens and weakening.
+</p>
+
+<div class="scriptsize">
+<div style="column-rule-style:solid;column-count:2;"<p>
+<span class="underline">Setup</span>
+</p>
+
+<p>
+Here are the pieces required to ensure the neighbouring snippets to be minimal working examples.
+</p>
+
+<p>
+In-practice the <code>Axiom</code>'s here are <code>Theorem</code>'s or <code>Subproof</code>'s.
+</p>
+
+<pre class="example">
+Declaration: X : Type
+
+Precedence 45 for: _~_
+Declaration: _~_ : X → X → 𝔹
+
+Declaration: P : 𝔹
+Declaration: r, s, t, u : X
+
+Axiom “Fact”: P ≡ (s ~ t)
+Axiom “Hint why P is true”: P ≡ true
+Axiom “Hint why t = u”: t = u
+Axiom “Hint why r = s”: r = s
+</pre>
+<p>
+
+<span class="underline">Verbose Plain CalcCheck</span>
+</p>
+<pre class="example">
+Theorem: r ~ u
+Proof:
+    r ~ u
+  ⇐⟨ “Consequence” with “Weakening” ⟩
+       r = s  ∧  t = u
+    ∧  r ~ u
+  ≡⟨ Substitution ⟩
+      r = s  ∧  t = u
+    ∧ (x ~ y)[x ≔ r][y ≔ u]
+  ≡⟨ “Replacement” and Substitution ⟩
+      r = s  ∧  t = u ∧ s ~ t
+  ≡⟨ “Hint why r = s” and “Identity of ∧” ⟩
+    (s ~ t) ∧ t = u
+  ≡⟨ “Hint why t = u” and “Identity of ∧” ⟩
+    s ~ t
+  ≡⟨ “Fact” ⟩
+    P
+  ≡⟨ “Hint why P is true” ⟩
+    true
+</pre>
+<p>
+
+<span class="underline">Sweetened with sugar</span>
+</p>
+<pre class="example">
+
+Theorem: r ~ u
+Proof:
+    r
+  =⟨ “Hint why r = s” ⟩
+    s
+  ~⟨ “Fact” with “Hint why P is true” ⟩
+    t
+  =⟨ “Hint why t = u” ⟩
+    u
+
+</pre>
+<blockquote>
+<p>
+&#x2014;Recall that relations can be used in the left-column.&#x2014;
+</p>
+</blockquote>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc64cac4" class="outline-3">
+<h3 id="with-associates-to-the-right"><a href="#with-associates-to-the-right">  <code>with</code> associates to the right</a></h3>
+<div class="outline-text-3" id="text-with-associates-to-the-right">
+<p>
+The keyword <code>with</code> is right-associative:
+ That is, <code>X with Y with Z</code> essentially parses as <code>X with (Y with Z)</code>.
+</p>
+<ul class="org-ul">
+<li>This happens when we wish to use the result of <code>X</code> whose
+proviso is the consequent of <code>Y</code>
+and <code>Y</code> itself has a proviso which must be discharged.</li>
+</ul>
+
+<div class="scriptsize">
+<div style="column-rule-style:solid;column-count:2;"<p>
+<span class="underline">Discharging for a relation</span>
+</p>
+<pre class="example">
+Declaration: T : Type
+Precedence 45 for: _~_
+Declaration: _~_ : T → T → 𝔹
+
+Declaration: pre, proviso, pre : 𝔹
+Axiom “X”: pre ⇒ (lhs ~ rhs)
+Axiom “Y”: proviso ⇒ pre
+Axiom “Z”: proviso
+
+Calculation:
+    lhs
+  ~⟨ “X” with “Y” with “Z” ⟩
+    rhs
+This proves: Theorem “Neat”: lhs ~ rhs
+</pre>
+<p>
+<span class="underline">Discharging Implication Provisos</span>
+</p>
+<pre class="example">
+Declaration: pre, proviso, pre, pos : 𝔹
+Axiom “X”: pre ⇒ pos
+Axiom “Y”: proviso ⇒ pre
+Axiom “Z”: proviso
+
+Theorem: pos
+Proof: By “X” with “Y” with “Z”
+</pre>
+<p>
+<span class="underline">Discharging equivalences</span>
+</p>
+<pre class="example">
+Declaration: pre, proviso, pre, pos : 𝔹
+Axiom “X”: pre ≡ pos
+Axiom “Y”: proviso ≡ pre
+Axiom “Z”: proviso
+
+Theorem: pos
+Proof: By “X” with “Y” with “Z”
+</pre>
+</div>
+
+</div>
+
+<p>
+At times we do not wish to make an auxiliary lemma that may be trivial and only
+  serve to discharge a proviso, in such cases we may provide the proof directly
+  in the calculation.
+</p>
+<ul class="org-ul">
+<li>E.g., above we could have had <code>=⟨ “X” with “Y” with Subproof for `proviso`: &lt;&lt;proof here&gt;&gt; ⟩</code>.</li>
+<li>The final section on <code>Subproof</code>'s shows an example of this nature.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd4ff3ff" class="outline-3">
+<h3 id="Discharging-multiple-obligations-with-with"><a href="#Discharging-multiple-obligations-with-with">Discharging <i>multiple</i> obligations with <code>with</code></a></h3>
+<div class="outline-text-3" id="text-Discharging-multiple-obligations-with-with">
+<p>
+Here we show an example of how multiple provisos can be discharged.
+</p>
+
+<p>
+Recall that conjunction is order-preserving &#x2014;a proof is shown in the <code>Subproof</code> sections&#x2014;
+</p>
+<pre class="example">
+Theorem “Monotonicity of ∧”: (p ⇒ p') ⇒ (q ⇒ q') ⇒ ((p ∧ q) ⇒ (p' ∧ q'))
+</pre>
+
+<p>
+Let us apply such a monotonicity law:
+</p>
+
+<pre class="example">
+Theorem (3.76e) “Weakening”: p ∧ q ⇒ (p ∨ r) ∧ q
+Proof:
+    p ∧ q
+  ⇒⟨ “Left-monotonicity of ∧” with (3.76a) and “Left-identity of ⇒” ⟩
+    (p ∨ r) ∧ q
+</pre>
+
+<p>
+What will be going on here behind the scenes is essentially the following:
+</p>
+
+<pre class="example">
+Theorem (3.76e) “Weakening”: p ∧ q ⇒ (p ∨ r) ∧ q
+Proof:
+    p ∧ q ⇒ (p ∨ r) ∧ q
+  ≡⟨ “Left-identity of ⇒” ⟩
+    true ⇒ (p ∧ q ⇒ (p ∨ r) ∧ q)
+  ≡⟨ (3.76a) ⟩
+    (p ⇒ p ∨ r) ⇒ (p ∧ q ⇒ (p ∨ r) ∧ q)
+    — This is “Left-monotonicity of ∧”
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb00c3d6" class="outline-2">
+<h2 id="Assuming-the-Antecedent"><a href="#Assuming-the-Antecedent">  <code>Assuming</code> the Antecedent</a></h2>
+<div class="outline-text-2" id="text-Assuming-the-Antecedent">
+<p>
+A common practice in mathematics is to prove an implication <code>P ⇒ Q</code> by assuming the “antecedent” <code>P</code> and proving the “consequent” <code>Q</code>. That is, we momentarily take <code>P</code> to be a given truth, thereby equivalent to <code>true</code>, and its variables as immutable (<i>non-substitutable!</i>) constants, then utilise this extra knowledge in the aim of proving the truth of <code>Q</code>.
+</p>
+</div>
+
+<div id="outline-container-org9412aea" class="outline-3">
+<h3 id="The-Sugar"><a href="#The-Sugar">The Sugar</a></h3>
+<div class="outline-text-3" id="text-The-Sugar">
+<p>
+Leibniz, for the Booleans, along with the identity of equivalence gives us the following rule
+\[ p \qquad⇒\qquad E[z :\!= p] \;=\; E[z :\!= true] \]
+</p>
+
+<p>
+This rule justifies the common practice in mathematics in which one proves an implication
+\(P ⇒ Q\) by momentarily thinking of \(P\) as equivalent to \(true\) and then attempting to
+prove \(Q\) with this added knowledge.
+</p>
+
+<p>
+CalcCheck caters to this common scenario by allowing us to take proofs such as that on the left
+side and render them more clearly as that on the right:
+</p>
+
+<div class="scriptsize">
+<div style="column-rule-style:solid;column-count:2;"<p>
+<span class="underline">Plain CalcCheck</span>
+</p>
+<pre class="example">
+Theorem: p ⇒ q ⇒ (p ≡ q)
+Proof:
+    p ⇒ q ⇒ (p ≡ q)
+  ≡⟨ Substitution ⟩
+    p ⇒ (q ⇒ (p ≡ q)[q := q])[p := p]
+  ≡⟨ “Replace by `true`” — performed twice
+    and Substitution ⟩
+    p ⇒ q ⇒ (true ≡ true)
+  ≡⟨ “Reflexivity of ≡”
+    and “Right-zero of ⇒” ⟩
+    true
+</pre>
+<p>
+
+<span class="underline">Sweetened with Sugar</span>
+</p>
+<pre class="example">
+Theorem: p ⇒ q ⇒ (p ≡ q)
+Proof:
+  Assuming `p`:
+    Assuming `q`:
+        p
+      ≡⟨ Assumption `p` ⟩
+        true
+      ≡⟨ Assumption `q` ⟩
+        q
+</pre>
+<p>
+
+<span class="underline">More syntactic Sugar</span>
+</p>
+<pre class="example">
+Theorem: p ⇒ q ⇒ (p ≡ q)
+Proof:
+  Assuming `p`, `q`:
+      p
+    ≡⟨ Assumption `p` ⟩
+      true
+    ≡⟨ Assumption `q` ⟩
+      q
+</pre>
+</div>
+
+</div>
+
+<ul class="org-ul">
+<li>Note that the keyword <code>Assumption</code> necessarily takes an argument <i>enclosed</i> in back-quotes!
+
+<ul class="org-ul">
+<li><b>Important</b> There must be a space after each comma in an <code>Assuming</code> clause.</li>
+<li>Otherwise a syntax error.</li>
+</ul></li>
+
+<li>With the relaxed approach, we can be less verbose.
+
+<ul class="org-ul">
+<li>Not only is this clearer to communicate, it also lessens the technical burden on the reader (and   writer!).</li>
+</ul></li>
+
+<li>We may want to <i>name</i> assumptions if they are lengthy or would make the proof clearer.
+<ul class="org-ul">
+<li>This can be performed by giving the <code>Assuming</code> keyword a name, enclosed in quotes,
+before the actual assumption; e.g., <code>Assuming “p is true” `p`:</code>.</li>
+<li>Named assumptions can be invoked as usual or by using their name, e.g., <code>Assumption “p is true”</code>.</li>
+</ul></li>
+
+<li>Just as the “Proof” syntax is hierarchical, so is the “Assuming” syntax. For example, a proof of a  nested implication <code>P ⇒ (Q ⇒ R)</code> can be presented using nested “Assuming” sub-proofs as in the
+middle snippet above.</li>
+
+<li>To reduce nesting and indentation, consecutive <i>unnamed</i> suppositions can be placed in one level, as in the right-most snippet above.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1a82a2f" class="outline-3">
+<h3 id="Assuming-Conjunctions"><a href="#Assuming-Conjunctions">Assuming Conjunctions</a></h3>
+<div class="outline-text-3" id="text-Assuming-Conjunctions">
+<p>
+However, by “Shunting” (3.65), proving <code>P ⇒ (Q ⇒ R)</code> is tantamount to proving <code>P ∧ Q ⇒ R</code>, and so we might consider to use such proofs also for this kind of theorem. This is currently not directly supported, however the extensibility syntax <code>Using</code> gives a work-around,
+</p>
+
+<pre class="example">
+Theorem: p ∧ q ⇒ (p ≡ q)
+Proof:
+  Using “Shunting”:
+    Subproof for `p ⇒ q ⇒ (p ≡ q)`:
+      Assuming `p`, `q`:
+          p
+        =⟨ Assumption `p` ⟩
+          true
+        =⟨ Assumption `q` ⟩
+          q
+</pre>
+
+<p>
+( More on the <code>Using</code> and <code>Subproof</code> syntax later. )
+</p>
+
+<p>
+Of course such a hierarchical approach has its limits and at times if there are many involved sub-proofs, then it may be prudent to make them first-class lemmas or theorems in their own right. Among other things, this will make it easier for the reader to follow the exposition.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc36f850" class="outline-3">
+<h3 id="Two-worked-out-examples"><a href="#Two-worked-out-examples">Two worked-out examples</a></h3>
+<div class="outline-text-3" id="text-Two-worked-out-examples">
+<p>
+LADM shows examples where assumptions are used in a modified shape; one way to achieve this is by modification using “with” to rewrite the assumption using some other laws:
+</p>
+
+<div class="scriptsize">
+<div style="column-rule-style:solid;column-count:2;"<pre class="example">
+Theorem (4.3) “Left-monotonicity of ∧”:
+  (p ⇒ q) ⇒ ( (p ∧ r) ⇒ (q ∧ r) )
+Proof:
+  Assuming `p ⇒ q`:
+      p ∧ r
+    ≡⟨ Assumption `p ⇒ q`
+        with “Definition of ⇒” `p ⇒ q ≡ p ∧ q ≡ p` ⟩
+      p ∧ q ∧ r
+    ⇒⟨ “Weakening” ⟩
+      q ∧ r
+</pre>
+<p>
+
+</p>
+<pre class="example">
+Axiom “Cancellation of ·”: c ≠ 0 ⇒ (c · a = c · b  ≡  a = b)
+
+Theorem “Non-zero multiplication”: a ≠ 0 ⇒ b ≠ 0 ⇒ a · b ≠ 0
+Proof:
+  Assuming `a ≠ 0`, `b ≠ 0`:
+      a · b ≠ 0
+    ≡⟨ “Definition of ≠” ⟩
+      ¬ (a · b = 0)
+    ≡⟨ “Zero of ·” ⟩
+      ¬ (a · b = a · 0)
+    ≡⟨ “Cancellation of ·” with assumption `a ≠ 0` ⟩
+      ¬ (b = 0)
+    ≡⟨ “Definition of ≠”, Assumption `b ≠ 0` ⟩
+      true
+</pre>
+</div>
+
+</div>
+<p>
+For the right side,
+</p>
+<ul class="org-ul">
+<li>In the third step, the implicit renaming of the variables to fit the context
+renders <code>Axiom “Cancellation of ·”</code> as <code>a ≠ 0 ⇒ (a · 0 = a · b  ≡  0 = b)</code>.</li>
+<li>Then the <code>with</code> discharges the proviso to give us the rule <code>a · 0 = a · b  ≡  0 = b</code>,
+which is then used to rewrite the third expression into the fourth.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org35fd7cb" class="outline-2">
+<h2 id="Subproof"><a href="#Subproof">Subproof</a></h2>
+<div class="outline-text-2" id="text-Subproof">
+<p>
+When calculating it is common that we require an auxiliary result to progress or we
+could prove such a result in-place while doing the necessary bookkeeping to carry
+the context-along. The latter is clunky since it carries the context while only
+a certain subexpression is being altered for some time. The former is not much better
+since it requires the introduction of new <code>Theorem</code>'s whose purpose is limited.
+</p>
+
+<p>
+An alternative is to prove a result or simplify an expression <i>in-place</i>.
+</p>
+
+<div style="column-rule-style:solid;column-count:2;"<p>
+<span class="underline">Using new syntax</span>
+</p>
+<pre class="example">
+Calculation:
+  ⋮
+    E[z ≔ F]
+  =⟨ Subproof for `F = G`:
+          F
+        =⟨ ? ⟩
+          G
+    ⟩
+    E[z ≔ G]
+  ⋮
+</pre>
+<p>
+
+<span class="underline">Without <code>Subproof</code></span>
+</p>
+<pre class="example">
+Theorem “Helper”: F = G
+Proof: ?
+
+Calculation:
+  ⋮
+    E[z ≔ F]
+  =⟨ “Helper” ⟩
+    E[z ≔ G]
+  ⋮
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Delete the vdots, ⋮, to obtain minimal working examples.</li>
+
+<li>The sub-proof body currently still needs to start on a new line and indented inside the hint, and the hint end `⟩' must also be on a new line, indented not more than the start of the sub-proof body.</li>
+</ul>
+</div>
+
+<div id="outline-container-orgf66bb84" class="outline-3">
+<h3 id="Example-of-Assuming-within-a-Subproof"><a href="#Example-of-Assuming-within-a-Subproof">Example of <code>Assuming</code> within a <code>Subproof</code></a></h3>
+<div class="outline-text-3" id="text-Example-of-Assuming-within-a-Subproof">
+<p>
+Rather than do an <code>Assuming</code> immediately &#x2014;which would be more elegant and readable&#x2014;, for the sake of example, we modify the antecedents before assuming them, which pushes the <code>Assuming</code> structure into a sub-proof inside a calculation hint:
+</p>
+
+<pre class="example">
+Theorem “Monotonicity of ∧”: (p ⇒ p') ⇒ (q ⇒ q') ⇒ ( (p ∧ q) ⇒ (p' ∧ q') )
+Proof:
+    (p ⇒ p') ⇒ (q ⇒ q') ⇒ ((p ∧ q) ⇒ (p' ∧ q'))
+  ≡⟨ “Definition of ⇒” (3.60) ⟩
+    (p ∧ p' ≡ p) ⇒ (q ∧ q' ≡ q) ⇒ ((p ∧ q) ⇒ (p' ∧ q'))
+  ≡⟨ Subproof:
+    Assuming `p ∧ p' ≡ p`, `q ∧ q' ≡ q`:
+        p ∧ q
+      ≡⟨ Assumption `p ∧ p' ≡ p` ⟩
+        p ∧ p' ∧ q
+      ≡⟨ Assumption `q ∧ q' ≡ q` ⟩
+        p ∧ p' ∧ q ∧ q'
+      ⇒⟨ “Weakening” ⟩
+        p' ∧ q'
+    ⟩
+    true
+</pre>
+
+<p>
+Where a <code>Subproof</code> is the only item in a hint, the <code>for</code> and the explicit sub-proof goal are not necessary. However, the sub-proof body currently still needs to start on a new line, and indented inside the hint, and the hint end <code>⟩</code> must also be on a new line, indented not more than the start of the sub-proof body.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2885900" class="outline-3">
+<h3 id="Discharging-a-proof-obligation-in-place"><a href="#Discharging-a-proof-obligation-in-place">Discharging a proof obligation in-place</a></h3>
+<div class="outline-text-3" id="text-Discharging-a-proof-obligation-in-place">
+<p>
+The following silly calculation shows the
+various forms of proof presentation are still valid in a subproof setting. In-particular,
+we can satisfy an obligation in-place rather than as some previously proven result.
+</p>
+<pre class="example">
+Theorem “Monotony of ·”: b ≤ c ⇒ a · b ≤ a · c
+Theorem “Antitony of -”: b ≤ c ⇒ a - c ≤ a - b
+
+Theorem “Silly”: 6 · (12 - S n) ≤ 7 · (12 - n)
+Proof:
+     6 · (12 - S n)
+  =⟨ Evaluation ⟩
+    (10 - 4) · (12 - S n)
+  ≤⟨ “Monotony of ·”
+        with “Antitony of -”
+        with subproof for `3 ≤ 4`: By Evaluation ⟩
+    (10 - 3) · (12 - S n)
+  ≤⟨ “Monotony of ·”
+        with “Antitony of -”
+        with subproof for `n ≤ S n`:
+          By induction on `n : ℕ`:
+            Base case `0 ≤ S 0`: By “Zero is least element”
+            Induction step `S n ≤ S (S n)`:
+               S n ≤ S (S n)
+              ≡⟨ “Isotony of successor” ⟩
+               n ≤ S n
+              ≡⟨ induction hypothesis ⟩
+               true
+   ⟩
+    (10 - 3) · (12 - n)
+  =⟨ Evaluation ⟩
+    7 · (12 - n)
+</pre>
+
+<p>
+Recall that the <code>with</code> keyword associates to the right.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5c26f9c" class="outline-2">
+<h2 id="Proving-universals-using-For-any"><a href="#Proving-universals-using-For-any">Proving universals using <code>For any</code></a></h2>
+<div class="outline-text-2" id="text-Proving-universals-using-For-any">
+<p>
+It often happens that we need to prove statements of the form
+<code>(∀ x • P)</code>, ``Metatheorem (9.16)'' of LADM ensures that it suffices to prove
+<code>P</code>. We mark this transition between the logic and ambient language using the <code>For any</code> syntax:
+</p>
+
+<div style="column-rule-style:solid;column-count:2;"<p>
+<span class="underline">Simple form</span>
+</p>
+<pre class="example">
+Theorem: ∀ x • P
+Proof:
+  For any `x`:
+    ?
+</pre>
+<p>
+
+<span class="underline">General form</span>
+</p>
+<pre class="example">
+Theorem: ∀ x ❙ R • P
+Proof:
+  For any `x` satisfying `R`:
+    ?
+</pre>
+</div>
+<ul class="org-ul">
+<li>Where <code>?</code> is a proof for <code>P</code>.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org62c1406" class="outline-2">
+<h2 id="Extensiblity-Using-theorems-as-proof-methods"><a href="#Extensiblity-Using-theorems-as-proof-methods">Extensiblity: <code>Using</code> theorems as proof methods</a></h2>
+<div class="outline-text-2" id="text-Extensiblity-Using-theorems-as-proof-methods">
+<p>
+Sometimes a concept is defined in such a way that it is difficult and awkward to prove
+properties about it and but there is some extensional view of the concept that admits
+formuale more amicable to calculation &#x2013; c.f., indirect equality.
+Alternatively, there may not be an obvious way
+to prove a result but if we reshape it then we may end up with a proof-obligation whose
+form immediately suggests a proof approach &#x2013; c.f., induction.
+</p>
+
+<p>
+The <code>Using</code> syntax allows us to move from a general shape to a the more specific or calculation-friendly shape and proof that in-order to prove our initial goal.
+</p>
+</div>
+
+<div id="outline-container-orge8ca2ba" class="outline-3">
+<h3 id="Indirect-Equality"><a href="#Indirect-Equality">Indirect Equality</a></h3>
+<div class="outline-text-3" id="text-Indirect-Equality">
+<p>
+The usual minimum operation can be defined by conditional but that would result in case-analysis proofs
+and so an alternative is to define it by its <i>relation to other numbers</i>:
+</p>
+<pre class="example">
+Declaration: _↓_ : ℤ → ℤ → ℤ
+Axiom “Definition of ↓”: z ≤ x ↓ y  ≡  z ≤ x ∧ z ≤ y
+</pre>
+
+<p>
+Suppose we now wish to prove the minimum is a symmetric operation: <code>x ↓ y = y ↓ x</code>.
+The definition gives us no clear indication how to proceed, however in the presence of an
+anti-symmetric order `≤' we can prove
+</p>
+
+<pre class="example">
+Theorem (15.47) “Indirect Equality from below”:
+  a = b  ≡  (∀ z • z ≤ a  ≡  z ≤ b)
+</pre>
+<p>
+( Proof shown in a following sub-section! )
+</p>
+
+<p>
+Now we use <span class="underline">this</span> result as it gives us a more calculation-friendly formula to work with:
+</p>
+
+<div class="scriptsize">
+<div style="column-rule-style:solid;column-count:2;"<p>
+<span class="underline">Plain CalcCheck</span>
+</p>
+<pre class="example">
+Theorem (15.54) “Symmetry of ↓”:  x ↓ y = y ↓ x
+Proof:
+    x ↓ y = y ↓ x
+  ≡⟨ “Indirect Equality from below” ⟩
+    ∀ z • z ≤ x ↓ y  ≡  z ≤ y ↓ x
+  ≡⟨ Subproof for `∀ z • z ≤ x ↓ y  ≡  z ≤ y ↓ x`:
+      For any `z`:
+          z ≤ x ↓ y
+        ≡⟨ “Definition of ↓” ⟩
+          z ≤ x ∧ z ≤ y
+        ≡⟨ “Symmetry of ∧” ⟩
+          z ≤ y ∧ z ≤ x
+        ≡⟨ “Definition of ↓” ⟩
+          z ≤ y ↓ x
+   ⟩
+    true
+</pre>
+<p>
+
+<span class="underline">Slight Sweetener</span>
+</p>
+<pre class="example">
+Theorem (15.54) “Symmetry of ↓”:  x ↓ y = y ↓ x
+Proof:
+  Using “Indirect Equality from below”:
+    Subproof for `∀ z • z ≤ x ↓ y  ≡  z ≤ y ↓ x`:
+      For any `z`:
+          z ≤ x ↓ y
+        ≡⟨ “Definition of ↓” ⟩
+          z ≤ x ∧ z ≤ y
+        ≡⟨ “Symmetry of ∧” ⟩
+          z ≤ y ∧ z ≤ x
+        ≡⟨ “Definition of ↓” ⟩
+          z ≤ y ↓ x
+</pre>
+</div>
+
+</div>
+
+<p>
+The syntactic sugar makes the proof easier to write and easier to read &amp; understand.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org65a6696" class="outline-3">
+<h3 id="Mutual-Implication"><a href="#Mutual-Implication">Mutual Implication</a></h3>
+<div class="outline-text-3" id="text-Mutual-Implication">
+<p>
+Sometimes we have to prove <code>p ≡ q</code> and the sides are sufficiently different that we are unable
+to massage one of them so as to transform it to the other. In such situations, we appeal to
+</p>
+<pre class="example">
+Theorem  “Mutual implication”: p ≡ q ≡ (p ⇒ q) ∧ (q ⇒ p)
+</pre>
+
+<p>
+Two examples follow,
+</p>
+
+<div class="scriptsize">
+<div style="column-rule-style:solid;column-count:2;"<p>
+<span class="underline">(15.47) “Indirect Equality from below”</span>
+</p>
+<pre class="example">
+Theorem: a = b  ≡  (∀ z • z ≤ a  ≡  z ≤ b)
+Proof:
+  Using “Mutual implication”:
+    Subproof for `a = b  ⇒  (∀ z • z ≤ a  ≡  z ≤ b)`:
+      Assuming `a = b`:
+        For any `z`:
+          By Assumption `a = b`
+    Subproof for `(∀ z • z ≤ a  ≡  z ≤ b)  ⇒  a = b`:
+      Assuming “A” `(∀ z • z ≤ a  ≡  z ≤ b)`:
+           a = b
+        ≡⟨ “Antisymmetry of ≤” ⟩
+           a ≤ b  ∧  b ≤ a
+        ≡⟨ Assumption “A” ⟩
+           a ≤ a  ∧  b ≤ b
+        ≡⟨ “Reflexivity of ≤”, “Idempotency of ∧” ⟩
+           true
+</pre>
+<p>
+
+<span class="underline">(15.44A) “Trichotomy — A”</span>
+</p>
+<pre class="example">
+Theorem: a &lt; b  ≡  a = b  ≡  a &gt; b
+Proof:
+  Using “Mutual implication”:
+    Subproof for `a = b  ⇒  (a &lt; b  ≡  a &gt; b)`:
+      Assuming `a = b`:
+          a &lt; b
+        ≡⟨ “Converse of &lt;”, Assumption `a = b` ⟩
+          a &gt; b
+    Subproof for `(a &lt; b  ≡  a &gt; b) ⇒ a = b`:
+        a &lt; b  ≡  a &gt; b
+      ≡⟨ “Definition of &lt;”, “Definition of &gt;” ⟩
+        pos (b - a) ≡ pos (a - b)
+      ≡⟨ (15.17), (15.19), “Subtraction” ⟩
+        pos (b - a) ≡ pos (- (b - a))
+      ⇒⟨ (15.33c) ⟩
+        b - a = 0
+      ≡⟨ “Cancellation of +” ⟩
+        b - a + a = 0 + a
+      ≡⟨ “Identity of +”, “Subtraction”, “Unary minus” ⟩
+        a = b
+</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: <a href="http://www.cas.mcmaster.ca/~alhassm/">Musa Al-hassy</a></p>
+<p class="date">Created: 2020-09-08 Tue 17:28</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
