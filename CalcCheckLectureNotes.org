@@ -519,7 +519,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
     | Associativity of ∧   | $(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)$       | $m ↓ n = n ↓ m$                   |
     | Idempotency of ∧     | $p ∧ p ≡ p$                       | $n ↓ n = n$                       |
     | Identity of ∧        | $p ∧ \true ≡ p$                   | $n ↓ +∞ = n$                      |
-    | Zero of ∧            | $p ∧ \false ≡ \false$             | $n ↓ -∞ = 0$                      |
+    | Zero of ∧            | $p ∧ \false ≡ \false$             | $n ↓ -∞ = -∞$                     |
     | Contradiction        | $p ∧ ¬ p ≡ \false$                | ─nope─                            |
     |----------------------+-----------------------------------+-----------------------------------|
     | Symmetry of ∨        | $p ∨ q ≡ q ∨ p$                   | $m ↑ n = n ↑ m$                   |
