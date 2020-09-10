@@ -341,7 +341,7 @@ can solve!/
 How do you ‘read’ (/parse/) the expression $6 - x + 7$?
 #+end_center
 
-#+BEGIN_SRC dot :file ~/github_calccheck/images/6-x+7_third_time.png :exports results
+#+BEGIN_SRC dot :file images/6-x+7_third_time.png :exports results
 digraph structs {
  main [shape=plaintext, label="6 - x + 7"];
  main -> parse1 [style = dashed, label = "means"];
@@ -359,11 +359,14 @@ digraph structs {
 #     5: struct3 [shape=record,label="hello\nworld |{ b |{c|<here> d|e}| f}| g | h"];
 #+END_SRC
 
+#+RESULTS:
+[[file:images/6-x+7_third_time.png]]
+
 
 
 It can be generated from its parts in two different ways:
 1. Both $6$ and $x + 7$ are expressions, so $6 - x + 7$ is an expression.
-   #+BEGIN_SRC dot :file ~/github_calccheck/images/6-x+7_parse2.png :exports results
+   #+BEGIN_SRC dot :file images/6-x+7_parse2.png :exports results
    digraph structs {
     "-" -> 6;
     "-" -> "+";
@@ -372,8 +375,11 @@ It can be generated from its parts in two different ways:
    }
    #+END_SRC
 
+   #+RESULTS:
+   [[file:images/6-x+7_parse2.png]]
+
 2. and also both $6 - x$ and $7$ are expressions, so $6 - x + 7$ is an expression.
-   #+BEGIN_SRC dot :file ~/github_calccheck/images/6-x+7_parse1.png :exports results
+   #+BEGIN_SRC dot :file images/6-x+7_parse1.png :exports results
 digraph {
  "-" -> 6;
  "-" -> x;
@@ -381,6 +387,9 @@ digraph {
  "+" -> "-";
 }
 #+END_SRC
+
+#+RESULTS:
+[[file:images/6-x+7_parse1.png]]
 
 A *convention* on how a /string/ should be parsed
 as a /tree/ is known as a *precedence rule*.
