@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-09-04 Fri 08:38 -->
+<!-- 2020-09-10 Thu 11:03 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CalcCheck</title>
+<title>Calculational Mathematics and <code>CalcCheck</code></title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Musa Al-hassy" />
 <meta name="description" content="Abrdiged Lecture Notes"
@@ -310,312 +310,65 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
-<h1 class="title">CalcCheck
-<br />
-<span class="subtitle">Abrdiged Lecture Notes</span>
-</h1>
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#">1. <a href="#">Calculational Proofs</a></a></li>
-<li><a href="#Intro">2. <a href="#Intro">Intro</a></a></li>
-<li><a href="#CalcCheck-Manual">3. <a href="#CalcCheck-Manual">CalcCheck Usage Hints</a></a>
-<ul>
-<li><a href="#Calculational-Steps">3.1. <a href="#Calculational-Steps">Calculational Steps</a></a></li>
-<li><a href="#shape-of-calculations">3.2. <a href="#shape-of-calculations">The Shape of Calculations</a></a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
+<h1 class="title">Calculational Mathematics and <code>CalcCheck</code></h1>
+<div style="column-rule-style:none;column-count:2;"<p>
 
-<p style="display:none">\[
-\def\BEGINstep{ \langle }
-\def\ENDstep{ \rangle }
-\newcommand{\step}[2][=]{ \\ #1 \;\; &amp; \qquad \color{maroon}{\BEGINstep \text{ #2 } \ENDstep} \\ &amp; }
-\newenvironment{calc}{\begin{align*} &amp; }{\end{align*}}
-
-
-
-\def\true{\mathsf{true}}
-\def\false{\mathsf{false}}
-
-\]</p>
-
-<div id="outline-container-orgf1a5154" class="outline-2">
-<h2 id=""><span class="section-number-2">1</span> <a href="#">Calculational Proofs</a></h2>
-<div class="outline-text-2" id="text-">
-<p>
-We advocate <b>calculational proofs</b> in which reasoning is goal directed
-and justified by simple axiomatic laws that can be checked syntactically
-rather than semantically.
 </p>
 
-\begin{calc}
-x
-\step{ reason for x = y }
-y
-\step[\leq]{ reason for y < z }
-z
-\end{calc}
 
 <p>
-The brief calculation above shows \(x ≤ z\).
+ <div style="padding: 1em; background-color: pink; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
+</p>
+<h2>
+<p>
+<a href="https://alhassy.github.io/CalcCheck/Docs"><code>CalcCheck</code> Documentation</a>
+</p>
+</h2>
+<p>
+ </div>
+</p>
+
+<p>
+
+</p>
+
+<p>
+ <div style="padding: 1em; background-color: pink; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
+</p>
+<h2>
+<p>
+<a href="https://alhassy.github.io/CalcCheck/LectureNotes.html">Lecture Notes</a>
+</p>
+</h2>
+<p>
+ </div>
 </p>
 </div>
-</div>
 
-<div id="outline-container-org3434aa4" class="outline-2">
-<h2 id="Intro"><span class="section-number-2">2</span> <a href="#Intro">Intro</a></h2>
-<div class="outline-text-2" id="text-Intro">
+<p>
+ <div style="padding: 1em; background-color: cyan; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
+</p>
+<h2>
+<p>
+Videos
+</p>
+</h2>
+
 <ol class="org-ol">
-<li><p>
-<b>Discrete Mathematics</b>
-includes logic (calculational reasoning), (data) sets, functions, relations,
-graphs, inductive types, and more.
-</p>
-
-<p>
-Conscious and fluent use of the language of (discrete) mathematics
-is the foundation for precise specification and rigorous reasoning
-in Computer Science and Software Engineering
-</p></li>
-
-<li><b>Goal</b>: Understand the mechanics of mathematical expressions and proof.</li>
-
-<li><p>
-<a id="orgafd0f28">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
-</p>
-
-<p>
-<a id="org85a9e7b">Predicate</a>: <a href="#orgafd0f28">Propositional</a> statement about some subjects.
-</p></li>
-
-<li><p>
-<a id="org8666b32">Calculus</a>: Formalised reasoning through calculation.
-</p>
-
-<p>
-‘Hand wavy’ English arguments tend to favour <i>case analysis</i>
-   &#x2014;considering what could happen in each possible scenario&#x2014;
-   which increases exponentially with each variable; in contrast,
-   equality-based calculation is much simpler since it delegates
-   intricate case analysis into codifed algebraic laws.
-</p>
-
-<p>
-E.g., Portia's Suitor's Dilemma has 4 unknowns, each being either true or false,
-and so has \(2^4\) many possible scenarios to consider. Whereas a
-calculation solving the problem can be formed in less than 10 super simple
-lines.
-</p></li>
-
-<li><p>
-<a href="http://calccheck.mcmaster.ca/">CalcCheck</a>: A proof checker for the logic of “A Logical Approach to
-Discrete Math” (‘LADM’).
-</p>
-<ul class="org-ul">
-<li>It <i>checks</i> your arguments in a notation similar to that of the book.</li>
-<li><b>You can check your work before handing it in.</b></li>
-<li>You can formalise your own theorems from other books and check them
-&#x2014;unlimited exercises!</li>
-</ul>
-
-<div class="org-center">
-<p>
-<code>Control + Alt + Enter</code> to check a cell.
-</p>
-</div>
-
-<ul class="org-ul">
-<li><a href="http://calccheck.mcmaster.ca/CalcCheckDoc/">CalcCheckDoc</a> - Documentation including syntax hints and theorem lists</li>
-</ul></li>
+<li>Introduction to Discrete &amp; Calculational Maths ─<a href="https://web.microsoftstream.com/video/76eac408-540e-47f9-a83b-d2caad93443c">Wolfram</a>, <a href="https://youtu.be/5IyMizFhHMA">Musa</a></li>
+<li><span style="color:red;"><b>not yet given</b></span></li>
 </ol>
-</div>
-</div>
-
-<div id="outline-container-org173df24" class="outline-2">
-<h2 id="CalcCheck-Manual"><span class="section-number-2">3</span> <a href="#CalcCheck-Manual">CalcCheck Usage Hints</a></h2>
-<div class="outline-text-2" id="text-CalcCheck-Manual">
-</div>
-
-
-<div id="outline-container-orgd98cd9a" class="outline-3">
-<h3 id="Calculational-Steps"><span class="section-number-3">3.1</span> <a href="#Calculational-Steps">Calculational Steps</a></h3>
-<div class="outline-text-3" id="text-Calculational-Steps">
-<p>
-For clarifying terminology, here is an example <b><a id="org27b0a8c">calculation step</a></b>:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-calccheck">    x + 2
-  =<span style="color: #FCCE7B;">&#10216; &#8220;Symmetry of +&#8221; &#10217;</span>
-    2 + x
-</pre>
-</div>
 
 <p>
-The part between the hint brackets “⟨” and “⟩” is called the hint for this
-<a href="#org27b0a8c">calculation step</a>, and it serves to justify that the expression before (x + 2) is
-related via the relation denoted by the calculation operator (=) with the
-expression after (2 + x). So, altogether, in this case the hint “Symmetry of +”
-is expected to justify the proposition x + 2 = 2 + x (and it does).
+ </div>
 </p>
-
-<ul class="org-ul">
-<li>Use <code>\&lt;</code> and <code>\&gt;</code> to enter the hint delimiters <code>⟨</code> and <code>⟩</code>.</li>
-</ul>
-
-<p>
-In general, a hint may contain several <b><a id="org48961ea">hint item</a>s</b>; for now, only one <a href="#org48961ea">hint
-item</a> will be allowed per hint, and the only kinds of hint you can use here are:
-</p>
-
-<p>
-Theorem references: These can be
-</p>
-<ul class="org-ul">
-<li>theorem names in pretty double quotes, such as <code>“Unary minus”</code>,
-<ul class="org-ul">
-<li>Enter the quotes with <code>\ldq + TAB</code> and <code>\rdq + TAB</code>, for ‘l’eft and ‘r’ight ‘d’ouble ‘q’uotes.</li>
-<li>After starting a theorem name, press <code>TAB</code> to see <b>possible completions</b>.</li>
-<li>E.g., both <code>\ldq + TAB + Dist + TAB</code> and <code>"Dist + TAB</code> yield the completion
-list for theorems whose names begin with <code>Dist</code>, such as <i>distributivity laws</i>.</li>
-</ul></li>
-<li>theorem numbers, which are always enclosed in parentheses, such as <code>(15.5b)</code></li>
-<li><p>
-combinations of both, which narrow down the selection of theorems to their
-intersection; this is currently mostly useful to disambiguate while still
-documenting the proof via the theorem name:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-calccheck">&#8220;Distributivity of &#183; over -&#8221; (15.29b)
-</pre>
-</div>
-
-<p>
-In that particular case, omitting the number would still be accepted, but the
-system then may explore the unused (15.29a) before it is successful with
-(15.29b).
-</p></li>
-
-<li><i>Basic facts</i> such as: <code>Fact `5 · 6 = 30`</code> . The expression between the backticks
-here has to consist entirely of literals and operators for which built-in
-evaluation is enabled. In particular, expressions containing variables are not
-accepted for <code>Fact</code>; writing <code>Fact `x · 0 = 0`</code> will only get you an unjustified
-step.</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org7529f9b" class="outline-3">
-<h3 id="shape-of-calculations"><span class="section-number-3">3.2</span> <a href="#shape-of-calculations">The Shape of Calculations</a></h3>
-<div class="outline-text-3" id="text-shape-of-calculations">
-<p>
-Below is an <i>exploratory calculation</i> that <i>begins with a richly structured
-known assumption</i> and <i>proceeds with the sole goal of simplification</i>.  Happily,
-the exploration ends somewhere fruitful and so we decide to <b>name the result
-of the calculation</b> using the (case sensitive clause) <code>This proves: Theorem “⟪name⟫”:
-   ⟪result⟫</code> &#x2014;with no indentation. However, the exploration may not end
-anywhere useful, and so we may keep it around for further study but need not
-name it; as such <code>This prove …</code> is <i>optional</i>.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-calccheck"><span style="color: #5cEfFF;">Calculation</span>:
-    S &#8801; (S &#8801; &#172; G)  &#8212; This is &#8220;Inscription on silver casket&#8221;
-  &#8801;<span style="color: #FCCE7B;">&#10216; &#8220;Reflexivity of &#8801;&#8221; &#10217;</span>
-    S &#8801; S &#8801; &#172; G
-  &#8801;<span style="color: #FCCE7B;">&#10216; &#8220;Symmetry of &#8801;&#8221; &#10217;</span>
-    &#172; G
-  &#8801;<span style="color: #FCCE7B;">&#10216; &#8220;Inscription on gold casket&#8221; &#10217;</span>
-    &#172; &#172; gc
-  &#8801;<span style="color: #FCCE7B;">&#10216; &#8220;Double negation&#8221; &#10217;</span>
-    gc
-This proves: Fact &#8220;location of the portrait&#8221;: gc
-</pre>
-</div>
-
-<p>
-The following qualifiers behave the same, it is only the <i>user</i> who
-treats them different, such as treating ‘corollaries’ as consequences
-of grander ‘theorems’.
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left"><code>Fact</code></td>
-<td class="org-left"><code>Theorem</code></td>
-<td class="org-left"><code>Lemma</code></td>
-<td class="org-left"><code>Corollary</code></td>
-<td class="org-left"><code>Proposition</code></td>
-</tr>
-</tbody>
-</table>
-
-<p>
-The use of a <code>— This is “𝒳”</code> clause is to abbreviate
-calculations that whose first step is as follows:
-</p>
-<div class="org-src-container">
-<pre class="src src-calccheck">   true
- =<span style="color: #FCCE7B;">&#10216; &#8220;&#119987;&#8221; &#10217;</span>
-</pre>
-</div>
-<p>
-Such calculations are intended to begin with a known, <code>true</code>, result and derive
-new information from it.
-</p>
-<ul class="org-ul">
-<li>Enter <code>\---</code> to obtain the em-dash.</li>
-</ul>
-</div>
-</div>
-</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-09-04 Fri 08:38</p>
+<p class="date">Created: 2020-09-10 Thu 11:03</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

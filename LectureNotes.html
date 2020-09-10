@@ -1,0 +1,1160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-09-10 Thu 11:11 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mathematics for Computing</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Musa Al-hassy" />
+<meta name="description" content="Abrdiged Lecture Notes"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link href="https://alhassy.github.io/org-notes-style.css" rel="stylesheet" type="text/css" />
+<link href="https://alhassy.github.io/floating-toc.css" rel="stylesheet" type="text/css" />
+<link href="https://alhassy.github.io/blog-banner.css" rel="stylesheet" type="text/css" />
+
+        <style>
+        /* From: https://endlessparentheses.com/public/css/endless.css */
+        /* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
+        kbd
+        {
+          -moz-border-radius: 6px;
+          -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          background-color: #f7f7f7;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          color: #333;
+          display: inline-block;
+          font-family: 'Droid Sans Mono', monospace;
+          font-size: 80%;
+          font-weight: normal;
+          line-height: inherit;
+          margin: 0 .1em;
+          padding: .08em .4em;
+          text-shadow: 0 1px 0 #fff;
+          word-spacing: -4px;
+
+          box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/tooltipster.bundle.min.css"/>
+
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css" />
+
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-1.10.0.min.js"%3E%3C/script%3E'));
+            }
+        </script>
+
+         <script type="text/javascript"            src="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+
+          <script>
+                 $(document).ready(function() {
+                     $('.tooltip').tooltipster({
+                         theme: 'tooltipster-punk',
+                         contentAsHTML: true,
+                         animation: 'grow',
+                         delay: [100,500],
+                         // trigger: 'click'
+                         trigger: 'custom',
+                         triggerOpen: {
+                             mouseenter: true
+                         },
+                         triggerClose: {
+                             originClick: true,
+                             scroll: true
+                         }
+         });
+                 });
+             </script>
+
+        <style>
+           abbr {color: red;}
+
+           .tooltip { border-bottom: 1px dotted #000;
+                      color:red;
+                      text-decoration: none;}
+        </style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Mathematics for Computing
+<br />
+<span class="subtitle">Abrdiged Lecture Notes</span>
+</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#Introduction-to-Calculational-Reasoning">1. <a href="#Introduction-to-Calculational-Reasoning">Introduction to Calculational Reasoning</a></a>
+<ul>
+<li><a href="#">1.1. <a href="#">What are Calculational Proofs</a></a></li>
+<li><a href="#Discrete-Mathematics">1.2. <a href="#Discrete-Mathematics">What is Discrete Mathematics</a></a></li>
+</ul>
+</li>
+<li><a href="#Boolean-Expressions-and-Propositional-Logic">2. <a href="#Boolean-Expressions-and-Propositional-Logic">Boolean Expressions and Propositional Logic</a></a>
+<ul>
+<li><a href="#hi">2.1. <a href="#hi">Expressions</a></a></li>
+<li><a href="#Boolean-Operators">2.2. <a href="#Boolean-Operators">Boolean Operators</a></a>
+<ul>
+<li><a href="#Equality-and">2.2.1. <a href="#Equality-and">Equality: “=” and “≡”</a></a></li>
+<li><a href="#Useful-Operators">2.2.2. <a href="#Useful-Operators">Useful Operators</a></a></li>
+<li><a href="#Boolean-Laws-and-Numeric-Laws">2.2.3. <a href="#Boolean-Laws-and-Numeric-Laws">Boolean Laws and Numeric Laws</a></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<style>
+
+/* Using source blocks “math” as aliaas for haskell */
+pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
+/* Execute this for alias: (add-to-list 'org-src-lang-modes '("math" . haskell)) */
+
+</style>
+
+<p style="display:none">\[
+\def\BEGINstep{ \left\langle }
+\def\ENDstep{ \right\rangle }
+\newcommand{\step}[2][=]{ \\ #1 \;\; &amp; \qquad \color{maroon}{\BEGINstep\text{ #2
+} \ENDstep} \\ &amp; }
+
+
+
+% multi-line step with many lines of text
+\newcommand{\line}[1]{ \text{#1}\hfill\\ }
+\newcommand{\stepmany}[2][=]{ \\ #1 \;\; &amp; \qquad \color{maroon}{\BEGINstep \large\substack{ #2 } \ENDstep} \\ &amp; }
+
+
+
+% multi-line step with 4 lines of text
+\newcommand{\stepfour}[5][=]{ \stepmany[#1]{\line{#2} \line{#3} \line{#4} \line{#5}} }
+
+
+
+
+\newenvironment{calc}{\begin{align*} &amp; }{\end{align*}}
+
+
+
+% \step{  The left side is almost factorable;} \hfill \\ \text{introduce the missing part since + is cancellative} \hfill\\ more}$ }
+
+
+
+\def\eq{\,=\,}
+
+
+
+\def\true{\mathsf{true}}
+\def\false{\mathsf{false}}
+
+
+
+\def\xnull{\null}
+\def\Macro#1{\def\tmp{#1}\ifx\tmp\xnull\else ,#1\expandafter\Macro \fi}
+
+\]</p>
+
+<div id="outline-container-orge69685f" class="outline-2">
+<h2 id="Introduction-to-Calculational-Reasoning"><span class="section-number-2">1</span> <a href="#Introduction-to-Calculational-Reasoning">Introduction to Calculational Reasoning</a></h2>
+<div class="outline-text-2" id="text-Introduction-to-Calculational-Reasoning">
+</div>
+<div id="outline-container-orge29a795" class="outline-3">
+<h3 id=""><span class="section-number-3">1.1</span> <a href="#">What are Calculational Proofs</a></h3>
+<div class="outline-text-3" id="text-">
+<p>
+We advocate <b>calculational proofs</b> in which reasoning is goal directed and
+justified by simple axiomatic laws that can be checked syntactically rather
+than semantically. ---<i>Program Construction</i> by Roland Backhouse
+</p>
+
+<p>
+For example, below are two arguments showing that \(\sqrt[n]{k}\) is a rational
+number precisely when \(k\) is a so-called perfect <i>n</i>-th root &#x2014;consequently,
+since 2 is not a perfect square, \(\sqrt{2}\) is not rational.
+</p>
+
+<p>
+ <div style="padding: 1em; background-color: #e5f5e5; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3> Classical Proof: Non-perfect powers have irrational roots</h3>
+Suppose that \(k\) is not a perfect <i>n</i>-th power &#x2014;i.e., not of the form <i>𝓍ⁿ</i>&#x2014;
+then there is some prime \(p\) in the factorisation of \(k\) that has its exponent,
+say \(\exp{p} k\), being not a multiple of \(n\).  But if \(\sqrt[n]{k} \eq
+a/b\) then \(\exp{p}{k} \eq \exp{p}{a^n} - \exp{p}{b ^ n} \eq n · \exp{p}{a} - n ·
+\exp{p}{b}\) and the difference of multiples of \(n\) is a multiple of \(n\), and so
+we have a contradiction. Hence, no such \(a, b\) could exist and so \(\sqrt[n]{k}\)
+is irrational.
+ </div>
+</p>
+
+<p>
+This is an example of an <b>informal proof</b>, which is a mixture of natural language,
+English, and mathematical calculations.  The English text outline the main steps
+of the proof, and the mathematical calculations fill in <b>some</b> of the details.
+</p>
+
+<p>
+Since they only communicate the key ideas, such proofs are preferred by writers
+but they place a large semantic burden on readers who are expected to have such
+a good understanding of the problem domain that the details of the outline
+proofs can be filled in, and so the writer leaves these as an implicit exercise
+to the reader.
+</p>
+
+<p>
+However, even worse, such informal outline proofs may skip over important
+details and thus can be wrong!
+</p>
+
+<p>
+Below is a <b>calculational proof</b>. It introduces notation and recalls theorems as
+needed, thereby making each step of the argument easy to verify and follow.  As
+such, the following argument is more accessible to readers unfamiliar with the
+problem domain.
+</p>
+
+<p>
+ <div style="padding: 1em; background-color: #e5f5e5; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3> Calculational Proof</h3>
+</p>
+
+ \begin{calc}
+ \def\BEGINstep{\left[} \def\ENDstep{\right.}
+ \def\exp#1{\mathsf{exp}_#1\,}
+ \sqrt[n]{k} \text{ is a rational number }
+ \stepfour{ A rational number is the fraction of two integers.}{
+          Let variables $a,\, b$ range over integer numbers.}{}{
+  }
+  ∃\, a, b •\; \sqrt[n]{k} = {a \over b}
+ \step{ Use arithmetic to eliminate the $n$-th root operator.
+  }
+  ∃\, a, b •\; k · a ^n = b ^n
+  \stepmany{ \line{Let $\exp{m} 𝓍$ be the number of times that $m$ divides $𝓍$.}
+   \line{For example, $\exp{2} 48 \eq 4$ and $\exp{2} 49 \eq 0$.}
+   \line{The numbers $p$ with $∀ m : ℤ⁺ \,•\, \exp{m}p \,≠\, 0 \,≡\, m \,=\, p$ are called $prime$ numbers.}
+   \line{Let variable $p$ ranges over primes numbers. }
+   \line{Fundamental theorem of arithmetic: Numbers are determined by their prime powers.}
+   \line{That is, $\big(∀ \,p\, •\; \exp{p} 𝓍 \eq f(p)\big) \;≡\; 𝓍 \,=\, \big(Π\, p\, •\; p^{f(p)}\big)$ for any $f$.}
+   \line{As such, every number is the product of its prime powers:}
+   \line{$\qquad 𝓍 \eq \big(Π \,p\, •\; p^{\exp{p} 𝓍}\big)$. }
+   \line{And so, any two numbers are the same preciely when they have the same primes:}
+   \line{$\qquad 𝓍 \eq 𝓎 \;≡\; \big(∀ p \,•\, \exp{p} 𝓍 \eq \exp{p} 𝓎\big)$.}
+  }
+  ∃\, a, b •\; ∀\, p •\; \exp{p}(k × a ^n) \eq \exp{p}(b ^n )
+  \stepmany{\line{When $p$ is prime, $\exp{p}(x · y) \eq \exp{p} x \,+\, \exp{p} y$.}
+   \line{Aside: In general, $\exp{p}(Π \,i\, \,•\, x_i) \eq (Σ \,i\, \,•\, \exp{p} x_i)$.}
+  }
+  ∃\, a, b •\; ∀\, p •\; \exp{p} k + n · \exp{p} a \eq n · \exp{p} b
+  \step{ Use arithmetic to collect similar terms.
+  }
+  ∃\, a, b •\; ∀\, p •\; \exp{p} k \eq  n · \Big(\exp{p} b - \exp{p} a\Big)
+  \stepmany{ \line{(⇒) is the definition of multiplicity;}
+             \line{(⇐) take $a \,≔\, 1$ and define $b$ by its prime powers:}
+             \line{ $\qquad ∀\, p \,•\, \exp{p} b \,≔\, {\exp{p} k \,/\, n}$}
+  }
+  ∀\, p •\; \exp{p} k \text{ is a multiple of } n
+  \step{ Fundamental theorem of arithmetic and definition of ‘perfect’ }
+  k \text{ is a perfect $n$-th power; i.e., of the shape } 𝓍^n
+\end{calc}
+
+<p>
+ </div>
+</p>
+
+<p>
+Finally, observe that the calculational form is <b>more general</b>.  The use of a
+<i>formal</i> approach let us keep track of when our statements are equivalent
+(“=”) rather than being weakened (“⇒”).
+</p>
+
+<p>
+The above proof is a generalisation of a proof in Backhouse's text for square
+roots, which may be viewed as a <a href="https://youtu.be/t39wHoFHbvY">Youtube video</a> which makes use of <kbd> CalcCheck </kbd>
+<a href="https://alhassy.github.io/CalcCheck/Docs">⇭</a>: A proof checker for the logic of “A Logical Approach to Discrete Math”
+(‘LADM’).
+</p>
+<ul class="org-ul">
+<li>It <i>checks</i> your arguments in a notation similar to that of the book.</li>
+<li><b>You can check your work before handing it in.</b></li>
+<li>You can formalise your own theorems from other books and check them
+&#x2014;unlimited exercises!</li>
+</ul>
+
+<div class="org-center">
+<p>
+<kbd> Control + Alt + Enter </kbd> to check a cell.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga91bdfc" class="outline-3">
+<h3 id="Discrete-Mathematics"><span class="section-number-3">1.2</span> <a href="#Discrete-Mathematics">What is Discrete Mathematics</a></h3>
+<div class="outline-text-3" id="text-Discrete-Mathematics">
+<ol class="org-ol">
+<li><p>
+<b>Discrete Mathematics</b>
+includes logic (calculational reasoning), (data) sets, functions, relations,
+graphs, inductive types, and more.
+</p>
+
+<p>
+Conscious and fluent use of the language of (discrete) mathematics
+is the foundation for precise specification and rigorous reasoning
+in Computer Science and Software Engineering
+</p></li>
+
+<li><b>Goal</b>: Understand the mechanics of mathematical expressions and proof.</li>
+
+<li><p>
+<a id="org8cfd0b7">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
+</p>
+
+<p>
+<a id="org7a36b41">Predicate</a>: <a href="#org8cfd0b7">Propositional</a> statement about some subjects.
+</p></li>
+
+<li><p>
+<a id="org6b922f2">Calculus</a>: Formalised reasoning through calculation.
+</p>
+
+<p>
+‘Hand wavy’ English arguments tend to favour <i>case analysis</i>
+   &#x2014;considering what could happen in each possible scenario&#x2014;
+   which increases exponentially with each variable; in contrast,
+   equality-based calculation is much simpler since it delegates
+   intricate case analysis into codifed algebraic laws.
+</p>
+
+<p>
+E.g., Portia's Suitor's Dilemma has 4 unknowns, each being either true or false,
+and so has \(2^4\) many possible scenarios to consider. Whereas a
+calculation solving the problem can be formed in less than 10 super simple
+lines.
+</p>
+
+<details class="code-details"> <summary> <strong> <font face="Courier" size="3" color="green"> Portia's Suitor's Dilemma </font> </strong> </summary> <p>
+
+</p>
+
+<p>
+Portia has a gold casket and a silver casket and has placed a picture of herself
+in one of them. On the caskets, she has written the following inscriptions:
+</p>
+
+<dl class="org-dl">
+<dt>Gold</dt><dd>The portrait is not in here</dd>
+<dt>Silver</dt><dd>Exactly one of these inscriptions is true.</dd>
+</dl>
+
+<p>
+Portia explains to her suitor that each inscription may be true or false, but
+that she has placed her portrait in one of the caskets in a manner that is
+consistent with the truth or falsity of the inscriptions.
+</p>
+
+<p>
+If the suitor can choose the casket with her portrait, she will marry him.
+</p>
+
+<hr />
+
+<p>
+( This is a ‘teaser’; you're not expected to know the details in the following
+calculation. )
+</p>
+
+<p>
+Formalisation is the first step towards solution!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-calccheck">Declaration: G, S : 𝔹
+
+Explanation: G ≔ “The inscription on the gold casket is true”
+Explanation: S ≔ “The inscription on the silver casket is true”
+</pre>
+</div>
+
+<p>
+… and
+</p>
+<div class="org-src-container">
+<pre class="src src-calccheck">Declaration: gc : 𝔹
+Explanation: gc ≔ “The portrait is in the gold casket”
+</pre>
+</div>
+
+<p>
+… we know the portrait is in a casket preciely when
+that casket's inscription is true …
+</p>
+
+<div class="org-src-container">
+<pre class="src src-calccheck">Axiom “Inscription on gold casket”: G ≡ ¬ gc
+Axiom “Inscription on silver casket”: S ≡ (S ≡ ¬ G)
+</pre>
+</div>
+
+<p>
+… let us start from what we know about the silver casket:
+</p>
+<div class="org-src-container">
+<pre class="src src-calccheck">Calculation:
+    S ≡ (S ≡ ¬ G)    — This is “Inscription on silver casket”
+  ≡⟨ “Reflexivity of ≡” ⟩
+    S ≡ S ≡ ¬ G
+  ≡⟨ “Symmetry of ≡” ⟩
+    ¬ G
+  ≡⟨ “Inscription on gold casket” ⟩
+    ¬ ¬ gc
+  ≡⟨ “Double negation” ⟩
+    gc
+</pre>
+</div>
+
+<p>
+By just <b>simplifying</b>, we calculated that the portrait is in the gold casket!
+</p>
+ </details></li>
+</ol>
+
+<blockquote>
+<p>
+<i>Knowledge is software for your brain: The more you know, the more problems you
+can solve!</i>
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6685712" class="outline-2">
+<h2 id="Boolean-Expressions-and-Propositional-Logic"><span class="section-number-2">2</span> <a href="#Boolean-Expressions-and-Propositional-Logic">Boolean Expressions and <a href="#org8cfd0b7">Propositional</a> Logic</a></h2>
+<div class="outline-text-2" id="text-Boolean-Expressions-and-Propositional-Logic">
+</div>
+<div id="outline-container-orgef4f658" class="outline-3">
+<h3 id="hi"><span class="section-number-3">2.1</span> <a href="#hi">Expressions</a></h3>
+<div class="outline-text-3" id="text-hi">
+<div class="org-center">
+<p>
+How do you ‘read’ (<i>parse</i>) the expression \(6 - x + 7\)?
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="file:///Users/musa/github_calccheck/images/6-x+7_third_time.png" alt="6-x+7_third_time.png" />
+</p>
+</div>
+
+
+
+<p>
+It can be generated from its parts in two different ways:
+</p>
+<ol class="org-ol">
+<li><p>
+Both \(6\) and \(x + 7\) are expressions, so \(6 - x + 7\) is an expression.
+</p>
+
+<div class="figure">
+<p><img src="file:///Users/musa/github_calccheck/images/6-x+7_parse2.png" alt="6-x+7_parse2.png" />
+</p>
+</div></li>
+
+<li>and also both \(6 - x\) and \(7\) are expressions, so \(6 - x + 7\) is an expression.</li>
+</ol>
+
+<div class="figure">
+<p><img src="file:///Users/musa/github_calccheck/images/6-x+7_parse1.png" alt="6-x+7_parse1.png" />
+</p>
+</div>
+
+<p>
+A <b>convention</b> on how a <i>string</i> should be parsed
+as a <i>tree</i> is known as a <b>precedence rule</b>.
+</p>
+
+<hr />
+
+<p>
+Expressions are defined by the following <i>grammar</i>, but <i>in practice</i> one does
+not write \(+(1, 2)\) and instead writes \(1 + 2\).  However, the phrase \(+(1,
+    ·(2, 3))\) is <i>unambiguous</i>, whereas the phrase \(1 + 2 · 3\) <i>could be read</i> as
+\((1 + 2) · 3\) or as \(1 + (2 · 3)\).
+</p>
+
+<blockquote>
+<p>
+The grammar defines expressions as <b>abstract syntax (trees)</b> whereas strings
+with mixfix notation gives a <b>concrete syntax</b> where ambiguity is resolved by
+parentheses, precedence, or association rules.
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-math"><span style="color: #b58900; font-style: italic;">Expr</span> <span style="color: #b58900;">::=</span> <span style="color: #b58900; font-style: italic;">Constant</span>    <span style="color: #96A7A9; font-style: italic;">-- </span><span style="color: #96A7A9; font-style: italic;">E.g., 1 or &#8220;apple&#8221;</span>
+      <span style="color: #268bd2;">|</span>  <span style="color: #b58900; font-style: italic;">Variable</span>    <span style="color: #96A7A9; font-style: italic;">-- </span><span style="color: #96A7A9; font-style: italic;">E.g., x or apple (no quotes!)</span>
+      <span style="color: #268bd2;">|</span>  <span style="color: #b58900; font-style: italic;">Application</span> <span style="color: #96A7A9; font-style: italic;">-- </span><span style="color: #96A7A9; font-style: italic;">E.g., f(x&#8321;, x&#8322;, &#8230;, x&#8345;)</span>
+</pre>
+</div>
+
+<p>
+( One reads <code>:=</code> as <i>becomes</i> and so the addition of an extra
+colon results in a ‘stutter’: One reads
+ <code>::=</code> as <i>be-becomes</i>. The symbol <code>|</code> is read <i>or</i>. )
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbe003d7" class="outline-3">
+<h3 id="Boolean-Operators"><span class="section-number-3">2.2</span> <a href="#Boolean-Operators">Boolean Operators</a></h3>
+<div class="outline-text-3" id="text-Boolean-Operators">
+<p>
+The type of propositions is known as the <b>Booleans</b> and denoted 𝔹.
+</p>
+<div class="org-src-container">
+<pre class="src src-math"><span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #b58900; font-style: italic;">::=</span> true <span style="color: #268bd2;">|</span> false
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb73b7c2" class="outline-4">
+<h4 id="Equality-and"><span class="section-number-4">2.2.1</span> <a href="#Equality-and">Equality: “=” and “≡”</a></h4>
+<div class="outline-text-4" id="text-Equality-and">
+<p>
+For instance, the notion of equality on any type τ is
+typed <code>_=_ : τ → τ → 𝔹</code>; i.e., equality takes two values of a type τ
+and returns a <a href="#org8cfd0b7">propositional</a> value.
+</p>
+
+<blockquote>
+<p>
+In general, the “continued equality” \(x = y = z\)
+is <b>read conjunctively</b>: Both \(x = y\) <i>and</i> \(y = z\).
+However, for the special case τ being 𝔹, the expression
+\(x = y = z\) could be <b>read associativity</b>: \((x = y) = z\).
+</p>
+
+<p>
+These two ways to read (parse) a continued equality
+give different operators on 𝔹. The associative equality
+is popularly written as ‘⇔’ but, unfortunately, not usually treated
+as an equality at all! In this class, we write the associative equality
+as ‘≡’ and read it as “equivales”.
+</p>
+
+<p>
+See <a href="https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem">The associativity of equivalence and the Towers of Hanoi problem</a>.
+</p>
+</blockquote>
+
+<p>
+The phrase \(p ≡ q\) may be read as
+</p>
+<ul class="org-ul">
+<li><i>p is equivalent to q</i>, or</li>
+<li><i>p exactly when q</i>,</li>
+<li><i>p if-and-only-if q</i>,</li>
+</ul>
+
+<p>
+This operator is just equality on the Booleans:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Definition of ≡</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>(p ≡ q) = (p = q)</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The need for a new name for an existing concept is that they have different
+<b>notational conventions</b>: Firstly, “≡” has lower precedence than “=” and
+secondly,
+</p>
+<dl class="org-dl">
+<dt>= is conjunctive</dt><dd>\(\big(p = q = r\big) \quad=\quad \big( (p = q)
+      \;\land\; (q = r)\big)\)</dd>
+<dt>≡ is associative</dt><dd>\(\big(p ≡ q ≡ r\big) \quad=\quad \big((p ≡ q) ≡ r\big) \quad=\quad \big(p ≡ (q ≡ r)\big)\)</dd>
+</dl>
+
+<p>
+For example, \(\false ≡ \true ≡ \false\) is \(\true\), whereas
+\(\false = \true = \false\) is \(\false\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb8b014d" class="outline-4">
+<h4 id="Useful-Operators"><span class="section-number-4">2.2.2</span> <a href="#Useful-Operators">Useful Operators</a></h4>
+<div class="outline-text-4" id="text-Useful-Operators">
+<p>
+The Booleans have a number of useful operators that model reasoning,
+   such as:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> Boolean operators and similar numeric operators</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Operator</th>
+<th scope="col" class="org-left">Booleans (𝔹)</th>
+<th scope="col" class="org-left">Numbers (ℤ)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">“and”</td>
+<td class="org-left"><code>_∧_ : 𝔹 → 𝔹 → 𝔹</code></td>
+<td class="org-left">“minimum” <code>_↓_ : ℤ → ℤ → ℤ</code></td>
+</tr>
+
+<tr>
+<td class="org-left">“or”</td>
+<td class="org-left"><code>_∨_ : 𝔹 → 𝔹 → 𝔹</code></td>
+<td class="org-left">“maximum” <code>_↑_ : ℤ → ℤ → ℤ</code></td>
+</tr>
+
+<tr>
+<td class="org-left">“not”</td>
+<td class="org-left"><code>¬_ : 𝔹 → 𝔹</code></td>
+<td class="org-left">“negation” <code>-_ : ℤ → ℤ → ℤ</code></td>
+</tr>
+
+<tr>
+<td class="org-left">“implies”</td>
+<td class="org-left"><code>_⇒_ : 𝔹 → 𝔹 → 𝔹</code></td>
+<td class="org-left">“inclusion” <code>_≤_ : ℤ → ℤ → 𝔹</code></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem">“Equivales”</a></td>
+<td class="org-left"><code>_≡_ : 𝔹 → 𝔹 → 𝔹</code></td>
+<td class="org-left">“equality” <code>_=_ : ℤ → ℤ → 𝔹</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+These operators can be defined <i>informally</i>, as done below, but we shall follow
+an <i>axiomatic</i> definition as done in LADM by providing an <i>interface</i> of
+properties that they satisfy instead of any particular <i>implementation</i>. Later
+in the class when we get to the <code>if_then_else_fi</code> construct, we may provide
+explicit implementations and prove them to be equal to the operations
+specified axiomatically.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 2:</span> Example explicit definitions &#x2014;not used in this class</caption>
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">“p ∧ q” is “true” whenever both “p” and “q” are “true”, otherwise it is “false”</td>
+</tr>
+
+<tr>
+<td class="org-left">“m ↓ n” is “m” whenever “m ≤ n”, otherwise it is “n”</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org6123c46" class="outline-4">
+<h4 id="Boolean-Laws-and-Numeric-Laws"><span class="section-number-4">2.2.3</span> <a href="#Boolean-Laws-and-Numeric-Laws">Boolean Laws and Numeric Laws</a></h4>
+<div class="outline-text-4" id="text-Boolean-Laws-and-Numeric-Laws">
+<p>
+To better understand the 𝔹ooleans, it can be useful to compare their laws
+    with those on numbers. For instance, the <code>Definition of ⇒</code> at first glance is
+    tremendously cryptic: Why in the world would anyone define implication in
+    this way \(p ⇒ q \,≡\, p ∧ q ≡ p\)?  However, when compared to the similar law
+    for numbers that defines inclusion \(m ≤ n \,≡\, m ↓ n = m\), the definition
+    becomes <b>“obvious”</b>: <i>p is included in (implies) q precisely when having both p
+    and q is the same as just having p</i>; i.e., <i>m is at-most n precisely when m is
+    the minimum of m and n.</i>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 3:</span> Properties of <a href="#org8cfd0b7">propositional</a> operators and similar (familiar) numeric laws</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Law</th>
+<th scope="col" class="org-left">Booleans (𝔹)</th>
+<th scope="col" class="org-left">Numbers (ℤ with ±∞)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Symmetry of ∧</td>
+<td class="org-left">\(p ∧ q ≡ q ∧ p\)</td>
+<td class="org-left">\(m ↓ n = n ↓ m\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Associativity of ∧</td>
+<td class="org-left">\((p ∧ q) ∧ r ≡ p ∧ (q ∧ r)\)</td>
+<td class="org-left">\(m ↓ n = n ↓ m\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Idempotency of ∧</td>
+<td class="org-left">\(p ∧ p ≡ p\)</td>
+<td class="org-left">\(n ↓ n = n\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Identity of ∧</td>
+<td class="org-left">\(p ∧ \true ≡ p\)</td>
+<td class="org-left">\(n ↓ +∞ = n\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Zero of ∧</td>
+<td class="org-left">\(p ∧ \false ≡ \false\)</td>
+<td class="org-left">\(n ↓ -∞ = 0\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Contradiction</td>
+<td class="org-left">\(p ∧ ¬ p ≡ \false\)</td>
+<td class="org-left">─nope─</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Symmetry of ∨</td>
+<td class="org-left">\(p ∨ q ≡ q ∨ p\)</td>
+<td class="org-left">\(m ↑ n = n ↑ m\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Associativity of ∨</td>
+<td class="org-left">\((p ∨ q) ∨ r ≡ p ∨ (q ∨ r)\)</td>
+<td class="org-left">\(m ↑ n = n ↑ m\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Idempotency of ∨</td>
+<td class="org-left">\(p ∨ p ≡ p\)</td>
+<td class="org-left">\(n ↑ n = n\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Identity of ∨</td>
+<td class="org-left">\(p ∨ \false ≡ p\)</td>
+<td class="org-left">\(n ↑ -∞ = n\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Zero of ∨</td>
+<td class="org-left">\(p ∨ \true ≡ p\)</td>
+<td class="org-left">\(n ↑ +∞ = +∞\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Excluded Middle</td>
+<td class="org-left">\(p ∨ ¬ p ≡ \false\)</td>
+<td class="org-left">─nope─</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Golden Rule</td>
+<td class="org-left">\(p ∧ q ≡ p ≡ q ≡ p ∨ q\)</td>
+<td class="org-left">\(m ↓ n = m \,≡\, n = m ↑ n\)</td>
+</tr>
+
+<tr>
+<td class="org-left">∧/∨ Distributivity</td>
+<td class="org-left">\(p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)\)</td>
+<td class="org-left">\(m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)\)</td>
+</tr>
+
+<tr>
+<td class="org-left">∨/∧ Distributivity</td>
+<td class="org-left">\(p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)\)</td>
+<td class="org-left">\(m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Double negation</td>
+<td class="org-left">\(¬ ¬ p ≡ p\)</td>
+<td class="org-left">\(- - n = n\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Definition of \(\false\)</td>
+<td class="org-left">\(\false ≡ ¬ \true\)</td>
+<td class="org-left">\(-∞ \,=\, - (+∞)\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Negation of \(\false\)</td>
+<td class="org-left">\(¬ \false = \true\)</td>
+<td class="org-left">\(- (-∞) = +∞\)</td>
+</tr>
+
+<tr>
+<td class="org-left">De Morgan</td>
+<td class="org-left">\(¬(p ∧ q) = ¬ p ∨ ¬ q\)</td>
+<td class="org-left">\(-(m ↓ n) = -m ↑ -n\)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(¬(p ∨ q) = ¬ p ∧ ¬ q\)</td>
+<td class="org-left">\(-(m ↑ n) = -m ↓ -n\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Definition of ⇒</td>
+<td class="org-left">\(p ⇒ q ≡ p ∧ q ≡ p\)</td>
+<td class="org-left">\(m ≤ n \,≡\, m ↓ n = m\)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(p ⇒ q ≡ p ∨ q ≡ q\)</td>
+<td class="org-left">\(m ≤ n \,≡\, m ↑ n = n\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Consequence</td>
+<td class="org-left">\(p ⇐ q ≡ p ⇒ q\)</td>
+<td class="org-left">\(m ≥ n \,≡\, m ≤ n\)</td>
+</tr>
+
+<tr>
+<td class="org-left">ex falso quodlibet</td>
+<td class="org-left">\(\false ⇒ p ≡ \true\)</td>
+<td class="org-left">\(-∞ ≤ n \,≡\, \true\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Left-identity of ⇒</td>
+<td class="org-left">\(\true ⇒ p ≡ p\)</td>
+<td class="org-left">\(+∞ ≤ n \,≡\, n = +∞\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Right-zero of ⇒</td>
+<td class="org-left">\(p ⇒ \true ≡ \true\)</td>
+<td class="org-left">\(n ≤ +∞ \,≡\, \true\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Definition of ¬</td>
+<td class="org-left">\(p ⇒ \false ≡ ¬ p\)</td>
+<td class="org-left">─nope─</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Musa Al-hassy</p>
+<p class="date">Created: 2020-09-10 Thu 11:11</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

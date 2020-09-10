@@ -1,0 +1,57 @@
+#+title: Calculational Mathematics and ~CalcCheck~
+# +subtitle: Abrdiged Lecture Notes
+#+author: Musa Al-hassy
+#+options: tags:nil d:nil
+#+PROPERTY: header-args:calccheck :tangle (concat (file-name-sans-extension (buffer-name)) ".calc") :comments nil
+
+#+Description: Abrdiged Lecture Notes
+
+# Make HTML
+# (f-move (org-html-export-to-html) "~/github_calccheck/index.html")
+# (f-move (org-md-export-to-markdown) "~/github_calccheck/README.md")
+#+HTML_HEAD: <link href="https://alhassy.github.io/org-notes-style.css" rel="stylesheet" type="text/css" />
+#+HTML_HEAD: <link href="https://alhassy.github.io/floating-toc.css" rel="stylesheet" type="text/css" />
+
+# $1 colour eg “pink” or “hsl(157 75% 20%)” or “#e5f5e5”; $2 title
+#+macro: begin-box @@html: <div style="padding: 1em; background-color: $1; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3>$2</h3>@@
+
+#+macro: end-box @@html: </div>@@
+
+
+#+begin_parallelNB
+
+
+{{{begin-box(pink,)}}}
+#+html: <h2>
+[[https://alhassy.github.io/CalcCheck/Docs][=CalcCheck= Documentation]]
+#+html: </h2>
+{{{end-box}}}
+
+:columnbreak:
+
+{{{begin-box(pink, )}}}
+#+html: <h2>
+[[https://alhassy.github.io/CalcCheck/LectureNotes.html][Lecture Notes]]
+#+html: </h2>
+{{{end-box}}}
+
+
+#+end_parallelNB
+
+{{{begin-box(cyan, )}}}
+#+html: <h2>
+Videos
+#+html: </h2>
+
+1. Introduction to Discrete & Calculational Maths ─[[https://web.microsoftstream.com/video/76eac408-540e-47f9-a83b-d2caad93443c][Wolfram]], [[https://youtu.be/5IyMizFhHMA][Musa]]
+2. [[color:red][*not yet given*]]
+
+:Relocate:
+ + Program Construction
+ + LADM
+ + [[https://fourferries.com/wp-content/uploads/2016/10/StructuredDerivation26092016.pdf][Structured Derivations: Teaching Mathematical Reasoning in High School]]
+
+   Online and covers a variety of topics, including limits and probability theory.
+:End:
+
+{{{end-box}}}

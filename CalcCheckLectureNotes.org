@@ -1,0 +1,561 @@
+#+title: Mathematics for Computing
+#+subtitle: Abrdiged Lecture Notes
+#+author: Musa Al-hassy
+#+options: tags:nil d:nil
+#+PROPERTY: header-args:calccheck :tangle (concat (file-name-sans-extension (buffer-name)) ".calc") :comments nil
+
+#+Description: Abrdiged Lecture Notes
+
+# Make HTML
+# (f-move (org-html-export-to-html) "~/github_calccheck/LectureNotes.html")
+#+HTML_HEAD: <link href="https://alhassy.github.io/org-notes-style.css" rel="stylesheet" type="text/css" />
+#+HTML_HEAD: <link href="https://alhassy.github.io/floating-toc.css" rel="stylesheet" type="text/css" />
+#+HTML_HEAD: <link href="https://alhassy.github.io/blog-banner.css" rel="stylesheet" type="text/css" />
+# The last one has the styling for lists.
+
+# $1 colour eg “pink” or “hsl(157 75% 20%)” or “#e5f5e5”; $2 title
+#+macro: begin-box @@html: <div style="padding: 1em; background-color: $1; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3>$2</h3>@@
+
+#+macro: end-box @@html: </div>@@
+
+* Notational Setup :ignore:
+  :PROPERTIES:
+  :CUSTOM_ID: Notational-Setup
+  :END:
+:Calc_notation:
+
+\begin{calc}
+x
+\step[op]{ hint }
+y
+\end{calc}
+
+:End:
+
+#+BEGIN_export html
+<style>
+
+/* Using source blocks “math” as aliaas for haskell */
+pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
+/* Execute this for alias: (add-to-list 'org-src-lang-modes '("math" . haskell)) */
+
+</style>
+#+END_export
+
+# The following snippet let's us export calc clauses in HTML nicely.
+#+begin_latex-definitions
+\def\BEGINstep{ \left\langle }
+\def\ENDstep{ \right\rangle }
+\newcommand{\step}[2][=]{ \\ #1 \;\; & \qquad \color{maroon}{\BEGINstep\text{ #2
+} \ENDstep} \\ & }
+
+% multi-line step with many lines of text
+\newcommand{\line}[1]{ \text{#1}\hfill\\ }
+\newcommand{\stepmany}[2][=]{ \\ #1 \;\; & \qquad \color{maroon}{\BEGINstep \large\substack{ #2 } \ENDstep} \\ & }
+
+% multi-line step with 4 lines of text
+\newcommand{\stepfour}[5][=]{ \stepmany[#1]{\line{#2} \line{#3} \line{#4} \line{#5}} }
+
+
+\newenvironment{calc}{\begin{align*} & }{\end{align*}}
+
+% \step{  The left side is almost factorable;} \hfill \\ \text{introduce the missing part since + is cancellative} \hfill\\ more}$ }
+
+\def\eq{\,=\,}
+
+\def\true{\mathsf{true}}
+\def\false{\mathsf{false}}
+
+\def\xnull{\null}
+\def\Macro#1{\def\tmp{#1}\ifx\tmp\xnull\else ,#1\expandafter\Macro \fi}
+#+end_latex-definitions
+
+# This snippet let's us, in an org file, do C-c C-x C-l to see the calculation
+# rendered prettily. It will not work if you do #+begin_calc … #+end_calc.
+#+begin_src emacs-lisp :exports none
+(add-to-list 'org-latex-packages-alist
+  '("fleqn, leqno, block" "calculation" t))
+
+(setq org-format-latex-header
+      (concat org-format-latex-header
+              "\\usepackage{color}
+               \\def\\BEGINstep{ \\langle }
+               \\def\\ENDstep{ \\rangle }
+               \\newcommand{\\step}[2][=]{ \\\\ #1 \\;\\; & \\qquad \\color{maroon}{\\BEGINstep \\text{ #2 } \\ENDstep} \\\\ & }
+               \\newenvironment{calc}{\\begin{align*} & }{\\end{align*}}"))
+#+end_src
+
+#+RESULTS:
+#+begin_example
+\documentclass{article}
+\usepackage[usenames]{color}
+[PACKAGES]
+[DEFAULT-PACKAGES]
+\pagestyle{empty}             % do not remove
+% The settings below are copied from fullpage.sty
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-3cm}
+\setlength{\oddsidemargin}{1.5cm}
+\addtolength{\oddsidemargin}{-2.54cm}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-\headheight}
+\addtolength{\textheight}{-\headsep}
+\addtolength{\textheight}{-\footskip}
+\addtolength{\textheight}{-3cm}
+\setlength{\topmargin}{1.5cm}
+\addtolength{\topmargin}{-2.54cm}\usepackage{color}
+               \def\BEGINstep{ \langle }
+               \def\ENDstep{ \rangle }
+               \newcommand{\step}[2][=]{ \\ #1 \;\; & \qquad \color{maroon}{\BEGINstep \text{ #2 } \ENDstep} \\ & }
+               \newenvironment{calc}{\begin{align*} & }{\end{align*}}
+#+end_example
+
+:hide:
+ \begin{calc}
+  x
+\step{nice}
+  y
+\end{calc}
+:end:
+
+* Introduction to Calculational Reasoning :Lecture_1:
+  :PROPERTIES:
+  :CUSTOM_ID: Introduction-to-Calculational-Reasoning
+  :END:
+** What are Calculational Proofs
+   :PROPERTIES:
+   :CUSTOM_ID:
+   :END:
+
+ We advocate *calculational proofs* in which reasoning is goal directed and
+ justified by simple axiomatic laws that can be checked syntactically rather
+ than semantically. ---/Program Construction/ by Roland Backhouse
+
+ For example, below are two arguments showing that $\sqrt[n]{k}$ is a rational
+ number precisely when $k$ is a so-called perfect /n/-th root ---consequently,
+ since 2 is not a perfect square, $\sqrt{2}$ is not rational.
+
+{{{begin-box(#e5f5e5, Classical Proof: Non-perfect powers have irrational roots)}}}
+Suppose that $k$ is not a perfect /n/-th power ---i.e., not of the form /𝓍ⁿ/---
+then there is some prime $p$ in the factorisation of $k$ that has its exponent,
+say $\exp{p} k$, being not a multiple of $n$.  But if $\sqrt[n]{k} \eq
+a/b$ then $\exp{p}{k} \eq \exp{p}{a^n} - \exp{p}{b ^ n} \eq n · \exp{p}{a} - n ·
+\exp{p}{b}$ and the difference of multiples of $n$ is a multiple of $n$, and so
+we have a contradiction. Hence, no such $a, b$ could exist and so $\sqrt[n]{k}$
+is irrational.
+{{{end-box}}}
+
+This is an example of an *informal proof*, which is a mixture of natural language,
+English, and mathematical calculations.  The English text outline the main steps
+of the proof, and the mathematical calculations fill in *some* of the details.
+
+Since they only communicate the key ideas, such proofs are preferred by writers
+but they place a large semantic burden on readers who are expected to have such
+a good understanding of the problem domain that the details of the outline
+proofs can be filled in, and so the writer leaves these as an implicit exercise
+to the reader.
+
+However, even worse, such informal outline proofs may skip over important
+details and thus can be wrong!
+
+Below is a *calculational proof*. It introduces notation and recalls theorems as
+needed, thereby making each step of the argument easy to verify and follow.  As
+such, the following argument is more accessible to readers unfamiliar with the
+problem domain.
+
+{{{begin-box(#e5f5e5, Calculational Proof)}}}
+
+ \begin{calc}
+ \def\BEGINstep{\left[} \def\ENDstep{\right.}
+ \def\exp#1{\mathsf{exp}_#1\,}
+ \sqrt[n]{k} \text{ is a rational number }
+ \stepfour{ A rational number is the fraction of two integers.}{
+          Let variables $a,\, b$ range over integer numbers.}{}{
+  }
+  ∃\, a, b •\; \sqrt[n]{k} = {a \over b}
+ \step{ Use arithmetic to eliminate the $n$-th root operator.
+  }
+  ∃\, a, b •\; k · a ^n = b ^n
+  \stepmany{ \line{Let $\exp{m} 𝓍$ be the number of times that $m$ divides $𝓍$.}
+   \line{For example, $\exp{2} 48 \eq 4$ and $\exp{2} 49 \eq 0$.}
+   \line{The numbers $p$ with $∀ m : ℤ⁺ \,•\, \exp{m}p \,≠\, 0 \,≡\, m \,=\, p$ are called $prime$ numbers.}
+   \line{Let variable $p$ ranges over primes numbers. }
+   \line{Fundamental theorem of arithmetic: Numbers are determined by their prime powers.}
+   \line{That is, $\big(∀ \,p\, •\; \exp{p} 𝓍 \eq f(p)\big) \;≡\; 𝓍 \,=\, \big(Π\, p\, •\; p^{f(p)}\big)$ for any $f$.}
+   \line{As such, every number is the product of its prime powers:}
+   \line{$\qquad 𝓍 \eq \big(Π \,p\, •\; p^{\exp{p} 𝓍}\big)$. }
+   \line{And so, any two numbers are the same preciely when they have the same primes:}
+   \line{$\qquad 𝓍 \eq 𝓎 \;≡\; \big(∀ p \,•\, \exp{p} 𝓍 \eq \exp{p} 𝓎\big)$.}
+  }
+  ∃\, a, b •\; ∀\, p •\; \exp{p}(k × a ^n) \eq \exp{p}(b ^n )
+  \stepmany{\line{When $p$ is prime, $\exp{p}(x · y) \eq \exp{p} x \,+\, \exp{p} y$.}
+   \line{Aside: In general, $\exp{p}(Π \,i\, \,•\, x_i) \eq (Σ \,i\, \,•\, \exp{p} x_i)$.}
+  }
+  ∃\, a, b •\; ∀\, p •\; \exp{p} k + n · \exp{p} a \eq n · \exp{p} b
+  \step{ Use arithmetic to collect similar terms.
+  }
+  ∃\, a, b •\; ∀\, p •\; \exp{p} k \eq  n · \Big(\exp{p} b - \exp{p} a\Big)
+  \stepmany{ \line{(⇒) is the definition of multiplicity;}
+             \line{(⇐) take $a \,≔\, 1$ and define $b$ by its prime powers:}
+             \line{ $\qquad ∀\, p \,•\, \exp{p} b \,≔\, {\exp{p} k \,/\, n}$}
+  }
+  ∀\, p •\; \exp{p} k \text{ is a multiple of } n
+  \step{ Fundamental theorem of arithmetic and definition of ‘perfect’ }
+  k \text{ is a perfect $n$-th power; i.e., of the shape } 𝓍^n
+\end{calc}
+
+{{{end-box}}}
+
+Finally, observe that the calculational form is *more general*.  The use of a
+/formal/ approach let us keep track of when our statements are equivalent
+(“=”) rather than being weakened (“⇒”).
+
+The above proof is a generalisation of a proof in Backhouse's text for square
+roots, which may be viewed as a [[https://youtu.be/t39wHoFHbvY][Youtube video]] which makes use of kbd:CalcCheck
+[[https://alhassy.github.io/CalcCheck/Docs][⇭]]: A proof checker for the logic of “A Logical Approach to Discrete Math”
+(‘LADM’).
+    - It /checks/ your arguments in a notation similar to that of the book.
+    - *You can check your work before handing it in.*
+    - You can formalise your own theorems from other books and check them
+      ---unlimited exercises!
+
+    #+begin_center
+    kbd:Control_+_Alt_+_Enter to check a cell.
+    #+end_center
+
+** What is Discrete Mathematics
+   :PROPERTIES:
+   :CUSTOM_ID: Discrete-Mathematics
+   :END:
+ 1. *Discrete Mathematics*
+    includes logic (calculational reasoning), (data) sets, functions, relations,
+    graphs, inductive types, and more.
+
+    Conscious and fluent use of the language of (discrete) mathematics
+    is the foundation for precise specification and rigorous reasoning
+    in Computer Science and Software Engineering
+
+ 2. *Goal*: Understand the mechanics of mathematical expressions and proof.
+
+ 3. <<<Propositional>>>: Statements that can be either /true/ or /false/; not numbers.
+
+    <<<Predicate>>>: Propositional statement about some subjects.
+
+ 4. <<<Calculus>>>: Formalised reasoning through calculation.
+
+    ‘Hand wavy’ English arguments tend to favour /case analysis/
+       ---considering what could happen in each possible scenario---
+       which increases exponentially with each variable; in contrast,
+       equality-based calculation is much simpler since it delegates
+       intricate case analysis into codifed algebraic laws.
+
+       E.g., Portia's Suitor's Dilemma has 4 unknowns, each being either true or false,
+       and so has $2^4$ many possible scenarios to consider. Whereas a
+       calculation solving the problem can be formed in less than 10 super simple
+       lines.
+
+       #+begin_details
+       :title: Portia's Suitor's Dilemma
+
+ Portia has a gold casket and a silver casket and has placed a picture of herself
+ in one of them. On the caskets, she has written the following inscriptions:
+
+ + Gold ::  The portrait is not in here
+ + Silver :: Exactly one of these inscriptions is true.
+
+ Portia explains to her suitor that each inscription may be true or false, but
+ that she has placed her portrait in one of the caskets in a manner that is
+ consistent with the truth or falsity of the inscriptions.
+
+ If the suitor can choose the casket with her portrait, she will marry him.
+
+ -----
+
+ ( This is a ‘teaser’; you're not expected to know the details in the following
+ calculation. )
+
+ Formalisation is the first step towards solution!
+
+ #+begin_src calccheck
+Declaration: G, S : 𝔹
+
+Explanation: G ≔ “The inscription on the gold casket is true”
+Explanation: S ≔ “The inscription on the silver casket is true”
+ #+end_src
+
+ … and
+ #+begin_src calccheck
+Declaration: gc : 𝔹
+Explanation: gc ≔ “The portrait is in the gold casket”
+ #+end_src
+
+… we know the portrait is in a casket preciely when
+that casket's inscription is true …
+
+ #+begin_src calccheck
+Axiom “Inscription on gold casket”: G ≡ ¬ gc
+Axiom “Inscription on silver casket”: S ≡ (S ≡ ¬ G)
+ #+end_src
+
+ … let us start from what we know about the silver casket:
+ #+begin_src calccheck
+Calculation:
+    S ≡ (S ≡ ¬ G)    — This is “Inscription on silver casket”
+  ≡⟨ “Reflexivity of ≡” ⟩
+    S ≡ S ≡ ¬ G
+  ≡⟨ “Symmetry of ≡” ⟩
+    ¬ G
+  ≡⟨ “Inscription on gold casket” ⟩
+    ¬ ¬ gc
+  ≡⟨ “Double negation” ⟩
+    gc
+ #+end_src
+
+ By just *simplifying*, we calculated that the portrait is in the gold casket!
+
+ # See below [[#shape-of-calculations][The Shape of Calculations]] for more on /exploratory calculations/.
+
+ #+end_details
+
+ #+begin_quote
+/Knowledge is software for your brain: The more you know, the more problems you
+can solve!/
+ #+end_quote
+
+# Time for an upgrade!
+
+* Boolean Expressions and Propositional Logic
+  :PROPERTIES:
+  :CUSTOM_ID: Boolean-Expressions-and-Propositional-Logic
+  :END:
+** Expressions                                                    :Lecture_2:
+   :PROPERTIES:
+   :CUSTOM_ID: hi
+   :END:
+
+# Dot guide
+# https://www.graphviz.org/pdf/dotguide.pdf
+
+#+begin_center
+How do you ‘read’ (/parse/) the expression $6 - x + 7$?
+#+end_center
+
+#+BEGIN_SRC dot :file ~/github_calccheck/images/6-x+7_third_time.png :exports results
+digraph structs {
+ main [shape=plaintext, label="6 - x + 7"];
+ main -> parse1 [style = dashed, label = "means"];
+ main -> or [style = invis];
+ main -> parse2 [style = dashed, label = "means"];
+
+ parse1 [shape=record,label="+ |{{-|{6|x}}| 7}"];
+ or[shape=plaintext];
+ parse2 [shape=record,label="- |{6 | {+|{x|7}}}"];
+
+ "???"[shape=plaintext];
+  or  -> "???" [style = invis];
+
+}
+#     5: struct3 [shape=record,label="hello\nworld |{ b |{c|<here> d|e}| f}| g | h"];
+#+END_SRC
+
+
+
+It can be generated from its parts in two different ways:
+1. Both $6$ and $x + 7$ are expressions, so $6 - x + 7$ is an expression.
+   #+BEGIN_SRC dot :file ~/github_calccheck/images/6-x+7_parse2.png :exports results
+   digraph structs {
+    "-" -> 6;
+    "-" -> "+";
+    "+" -> x;
+    "+" -> 7;
+   }
+   #+END_SRC
+
+2. and also both $6 - x$ and $7$ are expressions, so $6 - x + 7$ is an expression.
+   #+BEGIN_SRC dot :file ~/github_calccheck/images/6-x+7_parse1.png :exports results
+digraph {
+ "-" -> 6;
+ "-" -> x;
+ "+" -> 7;
+ "+" -> "-";
+}
+#+END_SRC
+
+A *convention* on how a /string/ should be parsed
+as a /tree/ is known as a *precedence rule*.
+
+------
+
+    Expressions are defined by the following /grammar/, but /in practice/ one does
+    not write $+(1, 2)$ and instead writes $1 + 2$.  However, the phrase $+(1,
+    ·(2, 3))$ is /unambiguous/, whereas the phrase $1 + 2 · 3$ /could be read/ as
+    $(1 + 2) · 3$ or as $1 + (2 · 3)$.
+
+    #+begin_quote
+    The grammar defines expressions as *abstract syntax (trees)* whereas strings
+    with mixfix notation gives a *concrete syntax* where ambiguity is resolved by
+    parentheses, precedence, or association rules.
+    #+end_quote
+    # Parentheses, precedences, and association rules only serve to disambiguate
+    # the encoding of trees in strings.
+
+    #+begin_src math
+Expr ::= Constant    -- E.g., 1 or “apple”
+      |  Variable    -- E.g., x or apple (no quotes!)
+      |  Application -- E.g., f(x₁, x₂, …, xₙ)
+    #+end_src
+
+    ( One reads =:== as /becomes/ and so the addition of an extra
+    colon results in a ‘stutter’: One reads
+     =::== as /be-becomes/. The symbol =|= is read /or/. )
+
+** Boolean Operators                                               :Lecture2:
+   :PROPERTIES:
+   :CUSTOM_ID: Boolean-Operators
+   :END:
+
+ The type of propositions is known as the *Booleans* and denoted 𝔹.
+    #+begin_src math
+𝔹 ::= true | false
+    #+end_src
+
+*** Equality: “=” and “≡”
+    :PROPERTIES:
+    :CUSTOM_ID: Equality-and
+    :END:
+
+    For instance, the notion of equality on any type τ is
+    typed ~_=_ : τ → τ → 𝔹~; i.e., equality takes two values of a type τ
+    and returns a propositional value.
+
+    #+begin_quote
+    In general, the “continued equality” $x = y = z$
+    is *read conjunctively*: Both $x = y$ /and/ $y = z$.
+    However, for the special case τ being 𝔹, the expression
+    $x = y = z$ could be *read associativity*: $(x = y) = z$.
+
+    These two ways to read (parse) a continued equality
+    give different operators on 𝔹. The associative equality
+    is popularly written as ‘⇔’ but, unfortunately, not usually treated
+    as an equality at all! In this class, we write the associative equality
+    as ‘≡’ and read it as “equivales”.
+
+    See [[https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem][The associativity of equivalence and the Towers of Hanoi problem]].
+    #+end_quote
+
+ The phrase $p ≡ q$ may be read as
+    - /p is equivalent to q/, or
+    - /p exactly when q/,
+    - /p if-and-only-if q/,
+
+    This operator is just equality on the Booleans:
+    | Definition of ≡ |   | ~(p ≡ q) = (p = q)~ |
+
+    The need for a new name for an existing concept is that they have different
+    *notational conventions*: Firstly, “≡” has lower precedence than “=” and
+    secondly,
+    - = is conjunctive :: $\big(p = q = r\big) \quad=\quad \big( (p = q)
+      \;\land\; (q = r)\big)$
+    - ≡ is associative :: $\big(p ≡ q ≡ r\big) \quad=\quad \big((p ≡ q) ≡ r\big) \quad=\quad \big(p ≡ (q ≡ r)\big)$
+
+    For example, $\false ≡ \true ≡ \false$ is $\true$, whereas
+    $\false = \true = \false$ is $\false$.
+
+*** Useful Operators
+    :PROPERTIES:
+    :CUSTOM_ID: Useful-Operators
+    :END:
+ The Booleans have a number of useful operators that model reasoning,
+    such as:
+    #+caption: Boolean operators and similar numeric operators
+    | Operator    | Booleans (𝔹)    | Numbers (ℤ)                 |
+    | /           | >               |                             |
+    |-------------+-----------------+-----------------------------|
+    | “and”       | =_∧_ : 𝔹 → 𝔹 → 𝔹= | “minimum” =_↓_ : ℤ → ℤ → ℤ=   |
+    | “or”        | =_∨_ : 𝔹 → 𝔹 → 𝔹= | “maximum” =_↑_ : ℤ → ℤ → ℤ=   |
+    | “not”       | =¬_ : 𝔹 → 𝔹=      | “negation” =-_ : ℤ → ℤ → ℤ=   |
+    | “implies”   | =_⇒_ : 𝔹 → 𝔹 → 𝔹= | “inclusion” =_≤_ : ℤ → ℤ → 𝔹= |
+    | [[https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem][“Equivales”]]  | =_≡_ : 𝔹 → 𝔹 → 𝔹= | “equality” =_=_ : ℤ → ℤ → 𝔹=  |
+
+    These operators can be defined /informally/, as done below, but we shall follow
+    an /axiomatic/ definition as done in LADM by providing an /interface/ of
+    properties that they satisfy instead of any particular /implementation/. Later
+    in the class when we get to the =if_then_else_fi= construct, we may provide
+    explicit implementations and prove them to be equal to the operations
+    specified axiomatically.
+
+    #+caption: Example explicit definitions ---not used in this class
+    | “p ∧ q” is “true” whenever both “p” and “q” are “true”, otherwise it is “false” |
+    | “m ↓ n” is “m” whenever “m ≤ n”, otherwise it is “n”                            |
+
+*** Boolean Laws and Numeric Laws
+    :PROPERTIES:
+    :CUSTOM_ID: Boolean-Laws-and-Numeric-Laws
+    :END:
+To better understand the 𝔹ooleans, it can be useful to compare their laws
+    with those on numbers. For instance, the =Definition of ⇒= at first glance is
+    tremendously cryptic: Why in the world would anyone define implication in
+    this way $p ⇒ q \,≡\, p ∧ q ≡ p$?  However, when compared to the similar law
+    for numbers that defines inclusion $m ≤ n \,≡\, m ↓ n = m$, the definition
+    becomes *“obvious”*: /p is included in (implies) q precisely when having both p
+    and q is the same as just having p/; i.e., /m is at-most n precisely when m is
+    the minimum of m and n./
+
+    #+caption: Properties of propositional operators and similar (familiar) numeric laws
+    | Law                  | Booleans (𝔹)                      | Numbers (ℤ with ±∞)               |
+    | /                    | >                                 |                                   |
+    |----------------------+-----------------------------------+-----------------------------------|
+    | Symmetry of ∧        | $p ∧ q ≡ q ∧ p$                   | $m ↓ n = n ↓ m$                   |
+    | Associativity of ∧   | $(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)$       | $m ↓ n = n ↓ m$                   |
+    | Idempotency of ∧     | $p ∧ p ≡ p$                       | $n ↓ n = n$                       |
+    | Identity of ∧        | $p ∧ \true ≡ p$                   | $n ↓ +∞ = n$                      |
+    | Zero of ∧            | $p ∧ \false ≡ \false$             | $n ↓ -∞ = 0$                      |
+    | Contradiction        | $p ∧ ¬ p ≡ \false$                | ─nope─                            |
+    |----------------------+-----------------------------------+-----------------------------------|
+    | Symmetry of ∨        | $p ∨ q ≡ q ∨ p$                   | $m ↑ n = n ↑ m$                   |
+    | Associativity of ∨   | $(p ∨ q) ∨ r ≡ p ∨ (q ∨ r)$       | $m ↑ n = n ↑ m$                   |
+    | Idempotency of ∨     | $p ∨ p ≡ p$                       | $n ↑ n = n$                       |
+    | Identity of ∨        | $p ∨ \false ≡ p$                  | $n ↑ -∞ = n$                      |
+    | Zero of ∨            | $p ∨ \true ≡ p$                   | $n ↑ +∞ = +∞$                     |
+    | Excluded Middle      | $p ∨ ¬ p ≡ \false$                | ─nope─                            |
+    |----------------------+-----------------------------------+-----------------------------------|
+    | Golden Rule          | $p ∧ q ≡ p ≡ q ≡ p ∨ q$           | $m ↓ n = m \,≡\, n = m ↑ n$       |
+    | ∧/∨ Distributivity   | $p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)$ | $m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)$ |
+    | ∨/∧ Distributivity   | $p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)$ | $m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)$ |
+    |----------------------+-----------------------------------+-----------------------------------|
+    | Double negation      | $¬ ¬ p ≡ p$                       | $- - n = n$                       |
+    | Definition of $\false$ | $\false ≡ ¬ \true$                | $-∞ \,=\, - (+∞)$                 |
+    | Negation of $\false$ | $¬ \false = \true$                | $- (-∞) = +∞$                     |
+    | De Morgan            | $¬(p ∧ q) = ¬ p ∨ ¬ q$            | $-(m ↓ n) = -m ↑ -n$              |
+    |                      | $¬(p ∨ q) = ¬ p ∧ ¬ q$            | $-(m ↑ n) = -m ↓ -n$              |
+    |----------------------+-----------------------------------+-----------------------------------|
+    | Definition of ⇒      | $p ⇒ q ≡ p ∧ q ≡ p$               | $m ≤ n \,≡\, m ↓ n = m$           |
+    |                      | $p ⇒ q ≡ p ∨ q ≡ q$               | $m ≤ n \,≡\, m ↑ n = n$           |
+    | Consequence          | $p ⇐ q ≡ p ⇒ q$                   | $m ≥ n \,≡\, m ≤ n$               |
+    | ex falso quodlibet   | $\false ⇒ p ≡ \true$              | $-∞ ≤ n \,≡\, \true$              |
+    | Left-identity of ⇒   | $\true ⇒ p ≡ p$                   | $+∞ ≤ n \,≡\, n = +∞$             |
+    | Right-zero of ⇒      | $p ⇒ \true ≡ \true$               | $n ≤ +∞ \,≡\, \true$              |
+    | Definition of ¬      | $p ⇒ \false ≡ ¬ p$                | ─nope─                            |
+    |----------------------+-----------------------------------+-----------------------------------|
+
+* TODO COMMENT Quantification and Predicate Logic
+  :PROPERTIES:
+  :CUSTOM_ID: Quantification-and-Predicate-Logic
+  :END:
+* TODO COMMENT Sets
+  :PROPERTIES:
+  :CUSTOM_ID: Sets
+  :END:
+* TODO COMMENT Relations and Functions
+  :PROPERTIES:
+  :CUSTOM_ID: Relations-and-Functions
+  :END:
+* TODO COMMENT Induction and Sequences
+  :PROPERTIES:
+  :CUSTOM_ID: Induction-and-Sequences
+  :END:
+* TODO COMMENT Graphs and Counting
+  :PROPERTIES:
+  :CUSTOM_ID: Graphs-and-Counting
+  :END:

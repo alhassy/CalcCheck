@@ -18,6 +18,8 @@
 # Make HTML
 # (f-move (org-html-export-to-html) "~/github_calccheck/Docs.html")
 
+# ``Fact'' is like a calculator, it simplifies arithmetic expressions that do not contain variables.
+
 * Why The Calculational Method and CalcCheck
   :PROPERTIES:
   :CUSTOM_ID: Why-The-Calculational-Method-and-CalcCheck
@@ -1681,3 +1683,11 @@ Proof:
 #+END_EXAMPLE
 #+end_parallel
 #+end_scriptsize
+* FAQ
+
+** CalcCheck is “not working” / “not showing up” / “only a white screen”
+
+CalcCheck needs a Websocket-capable browser, such as Firefox and Chrome.
++ In doubt, try a different browser than the one you're currently using.
+
+JavaScript and cookies need to be enabled.
