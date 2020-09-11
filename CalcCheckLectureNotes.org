@@ -541,7 +541,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
     |----------------------+-----------------------------------+-----------------------------------|
     | Definition of ⇒      | $p ⇒ q ≡ p ∧ q ≡ p$               | $m ≤ n \,≡\, m ↓ n = m$           |
     |                      | $p ⇒ q ≡ p ∨ q ≡ q$               | $m ≤ n \,≡\, m ↑ n = n$           |
-    | Consequence          | $p ⇐ q ≡ p ⇒ q$                   | $m ≥ n \,≡\, m ≤ n$               |
+    | Consequence          | $p ⇐ q ≡ q ⇒ p$                   | $m ≥ n \,≡\, n ≤ m$               |
     | ex falso quodlibet   | $\false ⇒ p ≡ \true$              | $-∞ ≤ n \,≡\, \true$              |
     | Left-identity of ⇒   | $\true ⇒ p ≡ p$                   | $+∞ ≤ n \,≡\, n = +∞$             |
     | Right-zero of ⇒      | $p ⇒ \true ≡ \true$               | $n ≤ +∞ \,≡\, \true$              |

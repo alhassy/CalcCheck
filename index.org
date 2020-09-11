@@ -11,6 +11,8 @@
 # (f-move (org-md-export-to-markdown) "~/github_calccheck/README.md")
 #+HTML_HEAD: <link href="https://alhassy.github.io/org-notes-style.css" rel="stylesheet" type="text/css" />
 #+HTML_HEAD: <link href="https://alhassy.github.io/floating-toc.css" rel="stylesheet" type="text/css" />
+#+HTML_HEAD: <link href="https://alhassy.github.io/blog-banner.css" rel="stylesheet" type="text/css" />
+# The last one has the styling for lists.
 
 # $1 colour eg “pink” or “hsl(157 75% 20%)” or “#e5f5e5”; $2 title
 #+macro: begin-box @@html: <div style="padding: 1em; background-color: $1; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3>$2</h3>@@
@@ -55,3 +57,5 @@ Videos
 :End:
 
 {{{end-box}}}
+
+| ⇨ [[https://github.com/alhassy/CalcCheck][Github Repository]] ⇦ |
