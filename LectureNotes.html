@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-09-11 Fri 05:10 -->
+<!-- 2020-09-11 Fri 06:31 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mathematics for Computing</title>
@@ -42,7 +42,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -398,10 +398,6 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 
 
 
-% \step{  The left side is almost factorable;} \hfill \\ \text{introduce the missing part since + is cancellative} \hfill\\ more}$ }
-
-
-
 \def\eq{\,=\,}
 
 
@@ -409,18 +405,19 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 \def\true{\mathsf{true}}
 \def\false{\mathsf{false}}
 
-
-
-\def\xnull{\null}
-\def\Macro#1{\def\tmp{#1}\ifx\tmp\xnull\else ,#1\expandafter\Macro \fi}
-
 \]</p>
 
-<div id="outline-container-org21fb65d" class="outline-2">
+<p style="display:none">
+<p>
+\[\newcommand\exp[1]{\mathsf{exp}_{#1}\,}\]
+</p>
+</p>
+
+<div id="outline-container-org405c3d9" class="outline-2">
 <h2 id="Introduction-to-Calculational-Reasoning"><span class="section-number-2">1</span> <a href="#Introduction-to-Calculational-Reasoning">Introduction to Calculational Reasoning</a></h2>
 <div class="outline-text-2" id="text-Introduction-to-Calculational-Reasoning">
 </div>
-<div id="outline-container-org623d152" class="outline-3">
+<div id="outline-container-org2af4733" class="outline-3">
 <h3 id=""><span class="section-number-3">1.1</span> <a href="#">What are Calculational Proofs</a></h3>
 <div class="outline-text-3" id="text-">
 <p>
@@ -437,6 +434,9 @@ since 2 is not a perfect square, \(\sqrt{2}\) is not rational.
 
 <p>
  <div style="padding: 1em; background-color: #e5f5e5; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3> Classical Proof: Non-perfect powers have irrational roots</h3>
+</p>
+
+<p>
 Suppose that \(k\) is not a perfect <i>n</i>-th power &#x2014;i.e., not of the form <i>𝓍ⁿ</i>&#x2014;
 then there is some prime \(p\) in the factorisation of \(k\) that has its exponent,
 say \(\exp{p} k\), being not a multiple of \(n\).  But if \(\sqrt[n]{k} \eq
@@ -479,7 +479,6 @@ problem domain.
 
  \begin{calc}
  \def\BEGINstep{\left[} \def\ENDstep{\right.}
- \def\exp#1{\mathsf{exp}_#1\,}
  \sqrt[n]{k} \text{ is a rational number }
  \stepfour{ A rational number is the fraction of two integers.}{
           Let variables $a,\, b$ range over integer numbers.}{}{
@@ -488,18 +487,18 @@ problem domain.
  \step{ Use arithmetic to eliminate the $n$-th root operator.
   }
   ∃\, a, b •\; k · a ^n = b ^n
-  \stepmany{ \line{Let $\exp{m} 𝓍$ be the number of times that $m$ divides $𝓍$.}
+  \stepmany{ \line{Let $\exp{m} x$ be the number of times that $m$ divides $x$.}
    \line{For example, $\exp{2} 48 \eq 4$ and $\exp{2} 49 \eq 0$.}
    \line{The numbers $p$ with $∀ m : ℤ⁺ \,•\, \exp{m}p \,≠\, 0 \,≡\, m \,=\, p$ are called $prime$ numbers.}
    \line{Let variable $p$ ranges over primes numbers. }
    \line{Fundamental theorem of arithmetic: Numbers are determined by their prime powers.}
-   \line{That is, $\big(∀ \,p\, •\; \exp{p} 𝓍 \eq f(p)\big) \;≡\; 𝓍 \,=\, \big(Π\, p\, •\; p^{f(p)}\big)$ for any $f$.}
+   \line{That is, $\big(∀ \,p\, •\; \exp{p} x \eq f(p)\big) \;≡\; x \,=\, \big(Π\, p\, •\; p^{f(p)}\big)$ for any $f$.}
    \line{As such, every number is the product of its prime powers:}
-   \line{$\qquad 𝓍 \eq \big(Π \,p\, •\; p^{\exp{p} 𝓍}\big)$. }
-   \line{And so, any two numbers are the same preciely when they have the same primes:}
-   \line{$\qquad 𝓍 \eq 𝓎 \;≡\; \big(∀ p \,•\, \exp{p} 𝓍 \eq \exp{p} 𝓎\big)$.}
+   \line{$\qquad x \eq \big(Π \,p\, •\; p^{\exp{p} x}\big)$. }
+   \line{And so, any two numbers are the same precisely when they have the same primes:}
+   \line{$\qquad x \eq y \;≡\; \big(∀ p \,•\, \exp{p} x \eq \exp{p} y\big)$.}
   }
-  ∃\, a, b •\; ∀\, p •\; \exp{p}(k × a ^n) \eq \exp{p}(b ^n )
+  ∃\, a, b •\; ∀\, p •\; \exp{p}(k · a ^n) \eq \exp{p}(b ^n )
   \stepmany{\line{When $p$ is prime, $\exp{p}(x · y) \eq \exp{p} x \,+\, \exp{p} y$.}
    \line{Aside: In general, $\exp{p}(Π \,i\, \,•\, x_i) \eq (Σ \,i\, \,•\, \exp{p} x_i)$.}
   }
@@ -513,7 +512,7 @@ problem domain.
   }
   ∀\, p •\; \exp{p} k \text{ is a multiple of } n
   \step{ Fundamental theorem of arithmetic and definition of ‘perfect’ }
-  k \text{ is a perfect $n$-th power; i.e., of the shape } 𝓍^n
+  k \text{ is a perfect $n$-th power; i.e., of the shape } x^n
 \end{calc}
 
 <p>
@@ -547,7 +546,7 @@ roots, which may be viewed as a <a href="https://youtu.be/t39wHoFHbvY">Youtube v
 </div>
 </div>
 
-<div id="outline-container-orgaf3bc35" class="outline-3">
+<div id="outline-container-org2a7fa96" class="outline-3">
 <h3 id="Discrete-Mathematics"><span class="section-number-3">1.2</span> <a href="#Discrete-Mathematics">What is Discrete Mathematics</a></h3>
 <div class="outline-text-3" id="text-Discrete-Mathematics">
 <ol class="org-ol">
@@ -566,15 +565,15 @@ in Computer Science and Software Engineering
 <li><b>Goal</b>: Understand the mechanics of mathematical expressions and proof.</li>
 
 <li><p>
-<a id="org550adb6">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
+<a id="org1718cc8">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
 </p>
 
 <p>
-<a id="orga793dc2">Predicate</a>: <a href="#org550adb6">Propositional</a> statement about some subjects.
+<a id="orgeed2e61">Predicate</a>: <a href="#org1718cc8">Propositional</a> statement about some subjects.
 </p></li>
 
 <li><p>
-<a id="orgda9885f">Calculus</a>: Formalised reasoning through calculation.
+<a id="org23eae16">Calculus</a>: Formalised reasoning through calculation.
 </p>
 
 <p>
@@ -688,11 +687,11 @@ can solve!</i>
 </div>
 </div>
 
-<div id="outline-container-org8f5ee7d" class="outline-2">
-<h2 id="Boolean-Expressions-and-Propositional-Logic"><span class="section-number-2">2</span> <a href="#Boolean-Expressions-and-Propositional-Logic">Boolean Expressions and <a href="#org550adb6">Propositional</a> Logic</a></h2>
+<div id="outline-container-org41c1519" class="outline-2">
+<h2 id="Boolean-Expressions-and-Propositional-Logic"><span class="section-number-2">2</span> <a href="#Boolean-Expressions-and-Propositional-Logic">Boolean Expressions and <a href="#org1718cc8">Propositional</a> Logic</a></h2>
 <div class="outline-text-2" id="text-Boolean-Expressions-and-Propositional-Logic">
 </div>
-<div id="outline-container-orged8ad9d" class="outline-3">
+<div id="outline-container-orgc8f09e5" class="outline-3">
 <h3 id="hi"><span class="section-number-3">2.1</span> <a href="#hi">Expressions</a></h3>
 <div class="outline-text-3" id="text-hi">
 <div class="org-center">
@@ -759,9 +758,9 @@ parentheses, precedence, or association rules.
 </blockquote>
 
 <div class="org-src-container">
-<pre class="src src-math"><span style="color: #b58900; font-style: italic;">Expr</span> <span style="color: #b58900;">::=</span> <span style="color: #b58900; font-style: italic;">Constant</span>    <span style="color: #96A7A9; font-style: italic;">-- </span><span style="color: #96A7A9; font-style: italic;">E.g., 1 or &#8220;apple&#8221;</span>
-      <span style="color: #268bd2;">|</span>  <span style="color: #b58900; font-style: italic;">Variable</span>    <span style="color: #96A7A9; font-style: italic;">-- </span><span style="color: #96A7A9; font-style: italic;">E.g., x or apple (no quotes!)</span>
-      <span style="color: #268bd2;">|</span>  <span style="color: #b58900; font-style: italic;">Application</span> <span style="color: #96A7A9; font-style: italic;">-- </span><span style="color: #96A7A9; font-style: italic;">E.g., f(x&#8321;, x&#8322;, &#8230;, x&#8345;)</span>
+<pre class="src src-math">Expr ::= Constant    -- E.g., 1 or “apple”
+      |  Variable    -- E.g., x or apple (no quotes!)
+      |  Application -- E.g., f(x₁, x₂, …, xₙ)
 </pre>
 </div>
 
@@ -773,25 +772,25 @@ colon results in a ‘stutter’: One reads
 </div>
 </div>
 
-<div id="outline-container-org63d1f50" class="outline-3">
+<div id="outline-container-org5983fba" class="outline-3">
 <h3 id="Boolean-Operators"><span class="section-number-3">2.2</span> <a href="#Boolean-Operators">Boolean Operators</a></h3>
 <div class="outline-text-3" id="text-Boolean-Operators">
 <p>
 The type of propositions is known as the <b>Booleans</b> and denoted 𝔹.
 </p>
 <div class="org-src-container">
-<pre class="src src-math"><span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #b58900; font-style: italic;">::=</span> true <span style="color: #268bd2;">|</span> false
+<pre class="src src-math">𝔹 ::= true | false
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org44ac33a" class="outline-4">
+<div id="outline-container-org401e90d" class="outline-4">
 <h4 id="Equality-and"><span class="section-number-4">2.2.1</span> <a href="#Equality-and">Equality: “=” and “≡”</a></h4>
 <div class="outline-text-4" id="text-Equality-and">
 <p>
 For instance, the notion of equality on any type τ is
 typed <code>_=_ : τ → τ → 𝔹</code>; i.e., equality takes two values of a type τ
-and returns a <a href="#org550adb6">propositional</a> value.
+and returns a <a href="#org1718cc8">propositional</a> value.
 </p>
 
 <blockquote>
@@ -864,7 +863,7 @@ For example, \(\false ≡ \true ≡ \false\) is \(\true\), whereas
 </div>
 </div>
 
-<div id="outline-container-orgcc81f04" class="outline-4">
+<div id="outline-container-org58dd4ad" class="outline-4">
 <h4 id="Useful-Operators"><span class="section-number-4">2.2.2</span> <a href="#Useful-Operators">Useful Operators</a></h4>
 <div class="outline-text-4" id="text-Useful-Operators">
 <p>
@@ -951,7 +950,7 @@ specified axiomatically.
 </div>
 </div>
 
-<div id="outline-container-org96957b0" class="outline-4">
+<div id="outline-container-orgcebf167" class="outline-4">
 <h4 id="Boolean-Laws-and-Numeric-Laws"><span class="section-number-4">2.2.3</span> <a href="#Boolean-Laws-and-Numeric-Laws">Boolean Laws and Numeric Laws</a></h4>
 <div class="outline-text-4" id="text-Boolean-Laws-and-Numeric-Laws">
 <p>
@@ -966,7 +965,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 3:</span> Properties of <a href="#org550adb6">propositional</a> operators and similar (familiar) numeric laws</caption>
+<caption class="t-above"><span class="table-number">Table 3:</span> Properties of <a href="#org1718cc8">propositional</a> operators and similar (familiar) numeric laws</caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -1159,7 +1158,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-09-11 Fri 05:10</p>
+<p class="date">Created: 2020-09-11 Fri 06:31</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

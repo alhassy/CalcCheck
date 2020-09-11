@@ -1,7 +1,7 @@
 #+title: Mathematics for Computing
 #+subtitle: Abrdiged Lecture Notes
 #+author: Musa Al-hassy
-#+options: tags:nil d:nil
+#+options: tags:nil d:nil toc:t
 #+PROPERTY: header-args:calccheck :tangle (concat (file-name-sans-extension (buffer-name)) ".calc") :comments nil
 
 #+Description: Abrdiged Lecture Notes
@@ -59,16 +59,16 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 
 \newenvironment{calc}{\begin{align*} & }{\end{align*}}
 
-% \step{  The left side is almost factorable;} \hfill \\ \text{introduce the missing part since + is cancellative} \hfill\\ more}$ }
-
 \def\eq{\,=\,}
 
 \def\true{\mathsf{true}}
 \def\false{\mathsf{false}}
-
-\def\xnull{\null}
-\def\Macro#1{\def\tmp{#1}\ifx\tmp\xnull\else ,#1\expandafter\Macro \fi}
 #+end_latex-definitions
+
+#+html: <p style="display:none">
+$$\newcommand\exp[1]{\mathsf{exp}_{#1}\,}$$
+#+html: </p>
+
 
 # This snippet let's us, in an org file, do C-c C-x C-l to see the calculation
 # rendered prettily. It will not work if you do #+begin_calc … #+end_calc.
@@ -136,7 +136,9 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
  number precisely when $k$ is a so-called perfect /n/-th root ---consequently,
  since 2 is not a perfect square, $\sqrt{2}$ is not rational.
 
-{{{begin-box(#e5f5e5, Classical Proof: Non-perfect powers have irrational roots)}}}
+{{{begin-box(#e5f5e5, Classical Proof: Non-perfect powers have irrational
+roots)}}}
+
 Suppose that $k$ is not a perfect /n/-th power ---i.e., not of the form /𝓍ⁿ/---
 then there is some prime $p$ in the factorisation of $k$ that has its exponent,
 say $\exp{p} k$, being not a multiple of $n$.  But if $\sqrt[n]{k} \eq
@@ -168,7 +170,6 @@ problem domain.
 
  \begin{calc}
  \def\BEGINstep{\left[} \def\ENDstep{\right.}
- \def\exp#1{\mathsf{exp}_#1\,}
  \sqrt[n]{k} \text{ is a rational number }
  \stepfour{ A rational number is the fraction of two integers.}{
           Let variables $a,\, b$ range over integer numbers.}{}{
@@ -177,18 +178,18 @@ problem domain.
  \step{ Use arithmetic to eliminate the $n$-th root operator.
   }
   ∃\, a, b •\; k · a ^n = b ^n
-  \stepmany{ \line{Let $\exp{m} 𝓍$ be the number of times that $m$ divides $𝓍$.}
+  \stepmany{ \line{Let $\exp{m} x$ be the number of times that $m$ divides $x$.}
    \line{For example, $\exp{2} 48 \eq 4$ and $\exp{2} 49 \eq 0$.}
    \line{The numbers $p$ with $∀ m : ℤ⁺ \,•\, \exp{m}p \,≠\, 0 \,≡\, m \,=\, p$ are called $prime$ numbers.}
    \line{Let variable $p$ ranges over primes numbers. }
    \line{Fundamental theorem of arithmetic: Numbers are determined by their prime powers.}
-   \line{That is, $\big(∀ \,p\, •\; \exp{p} 𝓍 \eq f(p)\big) \;≡\; 𝓍 \,=\, \big(Π\, p\, •\; p^{f(p)}\big)$ for any $f$.}
+   \line{That is, $\big(∀ \,p\, •\; \exp{p} x \eq f(p)\big) \;≡\; x \,=\, \big(Π\, p\, •\; p^{f(p)}\big)$ for any $f$.}
    \line{As such, every number is the product of its prime powers:}
-   \line{$\qquad 𝓍 \eq \big(Π \,p\, •\; p^{\exp{p} 𝓍}\big)$. }
-   \line{And so, any two numbers are the same preciely when they have the same primes:}
-   \line{$\qquad 𝓍 \eq 𝓎 \;≡\; \big(∀ p \,•\, \exp{p} 𝓍 \eq \exp{p} 𝓎\big)$.}
+   \line{$\qquad x \eq \big(Π \,p\, •\; p^{\exp{p} x}\big)$. }
+   \line{And so, any two numbers are the same precisely when they have the same primes:}
+   \line{$\qquad x \eq y \;≡\; \big(∀ p \,•\, \exp{p} x \eq \exp{p} y\big)$.}
   }
-  ∃\, a, b •\; ∀\, p •\; \exp{p}(k × a ^n) \eq \exp{p}(b ^n )
+  ∃\, a, b •\; ∀\, p •\; \exp{p}(k · a ^n) \eq \exp{p}(b ^n )
   \stepmany{\line{When $p$ is prime, $\exp{p}(x · y) \eq \exp{p} x \,+\, \exp{p} y$.}
    \line{Aside: In general, $\exp{p}(Π \,i\, \,•\, x_i) \eq (Σ \,i\, \,•\, \exp{p} x_i)$.}
   }
@@ -202,7 +203,7 @@ problem domain.
   }
   ∀\, p •\; \exp{p} k \text{ is a multiple of } n
   \step{ Fundamental theorem of arithmetic and definition of ‘perfect’ }
-  k \text{ is a perfect $n$-th power; i.e., of the shape } 𝓍^n
+  k \text{ is a perfect $n$-th power; i.e., of the shape } x^n
 \end{calc}
 
 {{{end-box}}}

@@ -46,7 +46,24 @@ Videos
 #+html: </h2>
 
 1. Introduction to Discrete & Calculational Maths ─[[https://web.microsoftstream.com/video/76eac408-540e-47f9-a83b-d2caad93443c][Wolfram]], [[https://youtu.be/5IyMizFhHMA][Musa]]
-2. [[color:red][*not yet given*]]
+
+   What is a calculational proof? What is discrete mathematics?
+   How is math related to programming: “proofs-as-programs”.
+
+2. Grammatical Analysis and Boolean Operators ─[[https://web.microsoftstream.com/video/3216c424-1494-4ed1-9f7d-6591bde71fc3][Wolfram]] (only second part), [[https://youtu.be/0wM0WXLJULQ][Musa]]
+
+   A proof is a “story”, and calculation hints are the “transitions” that make
+   the story flow nicely.  The formulae are the “sentences” and they are formed
+   from operators, constants, and variables which act as “verbs”, “names”, and
+   “pronouns”, respectively.
+
+   ℕumber arithmetic is learned by memorising parts of
+   infinitely large addition and multiplication tables.
+   In contrast, 𝔹oolean arithmetic has tiny 2×2 “truth tables”.
+   As such, 𝔹  may be easier to learn than ℕ.
+
+3. [[color:red][*not yet given*]]
+
 
 :Relocate:
  + Program Construction
