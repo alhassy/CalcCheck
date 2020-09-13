@@ -19,6 +19,26 @@
 
 #+macro: end-box @@html: </div>@@
 
+:Books_todo:
+{{{begin-box(#E5E7E9 , hi)}}}
+
+ + Program Construction
+ + LADM
+ + [[https://fourferries.com/wp-content/uploads/2016/10/StructuredDerivation26092016.pdf][Structured Derivations: Teaching Mathematical Reasoning in High School]]
+
+   Online and covers a variety of topics, including limits and probability
+   theory.
+
+
+[[https://avenue.cllmcmaster.ca/d2l/lms/links/link_newedit.d2l?ext=0&linkid=97717&ou=347775][Using Z]]
+
+Z (pronouced "Zed") is a standardised mathematical notation intended for software specification.
+For universal and existential quantification, CalcCheck uses the same notation as Z.
+
+The first half of the book "Using Z" is an introduction to logic via natural deduction, and to basic discrete mathematics covering set, functions, and relations, all in the Z notation.
+
+{{{end-box}}}
+:end:
 
 #+begin_parallelNB
 
@@ -40,7 +60,7 @@
 
 #+end_parallelNB
 
-{{{begin-box(cyan, )}}}
+{{{begin-box(#99FFCC, )}}}
 #+html: <h2>
 Videos
 #+html: </h2>
@@ -62,16 +82,15 @@ Videos
    In contrast, 𝔹oolean arithmetic has tiny 2×2 “truth tables”.
    As such, 𝔹  may be easier to learn than ℕ.
 
-3. [[color:red][*not yet given*]]
+3. Ladies and Tigers, a teaser ─[[https://web.microsoftstream.com/video/3153223e-a48a-4177-bb2b-013d0694b336][Wolfram]], [[https://youtu.be/9oeJtu4JjSQ][Musa]]
 
+   Continuing the discussion on Boolean operators
+   and how they can be used to model puzzles.
 
-:Relocate:
- + Program Construction
- + LADM
- + [[https://fourferries.com/wp-content/uploads/2016/10/StructuredDerivation26092016.pdf][Structured Derivations: Teaching Mathematical Reasoning in High School]]
+4. [[color:red][*not yet given*]]
 
-   Online and covers a variety of topics, including limits and probability theory.
-:End:
+   # ─⟦Maths for Computing ⟧
+   # Associated notes: https://alhassy.github.io/CalcCheck/
 
 {{{end-box}}}
 
