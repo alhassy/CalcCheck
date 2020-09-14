@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-09-14 Mon 10:46 -->
+<!-- 2020-09-14 Mon 17:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mathematics for Computing</title>
@@ -363,7 +363,8 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#Syntax-vs-Semantics">3.1. <a href="#Syntax-vs-Semantics">Syntax vs. Semantics</a></a></li>
 <li><a href="#Logics-and-Inference-Rules">3.2. <a href="#Logics-and-Inference-Rules">Inference Rules</a></a></li>
-<li><a href="#Rules-of-Equality-Proof-Trees-and-Calculations">3.3. <a href="#Rules-of-Equality-Proof-Trees-and-Calculations">Rules of Equality and Proof Trees vs. Calculational Proofs</a></a></li>
+<li><a href="#water-bucket-logics">3.3. <a href="#water-bucket-logics">[Optional] Strange Logics</a></a></li>
+<li><a href="#Rules-of-Equality-and-Proof-Trees-vs-Calculational-Proofs">3.4. <a href="#Rules-of-Equality-and-Proof-Trees-vs-Calculational-Proofs">Rules of Equality and Proof Trees vs. Calculational Proofs</a></a></li>
 </ul>
 </li>
 <li><a href="#Boolean-Expressions-and-Laws">4. <a href="#Boolean-Expressions-and-Laws">Boolean Expressions and Laws</a></a>
@@ -434,11 +435,11 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 </p>
 </p>
 
-<div id="outline-container-org147615b" class="outline-2">
+<div id="outline-container-org51c8e7c" class="outline-2">
 <h2 id="Introduction-to-Calculational-Reasoning"><span class="section-number-2">1</span> <a href="#Introduction-to-Calculational-Reasoning">Introduction to Calculational Reasoning</a></h2>
 <div class="outline-text-2" id="text-Introduction-to-Calculational-Reasoning">
 </div>
-<div id="outline-container-org38bcf05" class="outline-3">
+<div id="outline-container-org6dc98da" class="outline-3">
 <h3 id=""><span class="section-number-3">1.1</span> <a href="#">What are Calculational Proofs</a></h3>
 <div class="outline-text-3" id="text-">
 <p>
@@ -577,12 +578,12 @@ we define expressions in terms of how they can be manipulated.
 </p>
 
 <p>
-A <b><a id="org62771a4">calculus</a></b> is a method or process of reasoning by calculation with
+A <b><a id="orgbe6ef69">calculus</a></b> is a method or process of reasoning by calculation with
 symbols.
 A Boolean variable that can denote a proposition is sometimes called a
-<i><a href="#org354c689">propositional</a> variable</i>.
-A <b><a id="org36752b0">propositional calculus</a></b> is so named beacuse it is a method
-of calculating with expressions that involve <a href="#org354c689">propositional</a> variables.
+<i><a href="#orgb9db56b">propositional</a> variable</i>.
+A <b><a id="orge138088">propositional calculus</a></b> is so named beacuse it is a method
+of calculating with expressions that involve <a href="#orgb9db56b">propositional</a> variables.
 </p>
 
 <p>
@@ -592,22 +593,22 @@ of calculating with expressions that involve <a href="#org354c689">propositional
    For example, the axiom \(p ∨ q ≡ q ∨ p\) indicates (semantically)
    that the value of a disjunction doesn't depend on the order of its arguments
    and (syntactically) we may swap their order when manipulating expressions.
-   The other part of this <a href="#org62771a4">calculus</a> are the 3 inference rules Substitution,
+   The other part of this <a href="#orgbe6ef69">calculus</a> are the 3 inference rules Substitution,
    Leibniz, and Transitivity.
 </p>
 
 <p>
-   A <b><a id="orga5fc24f">theorem</a></b> of this <a href="#org62771a4">calculus</a> is either an axiom, the conclusion
+   A <b><a id="org4a51776">theorem</a></b> of this <a href="#orgbe6ef69">calculus</a> is either an axiom, the conclusion
    of an inference rule whose premises are theorems, or a Boolean expression
    that, using the inference rules, is proved equal to an axiom or a previously
-   proved <a href="#orga5fc24f">theorem</a>.
+   proved <a href="#org4a51776">theorem</a>.
  </div>
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-org5bb4432" class="outline-3">
+<div id="outline-container-org7b898c0" class="outline-3">
 <h3 id="Discrete-Mathematics"><span class="section-number-3">1.2</span> <a href="#Discrete-Mathematics">What is Discrete Mathematics</a></h3>
 <div class="outline-text-3" id="text-Discrete-Mathematics">
 <ol class="org-ol">
@@ -626,15 +627,15 @@ in Computer Science and Software Engineering
 <li><b>Goal</b>: Understand the mechanics of mathematical expressions and proof.</li>
 
 <li><p>
-<a id="org354c689">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
+<a id="orgb9db56b">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
 </p>
 
 <p>
-<a id="org251e4ad">Predicate</a>: <a href="#org354c689">Propositional</a> statement about some subjects.
+<a id="orgbf09fcf">Predicate</a>: <a href="#orgb9db56b">Propositional</a> statement about some subjects.
 </p></li>
 
 <li><p>
-<a id="orge012ce4">Calculus</a>: Formalised reasoning through calculation.
+<a id="org8b3491f">Calculus</a>: Formalised reasoning through calculation.
 </p>
 
 <p>
@@ -747,7 +748,7 @@ can solve!</i>
 </div>
 </div>
 
-<div id="outline-container-org2f23bda" class="outline-3">
+<div id="outline-container-org46918da" class="outline-3">
 <h3 id="Road-map"><span class="section-number-3">1.3</span> <a href="#Road-map">Road-map</a></h3>
 <div class="outline-text-3" id="text-Road-map">
 <p>
@@ -870,12 +871,12 @@ formulae&#x2014; are written. So let's start at expressions.
 </div>
 </div>
 
-<div id="outline-container-org3c3f2d3" class="outline-2">
+<div id="outline-container-org318de0d" class="outline-2">
 <h2 id="hi"><span class="section-number-2">2</span> <a href="#hi">Expressions</a></h2>
 <div class="outline-text-2" id="text-hi">
 </div>
 
-<div id="outline-container-org492fc5c" class="outline-3">
+<div id="outline-container-orgfb48815" class="outline-3">
 <h3 id="Precedence"><span class="section-number-3">2.1</span> <a href="#Precedence">Precedence</a></h3>
 <div class="outline-text-3" id="text-Precedence">
 <div class="org-center">
@@ -919,7 +920,7 @@ as a <i>tree</i> is known as a <b>precedence rule</b>.
 </div>
 </div>
 
-<div id="outline-container-orgf055828" class="outline-3">
+<div id="outline-container-org0be7e10" class="outline-3">
 <h3 id="Grammars"><span class="section-number-3">2.2</span> <a href="#Grammars">Grammars</a></h3>
 <div class="outline-text-3" id="text-Grammars">
 <p>
@@ -959,7 +960,7 @@ and so the first line in the definition above could be omitted.
 </div>
 </div>
 
-<div id="outline-container-org7909546" class="outline-3">
+<div id="outline-container-orge2d102b" class="outline-3">
 <h3 id="Textual-Substitution-i-e-https-en-wikipedia-org-wiki-Grafting-grafting-trees"><span class="section-number-3">2.3</span> <a href="#Textual-Substitution-i-e-https-en-wikipedia-org-wiki-Grafting-grafting-trees">Textual Substitution &#x2014;i.e., <a href="https://en.wikipedia.org/wiki/Grafting">“grafting trees”</a></a></h3>
 <div class="outline-text-3" id="text-Textual-Substitution-i-e-https-en-wikipedia-org-wiki-Grafting-grafting-trees">
 <p>
@@ -1021,7 +1022,7 @@ the hint <kbd> Substitution </kbd>; e.g.,
 </div>
 </div>
 
-<div id="outline-container-orge3dcddf" class="outline-3">
+<div id="outline-container-org67bb1fd" class="outline-3">
 <h3 id="Meta-𝒳-Speaking-about-the-concept-of-𝒳-using-the-notions-of-𝒳"><span class="section-number-3">2.4</span> <a href="#Meta-𝒳-Speaking-about-the-concept-of-𝒳-using-the-notions-of-𝒳">“Meta-𝒳”: Speaking about the concept of 𝒳 using the notions of 𝒳</a></h3>
 <div class="outline-text-3" id="text-Meta-𝒳-Speaking-about-the-concept-of-𝒳-using-the-notions-of-𝒳">
 <p>
@@ -1043,14 +1044,14 @@ then a <b>meta-variable</b> is simply a normal variable of type <code>Expr τ</c
 </p>
 
 <p>
-Likewise, a <b><a href="#orga5fc24f">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
-whereas a <b>meta-<a href="#orga5fc24f">theorem</a></b> is a general statement about our logic that we prove
+Likewise, a <b><a href="#org4a51776">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
+whereas a <b>meta-<a href="#org4a51776">theorem</a></b> is a general statement about our logic that we prove
 to be true. That is, if 𝑬 is collection of rules that allows us to find
-truths, then a <i><a href="#orga5fc24f">theorem</a></i> is a truth found using those rules; whereas a
-<i>meta-<a href="#orga5fc24f">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
+truths, then a <i><a href="#org4a51776">theorem</a></i> is a truth found using those rules; whereas a
+<i>meta-<a href="#org4a51776">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
 That is, theorems are <span class="underline">in</span> 𝑬 and meta-theorems are <span class="underline">about</span> 𝑬.  For example, here
-is a meta-<a href="#orga5fc24f">theorem</a> that the equational logic 𝑬 has (as do many other theories,
-such as lattices): An <i>equational</i> <a href="#orga5fc24f">theorem</a> is true precisely when its ‘dual’ is
+is a meta-<a href="#org4a51776">theorem</a> that the equational logic 𝑬 has (as do many other theories,
+such as lattices): An <i>equational</i> <a href="#org4a51776">theorem</a> is true precisely when its ‘dual’ is
 true. Such metatheorems can be helpful to discover new theorems.
 </p>
 
@@ -1114,11 +1115,11 @@ true. Such metatheorems can be helpful to discover new theorems.
 </div>
 </div>
 
-<div id="outline-container-orgfc6ca44" class="outline-2">
+<div id="outline-container-org052f097" class="outline-2">
 <h2 id="Logics"><span class="section-number-2">3</span> <a href="#Logics">Logics</a></h2>
 <div class="outline-text-2" id="text-Logics">
 </div>
-<div id="outline-container-orgf8c0018" class="outline-3">
+<div id="outline-container-org48166b7" class="outline-3">
 <h3 id="Syntax-vs-Semantics"><span class="section-number-3">3.1</span> <a href="#Syntax-vs-Semantics">Syntax vs. Semantics</a></h3>
 <div class="outline-text-3" id="text-Syntax-vs-Semantics">
 <p>
@@ -1137,29 +1138,29 @@ yield \(1\).
 </p>
 
 <p>
-A Boolean expression \(P\) is <b><a id="org19cee91">satisfied</a></b> in a state if its value is <i>true</i>
-in that state; \(P\) is <b><a id="org3414f78">satisfiable</a></b> if there is a state in which it is
-<a href="#org19cee91">satisfied</a>; and \(P\) is <b><a id="orgd682031">valid</a></b> (or is a <b><a id="org16e5141">tautology</a></b>) if it is
-<a href="#org19cee91">satisfied</a> in every state.
+A Boolean expression \(P\) is <b><a id="org55b78cc">satisfied</a></b> in a state if its value is <i>true</i>
+in that state; \(P\) is <b><a id="orgd41009a">satisfiable</a></b> if there is a state in which it is
+<a href="#org55b78cc">satisfied</a>; and \(P\) is <b><a id="org3532462">valid</a></b> (or is a <b><a id="org680d0d2">tautology</a></b>) if it is
+<a href="#org55b78cc">satisfied</a> in every state.
 </p>
 
 <hr />
 
 <p>
-All theorems of the <a href="#org354c689">propositional</a> <a href="#org62771a4">calculus</a> 𝑬 are <a href="#orgd682031">valid</a>. This can be checked by checking
+All theorems of the <a href="#orgb9db56b">propositional</a> <a href="#orgbe6ef69">calculus</a> 𝑬 are <a href="#org3532462">valid</a>. This can be checked by checking
 that each axiom with a truth table and arguing for each inference rule that
-if its premises are <a href="#orgd682031">valid</a> then so is its conclusion.
+if its premises are <a href="#org3532462">valid</a> then so is its conclusion.
 </p>
 
 <p>
 For example, let's show that the Substitution rule preserves validity.  Let
 us write \(s(E)\) to denote the value of expression \(E\) in state \(s\).  If \(E\)
-is <a href="#orgd682031">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
+is <a href="#org3532462">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
 true in any state. So, given a state \(s\), let \(s′\) be the ‘updated’ state
 that assigns the same values to all the variables as does \(s\) <i>except</i> that
-the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#orgd682031">valid</a>,
+the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#org3532462">valid</a>,
 \(s′(E)\) is true but \(s′(E)\) is just \(s\big(E[x ≔ F]\big)\) and so the
-resulting substitution is also <a href="#orgd682031">valid</a>.
+resulting substitution is also <a href="#org3532462">valid</a>.
 </p>
 
 <p>
@@ -1170,8 +1171,8 @@ then the updated state \(s′\) &#x2014;having <i>s′(x) = s(F)</i>&#x2014; wil
 </p>
 
 <p>
-Not only are all theorems <a href="#orgd682031">valid</a>, but all <a href="#orgd682031">valid</a> expressions are theorems of
-our <a href="#org62771a4">calculus</a> (although we do not prove this fact). Theoremhood and validity
+Not only are all theorems <a href="#org3532462">valid</a>, but all <a href="#org3532462">valid</a> expressions are theorems of
+our <a href="#orgbe6ef69">calculus</a> (although we do not prove this fact). Theoremhood and validity
 are one and the same.
 </p>
 
@@ -1211,12 +1212,12 @@ Later we see that theorems correspond to expressions that are true in all states
 </div>
 </div>
 
-<div id="outline-container-org64175ee" class="outline-3">
+<div id="outline-container-org2ab6451" class="outline-3">
 <h3 id="Logics-and-Inference-Rules"><span class="section-number-3">3.2</span> <a href="#Logics-and-Inference-Rules">Inference Rules</a></h3>
 <div class="outline-text-3" id="text-Logics-and-Inference-Rules">
 <p>
 Formally, a “proof” is obtained by applying a number of “rules” to known
-results to obtain new results; a “<a href="#orga5fc24f">theorem</a>” is the conclusion of a “proof”.
+results to obtain new results; a “<a href="#org4a51776">theorem</a>” is the conclusion of a “proof”.
 An “axiom” is a rule that does not need to be applied to any existing
 results: It's just a known result.
 </p>
@@ -1333,38 +1334,193 @@ axioms \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\).
 </p>
 
 <p>
-The inference rule says “if the \(Pᵢ\) are all <a href="#orgd682031">valid</a>, i.e., true in <i>all
+The inference rule says “if the \(Pᵢ\) are all <a href="#org3532462">valid</a>, i.e., true in <i>all
 states</i>, then so is \(C\)”; the axiom, on the other hand, says “if the \(Pᵢ\)
 are true in <i>a state</i>, then \(C\) is true in <i>that state</i>.” Thus the rule and
 the axiom are not quite the same.
 </p>
 
 <p>
-Moreover, the rule is not a Boolean expression.
-Rules are thus more general, allowing us to construct
-systems of reasoning that have no concrete notions of ‘truth’ &#x2014;recall, the
-water buckets probelm (above/below?).
+Moreover, the rule is not a Boolean expression.  Rules are thus more
+general, allowing us to construct systems of reasoning that have no
+concrete notions of ‘truth’ &#x2014;see the logic <a href="#org7ddcf66">𝑾𝑩</a> below.
 </p>
 
 <p>
 Finally, the rule asserts that \(C\) follows from \(P₁, …, Pₙ\).
 The formula \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\), on the other hand, is a Boolean
-expression (but it need not be a <a href="#orga5fc24f">theorem</a>).
+expression (but it need not be a <a href="#org4a51776">theorem</a>).
 </p>
+
+<p>
+An example of this relationship between rules and operators
+may be observed by comparing the logics <a href="#org7ddcf66">𝑾𝑩</a> and <a href="#org9143fcc">𝑴𝑺𝑯</a>, below.
+One could read “◇” as “and”, and “⟶” as “implies”.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1afca01" class="outline-3">
+<h3 id="water-bucket-logics"><span class="section-number-3">3.3</span> <a href="#water-bucket-logics">[Optional] Strange Logics</a></h3>
+<div class="outline-text-3" id="text-water-bucket-logics">
+<p>
+Here is an example logic, call it <a id="org7ddcf66">𝑾𝑩</a>:
+</p>
+<ul class="org-ul">
+<li>The symbols are the usual numbers, along with <code>+</code> and <code>-</code> and
+<code>,</code> (comma).</li>
+<li>A formula is term of the shape <code>x, y</code>, where \(x\) and \(y\) are terms formed
+from numbers, +, and -.
+<ul class="org-ul">
+<li>Notice that comma is a binary <i>operator</i>.</li>
+<li>Notice that there are <i>no variables</i> (as terms).</li>
+</ul></li>
+<li>There are 7 inference rules &#x2014;including one axiom.</li>
+</ul>
+
+<p>
+\[\Rule[Empty]{}{0,0}\]
+\[
+ \Rule[ZeroLeft]{x,y}{0, y} \quad
+ \Rule[ZeroRight]{x,y}{x, 0}
+ \]\[
+ \Rule[RefreshLeft]{x, y}{3, y} \quad
+ \Rule[RefreshRight]{x, y}{x, 5}
+ \]
+\[ \Rule[ShiftLeft_d \quad\text{(provided $0 ≤ d ≤ y$ and $x + d ≤ 3$)}]{x, y}{x + d, y -
+ d} \]
+\[
+ \Rule[ShiftRight_d \quad\text{(provided $0 ≤ d ≤ x$ and $y + d ≤ 5$)}]{x, y}{x - d, y + d}
+ \]
+</p>
+
+<p>
+<b>Exercise <a href="#water-bucket-logics">3.3</a>.1</b>: Using this logic, prove the <a href="#org4a51776">theorem</a> <code>0, 4</code>.
+</p>
+<ul class="org-ul">
+<li>Notice that the <a href="#org4a51776">theorem</a> has nothing to do with ‘truth’! &#x2014;At least not
+explicitly, or intuitively.</li>
+</ul>
+<details class="code-details"> <summary> <strong> <font face="Courier" size="3" color="green"> Solution </font> </strong> </summary> <p>
+
+\[
+ \Rule[ZeroLeft]{\normalsize\Rule[ShiftLeft_1]{\LARGE\Rule[RefreshLeft]{\LARGE\Rule[ShiftLeft_2]{\Rule[ZeroLeft]{\LARGE
+ \Rule[ShiftLeft_3]{\LARGE \Rule[RefreshRight]{\LARGE\Rule[Empty]{}{0,0}}{0,
+ 5}}{3, 2}}{0,2}}{2,0}}{2, 5}}{3, 4}}{0, 4}
+ \]
+</p>
+ </details>
+
+<p>
+<b>Exercise <a href="#water-bucket-logics">3.3</a>.2:</b>
+A logic models reasoning, can you <i>interpret</i> the terms <code>x, y</code> in such
+a way that makes the inference rules true?
+</p>
+<details class="code-details"> <summary> <strong> <font face="Courier" size="3" color="green"> Solution </font> </strong> </summary> <p>
+
+</p>
+
+<p>
+The logic <a href="#org7ddcf66">𝑾𝑩</a> <i>could be</i> interpreted as modelling two ‘water buckets’, the first
+can contain 3 litres while the second can contain 5 litres, along with an
+unlimited water supply.
+</p>
+
+<ol class="org-ol">
+<li>The axiom says we start out with empty buckets.</li>
+<li>The zero rules says we can empty out buckets.</li>
+<li>The refresh rules say we can fill up buckets to being full.</li>
+<li>The shift rules say we can transfer appropriate amounts of water between the
+buckets.</li>
+</ol>
+
+<p>
+Then the <a href="#org4a51776">theorem</a> says we can measure 4 litres of water &#x2014;using only a 3 and 5
+litre buckets and an unlimited water supply.
+</p>
+ </details>
 
 <hr />
 
 <p>
-Let's look at a few simpler rules; the next 3 rules
-are part of the <b>Logic E</b> system used in the LADM text book
-&#x2014;see “<a href="http://www.cse.yorku.ca/~logicE/misc/logicE_intro.pdf">Equational Propositional Logic</a>” by Gries &amp; Schneider.
+Here is another example logic, call it <a id="org9143fcc">𝑴𝑺𝑯</a>:
 </p>
+<ul class="org-ul">
+<li>The symbols are the usual numbers, along with <code>+, -, ◇, ⟶</code>.</li>
+<li>A formula is of the form \(x ◇ y ⟶ x′ ◇ y′\) where ◇ binds tightest
+and \(x, y, x′, y′\) are terms formed from numbers, <code>+</code>, and <code>-</code>.</li>
+<li><p>
+In contrast to <a href="#org7ddcf66">𝑾𝑩</a>, this logic has only 1 non-axiom inference rule!
+</p>
+
+<p>
+\[\Rule[Reflexivity]{}{x ◇ y ⟶ x ◇ y}\]
+\[\Rule[Transitivity]{x ◇ y ⟶ x′ ◇ y′ \And x′ ◇ y′ ⟶ x″ ◇ y″}{x ◇ y ⟶ x″ ◇ y″}\]
+</p>
+
+<p>
+\[\Rule[ZeroLeft]{}{x ◇ y ⟶ 0 ◇ y} \quad \Rule[ZeroRight]{}{x ◇ y ⟶ x ◇ 0}\]
+\[\Rule[RefreshLeft]{}{x ◇ y ⟶ 3 ◇ y} \quad \Rule[RefreshRight]{}{x ◇ y ⟶ x ◇ 5} \]
+\[\Rule[ShiftLeft_d]{\text{(provided $0 ≤ d ≤ y$ and $x + d ≤ 3$)}}{x ◇ y ⟶ (x+d) ◇ (y-d)} \]
+\[\Rule[ShiftRight_d]{\text{(provided $0 ≤ d ≤ x$ and $y + d ≤ 5$)}}{x ◇ y ⟶ (x - d) ◇ (y + d)}\]
+</p></li>
+</ul>
+
+<p>
+<b>Exercise <a href="#water-bucket-logics">3.3</a>.3:</b> Finish reading this section, then come back and
+prove the <a href="#org4a51776">theorem</a> <code>0 ◇ 0 ⟶ 0 ◇ 4</code> using a <i>calculational proof</i>.
+</p>
+<details class="code-details"> <summary> <strong> <font face="Courier" size="3" color="green"> Solution </font> </strong> </summary> <p>
+
+</p>
+
+<p>
+As discussed in §<a href="#Rules-of-Equality-and-Proof-Trees-vs-Calculational-Proofs">3.4</a>, we
+form calculational proofs using a transitive relation in the left-most column of
+a calculation.  The transitvity of the relation ensures that the first term is
+related, via the relation, to the last term.
+</p>
+
+\begin{calc}
+  0◇ 0 \step[⟶]{refresh left}
+  3◇ 0 \step[⟶]{ shift right}
+  0◇ 3 \step[⟶]{ refresh left }
+  3◇ 3 \step[⟶]{ shift right, then zero right}
+  1◇ 0 \step[⟶]{ shift right }
+  0◇ 1 \step[⟶]{ refresh left, then shift right }
+  0◇ 4
+\end{calc}
+ </details>
+
+<p>
+<b>Exercise <a href="#water-bucket-logics">3.3</a>.4:</b> Provide an interpretation of this logic.
+</p>
+<details class="code-details"> <summary> <strong> <font face="Courier" size="3" color="green"> Solution </font> </strong> </summary> <p>
+
+</p>
+
+<p>
+We <i>may</i> think of <a href="#org9143fcc">𝑴𝑺𝑯</a> as a ‘machine’ with two memory banks: A computer with memory
+state \(x\) and \(y\) is executed and it terminates in memory state \(x′\) and \(y′\).
+That is, \(x ◇ y ⟶ x′ ◇ y′\) is “starting from \((x, y)\), the computer finishes
+with \((x′, y′)\)”.
+</p>
+
+<p>
+The <a href="#org4a51776">theorem</a> then says that it is possible for the computer to start at \((0, 0)\)
+and finish with memory store \((0, 4)\).
+</p>
+
+<p>
+Of-course, we could also re-use the water buckets interpretation of <a href="#org7ddcf66">𝑾𝑩</a>.
+</p>
+ </details>
 </div>
 </div>
 
-<div id="outline-container-org84aaf26" class="outline-3">
-<h3 id="Rules-of-Equality-Proof-Trees-and-Calculations"><span class="section-number-3">3.3</span> <a href="#Rules-of-Equality-Proof-Trees-and-Calculations">Rules of Equality and Proof Trees vs. Calculational Proofs</a></h3>
-<div class="outline-text-3" id="text-Rules-of-Equality-Proof-Trees-and-Calculations">
+<div id="outline-container-orgd32d07a" class="outline-3">
+<h3 id="Rules-of-Equality-and-Proof-Trees-vs-Calculational-Proofs"><span class="section-number-3">3.4</span> <a href="#Rules-of-Equality-and-Proof-Trees-vs-Calculational-Proofs">Rules of Equality and Proof Trees vs. Calculational Proofs</a></h3>
+<div class="outline-text-3" id="text-Rules-of-Equality-and-Proof-Trees-vs-Calculational-Proofs">
 <p>
 Before we can showcase an example of a proof tree &#x2014;let alone
 compare them with calculational proofs&#x2014; we need a few
@@ -1387,12 +1543,12 @@ The following rules define equality by how it can be used, manipulated.
 <li><p>
 The <b>Substitution inference rule</b>
 says that a substitution \(E[\vec x ≔ \vec F]\) is
-a <a href="#orga5fc24f">theorem</a> <i>whenever</i> \(E\) is a <a href="#orga5fc24f">theorem</a>.
+a <a href="#org4a51776">theorem</a> <i>whenever</i> \(E\) is a <a href="#org4a51776">theorem</a>.
 </p>
 
 <p>
 Within CalcCheck, this rule is realised as the <kbd> with </kbd> clause: The phrase <code>E
-    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#orga5fc24f">theorem</a>
+    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#org4a51776">theorem</a>
 \(E[\vec x ≔ \vec F]\). The rule is applied <i>implicitly</i>, unless <code>rigid matching</code>
 is activated &#x2014;e.g., to get students <b>thinking correctly about applying
 theorems</b> instead of just putting random theorems that look similar and hoping
@@ -1436,7 +1592,7 @@ from one must be the same when extracted from the other.
 
 <p>
 Again: Unlike the Substitution rule, which allows us to instantiate <i>any</i>
-<a href="#orga5fc24f">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
+<a href="#org4a51776">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
 within expressions</b>. Later on, we will look at ‘monotonicity rules’ which will
 let us apply inclusion (≤, ⇒, ⊑) theorems deep within expressions.
 </p>
@@ -1591,7 +1747,7 @@ inference rules must be mentioned explicitly.
 
 <p>
 Leibniz is often used with Substitution, as follows
-&#x2014;supposing we know the <a href="#orga5fc24f">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
+&#x2014;supposing we know the <a href="#org4a51776">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
 </p>
 
 \begin{calc}
@@ -1602,9 +1758,9 @@ Leibniz is often used with Substitution, as follows
 
 <p>
 We are using Leibniz with the premise \(2 · j / 2 = j\).
-We can use this premise only if it is a <a href="#orga5fc24f">theorem</a>. It is, because
-\(2 · x / 2 = x\) is a <a href="#orga5fc24f">theorem</a> and, therefore, by Substitution,
-\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#orga5fc24f">theorem</a>.
+We can use this premise only if it is a <a href="#org4a51776">theorem</a>. It is, because
+\(2 · x / 2 = x\) is a <a href="#org4a51776">theorem</a> and, therefore, by Substitution,
+\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#org4a51776">theorem</a>.
 </p>
 
 <p>
@@ -1615,7 +1771,7 @@ off the indication “with \(x ≔ j\)”.
 </div>
 </div>
 
-<div id="outline-container-orgb880926" class="outline-2">
+<div id="outline-container-org08851fc" class="outline-2">
 <h2 id="Boolean-Expressions-and-Laws"><span class="section-number-2">4</span> <a href="#Boolean-Expressions-and-Laws">Boolean Expressions and Laws</a></h2>
 <div class="outline-text-2" id="text-Boolean-Expressions-and-Laws">
 <p>
@@ -1627,13 +1783,13 @@ The type of propositions is known as the <b>Booleans</b> and denoted 𝔹.
 </div>
 </div>
 
-<div id="outline-container-org289333c" class="outline-3">
+<div id="outline-container-org7338b15" class="outline-3">
 <h3 id="Equality-and"><span class="section-number-3">4.1</span> <a href="#Equality-and">Equality: “=” and “≡”</a></h3>
 <div class="outline-text-3" id="text-Equality-and">
 <p>
 For instance, the notion of equality on any type τ is
 typed <code>_=_ : τ → τ → 𝔹</code>; i.e., equality takes two values of a type τ
-and returns a <a href="#org354c689">propositional</a> value.
+and returns a <a href="#orgb9db56b">propositional</a> value.
 </p>
 
 <blockquote>
@@ -1706,7 +1862,7 @@ For example, \(\false ≡ \true ≡ \false\) is \(\true\), whereas
 </div>
 </div>
 
-<div id="outline-container-org24db16c" class="outline-3">
+<div id="outline-container-orgce7df48" class="outline-3">
 <h3 id="Useful-Operators"><span class="section-number-3">4.2</span> <a href="#Useful-Operators">Useful Operators</a></h3>
 <div class="outline-text-3" id="text-Useful-Operators">
 <p>
@@ -1793,7 +1949,7 @@ specified axiomatically.
 </div>
 </div>
 
-<div id="outline-container-orgea45d2d" class="outline-3">
+<div id="outline-container-orgf996de6" class="outline-3">
 <h3 id="Boolean-Laws-and-Numeric-Laws"><span class="section-number-3">4.3</span> <a href="#Boolean-Laws-and-Numeric-Laws">Boolean Laws and Numeric Laws</a></h3>
 <div class="outline-text-3" id="text-Boolean-Laws-and-Numeric-Laws">
 <p>
@@ -1808,7 +1964,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 6:</span> Properties of <a href="#org354c689">propositional</a> operators and similar (familiar) numeric laws</caption>
+<caption class="t-above"><span class="table-number">Table 6:</span> Properties of <a href="#orgb9db56b">propositional</a> operators and similar (familiar) numeric laws</caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -2000,7 +2156,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-09-14 Mon 10:46</p>
+<p class="date">Created: 2020-09-14 Mon 17:38</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

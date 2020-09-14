@@ -161,6 +161,9 @@ $$\newcommand\exp[1]{\mathsf{exp}_{#1}\,}$$
   ))
 #+end_src
 
+#+RESULTS: startup-code
+: subtle-colors
+
 # $1 colour eg “pink” or “hsl(157 75% 20%)” or “#e5f5e5”; $2 title
 #+macro: begin-box (eval (concat "@@html: <div style=\"padding: 1em; background-color: " (subtle-colors $1) "; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;\"> <h3>" $2 "</h3>@@"))
 
@@ -813,24 +816,163 @@ and so the first line in the definition above could be omitted.
      are true in /a state/, then $C$ is true in /that state/.” Thus the rule and
      the axiom are not quite the same.
 
-     Moreover, the rule is not a Boolean expression.
-     Rules are thus more general, allowing us to construct
-     systems of reasoning that have no concrete notions of ‘truth’ ---recall, the
-     water buckets probelm (above/below?).
+     Moreover, the rule is not a Boolean expression.  Rules are thus more
+     general, allowing us to construct systems of reasoning that have no
+     concrete notions of ‘truth’ ---see the logic 𝑾𝑩 below.
 
      Finally, the rule asserts that $C$ follows from $P₁, …, Pₙ$.
      The formula $P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C$, on the other hand, is a Boolean
      expression (but it need not be a theorem).
 
+     An example of this relationship between rules and operators
+     may be observed by comparing the logics 𝑾𝑩 and 𝑴𝑺𝑯, below.
+     One could read “◇” as “and”, and “⟶” as “implies”.
+
+#  --------------------------------------------------------------------------------
+
+#   Let's look at a few simpler rules; the next 3 rules
+#   are part of the *Logic E* system used in the LADM text book
+#   ---see “[[http://www.cse.yorku.ca/~logicE/misc/logicE_intro.pdf][Equational Propositional Logic]]” by Gries & Schneider.
+
+** [Optional] Strange Logics
+   :PROPERTIES:
+   :CUSTOM_ID: water-bucket-logics
+   :END:
+
+     Here is an example logic, call it <<<𝑾𝑩>>>:
+     - The symbols are the usual numbers, along with =+= and =-= and
+       =,= (comma).
+     - A formula is term of the shape =x, y=, where $x$ and $y$ are terms formed
+       from numbers, +, and -.
+       + Notice that comma is a binary /operator/.
+       + Notice that there are /no variables/ (as terms).
+     - There are 7 inference rules ---including one axiom.
+
+ #    Let's construct a logic to that models two bukects of water,
+ #    one containing 3 liters and the other containing 5 liters, and
+ #    an unlimited water supply.
+
+ \[\Rule[Empty]{}{0,0}\]
+ \[
+ \Rule[ZeroLeft]{x,y}{0, y} \quad
+ \Rule[ZeroRight]{x,y}{x, 0}
+ \]\[
+ \Rule[RefreshLeft]{x, y}{3, y} \quad
+ \Rule[RefreshRight]{x, y}{x, 5}
+ \]
+ \[ \Rule[ShiftLeft_d \quad\text{(provided $0 ≤ d ≤ y$ and $x + d ≤ 3$)}]{x, y}{x + d, y -
+ d} \]
+ \[
+ \Rule[ShiftRight_d \quad\text{(provided $0 ≤ d ≤ x$ and $y + d ≤ 5$)}]{x, y}{x - d, y + d}
+ \]
+
+ *Exercise [[#water-bucket-logics]].1*: Using this logic, prove the theorem =0, 4=.
+ - Notice that the theorem has nothing to do with ‘truth’! ---At least not
+   explicitly, or intuitively.
+ #+begin_details
+ :title: Solution
+ \[
+ \Rule[ZeroLeft]{\normalsize\Rule[ShiftLeft_1]{\LARGE\Rule[RefreshLeft]{\LARGE\Rule[ShiftLeft_2]{\Rule[ZeroLeft]{\LARGE
+ \Rule[ShiftLeft_3]{\LARGE \Rule[RefreshRight]{\LARGE\Rule[Empty]{}{0,0}}{0,
+ 5}}{3, 2}}{0,2}}{2,0}}{2, 5}}{3, 4}}{0, 4}
+ \]
+ #+end_details
+
+ *Exercise [[#water-bucket-logics]].2:*
+ A logic models reasoning, can you /interpret/ the terms =x, y= in such
+ a way that makes the inference rules true?
+ #+begin_details
+ :title: Solution
+
+ The logic 𝑾𝑩 /could be/ interpreted as modelling two ‘water buckets’, the first
+ can contain 3 litres while the second can contain 5 litres, along with an
+ unlimited water supply.
+
+ 1. The axiom says we start out with empty buckets.
+ 2. The zero rules says we can empty out buckets.
+ 3. The refresh rules say we can fill up buckets to being full.
+ 4. The shift rules say we can transfer appropriate amounts of water between the
+    buckets.
+
+ Then the theorem says we can measure 4 litres of water ---using only a 3 and 5
+ litre buckets and an unlimited water supply.
+ #+end_details
+
  --------------------------------------------------------------------------------
 
-   Let's look at a few simpler rules; the next 3 rules
-   are part of the *Logic E* system used in the LADM text book
-   ---see “[[http://www.cse.yorku.ca/~logicE/misc/logicE_intro.pdf][Equational Propositional Logic]]” by Gries & Schneider.
+ Here is another example logic, call it <<<𝑴𝑺𝑯>>>:
+ + The symbols are the usual numbers, along with =+, -, ◇, ⟶=.
+ + A formula is of the form $x ◇ y ⟶ x′ ◇ y′$ where ◇ binds tightest
+   and $x, y, x′, y′$ are terms formed from numbers, =+=, and =-=.
+ + In contrast to 𝑾𝑩, this logic has only 1 non-axiom inference rule!
+
+   \[\Rule[Reflexivity]{}{x ◇ y ⟶ x ◇ y}\]
+   \[\Rule[Transitivity]{x ◇ y ⟶ x′ ◇ y′ \And x′ ◇ y′ ⟶ x″ ◇ y″}{x ◇ y ⟶ x″ ◇ y″}\]
+
+   \[\Rule[ZeroLeft]{}{x ◇ y ⟶ 0 ◇ y} \quad \Rule[ZeroRight]{}{x ◇ y ⟶ x ◇ 0}\]
+   \[\Rule[RefreshLeft]{}{x ◇ y ⟶ 3 ◇ y} \quad \Rule[RefreshRight]{}{x ◇ y ⟶ x ◇ 5} \]
+   \[\Rule[ShiftLeft_d]{\text{(provided $0 ≤ d ≤ y$ and $x + d ≤ 3$)}}{x ◇ y ⟶ (x+d) ◇ (y-d)} \]
+   \[\Rule[ShiftRight_d]{\text{(provided $0 ≤ d ≤ x$ and $y + d ≤ 5$)}}{x ◇ y ⟶ (x - d) ◇ (y + d)}\]
+
+ *Exercise [[#water-bucket-logics]].3:* Finish reading this section, then come back and
+ prove the theorem =0 ◇ 0 ⟶ 0 ◇ 4= using a /calculational proof/.
+ #+begin_details org
+ :title: Solution
+
+ As discussed in §[[#Rules-of-Equality-and-Proof-Trees-vs-Calculational-Proofs]], we
+ form calculational proofs using a transitive relation in the left-most column of
+ a calculation.  The transitvity of the relation ensures that the first term is
+ related, via the relation, to the last term.
+
+ \begin{calc}
+   0◇ 0 \step[⟶]{refresh left}
+   3◇ 0 \step[⟶]{ shift right}
+   0◇ 3 \step[⟶]{ refresh left }
+   3◇ 3 \step[⟶]{ shift right, then zero right}
+   1◇ 0 \step[⟶]{ shift right }
+   0◇ 1 \step[⟶]{ refresh left, then shift right }
+   0◇ 4
+ \end{calc}
+
+ :AnotherProof:
+ #+begin_src C
+  0,0
+→⟨ refresh 2 ⟩
+  0, 5
+→⟨ draw from 2 ⟩
+  3, 2
+→⟨ dump 1 ⟩
+  0, 2
+→⟨ draw from 2 ⟩
+  2, 0
+→⟨ refresh 1 ⟩
+  2, 5
+→⟨ draw from 2 ⟩
+  3, 4
+→⟨ dump 1 ⟩
+  0, 4
+     #+end_src
+ :End:
+ #+end_details
+
+ *Exercise [[#water-bucket-logics]].4:* Provide an interpretation of this logic.
+ #+begin_details
+ :title: Solution
+
+ We /may/ think of 𝑴𝑺𝑯 as a ‘machine’ with two memory banks: A computer with memory
+ state $x$ and $y$ is executed and it terminates in memory state $x′$ and $y′$.
+ That is, $x ◇ y ⟶ x′ ◇ y′$ is “starting from $(x, y)$, the computer finishes
+ with $(x′, y′)$”.
+
+ The theorem then says that it is possible for the computer to start at $(0, 0)$
+ and finish with memory store $(0, 4)$.
+
+ Of-course, we could also re-use the water buckets interpretation of 𝑾𝑩.
+ #+end_details
 
 ** Rules of Equality and Proof Trees vs. Calculational Proofs
    :PROPERTIES:
-   :CUSTOM_ID: Rules-of-Equality-Proof-Trees-and-Calculations
+   :CUSTOM_ID: Rules-of-Equality-and-Proof-Trees-vs-Calculational-Proofs
    :END:
 
  # ** Defining equality by how it can be used, manipulated
@@ -1161,6 +1303,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
     | Right-zero of ⇒      | $p ⇒ \true ≡ \true$               | $n ≤ +∞ \,≡\, \true$              |
     | Definition of ¬      | $p ⇒ \false ≡ ¬ p$                | ─nope─                            |
     |----------------------+-----------------------------------+-----------------------------------|
+
 * TODO COMMENT Quantification and Predicate Logic
   :PROPERTIES:
   :CUSTOM_ID: Quantification-and-Predicate-Logic
