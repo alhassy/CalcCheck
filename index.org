@@ -7,8 +7,8 @@
 #+Description: Abrdiged Lecture Notes
 
 # Make HTML
-# (f-move (org-html-export-to-html) "~/github_calccheck/index.html")
-# (f-move (org-md-export-to-markdown) "~/github_calccheck/README.md")
+# (f-move (org-html-export-to-html) "~/CalcCheck/index.html")
+# (f-move (org-md-export-to-markdown) "~/CalcCheck/README.md")
 #+HTML_HEAD: <link href="https://alhassy.github.io/org-notes-style.css" rel="stylesheet" type="text/css" />
 #+HTML_HEAD: <link href="https://alhassy.github.io/floating-toc.css" rel="stylesheet" type="text/css" />
 #+HTML_HEAD: <link href="https://alhassy.github.io/blog-banner.css" rel="stylesheet" type="text/css" />
@@ -59,6 +59,8 @@ The first half of the book "Using Z" is an introduction to logic via natural ded
 
 
 #+end_parallelNB
+
+[[file:images/proof trees vs calculational proofs.png]]
 
 {{{begin-box(#99FFCC, )}}}
 #+html: <h2>
