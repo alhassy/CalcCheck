@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-09-11 Fri 06:31 -->
+<!-- 2020-09-14 Mon 10:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mathematics for Computing</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Musa Al-hassy" />
-<meta name="description" content="Abrdiged Lecture Notes"
+<meta name="description" content="Abridged Lecture Notes Based on “A Logical Approach to Discrete Math”"
  />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -338,7 +338,7 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Mathematics for Computing
 <br />
-<span class="subtitle">Abrdiged Lecture Notes</span>
+<span class="subtitle">Abridged Lecture Notes <br> Based on “A Logical Approach to Discrete Math”</span>
 </h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -348,18 +348,29 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#">1.1. <a href="#">What are Calculational Proofs</a></a></li>
 <li><a href="#Discrete-Mathematics">1.2. <a href="#Discrete-Mathematics">What is Discrete Mathematics</a></a></li>
+<li><a href="#Road-map">1.3. <a href="#Road-map">Road-map</a></a></li>
 </ul>
 </li>
-<li><a href="#Boolean-Expressions-and-Propositional-Logic">2. <a href="#Boolean-Expressions-and-Propositional-Logic">Boolean Expressions and Propositional Logic</a></a>
+<li><a href="#hi">2. <a href="#hi">Expressions</a></a>
 <ul>
-<li><a href="#hi">2.1. <a href="#hi">Expressions</a></a></li>
-<li><a href="#Boolean-Operators">2.2. <a href="#Boolean-Operators">Boolean Operators</a></a>
-<ul>
-<li><a href="#Equality-and">2.2.1. <a href="#Equality-and">Equality: “=” and “≡”</a></a></li>
-<li><a href="#Useful-Operators">2.2.2. <a href="#Useful-Operators">Useful Operators</a></a></li>
-<li><a href="#Boolean-Laws-and-Numeric-Laws">2.2.3. <a href="#Boolean-Laws-and-Numeric-Laws">Boolean Laws and Numeric Laws</a></a></li>
+<li><a href="#Precedence">2.1. <a href="#Precedence">Precedence</a></a></li>
+<li><a href="#Grammars">2.2. <a href="#Grammars">Grammars</a></a></li>
+<li><a href="#Textual-Substitution-i-e-https-en-wikipedia-org-wiki-Grafting-grafting-trees">2.3. <a href="#Textual-Substitution-i-e-https-en-wikipedia-org-wiki-Grafting-grafting-trees">Textual Substitution &#x2014;i.e., “grafting trees”</a></a></li>
+<li><a href="#Meta-𝒳-Speaking-about-the-concept-of-𝒳-using-the-notions-of-𝒳">2.4. <a href="#Meta-𝒳-Speaking-about-the-concept-of-𝒳-using-the-notions-of-𝒳">“Meta-𝒳”: Speaking about the concept of 𝒳 using the notions of 𝒳</a></a></li>
 </ul>
 </li>
+<li><a href="#Logics">3. <a href="#Logics">Logics</a></a>
+<ul>
+<li><a href="#Syntax-vs-Semantics">3.1. <a href="#Syntax-vs-Semantics">Syntax vs. Semantics</a></a></li>
+<li><a href="#Logics-and-Inference-Rules">3.2. <a href="#Logics-and-Inference-Rules">Inference Rules</a></a></li>
+<li><a href="#Rules-of-Equality-Proof-Trees-and-Calculations">3.3. <a href="#Rules-of-Equality-Proof-Trees-and-Calculations">Rules of Equality and Proof Trees vs. Calculational Proofs</a></a></li>
+</ul>
+</li>
+<li><a href="#Boolean-Expressions-and-Laws">4. <a href="#Boolean-Expressions-and-Laws">Boolean Expressions and Laws</a></a>
+<ul>
+<li><a href="#Equality-and">4.1. <a href="#Equality-and">Equality: “=” and “≡”</a></a></li>
+<li><a href="#Useful-Operators">4.2. <a href="#Useful-Operators">Useful Operators</a></a></li>
+<li><a href="#Boolean-Laws-and-Numeric-Laws">4.3. <a href="#Boolean-Laws-and-Numeric-Laws">Boolean Laws and Numeric Laws</a></a></li>
 </ul>
 </li>
 </ul>
@@ -389,12 +400,18 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 
 
 % multi-line step with 4 lines of text
-\newcommand{\stepfour}[5][=]{ \stepmany[#1]{\line{#2} \line{#3} \line{#4} \line{#5}} }
-
+\newcommand{\stepfour}[5][=]{ \stepmany[#1]{\line{#2} \line{#3} \line{#4}
+\line{#5}} }
 
 
 
 \newenvironment{calc}{\begin{align*} &amp; }{\end{align*}}
+
+
+
+% Inference rules
+\def\And{\quad}
+\newcommand\Rule[3][]{ {#2 \over #3}\mathsf{#1} }
 
 
 
@@ -405,6 +422,10 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 \def\true{\mathsf{true}}
 \def\false{\mathsf{false}}
 
+
+
+\def\even{\mathsf{even}}
+
 \]</p>
 
 <p style="display:none">
@@ -413,11 +434,11 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 </p>
 </p>
 
-<div id="outline-container-org405c3d9" class="outline-2">
+<div id="outline-container-org147615b" class="outline-2">
 <h2 id="Introduction-to-Calculational-Reasoning"><span class="section-number-2">1</span> <a href="#Introduction-to-Calculational-Reasoning">Introduction to Calculational Reasoning</a></h2>
 <div class="outline-text-2" id="text-Introduction-to-Calculational-Reasoning">
 </div>
-<div id="outline-container-org2af4733" class="outline-3">
+<div id="outline-container-org38bcf05" class="outline-3">
 <h3 id=""><span class="section-number-3">1.1</span> <a href="#">What are Calculational Proofs</a></h3>
 <div class="outline-text-3" id="text-">
 <p>
@@ -519,6 +540,12 @@ problem domain.
  </div>
 </p>
 
+<p style="display:none">\[
+\def\BEGINstep{ \left\langle }
+\def\ENDstep{ \right\rangle }
+
+\]</p>
+
 <p>
 Finally, observe that the calculational form is <b>more general</b>.  The use of a
 <i>formal</i> approach let us keep track of when our statements are equivalent
@@ -543,10 +570,44 @@ roots, which may be viewed as a <a href="https://youtu.be/t39wHoFHbvY">Youtube v
 <kbd> Control + Alt + Enter </kbd> to check a cell.
 </p>
 </div>
+
+<p>
+Going forward, instead of defining expressions by how they are evaluated,
+we define expressions in terms of how they can be manipulated.
+</p>
+
+<p>
+A <b><a id="org62771a4">calculus</a></b> is a method or process of reasoning by calculation with
+symbols.
+A Boolean variable that can denote a proposition is sometimes called a
+<i><a href="#org354c689">propositional</a> variable</i>.
+A <b><a id="org36752b0">propositional calculus</a></b> is so named beacuse it is a method
+of calculating with expressions that involve <a href="#org354c689">propositional</a> variables.
+</p>
+
+<p>
+ <div style="padding: 1em; background-color: #FFCCFF; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3> The propositional calculus of LADM is called “equational logic 𝑬”</h3>
+   One part of 𝑬 is a set of <i>axioms</i>, which are certain Boolean expressions
+   that define basic manipulative properties of Boolean operators.
+   For example, the axiom \(p ∨ q ≡ q ∨ p\) indicates (semantically)
+   that the value of a disjunction doesn't depend on the order of its arguments
+   and (syntactically) we may swap their order when manipulating expressions.
+   The other part of this <a href="#org62771a4">calculus</a> are the 3 inference rules Substitution,
+   Leibniz, and Transitivity.
+</p>
+
+<p>
+   A <b><a id="orga5fc24f">theorem</a></b> of this <a href="#org62771a4">calculus</a> is either an axiom, the conclusion
+   of an inference rule whose premises are theorems, or a Boolean expression
+   that, using the inference rules, is proved equal to an axiom or a previously
+   proved <a href="#orga5fc24f">theorem</a>.
+ </div>
+</p>
 </div>
 </div>
 
-<div id="outline-container-org2a7fa96" class="outline-3">
+
+<div id="outline-container-org5bb4432" class="outline-3">
 <h3 id="Discrete-Mathematics"><span class="section-number-3">1.2</span> <a href="#Discrete-Mathematics">What is Discrete Mathematics</a></h3>
 <div class="outline-text-3" id="text-Discrete-Mathematics">
 <ol class="org-ol">
@@ -565,15 +626,15 @@ in Computer Science and Software Engineering
 <li><b>Goal</b>: Understand the mechanics of mathematical expressions and proof.</li>
 
 <li><p>
-<a id="org1718cc8">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
+<a id="org354c689">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
 </p>
 
 <p>
-<a id="orgeed2e61">Predicate</a>: <a href="#org1718cc8">Propositional</a> statement about some subjects.
+<a id="org251e4ad">Predicate</a>: <a href="#org354c689">Propositional</a> statement about some subjects.
 </p></li>
 
 <li><p>
-<a id="org23eae16">Calculus</a>: Formalised reasoning through calculation.
+<a id="orge012ce4">Calculus</a>: Formalised reasoning through calculation.
 </p>
 
 <p>
@@ -685,15 +746,138 @@ can solve!</i>
 </blockquote>
 </div>
 </div>
+
+<div id="outline-container-org2f23bda" class="outline-3">
+<h3 id="Road-map"><span class="section-number-3">1.3</span> <a href="#Road-map">Road-map</a></h3>
+<div class="outline-text-3" id="text-Road-map">
+<p>
+In the previous section, we showed how a calculational argument is more structured
+and may be more accessible. Before getting to <b>using</b> such a style, we first pause
+to discuss the <b>foundations</b> that legitimatise it as a tool of reasoning.
+</p>
+
+<p>
+In general, proofs are evidence of truth of a claim; by demonstrating that the
+claim follows from some <i>obvious truth</i> using rules of reasoning that <i>obviously
+preserve truth</i>. Here are some examples of <i>clearly obviously true things</i>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Axiom</th>
+<th scope="col" class="org-left">“self-evident (obvious) truth”</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Reflexivity</td>
+<td class="org-left">\(X = X\) &#x2014;Everything is the same as itself</td>
+</tr>
+
+<tr>
+<td class="org-left">Symmetry</td>
+<td class="org-left">\(X = Y\) precisely when \(Y = X\) &#x2014;Sameness is mutual</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> An inference rule is a syntactic mechansim for deriving “truths” or “theorems”.</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Infernece Rule</th>
+<th scope="col" class="org-left">“a reasonable way to derive truths”</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Substitution</td>
+<td class="org-left">If \(E(\vec x)\) is true, then so is \(E(\vec F)\) &#x2014;where \(E(\vec R)\) means \(E[\vec x ≔ \vec R]\)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">E.g., Since \(x + y = y + 3\) is true, so is \(b + 3 = 3 + b\) &#x2014;using \(x, y ≔ b, 3\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Transitivity</td>
+<td class="org-left">If \(X = Y\) and \(Y = Z\) then \(X = Z\)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">E.g., since \(e^{i · π} = -1\) and \(-1 = i²\), we must have \(e^{i · π} = i²\).</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Leibniz</td>
+<td class="org-left">If \(X = Y\) then \(E(X) = E(Y)\) &#x2014;“substituting equals for equals”</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">E.g., since \(n = 2 · m\) we must have \(\even n = \even (2 · m)\)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">E.g., if <i>Jim = James</i> then <i>Jim's home address = James' home address</i>.</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+That's a lot of hand-waving; and a few examples don't scale. In order to discuss
+proof, we need to discuss inference rules, which are ways to derive new claims
+from old claims, and so we need to discuss how claims &#x2014;expressions or
+formulae&#x2014; are written. So let's start at expressions.
+</p>
+
+<p>
+ <div style="padding: 1em; background-color: #99FFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3> Super terse definition ---to be explained in subsequent sections</h3>
+ A <i>logic</i> is a set of <i>symbols</i> along with a set of <i>formulas</i> formed from the
+ symbols, and a set of <i>infernece rules</i> which allow formulas to be derived
+ from other formulas. (The formulas may or may not include a notion of variable.)
+ Logics are purely syntactic objects.
+</p>
+
+<p>
+ </div>
+</p>
+</div>
+</div>
 </div>
 
-<div id="outline-container-org41c1519" class="outline-2">
-<h2 id="Boolean-Expressions-and-Propositional-Logic"><span class="section-number-2">2</span> <a href="#Boolean-Expressions-and-Propositional-Logic">Boolean Expressions and <a href="#org1718cc8">Propositional</a> Logic</a></h2>
-<div class="outline-text-2" id="text-Boolean-Expressions-and-Propositional-Logic">
+<div id="outline-container-org3c3f2d3" class="outline-2">
+<h2 id="hi"><span class="section-number-2">2</span> <a href="#hi">Expressions</a></h2>
+<div class="outline-text-2" id="text-hi">
 </div>
-<div id="outline-container-orgc8f09e5" class="outline-3">
-<h3 id="hi"><span class="section-number-3">2.1</span> <a href="#hi">Expressions</a></h3>
-<div class="outline-text-3" id="text-hi">
+
+<div id="outline-container-org492fc5c" class="outline-3">
+<h3 id="Precedence"><span class="section-number-3">2.1</span> <a href="#Precedence">Precedence</a></h3>
+<div class="outline-text-3" id="text-Precedence">
 <div class="org-center">
 <p>
 How do you ‘read’ (<i>parse</i>) the expression \(6 - x + 7\)?
@@ -705,7 +889,6 @@ How do you ‘read’ (<i>parse</i>) the expression \(6 - x + 7\)?
 <p><img src="images/6-x+7_third_time.png" alt="6-x+7_third_time.png" />
 </p>
 </div>
-
 
 
 <p>
@@ -729,19 +912,16 @@ Both \(6\) and \(x + 7\) are expressions, so \(6 - x + 7\) is an expression.
 </p>
 </div>
 
-
-<div class="figure">
-<p><img src="images/6-x+7_parse1.png" alt="6-x+7_parse1.png" />
-</p>
-</div>
-
 <p>
 A <b>convention</b> on how a <i>string</i> should be parsed
 as a <i>tree</i> is known as a <b>precedence rule</b>.
 </p>
+</div>
+</div>
 
-<hr />
-
+<div id="outline-container-orgf055828" class="outline-3">
+<h3 id="Grammars"><span class="section-number-3">2.2</span> <a href="#Grammars">Grammars</a></h3>
+<div class="outline-text-3" id="text-Grammars">
 <p>
 Expressions are defined by the following <i>grammar</i>, but <i>in practice</i> one does
 not write \(+(1, 2)\) and instead writes \(1 + 2\).  However, the phrase \(+(1,
@@ -769,12 +949,675 @@ parentheses, precedence, or association rules.
 colon results in a ‘stutter’: One reads
  <code>::=</code> as <i>be-becomes</i>. The symbol <code>|</code> is read <i>or</i>. )
 </p>
+
+<p>
+   <div style="padding: 1em; background-color: #99FFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
+Notice that a <i>constant</i> is really just an <i>application</i> with \(n = 0\) arguments
+and so the first line in the definition above could be omitted.
+   </div>
+</p>
 </div>
 </div>
 
-<div id="outline-container-org5983fba" class="outline-3">
-<h3 id="Boolean-Operators"><span class="section-number-3">2.2</span> <a href="#Boolean-Operators">Boolean Operators</a></h3>
-<div class="outline-text-3" id="text-Boolean-Operators">
+<div id="outline-container-org7909546" class="outline-3">
+<h3 id="Textual-Substitution-i-e-https-en-wikipedia-org-wiki-Grafting-grafting-trees"><span class="section-number-3">2.3</span> <a href="#Textual-Substitution-i-e-https-en-wikipedia-org-wiki-Grafting-grafting-trees">Textual Substitution &#x2014;i.e., <a href="https://en.wikipedia.org/wiki/Grafting">“grafting trees”</a></a></h3>
+<div class="outline-text-3" id="text-Textual-Substitution-i-e-https-en-wikipedia-org-wiki-Grafting-grafting-trees">
+<p>
+The <b>(simultaneous textual) Substitution operation</b> \(E[\vec x ≔ \vec F]\)
+replaces all variables \(\vec x\) with parenthesised expressions \(\vec F\) in an
+expression \(E\). In particular, \(E[x ≔ F]\) is just \(E\) but with all
+occurrences of \(x\) replaced by \(“(F)”\). This is the “find-and-replace” utility
+you use on your computers.
+</p>
+
+<p>
+ <div style="padding: 1em; background-color: #CCFF99; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
+ Textual substitution on expressions is known as “grafting” on trees: Evaluate
+ \(E[x ≔ F]\) by going down the tree \(E\) and finding all the ‘leaves’ labelled
+ \(x\), cut them out and replace them with the new trees \(F\).
+ </div>
+</p>
+
+<p>
+ <div style="padding: 1em; background-color: #99FFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
+ Using the informal English definition of substitution, one quickly notices
+ \(E[x ≔ x] = E\) and \(E[x ≔ y][y ≔ x] = E\).
+ </div>
+</p>
+
+<p>
+Since expressions are either variables of functions applications,
+substitution can be defined by the following two clauses &#x2014;we will get to
+recursion and induction more formally later on.
+</p>
+\begin{align*}
+   y[x ≔ F]              &=  \mathsf{if}\, x = y \,\mathsf{then}\, F \,\mathsf{else}\, y \,\mathsf{fi}\,
+\\ f(t₁, …, tₙ)[x ≔ F]  &=  f(t₁′, …, tₙ′) \; \text{ where } tᵢ′ = tᵢ[x ≔ F]
+\end{align*}
+
+<p>
+ <div style="padding: 1em; background-color: #99FFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3> Sequential ≠ Simultaneous</h3>
+\[
+  (x + 2 · y)[x ≔ y][y ≔ x]  \quad≠\quad  (x + 2 · y)[x, y ≔ y, x]
+  \]
+ </div>
+</p>
+
+<p>
+<a href="https://alhassy.github.io/PythonCheatSheet/CheatSheet.pdf">Python</a>, for example, has simultaneous <i>assignment</i>; e.g., <code>x, y = y, x</code> is
+used to swap the value of two variables.
+</p>
+
+<p>
+Within CalcCheck, to simplify and actually perform the substitution, one uses
+the hint <kbd> Substitution </kbd>; e.g.,
+</p>
+<div class="org-src-container">
+<pre class="src src-calccheck">  (x + 2 · y)[x, y ≔ 3 · y, x + 5]
+=⟨ Substitution ⟩
+   3 · y + 2 · (x + 5)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge3dcddf" class="outline-3">
+<h3 id="Meta-𝒳-Speaking-about-the-concept-of-𝒳-using-the-notions-of-𝒳"><span class="section-number-3">2.4</span> <a href="#Meta-𝒳-Speaking-about-the-concept-of-𝒳-using-the-notions-of-𝒳">“Meta-𝒳”: Speaking about the concept of 𝒳 using the notions of 𝒳</a></h3>
+<div class="outline-text-3" id="text-Meta-𝒳-Speaking-about-the-concept-of-𝒳-using-the-notions-of-𝒳">
+<p>
+When we write phrases like <code>“Let E be an expression”</code>, then the <i>name</i> \(E\)
+varies and so is a variable, but it is an expression and so may consist of a
+function application or a variable. <b>That is, \(E\) is a variable that may
+stand for variables.</b> This layered inception is resolved by referring to \(E\)
+as not just any normal variable, but instead as a <b>meta-variable</b>: A variable
+capable of referring to other (simpler) variables.
+</p>
+
+<p>
+Aside: A <b>variable of type τ</b> is a <i>name</i> denoting a yet unknown <i>value</i> of type τ;
+i.e., “it is a pronoun (nickname) referring to a person in the collection of people τ”.
+E.g., to say \(x\) is an integer variable means that we may treat it
+as if it were a number whose precise value is unknown.
+Then, if we let <code>Expr τ</code> refer to the expressions denoting <i>values</i> of type τ;
+then a <b>meta-variable</b> is simply a normal variable of type <code>Expr τ</code>.
+</p>
+
+<p>
+Likewise, a <b><a href="#orga5fc24f">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
+whereas a <b>meta-<a href="#orga5fc24f">theorem</a></b> is a general statement about our logic that we prove
+to be true. That is, if 𝑬 is collection of rules that allows us to find
+truths, then a <i><a href="#orga5fc24f">theorem</a></i> is a truth found using those rules; whereas a
+<i>meta-<a href="#orga5fc24f">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
+That is, theorems are <span class="underline">in</span> 𝑬 and meta-theorems are <span class="underline">about</span> 𝑬.  For example, here
+is a meta-<a href="#orga5fc24f">theorem</a> that the equational logic 𝑬 has (as do many other theories,
+such as lattices): An <i>equational</i> <a href="#orga5fc24f">theorem</a> is true precisely when its ‘dual’ is
+true. Such metatheorems can be helpful to discover new theorems.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 2:</span> Being self-reflective using “meta” (Greek for ‘beyond’)</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">meta-𝒳</th>
+<th scope="col" class="org-left">“the study of 𝒳” or “𝒳 about 𝒳” or “beyond 𝒳”</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">meta-joke</td>
+<td class="org-left">a joke about jokes</td>
+</tr>
+
+<tr>
+<td class="org-left">meta-data</td>
+<td class="org-left">data about data; e.g., publication date</td>
+</tr>
+
+<tr>
+<td class="org-left">meta-fiction</td>
+<td class="org-left">a fictional story that acknowledges itself as fiction</td>
+</tr>
+
+<tr>
+<td class="org-left">meta-game</td>
+<td class="org-left">a game in which mini-games happen; e.g., Mario Party</td>
+</tr>
+
+<tr>
+<td class="org-left">meta-cognition</td>
+<td class="org-left">thinking about thinking</td>
+</tr>
+
+<tr>
+<td class="org-left">meta-ethics</td>
+<td class="org-left">what is the ethical way to study ethics</td>
+</tr>
+
+<tr>
+<td class="org-left">meta-physics</td>
+<td class="org-left">the study of that which is beyond the physical</td>
+</tr>
+
+<tr>
+<td class="org-left">meta-mathematics</td>
+<td class="org-left">studying systems of reasoning; aka ‘proof theory’</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfc6ca44" class="outline-2">
+<h2 id="Logics"><span class="section-number-2">3</span> <a href="#Logics">Logics</a></h2>
+<div class="outline-text-2" id="text-Logics">
+</div>
+<div id="outline-container-orgf8c0018" class="outline-3">
+<h3 id="Syntax-vs-Semantics"><span class="section-number-3">3.1</span> <a href="#Syntax-vs-Semantics">Syntax vs. Semantics</a></h3>
+<div class="outline-text-3" id="text-Syntax-vs-Semantics">
+<p>
+<b>Syntax</b> refers to the structure of expressions, or the rules for putting
+  symbols together to form an expression. <b>Semantics</b> refers to the meaning
+  of expressions or how they are evaluated.
+</p>
+
+<p>
+An expression can contain variables, and evaluating such an expression
+requires knowing what values to use for these variables; i.e., a <b>state</b>:
+A list of variables with associated values. E.g., evaluation of \(x - y + 2\) in
+the state consisting of \((x, 5)\) and \((y, 6)\) is performed by replacing \(x\)
+and \(y\)  by their values to yield \(5 - 6 + 2\) and then evaluating that to
+yield \(1\).
+</p>
+
+<p>
+A Boolean expression \(P\) is <b><a id="org19cee91">satisfied</a></b> in a state if its value is <i>true</i>
+in that state; \(P\) is <b><a id="org3414f78">satisfiable</a></b> if there is a state in which it is
+<a href="#org19cee91">satisfied</a>; and \(P\) is <b><a id="orgd682031">valid</a></b> (or is a <b><a id="org16e5141">tautology</a></b>) if it is
+<a href="#org19cee91">satisfied</a> in every state.
+</p>
+
+<hr />
+
+<p>
+All theorems of the <a href="#org354c689">propositional</a> <a href="#org62771a4">calculus</a> 𝑬 are <a href="#orgd682031">valid</a>. This can be checked by checking
+that each axiom with a truth table and arguing for each inference rule that
+if its premises are <a href="#orgd682031">valid</a> then so is its conclusion.
+</p>
+
+<p>
+For example, let's show that the Substitution rule preserves validity.  Let
+us write \(s(E)\) to denote the value of expression \(E\) in state \(s\).  If \(E\)
+is <a href="#orgd682031">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
+true in any state. So, given a state \(s\), let \(s′\) be the ‘updated’ state
+that assigns the same values to all the variables as does \(s\) <i>except</i> that
+the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#orgd682031">valid</a>,
+\(s′(E)\) is true but \(s′(E)\) is just \(s\big(E[x ≔ F]\big)\) and so the
+resulting substitution is also <a href="#orgd682031">valid</a>.
+</p>
+
+<p>
+In programming, if we want the <i>assignment</i> \(x ≔ F\) to ensure a property \(R\)
+holds, then we need \(R[x ≔ F]\) to hold <i>before</i> the assignment.
+That is, if the state \(s\) of our program variables satisfies \(R[x ≔ F]\)
+then the updated state \(s′\) &#x2014;having <i>s′(x) = s(F)</i>&#x2014; will satisfy \(R\).
+</p>
+
+<p>
+Not only are all theorems <a href="#orgd682031">valid</a>, but all <a href="#orgd682031">valid</a> expressions are theorems of
+our <a href="#org62771a4">calculus</a> (although we do not prove this fact). Theoremhood and validity
+are one and the same.
+</p>
+
+<hr />
+
+<p>
+Evaluation of the expression \(X = Y\) in a state yields the value <i>true</i> if
+expressions \(X\) and \(Y\) have the same value and yields <i>false</i> if they have
+different values.
+</p>
+
+<p>
+This characterisation of equality is in terms of expression evaluation.
+</p>
+
+<p>
+For reasoning about expressions, a more useful characterisation
+would be a set of laws that can be used to show that two expressions
+are equal, <b>without</b> calculating their values.
+</p>
+
+<p>
+For example, you know that \(x = y\) equals \(y = x\), regardless
+of the values of \(x\) and \(y\).
+</p>
+
+<p>
+A collection of such laws can be regarded as a definition
+of equality, <b>provided</b> two expressions have the same value
+in all states precisely when one expression can be translated into
+the other according to the laws.
+</p>
+
+<p>
+Later we see that theorems correspond to expressions that are true in all states.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org64175ee" class="outline-3">
+<h3 id="Logics-and-Inference-Rules"><span class="section-number-3">3.2</span> <a href="#Logics-and-Inference-Rules">Inference Rules</a></h3>
+<div class="outline-text-3" id="text-Logics-and-Inference-Rules">
+<p>
+Formally, a “proof” is obtained by applying a number of “rules” to known
+results to obtain new results; a “<a href="#orga5fc24f">theorem</a>” is the conclusion of a “proof”.
+An “axiom” is a rule that does not need to be applied to any existing
+results: It's just a known result.
+</p>
+
+<p>
+That is, a <b>rule</b> \(R\) is a tuple \(P₁, …, Pₙ, C\) that is thought of as ‘taking
+<b>premises</b> (instances of known results) \(Pᵢ\)’ and acting as a ‘natural,
+reasonable justification’ to obtain <b>conclusion</b> \(C\).  A <b>proof system</b> is a
+collection of rules. At first sight, this all sounds very abstract and rather
+useless, however it is a <i>game</i>: <b>Starting from rules, what can you obtain?</b> Some
+games can be very fun! Another way to see these ideas is from the view of
+programming:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 3:</span> Proofs-are-programs</caption>
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Mathematics</th>
+<th scope="col" class="org-left">Programming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">logic</td>
+<td class="org-left">trees (algebraic data types, 𝒲-types)</td>
+</tr>
+
+<tr>
+<td class="org-left">rules</td>
+<td class="org-left">constructors</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">proof</td>
+<td class="org-left">an application of constructors</td>
+</tr>
+
+<tr>
+<td class="org-left">axiom</td>
+<td class="org-left">a constructor with no arguments</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+For example, recall from elementary school that the addition ‘+’
+of a number 12 and a number 7 to obtain a number 19 is written as
+</p>
+\begin{align*}
+ & 12 \\
++ & \;\;7 \\ \hline
+ & 19
+\end{align*}
+<p>
+This familiar notation is also used for proof rules as well:
+A rule \(R = (P₁, …, Pₙ, C)\) is traditionally presented in the shape
+\[{P₁ \; P₂ \; … \; Pₙ \over C}R\]
+</p>
+
+<p>
+ <div style="padding: 1em; background-color: #CCFF99; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3> 𝑰𝑭 I have ingredients and a recipe for a cake 𝑻𝑯𝑬𝑵 I can make a cake</h3>
+</p>
+
+<p>
+Here are two familiar and eerily similar rules ;-)
+</p>
+
+<p>
+\[\Rule[Function Application]{a : A \And f : A → B}{f(a) : B}\]
+</p>
+
+<p>
+\[\Rule[Modus Ponens]{p \And p ⇒ q}{q}\]
+</p>
+
+<p>
+For instance, the first rule says “if you have a road between two cities, <i>A</i> and <i>B</i>, then you
+can travel from address <i>a</i> in city <i>A</i> to get to address <i>f(a)</i> in city \(B\)”.  The
+second rule says the same thing, but <b>forgets/ignores</b> the precise
+locations. Sometimes it's okay for something “to exist”, but other times
+that's not enough and you “actually want to get (construct) it somehow”;
+e.g., as the title begs: It's <i>possible</i> to make a cake, but <i>how</i>? <i>Which</i> recipe
+you use makes a difference!
+</p>
+
+<p>
+ </div>
+</p>
+
+<hr />
+
+<p>
+Just as there are meta-variables and meta-theorems, there is ‘meta-syntax’:
+</p>
+<ul class="org-ul">
+<li>The use of a fraction to delimit premises from conclusion is a form of ‘implication’.</li>
+<li>The use of a comma, or white space, to separate premises is a form of ‘conjunction’.</li>
+</ul>
+
+<p>
+If our expressions actually have an implication and conjunction operation,
+then inference rules \(\Rule[R]{P₁ \And ⋯ \And Pₙ}{C}\) can be presented as
+axioms \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\).
+</p>
+
+<p>
+The inference rule says “if the \(Pᵢ\) are all <a href="#orgd682031">valid</a>, i.e., true in <i>all
+states</i>, then so is \(C\)”; the axiom, on the other hand, says “if the \(Pᵢ\)
+are true in <i>a state</i>, then \(C\) is true in <i>that state</i>.” Thus the rule and
+the axiom are not quite the same.
+</p>
+
+<p>
+Moreover, the rule is not a Boolean expression.
+Rules are thus more general, allowing us to construct
+systems of reasoning that have no concrete notions of ‘truth’ &#x2014;recall, the
+water buckets probelm (above/below?).
+</p>
+
+<p>
+Finally, the rule asserts that \(C\) follows from \(P₁, …, Pₙ\).
+The formula \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\), on the other hand, is a Boolean
+expression (but it need not be a <a href="#orga5fc24f">theorem</a>).
+</p>
+
+<hr />
+
+<p>
+Let's look at a few simpler rules; the next 3 rules
+are part of the <b>Logic E</b> system used in the LADM text book
+&#x2014;see “<a href="http://www.cse.yorku.ca/~logicE/misc/logicE_intro.pdf">Equational Propositional Logic</a>” by Gries &amp; Schneider.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org84aaf26" class="outline-3">
+<h3 id="Rules-of-Equality-Proof-Trees-and-Calculations"><span class="section-number-3">3.3</span> <a href="#Rules-of-Equality-Proof-Trees-and-Calculations">Rules of Equality and Proof Trees vs. Calculational Proofs</a></h3>
+<div class="outline-text-3" id="text-Rules-of-Equality-Proof-Trees-and-Calculations">
+<p>
+Before we can showcase an example of a proof tree &#x2014;let alone
+compare them with calculational proofs&#x2014; we need a few
+example inference rules that can be used in the construction of the proofs.
+</p>
+
+<p>
+The following rules define equality by how it can be used, manipulated.
+</p>
+
+<ol class="org-ol">
+<li>Equality is:
+<ul class="org-ul">
+<li><b>reflexive:</b> \(X = Y\);</li>
+<li><b>symmetric:</b> \(X = Y\) implies \(Y = X\); and</li>
+<li><b>transitive</b>: \(X = Z\) follows from having both \(X = Y\) and \(Y = Z\), for any
+\(Y\)</li>
+</ul></li>
+
+<li><p>
+The <b>Substitution inference rule</b>
+says that a substitution \(E[\vec x ≔ \vec F]\) is
+a <a href="#orga5fc24f">theorem</a> <i>whenever</i> \(E\) is a <a href="#orga5fc24f">theorem</a>.
+</p>
+
+<p>
+Within CalcCheck, this rule is realised as the <kbd> with </kbd> clause: The phrase <code>E
+    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#orga5fc24f">theorem</a>
+\(E[\vec x ≔ \vec F]\). The rule is applied <i>implicitly</i>, unless <code>rigid matching</code>
+is activated &#x2014;e.g., to get students <b>thinking correctly about applying
+theorems</b> instead of just putting random theorems that look similar and hoping
+the system sees a justification from a mixture of them.
+</p></li>
+
+<li><p>
+The <b>Leibniz inference rule</b> says that \(E[z ≔ X] = E[z ≔ Y]\) whenever \(X = Y\);
+i.e., it justifies substituting “equals for equals”.
+</p>
+
+<p>
+Leibniz allows us to use an equation to rewrite a part of an expression; and
+so, it justifies the use of ‘calculation hints’.
+</p>
+
+<p>
+Leibniz says: Two expressions are equal (in all states) precisely when
+replacing one by the other in any expression \(E\) does not change the value of
+\(E\) (in any state).
+</p>
+
+<p>
+   <div style="padding: 1em; background-color: #CCFFFF; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
+A <i>function</i> \(f\) is a rule for computing a value from another value.
+</p>
+
+<p>
+If we define \(f\, x = E\) using an expression, then <i>function application</i> can
+be defined using textual substitution: \(f \, X = E[x ≔ X]\). That is,
+expressions can be considered functions of their variables
+&#x2014;but it is still expressions that are the primitive idea, the building blocks.
+</p>
+
+<p>
+Using functions, Leibniz says <i>if X = Y then f X = f Y, for any function f</i>.
+That is, if two things are actually the same, then any (<i>f-</i>)value extracted
+from one must be the same when extracted from the other.
+ </div>
+</p>
+
+<p>
+Again: Unlike the Substitution rule, which allows us to instantiate <i>any</i>
+<a href="#orga5fc24f">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
+within expressions</b>. Later on, we will look at ‘monotonicity rules’ which will
+let us apply inclusion (≤, ⇒, ⊑) theorems deep within expressions.
+</p>
+
+<p>
+The <kbd> with </kbd> syntax is overloaded for this rule as well.
+</p></li>
+</ol>
+
+<hr />
+
+<p>
+In addition to these rules, suppose that we have
+   \(2 · a = a + a\) (“Twice”) and \(-1 · a = - a\) (15.20) as axioms;
+   then we can form the following proof.
+</p>
+
+<p>
+\[
+ \Rule[Transitivity\; of\; =]
+ {\large
+   \Rule[\small Substitution]
+   {\Large \Rule{✓}{-1 · a \,=\, - a} }
+   { (- 1) · 2 · (x + y) \,=\, - (2 · (x + y)) }
+   \And
+   \Rule[\small Leibniz]
+   {\Large \Rule{✓}{2 · a = a + a} }
+   { - (2 · (x + y)) \,=\,    -((x + y) + (x + y)) }
+ }{(- 1) · 2 · (x + y) \,=\, -((x + y) + (x + y))}
+ \]
+</p>
+
+<p>
+This is known as a <i>natural deduction proof tree</i>; one begins ‘reading’ such a
+proof from the very <b>bottom</b>: Each line is an application of a rule of reasoning,
+whose assumptions are above the line; so read upward.
+The <b>benefit</b> of this approach is that <b>rules guide proof construction</b>; i.e., it is
+goal-directed.
+</p>
+
+<p>
+However the <b>downsides are numerous</b>:
+</p>
+<ul class="org-ul">
+<li>So much horizontal space for such a simple proof!</li>
+<li>One has to <b>repeat</b> common subexpressions, such as the
+\(-(2 · (x + y))\).</li>
+<li>For comparison with other proof notations, such as Hilbert style,
+see “<a href="http://www.cse.yorku.ca/~logicE/misc/logicE_intro.pdf">Equational Propositional Logic</a>” or LADM-§6.</li>
+</ul>
+
+<p>
+Instead, we may use a more ‘linear’ proof format:
+</p>
+\begin{calc}
+(- 1) · 2 · (x + y)
+\step{ 15.20) $- a \,=\, - 1 · a$
+      ─ Using implicit substitution rule }
+- (2 · (x + y))
+\step{ “Twice”
+      ─ Using implicit Leibniz with $a ≔ x + y$ }
+-((x + y) + (x + y))
+\end{calc}
+
+<p>
+In this equational style, instead of a <b>tree</b> (on the left)
+we use a <b>sequential chain of equalities</b> (on the right):
+</p>
+
+<div style="column-rule-style:solid;column-count:2;"<p>
+\[\Rule[Leibniz]{X \,=\, Y}{E[z ≔ X] \,=\, E[z ≔ Y]}\]
+</p>
+
+<br>
+
+\begin{calc}
+    E[z ≔ X]
+\step{ X = Y }
+    E[z ≔ Y]
+\end{calc}
+</div>
+
+<p>
+In this way, we may use the Substitution rule to create theorems that can be
+used with the Leibniz rule and then use the Transitivity rule to conclude
+that the first expression of an equational proof is equivalent to the last one.
+ <div style="padding: 1em; background-color: #FFCC99; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
+To show that \(L = R\), transform \(L\) into \(R\) by a series of substitutions
+of equals for equals. (If \(R\) has more ‘structure’, then begin at \(R\) and
+transform to \(L\).)
+ </div>
+</p>
+
+<hr />
+
+<ul class="org-ul">
+<li>Transitivity allows us to conclude the first expression in a calculation
+is equal to the last expression in the calculation.</li>
+<li>Reflexivity allows us to have ‘empty’ calculations and “no (expression) change”
+calculation steps</li>
+<li>Symmetry allows us to use an equation \(LHS = RHS\)
+“in the other direction” to replace an instance of \(RHS\) by \(LHS\).</li>
+</ul>
+
+<p>
+Equational proofs thus have this shape:
+</p>
+
+\begin{calc}
+  P
+\step{ $P = Q[z ≔ X]$ }
+  Q[z ≔ X]
+\stepmany{ \line{make a “remark” about $Q[z ≔ X]$}
+           \line{or the direction of the proof}
+           \line{or “remove superflous parentheses”}
+           \line{or “insert parentheses for clairty”} }
+  Q[z ≔ X]
+\step{ $X = Y$ }
+  Q[z ≔ Y]
+\step{ $R = Q[z ≔ Y]$ ──note the change in ‘direction’ }
+  R
+\end{calc}
+
+<p>
+Which is far <b>easier to read and write</b> than:
+\[
+ \Rule[Transitivity]{
+  P = Q[z ≔ X]
+  \And
+  \Rule[Transitivity]{
+    \Rule[\large Transitivity]{ \LARGE
+      \Rule[Reflexivity]{}{Q[z ≔ X] \eq Q[z ≔ X]}
+      \And
+      \Rule[Leibniz]{X \eq Y}{Q[z ≔ X] \eq Q[z ≔ Y]}
+      }{\LARGE Q[z ≔ X] \eq Q[z ≔ Y]}
+    \And
+    {\LARGE \Rule[\large Symmetry]{R \eq Q[z ≔ Y]}{Q[z ≔ Y] \eq R}
+    }}
+ {\large \text{$Q[z ≔ X] \eq R$}}}
+ {P = R}
+ \]
+</p>
+
+<p>
+<b>The structure of equational proofs allows implicit use of infernece rules
+Leibniz, Transitvitity &amp; Symmetry &amp; Reflexivity of equality, and Substitution.</b> In contrast, the
+structure of proof trees is no help in this regard, and so all uses of
+inference rules must be mentioned explicitly.
+</p>
+
+<hr />
+
+<p>
+Leibniz is often used with Substitution, as follows
+&#x2014;supposing we know the <a href="#orga5fc24f">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
+</p>
+
+\begin{calc}
+  2 · j / 2 = 2 · (j - 1)
+\step{ Half, with $x ≔ j$ }
+  j = 2 · (j - 1)
+\end{calc}
+
+<p>
+We are using Leibniz with the premise \(2 · j / 2 = j\).
+We can use this premise only if it is a <a href="#orga5fc24f">theorem</a>. It is, because
+\(2 · x / 2 = x\) is a <a href="#orga5fc24f">theorem</a> and, therefore, by Substitution,
+\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#orga5fc24f">theorem</a>.
+</p>
+
+<p>
+If a use of Substitution is simple enough, as in this case, we may leave
+off the indication “with \(x ≔ j\)”.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb880926" class="outline-2">
+<h2 id="Boolean-Expressions-and-Laws"><span class="section-number-2">4</span> <a href="#Boolean-Expressions-and-Laws">Boolean Expressions and Laws</a></h2>
+<div class="outline-text-2" id="text-Boolean-Expressions-and-Laws">
 <p>
 The type of propositions is known as the <b>Booleans</b> and denoted 𝔹.
 </p>
@@ -784,13 +1627,13 @@ The type of propositions is known as the <b>Booleans</b> and denoted 𝔹.
 </div>
 </div>
 
-<div id="outline-container-org401e90d" class="outline-4">
-<h4 id="Equality-and"><span class="section-number-4">2.2.1</span> <a href="#Equality-and">Equality: “=” and “≡”</a></h4>
-<div class="outline-text-4" id="text-Equality-and">
+<div id="outline-container-org289333c" class="outline-3">
+<h3 id="Equality-and"><span class="section-number-3">4.1</span> <a href="#Equality-and">Equality: “=” and “≡”</a></h3>
+<div class="outline-text-3" id="text-Equality-and">
 <p>
 For instance, the notion of equality on any type τ is
 typed <code>_=_ : τ → τ → 𝔹</code>; i.e., equality takes two values of a type τ
-and returns a <a href="#org1718cc8">propositional</a> value.
+and returns a <a href="#org354c689">propositional</a> value.
 </p>
 
 <blockquote>
@@ -852,7 +1695,7 @@ secondly,
 </p>
 <dl class="org-dl">
 <dt>= is conjunctive</dt><dd>\(\big(p = q = r\big) \quad=\quad \big( (p = q)
-      \;\land\; (q = r)\big)\)</dd>
+     \;\land\; (q = r)\big)\)</dd>
 <dt>≡ is associative</dt><dd>\(\big(p ≡ q ≡ r\big) \quad=\quad \big((p ≡ q) ≡ r\big) \quad=\quad \big(p ≡ (q ≡ r)\big)\)</dd>
 </dl>
 
@@ -863,15 +1706,15 @@ For example, \(\false ≡ \true ≡ \false\) is \(\true\), whereas
 </div>
 </div>
 
-<div id="outline-container-org58dd4ad" class="outline-4">
-<h4 id="Useful-Operators"><span class="section-number-4">2.2.2</span> <a href="#Useful-Operators">Useful Operators</a></h4>
-<div class="outline-text-4" id="text-Useful-Operators">
+<div id="outline-container-org24db16c" class="outline-3">
+<h3 id="Useful-Operators"><span class="section-number-3">4.2</span> <a href="#Useful-Operators">Useful Operators</a></h3>
+<div class="outline-text-3" id="text-Useful-Operators">
 <p>
 The Booleans have a number of useful operators that model reasoning,
    such as:
 </p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 1:</span> Boolean operators and similar numeric operators</caption>
+<caption class="t-above"><span class="table-number">Table 4:</span> Boolean operators and similar numeric operators</caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -932,7 +1775,7 @@ specified axiomatically.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 2:</span> Example explicit definitions &#x2014;not used in this class</caption>
+<caption class="t-above"><span class="table-number">Table 5:</span> Example explicit definitions &#x2014;not used in this class</caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -950,9 +1793,9 @@ specified axiomatically.
 </div>
 </div>
 
-<div id="outline-container-orgcebf167" class="outline-4">
-<h4 id="Boolean-Laws-and-Numeric-Laws"><span class="section-number-4">2.2.3</span> <a href="#Boolean-Laws-and-Numeric-Laws">Boolean Laws and Numeric Laws</a></h4>
-<div class="outline-text-4" id="text-Boolean-Laws-and-Numeric-Laws">
+<div id="outline-container-orgea45d2d" class="outline-3">
+<h3 id="Boolean-Laws-and-Numeric-Laws"><span class="section-number-3">4.3</span> <a href="#Boolean-Laws-and-Numeric-Laws">Boolean Laws and Numeric Laws</a></h3>
+<div class="outline-text-3" id="text-Boolean-Laws-and-Numeric-Laws">
 <p>
 To better understand the 𝔹ooleans, it can be useful to compare their laws
     with those on numbers. For instance, the <code>Definition of ⇒</code> at first glance is
@@ -965,7 +1808,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 3:</span> Properties of <a href="#org1718cc8">propositional</a> operators and similar (familiar) numeric laws</caption>
+<caption class="t-above"><span class="table-number">Table 6:</span> Properties of <a href="#org354c689">propositional</a> operators and similar (familiar) numeric laws</caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -1155,10 +1998,9 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </div>
 </div>
 </div>
-</div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-09-11 Fri 06:31</p>
+<p class="date">Created: 2020-09-14 Mon 10:46</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -1,13 +1,15 @@
+ # -*- eval: (my/execute-startup-blocks) -*-
+
 #+title: Mathematics for Computing
-#+subtitle: Abrdiged Lecture Notes
+#+subtitle: Abridged Lecture Notes @@html:<br>@@ Based on “A Logical Approach to Discrete Math”
 #+author: Musa Al-hassy
 #+options: tags:nil d:nil toc:t
 #+PROPERTY: header-args:calccheck :tangle (concat (file-name-sans-extension (buffer-name)) ".calc") :comments nil
 
-#+Description: Abrdiged Lecture Notes
+#+Description: Abridged Lecture Notes Based on “A Logical Approach to Discrete Math”
 
 # Make HTML
-# (f-move (org-html-export-to-html) "~/github_calccheck/LectureNotes.html")
+# (f-move (org-html-export-to-html) "~/CalcCheck/LectureNotes.html")
 #+HTML_HEAD: <link href="https://alhassy.github.io/org-notes-style.css" rel="stylesheet" type="text/css" />
 #+HTML_HEAD: <link href="https://alhassy.github.io/floating-toc.css" rel="stylesheet" type="text/css" />
 #+HTML_HEAD: <link href="https://alhassy.github.io/blog-banner.css" rel="stylesheet" type="text/css" />
@@ -17,6 +19,12 @@
 #+macro: begin-box @@html: <div style="padding: 1em; background-color: $1; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3>$2</h3>@@
 
 #+macro: end-box @@html: </div>@@
+
+:Hide:
+  {{{begin-box(teal, Salam!)}}}
+
+  {{{end-box}}}
+:End:
 
 * Notational Setup :ignore:
   :PROPERTIES:
@@ -54,15 +62,21 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 \newcommand{\stepmany}[2][=]{ \\ #1 \;\; & \qquad \color{maroon}{\BEGINstep \large\substack{ #2 } \ENDstep} \\ & }
 
 % multi-line step with 4 lines of text
-\newcommand{\stepfour}[5][=]{ \stepmany[#1]{\line{#2} \line{#3} \line{#4} \line{#5}} }
-
+\newcommand{\stepfour}[5][=]{ \stepmany[#1]{\line{#2} \line{#3} \line{#4}
+\line{#5}} }
 
 \newenvironment{calc}{\begin{align*} & }{\end{align*}}
+
+% Inference rules
+\def\And{\quad}
+\newcommand\Rule[3][]{ {#2 \over #3}\mathsf{#1} }
 
 \def\eq{\,=\,}
 
 \def\true{\mathsf{true}}
 \def\false{\mathsf{false}}
+
+\def\even{\mathsf{even}}
 #+end_latex-definitions
 
 #+html: <p style="display:none">
@@ -119,7 +133,59 @@ $$\newcommand\exp[1]{\mathsf{exp}_{#1}\,}$$
 \end{calc}
 :end:
 
-* Introduction to Calculational Reasoning :Lecture_1:
+* subtle colours :ignore:
+  :PROPERTIES:
+  :CUSTOM_ID: subtle-colours
+  :END:
+
+#+name: startup-code
+#+begin_src emacs-lisp  :exports none
+(defun subtle-colors (c)
+  "Names are very rough approximates.
+
+   Translations from: https://www.december.com/html/spec/softhues.html"
+  (pcase c
+    ("teal"    "#99FFCC") ;; close to aqua
+    ("brown"   "#CCCC99") ;; close to moss
+    ("gray"    "#CCCCCC")
+    ("purple"  "#CCCCFF")
+    ("lime"    "#CCFF99") ;; brighter than ‘green’
+    ("green"   "#CCFFCC")
+    ("blue"    "#CCFFFF")
+    ("orange"  "#FFCC99")
+    ("peach"   "#FFCCCC")
+    ("pink"    "#FFCCFF")
+    ("yellow"  "#FFFF99")
+    ("custard" "#FFFFCC") ;; paler than ‘yellow’
+    (c c)
+  ))
+#+end_src
+
+# $1 colour eg “pink” or “hsl(157 75% 20%)” or “#e5f5e5”; $2 title
+#+macro: begin-box (eval (concat "@@html: <div style=\"padding: 1em; background-color: " (subtle-colors $1) "; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;\"> <h3>" $2 "</h3>@@"))
+
+#+macro: end-box @@html: </div>@@
+
+:Hide:
+“Subtle colours”
+#+begin_parallelNB
+
+   {{{begin-box(teal,    This is “teal”!)}}} {{{end-box}}} \\
+   {{{begin-box(brown,   This is “brown”!)}}} {{{end-box}}} \\
+   {{{begin-box(gray,    This is “gray”!)}}} {{{end-box}}} \\
+   {{{begin-box(purple,  This is “purple”!)}}} {{{end-box}}} \\
+   {{{begin-box(lime,    This is “lime”!)}}} {{{end-box}}} \\
+   {{{begin-box(green,   This is “green”!)}}} {{{end-box}}} \\
+   {{{begin-box(blue,    This is “blue”!)}}} {{{end-box}}} \\
+   {{{begin-box(orange,  This is “orange”!)}}} {{{end-box}}} \\
+   {{{begin-box(peach,   This is “peach”!)}}} {{{end-box}}} \\
+   {{{begin-box(pink,    This is “pink”!)}}} {{{end-box}}} \\
+   {{{begin-box(yellow,  This is “yellow”!)}}} {{{end-box}}} \\
+   {{{begin-box(custard, This is “custard”!)}}} {{{end-box}}} \\
+
+#+end_parallelNB
+:End:
+* Introduction to Calculational Reasoning
   :PROPERTIES:
   :CUSTOM_ID: Introduction-to-Calculational-Reasoning
   :END:
@@ -208,6 +274,12 @@ problem domain.
 
 {{{end-box}}}
 
+# Go back to the ⟨hint notation⟩.
+#+begin_latex-definitions
+\def\BEGINstep{ \left\langle }
+\def\ENDstep{ \right\rangle }
+#+end_latex-definitions
+
 Finally, observe that the calculational form is *more general*.  The use of a
 /formal/ approach let us keep track of when our statements are equivalent
 (“=”) rather than being weakened (“⇒”).
@@ -224,6 +296,34 @@ roots, which may be viewed as a [[https://youtu.be/t39wHoFHbvY][Youtube video]] 
     #+begin_center
     kbd:Control_+_Alt_+_Enter to check a cell.
     #+end_center
+
+     Going forward, instead of defining expressions by how they are evaluated,
+     we define expressions in terms of how they can be manipulated.
+     # operational versues aximatic method.
+
+     A *<<<calculus>>>* is a method or process of reasoning by calculation with
+     symbols.
+     A Boolean variable that can denote a proposition is sometimes called a
+     /propositional variable/.
+     A *<<<propositional calculus>>>* is so named beacuse it is a method
+     of calculating with expressions that involve propositional variables.
+
+  {{{begin-box(pink, The propositional calculus of LADM is called “equational
+  logic 𝑬”)}}}
+     One part of 𝑬 is a set of /axioms/, which are certain Boolean expressions
+     that define basic manipulative properties of Boolean operators.
+     For example, the axiom $p ∨ q ≡ q ∨ p$ indicates (semantically)
+     that the value of a disjunction doesn't depend on the order of its arguments
+     and (syntactically) we may swap their order when manipulating expressions.
+     The other part of this calculus are the 3 inference rules Substitution,
+     Leibniz, and Transitivity.
+
+     A *<<<theorem>>>* of this calculus is either an axiom, the conclusion
+     of an inference rule whose premises are theorems, or a Boolean expression
+     that, using the inference rules, is proved equal to an axiom or a previously
+     proved theorem.
+  {{{end-box}}}
+
 
 ** What is Discrete Mathematics
    :PROPERTIES:
@@ -326,15 +426,63 @@ can solve!/
 
 # Time for an upgrade!
 
-* Boolean Expressions and Propositional Logic
-  :PROPERTIES:
-  :CUSTOM_ID: Boolean-Expressions-and-Propositional-Logic
-  :END:
-** Expressions                                                    :Lecture_2:
+** Road-map
    :PROPERTIES:
-   :CUSTOM_ID: hi
+   :CUSTOM_ID: Road-map
    :END:
 
+ In the previous section, we showed how a calculational argument is more structured
+ and may be more accessible. Before getting to *using* such a style, we first pause
+ to discuss the *foundations* that legitimatise it as a tool of reasoning.
+
+ In general, proofs are evidence of truth of a claim; by demonstrating that the
+ claim follows from some /obvious truth/ using rules of reasoning that /obviously
+ preserve truth/. Here are some examples of /clearly obviously true things/.
+
+ | Axiom       | “self-evident (obvious) truth”                |
+ |-------------+-----------------------------------------------|
+ | Reflexivity | $X = X$ ---Everything is the same as itself   |
+ | Symmetry    | $X = Y$ precisely when $Y = X$ ---Sameness is mutual  |
+
+ #+caption: An inference rule is a syntactic mechansim for deriving “truths” or “theorems”.
+ | Infernece Rule | “a reasonable way to derive truths”                                                            |
+ |----------------+------------------------------------------------------------------------------------------------|
+ | Substitution   | If $E(\vec x)$ is true, then so is $E(\vec F)$ ---where $E(\vec R)$ means $E[\vec x ≔ \vec R]$   |
+ |                | E.g., Since $x + y = y + 3$ is true, so is $b + 3 = 3 + b$ ---using $x, y ≔ b, 3$              |
+ |----------------+------------------------------------------------------------------------------------------------|
+ | Transitivity   | If $X = Y$ and $Y = Z$ then $X = Z$                                                            |
+ |                | E.g., since $e^{i · π} = -1$ and $-1 = i²$, we must have $e^{i · π} = i²$.                     |
+ |----------------+------------------------------------------------------------------------------------------------|
+ | Leibniz        | If $X = Y$ then $E(X) = E(Y)$ ---“substituting equals for equals”                              |
+ |                | E.g., since $n = 2 · m$ we must have $\even n = \even (2 · m)$                                 |
+ |                | E.g., if /Jim = James/ then /Jim's home address = James' home address/.                            |
+ |                |                                                                                                |
+
+ That's a lot of hand-waving; and a few examples don't scale. In order to discuss
+ proof, we need to discuss inference rules, which are ways to derive new claims
+ from old claims, and so we need to discuss how claims ---expressions or
+ formulae--- are written. So let's start at expressions.
+
+   {{{begin-box(teal, Super terse definition ---to be explained in subsequent
+    sections)}}}
+    A /logic/ is a set of /symbols/ along with a set of /formulas/ formed from the
+    symbols, and a set of /infernece rules/ which allow formulas to be derived
+    from other formulas. (The formulas may or may not include a notion of variable.)
+    Logics are purely syntactic objects.
+
+    # | Syntax    | Proof theory |
+    # | Semantics | Model theory |
+   {{{end-box}}}
+
+* Expressions
+  :PROPERTIES:
+  :CUSTOM_ID: hi
+  :END:
+
+** Precedence
+   :PROPERTIES:
+   :CUSTOM_ID: Precedence
+   :END:
 # Dot guide
 # https://www.graphviz.org/pdf/dotguide.pdf
 
@@ -364,7 +512,6 @@ digraph structs {
 [[file:images/6-x+7_third_time.png]]
 
 
-
 It can be generated from its parts in two different ways:
 1. Both $6$ and $x + 7$ are expressions, so $6 - x + 7$ is an expression.
    #+BEGIN_SRC dot :file images/6-x+7_parse2.png :exports results
@@ -380,7 +527,7 @@ It can be generated from its parts in two different ways:
    [[file:images/6-x+7_parse2.png]]
 
 2. and also both $6 - x$ and $7$ are expressions, so $6 - x + 7$ is an expression.
-   #+BEGIN_SRC dot :file images/6-x+7_parse1.png :exports results
+   #+BEGIN_SRC dot :file images/6-x+7_parse1.png :exports results :results replace
 digraph {
  "-" -> 6;
  "-" -> x;
@@ -389,13 +536,13 @@ digraph {
 }
 #+END_SRC
 
-#+RESULTS:
-[[file:images/6-x+7_parse1.png]]
-
 A *convention* on how a /string/ should be parsed
 as a /tree/ is known as a *precedence rule*.
 
-------
+** Grammars
+   :PROPERTIES:
+   :CUSTOM_ID: Grammars
+   :END:
 
     Expressions are defined by the following /grammar/, but /in practice/ one does
     not write $+(1, 2)$ and instead writes $1 + 2$.  However, the phrase $+(1,
@@ -420,89 +567,555 @@ Expr ::= Constant    -- E.g., 1 or “apple”
     colon results in a ‘stutter’: One reads
      =::== as /be-becomes/. The symbol =|= is read /or/. )
 
-** Boolean Operators                                               :Lecture2:
+  {{{begin-box(teal)}}}
+Notice that a /constant/ is really just an /application/ with $n = 0$ arguments
+and so the first line in the definition above could be omitted.
+  {{{end-box}}}
+
+** Textual Substitution ---i.e., [[https://en.wikipedia.org/wiki/Grafting][“grafting trees”]]
    :PROPERTIES:
-   :CUSTOM_ID: Boolean-Operators
+   :CUSTOM_ID: Textual-Substitution-i-e-https-en-wikipedia-org-wiki-Grafting-grafting-trees
    :END:
+
+  The *(simultaneous textual) Substitution operation* $E[\vec x ≔ \vec F]$
+  replaces all variables $\vec x$ with parenthesised expressions $\vec F$ in an
+  expression $E$. In particular, $E[x ≔ F]$ is just $E$ but with all
+  occurrences of $x$ replaced by $“(F)”$. This is the “find-and-replace” utility
+  you use on your computers.
+
+ {{{begin-box(lime)}}}
+  Textual substitution on expressions is known as “grafting” on trees: Evaluate
+  $E[x ≔ F]$ by going down the tree $E$ and finding all the ‘leaves’ labelled
+  $x$, cut them out and replace them with the new trees $F$.
+ {{{end-box}}}
+
+ {{{begin-box(teal)}}}
+  Using the informal English definition of substitution, one quickly notices
+  $E[x ≔ x] = E$ and $E[x ≔ y][y ≔ x] = E$.
+ {{{end-box}}}
+
+  Since expressions are either variables of functions applications,
+  substitution can be defined by the following two clauses ---we will get to
+  recursion and induction more formally later on.
+  \begin{align*}
+     y[x ≔ F]              &=  \mathsf{if}\, x = y \,\mathsf{then}\, F \,\mathsf{else}\, y \,\mathsf{fi}\,
+  \\ f(t₁, …, tₙ)[x ≔ F]  &=  f(t₁′, …, tₙ′) \; \text{ where } tᵢ′ = tᵢ[x ≔ F]
+  \end{align*}
+
+  {{{begin-box(teal, Sequential ≠ Simultaneous)}}}
+  \[
+  (x + 2 · y)[x ≔ y][y ≔ x]  \quad≠\quad  (x + 2 · y)[x, y ≔ y, x]
+  \]
+  {{{end-box}}}
+
+  [[https://alhassy.github.io/PythonCheatSheet/CheatSheet.pdf][Python]], for example, has simultaneous /assignment/; e.g., ~x, y = y, x~ is
+  used to swap the value of two variables.
+
+  Within CalcCheck, to simplify and actually perform the substitution, one uses
+  the hint kbd:Substitution; e.g.,
+  #+begin_src calccheck
+  (x + 2 · y)[x, y ≔ 3 · y, x + 5]
+=⟨ Substitution ⟩
+   3 · y + 2 · (x + 5)
+  #+end_src
+
+** “Meta-𝒳”: Speaking about the concept of 𝒳 using the notions of 𝒳
+   :PROPERTIES:
+   :CUSTOM_ID: Meta-𝒳-Speaking-about-the-concept-of-𝒳-using-the-notions-of-𝒳
+   :END:
+
+    When we write phrases like =“Let E be an expression”=, then the /name/ $E$
+    varies and so is a variable, but it is an expression and so may consist of a
+    function application or a variable. *That is, $E$ is a variable that may
+    stand for variables.* This layered inception is resolved by referring to $E$
+    as not just any normal variable, but instead as a *meta-variable*: A variable
+    capable of referring to other (simpler) variables.
+
+    Aside: A *variable of type τ* is a /name/ denoting a yet unknown /value/ of type τ;
+    i.e., “it is a pronoun (nickname) referring to a person in the collection of people τ”.
+    E.g., to say $x$ is an integer variable means that we may treat it
+    as if it were a number whose precise value is unknown.
+    Then, if we let =Expr τ= refer to the expressions denoting /values/ of type τ;
+    then a *meta-variable* is simply a normal variable of type =Expr τ=.
+
+    Likewise, a *theorem* is a Boolean expression that is proved equal to an axiom;
+    whereas a *meta-theorem* is a general statement about our logic that we prove
+    to be true. That is, if 𝑬 is collection of rules that allows us to find
+    truths, then a /theorem/ is a truth found using those rules; whereas a
+    /meta-theorem/ is property of 𝑬 itself, such as what theorems it can have.
+    That is, theorems are _in_ 𝑬 and meta-theorems are _about_ 𝑬.  For example, here
+    is a meta-theorem that the equational logic 𝑬 has (as do many other theories,
+    such as lattices): An /equational/ theorem is true precisely when its ‘dual’ is
+    true. Such metatheorems can be helpful to discover new theorems.
+    # A meta-theorem is a theorem about theorems.
+    #
+    # E.g., p ∧ q ⇒ q is not an equation, but it is equivalent to the equation
+    # p ∧ q ⇒ p ≡ true, whose dual is p ∨ q ⇍ q ≡ false; i.e.,
+    # p ∨ q ⇐ q.
+
+    #+caption: Being self-reflective using “meta” (Greek for ‘beyond’)
+    | meta-𝒳           | “the study of 𝒳” or “𝒳 about 𝒳” or “beyond 𝒳”         |
+    |------------------+-------------------------------------------------------|
+    | meta-joke        | a joke about jokes                                    |
+    | meta-data        | data about data; e.g., publication date               |
+    | meta-fiction     | a fictional story that acknowledges itself as fiction |
+    | meta-game        | a game in which mini-games happen; e.g., Mario Party  |
+    | meta-cognition   | thinking about thinking                               |
+    | meta-ethics      | what is the ethical way to study ethics               |
+    | meta-physics     | the study of that which is beyond the physical        |
+    | meta-mathematics | studying systems of reasoning; aka ‘proof theory’     |
+
+* Logics
+  :PROPERTIES:
+  :CUSTOM_ID: Logics
+  :END:
+** Syntax vs. Semantics
+   :PROPERTIES:
+   :CUSTOM_ID: Syntax-vs-Semantics
+   :END:
+
+   *Syntax* refers to the structure of expressions, or the rules for putting
+     symbols together to form an expression. *Semantics* refers to the meaning
+     of expressions or how they are evaluated.
+
+   An expression can contain variables, and evaluating such an expression
+   requires knowing what values to use for these variables; i.e., a *state*:
+   A list of variables with associated values. E.g., evaluation of $x - y + 2$ in
+   the state consisting of $(x, 5)$ and $(y, 6)$ is performed by replacing $x$
+   and $y$  by their values to yield $5 - 6 + 2$ and then evaluating that to
+   yield $1$.
+
+   A Boolean expression $P$ is *<<<satisfied>>>* in a state if its value is /true/
+   in that state; $P$ is *<<<satisfiable>>>* if there is a state in which it is
+   satisfied; and $P$ is *<<<valid>>>* (or is a *<<<tautology>>>*) if it is
+   satisfied in every state.
+
+ --------------------------------------------------------------------------------
+
+     All theorems of the propositional calculus 𝑬 are valid. This can be checked by checking
+     that each axiom with a truth table and arguing for each inference rule that
+     if its premises are valid then so is its conclusion.
+
+     For example, let's show that the Substitution rule preserves validity.  Let
+     us write $s(E)$ to denote the value of expression $E$ in state $s$.  If $E$
+     is valid, then it is true in any state, let's argue that $E[x ≔ F]$ is also
+     true in any state. So, given a state $s$, let $s′$ be the ‘updated’ state
+     that assigns the same values to all the variables as does $s$ /except/ that
+     the variable $x$ is assigned the value $s(F)$.  Then, since $E$ is valid,
+     $s′(E)$ is true but $s′(E)$ is just $s\big(E[x ≔ F]\big)$ and so the
+     resulting substitution is also valid.
+
+     In programming, if we want the /assignment/ $x ≔ F$ to ensure a property $R$
+     holds, then we need $R[x ≔ F]$ to hold /before/ the assignment.
+     That is, if the state $s$ of our program variables satisfies $R[x ≔ F]$
+     then the updated state $s′$ ---having /s′(x) = s(F)/--- will satisfy $R$.
+
+     Not only are all theorems valid, but all valid expressions are theorems of
+     our calculus (although we do not prove this fact). Theoremhood and validity
+     are one and the same.
+
+ --------------------------------------------------------------------------------
+
+   Evaluation of the expression $X = Y$ in a state yields the value /true/ if
+   expressions $X$ and $Y$ have the same value and yields /false/ if they have
+   different values.
+
+   This characterisation of equality is in terms of expression evaluation.
+
+   For reasoning about expressions, a more useful characterisation
+   would be a set of laws that can be used to show that two expressions
+   are equal, *without* calculating their values.
+   # c.f., static analysis versues running a program
+
+   For example, you know that $x = y$ equals $y = x$, regardless
+   of the values of $x$ and $y$.
+
+   A collection of such laws can be regarded as a definition
+   of equality, *provided* two expressions have the same value
+   in all states precisely when one expression can be translated into
+   the other according to the laws.
+
+   Later we see that theorems correspond to expressions that are true in all states.
+
+** Inference Rules
+   :PROPERTIES:
+   :CUSTOM_ID: Logics-and-Inference-Rules
+   :END:
+
+   Formally, a “proof” is obtained by applying a number of “rules” to known
+   results to obtain new results; a “theorem” is the conclusion of a “proof”.
+   An “axiom” is a rule that does not need to be applied to any existing
+   results: It's just a known result.
+
+   That is, a *rule* $R$ is a tuple $P₁, …, Pₙ, C$ that is thought of as ‘taking
+   *premises* (instances of known results) $Pᵢ$’ and acting as a ‘natural,
+   reasonable justification’ to obtain *conclusion* $C$.  A *proof system* is a
+   collection of rules. At first sight, this all sounds very abstract and rather
+   useless, however it is a /game/: *Starting from rules, what can you obtain?* Some
+   games can be very fun! Another way to see these ideas is from the view of
+   programming:
+
+   #+caption: Proofs-are-programs
+   | /           | <                                     |
+   | Mathematics | Programming                           |
+   |-------------+---------------------------------------|
+   | logic       | trees (algebraic data types, 𝒲-types) |
+   | rules       | constructors                          |
+   |-------------+---------------------------------------|
+   | proof       | an application of constructors        |
+   | axiom       | a constructor with no arguments       |
+
+   For example, recall from elementary school that the addition ‘+’
+   of a number 12 and a number 7 to obtain a number 19 is written as
+   \begin{align*}
+    & 12 \\
+   + & \;\;7 \\ \hline
+    & 19
+   \end{align*}
+   This familiar notation is also used for proof rules as well:
+   A rule $R = (P₁, …, Pₙ, C)$ is traditionally presented in the shape
+   \[{P₁ \; P₂ \; … \; Pₙ \over C}R\]
+
+   {{{begin-box(lime, 𝑰𝑭 I have ingredients and a recipe for a cake 𝑻𝑯𝑬𝑵 I can
+   make a cake)}}}
+
+   Here are two familiar and eerily similar rules ;-)
+
+   $$\Rule[Function Application]{a : A \And f : A → B}{f(a) : B}$$
+
+   $$\Rule[Modus Ponens]{p \And p ⇒ q}{q}$$
+
+   For instance, the first rule says “if you have a road between two cities, /A/ and /B/, then you
+   can travel from address /a/ in city /A/ to get to address /f(a)/ in city $B$”.  The
+   second rule says the same thing, but *forgets/ignores* the precise
+   locations. Sometimes it's okay for something “to exist”, but other times
+   that's not enough and you “actually want to get (construct) it somehow”;
+   e.g., as the title begs: It's /possible/ to make a cake, but /how/? /Which/ recipe
+   you use makes a difference!
+
+   # The second rule is also known as /Impication Elimination/
+   # as it is “the way an implication can be used”.
+
+   {{{end-box}}}
+
+ --------------------------------------------------------------------------------
+
+     Just as there are meta-variables and meta-theorems, there is ‘meta-syntax’:
+     - The use of a fraction to delimit premises from conclusion is a form of ‘implication’.
+     - The use of a comma, or white space, to separate premises is a form of ‘conjunction’.
+
+     If our expressions actually have an implication and conjunction operation,
+     then inference rules $\Rule[R]{P₁ \And ⋯ \And Pₙ}{C}$ can be presented as
+     axioms $P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C$.
+
+     The inference rule says “if the $Pᵢ$ are all valid, i.e., true in /all
+     states/, then so is $C$”; the axiom, on the other hand, says “if the $Pᵢ$
+     are true in /a state/, then $C$ is true in /that state/.” Thus the rule and
+     the axiom are not quite the same.
+
+     Moreover, the rule is not a Boolean expression.
+     Rules are thus more general, allowing us to construct
+     systems of reasoning that have no concrete notions of ‘truth’ ---recall, the
+     water buckets probelm (above/below?).
+
+     Finally, the rule asserts that $C$ follows from $P₁, …, Pₙ$.
+     The formula $P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C$, on the other hand, is a Boolean
+     expression (but it need not be a theorem).
+
+ --------------------------------------------------------------------------------
+
+   Let's look at a few simpler rules; the next 3 rules
+   are part of the *Logic E* system used in the LADM text book
+   ---see “[[http://www.cse.yorku.ca/~logicE/misc/logicE_intro.pdf][Equational Propositional Logic]]” by Gries & Schneider.
+
+** Rules of Equality and Proof Trees vs. Calculational Proofs
+   :PROPERTIES:
+   :CUSTOM_ID: Rules-of-Equality-Proof-Trees-and-Calculations
+   :END:
+
+ # ** Defining equality by how it can be used, manipulated
+
+
+ # E.g., 4 laws that characterise equality are reflexitivitry, symmetry,
+ #   transitvity, and Leibniz.
+
+ Before we can showcase an example of a proof tree ---let alone
+ compare them with calculational proofs--- we need a few
+ example inference rules that can be used in the construction of the proofs.
+
+ The following rules define equality by how it can be used, manipulated.
+
+ 1. Equality is:
+    - *reflexive:* $X = Y$;
+    - *symmetric:* $X = Y$ implies $Y = X$; and
+    - *transitive*: $X = Z$ follows from having both $X = Y$ and $Y = Z$, for any
+      $Y$
+
+ 2. The *Substitution inference rule*
+    says that a substitution $E[\vec x ≔ \vec F]$ is
+    a theorem /whenever/ $E$ is a theorem.
+
+    Within CalcCheck, this rule is realised as the kbd:with clause: The phrase =E
+    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`= is tantamount to invoking the theorem
+    $E[\vec x ≔ \vec F]$. The rule is applied /implicitly/, unless =rigid matching=
+    is activated ---e.g., to get students *thinking correctly about applying
+    theorems* instead of just putting random theorems that look similar and hoping
+    the system sees a justification from a mixture of them.
+
+ 3. The *Leibniz inference rule* says that $E[z ≔ X] = E[z ≔ Y]$ whenever $X = Y$;
+    i.e., it justifies substituting “equals for equals”.
+
+    Leibniz allows us to use an equation to rewrite a part of an expression; and
+    so, it justifies the use of ‘calculation hints’.
+
+    Leibniz says: Two expressions are equal (in all states) precisely when
+    replacing one by the other in any expression $E$ does not change the value of
+    $E$ (in any state).
+
+      {{{begin-box(blue)}}}
+    A /function/ $f$ is a rule for computing a value from another value.
+
+    If we define $f\, x = E$ using an expression, then /function application/ can
+    be defined using textual substitution: $f \, X = E[x ≔ X]$. That is,
+    expressions can be considered functions of their variables
+    ---but it is still expressions that are the primitive idea, the building blocks.
+
+    Using functions, Leibniz says /if X = Y then f X = f Y, for any function f/.
+    That is, if two things are actually the same, then any (/f-/)value extracted
+    from one must be the same when extracted from the other.
+    {{{end-box}}}
+
+    Again: Unlike the Substitution rule, which allows us to instantiate /any/
+    theorem, the Leibniz rule is meant for *applying equational theorems deeper
+    within expressions*. Later on, we will look at ‘monotonicity rules’ which will
+    let us apply inclusion (≤, ⇒, ⊑) theorems deep within expressions.
+
+    The kbd:with syntax is overloaded for this rule as well.
+
+ ------
+
+ In addition to these rules, suppose that we have
+    $2 · a = a + a$ (“Twice”) and $-1 · a = - a$ (15.20) as axioms;
+    then we can form the following proof.
+
+ \[
+ \Rule[Transitivity\; of\; =]
+ {\large
+   \Rule[\small Substitution]
+   {\Large \Rule{✓}{-1 · a \,=\, - a} }
+   { (- 1) · 2 · (x + y) \,=\, - (2 · (x + y)) }
+   \And
+   \Rule[\small Leibniz]
+   {\Large \Rule{✓}{2 · a = a + a} }
+   { - (2 · (x + y)) \,=\,    -((x + y) + (x + y)) }
+ }{(- 1) · 2 · (x + y) \,=\, -((x + y) + (x + y))}
+ \]
+
+ This is known as a /natural deduction proof tree/; one begins ‘reading’ such a
+ proof from the very *bottom*: Each line is an application of a rule of reasoning,
+ whose assumptions are above the line; so read upward.
+ The *benefit* of this approach is that *rules guide proof construction*; i.e., it is
+ goal-directed.
+
+ However the *downsides are numerous*:
+ - So much horizontal space for such a simple proof!
+ - One has to *repeat* common subexpressions, such as the
+   $-(2 · (x + y))$.
+ - For comparison with other proof notations, such as Hilbert style,
+   see “[[http://www.cse.yorku.ca/~logicE/misc/logicE_intro.pdf][Equational Propositional Logic]]” or LADM-§6.
+
+ Instead, we may use a more ‘linear’ proof format:
+ \begin{calc}
+ (- 1) · 2 · (x + y)
+ \step{ 15.20) $- a \,=\, - 1 · a$
+       ─ Using implicit substitution rule }
+ - (2 · (x + y))
+ \step{ “Twice”
+       ─ Using implicit Leibniz with $a ≔ x + y$ }
+ -((x + y) + (x + y))
+ \end{calc}
+
+ In this equational style, instead of a *tree* (on the left)
+ we use a *sequential chain of equalities* (on the right):
+
+ #+begin_parallel org
+ $$\Rule[Leibniz]{X \,=\, Y}{E[z ≔ X] \,=\, E[z ≔ Y]}$$
+
+ #+html: <br>
+
+ \begin{calc}
+     E[z ≔ X]
+ \step{ X = Y }
+     E[z ≔ Y]
+ \end{calc}
+ #+end_parallel
+
+ In this way, we may use the Substitution rule to create theorems that can be
+ used with the Leibniz rule and then use the Transitivity rule to conclude
+ that the first expression of an equational proof is equivalent to the last one.
+ {{{begin-box(orange, )}}}
+ To show that $L = R$, transform $L$ into $R$ by a series of substitutions
+ of equals for equals. (If $R$ has more ‘structure’, then begin at $R$ and
+ transform to $L$.)
+ {{{end-box}}}
+
+ --------------------------------------------------------------------------------
+
+ + Transitivity allows us to conclude the first expression in a calculation
+    is equal to the last expression in the calculation.
+ + Reflexivity allows us to have ‘empty’ calculations and “no (expression) change”
+      calculation steps
+ + Symmetry allows us to use an equation $LHS = RHS$
+      “in the other direction” to replace an instance of $RHS$ by $LHS$.
+
+ Equational proofs thus have this shape:
+
+ \begin{calc}
+   P
+ \step{ $P = Q[z ≔ X]$ }
+   Q[z ≔ X]
+ \stepmany{ \line{make a “remark” about $Q[z ≔ X]$}
+            \line{or the direction of the proof}
+            \line{or “remove superflous parentheses”}
+            \line{or “insert parentheses for clairty”} }
+   Q[z ≔ X]
+ \step{ $X = Y$ }
+   Q[z ≔ Y]
+ \step{ $R = Q[z ≔ Y]$ ──note the change in ‘direction’ }
+   R
+ \end{calc}
+
+ Which is far *easier to read and write* than:
+ \[
+ \Rule[Transitivity]{
+  P = Q[z ≔ X]
+  \And
+  \Rule[Transitivity]{
+    \Rule[\large Transitivity]{ \LARGE
+      \Rule[Reflexivity]{}{Q[z ≔ X] \eq Q[z ≔ X]}
+      \And
+      \Rule[Leibniz]{X \eq Y}{Q[z ≔ X] \eq Q[z ≔ Y]}
+      }{\LARGE Q[z ≔ X] \eq Q[z ≔ Y]}
+    \And
+    {\LARGE \Rule[\large Symmetry]{R \eq Q[z ≔ Y]}{Q[z ≔ Y] \eq R}
+    }}
+ {\large \text{$Q[z ≔ X] \eq R$}}}
+ {P = R}
+ \]
+
+    *The structure of equational proofs allows implicit use of infernece rules
+    Leibniz, Transitvitity & Symmetry & Reflexivity of equality, and Substitution.* In contrast, the
+    structure of proof trees is no help in this regard, and so all uses of
+    inference rules must be mentioned explicitly.
+    # In fact, more suitable inference rules for proof trees are those of /natural
+    # deduction/ (𝑵𝑫): Each propositional operator ⊕ has two rules, one to show
+    # how to introduce it into a theorem (i.e., prove a theorem involving it) and
+    # one to show how to use it (eliminate it) to derive new truths; as such, 𝑵𝑫
+    # has no axioms and the ⇒-elimination inference rule is known as “modus
+    # ponens”, a theorem in 𝑬.
+
+ --------------------------------------------------------------------------------
+
+    Leibniz is often used with Substitution, as follows
+    ---supposing we know the theorem =“Half”= $2 · x / 2 = x$:
+
+    \begin{calc}
+      2 · j / 2 = 2 · (j - 1)
+    \step{ Half, with $x ≔ j$ }
+      j = 2 · (j - 1)
+    \end{calc}
+
+    We are using Leibniz with the premise $2 · j / 2 = j$.
+    We can use this premise only if it is a theorem. It is, because
+    $2 · x / 2 = x$ is a theorem and, therefore, by Substitution,
+    $(2 · x / 2 = x)[x ≔ j]$ is a theorem.
+
+    If a use of Substitution is simple enough, as in this case, we may leave
+    off the indication “with $x ≔ j$”.
+
+* Boolean Expressions and Laws
+  :PROPERTIES:
+  :CUSTOM_ID: Boolean-Expressions-and-Laws
+  :END:
 
  The type of propositions is known as the *Booleans* and denoted 𝔹.
     #+begin_src math
 𝔹 ::= true | false
     #+end_src
 
-*** Equality: “=” and “≡”
-    :PROPERTIES:
-    :CUSTOM_ID: Equality-and
-    :END:
+** Equality: “=” and “≡”
+   :PROPERTIES:
+   :CUSTOM_ID: Equality-and
+   :END:
 
-    For instance, the notion of equality on any type τ is
-    typed ~_=_ : τ → τ → 𝔹~; i.e., equality takes two values of a type τ
-    and returns a propositional value.
+   For instance, the notion of equality on any type τ is
+   typed ~_=_ : τ → τ → 𝔹~; i.e., equality takes two values of a type τ
+   and returns a propositional value.
 
-    #+begin_quote
-    In general, the “continued equality” $x = y = z$
-    is *read conjunctively*: Both $x = y$ /and/ $y = z$.
-    However, for the special case τ being 𝔹, the expression
-    $x = y = z$ could be *read associativity*: $(x = y) = z$.
+   #+begin_quote
+   In general, the “continued equality” $x = y = z$
+   is *read conjunctively*: Both $x = y$ /and/ $y = z$.
+   However, for the special case τ being 𝔹, the expression
+   $x = y = z$ could be *read associativity*: $(x = y) = z$.
 
-    These two ways to read (parse) a continued equality
-    give different operators on 𝔹. The associative equality
-    is popularly written as ‘⇔’ but, unfortunately, not usually treated
-    as an equality at all! In this class, we write the associative equality
-    as ‘≡’ and read it as “equivales”.
+   These two ways to read (parse) a continued equality
+   give different operators on 𝔹. The associative equality
+   is popularly written as ‘⇔’ but, unfortunately, not usually treated
+   as an equality at all! In this class, we write the associative equality
+   as ‘≡’ and read it as “equivales”.
 
-    See [[https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem][The associativity of equivalence and the Towers of Hanoi problem]].
-    #+end_quote
+   See [[https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem][The associativity of equivalence and the Towers of Hanoi problem]].
+   #+end_quote
 
- The phrase $p ≡ q$ may be read as
-    - /p is equivalent to q/, or
-    - /p exactly when q/,
-    - /p if-and-only-if q/,
+The phrase $p ≡ q$ may be read as
+   - /p is equivalent to q/, or
+   - /p exactly when q/,
+   - /p if-and-only-if q/,
 
-    This operator is just equality on the Booleans:
-    | Definition of ≡ |   | ~(p ≡ q) = (p = q)~ |
+   This operator is just equality on the Booleans:
+   | Definition of ≡ |   | ~(p ≡ q) = (p = q)~ |
 
-    The need for a new name for an existing concept is that they have different
-    *notational conventions*: Firstly, “≡” has lower precedence than “=” and
-    secondly,
-    - = is conjunctive :: $\big(p = q = r\big) \quad=\quad \big( (p = q)
-      \;\land\; (q = r)\big)$
-    - ≡ is associative :: $\big(p ≡ q ≡ r\big) \quad=\quad \big((p ≡ q) ≡ r\big) \quad=\quad \big(p ≡ (q ≡ r)\big)$
+   The need for a new name for an existing concept is that they have different
+   *notational conventions*: Firstly, “≡” has lower precedence than “=” and
+   secondly,
+   - = is conjunctive :: $\big(p = q = r\big) \quad=\quad \big( (p = q)
+     \;\land\; (q = r)\big)$
+   - ≡ is associative :: $\big(p ≡ q ≡ r\big) \quad=\quad \big((p ≡ q) ≡ r\big) \quad=\quad \big(p ≡ (q ≡ r)\big)$
 
-    For example, $\false ≡ \true ≡ \false$ is $\true$, whereas
-    $\false = \true = \false$ is $\false$.
+   For example, $\false ≡ \true ≡ \false$ is $\true$, whereas
+   $\false = \true = \false$ is $\false$.
 
-*** Useful Operators
-    :PROPERTIES:
-    :CUSTOM_ID: Useful-Operators
-    :END:
- The Booleans have a number of useful operators that model reasoning,
-    such as:
-    #+caption: Boolean operators and similar numeric operators
-    | Operator    | Booleans (𝔹)    | Numbers (ℤ)                 |
-    | /           | >               |                             |
-    |-------------+-----------------+-----------------------------|
-    | “and”       | =_∧_ : 𝔹 → 𝔹 → 𝔹= | “minimum” =_↓_ : ℤ → ℤ → ℤ=   |
-    | “or”        | =_∨_ : 𝔹 → 𝔹 → 𝔹= | “maximum” =_↑_ : ℤ → ℤ → ℤ=   |
-    | “not”       | =¬_ : 𝔹 → 𝔹=      | “negation” =-_ : ℤ → ℤ → ℤ=   |
-    | “implies”   | =_⇒_ : 𝔹 → 𝔹 → 𝔹= | “inclusion” =_≤_ : ℤ → ℤ → 𝔹= |
-    | [[https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem][“Equivales”]]  | =_≡_ : 𝔹 → 𝔹 → 𝔹= | “equality” =_=_ : ℤ → ℤ → 𝔹=  |
+** Useful Operators
+   :PROPERTIES:
+   :CUSTOM_ID: Useful-Operators
+   :END:
+The Booleans have a number of useful operators that model reasoning,
+   such as:
+   #+caption: Boolean operators and similar numeric operators
+   | Operator    | Booleans (𝔹)    | Numbers (ℤ)                 |
+   | /           | >               |                             |
+   |-------------+-----------------+-----------------------------|
+   | “and”       | =_∧_ : 𝔹 → 𝔹 → 𝔹= | “minimum” =_↓_ : ℤ → ℤ → ℤ=   |
+   | “or”        | =_∨_ : 𝔹 → 𝔹 → 𝔹= | “maximum” =_↑_ : ℤ → ℤ → ℤ=   |
+   | “not”       | =¬_ : 𝔹 → 𝔹=      | “negation” =-_ : ℤ → ℤ → ℤ=   |
+   | “implies”   | =_⇒_ : 𝔹 → 𝔹 → 𝔹= | “inclusion” =_≤_ : ℤ → ℤ → 𝔹= |
+   | [[https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem][“Equivales”]]  | =_≡_ : 𝔹 → 𝔹 → 𝔹= | “equality” =_=_ : ℤ → ℤ → 𝔹=  |
 
-    These operators can be defined /informally/, as done below, but we shall follow
-    an /axiomatic/ definition as done in LADM by providing an /interface/ of
-    properties that they satisfy instead of any particular /implementation/. Later
-    in the class when we get to the =if_then_else_fi= construct, we may provide
-    explicit implementations and prove them to be equal to the operations
-    specified axiomatically.
+   These operators can be defined /informally/, as done below, but we shall follow
+   an /axiomatic/ definition as done in LADM by providing an /interface/ of
+   properties that they satisfy instead of any particular /implementation/. Later
+   in the class when we get to the =if_then_else_fi= construct, we may provide
+   explicit implementations and prove them to be equal to the operations
+   specified axiomatically.
 
-    #+caption: Example explicit definitions ---not used in this class
-    | “p ∧ q” is “true” whenever both “p” and “q” are “true”, otherwise it is “false” |
-    | “m ↓ n” is “m” whenever “m ≤ n”, otherwise it is “n”                            |
+   #+caption: Example explicit definitions ---not used in this class
+   | “p ∧ q” is “true” whenever both “p” and “q” are “true”, otherwise it is “false” |
+   | “m ↓ n” is “m” whenever “m ≤ n”, otherwise it is “n”                            |
 
-*** Boolean Laws and Numeric Laws
-    :PROPERTIES:
-    :CUSTOM_ID: Boolean-Laws-and-Numeric-Laws
-    :END:
+** Boolean Laws and Numeric Laws
+   :PROPERTIES:
+   :CUSTOM_ID: Boolean-Laws-and-Numeric-Laws
+   :END:
 To better understand the 𝔹ooleans, it can be useful to compare their laws
     with those on numbers. For instance, the =Definition of ⇒= at first glance is
     tremendously cryptic: Why in the world would anyone define implication in
@@ -548,7 +1161,6 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
     | Right-zero of ⇒      | $p ⇒ \true ≡ \true$               | $n ≤ +∞ \,≡\, \true$              |
     | Definition of ¬      | $p ⇒ \false ≡ ¬ p$                | ─nope─                            |
     |----------------------+-----------------------------------+-----------------------------------|
-
 * TODO COMMENT Quantification and Predicate Logic
   :PROPERTIES:
   :CUSTOM_ID: Quantification-and-Predicate-Logic
