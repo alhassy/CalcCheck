@@ -860,10 +860,10 @@ and so the first line in the definition above could be omitted.
  \Rule[RefreshLeft]{x, y}{3, y} \quad
  \Rule[RefreshRight]{x, y}{x, 5}
  \]
- \[ \Rule[ShiftLeft_d \quad\text{(provided $0 ≤ d ≤ y$ and $x + d ≤ 3$)}]{x, y}{x + d, y -
+ \[ \Rule[ShiftLeft_d \quad\text{(provided $y - d = 0$ or $x + d = 3$)}]{x, y}{x + d, y -
  d} \]
  \[
- \Rule[ShiftRight_d \quad\text{(provided $0 ≤ d ≤ x$ and $y + d ≤ 5$)}]{x, y}{x - d, y + d}
+ \Rule[ShiftRight_d \quad\text{(provided $x - d = 0$ or $y + d = 5$)}]{x, y}{x - d, y + d}
  \]
 
  *Exercise [[#water-bucket-logics]].1*: Using this logic, prove the theorem =0, 4=.
@@ -891,8 +891,9 @@ and so the first line in the definition above could be omitted.
  1. The axiom says we start out with empty buckets.
  2. The zero rules says we can empty out buckets.
  3. The refresh rules say we can fill up buckets to being full.
- 4. The shift rules say we can transfer appropriate amounts of water between the
-    buckets.
+ 4. The shift rules say we can pour out water from one bucket to
+    the other, such that the first is emptied *or* the second is filled.
+    (In particular, we cannot pour an arbitrary /chosen/ amount of water. )
 
  Then the theorem says we can measure 4 litres of water ---using only a 3 and 5
  litre buckets and an unlimited water supply.
@@ -911,8 +912,8 @@ and so the first line in the definition above could be omitted.
 
    \[\Rule[ZeroLeft]{}{x ◇ y ⟶ 0 ◇ y} \quad \Rule[ZeroRight]{}{x ◇ y ⟶ x ◇ 0}\]
    \[\Rule[RefreshLeft]{}{x ◇ y ⟶ 3 ◇ y} \quad \Rule[RefreshRight]{}{x ◇ y ⟶ x ◇ 5} \]
-   \[\Rule[ShiftLeft_d]{\text{(provided $0 ≤ d ≤ y$ and $x + d ≤ 3$)}}{x ◇ y ⟶ (x+d) ◇ (y-d)} \]
-   \[\Rule[ShiftRight_d]{\text{(provided $0 ≤ d ≤ x$ and $y + d ≤ 5$)}}{x ◇ y ⟶ (x - d) ◇ (y + d)}\]
+   \[\Rule[ShiftLeft_d]{\text{(provided $y - d = 0$ or $x + d = 3$)}}{x ◇ y ⟶ (x+d) ◇ (y-d)} \]
+   \[\Rule[ShiftRight_d]{\text{(provided $x - d = 0$ or $y + d = 5$)}}{x ◇ y ⟶ (x - d) ◇ (y + d)}\]
 
  *Exercise [[#water-bucket-logics]].3:* Finish reading this section, then come back and
  prove the theorem =0 ◇ 0 ⟶ 0 ◇ 4= using a /calculational proof/.
@@ -966,6 +967,9 @@ and so the first line in the definition above could be omitted.
 
  The theorem then says that it is possible for the computer to start at $(0, 0)$
  and finish with memory store $(0, 4)$.
+
+ The idea to use *inference rules as computation*
+ is witnessed by the [[https://alhassy.github.io/PrologCheatSheet/CheatSheet.pdf][Prolog]] programming language.
 
  Of-course, we could also re-use the water buckets interpretation of 𝑾𝑩.
  #+end_details
