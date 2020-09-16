@@ -2,29 +2,46 @@
 
 
 
-<div style="column-rule-style:none;column-count:2;"
 
+<div style="column-rule-style:none;column-count:2;"<p>
+
+</p>
+
+<p>
  <div style="padding: 1em; background-color: pink; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
+</p>
 
 <h2>
 
-[`CalcCheck` Documentation](https://alhassy.github.io/CalcCheck/Docs)
+<p>
+<a href="https://alhassy.github.io/CalcCheck/Docs"><code>CalcCheck</code> Documentation</a>
+</p>
 
 </h2>
 
+<p>
  </div>
+</p>
 
+<p>
 
+</p>
 
+<p>
  <div style="padding: 1em; background-color: pink; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
+</p>
 
 <h2>
 
-[Lecture Notes](https://alhassy.github.io/CalcCheck/LectureNotes.html)
+<p>
+<a href="https://alhassy.github.io/CalcCheck/LectureNotes.html">Lecture Notes</a>
+</p>
 
 </h2>
 
+<p>
  </div>
+</p>
 </div>
 
 ![img](images/proof trees vs calculational proofs.png)
@@ -59,7 +76,12 @@ Videos
     Continuing the discussion on Boolean operators
     and how they can be used to model puzzles.
 
-4.  <span style="color:red;">**not yet given**</span>
+4.  Substitution ─ Wolfram (not yet available), [Musa](https://youtu.be/7cmretG3Zzg)
+
+    Textual substitution is a way to implement function application,
+    grafting on trees, and can be used for assignment commands in programming.
+
+5.  <span style="color:red;">**not yet given**</span>
 
  </div>
 
@@ -71,7 +93,7 @@ Videos
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">⇨ [Github Repository](https://github.com/alhassy/CalcCheck) ⇦</td>
+<td class="org-left">⇨ <a href="https://github.com/alhassy/CalcCheck">Github Repository</a> ⇦</td>
 </tr>
 </tbody>
 </table>

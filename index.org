@@ -19,7 +19,10 @@
 
 #+macro: end-box @@html: </div>@@
 
-:Books_todo:
+* TODO COMMENT Books
+  :PROPERTIES:
+  :CUSTOM_ID: COMMENT-Books
+  :END:
 {{{begin-box(#E5E7E9 , hi)}}}
 
  + Program Construction
@@ -38,10 +41,13 @@ For universal and existential quantification, CalcCheck uses the same notation a
 The first half of the book "Using Z" is an introduction to logic via natural deduction, and to basic discrete mathematics covering set, functions, and relations, all in the Z notation.
 
 {{{end-box}}}
-:end:
+
+* Links to docs & notes :ignore:
+  :PROPERTIES:
+  :CUSTOM_ID: Links-to-docs-notes
+  :END:
 
 #+begin_parallelNB
-
 
 {{{begin-box(pink,)}}}
 #+html: <h2>
@@ -57,10 +63,14 @@ The first half of the book "Using Z" is an introduction to logic via natural ded
 #+html: </h2>
 {{{end-box}}}
 
-
 #+end_parallelNB
 
 [[file:images/proof trees vs calculational proofs.png]]
+
+* Videos :ignore:
+  :PROPERTIES:
+  :CUSTOM_ID: Videos
+  :END:
 
 {{{begin-box(#99FFCC, )}}}
 #+html: <h2>
@@ -89,7 +99,12 @@ Videos
    Continuing the discussion on Boolean operators
    and how they can be used to model puzzles.
 
-4. [[color:red][*not yet given*]]
+4. Substitution ─ Wolfram (not yet available), [[https://youtu.be/7cmretG3Zzg][Musa]]
+
+   Textual substitution is a way to implement function application,
+   grafting on trees, and can be used for assignment commands in programming.
+
+5. [[color:red][*not yet given*]]
 
    # ─⟦Maths for Computing ⟧
    # Associated notes: https://alhassy.github.io/CalcCheck/
