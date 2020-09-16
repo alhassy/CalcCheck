@@ -26,7 +26,7 @@
   {{{end-box}}}
 :End:
 
-* Notational Setup :ignore:
+* Notational Setup                                                   :ignore:
   :PROPERTIES:
   :CUSTOM_ID: Notational-Setup
   :END:
@@ -80,7 +80,14 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 #+end_latex-definitions
 
 #+html: <p style="display:none">
-$$\newcommand\exp[1]{\mathsf{exp}_{#1}\,}$$
+$$\newcommand\exp[1]{\mathsf{exp}_{#1}\,}
+%
+% for calc environment
+% line breaks with extra whitespace using phantom formula
+% \hdashline
+\def\NL{\\ \phantom{Σ} \\}
+\def\NLtwo{\\ \phantom{\substack{Σ \\ Σ}} \\}
+$$
 #+html: </p>
 
 
@@ -202,13 +209,13 @@ $$\newcommand\exp[1]{\mathsf{exp}_{#1}\,}$$
  than semantically. ---/Program Construction/ by Roland Backhouse
 
  For example, below are two arguments showing that $\sqrt[n]{k}$ is a rational
- number precisely when $k$ is a so-called perfect /n/-th root ---consequently,
+ number precisely when /integer/ $k$ is a so-called perfect /n/-th root ---consequently,
  since 2 is not a perfect square, $\sqrt{2}$ is not rational.
 
 {{{begin-box(#e5f5e5, Classical Proof: Non-perfect powers have irrational
 roots)}}}
 
-Suppose that $k$ is not a perfect /n/-th power ---i.e., not of the form /𝓍ⁿ/---
+Suppose that /integer/ $k$ is not a perfect /n/-th power ---i.e., not of the form /𝓍ⁿ/---
 then there is some prime $p$ in the factorisation of $k$ that has its exponent,
 say $\exp{p} k$, being not a multiple of $n$.  But if $\sqrt[n]{k} \eq
 a/b$ then $\exp{p}{k} \eq \exp{p}{a^n} - \exp{p}{b ^ n} \eq n · \exp{p}{a} - n ·
@@ -249,8 +256,10 @@ problem domain.
   ∃\, a, b •\; k · a ^n = b ^n
   \stepmany{ \line{Let $\exp{m} x$ be the number of times that $m$ divides $x$.}
    \line{For example, $\exp{2} 48 \eq 4$ and $\exp{2} 49 \eq 0$.}
+   \NL
    \line{The numbers $p$ with $∀ m : ℤ⁺ \,•\, \exp{m}p \,≠\, 0 \,≡\, m \,=\, p$ are called $prime$ numbers.}
-   \line{Let variable $p$ ranges over primes numbers. }
+   \line{Let variable $p$ ranges over prime numbers. }
+   \NL
    \line{Fundamental theorem of arithmetic: Numbers are determined by their prime powers.}
    \line{That is, $\big(∀ \,p\, •\; \exp{p} x \eq f(p)\big) \;≡\; x \,=\, \big(Π\, p\, •\; p^{f(p)}\big)$ for any $f$.}
    \line{As such, every number is the product of its prime powers:}
@@ -326,7 +335,6 @@ roots, which may be viewed as a [[https://youtu.be/t39wHoFHbvY][Youtube video]] 
      that, using the inference rules, is proved equal to an axiom or a previously
      proved theorem.
   {{{end-box}}}
-
 
 ** What is Discrete Mathematics
    :PROPERTIES:
@@ -594,7 +602,8 @@ and so the first line in the definition above could be omitted.
 
  {{{begin-box(teal)}}}
   Using the informal English definition of substitution, one quickly notices
-  $E[x ≔ x] = E$ and $E[x ≔ y][y ≔ x] = E$.
+  $E[x ≔ x] = E$ and /provided/ $y$ does not occur in $E$:
+  $E[x ≔ y][y ≔ x] = E = E[y ≔ F]$.
  {{{end-box}}}
 
   Since expressions are either variables of functions applications,
