@@ -77,12 +77,12 @@ The first half of the book "Using Z" is an introduction to logic via natural ded
 Videos
 #+html: </h2>
 
-1. Introduction to Discrete & Calculational Maths ─[[https://web.microsoftstream.com/video/76eac408-540e-47f9-a83b-d2caad93443c][Wolfram]], [[https://youtu.be/5IyMizFhHMA][Musa]]
+1. Introduction to Discrete & Calculational Maths ─[[https://web.microsoftstream.com/video/76eac408-540e-47f9-a83b-d2caad93443c][Wolfram]], [[https://youtu.be/5IyMizFhHMA][Musa]] kbd:Sep_8
 
    What is a calculational proof? What is discrete mathematics?
    How is math related to programming: “proofs-as-programs”.
 
-2. Grammatical Analysis and Boolean Operators ─[[https://web.microsoftstream.com/video/3216c424-1494-4ed1-9f7d-6591bde71fc3][Wolfram]] (only second part), [[https://youtu.be/0wM0WXLJULQ][Musa]]
+2. Grammatical Analysis and Boolean Operators ─[[https://web.microsoftstream.com/video/3216c424-1494-4ed1-9f7d-6591bde71fc3][Wolfram]] (only second part), [[https://youtu.be/0wM0WXLJULQ][Musa]]  kbd:Sep_10
 
    A proof is a “story”, and calculation hints are the “transitions” that make
    the story flow nicely.  The formulae are the “sentences” and they are formed
@@ -94,20 +94,43 @@ Videos
    In contrast, 𝔹oolean arithmetic has tiny 2×2 “truth tables”.
    As such, 𝔹  may be easier to learn than ℕ.
 
-3. Ladies and Tigers, a teaser ─[[https://web.microsoftstream.com/video/3153223e-a48a-4177-bb2b-013d0694b336][Wolfram]], [[https://youtu.be/9oeJtu4JjSQ][Musa]]
+3. Ladies and Tigers, a teaser ─[[https://web.microsoftstream.com/video/3153223e-a48a-4177-bb2b-013d0694b336][Wolfram]], [[https://youtu.be/9oeJtu4JjSQ][Musa]]  kbd:Sep_11
 
    Continuing the discussion on Boolean operators
    and how they can be used to model puzzles.
 
-4. Substitution ─ Wolfram (not yet available), [[https://youtu.be/7cmretG3Zzg][Musa]]
+4. Substitution ─Wolfram (not yet available), [[https://youtu.be/7cmretG3Zzg][Musa]]  kbd:Sep_15
 
    Textual substitution is a way to implement function application,
    grafting on trees, and can be used for assignment commands in programming.
 
-5. [[color:red][*not yet given*]]
+5. Inference rules, Proofs-are-programs, and Equivalence Part I ─Wolfram (not
+   yet available), [[https://youtu.be/OXL-FvDqhX8][Musa]] kbd:Sep_17
 
-   # ─⟦Maths for Computing ⟧
-   # Associated notes: https://alhassy.github.io/CalcCheck/
+   Update: There will be no knights and knaves problems in the upcoming Sep 22 midterm;
+   but possibly in a future midterm.
+
+   The inference rules act as the foundational justification for the equational
+   proof style; the online lecture notes go into more detail.
+
+6. Inference rules, Proofs-are-programs, and Equivalence Part II ─Wolfram (not
+   yet available), [[https://youtu.be/JxRZC2UMJb0][Musa]] (with lofi music) kbd:Sep_18
+
+   Quickly show how a program can be shown to meet its specification,
+   discuss equivalence and negation for the purposes of solving
+   knights and knaves problems.
+
+7. [[color:red][*not yet given*]]
+
+   kbd:Sep_22 is the first midterm; it is online during class time.
+
+:Video_description:
+ ─⟦Maths for Computing 𝓃⟧
+
+?
+
+Associated notes: https://alhassy.github.io/CalcCheck/
+:End:
 
 {{{end-box}}}
 

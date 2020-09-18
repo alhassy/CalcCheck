@@ -106,32 +106,6 @@ $$
                \\newenvironment{calc}{\\begin{align*} & }{\\end{align*}}"))
 #+end_src
 
-#+RESULTS:
-#+begin_example
-\documentclass{article}
-\usepackage[usenames]{color}
-[PACKAGES]
-[DEFAULT-PACKAGES]
-\pagestyle{empty}             % do not remove
-% The settings below are copied from fullpage.sty
-\setlength{\textwidth}{\paperwidth}
-\addtolength{\textwidth}{-3cm}
-\setlength{\oddsidemargin}{1.5cm}
-\addtolength{\oddsidemargin}{-2.54cm}
-\setlength{\evensidemargin}{\oddsidemargin}
-\setlength{\textheight}{\paperheight}
-\addtolength{\textheight}{-\headheight}
-\addtolength{\textheight}{-\headsep}
-\addtolength{\textheight}{-\footskip}
-\addtolength{\textheight}{-3cm}
-\setlength{\topmargin}{1.5cm}
-\addtolength{\topmargin}{-2.54cm}\usepackage{color}
-               \def\BEGINstep{ \langle }
-               \def\ENDstep{ \rangle }
-               \newcommand{\step}[2][=]{ \\ #1 \;\; & \qquad \color{maroon}{\BEGINstep \text{ #2 } \ENDstep} \\ & }
-               \newenvironment{calc}{\begin{align*} & }{\end{align*}}
-#+end_example
-
 :hide:
  \begin{calc}
   x
@@ -1187,6 +1161,223 @@ and so the first line in the definition above could be omitted.
 
     If a use of Substitution is simple enough, as in this case, we may leave
     off the indication “with $x ≔ j$”.
+
+* The Assignment Statement
+  :PROPERTIES:
+  :CUSTOM_ID: The-Assignment-Statement
+  :END:
+
+1. Textual substitution is inextricably intertwined with equality.
+
+2. Likewise, assignment statements in programming can be reasoned
+   about using textual substitution.
+
+   The coincidence of notations is deliberate.
+
+   Rather than understanding how a program is /executed/,
+   we can also understand a program in terms of /syntactic substitution/.
+
+3. The <<<assignment statement>>>
+   ~x := E~ evaluates expression =E= (which we assume “never crashes”)
+   and stores the result in variable =x=.
+   The statement is read “ ~x~ becomes ~E~ ”.
+
+   States may be represented by predicates on variables and so *imperative
+   commands are relations on predicate*: /Given two propositions $G, R$ making/
+   /use of program variables, we write $R \;⇒[C]\;\; G$ to mean “in a state $R$, the
+   execution of command $C$ terminates in state $G$”/.
+   ( This is also known as a /Hoare Triple/ and written ={R} C {G}=. )
+
+   For  example,
+   | ~v = 5 ∧ w = 4 ∧ x = 8   ⇒[ v := v + w ]   v = 9 ∧ w = 4 ∧ x = 8~ |
+   |-----------------------------------------------------------------|
+   | ~x = 0   ⇒[ x := x + 1 ]  x > 0~                                  |
+   | ~x > 5   ⇒[ x := x + 1]  x > 0~                                   |
+   |-----------------------------------------------------------------|
+   | ~(x = 5   ⇒[ x := x + 1 ]  x = 7)   ≡   false~                    |
+   |-----------------------------------------------------------------|
+   | ~5 ≠ 5   ⇒[ x := 5 ]   x ≠ 5~                                     |
+
+   In practice, one begins with *the goal G* (also known as the
+   ‘postcondition’) and /forms/ a suitable *command C* that ensures $G$ but may
+   require some provisos to be given, which are conjuctively known the *required R*
+   (also known as the ‘precondition’).
+
+   | $R \,\;⇒[C]\;\; G$ | ≈ | “Get goal $G$ using command $C$, by requiring $R$.” |
+
+   This is only /reasonable/: We have some desired goal $G$ and we wish to form an
+   imperative program =C= whose execution will ensure the goal $G$, but the
+   construction of =C= may require some necessary provisos $R$.
+
+** What is the definition of $R \;⇒[C]\;\; G$?
+   :PROPERTIES:
+   :CUSTOM_ID: What-is-the-definition-of-R-C-G
+   :END:
+
+   It is defined by the /shape/ of the possible commands =C=.
+
+   For example, the *<<<sequential>>> command* =C₁ ⍮ C₂= is executed by first
+   executing =C₁= then by executing =C₂=. As such, to obtain a goal state $G$, we
+   may construct a partial program $C₂$ which in-turn requires an intermediary
+   state $I$; then to establish state $I$, we may construct a program =C₁= which
+   requires a state $R$. This is *divide and conquer*.
+
+   \[
+   \Rule[Sequencing]{R \;⇒[C₁]\;\; I \And I \;⇒[C₂]\;\; G}{R \;⇒[C₁⍮C₂]\;\; G}
+   \]
+
+   Notice that this is similar to $\Rule{x ≤ y \And y ≤ z}{x ≤ z}$ but unlike
+   inclusions ‘≤’ which are either true or false, the relationships ‘$⇒[C]$’ are
+   /parameterised/ by commands $C$ and so it's important to *remember* which
+   commands /witnessed/ the relationship. To see the similarity even closely, let
+   us write $m ≤ₖ\, n \;≡\; m + k = n$, so that we have “a witness to the
+   inclusion”; then the ≤-transitivity becomes suspiciously similar to the
+   sequencing rule …  \[ \Rule[Addition]{x ≤_a y \And y ≤_b z}{x ≤_{a+b} z} \]
+   The reason that we usually use ‘≤’ instead of ‘≤ₖ’, because if $x ≤ₖ\, y$
+   then there can only be one such $k$, namely $k = y - x$, and so the simpler
+   ‘≤’ simply marks whether such a (unique) $k$ exists or not. In contrast,
+   infinitely many programs =C= can be used to establish relationships $R ⇒[C] G$
+   and this is what makes programming interesting!
+
+** We define assignment using textual substitution
+   :PROPERTIES:
+   :CUSTOM_ID: We-define-assignment-using-textual-substitution
+   :END:
+
+   When your goal $G$ mentions a variable $x$,
+   then your goal state $G$ could be established
+   by using the command ~x := E~ for some choice of expression $E$
+   provided you know that $G[x ≔ E]$ is true to begin with.
+
+   For example, suppose we want to get the goal $i < 10$ /after/ executing ~i := 2
+   · i~. Then, this could only happen if /beforehand/ we had $(i < 10)[i ≔ 2 · i]$;
+   i.e., $2 · i < 10$; i.e., $i < 5$. Hence, starting in a state in which $i <
+   5$, the execution of ~i := 2 · i~ is guaranteed to terminate in a state with $i
+   < 10$.
+
+   This is summarised as follows.
+   \[
+   \mathsf{Definition\, of\, Assignment:}\quad G[x:= E] \;⇒[x:= E]\;\; G
+   \]
+
+   The ‘backwards’ nature of this rule ---working backward from the
+   postcondition--- is most easily understood via examples of the video lectures
+   that start with the goal and work back to the precondition.  See the first 5
+   minutes of this [[https://youtu.be/JxRZC2UMJb0][this video lecture]] for a taste of ‘working backwards’.  The
+   examples below also aim to demonstrate this idea.
+
+   This definition is also used when we allow /multiple assignments/
+   ~x₁, x₂, …, xₙ := E₁, E₂, …, Eₙ~ ---which, for distinct variables $xᵢ$,
+   is executed by first evlauating all the expressions $Eᵢ$
+   to yield values, say, $vᵢ$; then assigning $v₁$ to $x₁$, …, $vₙ$ to $xₙ$.
+   - Note that all expressions are evaluated before any assignments are
+     performed. E.g., ~x, y := y, x~ is a program that *swaps* the values of two
+     variables, ~x~ and ~y~:
+     | ~x = X ∧ y = Y   ⇒[x, y := y, x]  x = Y ∧ y = X~ |
+
+   - Python, for example, allows multiple assignments.
+
+   $$
+   \def\If#1{\;⇐[#1]\;\;} % goal ⇐[command] provisos
+   \def\Then#1{\;⇒[#1]\;\;} % provisos ⇒[command] goal
+   $$
+
+** Let's show a calculation!
+   :PROPERTIES:
+   :CUSTOM_ID: Let's-show-a-calculation
+   :END:
+
+   First, since *programming is a goal-directed activity*, let us begin with the
+   goal and use that to arrive at a required precondition.
+   How? Just as $y ≥ x \;≡\; x ≤ y$, we define
+   \[G \;⇐[C]\;\; R \quad≡\quad R \;⇒[C]\;\; G \]
+   Using this ‘turned around’ (/converse/) notation, we may begin with the goal.
+
+   :Swap:
+   Here's a common problem: We want to have $x = Y ∧ y = X$, how do we achieve this?
+   \begin{calc}
+   x = Y ∧ y = X
+   \step[\If{x, y := y, x}]{ Assignment rule }
+   (x = Y ∧ y = X)[x, y ≔ y, x]
+   \step[=\quad\qquad\qquad\;\;]{ Substitution }
+    y = Y ∧ x = X
+   \end{calc}
+   :End:
+
+   # LADM exercise 1.11.b
+   Let's use the assignment rule to *find a necessary precondition*:
+   When will the assignment ~x := x - 1~ ensure the goal state $x² + 2 · x = 3$?
+   \begin{calc}
+     x² + 2 · x = 3
+   \step[\If{x := x - 1}]{ Assignment rule }
+     (x² + 2 · x = 3)[x ≔ x - 1]
+   \step[=\qquad\qquad\quad]{ Substitution }
+     (x - 1)² + 2 · (x - 1) = 3
+   \step[=\qquad\qquad\quad]{ Arithmetic: Perform multiplications }
+     (x² - 2 · x + 1) + (2 · x - 2) = 3
+   \step[=\qquad\qquad\quad]{ Arithmetic: Collect like terms }
+     x² - 1 = 3
+   \step[=\qquad\qquad\quad]{ Arithmetic: Square roots }
+     x = ±2
+   \end{calc}
+   Hence, if $x$ is positive or negative 2, then the assignment
+   ~x := x - 1~ will ensure that $x$ satisfies the predicate state $x² + 2 · x =
+   3$
+   ---incidentally, after the assignment $x$ will have its value being
+   positive 1 or negative 3, which are both solutions to the equation
+    $x² + 2 · x = 3$.
+
+    kbd:Begin_Warning [[color:red][*At the moment, in CalcCheck notebooks, to keep things
+   clear, we are using =R ⇒[C] G= and /not (yet)/ using ~G ⇐[C] R~.*]] See the first 5
+   minutes of this [[https://youtu.be/JxRZC2UMJb0][this video lecture]] for a taste of ‘working backwards’.
+   kbd:End_Warning
+
+ When $I \;⇒[C]\;\; I$, one says that “state $I$ is *<<<invariant>>>* for
+ command $C$” or that “$C$ /maintains/ $I$”.
+
+** Calculating Assignments
+   :PROPERTIES:
+   :CUSTOM_ID: Calculating-Assignments
+   :END:
+
+   It is /often/ possible to *calculate* an assignment statement that satisfies a
+   given precondition-postcondition specification.
+   Many examples involve a property that is to be maintained invariant whilst
+   progress is made by incrementing (or decrementing) a counter.
+
+   E.g., suppose we want to increment =k= while maintain the value of the sum =j +
+   k=. How should we alter =j=? Rather than guess and check, we can /calculate/! Let
+   =S= be the value of the sum (whatever it may) and let =𝒳= be the unknown
+   assignment to =j=; then our goal is to “solve for 𝒳” in
+   \[j + k = S \Then{j,k := 𝒳, k+1} j+k = S\] Let's begin calculating!
+   \begin{calc}
+       j + k = S
+   \step[\If{j, k := 𝒳, k + 1}]{Assignment rule}
+       (j + k = S)[j, k ≔ 𝒳, k + 1]
+   \step[=\hspace{7em}]{ Substitution }
+       𝒳 + k + 1 = S
+   \step[⇐\hspace{7em}]{ Strengthening }
+       𝒳 + k + 1 = S = j + k
+   \step[=\hspace{7em}]{ Arithmetic: Substitution and +-cancellation }
+       𝒳 + 1 = j \;∧\; j + k = S
+   \step[=\hspace{7em}]{ Subtraction }
+       𝒳 = j - 1 \;∧\; j + k = S
+   \end{calc}
+   Hence, we have found a solution for the unknown assignment 𝒳,
+   and so have /calculated/:
+   \[ j + k = S \Then{j,k := j - 1, k+1} j+k = S \]
+
+   Within the above calculation, we have /silently/ used the following law:
+   \[
+   \Rule[Strengthening]{R′ ⇒ R \And R \Then{C} G}{R′ \Then{C} G}
+   \]
+
+   Here is a more complicated example: Suppose we are computing the square $s$
+   of a number $n$ *without* using multiplication or squaring ---only using
+   addition!---, and we have just incremented $n$, how should we alter $s$ so as
+   to /maintain/ its relationship to $n$? Exercise: Solve for the unknown
+   assignment 𝒳 in \[ s = n² \Then{s,n := 𝒳, n + 1} s = n² \]
+   # Solution: 𝒳 = s + n + n + 1
 
 * Boolean Expressions and Laws
   :PROPERTIES:
