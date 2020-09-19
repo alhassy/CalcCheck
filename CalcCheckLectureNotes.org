@@ -15,17 +15,6 @@
 #+HTML_HEAD: <link href="https://alhassy.github.io/blog-banner.css" rel="stylesheet" type="text/css" />
 # The last one has the styling for lists.
 
-# $1 colour eg “pink” or “hsl(157 75% 20%)” or “#e5f5e5”; $2 title
-#+macro: begin-box @@html: <div style="padding: 1em; background-color: $1; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3>$2</h3>@@
-
-#+macro: end-box @@html: </div>@@
-
-:Hide:
-  {{{begin-box(teal, Salam!)}}}
-
-  {{{end-box}}}
-:End:
-
 * Notational Setup                                                   :ignore:
   :PROPERTIES:
   :CUSTOM_ID: Notational-Setup
@@ -113,6 +102,17 @@ $$
   y
 \end{calc}
 :end:
+
+# $1 colour eg “pink” or “hsl(157 75% 20%)” or “#e5f5e5”; $2 title
+#+macro: begin-box @@html: <div style="padding: 1em; background-color: $1; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3>$2</h3>@@
+
+#+macro: end-box @@html: </div>@@
+
+:Hide:
+  {{{begin-box(teal, Salam!)}}}
+
+  {{{end-box}}}
+:End:
 
 * subtle colours :ignore:
   :PROPERTIES:
@@ -1167,9 +1167,16 @@ and so the first line in the definition above could be omitted.
   :CUSTOM_ID: The-Assignment-Statement
   :END:
 
-1. Textual substitution is inextricably intertwined with equality.
+#+begin_latex-definitions
+\def\If#1{\,\;⇐\!\![#1]\;\;\,} % goal ⇐[command] provisos
+\def\Then#1{\,\;⇒\!\![#1]\;\;\,} % provisos ⇒[command] goal
+#+end_latex-definitions
 
-2. Likewise, assignment statements in programming can be reasoned
+ # (load-file "~/Desktop/power-blocks.el")
+
+ Textual substitution is inextricably intertwined with equality.
+
+ Likewise, assignment statements in programming can be reasoned
    about using textual substitution.
 
    The coincidence of notations is deliberate.
@@ -1177,14 +1184,121 @@ and so the first line in the definition above could be omitted.
    Rather than understanding how a program is /executed/,
    we can also understand a program in terms of /syntactic substitution/.
 
-3. The <<<assignment statement>>>
-   ~x := E~ evaluates expression =E= (which we assume “never crashes”)
-   and stores the result in variable =x=.
-   The statement is read “ ~x~ becomes ~E~ ”.
+** From Comments to Hoare Triples
+   :PROPERTIES:
+   :CUSTOM_ID: More
+   :END:
 
+ #+begin_box Commenting Your Code :background-color cyan
+ When writing computer programs, it is very good practice to comment them
+ thoroughly in order to explain what is going on.  It helps the programmer to
+ avoid errors by enforcing greater clarity, and it helps others who need to
+ modify the program at a later date (including the one who wrote the program in
+ the first place!)
+
+ It is a good discipline, for example, to comment every variable declaration with
+ a statement about the variable's function in the program.  This has the
+ additional benefit of disciplining the programmer to use distinct variables for
+ distinct functions, rather than overloading a variable with several different
+ functions.
+
+ Good comments supplement  the program text with explanations of the program's
+ function and why the code that is used achieves that function.
+ #+end_box
+
+   The comments we write state formal properties of the program variables at a
+   particular point in the execution of the program.
+
+   Sometimes comments are written within braces, as in ~{ 0 < i } i := i - 1 { 0 ≤
+   i }~ which documents that before the assignment we know $0 < i$ and after the
+   assignment we know $0 ≤ i$. Such /machine checkable comments/ are also known as
+   *assertions* and many languages have src_plantuml[:exports code]{assert }
+   commands ---e.g., [[https://alhassy.github.io/PythonCheatSheet/CheatSheet.pdf][Python]] has them.
+
+   An assertion is a claim that a particular property about the program variables
+   is true at that point in the program's execution.
+
+   An expression of the form ~{ R } C { G }~, where $R, G$ are properties of the program
+   variables and $C$ is a program command, is called a <<<Hoare triple>>>.
+
+   Such expressions are *commented programs*, but they are also *Boolean
+     expressions*: Triples ~{ R } C { G }~ denote the claim that, if the program
+     variables satisfy property $R$ before execution of command =C=, then execution
+     of =C= is guaranteed to terminate and, afterwards, the program variables will
+     satisfy property $G$. ( /Specifications are theorems!/ )
+
+ What can be said of the following *very interesting* triples?
+ | ~{ true  } i := 1 { i = 1 }~ |
+ | ~{ i = 1 } i := 0 { true  }~ |
+ | ~{ false } i := 1 { i = 0 }~ |
+ #+begin_details Solutions
+
+ The solutions below will generalise the exercises.
+
+ #+begin_box No assumptions needed!
+
+ | ~{ true } x := K { x = K }~  for a /constant/ $K$ |
+
+ A $\true$ precondition describes all states of the program variables; the claim
+ is thus that /whatever the initial value of the program variables/ (in particular
+ the variable /x/) after execution of the assignment ~x := K~ the property $x = K$
+ will hold ---you can /prove/ this using the assignment rule below.
+ #+end_box
+
+ #+begin_box Termination!
+
+ | ~{ R } C { true }~        |
+
+ The triple says nothing about the command because Since all states satisfy
+ postcondition $\true$, the triple communicates that ~C~ /terminates/ ---see the
+ informal definition of the Hoare triples.
+
+ Compare this with the right-zero property of implication: $p ⇒ \true$; “true is
+ always true, no matter what you have in hand”. Also similar to $n ≤ +∞$.
+ #+end_box
+
+ #+begin_box Impossible Assumptions ---“The Law of the Excluded Miracle”
+
+ | ~{ false } C { G }~          |
+
+ The claim is vacuously true because the assumption is that the execution of the
+ assignment is begun in a state satisfying $\false$, which can never be the case.
+
+ Compare this property with ex falso quodlibet: $\false ⇒ p$; “starting from
+ false, anything can be derived”. Also similar to $-∞ ≤ n$.
+ #+end_box
+
+ #+end_details
+
+ Consider the swap program ~x, y := y, x~, it swaps the /values/ of the /program
+ variables/. To formalise such a claim, we introduce variables $X$ and $Y$
+ to denote the /values/ of the program variables ~x, y~. Then, we can
+ formalise the claim as
+ \[
+ x = X \;∧\; y = Y \;\Then{x,y := y, x}\; x = Y \;∧\; y = Y
+ \]
+ We refer to variables that never appear in program text
+ as _<<<ghost variables>>>_; their function is to relate the final values of the
+ program variables to their initial values.
+
+ #+begin_box Definition of Hoare Triples
+ In general, an expression ~{ R } C { G }~, with $R, G$ predicates on a collection
+ of program variables and ghost variables, means that, /forall possible values of
+ the ghost variables,/ if the program variables satisfy property $R$ before
+ execution of the command ~C~, execution of ~C~ is guaranteed to terminate, and,
+ afterwards, the program variables will satisfy property $G$.
+ #+end_box
+
+ So the claim about swapping variables above is that, for all values of $X$ and
+ $Y$, if $x = X \;∧\; y = Y$, before executing the simultaneous assignment ~x,
+ y := y, x~, then, afterwards, $x = Y \;∧\; y = X$.
+** ‘Dynamic Logic’ Notation
+   :PROPERTIES:
+   :CUSTOM_ID: Dynamic-Logic-Notation
+   :END:
    States may be represented by predicates on variables and so *imperative
-   commands are relations on predicate*: /Given two propositions $G, R$ making/
-   /use of program variables, we write $R \;⇒[C]\;\; G$ to mean “in a state $R$, the
+   commands are relations on predicates*: /Given two propositions $G, R$ making/
+   /use of program variables, we write $R \Then{C} G$ to mean “in a state $R$, the
    execution of command $C$ terminates in state $G$”/.
    ( This is also known as a /Hoare Triple/ and written ={R} C {G}=. )
 
@@ -1203,13 +1317,79 @@ and so the first line in the definition above could be omitted.
    require some provisos to be given, which are conjuctively known the *required R*
    (also known as the ‘precondition’).
 
-   | $R \,\;⇒[C]\;\; G$ | ≈ | “Get goal $G$ using command $C$, by requiring $R$.” |
+   | $R \Then{C} G$       | ≈ | “Get goal $G$ using command $C$, by requiring $R$.” |
 
    This is only /reasonable/: We have some desired goal $G$ and we wish to form an
    imperative program =C= whose execution will ensure the goal $G$, but the
    construction of =C= may require some necessary provisos $R$.
 
-** What is the definition of $R \;⇒[C]\;\; G$?
+** Example Specifications
+   :PROPERTIES:
+   :CUSTOM_ID: Hi
+   :END:
+
+ A /<<<specification>>>/ is an equation of a certain shape.
+ /<<<Programming>>>/ is the activity of solving a specification
+ for its unknown. Its unknown is called a /<<<program>>>/.
+
+ One says “program =C= is specified by precondition $R$ and postcondition $G$”
+ whenever $R \Then{C} G$. One also says this is a /specification of =C=./
+
+ #+begin_box C. A. R. Hoare
+ Tony Hoare's 1969 landmark paper /An axiomatic basis for computer programming/
+ proposed to define the meaning of programs by how they transform state
+ (predicates on the program variables; i.e., stores). It defined $R \,\{C\}\, G$
+ to mean /partial correctness/; whereas the modern notations $\{ R\}\, C\, \{G\}$
+ and $R \Then{C} G$ denote /total correctness/, which has the additional
+ requirement of the /termination/ of $C$.
+ #+end_box
+
+ *<<<Programming>>>* is solving the equation $R \Then{C} G$ in the unknown $C$;
+ i.e., it is the activity of finding a ‘recipe’ that satisfies a given
+ specification.  Sometimes we may write $R \Then{?} G$ and solve for ‘?’.
+ *Programming is a goal-directed activity: From a specification, a program is
+ found by examining the /shape/ of its postcondition.*
+
+ The notation $x : E$ is intended to communicate that we are looking at the
+ expression $E$ with /unknown/ $x$ ---i.e., $x$ is the variable we are focusing on.
+ For instance, is $x² + b · x = 0$ a linear equation? Yes, if $b$ is the variable
+ and $x$ is considered constant! In such a case, we are speaking of the equation
+ $b : x² + b · x = 0$. With this convention, the notation
+ $R \Then{C} \vec{x} : G$ means that /only/ the names $\vec{x}$ should be
+ considered ‘program variables’ and all other variables should be treated
+ as ‘fixed’ or ‘constant’ and so cannot appear in the program command $C$.
+
+ However, this convention only reduces ambiguity about what variables can be
+ meddled with; and so ghost variables are still required.  For instance, consider
+ the example specification “set $z$ to its own absolute value”, it is formalised
+ with the help of a ghost variable: $z = Z \Then{?} z = |Z|$.
+
+ #+begin_details Set q and r to the quotient and remainder of integer division of x ≥ 0 by y > 0
+ \[ x ≥ 0 ∧ y > 0 \Then{?} q · y + r = x ∧ 0 ⇐ r ∧ r < y \]
+
+ The first conjunct states that the quotient times the denominator plus the
+ remainder equals the numerator. The last two conjuncts bound the remainder: The
+ remainder is at least 0 and is less than the denominator.
+ #+end_details
+
+ #+begin_details Set x to the integer square-root of N ≥ 0
+ The integer square-root of $N$ is the largest integer whose square is at most
+ $N$, and so the answer is \[ N ≥ 0 \Then{?} x² ≤ N ∧ N < (x + 1)²\]
+
+ Note that the postcondition is equivalent to $x ≤ \sqrt{N} < x + 1$.
+ #+end_details
+
+ #+begin_details Set x to the largest integer that is a power of 2 and is at most N
+ \[N ≥ 0 \Then{?} (∃ i : ℕ • x = 2^i) ∧ x ≤ N ∧ N < 2 · x\]
+
+ The first conjunct states that $x$ is a power of 2. The second states that $x4
+ is at most $N4, while the third states that the next power of 2 exceeds $N$.
+
+ This is /the integer-logarithm base-2/ problem; the postcondition is equivalent to
+ $∃ i : ℕ \,•\, i = \lg_2 x \,∧\, i ≤ \lg_2 N < 1 + i$.
+ #+end_details
+
+** What is the definition of $R \Then{C} G$?
    :PROPERTIES:
    :CUSTOM_ID: What-is-the-definition-of-R-C-G
    :END:
@@ -1244,6 +1424,11 @@ and so the first line in the definition above could be omitted.
    :CUSTOM_ID: We-define-assignment-using-textual-substitution
    :END:
 
+   The <<<assignment statement>>>
+   ~x := E~ evaluates expression =E= (which we assume “never crashes”)
+   and stores the result in variable =x=.
+   The statement is read “ ~x~ becomes ~E~ ”.
+
    When your goal $G$ mentions a variable $x$,
    then your goal state $G$ could be established
    by using the command ~x := E~ for some choice of expression $E$
@@ -1257,7 +1442,7 @@ and so the first line in the definition above could be omitted.
 
    This is summarised as follows.
    \[
-   \mathsf{Definition\, of\, Assignment:}\quad G[x:= E] \;⇒[x:= E]\;\; G
+   \mathsf{Definition\, of\, Assignment:}\quad G[x:= E] \Then{x:= E} G
    \]
 
    The ‘backwards’ nature of this rule ---working backward from the
@@ -1277,11 +1462,6 @@ and so the first line in the definition above could be omitted.
 
    - Python, for example, allows multiple assignments.
 
-   $$
-   \def\If#1{\;⇐[#1]\;\;} % goal ⇐[command] provisos
-   \def\Then#1{\;⇒[#1]\;\;} % provisos ⇒[command] goal
-   $$
-
 ** Let's show a calculation!
    :PROPERTIES:
    :CUSTOM_ID: Let's-show-a-calculation
@@ -1290,7 +1470,7 @@ and so the first line in the definition above could be omitted.
    First, since *programming is a goal-directed activity*, let us begin with the
    goal and use that to arrive at a required precondition.
    How? Just as $y ≥ x \;≡\; x ≤ y$, we define
-   \[G \;⇐[C]\;\; R \quad≡\quad R \;⇒[C]\;\; G \]
+   \[G \If{C} R \quad≡\quad R \Then{C} G \]
    Using this ‘turned around’ (/converse/) notation, we may begin with the goal.
 
    :Swap:
@@ -1379,6 +1559,85 @@ and so the first line in the definition above could be omitted.
    assignment 𝒳 in \[ s = n² \Then{s,n := 𝒳, n + 1} s = n² \]
    # Solution: 𝒳 = s + n + n + 1
 
+** Calculating expressions in assignments :ignore:
+   :PROPERTIES:
+   :CUSTOM_ID: Calculating-expressions-in-assignments
+   :END:
+
+ + Exercise: Solve for 𝒳 in $\true \Then{x := 𝒳} x = 4$.
+   - The answer is ‘obvious’, but actually do the calculation
+     to see that unknown expressions in an assignment can be found by
+     calculation.
+ + Exercise: Solve for 𝒳 in $0 ≤ x ∧ 0 < y \Then{q, r := 𝒳, x} 0 ≤ r ∧ q · y + r
+   = x$
+ + Exercise: Solve for 𝒳 in $q = a · c ∧ w  = c² \Then{a, q := a + c, 𝒳} q = a *
+   c$
+
+ #+begin_box  Heuristic
+ To determine an unknown expression in an assignment, calculate.
+ #+end_box
+** The Shapes of Programs
+   :PROPERTIES:
+   :CUSTOM_ID: The-Shapes-of-Programs
+   :END:
+
+ The activity of programming is the activity of solving a specification for its
+ unknown, where this unknown is called a /program/. Programs are
+ formulae of a certain shape.
+
+ The simplest program is called =skip=, then we may ‘sequentially compose’ two
+ programs =C₁= and =C₂= to obtain the program =C₁⍮ C₂=, and finally we have the
+ /(multiple) assignment/ program ~x := E~ consisting of a list of distinct variables
+ =x= and a corresponding list of expressions =E=. There are other shapes of programs
+ and we will get to those in due time.
+
+ #+begin_src math
+Program ::=  skip
+         |   C₁ ⍮ C₂
+         |   x := E
+ #+end_src
+
+ :Hide:
+ Thus far we have defined $R \Then{C} G$ informally, we now turn to defining
+ it /algebraically/ thereby placing the notion of program correctness firmly
+ within predicate calculus: We shall have a formal method to calculate
+ whether a program satisfies its specification.
+ :End:
+
+ #+begin_box Program Correctness Laws
+ $$\begin{align*}
+ \mathsf{Axiom,\; The\; Law\; of\; the\; Exluded\; Miracle} & & R \Then{C} \false \quad≡\quad ¬ R \\
+ \mathsf{Axiom,\; Conjunctivity} && R \Then{C} (G₁ ∧ G₂) \quad≡\quad \big(R \Then{C} G₁\big) ∧ \big(R \Then{C} G₂\big) \\
+ \mathsf{Axiom,\; Skip\; Rule} && R \Then{\mathsf{skip}} G \quad≡\quad R ⇒ G \\
+ \mathsf{Axiom,\; Sequence\; Rule} && R \Then{C₁} I \Then{C₂} G \quad⇒\quad R \Then{C₁⍮C₂} G \\
+ \mathsf{Axiom,\; Assignment\; Rule} && R \Then{x := E} G \quad≡\quad R[x ≔ E] ⇒ G \\ \hdashline
+ \mathsf{Postcondition\; Weakening} && \big(R \Then{C} G) ∧ (G ⇒ G′) \quad⇒\quad R \Then{C} G′ \\
+ \mathsf{Precondition\; Strengthening} && (R′ ⇒ R) ∧ \big(R \Then{C} G) \quad⇒\quad R′ \Then{C} G \\  \hdashline
+ \mathsf{Conjunction} && (R₁ \Then{C} G₁) ∧ (R₂ \Then{C} G₂) \quad⇒\quad (R₁ ∧ R₂) \Then{C} (G₁ ∧ G₂) \\
+ \mathsf{Case\; Analysis} && (R₁ \Then{C} G₁) ∧ (R₂ \Then{C} G₂) \quad⇒\quad (R₁ ∨ R₂) \Then{C} (G₁ ∨ G₂) \\
+ \end{align*}$$
+#+end_box
+
+ The skip rule tells us that the =skip= command is executed by doing nothing: When
+ $R ⇒ G$, and we are in state $R$, then we get to state $G$ by doing nothing.
+
+ Note: One then defines the equivalence of programs “up to specification”:
+ \[C = C′ \qquad≡\qquad \big(R \Then{C} G \quad≡\quad R \Then{C′} G\big) \text{ for
+ all } R, G \]
+ Using this, one can show that =skip= is the unit of sequencing,
+ and that it can be defined in terms of assignments.
+ | ~C ⍮ skip = C = skip ⍮ C~ |
+ | ~skip = (x := x)~         |
+
+
+* COMMENT Organising calculations
+  :PROPERTIES:
+  :CUSTOM_ID: COMMENT-Organising-calculations
+  :END:
+
+  Just as in doing arithmetic, we have the freedom to choose the most
+  effective way to organise our calculations.
+
 * Boolean Expressions and Laws
   :PROPERTIES:
   :CUSTOM_ID: Boolean-Expressions-and-Laws
@@ -1457,6 +1716,23 @@ The Booleans have a number of useful operators that model reasoning,
    #+caption: Example explicit definitions ---not used in this class
    | “p ∧ q” is “true” whenever both “p” and “q” are “true”, otherwise it is “false” |
    | “m ↓ n” is “m” whenever “m ≤ n”, otherwise it is “n”                            |
+
+   #+caption: Meanings of Boolean operators
+   | Expression | Pronounced       | is $\true$ if                                      |
+   |------------+------------------+----------------------------------------------------|
+   | $p ≡ q$    | /p equivales q/    | exactly an even number of arguments is $\false$    |
+   | $p ≢ q$    | /p differs from q/ | exactly an odd number of its arguments are $\true$ |
+   |------------+------------------+----------------------------------------------------|
+   | $p ∧ q$    | /p and q/          | all of its arguments are $\true$                   |
+   | $p ∨ q$    | /p or q/           | at least one of its arguments is $\true$           |
+   |------------+------------------+----------------------------------------------------|
+   | $p ⇒ q$    | /p implies q/      | either /q/ is $\true$ or /p/ is $\false$               |
+   | $p ⇐ q$    | /p follows from q/ | either /p/ is $\true$ or /q/ is $\false$               |
+   |------------+------------------+----------------------------------------------------|
+   | $¬ p$      | /not p/            | /p/ is $\false$                                      |
+
+A Boolean expression not equal to true is equal to false ---indeed, it is a
+simple proof to show ~(p ≢ true) ≡ (p ≡ false)~.
 
 ** Boolean Laws and Numeric Laws
    :PROPERTIES:

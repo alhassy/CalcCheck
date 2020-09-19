@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-09-18 Fri 17:27 -->
+<!-- 2020-09-18 Fri 23:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mathematics for Computing</title>
@@ -345,10 +345,14 @@
 </li>
 <li><a href="#The-Assignment-Statement">4. <a href="#The-Assignment-Statement">The Assignment Statement</a></a>
 <ul>
-<li><a href="#What-is-the-definition-of-R-C-G">4.1. <a href="#What-is-the-definition-of-R-C-G">What is the definition of \(R \;⇒[C]\;\; G\)?</a></a></li>
-<li><a href="#We-define-assignment-using-textual-substitution">4.2. <a href="#We-define-assignment-using-textual-substitution">We define assignment using textual substitution</a></a></li>
-<li><a href="#Let's-show-a-calculation">4.3. <a href="#Let's-show-a-calculation">Let's show a calculation!</a></a></li>
-<li><a href="#Calculating-Assignments">4.4. <a href="#Calculating-Assignments">Calculating Assignments</a></a></li>
+<li><a href="#More">4.1. <a href="#More">From Comments to Hoare Triples</a></a></li>
+<li><a href="#Dynamic-Logic-Notation">4.2. <a href="#Dynamic-Logic-Notation">‘Dynamic Logic’ Notation</a></a></li>
+<li><a href="#Hi">4.3. <a href="#Hi">Example Specifications</a></a></li>
+<li><a href="#What-is-the-definition-of-R-C-G">4.4. <a href="#What-is-the-definition-of-R-C-G">What is the definition of \(R \Then{C} G\)?</a></a></li>
+<li><a href="#We-define-assignment-using-textual-substitution">4.5. <a href="#We-define-assignment-using-textual-substitution">We define assignment using textual substitution</a></a></li>
+<li><a href="#Let's-show-a-calculation">4.6. <a href="#Let's-show-a-calculation">Let's show a calculation!</a></a></li>
+<li><a href="#Calculating-Assignments">4.7. <a href="#Calculating-Assignments">Calculating Assignments</a></a></li>
+<li><a href="#The-Shapes-of-Programs">4.8. <a href="#The-Shapes-of-Programs">The Shapes of Programs</a></a></li>
 </ul>
 </li>
 <li><a href="#Boolean-Expressions-and-Laws">5. <a href="#Boolean-Expressions-and-Laws">Boolean Expressions and Laws</a></a>
@@ -436,7 +440,7 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 <p>
 We advocate <b>calculational proofs</b> in which reasoning is goal directed and
 justified by simple axiomatic laws that can be checked syntactically rather
-than semantically. ---<i>Program Construction</i> by Roland Backhouse
+than semantically. ---<i><a href="#org2357993">Program</a> Construction</i> by Roland Backhouse
 </p>
 
 <p>
@@ -571,12 +575,12 @@ we define expressions in terms of how they can be manipulated.
 </p>
 
 <p>
-A <b><a id="orge6d1fb0">calculus</a></b> is a method or process of reasoning by calculation with
+A <b><a id="org92ce957">calculus</a></b> is a method or process of reasoning by calculation with
 symbols.
 A Boolean variable that can denote a proposition is sometimes called a
-<i><a href="#orgac04595">propositional</a> variable</i>.
-A <b><a id="org405f15f">propositional calculus</a></b> is so named beacuse it is a method
-of calculating with expressions that involve <a href="#orgac04595">propositional</a> variables.
+<i><a href="#orgff03aec">propositional</a> variable</i>.
+A <b><a id="orgba13035">propositional calculus</a></b> is so named beacuse it is a method
+of calculating with expressions that involve <a href="#orgff03aec">propositional</a> variables.
 </p>
 
 <p>
@@ -586,15 +590,15 @@ of calculating with expressions that involve <a href="#orgac04595">propositional
    For example, the axiom \(p ∨ q ≡ q ∨ p\) indicates (semantically)
    that the value of a disjunction doesn't depend on the order of its arguments
    and (syntactically) we may swap their order when manipulating expressions.
-   The other part of this <a href="#orge6d1fb0">calculus</a> are the 3 inference rules Substitution,
+   The other part of this <a href="#org92ce957">calculus</a> are the 3 inference rules Substitution,
    Leibniz, and Transitivity.
 </p>
 
 <p>
-   A <b><a id="org7553dc2">theorem</a></b> of this <a href="#orge6d1fb0">calculus</a> is either an axiom, the conclusion
+   A <b><a id="org4570ff7">theorem</a></b> of this <a href="#org92ce957">calculus</a> is either an axiom, the conclusion
    of an inference rule whose premises are theorems, or a Boolean expression
    that, using the inference rules, is proved equal to an axiom or a previously
-   proved <a href="#org7553dc2">theorem</a>.
+   proved <a href="#org4570ff7">theorem</a>.
  </div>
 </p>
 </div>
@@ -612,22 +616,22 @@ graphs, inductive types, and more.
 
 <p>
 Conscious and fluent use of the language of (discrete) mathematics
-is the foundation for precise specification and rigorous reasoning
+is the foundation for precise <a href="#org2229365">specification</a> and rigorous reasoning
 in Computer Science and Software Engineering
 </p></li>
 
 <li><b>Goal</b>: Understand the mechanics of mathematical expressions and proof.</li>
 
 <li><p>
-<a id="orgac04595">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
+<a id="orgff03aec">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
 </p>
 
 <p>
-<a id="org1972092">Predicate</a>: <a href="#orgac04595">Propositional</a> statement about some subjects.
+<a id="orgeaca09a">Predicate</a>: <a href="#orgff03aec">Propositional</a> statement about some subjects.
 </p></li>
 
 <li><p>
-<a id="org6f57a23">Calculus</a>: Formalised reasoning through calculation.
+<a id="org6650a4d">Calculus</a>: Formalised reasoning through calculation.
 </p>
 
 <p>
@@ -643,10 +647,12 @@ E.g., Portia's Suitor's Dilemma has 4 unknowns, each being either true or false,
 and so has \(2^4\) many possible scenarios to consider. Whereas a
 calculation solving the problem can be formed in less than 10 super simple
 lines.
-</p>
+</p></li>
+</ol>
 
-<details class="code-details"> <summary> <strong> <font face="Courier" size="3" color="green"> Portia's Suitor's Dilemma </font> </strong> </summary> <p>
-
+<p>
+<details class="code-details">
+<summary> <strong> <font face="Courier" size="3" color="green"></font> </strong> </summary>        :title: Portia's Suitor's Dilemma
 </p>
 
 <p>
@@ -728,8 +734,10 @@ Axiom “Inscription on silver casket”: S ≡ (S ≡ ¬ G)
 <p>
 By just <b>simplifying</b>, we calculated that the portrait is in the gold casket!
 </p>
- </details></li>
-</ol>
+
+<p>
+</details>
+</p>
 
 <blockquote>
 <p>
@@ -878,7 +886,7 @@ How do you ‘read’ (<i>parse</i>) the expression \(6 - x + 7\)?
 </div>
 
 
-<div id="org65d0b89" class="figure">
+<div id="org0b1b5ca" class="figure">
 <p><img src="images/6-x+7_third_time.png" alt="6-x+7_third_time.png" />
 </p>
 </div>
@@ -892,7 +900,7 @@ It can be generated from its parts in two different ways:
 Both \(6\) and \(x + 7\) are expressions, so \(6 - x + 7\) is an expression.
 </p>
 
-<div id="org4c46a6b" class="figure">
+<div id="orgbb5fa7a" class="figure">
 <p><img src="images/6-x+7_parse2.png" alt="6-x+7_parse2.png" />
 </p>
 </div></li>
@@ -900,7 +908,7 @@ Both \(6\) and \(x + 7\) are expressions, so \(6 - x + 7\) is an expression.
 <li>and also both \(6 - x\) and \(7\) are expressions, so \(6 - x + 7\) is an expression.</li>
 </ol>
 
-<div id="orgc52a55e" class="figure">
+<div id="org94a4c7a" class="figure">
 <p><img src="images/6-x+7_parse1.png" alt="6-x+7_parse1.png" />
 </p>
 </div>
@@ -1037,14 +1045,14 @@ then a <b>meta-variable</b> is simply a normal variable of type <code>Expr τ</c
 </p>
 
 <p>
-Likewise, a <b><a href="#org7553dc2">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
-whereas a <b>meta-<a href="#org7553dc2">theorem</a></b> is a general statement about our logic that we prove
+Likewise, a <b><a href="#org4570ff7">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
+whereas a <b>meta-<a href="#org4570ff7">theorem</a></b> is a general statement about our logic that we prove
 to be true. That is, if 𝑬 is collection of rules that allows us to find
-truths, then a <i><a href="#org7553dc2">theorem</a></i> is a truth found using those rules; whereas a
-<i>meta-<a href="#org7553dc2">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
+truths, then a <i><a href="#org4570ff7">theorem</a></i> is a truth found using those rules; whereas a
+<i>meta-<a href="#org4570ff7">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
 That is, theorems are <span class="underline">in</span> 𝑬 and meta-theorems are <span class="underline">about</span> 𝑬.  For example, here
-is a meta-<a href="#org7553dc2">theorem</a> that the equational logic 𝑬 has (as do many other theories,
-such as lattices): An <i>equational</i> <a href="#org7553dc2">theorem</a> is true precisely when its ‘dual’ is
+is a meta-<a href="#org4570ff7">theorem</a> that the equational logic 𝑬 has (as do many other theories,
+such as lattices): An <i>equational</i> <a href="#org4570ff7">theorem</a> is true precisely when its ‘dual’ is
 true. Such metatheorems can be helpful to discover new theorems.
 </p>
 
@@ -1131,41 +1139,41 @@ yield \(1\).
 </p>
 
 <p>
-A Boolean expression \(P\) is <b><a id="org096cae8">satisfied</a></b> in a state if its value is <i>true</i>
-in that state; \(P\) is <b><a id="orgbf3d472">satisfiable</a></b> if there is a state in which it is
-<a href="#org096cae8">satisfied</a>; and \(P\) is <b><a id="org62f4e29">valid</a></b> (or is a <b><a id="org2831810">tautology</a></b>) if it is
-<a href="#org096cae8">satisfied</a> in every state.
+A Boolean expression \(P\) is <b><a id="org884f429">satisfied</a></b> in a state if its value is <i>true</i>
+in that state; \(P\) is <b><a id="orgcc8a08c">satisfiable</a></b> if there is a state in which it is
+<a href="#org884f429">satisfied</a>; and \(P\) is <b><a id="org1b3d799">valid</a></b> (or is a <b><a id="org3cbfbed">tautology</a></b>) if it is
+<a href="#org884f429">satisfied</a> in every state.
 </p>
 
 <hr />
 
 <p>
-All theorems of the <a href="#orgac04595">propositional</a> <a href="#orge6d1fb0">calculus</a> 𝑬 are <a href="#org62f4e29">valid</a>. This can be checked by checking
+All theorems of the <a href="#orgff03aec">propositional</a> <a href="#org92ce957">calculus</a> 𝑬 are <a href="#org1b3d799">valid</a>. This can be checked by checking
 that each axiom with a truth table and arguing for each inference rule that
-if its premises are <a href="#org62f4e29">valid</a> then so is its conclusion.
+if its premises are <a href="#org1b3d799">valid</a> then so is its conclusion.
 </p>
 
 <p>
 For example, let's show that the Substitution rule preserves validity.  Let
 us write \(s(E)\) to denote the value of expression \(E\) in state \(s\).  If \(E\)
-is <a href="#org62f4e29">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
+is <a href="#org1b3d799">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
 true in any state. So, given a state \(s\), let \(s′\) be the ‘updated’ state
 that assigns the same values to all the variables as does \(s\) <i>except</i> that
-the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#org62f4e29">valid</a>,
+the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#org1b3d799">valid</a>,
 \(s′(E)\) is true but \(s′(E)\) is just \(s\big(E[x ≔ F]\big)\) and so the
-resulting substitution is also <a href="#org62f4e29">valid</a>.
+resulting substitution is also <a href="#org1b3d799">valid</a>.
 </p>
 
 <p>
-In programming, if we want the <i>assignment</i> \(x ≔ F\) to ensure a property \(R\)
+In <a href="#org247a51e">programming</a>, if we want the <i>assignment</i> \(x ≔ F\) to ensure a property \(R\)
 holds, then we need \(R[x ≔ F]\) to hold <i>before</i> the assignment.
-That is, if the state \(s\) of our program variables satisfies \(R[x ≔ F]\)
+That is, if the state \(s\) of our <a href="#org2357993">program</a> variables satisfies \(R[x ≔ F]\)
 then the updated state \(s′\) &#x2014;having <i>s′(x) = s(F)</i>&#x2014; will satisfy \(R\).
 </p>
 
 <p>
-Not only are all theorems <a href="#org62f4e29">valid</a>, but all <a href="#org62f4e29">valid</a> expressions are theorems of
-our <a href="#orge6d1fb0">calculus</a> (although we do not prove this fact). Theoremhood and validity
+Not only are all theorems <a href="#org1b3d799">valid</a>, but all <a href="#org1b3d799">valid</a> expressions are theorems of
+our <a href="#org92ce957">calculus</a> (although we do not prove this fact). Theoremhood and validity
 are one and the same.
 </p>
 
@@ -1210,7 +1218,7 @@ Later we see that theorems correspond to expressions that are true in all states
 <div class="outline-text-3" id="text-Logics-and-Inference-Rules">
 <p>
 Formally, a “proof” is obtained by applying a number of “rules” to known
-results to obtain new results; a “<a href="#org7553dc2">theorem</a>” is the conclusion of a “proof”.
+results to obtain new results; a “<a href="#org4570ff7">theorem</a>” is the conclusion of a “proof”.
 An “axiom” is a rule that does not need to be applied to any existing
 results: It's just a known result.
 </p>
@@ -1222,7 +1230,7 @@ reasonable justification’ to obtain <b>conclusion</b> \(C\).  A <b>proof syste
 collection of rules. At first sight, this all sounds very abstract and rather
 useless, however it is a <i>game</i>: <b>Starting from rules, what can you obtain?</b> Some
 games can be very fun! Another way to see these ideas is from the view of
-programming:
+<a href="#org247a51e">programming</a>:
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1238,7 +1246,7 @@ programming:
 <thead>
 <tr>
 <th scope="col" class="org-left">Mathematics</th>
-<th scope="col" class="org-left">Programming</th>
+<th scope="col" class="org-left"><a href="#org247a51e">Programming</a></th>
 </tr>
 </thead>
 <tbody>
@@ -1327,7 +1335,7 @@ axioms \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\).
 </p>
 
 <p>
-The inference rule says “if the \(Pᵢ\) are all <a href="#org62f4e29">valid</a>, i.e., true in <i>all
+The inference rule says “if the \(Pᵢ\) are all <a href="#org1b3d799">valid</a>, i.e., true in <i>all
 states</i>, then so is \(C\)”; the axiom, on the other hand, says “if the \(Pᵢ\)
 are true in <i>a state</i>, then \(C\) is true in <i>that state</i>.” Thus the rule and
 the axiom are not quite the same.
@@ -1336,18 +1344,18 @@ the axiom are not quite the same.
 <p>
 Moreover, the rule is not a Boolean expression.  Rules are thus more
 general, allowing us to construct systems of reasoning that have no
-concrete notions of ‘truth’ &#x2014;see the logic <a href="#org9c9ea6a">𝑾𝑩</a> below.
+concrete notions of ‘truth’ &#x2014;see the logic <a href="#org97c7652">𝑾𝑩</a> below.
 </p>
 
 <p>
 Finally, the rule asserts that \(C\) follows from \(P₁, …, Pₙ\).
 The formula \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\), on the other hand, is a Boolean
-expression (but it need not be a <a href="#org7553dc2">theorem</a>).
+expression (but it need not be a <a href="#org4570ff7">theorem</a>).
 </p>
 
 <p>
 An example of this relationship between rules and operators
-may be observed by comparing the logics <a href="#org9c9ea6a">𝑾𝑩</a> and <a href="#org6659775">𝑴𝑺𝑯</a>, below.
+may be observed by comparing the logics <a href="#org97c7652">𝑾𝑩</a> and <a href="#org1cc2e4a">𝑴𝑺𝑯</a>, below.
 One could read “◇” as “and”, and “⟶” as “implies”.
 </p>
 </div>
@@ -1357,7 +1365,7 @@ One could read “◇” as “and”, and “⟶” as “implies”.
 <h3 id="water-bucket-logics"><span class="section-number-3">3.3</span> <a href="#water-bucket-logics">[Optional] Strange Logics</a></h3>
 <div class="outline-text-3" id="text-water-bucket-logics">
 <p>
-Here is an example logic, call it <a id="org9c9ea6a">𝑾𝑩</a>:
+Here is an example logic, call it <a id="org97c7652">𝑾𝑩</a>:
 </p>
 <ul class="org-ul">
 <li>The symbols are the usual numbers, along with <code>+</code> and <code>-</code> and
@@ -1388,33 +1396,33 @@ from numbers, +, and -.
 </p>
 
 <p>
-<b>Exercise <a href="#water-bucket-logics">3.3</a>.1</b>: Using this logic, prove the <a href="#org7553dc2">theorem</a> <code>0, 4</code>.
+<b>Exercise <a href="#water-bucket-logics">3.3</a>.1</b>: Using this logic, prove the <a href="#org4570ff7">theorem</a> <code>0, 4</code>.
 </p>
 <ul class="org-ul">
-<li>Notice that the <a href="#org7553dc2">theorem</a> has nothing to do with ‘truth’! &#x2014;At least not
+<li>Notice that the <a href="#org4570ff7">theorem</a> has nothing to do with ‘truth’! &#x2014;At least not
 explicitly, or intuitively.</li>
 </ul>
-<details class="code-details"> <summary> <strong> <font face="Courier" size="3" color="green"> Solution </font> </strong> </summary> <p>
-
-\[
+<p>
+<details class="code-details">
+<summary> <strong> <font face="Courier" size="3" color="green"></font> </strong> </summary>  :title: Solution
+ \[
  \Rule[ZeroLeft]{\normalsize\Rule[ShiftLeft_1]{\LARGE\Rule[RefreshLeft]{\LARGE\Rule[ShiftLeft_2]{\Rule[ZeroLeft]{\LARGE
  \Rule[ShiftLeft_3]{\LARGE \Rule[RefreshRight]{\LARGE\Rule[Empty]{}{0,0}}{0,
  5}}{3, 2}}{0,2}}{2,0}}{2, 5}}{3, 4}}{0, 4}
  \]
-</p>
  </details>
+</p>
 
 <p>
 <b>Exercise <a href="#water-bucket-logics">3.3</a>.2:</b>
 A logic models reasoning, can you <i>interpret</i> the terms <code>x, y</code> in such
 a way that makes the inference rules true?
-</p>
-<details class="code-details"> <summary> <strong> <font face="Courier" size="3" color="green"> Solution </font> </strong> </summary> <p>
-
+<details class="code-details">
+<summary> <strong> <font face="Courier" size="3" color="green"></font> </strong> </summary>  :title: Solution
 </p>
 
 <p>
-The logic <a href="#org9c9ea6a">𝑾𝑩</a> <i>could be</i> interpreted as modelling two ‘water buckets’, the first
+The logic <a href="#org97c7652">𝑾𝑩</a> <i>could be</i> interpreted as modelling two ‘water buckets’, the first
 can contain 3 litres while the second can contain 5 litres, along with an
 unlimited water supply.
 </p>
@@ -1429,22 +1437,22 @@ the other, such that the first is emptied <b>or</b> the second is filled.
 </ol>
 
 <p>
-Then the <a href="#org7553dc2">theorem</a> says we can measure 4 litres of water &#x2014;using only a 3 and 5
+Then the <a href="#org4570ff7">theorem</a> says we can measure 4 litres of water &#x2014;using only a 3 and 5
 litre buckets and an unlimited water supply.
+</details>
 </p>
- </details>
 
 <hr />
 
 <p>
-Here is another example logic, call it <a id="org6659775">𝑴𝑺𝑯</a>:
+Here is another example logic, call it <a id="org1cc2e4a">𝑴𝑺𝑯</a>:
 </p>
 <ul class="org-ul">
 <li>The symbols are the usual numbers, along with <code>+, -, ◇, ⟶</code>.</li>
 <li>A formula is of the form \(x ◇ y ⟶ x′ ◇ y′\) where ◇ binds tightest
 and \(x, y, x′, y′\) are terms formed from numbers, <code>+</code>, and <code>-</code>.</li>
 <li><p>
-In contrast to <a href="#org9c9ea6a">𝑾𝑩</a>, this logic has only 1 non-axiom inference rule!
+In contrast to <a href="#org97c7652">𝑾𝑩</a>, this logic has only 1 non-axiom inference rule!
 </p>
 
 <p>
@@ -1462,10 +1470,9 @@ In contrast to <a href="#org9c9ea6a">𝑾𝑩</a>, this logic has only 1 non-axi
 
 <p>
 <b>Exercise <a href="#water-bucket-logics">3.3</a>.3:</b> Finish reading this section, then come back and
-prove the <a href="#org7553dc2">theorem</a> <code>0 ◇ 0 ⟶ 0 ◇ 4</code> using a <i>calculational proof</i>.
-</p>
-<details class="code-details"> <summary> <strong> <font face="Courier" size="3" color="green"> Solution </font> </strong> </summary> <p>
-
+prove the <a href="#org4570ff7">theorem</a> <code>0 ◇ 0 ⟶ 0 ◇ 4</code> using a <i>calculational proof</i>.
+<details class="code-details">
+<summary> <strong> <font face="Courier" size="3" color="green">org</font> </strong> </summary>  :title: Solution
 </p>
 
 <p>
@@ -1484,36 +1491,38 @@ related, via the relation, to the last term.
   0◇ 1 \step[⟶]{ refresh left, then shift right }
   0◇ 4
 \end{calc}
- </details>
+
+<p>
+</details>
+</p>
 
 <p>
 <b>Exercise <a href="#water-bucket-logics">3.3</a>.4:</b> Provide an interpretation of this logic.
-</p>
-<details class="code-details"> <summary> <strong> <font face="Courier" size="3" color="green"> Solution </font> </strong> </summary> <p>
-
+<details class="code-details">
+<summary> <strong> <font face="Courier" size="3" color="green"></font> </strong> </summary>  :title: Solution
 </p>
 
 <p>
-We <i>may</i> think of <a href="#org6659775">𝑴𝑺𝑯</a> as a ‘machine’ with two memory banks: A computer with memory
+We <i>may</i> think of <a href="#org1cc2e4a">𝑴𝑺𝑯</a> as a ‘machine’ with two memory banks: A computer with memory
 state \(x\) and \(y\) is executed and it terminates in memory state \(x′\) and \(y′\).
 That is, \(x ◇ y ⟶ x′ ◇ y′\) is “starting from \((x, y)\), the computer finishes
 with \((x′, y′)\)”.
 </p>
 
 <p>
-The <a href="#org7553dc2">theorem</a> then says that it is possible for the computer to start at \((0, 0)\)
+The <a href="#org4570ff7">theorem</a> then says that it is possible for the computer to start at \((0, 0)\)
 and finish with memory store \((0, 4)\).
 </p>
 
 <p>
 The idea to use <b>inference rules as computation</b>
-is witnessed by the <a href="https://alhassy.github.io/PrologCheatSheet/CheatSheet.pdf">Prolog</a> programming language.
+is witnessed by the <a href="https://alhassy.github.io/PrologCheatSheet/CheatSheet.pdf">Prolog</a> <a href="#org247a51e">programming</a> language.
 </p>
 
 <p>
-Of-course, we could also re-use the water buckets interpretation of <a href="#org9c9ea6a">𝑾𝑩</a>.
+Of-course, we could also re-use the water buckets interpretation of <a href="#org97c7652">𝑾𝑩</a>.
+</details>
 </p>
- </details>
 </div>
 </div>
 
@@ -1542,12 +1551,12 @@ The following rules define equality by how it can be used, manipulated.
 <li><p>
 The <b>Substitution inference rule</b>
 says that a substitution \(E[\vec x ≔ \vec F]\) is
-a <a href="#org7553dc2">theorem</a> <i>whenever</i> \(E\) is a <a href="#org7553dc2">theorem</a>.
+a <a href="#org4570ff7">theorem</a> <i>whenever</i> \(E\) is a <a href="#org4570ff7">theorem</a>.
 </p>
 
 <p>
 Within CalcCheck, this rule is realised as the <kbd> with </kbd> clause: The phrase <code>E
-    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#org7553dc2">theorem</a>
+    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#org4570ff7">theorem</a>
 \(E[\vec x ≔ \vec F]\). The rule is applied <i>implicitly</i>, unless <code>rigid matching</code>
 is activated &#x2014;e.g., to get students <b>thinking correctly about applying
 theorems</b> instead of just putting random theorems that look similar and hoping
@@ -1591,7 +1600,7 @@ from one must be the same when extracted from the other.
 
 <p>
 Again: Unlike the Substitution rule, which allows us to instantiate <i>any</i>
-<a href="#org7553dc2">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
+<a href="#org4570ff7">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
 within expressions</b>. Later on, we will look at ‘monotonicity rules’ which will
 let us apply inclusion (≤, ⇒, ⊑) theorems deep within expressions.
 </p>
@@ -1658,7 +1667,7 @@ Instead, we may use a more ‘linear’ proof format:
 
 <p>
 In this equational style, instead of a <b>tree</b> (on the left)
-we use a <b><a href="#org7945deb">sequential</a> chain of equalities</b> (on the right):
+we use a <b><a href="#org77b7643">sequential</a> chain of equalities</b> (on the right):
 </p>
 
 <div style="column-rule-style:solid;column-count:2;"<p>
@@ -1746,7 +1755,7 @@ inference rules must be mentioned explicitly.
 
 <p>
 Leibniz is often used with Substitution, as follows
-&#x2014;supposing we know the <a href="#org7553dc2">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
+&#x2014;supposing we know the <a href="#org4570ff7">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
 </p>
 
 \begin{calc}
@@ -1757,9 +1766,9 @@ Leibniz is often used with Substitution, as follows
 
 <p>
 We are using Leibniz with the premise \(2 · j / 2 = j\).
-We can use this premise only if it is a <a href="#org7553dc2">theorem</a>. It is, because
-\(2 · x / 2 = x\) is a <a href="#org7553dc2">theorem</a> and, therefore, by Substitution,
-\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#org7553dc2">theorem</a>.
+We can use this premise only if it is a <a href="#org4570ff7">theorem</a>. It is, because
+\(2 · x / 2 = x\) is a <a href="#org4570ff7">theorem</a> and, therefore, by Substitution,
+\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#org4570ff7">theorem</a>.
 </p>
 
 <p>
@@ -1771,14 +1780,21 @@ off the indication “with \(x ≔ j\)”.
 </div>
 
 <div id="outline-container-The-Assignment-Statement" class="outline-2">
-<h2 id="The-Assignment-Statement"><span class="section-number-2">4</span> <a href="#The-Assignment-Statement">The <a href="#org829d1de">Assignment Statement</a></a></h2>
+<h2 id="The-Assignment-Statement"><span class="section-number-2">4</span> <a href="#The-Assignment-Statement">The <a href="#org786637a">Assignment Statement</a></a></h2>
 <div class="outline-text-2" id="text-The-Assignment-Statement">
-<ol class="org-ol">
-<li>Textual substitution is inextricably intertwined with equality.</li>
+<p style="display:none">\[
+\def\If#1{\,\;⇐\!\![#1]\;\;\,} % goal ⇐[command] provisos
+\def\Then#1{\,\;⇒\!\![#1]\;\;\,} % provisos ⇒[command] goal
 
-<li><p>
-Likewise, assignment statements in programming can be reasoned
-about using textual substitution.
+\]</p>
+
+<p>
+Textual substitution is inextricably intertwined with equality.
+</p>
+
+<p>
+Likewise, assignment statements in <a href="#org247a51e">programming</a> can be reasoned
+  about using textual substitution.
 </p>
 
 <p>
@@ -1786,23 +1802,222 @@ The coincidence of notations is deliberate.
 </p>
 
 <p>
-Rather than understanding how a program is <i>executed</i>,
-we can also understand a program in terms of <i>syntactic substitution</i>.
-</p></li>
+Rather than understanding how a <a href="#org2357993">program</a> is <i>executed</i>,
+we can also understand a <a href="#org2357993">program</a> in terms of <i>syntactic substitution</i>.
+</p>
+</div>
 
-<li><p>
-The <a id="org829d1de">assignment statement</a>
-<code>x := E</code> evaluates expression <code>E</code> (which we assume “never crashes”)
-and stores the result in variable <code>x</code>.
-The statement is read “ <code>x</code> becomes <code>E</code> ”.
+<div id="outline-container-More" class="outline-3">
+<h3 id="More"><span class="section-number-3">4.1</span> <a href="#More">From Comments to Hoare Triples</a></h3>
+<div class="outline-text-3" id="text-More">
+<p>
+<div style="padding: 1em; background-color: cyan; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em
+           #00000057;"> <h3>Commenting Your Code</h3>  When writing computer programs, it is very good practice to comment them
+ thoroughly in order to explain what is going on.  It helps the programmer to
+ avoid errors by enforcing greater clarity, and it helps others who need to
+ modify the <a href="#org2357993">program</a> at a later date (including the one who wrote the <a href="#org2357993">program</a> in
+ the first place!)
 </p>
 
 <p>
+It is a good discipline, for example, to comment every variable declaration with
+a statement about the variable's function in the <a href="#org2357993">program</a>.  This has the
+additional benefit of disciplining the programmer to use distinct variables for
+distinct functions, rather than overloading a variable with several different
+functions.
+</p>
+
+<p>
+Good comments supplement  the <a href="#org2357993">program</a> text with explanations of the <a href="#org2357993">program</a>'s
+function and why the code that is used achieves that function.
+</div>
+</p>
+
+<p>
+The comments we write state formal properties of the <a href="#org2357993">program</a> variables at a
+particular point in the execution of the <a href="#org2357993">program</a>.
+</p>
+
+<p>
+Sometimes comments are written within braces, as in <code>{ 0 &lt; i } i := i - 1 { 0 ≤
+   i }</code> which documents that before the assignment we know \(0 < i\) and after the
+assignment we know \(0 ≤ i\). Such <i>machine checkable comments</i> are also known as
+<b>assertions</b> and many languages have <code class="src src-plantuml">assert </code>
+commands &#x2014;e.g., <a href="https://alhassy.github.io/PythonCheatSheet/CheatSheet.pdf">Python</a> has them.
+</p>
+
+<p>
+An assertion is a claim that a particular property about the <a href="#org2357993">program</a> variables
+is true at that point in the <a href="#org2357993">program</a>'s execution.
+</p>
+
+<p>
+An expression of the form <code>{ R } C { G }</code>, where \(R, G\) are properties of the <a href="#org2357993">program</a>
+variables and \(C\) is a <a href="#org2357993">program</a> command, is called a <a id="org9af99f2">Hoare triple</a>.
+</p>
+
+<p>
+Such expressions are <b>commented programs</b>, but they are also <b>Boolean
+  expressions</b>: Triples <code>{ R } C { G }</code> denote the claim that, if the <a href="#org2357993">program</a>
+  variables satisfy property \(R\) before execution of command <code>C</code>, then execution
+  of <code>C</code> is guaranteed to terminate and, afterwards, the <a href="#org2357993">program</a> variables will
+  satisfy property \(G\). ( <i>Specifications are theorems!</i> )
+</p>
+
+<p>
+What can be said of the following <b>very interesting</b> triples?
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>{ true  } i := 1 { i = 1 }</code></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>{ i = 1 } i := 0 { true  }</code></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>{ false } i := 1 { i = 0 }</code></td>
+</tr>
+</tbody>
+</table>
+<p>
+<details class="code-details">
+<summary> <strong> <font face="Courier" size="3" color="green">Solutions</font> </strong> </summary>
+ The solutions below will generalise the exercises.
+</p>
+
+<p>
+<div style="padding: 1em; background-color: #CCFFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em
+           #00000057;"> <h3>No assumptions needed!</h3>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>{ true } x := K { x = K }</code>  for a <i>constant</i> \(K\)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+A \(\true\) precondition describes all states of the <a href="#org2357993">program</a> variables; the claim
+is thus that <i>whatever the initial value of the <a href="#org2357993">program</a> variables</i> (in particular
+the variable <i>x</i>) after execution of the assignment <code>x := K</code> the property \(x = K\)
+will hold &#x2014;you can <i>prove</i> this using the assignment rule below.
+</div>
+</p>
+
+<p>
+<div style="padding: 1em; background-color: #CCFFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em
+           #00000057;"> <h3>Termination!</h3>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>{ R } C { true }</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The triple says nothing about the command because Since all states satisfy
+postcondition \(\true\), the triple communicates that <code>C</code> <i>terminates</i> &#x2014;see the
+informal definition of the Hoare triples.
+</p>
+
+<p>
+Compare this with the right-zero property of implication: \(p ⇒ \true\); “true is
+always true, no matter what you have in hand”. Also similar to \(n ≤ +∞\).
+</div>
+</p>
+
+<p>
+<div style="padding: 1em; background-color: #CCFFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em
+           #00000057;"> <h3>Impossible Assumptions ---“The Law of the Excluded Miracle”</h3>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>{ false } C { G }</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The claim is vacuously true because the assumption is that the execution of the
+assignment is begun in a state satisfying \(\false\), which can never be the case.
+</p>
+
+<p>
+Compare this property with ex falso quodlibet: \(\false ⇒ p\); “starting from
+false, anything can be derived”. Also similar to \(-∞ ≤ n\).
+</div>
+</p>
+
+<p>
+</details>
+</p>
+
+<p>
+Consider the swap <a href="#org2357993">program</a> <code>x, y := y, x</code>, it swaps the <i>values</i> of the <i><a href="#org2357993">program</a>
+variables</i>. To formalise such a claim, we introduce variables \(X\) and \(Y\)
+to denote the <i>values</i> of the <a href="#org2357993">program</a> variables <code>x, y</code>. Then, we can
+formalise the claim as
+\[
+ x = X \;∧\; y = Y \;\Then{x,y := y, x}\; x = Y \;∧\; y = Y
+ \]
+We refer to variables that never appear in <a href="#org2357993">program</a> text
+as <span class="underline"><a id="org2211f63">ghost variables</a></span>; their function is to relate the final values of the
+<a href="#org2357993">program</a> variables to their initial values.
+</p>
+
+<p>
+<div style="padding: 1em; background-color: #CCFFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em
+           #00000057;"> <h3>Definition of Hoare Triples</h3>  In general, an expression <code>{ R } C { G }</code>, with \(R, G\) predicates on a collection
+ of <a href="#org2357993">program</a> variables and <a href="#org2211f63">ghost variables</a>, means that, <i>forall possible values of
+ the <a href="#org2211f63">ghost variables</a>,</i> if the <a href="#org2357993">program</a> variables satisfy property \(R\) before
+ execution of the command <code>C</code>, execution of <code>C</code> is guaranteed to terminate, and,
+ afterwards, the <a href="#org2357993">program</a> variables will satisfy property \(G\).
+ </div>
+</p>
+
+<p>
+So the claim about swapping variables above is that, for all values of \(X\) and
+\(Y\), if \(x = X \;∧\; y = Y\), before executing the simultaneous assignment <code>x,
+ y := y, x</code>, then, afterwards, \(x = Y \;∧\; y = X\).
+</p>
+</div>
+</div>
+<div id="outline-container-Dynamic-Logic-Notation" class="outline-3">
+<h3 id="Dynamic-Logic-Notation"><span class="section-number-3">4.2</span> <a href="#Dynamic-Logic-Notation">‘Dynamic Logic’ Notation</a></h3>
+<div class="outline-text-3" id="text-Dynamic-Logic-Notation">
+<p>
 States may be represented by predicates on variables and so <b>imperative
-commands are relations on <a href="#org1972092">predicate</a></b>: <i>Given two propositions \(G, R\) making</i>
-<i>use of program variables, we write \(R \;⇒[C]\;\; G\) to mean “in a state \(R\), the
+commands are relations on predicates</b>: <i>Given two propositions \(G, R\) making</i>
+<i>use of <a href="#org2357993">program</a> variables, we write \(R \Then{C} G\) to mean “in a state \(R\), the
 execution of command \(C\) terminates in state \(G\)”</i>.
-( This is also known as a <i>Hoare Triple</i> and written <code>{R} C {G}</code>. )
+( This is also known as a <i><a href="#org9af99f2">Hoare Triple</a></i> and written <code>{R} C {G}</code>. )
 </p>
 
 <p>
@@ -1859,7 +2074,7 @@ require some provisos to be given, which are conjuctively known the <b>required 
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">\(R \,\;⇒[C]\;\; G\)</td>
+<td class="org-left">\(R \Then{C} G\)</td>
 <td class="org-left">≈</td>
 <td class="org-left">“Get goal \(G\) using command \(C\), by requiring \(R\).”</td>
 </tr>
@@ -1868,24 +2083,116 @@ require some provisos to be given, which are conjuctively known the <b>required 
 
 <p>
 This is only <i>reasonable</i>: We have some desired goal \(G\) and we wish to form an
-imperative program <code>C</code> whose execution will ensure the goal \(G\), but the
+imperative <a href="#org2357993">program</a> <code>C</code> whose execution will ensure the goal \(G\), but the
 construction of <code>C</code> may require some necessary provisos \(R\).
-</p></li>
-</ol>
+</p>
+</div>
+</div>
+
+<div id="outline-container-Hi" class="outline-3">
+<h3 id="Hi"><span class="section-number-3">4.3</span> <a href="#Hi">Example Specifications</a></h3>
+<div class="outline-text-3" id="text-Hi">
+<p>
+A <i><a id="org2229365">specification</a></i> is an equation of a certain shape.
+<i><a id="org247a51e">Programming</a></i> is the activity of solving a <a href="#org2229365">specification</a>
+for its unknown. Its unknown is called a <i><a id="org2357993">program</a></i>.
+</p>
+
+<p>
+One says “<a href="#org2357993">program</a> <code>C</code> is specified by precondition \(R\) and postcondition \(G\)”
+whenever \(R \Then{C} G\). One also says this is a <i><a href="#org2229365">specification</a> of <code>C</code>.</i>
+</p>
+
+<p>
+<div style="padding: 1em; background-color: #CCFFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em
+           #00000057;"> <h3>C. A. R. Hoare</h3>  Tony Hoare's 1969 landmark paper <i>An axiomatic basis for computer <a href="#org247a51e">programming</a></i>
+ proposed to define the meaning of programs by how they transform state
+ (predicates on the <a href="#org2357993">program</a> variables; i.e., stores). It defined \(R \,\{C\}\, G\)
+ to mean <i>partial correctness</i>; whereas the modern notations \(\{ R\}\, C\, \{G\}\)
+ and \(R \Then{C} G\) denote <i>total correctness</i>, which has the additional
+ requirement of the <i>termination</i> of \(C\).
+ </div>
+</p>
+
+<p>
+<b><a id="org6c7ddec">Programming</a></b> is solving the equation \(R \Then{C} G\) in the unknown \(C\);
+i.e., it is the activity of finding a ‘recipe’ that satisfies a given
+<a href="#org2229365">specification</a>.  Sometimes we may write \(R \Then{?} G\) and solve for ‘?’.
+<b><a href="#org247a51e">Programming</a> is a goal-directed activity: From a <a href="#org2229365">specification</a>, a <a href="#org2357993">program</a> is
+found by examining the <i>shape</i> of its postcondition.</b>
+</p>
+
+<p>
+The notation \(x : E\) is intended to communicate that we are looking at the
+expression \(E\) with <i>unknown</i> \(x\) &#x2014;i.e., \(x\) is the variable we are focusing on.
+For instance, is \(x² + b · x = 0\) a linear equation? Yes, if \(b\) is the variable
+and \(x\) is considered constant! In such a case, we are speaking of the equation
+\(b : x² + b · x = 0\). With this convention, the notation
+\(R \Then{C} \vec{x} : G\) means that <i>only</i> the names \(\vec{x}\) should be
+considered ‘<a href="#org2357993">program</a> variables’ and all other variables should be treated
+as ‘fixed’ or ‘constant’ and so cannot appear in the <a href="#org2357993">program</a> command \(C\).
+</p>
+
+<p>
+However, this convention only reduces ambiguity about what variables can be
+meddled with; and so <a href="#org2211f63">ghost variables</a> are still required.  For instance, consider
+the example <a href="#org2229365">specification</a> “set \(z\) to its own absolute value”, it is formalised
+with the help of a ghost variable: \(z = Z \Then{?} z = |Z|\).
+</p>
+
+<p>
+<details class="code-details">
+<summary> <strong> <font face="Courier" size="3" color="green">Set q and r to the quotient and remainder of integer division of x ≥ 0 by y > 0</font> </strong> </summary>  \[ x ≥ 0 ∧ y > 0 \Then{?} q · y + r = x ∧ 0 ⇐ r ∧ r < y \]
+</p>
+
+<p>
+The first conjunct states that the quotient times the denominator plus the
+remainder equals the numerator. The last two conjuncts bound the remainder: The
+remainder is at least 0 and is less than the denominator.
+</details>
+</p>
+
+<p>
+<details class="code-details">
+<summary> <strong> <font face="Courier" size="3" color="green">Set x to the integer square-root of N ≥ 0</font> </strong> </summary>  The integer square-root of \(N\) is the largest integer whose square is at most
+ \(N\), and so the answer is \[ N ≥ 0 \Then{?} x² ≤ N ∧ N < (x + 1)²\]
+</p>
+
+<p>
+Note that the postcondition is equivalent to \(x ≤ \sqrt{N} < x + 1\).
+</details>
+</p>
+
+<p>
+<details class="code-details">
+<summary> <strong> <font face="Courier" size="3" color="green">Set x to the largest integer that is a power of 2 and is at most N</font> </strong> </summary>  \[N ≥ 0 \Then{?} (∃ i : ℕ • x = 2^i) ∧ x ≤ N ∧ N < 2 · x\]
+</p>
+
+<p>
+The first conjunct states that \(x\) is a power of 2. The second states that $x4
+is at most $N4, while the third states that the next power of 2 exceeds \(N\).
+</p>
+
+<p>
+This is <i>the integer-logarithm base-2</i> problem; the postcondition is equivalent to
+\(∃ i : ℕ \,•\, i = \lg_2 x \,∧\, i ≤ \lg_2 N < 1 + i\).
+</details>
+</p>
+</div>
 </div>
 
 <div id="outline-container-What-is-the-definition-of-R-C-G" class="outline-3">
-<h3 id="What-is-the-definition-of-R-C-G"><span class="section-number-3">4.1</span> <a href="#What-is-the-definition-of-R-C-G">What is the definition of \(R \;⇒[C]\;\; G\)?</a></h3>
+<h3 id="What-is-the-definition-of-R-C-G"><span class="section-number-3">4.4</span> <a href="#What-is-the-definition-of-R-C-G">What is the definition of \(R \Then{C} G\)?</a></h3>
 <div class="outline-text-3" id="text-What-is-the-definition-of-R-C-G">
 <p>
 It is defined by the <i>shape</i> of the possible commands <code>C</code>.
 </p>
 
 <p>
-For example, the <b><a id="org7945deb">sequential</a> command</b> <code>C₁ ⍮ C₂</code> is executed by first
+For example, the <b><a id="org77b7643">sequential</a> command</b> <code>C₁ ⍮ C₂</code> is executed by first
 executing <code>C₁</code> then by executing <code>C₂</code>. As such, to obtain a goal state \(G\), we
-may construct a partial program \(C₂\) which in-turn requires an intermediary
-state \(I\); then to establish state \(I\), we may construct a program <code>C₁</code> which
+may construct a partial <a href="#org2357993">program</a> \(C₂\) which in-turn requires an intermediary
+state \(I\); then to establish state \(I\), we may construct a <a href="#org2357993">program</a> <code>C₁</code> which
 requires a state \(R\). This is <b>divide and conquer</b>.
 </p>
 
@@ -1907,14 +2214,21 @@ The reason that we usually use ‘≤’ instead of ‘≤ₖ’, because if \(x
 then there can only be one such \(k\), namely \(k = y - x\), and so the simpler
 ‘≤’ simply marks whether such a (unique) \(k\) exists or not. In contrast,
 infinitely many programs <code>C</code> can be used to establish relationships \(R ⇒[C] G\)
-and this is what makes programming interesting!
+and this is what makes <a href="#org247a51e">programming</a> interesting!
 </p>
 </div>
 </div>
 
 <div id="outline-container-We-define-assignment-using-textual-substitution" class="outline-3">
-<h3 id="We-define-assignment-using-textual-substitution"><span class="section-number-3">4.2</span> <a href="#We-define-assignment-using-textual-substitution">We define assignment using textual substitution</a></h3>
+<h3 id="We-define-assignment-using-textual-substitution"><span class="section-number-3">4.5</span> <a href="#We-define-assignment-using-textual-substitution">We define assignment using textual substitution</a></h3>
 <div class="outline-text-3" id="text-We-define-assignment-using-textual-substitution">
+<p>
+The <a id="org786637a">assignment statement</a>
+<code>x := E</code> evaluates expression <code>E</code> (which we assume “never crashes”)
+and stores the result in variable <code>x</code>.
+The statement is read “ <code>x</code> becomes <code>E</code> ”.
+</p>
+
 <p>
 When your goal \(G\) mentions a variable \(x\),
 then your goal state \(G\) could be established
@@ -1933,7 +2247,7 @@ i.e., \(2 · i < 10\); i.e., \(i < 5\). Hence, starting in a state in which \(i 
 <p>
 This is summarised as follows.
 \[
-   \mathsf{Definition\, of\, Assignment:}\quad G[x:= E] \;⇒[x:= E]\;\; G
+   \mathsf{Definition\, of\, Assignment:}\quad G[x:= E] \Then{x:= E} G
    \]
 </p>
 
@@ -1954,7 +2268,7 @@ to yield values, say, \(vᵢ\); then assigning \(v₁\) to \(x₁\), …, \(vₙ
 <ul class="org-ul">
 <li><p>
 Note that all expressions are evaluated before any assignments are
-performed. E.g., <code>x, y := y, x</code> is a program that <b>swaps</b> the values of two
+performed. E.g., <code>x, y := y, x</code> is a <a href="#org2357993">program</a> that <b>swaps</b> the values of two
 variables, <code>x</code> and <code>y</code>:
 </p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1972,24 +2286,17 @@ variables, <code>x</code> and <code>y</code>:
 
 <li>Python, for example, allows multiple assignments.</li>
 </ul>
-
-<p>
-\[
-   \def\If#1{\;⇐[#1]\;\;} % goal ⇐[command] provisos
-   \def\Then#1{\;⇒[#1]\;\;} % provisos ⇒[command] goal
-   \]
-</p>
 </div>
 </div>
 
 <div id="outline-container-Let's-show-a-calculation" class="outline-3">
-<h3 id="Let's-show-a-calculation"><span class="section-number-3">4.3</span> <a href="#Let's-show-a-calculation">Let's show a calculation!</a></h3>
+<h3 id="Let's-show-a-calculation"><span class="section-number-3">4.6</span> <a href="#Let's-show-a-calculation">Let's show a calculation!</a></h3>
 <div class="outline-text-3" id="text-Let's-show-a-calculation">
 <p>
-First, since <b>programming is a goal-directed activity</b>, let us begin with the
+First, since <b><a href="#org247a51e">programming</a> is a goal-directed activity</b>, let us begin with the
 goal and use that to arrive at a required precondition.
 How? Just as \(y ≥ x \;≡\; x ≤ y\), we define
-\[G \;⇐[C]\;\; R \quad≡\quad R \;⇒[C]\;\; G \]
+\[G \If{C} R \quad≡\quad R \Then{C} G \]
 Using this ‘turned around’ (<i>converse</i>) notation, we may begin with the goal.
 </p>
 
@@ -2012,7 +2319,7 @@ When will the assignment <code>x := x - 1</code> ensure the goal state \(x² + 2
 \end{calc}
 <p>
 Hence, if \(x\) is positive or negative 2, then the assignment
-<code>x := x - 1</code> will ensure that \(x\) satisfies the <a href="#org1972092">predicate</a> state \(x² + 2 · x =
+<code>x := x - 1</code> will ensure that \(x\) satisfies the <a href="#orgeaca09a">predicate</a> state \(x² + 2 · x =
    3\)
 &#x2014;incidentally, after the assignment \(x\) will have its value being
 positive 1 or negative 3, which are both solutions to the equation
@@ -2027,19 +2334,19 @@ minutes of this <a href="https://youtu.be/JxRZC2UMJb0">this video lecture</a> fo
 </p>
 
 <p>
-When \(I \;⇒[C]\;\; I\), one says that “state \(I\) is <b><a id="orgc2b1aa0">invariant</a></b> for
+When \(I \;⇒[C]\;\; I\), one says that “state \(I\) is <b><a id="org11c8d7b">invariant</a></b> for
 command \(C\)” or that “\(C\) <i>maintains</i> \(I\)”.
 </p>
 </div>
 </div>
 
 <div id="outline-container-Calculating-Assignments" class="outline-3">
-<h3 id="Calculating-Assignments"><span class="section-number-3">4.4</span> <a href="#Calculating-Assignments">Calculating Assignments</a></h3>
+<h3 id="Calculating-Assignments"><span class="section-number-3">4.7</span> <a href="#Calculating-Assignments">Calculating Assignments</a></h3>
 <div class="outline-text-3" id="text-Calculating-Assignments">
 <p>
-It is <i>often</i> possible to <b>calculate</b> an <a href="#org829d1de">assignment statement</a> that satisfies a
-given precondition-postcondition specification.
-Many examples involve a property that is to be maintained <a href="#orgc2b1aa0">invariant</a> whilst
+It is <i>often</i> possible to <b>calculate</b> an <a href="#org786637a">assignment statement</a> that satisfies a
+given precondition-postcondition <a href="#org2229365">specification</a>.
+Many examples involve a property that is to be maintained <a href="#org11c8d7b">invariant</a> whilst
 progress is made by incrementing (or decrementing) a counter.
 </p>
 
@@ -2085,7 +2392,99 @@ assignment 𝒳 in \[ s = n² \Then{s,n := 𝒳, n + 1} s = n² \]
 </p>
 </div>
 </div>
+
+<div class="outline-text-2" id="text-The-Assignment-Statement">
+<ul class="org-ul">
+<li>Exercise: Solve for 𝒳 in \(\true \Then{x := 𝒳} x = 4\).
+<ul class="org-ul">
+<li>The answer is ‘obvious’, but actually do the calculation
+to see that unknown expressions in an assignment can be found by
+calculation.</li>
+</ul></li>
+<li>Exercise: Solve for 𝒳 in \(0 ≤ x ∧ 0 < y \Then{q, r := 𝒳, x} 0 ≤ r ∧ q · y + r
+   = x\)</li>
+<li>Exercise: Solve for 𝒳 in \(q = a · c ∧ w  = c² \Then{a, q := a + c, 𝒳} q = a *
+   c\)</li>
+</ul>
+
+<p>
+<div style="padding: 1em; background-color: #CCFFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em
+           #00000057;"> <h3>Heuristic</h3>  To determine an unknown expression in an assignment, calculate.
+ </div>
+</p>
 </div>
+<div id="outline-container-The-Shapes-of-Programs" class="outline-3">
+<h3 id="The-Shapes-of-Programs"><span class="section-number-3">4.8</span> <a href="#The-Shapes-of-Programs">The Shapes of Programs</a></h3>
+<div class="outline-text-3" id="text-The-Shapes-of-Programs">
+<p>
+The activity of <a href="#org247a51e">programming</a> is the activity of solving a <a href="#org2229365">specification</a> for its
+unknown, where this unknown is called a <i><a href="#org2357993">program</a></i>. Programs are
+formulae of a certain shape.
+</p>
+
+<p>
+The simplest <a href="#org2357993">program</a> is called <code>skip</code>, then we may ‘sequentially compose’ two
+programs <code>C₁</code> and <code>C₂</code> to obtain the <a href="#org2357993">program</a> <code>C₁⍮ C₂</code>, and finally we have the
+<i>(multiple) assignment</i> <a href="#org2357993">program</a> <code>x := E</code> consisting of a list of distinct variables
+<code>x</code> and a corresponding list of expressions <code>E</code>. There are other shapes of programs
+and we will get to those in due time.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-math">Program ::=  skip
+         |   C₁ ⍮ C₂
+         |   x := E
+</pre>
+</div>
+
+<p>
+<div style="padding: 1em; background-color: #CCFFCC; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em
+           #00000057;"> <h3>Program Correctness Laws</h3>  \[\begin{align*}
+ \mathsf{Axiom,\; The\; Law\; of\; the\; Exluded\; Miracle} & & R \Then{C} \false \quad≡\quad ¬ R \\
+ \mathsf{Axiom,\; Conjunctivity} && R \Then{C} (G₁ ∧ G₂) \quad≡\quad \big(R \Then{C} G₁\big) ∧ \big(R \Then{C} G₂\big) \\
+ \mathsf{Axiom,\; Skip\; Rule} && R \Then{\mathsf{skip}} G \quad≡\quad R ⇒ G \\
+ \mathsf{Axiom,\; Sequence\; Rule} && R \Then{C₁} I \Then{C₂} G \quad⇒\quad R \Then{C₁⍮C₂} G \\
+ \mathsf{Axiom,\; Assignment\; Rule} && R \Then{x := E} G \quad≡\quad R[x ≔ E] ⇒ G \\ \hdashline
+ \mathsf{Postcondition\; Weakening} && \big(R \Then{C} G) ∧ (G ⇒ G′) \quad⇒\quad R \Then{C} G′ \\
+ \mathsf{Precondition\; Strengthening} && (R′ ⇒ R) ∧ \big(R \Then{C} G) \quad⇒\quad R′ \Then{C} G \\  \hdashline
+ \mathsf{Conjunction} && (R₁ \Then{C} G₁) ∧ (R₂ \Then{C} G₂) \quad⇒\quad (R₁ ∧ R₂) \Then{C} (G₁ ∧ G₂) \\
+ \mathsf{Case\; Analysis} && (R₁ \Then{C} G₁) ∧ (R₂ \Then{C} G₂) \quad⇒\quad (R₁ ∨ R₂) \Then{C} (G₁ ∨ G₂) \\
+ \end{align*}\]
+ </div>
+</p>
+
+<p>
+The skip rule tells us that the <code>skip</code> command is executed by doing nothing: When
+\(R ⇒ G\), and we are in state \(R\), then we get to state \(G\) by doing nothing.
+</p>
+
+<p>
+Note: One then defines the equivalence of programs “up to <a href="#org2229365">specification</a>”:
+\[C = C′ \qquad≡\qquad \big(R \Then{C} G \quad≡\quad R \Then{C′} G\big) \text{ for
+ all } R, G \]
+Using this, one can show that <code>skip</code> is the unit of sequencing,
+and that it can be defined in terms of assignments.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>C ⍮ skip = C = skip ⍮ C</code></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>skip = (x := x)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
 
 <div id="outline-container-Boolean-Expressions-and-Laws" class="outline-2">
 <h2 id="Boolean-Expressions-and-Laws"><span class="section-number-2">5</span> <a href="#Boolean-Expressions-and-Laws">Boolean Expressions and Laws</a></h2>
@@ -2105,7 +2504,7 @@ The type of propositions is known as the <b>Booleans</b> and denoted 𝔹.
 <p>
 For instance, the notion of equality on any type τ is
 typed <code>_=_ : τ → τ → 𝔹</code>; i.e., equality takes two values of a type τ
-and returns a <a href="#orgac04595">propositional</a> value.
+and returns a <a href="#orgff03aec">propositional</a> value.
 </p>
 
 <blockquote>
@@ -2262,6 +2661,76 @@ specified axiomatically.
 </tr>
 </tbody>
 </table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 6:</span> Meanings of Boolean operators</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Expression</th>
+<th scope="col" class="org-left">Pronounced</th>
+<th scope="col" class="org-left">is \(\true\) if</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">\(p ≡ q\)</td>
+<td class="org-left"><i>p equivales q</i></td>
+<td class="org-left">exactly an even number of arguments is \(\false\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(p ≢ q\)</td>
+<td class="org-left"><i>p differs from q</i></td>
+<td class="org-left">exactly an odd number of its arguments are \(\true\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">\(p ∧ q\)</td>
+<td class="org-left"><i>p and q</i></td>
+<td class="org-left">all of its arguments are \(\true\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(p ∨ q\)</td>
+<td class="org-left"><i>p or q</i></td>
+<td class="org-left">at least one of its arguments is \(\true\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">\(p ⇒ q\)</td>
+<td class="org-left"><i>p implies q</i></td>
+<td class="org-left">either <i>q</i> is \(\true\) or <i>p</i> is \(\false\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(p ⇐ q\)</td>
+<td class="org-left"><i>p follows from q</i></td>
+<td class="org-left">either <i>p</i> is \(\true\) or <i>q</i> is \(\false\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">\(¬ p\)</td>
+<td class="org-left"><i>not p</i></td>
+<td class="org-left"><i>p</i> is \(\false\)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+A Boolean expression not equal to true is equal to false &#x2014;indeed, it is a
+simple proof to show <code>(p ≢ true) ≡ (p ≡ false)</code>.
+</p>
 </div>
 </div>
 
@@ -2280,7 +2749,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 6:</span> Properties of <a href="#orgac04595">propositional</a> operators and similar (familiar) numeric laws</caption>
+<caption class="t-above"><span class="table-number">Table 7:</span> Properties of <a href="#orgff03aec">propositional</a> operators and similar (familiar) numeric laws</caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -2472,7 +2941,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-09-18 Fri 17:27</p>
+<p class="date">Created: 2020-09-18 Fri 23:23</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
