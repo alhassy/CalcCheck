@@ -25,20 +25,140 @@
   :END:
 {{{begin-box(#E5E7E9 , hi)}}}
 
- + Program Construction
+ *Mathematics of Program Construction*
+
+ + Program Construction   ---
+ + Ferreira's Thesis
+   #+begin_quote
+   The main contribution of this thesis is educational material, capturing
+   calculational and algorithmic problem-solving techniques, that supports the
+   teaching of mathematics and computing. The material is problem-driven, it is
+   aimed at the boundary between pre-university and university level...
+   #+end_quote
+
+A list of accidents caused by computer programs can be found at “The Risks Digest” (http://catless.ncl.ac.uk/Risks )
+
+Hoare triples and an axiomatic approach to language definition.
+
+*Equational Logic*
+
  + LADM
  + [[https://fourferries.com/wp-content/uploads/2016/10/StructuredDerivation26092016.pdf][Structured Derivations: Teaching Mathematical Reasoning in High School]]
 
    Online and covers a variety of topics, including limits and probability
    theory.
 
-
-[[https://avenue.cllmcmaster.ca/d2l/lms/links/link_newedit.d2l?ext=0&linkid=97717&ou=347775][Using Z]]
+[[https://avenue.cllmcmaster.ca/d2l/lms/links/link_newedit.d2l?ext=0&linkid=97717&ou=347775][Using Z]] (Not equational, but uses the same notation as the above books; mostly.)
 
 Z (pronouced "Zed") is a standardised mathematical notation intended for software specification.
 For universal and existential quantification, CalcCheck uses the same notation as Z.
 
 The first half of the book "Using Z" is an introduction to logic via natural deduction, and to basic discrete mathematics covering set, functions, and relations, all in the Z notation.
+
+*More Books*
+
+One of the products of the attempts to streamline mathematical arguments
+mentioned above is the so-called calculational method, which aims at reducing
+proofs as much as possible to elementary syntactic calculation. The
+calculational proof style has been adopted widely by the community of computing
+scientists working on formal pro- gramming methods. For example,
+
+- PhD thesis of Netty van Gasteren “On the shape of mathematical arguments”
+  [vG90],
+
+  :more:
+Antonetta J. M. van Gasteren. On the Shape of Mathematical Arguments. Number 445 in Lecture Notes in Computer Science. Springer-Verlag, New York, NY, USA, 1990.
+
+  One of the first problems was that mathematicians hardly manipulate their formu- lae: instead, they interpret them; and one of the reasons is that the notation they use is not adequate for manipulation.
+  :end:
+
+- PhD thesis of João F. Ferreira
+
+ :more:
+ João F. Ferreira and Alexandra Mendes. Students’ feedback on teaching
+ mathematics through the calculational method. In Frontiers in Education
+ Conference, 2009. FIE ’09. 39th IEEE, 2009.
+ :end:
+
+- the textbooks written by Roland Backhouse
+  :more:
+Roland C. Backhouse. Program Construction. Calculating Implementations
+from Specifications. John Wiley & Sons, 2003.
+  :end:
+
+- by Richard Bird and Oege de Moor
+  :more:
+  Richard S. Bird and Oege de Moor. Algebra of Programming. Prentice-Hall International, 1996.
+  :end:
+
+- by David Gries and Fred Schneider
+  :more:
+  David Gries and Fred B. Schneider. A Logical Approach to Discrete
+  Math. Springer-Verlag, 1993.
+
+  David Gries and Fred B. Schneider. Teaching math more effec- tively, through
+calculational proofs. The American Mathematical Monthly, 102(8):691–697, 1995.
+  :end:
+
+- Jan van de Snepscheut
+  # Jan L.A. van de Snepscheut. What Computing Is All About. Springer-Verlag, 1993.
+
+- Back et al. introduced the concept of structured derivations
+
+  :more:
+
+Ralph Back, Jim Grundy, and Joakim von Wright. Structured calculational proof. Technical Report TUCS-TR-65, 1996.
+
+Ralph-Johan Back, Mia Peltomäki, Tapio Salakoski, and Joakim von Wright. Structured derivations supporting high-school mathematics. In A. Laine, J. Lavonen, and V. Meisalo, editors, Proceedings of the 20th An- nual Symposium of the Finnish Mathematics and Science Education Research Association, Research Report 253, pages 104–122, Helsinki, Finland, 2004. Department of Applied Sciences of Education, University of Helsinki.
+
+Ralph-Johan Back and Joakim von Wright.
+Doing high school mathematics carefully. Technical report, 1997.
+
+Ralph-Johan Back and Joakim von Wright. Mathematics with a little bit of logic:
+Structured derivations in high-school mathematics. 2006. Manuscript.
+
+Ralph-Johan Back. Structured derivations as a unified proof format for teaching
+mathematics. Technical Report 949, TUCS, Jul 2009.
+
+Roland Backhouse, Wei Chen, and João Ferreira. The algorithmics of solitaire-like games. In Claude Bolduc, Jules Desharnais, and Béchir Ktari, editors, Mathematics of Program Construction, volume 6120 of Lecture Notes in Computer Science, pages 1–18. Springer-Verlag, 2010.
+  :end:
+
+
+resources on the calculational method
+- websites
+  - “E. W. Dijkstra Archive” (http://userweb.cs.utexas.edu/users/EWD)
+  - “mathmeth.com – Disci- pline in Thought” (http://mathmeth.com).
+
+Other
+
+The project “Computer Science Unplugged” [BWF06], whose goal is to teach principles of computing science through games and puzzles. They provide a series of activity worksheets that can be directly used in the classroom.
+- they want to convey general principles and ideas of computing
+- Also, their material is suitable for people of all ages
+- http://csunplugged.org.
+
+Tim Bell, Ian H. Witten, and Mike Fellows. Computer Science Unplugged: An enrichment and extension programme for primary-aged children. December 2006. Available from http://csunplugged.org/index.php/en/books.
+
+We cannot conclude this section without mentioning some of the efforts of the
+mathe- matical community in articulating psychological and technical approaches
+to problem solving. The best known work, and one of the major influences in
+problem solving, is George Pólya’s How to Solve It. Even though other
+mathematicians had considered questions of problem solving in earlier
+generations, it was Pólya’s How to Solve It that had the tremendous impact on
+the way people viewed the techniques of attacking mathematical problems. In
+particular, it was there that Pólya suggested the division of the
+problem-solving process into the now widely accepted four phases: understanding
+the problem, devising a plan, carrying out the plan, and looking back. Other
+works include Jacques Hadamard’s Essay on the Psychology of Invention in the
+Mathematical Field, Karl Duncker’s On Problem Solving, and Max Wertheimer’s
+Productive Thinking. Incidentally, all these books appeared in 1945, which led
+Alan H. Schoenfeld to point out that 1945 was indeed a great year for problem
+solving.
+
+*Puzzle books*
+
+Another trend in mathematics and problem solving — and related with the opening quote of this chapter — is based on the belief that mathematical games and recreations can be used for educational purposes and incorporated into various curricula
+
+Raymond Smullyan!
 
 {{{end-box}}}
 

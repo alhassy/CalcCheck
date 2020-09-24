@@ -1,5 +1,5 @@
- # -*- eval: (my/execute-startup-blocks) -*-
-
+# 56
+# -*- eval: (my/execute-startup-blocks) -*-
 #+title: Mathematics for Computing
 #+subtitle: Abridged Lecture Notes @@html:<br>@@ Based on “A Logical Approach to Discrete Math”
 #+author: Musa Al-hassy
@@ -15,6 +15,82 @@
 #+HTML_HEAD: <link href="https://alhassy.github.io/blog-banner.css" rel="stylesheet" type="text/css" />
 # The last one has the styling for lists.
 
+# One of the first problems was that mathematicians hardly manipulate their formu- lae: instead, they interpret them; and one of the reasons is that the notation they use is not adequate for manipulation.
+
+#+begin_center
+#+include: ~/Desktop/colours_palette.html export html
+#+end_center
+
+* keywords :ignore:
+  :PROPERTIES:
+  :CUSTOM_ID: keywords
+  :END:
+#+begin_details Keywords
+
+#+begin_documentation
+:name: Programming
+:label: Programming
+
+Programming is solving the equation /R ⇒[C] G/ in the unknown /C/; i.e., it is the
+activity of finding a ‘recipe’ that satisfies a given specification. Sometimes
+we may write /R ⇒[?] G/ and solve for ‘?’. Programming is a goal-directed activity: From a specification, a program is found by examining the shape of its postcondition.
+#+end_documentation
+doc:Programming
+
+#+begin_documentation
+:name: Specification
+:label: Spec
+
+ A specification is an equation of a certain shape.
+ /Programming/ is the activity of solving a specification
+ for its unknown. Its unknown is called a /program/.
+
+ See also “Programming”.
+#+end_documentation
+doc:Spec
+
+#+begin_documentation
+:name: Expression
+:label: Expression
+
+A ‘variable’ or a ‘function application’; i.e., the name of a function along
+with a number of existing expressions.
+
+In a sense, an expression is like a sentence with the variables acting as
+pronouns and the function applications acting as verb clauses and the argument
+to the application are the participants in the action of the verbal clause.
+#+end_documentation
+doc:Expression
+
+#+begin_documentation
+:name: Algorithmic Problem Solving
+:label: AlgorithmicProblemSolving
+
+There are two ways to read this phrase.
+
+Algorithmic-problem solving is about solving problems that
+involve the construction of an algorithm for their solution.
+
+Algorithmic problem-solving is about problem solving in general,
+using the principles of correct-by-construction algorithm-design.
+
+#+end_documentation
+doc:AlgorithmicProblemSolving
+# Computing science is all about solving algorithmic problems (or, as some authors pre- fer to say, it is all about instructing computers to solve problems).
+
+#+begin_documentation
+:name: Calculational Proof
+:label: CalcProof
+
+A story whose events have smooth transitions connecting them.
+
+A proof wherein each step is connected to the next step by an explicit
+justification.
+#+end_documentation
+doc:CalcProof
+
+…I'll add more in time…
+#+end_details
 * Notational Setup                                                   :ignore:
   :PROPERTIES:
   :CUSTOM_ID: Notational-Setup
@@ -28,6 +104,11 @@ y
 \end{calc}
 
 :End:
+
+#+name: startup-code
+#+begin_src emacs-lisp :exports none
+(load-file "~/Desktop/power-blocks.el")
+#+end_src
 
 #+BEGIN_export html
 <style>
@@ -65,7 +146,7 @@ pre.src-math:before { content: 'Mathematical! Algebraic! Axiomatic!'; }
 \def\true{\mathsf{true}}
 \def\false{\mathsf{false}}
 
-\def\even{\mathsf{even}}
+\def\even{\mathsf{even}\,}
 #+end_latex-definitions
 
 #+html: <p style="display:none">
@@ -143,7 +224,7 @@ $$
 #+end_src
 
 #+RESULTS: startup-code
-: subtle-colors
+: t
 
 # $1 colour eg “pink” or “hsl(157 75% 20%)” or “#e5f5e5”; $2 title
 #+macro: begin-box (eval (concat "@@html: <div style=\"padding: 1em; background-color: " (subtle-colors $1) "; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;\"> <h3>" $2 "</h3>@@"))
@@ -186,7 +267,7 @@ $$
  number precisely when /integer/ $k$ is a so-called perfect /n/-th root ---consequently,
  since 2 is not a perfect square, $\sqrt{2}$ is not rational.
 
-{{{begin-box(#e5f5e5, Classical Proof: Non-perfect powers have irrational
+{{{begin-box(#e5f5e5, Conventional Proof: Non-perfect powers have irrational
 roots)}}}
 
 Suppose that /integer/ $k$ is not a perfect /n/-th power ---i.e., not of the form /𝓍ⁿ/---
@@ -266,9 +347,22 @@ problem domain.
 \def\ENDstep{ \right\rangle }
 #+end_latex-definitions
 
-Finally, observe that the calculational form is *more general*.  The use of a
-/formal/ approach let us keep track of when our statements are equivalent
-(“=”) rather than being weakened (“⇒”).
+Observe that the calculational form is *more general*.  The use of a
+/formal/ approach let us keep track of when our statements are equivalent (“=”)
+rather than being weakened (“⇒”).  That is, the use of English to express the
+connection between steps is usually presented naturally using “if this, then
+that” statements ---i.e., implication--- rather than stronger notion of equality.
+- In contrast, the conventional proof is a ‘proof by contradiction’;
+  a method that is over-used.
+
+- Other features of conventional proofs are the /dot dot dot/ notations, “⋯”, to
+  indicate “and so on, of the same idea/form” ---leaving readers the burden to
+  guess the generic shape of the ‘idea/form’ that should be repeated.
+
+  Calculational proofs use quantifiers ---and loops--- instead.
+- Finally, conventional proofs tend to use prefix notation and thereby
+  implicitly forcing a syntactic distinction between equivalent expressions;
+  e.g., $\gcd(m, \gcd(n, p))$ and $\gcd(\gcd(m, n), p)$.
 
 The above proof is a generalisation of a proof in Backhouse's text for square
 roots, which may be viewed as a [[https://youtu.be/t39wHoFHbvY][Youtube video]] which makes use of kbd:CalcCheck
@@ -310,6 +404,29 @@ roots, which may be viewed as a [[https://youtu.be/t39wHoFHbvY][Youtube video]] 
      proved theorem.
   {{{end-box}}}
 
+#+begin_box Algorithmic Problem Solving ---“math is programming”
+Problems may be formulated and solved using, possibly implicitly, the
+construction of correct programs:
+
+|   | “for all $x$ satisfying $R(x)$, there is a $y$ such that $G(x, y)$ is true” |
+| ≈ | /∀ x • R x ⇒ ∃ y • G x y/                                                     |
+| ≈ | ~R ⇒[C] G~ for some program command ~C~ with inputs /x/ and outputs /y/             |
+
+This is known as a /constructive proof/ since we have an algorithm ~C~ that actually
+shows how to find a particular $y$ to solve the problem, for any given $x$.  In
+contrast, non-constructive proofs usually involving some form of counting
+followed by a phrase “there is at least one such $y$ …”, without actually
+indicating /how/ to find it!
+# p ∨ ¬ p ...!
+
+More concretely,
+|   | Any two consectuive Fibonnaci numbers are coprime    |
+| ≈ | /∀ n • n ≥ 1 ⇒ gcd(fib n, fib (n + 1)) = 1/            |
+| ≈ | ~a = fib n  ∧  b = fib (n + 1)  ∧  n ≥ 0~              |
+|   | ~            ⇒[C]~                                     |
+|   | ~a = b = gcd(fib n, fib (n + 1)) = 1~, for a program ~C~ |
+#+end_box
+
 ** What is Discrete Mathematics
    :PROPERTIES:
    :CUSTOM_ID: Discrete-Mathematics
@@ -341,8 +458,7 @@ roots, which may be viewed as a [[https://youtu.be/t39wHoFHbvY][Youtube video]] 
        calculation solving the problem can be formed in less than 10 super simple
        lines.
 
-       #+begin_details
-       :title: Portia's Suitor's Dilemma
+       #+begin_details Portia's Suitor's Dilemma
 
  Portia has a gold casket and a silver casket and has placed a picture of herself
  in one of them. On the caskets, she has written the following inscriptions:
@@ -442,6 +558,22 @@ can solve!/
  |                | E.g., since $n = 2 · m$ we must have $\even n = \even (2 · m)$                                 |
  |                | E.g., if /Jim = James/ then /Jim's home address = James' home address/.                            |
  |                |                                                                                                |
+
+
+ #+begin_details Uses of inference rules ---for Logic 𝑬
+
+| /                 | <                                             |
+| Inference Rule    | Usage                                         |
+|-------------------+-----------------------------------------------|
+| Leibniz           | We can apply equalities inside expressions    |
+| Transitivity of = | We can chain equalities                       |
+| Substitution      | We can use substitution instances of theorems |
+| Equipollence      | Things equal to theorems are also theorems    |
+
+Equipollence means if we show something is equal to ‘true’ (a particular
+theorem), then it is a theorem. Consequently, this means all theorems are
+equivalent.
+#+end_details
 
  That's a lot of hand-waving; and a few examples don't scale. In order to discuss
  proof, we need to discuss inference rules, which are ways to derive new claims
@@ -655,6 +787,13 @@ and so the first line in the definition above could be omitted.
   :PROPERTIES:
   :CUSTOM_ID: Logics
   :END:
+
+  #+begin_quote
+A modern mathematical proof is not very different from a modern machine, or a
+modern test setup: the simple fundamental principles are hidden and almost
+invisible under a mass of technical details. — Hermann Weyl
+  #+end_quote
+
 ** Syntax vs. Semantics
    :PROPERTIES:
    :CUSTOM_ID: Syntax-vs-Semantics
@@ -817,6 +956,16 @@ and so the first line in the definition above could be omitted.
 #   are part of the *Logic E* system used in the LADM text book
 #   ---see “[[http://www.cse.yorku.ca/~logicE/misc/logicE_intro.pdf][Equational Propositional Logic]]” by Gries & Schneider.
 
+
+A “theorem” is a syntactic concept: Can we play the game of moving symbols to
+get this? Not “is the meaning of this true”!
+‘Semantic concepts’ rely on ‘states’, assignments of values to variables
+so that we can ‘evaluate, simplify’ statements to deduce if they are true.
+
+Syntax is like static analysis; semantics is like actually running the program
+(on some, or all possible inputs).
+
+
 ** [Optional] Strange Logics
    :PROPERTIES:
    :CUSTOM_ID: water-bucket-logics
@@ -852,8 +1001,7 @@ and so the first line in the definition above could be omitted.
  *Exercise [[#water-bucket-logics]].1*: Using this logic, prove the theorem =0, 4=.
  - Notice that the theorem has nothing to do with ‘truth’! ---At least not
    explicitly, or intuitively.
- #+begin_details
- :title: Solution
+ #+begin_details Solution
  \[
  \Rule[ZeroLeft]{\normalsize\Rule[ShiftLeft_1]{\LARGE\Rule[RefreshLeft]{\LARGE\Rule[ShiftLeft_2]{\Rule[ZeroLeft]{\LARGE
  \Rule[ShiftLeft_3]{\LARGE \Rule[RefreshRight]{\LARGE\Rule[Empty]{}{0,0}}{0,
@@ -864,8 +1012,7 @@ and so the first line in the definition above could be omitted.
  *Exercise [[#water-bucket-logics]].2:*
  A logic models reasoning, can you /interpret/ the terms =x, y= in such
  a way that makes the inference rules true?
- #+begin_details
- :title: Solution
+ #+begin_details Solution
 
  The logic 𝑾𝑩 /could be/ interpreted as modelling two ‘water buckets’, the first
  can contain 3 litres while the second can contain 5 litres, along with an
@@ -900,8 +1047,7 @@ and so the first line in the definition above could be omitted.
 
  *Exercise [[#water-bucket-logics]].3:* Finish reading this section, then come back and
  prove the theorem =0 ◇ 0 ⟶ 0 ◇ 4= using a /calculational proof/.
- #+begin_details org
- :title: Solution
+ #+begin_details Solution
 
  As discussed in §[[#Rules-of-Equality-and-Proof-Trees-vs-Calculational-Proofs]], we
  form calculational proofs using a transitive relation in the left-most column of
@@ -940,8 +1086,7 @@ and so the first line in the definition above could be omitted.
  #+end_details
 
  *Exercise [[#water-bucket-logics]].4:* Provide an interpretation of this logic.
- #+begin_details
- :title: Solution
+ #+begin_details Solution
 
  We /may/ think of 𝑴𝑺𝑯 as a ‘machine’ with two memory banks: A computer with memory
  state $x$ and $y$ is executed and it terminates in memory state $x′$ and $y′$.
@@ -1162,7 +1307,7 @@ and so the first line in the definition above could be omitted.
     If a use of Substitution is simple enough, as in this case, we may leave
     off the indication “with $x ≔ j$”.
 
-* The Assignment Statement
+*  Program Correctness
   :PROPERTIES:
   :CUSTOM_ID: The-Assignment-Statement
   :END:
@@ -1183,6 +1328,11 @@ and so the first line in the definition above could be omitted.
 
    Rather than understanding how a program is /executed/,
    we can also understand a program in terms of /syntactic substitution/.
+
+#+begin_center
+Focus is on goal-directed and calculational construction of algorithms as
+opposed to the traditional guess-and-verify methodology.
+#+end_center
 
 ** From Comments to Hoare Triples
    :PROPERTIES:
@@ -1328,9 +1478,9 @@ and so the first line in the definition above could be omitted.
    :CUSTOM_ID: Hi
    :END:
 
- A /<<<specification>>>/ is an equation of a certain shape.
- /<<<Programming>>>/ is the activity of solving a specification
- for its unknown. Its unknown is called a /<<<program>>>/.
+ A /specification is an equation of a certain shape.
+ /Programming/ is the activity of solving a specification
+ for its unknown. Its unknown is called a /program/.
 
  One says “program =C= is specified by precondition $R$ and postcondition $G$”
  whenever $R \Then{C} G$. One also says this is a /specification of =C=./
@@ -1344,7 +1494,7 @@ and so the first line in the definition above could be omitted.
  requirement of the /termination/ of $C$.
  #+end_box
 
- *<<<Programming>>>* is solving the equation $R \Then{C} G$ in the unknown $C$;
+ *Programming* is solving the equation $R \Then{C} G$ in the unknown $C$;
  i.e., it is the activity of finding a ‘recipe’ that satisfies a given
  specification.  Sometimes we may write $R \Then{?} G$ and solve for ‘?’.
  *Programming is a goal-directed activity: From a specification, a program is
@@ -1629,15 +1779,6 @@ Program ::=  skip
  | ~C ⍮ skip = C = skip ⍮ C~ |
  | ~skip = (x := x)~         |
 
-
-* COMMENT Organising calculations
-  :PROPERTIES:
-  :CUSTOM_ID: COMMENT-Organising-calculations
-  :END:
-
-  Just as in doing arithmetic, we have the freedom to choose the most
-  effective way to organise our calculations.
-
 * Boolean Expressions and Laws
   :PROPERTIES:
   :CUSTOM_ID: Boolean-Expressions-and-Laws
@@ -1690,6 +1831,14 @@ The phrase $p ≡ q$ may be read as
    For example, $\false ≡ \true ≡ \false$ is $\true$, whereas
    $\false = \true = \false$ is $\false$.
 
+   #+begin_quote
+For the Booleans, equality is equal to equivalence:
+| /(p = q) = (p ≡ q)/ for /p, q : 𝔹/ |
+
+For the Booleans, equality is equivalent to equivalence:
+| /(p = q) ≡ (p ≡ q)/ for /p, q : 𝔹/  |
+   #+end_quote
+
 ** Useful Operators
    :PROPERTIES:
    :CUSTOM_ID: Useful-Operators
@@ -1718,18 +1867,87 @@ The Booleans have a number of useful operators that model reasoning,
    | “m ↓ n” is “m” whenever “m ≤ n”, otherwise it is “n”                            |
 
    #+caption: Meanings of Boolean operators
-   | Expression | Pronounced       | is $\true$ if                                      |
-   |------------+------------------+----------------------------------------------------|
-   | $p ≡ q$    | /p equivales q/    | exactly an even number of arguments is $\false$    |
-   | $p ≢ q$    | /p differs from q/ | exactly an odd number of its arguments are $\true$ |
-   |------------+------------------+----------------------------------------------------|
-   | $p ∧ q$    | /p and q/          | all of its arguments are $\true$                   |
-   | $p ∨ q$    | /p or q/           | at least one of its arguments is $\true$           |
-   |------------+------------------+----------------------------------------------------|
-   | $p ⇒ q$    | /p implies q/      | either /q/ is $\true$ or /p/ is $\false$               |
-   | $p ⇐ q$    | /p follows from q/ | either /p/ is $\true$ or /q/ is $\false$               |
-   |------------+------------------+----------------------------------------------------|
-   | $¬ p$      | /not p/            | /p/ is $\false$                                      |
+   | Expression | Pronounced       | is $\true$ if                                        |
+   |------------+------------------+------------------------------------------------------|
+   | $p ≡ q$    | /p equivales q/    | exactly an even number of arguments is $\false$, (⋆) |
+   | $p ≢ q$    | /p differs from q/ | exactly an odd number of its arguments are $\true$   |
+   |------------+------------------+------------------------------------------------------|
+   | $x = y$    | /x equals y/       | exactly $x$ and $y$ simplify to the same expression  |
+   | $x ≠ y$    | /x differs from y/ | $x$ and $y$ do not simplify to the same expression   |
+   |------------+------------------+------------------------------------------------------|
+   | $p ∧ q$    | /p and q/          | all of its arguments are $\true$                     |
+   | $p ∨ q$    | /p or q/           | at least one of its arguments is $\true$             |
+   |------------+------------------+------------------------------------------------------|
+   | $p ⇒ q$    | /p implies q/      | either /q/ is $\true$ or /p/ is $\false$                 |
+   |            | /if p, then q/     |                                                      |
+   | $p ⇐ q$    | /p follows from q/ | either /p/ is $\true$ or /q/ is $\false$                 |
+   |            | /p if q/           |                                                      |
+   |------------+------------------+------------------------------------------------------|
+   | $¬ p$      | /not p/            | /p/ is $\false$; read “it is not the case that $p$”    |
+
+   For example,
+   |   | “p, even if q”                               |
+   | ≈ | $p ∧ (q ⇒ p)$                                |
+   |   | ( This is provably equivalent to just $p$. ) |
+
+   (⋆) Note that if an even number of arguments is /false/, then the /false/'s
+   cancel out and only /true/ remains. Note that since /true/ is the identity of
+   ‘≡’, we can simply cancel them out of a chain of equivalences.  When there
+   are /2 · n/ many elements in the chain, then if there are an even number of
+   /true/'s, say /k/-many, then there must be an even number of /false/'s: $\even (2 ·
+   n - k) = (\even (2 · n) ≡ \even (-k)) = \even k = \true$.
+
+   Also,
+   | $p ≡ q ≡ r$         | ≈ | /One or all of p,q, and r are true/     |
+   |---------------------+---+---------------------------------------|
+   | $p ≡ q$             | ≈ | /None or both of p and q is true/       |
+   |---------------------+---+---------------------------------------|
+   | $p ≢ q$             | ≈ | /Exactly one of p and q is true/        |
+   |                     |   | /Either p or q, but not both/           |
+   |---------------------+---+---------------------------------------|
+   | $p₀ ≡ p₁ ≡ ⋯ ≡ p₂ₙ$ | ≈ | /An even number of the pᵢ are true/ (⋆) |
+   |                     |   |                                       |
+
+#+begin_details (⋆) When is <em>p₀ ≡ p₁ ≡ ⋯ ≡ pₙ</em> true?
+When is /p₀ ≡ p₁ ≡ ⋯ ≡ pₙ/ true?
+
+Since /true/ is the identity of ‘≡’; any $pᵢ$ equal to $\true$ can be ‘cancelled
+out’. Hence, we are left with only $\false$'s. Since $(\false ≡ \false) ≡
+\true$, we can cancel out any pair of $\false$'s and so if there are an even
+number of $\false$'s the resulting expression is $\true$.
+
+However, if the number, say $k$, of $\false$'s is even, then
+\begin{calc}
+\text{the parity of trues}
+\step{ Formalise: The trues are the non-falses }
+\even(n - k)
+\step{ Even distributes over sums, subtractions }
+\even n ≡ \even (-k)
+\step{ Even is invariant under unary minus }
+\even n ≡ \even k
+\step{ By assumption, there are $k$-many falses}
+\even n ≡ \true
+\step{ Identity of equivalence }
+\even n
+\end{calc}
+
+Hence,
+|   | $p₀ ≡ p₁ ≡ ⋯ ≡ pₙ$                                                        |
+| ≈ | An even number of the arguments is false.                                 |
+| ≈ | The parity of trues is the same as the parity of the number of arguments. |
+
+For example,
+|   | $p ≡ q$                                     |
+| ≈ | None or both of $p$ and $q$ is true         |
+|---+---------------------------------------------|
+|   | $p ≡ q ≡ r$                                 |
+| ≈ | One or all of $p, q, r$ are true            |
+|---+---------------------------------------------|
+|   | $p ≡ q ≡ r ≡ s$                             |
+| ≈ | Zero, two, or four of $p, q, r, s$ are true |
+|---+---------------------------------------------|
+|   |                                             |
+#+end_details
 
 A Boolean expression not equal to true is equal to false ---indeed, it is a
 simple proof to show ~(p ≢ true) ≡ (p ≡ false)~.
