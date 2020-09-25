@@ -6,7 +6,6 @@
 <!-- 2020-09-25 Fri 07:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Calculational Mathematics and <code>CalcCheck</code></title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Musa Al-hassy" />
 <meta name="description" content="Abrdiged Lecture Notes"
