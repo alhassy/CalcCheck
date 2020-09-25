@@ -7,9 +7,7 @@
 #+Description: Abrdiged Lecture Notes
 
 # Make HTML
-# (f-move (org-html-export-to-html) "~/CalcCheck/README.md")
 # (f-move (org-html-export-to-html) "~/CalcCheck/index.html")
-# (f-move (org-md-export-to-markdown) "~/CalcCheck/README.md")
 #+HTML_HEAD: <link href="https://alhassy.github.io/org-notes-style.css" rel="stylesheet" type="text/css" />
 #+HTML_HEAD: <link href="https://alhassy.github.io/floating-toc.css" rel="stylesheet" type="text/css" />
 #+HTML_HEAD: <link href="https://alhassy.github.io/blog-banner.css" rel="stylesheet" type="text/css" />
@@ -20,7 +18,6 @@
 
 #+macro: end-box @@html: </div>@@
 
-@@markdown: Live webpage: [[https://alhassy.github.io/CalcCheck/]]@@
 #+begin_center
 #+include: ~/Desktop/colours_palette.html export html
 #+end_center

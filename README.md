@@ -3,9 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-09-25 Fri 07:44 -->
+<!-- 2020-09-25 Fri 07:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Calculational Mathematics and <code>CalcCheck</code></title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Musa Al-hassy" />
 <meta name="description" content="Abrdiged Lecture Notes"
@@ -264,7 +265,28 @@
                       color:red;
                       text-decoration: none;}
         </style>
-
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
 </head>
 <body>
 <div id="content">
@@ -307,7 +329,7 @@ Live webpage: <a href="https://alhassy.github.io/CalcCheck/">https://alhassy.git
 </div>
 
 
-<div id="orgc1f9353" class="figure">
+<div id="orga5c1277" class="figure">
 <p><img src="images/proof trees vs calculational proofs.png" alt="proof trees vs calculational proofs.png" />
 </p>
 </div>
@@ -441,7 +463,7 @@ We also discuss formalisations of English phrases as propositional expressions.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-09-25 Fri 07:44</p>
+<p class="date">Created: 2020-09-25 Fri 07:46</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
