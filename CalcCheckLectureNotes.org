@@ -21,37 +21,171 @@
 #+include: ~/Desktop/colours_palette.html export html
 #+end_center
 
-* keywords :ignore:
+* keywords                                                           :ignore:
   :PROPERTIES:
   :CUSTOM_ID: keywords
   :END:
 #+begin_details Keywords
 
-#+begin_documentation
-:name: Programming
-:label: Programming
+#+begin_documentation Theorem
+A /theorem/ is a syntactic object, a string of symbols with a particular property.
 
+A /theorem/ of a calculus is either an axiom or the conclusion of an inference
+rule whose premises are theorems.
+
+Different axioms could lead to the same set of theorems, and many texts use
+different axioms.
+#+end_documentation
+doc:Theorem
+
+#+begin_documentation Calculus
+A /calculus/ is a method or process of reasoning by calculation
+with symbols. A /propositional calculus/ is a method of calculating with Boolean
+(or propositional) expressions.
+#+end_documentation
+doc:Calculus
+
+#+begin_documentation Propositional Calculus
+A /calculus/ is a method or process of reasoning by calculation
+with symbols. A /propositional calculus/ is a method of calculating with Boolean
+(or propositional) expressions.
+#+end_documentation
+doc:Propositional_Calculus
+
+#+begin_documentation Axiomatic Semantics
+Often operations are defined by how they are evaluated (“operationally”), we
+take the alternative route of defining operations by how they can be manipulated
+(“axiomatically”); i.e., by what properties they satisfy.
+
+For instance, we may define basic manipulative properties of operators ---i.e.,
+/axioms/--- by considering how the operators behave operationally on particular
+expressions. That is, one may use an operational, intuitive, approach to obtain
+an axiomatic specification (characterisation, interface) of the desired
+properties.
+
+More concretely, since $(p ≡ q) ≡ r$ and $p ≡ (q ≡ r)$ evaluate to
+the same value for any choice of values for $p, q, r$, we may insist that a part
+of the definition of equivalence is that it be an associative operation.
+
+Sometimes a single axiom is not enough to ‘pin down’ a unique operator ---i.e.,
+to ensure we actually have a well-defined operation--- and other times this is
+cleanly possible; e.g., given an ordering ‘≤’(‘⇒, ⊆, ⊑’) we can define minima
+‘↓’ (‘∧, ∩, ⊓’) by the axiom: “x ↓ y is the greatest lower bound”; i.e., $z ≤ x
+↓ y \quad≡\quad z ≤ x \,∧\, z ≤ y$.
+#+end_documentation
+doc:Axiomatic_Semantics
+
+#+begin_documentation Operational Semantics
+Often operations are defined by how they are evaluated (“operationally”), we
+take the alternative route of defining operations by how they can be manipulated
+(“axiomatically”); i.e., by what properties they satisfy.
+
+For instance, we may define basic manipulative properties of operators ---i.e.,
+/axioms/--- by considering how the operators behave operationally on particular
+expressions. That is, one may use an operational, intuitive, approach to obtain
+an axiomatic specification (characterisation, interface) of the desired
+properties.
+
+More concretely, since $(p ≡ q) ≡ r$ and $p ≡ (q ≡ r)$ evaluate to
+the same value for any choice of values for $p, q, r$, we may insist that a part
+of the definition of equivalence is that it be an associative operation.
+
+Sometimes a single axiom is not enough to ‘pin down’ a unique operator ---i.e.,
+to ensure we actually have a well-defined operation--- and other times this is
+cleanly possible; e.g., given an ordering ‘≤’(‘⇒, ⊆, ⊑’) we can define minima
+‘↓’ (‘∧, ∩, ⊓’) by the axiom: “x ↓ y is the greatest lower bound”; i.e., $z ≤ x
+↓ y \quad≡\quad z ≤ x \,∧\, z ≤ y$.
+#+end_documentation
+doc:Operational_Semantics
+
+#+begin_documentation Associative
+An operation _⊕_ is associative when it satisfies $(p ⊕ q) ⊕ r = p ⊕ (q ⊕ r)$.
+
+Associativity allows us to be informal and insert or delete pairs of
+parentheses in sequences of ⊕'s, just as we do with sequences of
+additions ---e.g., $a + b + c + d$ is equivalent to $a + (b + c) + d$.
+
+Hence, we can write $p ⊕ q ⊕ r$ instead of $(p ⊕ q) ⊕ r$ or $p ⊕ (q ⊕ r)$.
+
+When an operation is associative, it is best to avoid “making a choice” of how
+sequences of ⊕ should be read, by using parentheses ---unless to make things
+clear or explicit for manipulation.
+#+end_documentation
+doc:Associative
+
+#+begin_documentation Identity
+An operation _⊕_ has identity 𝑰 when it satisfies $𝑰 ⊕ x = x = x ⊕ 𝑰$.
+
+If it satisfies only the first equation, $𝑰 ⊕ x = x$, one says
+that “𝑰 is a left-identity for ⊕”. If it satisfies only the second
+equation, $x ⊕ 𝑰 = x$, one says that “𝑰 is a right-identity for ⊕”.
+
+For example, implication only has a left identity, $(false ⇒ x) = x$, and
+subtraction only has a right identity, $(x - 0) = x$.
+
+An identity implies that occurrences of “⊕ 𝑰” and “𝑰 ⊕” in an expression are
+redundant. Thus, $x ⊕ 𝑰$ may be replaced by $x$ in any expression without
+changing the value of the expression. Therefore, we usually eliminate such
+occurrences unless something encourages us to leave them in.
+#+end_documentation
+doc:Identity
+
+#+begin_documentation Distributive
+An operation ⊗ distributes over ⊕ when they satisfy
+“left-distributivity” $x ⊗ (y ⊕ z) = (x ⊗ y) ⊕ (x ⊗ y)$
+and
+“right-distributivity” $(y ⊕ z) ⊗ x = (y ⊗ x) ⊕ (z ⊗ x)$.
+
+When ⊕ = ⊗, one says that the operation is “self-distributive”.
+
+Distributivity can be viewed in two ways, much like distributivity of
+multiplication × over addition +. Replacing the left side by the right side
+could be called “multiplying out”; replacing the right side by the left side,
+“factoring”.
+#+end_documentation
+doc:Identity
+
+#+begin_documentation Metatheorem
+A /theorem/ in the technical sense is an expression derived
+from axioms using inference rules.
+
+A /metatheorem/ is a general *statement* about a logic that
+one argues to be *true*.
+
+For instance, “any two theorems are equivalent” is a statement that speaks about
+expressions which happen to be theorems. A logic may not have the linguistic
+capability to speak of its own expressions and so the statement may not be
+expressible as an expression *within* the logic ---and so cannot be a theorem of
+the logic.
+
+For instance, the logic 𝒑𝑞 has expressions formed from the symbols “𝒑”, “𝒒”, and
+“-” (dash). It has the axiom schema $x𝒑-𝒒x-$ and the rule “If $x𝒑y𝒒z$ is a theorem
+then so is $x-𝒑y-𝒒z-$”. Notice that $x, y, z$ are /any/ strings of dashes;
+the language of this logic does not have variables and so cannot even speak
+of its own expressions, let alone its own theorems!
+
+[Informal] theorems about [technical, logic-specific] theorems are thus termed
+‘metatheorems’.
+#+end_documentation
+doc:Metatheorem
+
+#+begin_documentation Programming
 Programming is solving the equation /R ⇒[C] G/ in the unknown /C/; i.e., it is the
 activity of finding a ‘recipe’ that satisfies a given specification. Sometimes
 we may write /R ⇒[?] G/ and solve for ‘?’. Programming is a goal-directed activity: From a specification, a program is found by examining the shape of its postcondition.
 #+end_documentation
 doc:Programming
 
-#+begin_documentation
-:name: Specification
-:label: Spec
-
+#+begin_documentation Specification
  A specification is an equation of a certain shape.
  /Programming/ is the activity of solving a specification
  for its unknown. Its unknown is called a /program/.
 
  See also “Programming”.
 #+end_documentation
-doc:Spec
+doc:Specification
 
-#+begin_documentation
-:name: Expression
-:label: Expression
+#+begin_documentation Expression
 
 A ‘variable’ or a ‘function application’; i.e., the name of a function along
 with a number of existing expressions.
@@ -62,10 +196,7 @@ to the application are the participants in the action of the verbal clause.
 #+end_documentation
 doc:Expression
 
-#+begin_documentation
-:name: Algorithmic Problem Solving
-:label: AlgorithmicProblemSolving
-
+#+begin_documentation Algorithmic Problem Solving
 There are two ways to read this phrase.
 
 Algorithmic-problem solving is about solving problems that
@@ -75,19 +206,16 @@ Algorithmic problem-solving is about problem solving in general,
 using the principles of correct-by-construction algorithm-design.
 
 #+end_documentation
-doc:AlgorithmicProblemSolving
+doc:Algorithmic_Problem_Solving
 # Computing science is all about solving algorithmic problems (or, as some authors pre- fer to say, it is all about instructing computers to solve problems).
 
-#+begin_documentation
-:name: Calculational Proof
-:label: CalcProof
-
+#+begin_documentation Calculational Proof
 A story whose events have smooth transitions connecting them.
 
 A proof wherein each step is connected to the next step by an explicit
 justification.
 #+end_documentation
-doc:CalcProof
+doc:Calculational_Proof
 
 …I'll add more in time…
 #+end_details
@@ -1307,6 +1435,117 @@ Syntax is like static analysis; semantics is like actually running the program
     If a use of Substitution is simple enough, as in this case, we may leave
     off the indication “with $x ≔ j$”.
 
+*  Propositional Calculus
+  :PROPERTIES:
+  :CUSTOM_ID: Propositional-Calculus
+  :END:
+
+** Preliminaries :ignore;
+   :PROPERTIES:
+   :CUSTOM_ID: Preliminaries-ignore
+   :END:
+
+Often operations are defined by how they are evaluated (“operationally”), we
+take the alternative route of defining operations by how they can be manipulated
+(“axiomatically”); i.e., by what properties they satisfy.  For instance, we may
+define basic manipulative properties of operators ---i.e., /axioms/--- by
+considering how the operators behave operationally on particular
+expressions. That is, one may use an operational, intuitive, approach to obtain
+an axiomatic specification (characterisation, interface) of the desired
+properties. More concretely, since $(p ≡ q) ≡ r$ and $p ≡ (q ≡ r)$ evaluate to
+the same value for any choice of values for $p, q, r$, we may insist that a part
+of the definition of equivalence is that it be an doc:Associative operation.
+Sometimes a single axiom is not enough to ‘pin down’ a unique operator ---i.e.,
+to ensure we actually have a well-defined operation--- and other times this is
+cleanly possible; e.g., given an ordering ‘≤’(‘⇒, ⊆, ⊑’) we can define minima
+‘↓’ (‘∧, ∩, ⊓’) by the axiom: “x ↓ y is the greatest lower bound”; i.e., $z ≤ x
+↓ y \quad≡\quad z ≤ x \,∧\, z ≤ y$.
+
+A /calculus/ is a method or process of reasoning by calculation with symbols. A
+/propositional calculus/ is a method of calculating with Boolean (or
+propositional) expressions.
+
+A /theorem/ is a syntactic object, a string of symbols with a particular property.
+A /theorem/ of a calculus is either an axiom or the conclusion of an inference
+rule whose premises are theorems. Different axioms could lead to the same
+set of theorems, and many texts use different axioms.
+
+** ‘true’
+   :PROPERTIES:
+   :CUSTOM_ID: Equivalence-and-true
+   :END:
+
+   The symmetry of equivalence could be read as $(p ≡ p) ≡ (q ≡ q)$ and so
+   ‘self-applications of ≡’ are indistinguishable.  That is, the value of $p ≡
+   p$ does not depend on the value of $q$ and so we introduce the constant
+   symbol /true/ is an abbreviation for $p ≡ p$.
+
+   #+begin_latex-definitions
+\newcommand{Law}[3][]{ #1\;\;\textbf{#2:}\quad #3 }
+   #+end_latex-definitions
+
+  \[\Law[(3.4)]{Axiom, Identity of ≡}{\true ≡ p ≡ p}\]
+
+  When this definition is read as $(\true ≡ p) = p$, and by symmetry of ≡ as $(p
+  ≡ \true) = p$, we see that this new constant is an doc:Identity of ≡.
+
+  Using its definition, we can quickly show that
+  $\true = \big(\true ≡ q ≡ q\big)$ and so by equanimity,
+  since the right side is a theorem, then the left side is also a theorem.
+  Hence,
+
+  \[\Law[3.4]{True is a theorem}{\true}\]
+
+  What is the benefit of this theorem?
+
+  By equanimity, this means that to prove $P$ is a theorem, it is
+  enough to show that $P ≡ \true$! This is an ‘expected’ result :-)
+
+  ( We can phrase this observation as a theorem itself as $(P ≡ \true) ≡ P$, but
+  this is essentially the definition of true, above! )
+
+  Here is an impressive benefit of this theorem.  Suppose we want to prove an
+  equation $L = R$ is true; if our proof only alters $L$ to make it the same as
+  $R$ so that we obtain $R = R$, then we may the definition of $\true$ to
+  obtain, well, $\true$, but since this is a theorem then so too is $L = R$.
+  That is,
+  \begin{calc}
+  L = R
+  \step{ Perform a number of steps ... }
+  ...
+  \step{ ... to transform L to R }
+  R = R
+  \step{ Definition of identity }
+  \true
+  \end{calc}
+  Since the right side of the equation “= R” is not altered, we can
+  /abbreviate/ such calculations, by omitting the final step and avoiding
+  the repetitious “= R” on each line, as follows.
+  \begin{calc}
+  L
+  \step{ Perform a number of steps ... }
+  ...
+  \step{ ... to transform L to R }
+  R
+  \end{calc}
+
+  That is, (3.4) gives us a new proof method ---which is always a bonus result
+  from a theorem.
+
+  #+begin_box (3.6) Simplifiction Proof Method ---Page 45
+  To prove $L = R$ is a theorem, transform $L$ to $R$ or $R$ to $L$
+  using Leibniz (equals for equals reasoning).
+
+  Usually, you start with the more ‘complicated’ (more structured) side of the
+  equation and transform that to the ‘simpler’ side.
+  #+end_box
+
+  Finally, (3.4) gives us the following doc:Metatheorem.
+
+  \[\Law[(3.7)]{Metatheorem}{\text{Any two theorems are equivalent}}\]
+
+  Indeed, if $P$ is a theorem and $Q$ is a theorem, then by (3.4) we have $P ≡
+  \true$ and $\true = Q$ and so by transitivity of ≡, we have $P ≡ Q$.
 *  Program Correctness
   :PROPERTIES:
   :CUSTOM_ID: The-Assignment-Statement
