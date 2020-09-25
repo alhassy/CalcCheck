@@ -7,6 +7,7 @@
 #+Description: Abrdiged Lecture Notes
 
 # Make HTML
+# (f-move (org-html-export-to-html) "~/CalcCheck/README.md")
 # (f-move (org-html-export-to-html) "~/CalcCheck/index.html")
 # (f-move (org-md-export-to-markdown) "~/CalcCheck/README.md")
 #+HTML_HEAD: <link href="https://alhassy.github.io/org-notes-style.css" rel="stylesheet" type="text/css" />
@@ -18,6 +19,11 @@
 #+macro: begin-box @@html: <div style="padding: 1em; background-color: $1; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3>$2</h3>@@
 
 #+macro: end-box @@html: </div>@@
+
+@@markdown: Live webpage: [[https://alhassy.github.io/CalcCheck/]]@@
+#+begin_center
+#+include: ~/Desktop/colours_palette.html export html
+#+end_center
 
 * TODO COMMENT Books
   :PROPERTIES:
@@ -197,12 +203,14 @@ Raymond Smullyan!
 Videos
 #+html: </h2>
 
-1. Introduction to Discrete & Calculational Maths ─[[https://web.microsoftstream.com/video/76eac408-540e-47f9-a83b-d2caad93443c][Wolfram]], [[https://youtu.be/5IyMizFhHMA][Musa]] kbd:Sep_8
+1. [[https://youtu.be/5IyMizFhHMA][Introduction to Discrete & Calculational Maths]]
+   kbd:Sep_8
 
    What is a calculational proof? What is discrete mathematics?
    How is math related to programming: “proofs-as-programs”.
 
-2. Grammatical Analysis and Boolean Operators ─[[https://web.microsoftstream.com/video/3216c424-1494-4ed1-9f7d-6591bde71fc3][Wolfram]] (only second part), [[https://youtu.be/0wM0WXLJULQ][Musa]]  kbd:Sep_10
+2. [[https://youtu.be/0wM0WXLJULQ][Grammatical Analysis and Boolean Operators]]
+   kbd:Sep_10
 
    A proof is a “story”, and calculation hints are the “transitions” that make
    the story flow nicely.  The formulae are the “sentences” and they are formed
@@ -214,35 +222,46 @@ Videos
    In contrast, 𝔹oolean arithmetic has tiny 2×2 “truth tables”.
    As such, 𝔹  may be easier to learn than ℕ.
 
-3. Ladies and Tigers, a teaser ─[[https://web.microsoftstream.com/video/3153223e-a48a-4177-bb2b-013d0694b336][Wolfram]], [[https://youtu.be/9oeJtu4JjSQ][Musa]]  kbd:Sep_11
+3. [[https://youtu.be/9oeJtu4JjSQ][Ladies and Tigers, a teaser]]
+   kbd:Sep_11
 
-   Continuing the discussion on Boolean operators
-   and how they can be used to model puzzles.
+   Continuing the discussion on Boolean operators and how they can be used to
+   model puzzles.
 
-4. Substitution ─Wolfram (not yet available), [[https://youtu.be/7cmretG3Zzg][Musa]]  kbd:Sep_15
+4. [[https://youtu.be/7cmretG3Zzg][Substitution]]
+    kbd:Sep_15
 
-   Textual substitution is a way to implement function application,
-   grafting on trees, and can be used for assignment commands in programming.
+   Textual substitution is a way to implement function application, grafting on
+   trees, and can be used for assignment commands in programming.
 
-5. Inference rules, Proofs-are-programs, and Equivalence Part I ─Wolfram (not
-   yet available), [[https://youtu.be/OXL-FvDqhX8][Musa]] kbd:Sep_17
+5. [[https://youtu.be/OXL-FvDqhX8][Inference rules, Proofs-are-programs, and Equivalence Part I]]
+   kbd:Sep_17
 
-   Update: There will be no knights and knaves problems in the upcoming Sep 22 midterm;
-   but possibly in a future midterm.
+   Update: There will be no knights and knaves problems in the upcoming Sep 22
+   midterm; but possibly in a future midterm.
 
    The inference rules act as the foundational justification for the equational
    proof style; the online lecture notes go into more detail.
 
-6. Inference rules, Proofs-are-programs, and Equivalence Part II ─Wolfram (not
-   yet available), [[https://youtu.be/JxRZC2UMJb0][Musa]] (with lofi music) kbd:Sep_18
+6. [[https://youtu.be/JxRZC2UMJb0][Inference rules, Proofs-are-programs, and Equivalence Part II]]
+   (with lofi music) kbd:Sep_18
 
    Quickly show how a program can be shown to meet its specification,
    discuss equivalence and negation for the purposes of solving
    knights and knaves problems.
 
-7. [[color:red][*not yet given*]]
-
    kbd:Sep_22 is the first midterm; it is online during class time.
+
+7. [[https://youtu.be/85MmBPp9jKc][Tabulation vs Calculation]] kbd:Sep_24
+
+   We review basic operations on the Booleans with a focus on how manipulating
+   symbols can be more effective than constructing truth tables, or evaluating
+   expressions by “plug and chug” simplifications.
+
+   We also discuss formalisations of English phrases as propositional expressions.
+
+8. [[color:red][*not yet given*]]
+
 
 :Video_description:
  ─⟦Maths for Computing 𝓃⟧
