@@ -1,5 +1,5 @@
-# 56
 # -*- eval: (my/execute-startup-blocks) -*-
+# 56
 #+title: Mathematics for Computing
 #+subtitle: Abridged Lecture Notes @@html:<br>@@ Based on “A Logical Approach to Discrete Math”
 #+author: Musa Al-hassy
@@ -26,6 +26,10 @@
   :CUSTOM_ID: keywords
   :END:
 #+begin_details Keywords
+
+#+begin_documentation template
+#+end_documentation
+# doc:template
 
 #+begin_documentation Theorem
 A /theorem/ is a syntactic object, a string of symbols with a particular property.
@@ -110,6 +114,14 @@ Hence, we can write $p ⊕ q ⊕ r$ instead of $(p ⊕ q) ⊕ r$ or $p ⊕ (q �
 When an operation is associative, it is best to avoid “making a choice” of how
 sequences of ⊕ should be read, by using parentheses ---unless to make things
 clear or explicit for manipulation.
+
+--------------------------------------------------------------------------------
+
+More generally, for any two operations _⊕_ and _⊞_, the “(left to right) mutual
+associativity of ⊕ and ⊞” is the property $(x ⊕ y) ⊞ z = x ⊕ (y ⊞ z)$. It allows
+us to omit parentheses in mixed sequences of ⊕ and ⊞. For instance, addition and
+subtraction are (left to right) mutually associative.
+
 #+end_documentation
 doc:Associative
 
@@ -322,6 +334,11 @@ $$
 
   {{{end-box}}}
 :End:
+
+
+   #+begin_latex-definitions
+\newcommand{Law}[3][]{ #1\;\;\textbf{#2:}\quad #3 }
+   #+end_latex-definitions
 
 * subtle colours :ignore:
   :PROPERTIES:
@@ -1440,7 +1457,7 @@ Syntax is like static analysis; semantics is like actually running the program
   :CUSTOM_ID: Propositional-Calculus
   :END:
 
-** Preliminaries :ignore;
+** Preliminaries :ignore:
    :PROPERTIES:
    :CUSTOM_ID: Preliminaries-ignore
    :END:
@@ -1470,6 +1487,233 @@ A /theorem/ of a calculus is either an axiom or the conclusion of an inference
 rule whose premises are theorems. Different axioms could lead to the same
 set of theorems, and many texts use different axioms.
 
+** Boolean Expressions and Laws
+   :PROPERTIES:
+   :CUSTOM_ID: Boolean-Expressions-and-Laws
+   :END:
+
+  The type of propositions is known as the *Booleans* and denoted 𝔹.
+     #+begin_src math
+𝔹 ::= true | false
+     #+end_src
+
+*** Equality: “=” and “≡”
+    :PROPERTIES:
+    :CUSTOM_ID: Equality-and
+    :END:
+
+    For instance, the notion of equality on any type τ is
+    typed ~_=_ : τ → τ → 𝔹~; i.e., equality takes two values of a type τ
+    and returns a propositional value.
+
+    #+begin_quote
+    In general, the “continued equality” $x = y = z$
+    is *read conjunctively*: Both $x = y$ /and/ $y = z$.
+    However, for the special case τ being 𝔹, the expression
+    $x = y = z$ could be *read associativity*: $(x = y) = z$.
+
+    These two ways to read (parse) a continued equality
+    give different operators on 𝔹. The associative equality
+    is popularly written as ‘⇔’ but, unfortunately, not usually treated
+    as an equality at all! In this class, we write the associative equality
+    as ‘≡’ and read it as “equivales”.
+
+    See [[https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem][The associativity of equivalence and the Towers of Hanoi problem]].
+    #+end_quote
+
+ The phrase $p ≡ q$ may be read as
+    - /p is equivalent to q/, or
+    - /p exactly when q/,
+    - /p if-and-only-if q/,
+
+    This operator is just equality on the Booleans:
+    | Definition of ≡ |   | ~(p ≡ q) = (p = q)~ |
+
+    The need for a new name for an existing concept is that they have different
+    *notational conventions*: Firstly, “≡” has lower precedence than “=” and
+    secondly,
+    - = is conjunctive :: $\big(p = q = r\big) \quad=\quad \big( (p = q)
+      \;\land\; (q = r)\big)$
+    - ≡ is associative :: $\big(p ≡ q ≡ r\big) \quad=\quad \big((p ≡ q) ≡ r\big) \quad=\quad \big(p ≡ (q ≡ r)\big)$
+
+    For example, $\false ≡ \true ≡ \false$ is $\true$, whereas
+    $\false = \true = \false$ is $\false$.
+
+    #+begin_quote
+ For the Booleans, equality is equal to equivalence:
+ | /(p = q) = (p ≡ q)/ for /p, q : 𝔹/ |
+
+ For the Booleans, equality is equivalent to equivalence:
+ | /(p = q) ≡ (p ≡ q)/ for /p, q : 𝔹/  |
+    #+end_quote
+
+*** Useful Operators
+    :PROPERTIES:
+    :CUSTOM_ID: Useful-Operators
+    :END:
+ The Booleans have a number of useful operators that model reasoning,
+    such as:
+    #+caption: Boolean operators and similar numeric operators
+    | Operator    | Booleans (𝔹)    | Numbers (ℤ)                 |
+    | /           | >               |                             |
+    |-------------+-----------------+-----------------------------|
+    | “and”       | =_∧_ : 𝔹 → 𝔹 → 𝔹= | “minimum” =_↓_ : ℤ → ℤ → ℤ=   |
+    | “or”        | =_∨_ : 𝔹 → 𝔹 → 𝔹= | “maximum” =_↑_ : ℤ → ℤ → ℤ=   |
+    | “not”       | =¬_ : 𝔹 → 𝔹=      | “negation” =-_ : ℤ → ℤ → ℤ=   |
+    | “implies”   | =_⇒_ : 𝔹 → 𝔹 → 𝔹= | “inclusion” =_≤_ : ℤ → ℤ → 𝔹= |
+    | [[https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem][“Equivales”]]  | =_≡_ : 𝔹 → 𝔹 → 𝔹= | “equality” =_=_ : ℤ → ℤ → 𝔹=  |
+
+    These operators can be defined /informally/, as done below, but we shall follow
+    an /axiomatic/ definition as done in LADM by providing an /interface/ of
+    properties that they satisfy instead of any particular /implementation/. Later
+    in the class when we get to the =if_then_else_fi= construct, we may provide
+    explicit implementations and prove them to be equal to the operations
+    specified axiomatically.
+
+    #+caption: Example explicit definitions ---not used in this class
+    | “p ∧ q” is “true” whenever both “p” and “q” are “true”, otherwise it is “false” |
+    | “m ↓ n” is “m” whenever “m ≤ n”, otherwise it is “n”                            |
+
+    #+caption: Meanings of Boolean operators
+    | Expression | Pronounced       | is $\true$ if                                        |
+    |------------+------------------+------------------------------------------------------|
+    | $p ≡ q$    | /p equivales q/    | exactly an even number of arguments is $\false$, (⋆) |
+    | $p ≢ q$    | /p differs from q/ | exactly an odd number of its arguments are $\true$   |
+    |------------+------------------+------------------------------------------------------|
+    | $x = y$    | /x equals y/       | exactly $x$ and $y$ simplify to the same expression  |
+    | $x ≠ y$    | /x differs from y/ | $x$ and $y$ do not simplify to the same expression   |
+    |------------+------------------+------------------------------------------------------|
+    | $p ∧ q$    | /p and q/          | all of its arguments are $\true$                     |
+    | $p ∨ q$    | /p or q/           | at least one of its arguments is $\true$             |
+    |------------+------------------+------------------------------------------------------|
+    | $p ⇒ q$    | /p implies q/      | either /q/ is $\true$ or /p/ is $\false$                 |
+    |            | /if p, then q/     |                                                      |
+    | $p ⇐ q$    | /p follows from q/ | either /p/ is $\true$ or /q/ is $\false$                 |
+    |            | /p if q/           |                                                      |
+    |------------+------------------+------------------------------------------------------|
+    | $¬ p$      | /not p/            | /p/ is $\false$; read “it is not the case that $p$”    |
+
+    For example,
+    |   | “p, even if q”                               |
+    | ≈ | $p ∧ (q ⇒ p)$                                |
+    |   | ( This is provably equivalent to just $p$. ) |
+
+    (⋆) Note that if an even number of arguments is /false/, then the /false/'s
+    cancel out and only /true/ remains. Note that since /true/ is the identity of
+    ‘≡’, we can simply cancel them out of a chain of equivalences.  When there
+    are /2 · n/ many elements in the chain, then if there are an even number of
+    /true/'s, say /k/-many, then there must be an even number of /false/'s: $\even (2 ·
+    n - k) = (\even (2 · n) ≡ \even (-k)) = \even k = \true$.
+
+    Also,
+    | $p ≡ q ≡ r$         | ≈ | /One or all of p,q, and r are true/     |
+    |---------------------+---+---------------------------------------|
+    | $p ≡ q$             | ≈ | /None or both of p and q is true/       |
+    |---------------------+---+---------------------------------------|
+    | $p ≢ q$             | ≈ | /Exactly one of p and q is true/        |
+    |                     |   | /Either p or q, but not both/           |
+    |---------------------+---+---------------------------------------|
+    | $p₀ ≡ p₁ ≡ ⋯ ≡ p₂ₙ$ | ≈ | /An even number of the pᵢ are true/ (⋆) |
+    |                     |   |                                       |
+
+ #+begin_details (⋆) When is <em>p₀ ≡ p₁ ≡ ⋯ ≡ pₙ</em> true?
+ When is /p₀ ≡ p₁ ≡ ⋯ ≡ pₙ/ true?
+
+ Since /true/ is the identity of ‘≡’; any $pᵢ$ equal to $\true$ can be ‘cancelled
+ out’. Hence, we are left with only $\false$'s. Since $(\false ≡ \false) ≡
+ \true$, we can cancel out any pair of $\false$'s and so if there are an even
+ number of $\false$'s the resulting expression is $\true$.
+
+ However, if the number, say $k$, of $\false$'s is even, then
+ \begin{calc}
+ \text{the parity of trues}
+ \step{ Formalise: The trues are the non-falses }
+ \even(n - k)
+ \step{ Even distributes over sums, subtractions }
+ \even n ≡ \even (-k)
+ \step{ Even is invariant under unary minus }
+ \even n ≡ \even k
+ \step{ By assumption, there are $k$-many falses}
+ \even n ≡ \true
+ \step{ Identity of equivalence }
+ \even n
+ \end{calc}
+
+ Hence,
+ |   | $p₀ ≡ p₁ ≡ ⋯ ≡ pₙ$                                                        |
+ | ≈ | An even number of the arguments is false.                                 |
+ | ≈ | The parity of trues is the same as the parity of the number of arguments. |
+
+ For example,
+ |   | $p ≡ q$                                     |
+ | ≈ | None or both of $p$ and $q$ is true         |
+ |---+---------------------------------------------|
+ |   | $p ≢ q$                                     |
+ | ≈ | Exactly one of $p$ and $q$ is true          |
+ |---+---------------------------------------------|
+ |   | $p ≡ q ≡ r$                                 |
+ | ≈ | One or all of $p, q, r$ are true            |
+ |---+---------------------------------------------|
+ |   | $p ≡ q ≡ r ≡ s$                             |
+ | ≈ | Zero, two, or four of $p, q, r, s$ are true |
+ |---+---------------------------------------------|
+ |   | $¬ (p ≡ q ≡ r ≡ s)$                         |
+ | ≈ | One or three of $p, q, r, s$ are true.      |
+
+ The second and last examples rely on the fact that “not an even number are true”
+ equivales “an odd number are true”.
+
+ #+end_details
+
+*** Boolean Laws and Numeric Laws
+    :PROPERTIES:
+    :CUSTOM_ID: Boolean-Laws-and-Numeric-Laws
+    :END:
+ To better understand the 𝔹ooleans, it can be useful to compare their laws
+     with those on numbers. For instance, the =Definition of ⇒= at first glance is
+     tremendously cryptic: Why in the world would anyone define implication in
+     this way $p ⇒ q \,≡\, p ∧ q ≡ p$?  However, when compared to the similar law
+     for numbers that defines inclusion $m ≤ n \,≡\, m ↓ n = m$, the definition
+     becomes *“obvious”*: /p is included in (implies) q precisely when having both p
+     and q is the same as just having p/; i.e., /m is at-most n precisely when m is
+     the minimum of m and n./
+
+     #+caption: Properties of propositional operators and similar (familiar) numeric laws
+     | Law                  | Booleans (𝔹)                      | Numbers (ℤ with ±∞)               |
+     | /                    | >                                 |                                   |
+     |----------------------+-----------------------------------+-----------------------------------|
+     | Symmetry of ∧        | $p ∧ q ≡ q ∧ p$                   | $m ↓ n = n ↓ m$                   |
+     | Associativity of ∧   | $(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)$       | $m ↓ n = n ↓ m$                   |
+     | Idempotency of ∧     | $p ∧ p ≡ p$                       | $n ↓ n = n$                       |
+     | Identity of ∧        | $p ∧ \true ≡ p$                   | $n ↓ +∞ = n$                      |
+     | Zero of ∧            | $p ∧ \false ≡ \false$             | $n ↓ -∞ = -∞$                     |
+     | Contradiction        | $p ∧ ¬ p ≡ \false$                | ─nope─                            |
+     |----------------------+-----------------------------------+-----------------------------------|
+     | Symmetry of ∨        | $p ∨ q ≡ q ∨ p$                   | $m ↑ n = n ↑ m$                   |
+     | Associativity of ∨   | $(p ∨ q) ∨ r ≡ p ∨ (q ∨ r)$       | $m ↑ n = n ↑ m$                   |
+     | Idempotency of ∨     | $p ∨ p ≡ p$                       | $n ↑ n = n$                       |
+     | Identity of ∨        | $p ∨ \false ≡ p$                  | $n ↑ -∞ = n$                      |
+     | Zero of ∨            | $p ∨ \true ≡ p$                   | $n ↑ +∞ = +∞$                     |
+     | Excluded Middle      | $p ∨ ¬ p ≡ \false$                | ─nope─                            |
+     |----------------------+-----------------------------------+-----------------------------------|
+     | Golden Rule          | $p ∧ q ≡ p ≡ q ≡ p ∨ q$           | $m ↓ n = m \,≡\, n = m ↑ n$       |
+     | ∧/∨ Distributivity   | $p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)$ | $m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)$ |
+     | ∨/∧ Distributivity   | $p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)$ | $m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)$ |
+     |----------------------+-----------------------------------+-----------------------------------|
+     | Double negation      | $¬ ¬ p ≡ p$                       | $- - n = n$                       |
+     | Definition of $\false$ | $\false ≡ ¬ \true$                | $-∞ \,=\, - (+∞)$                 |
+     | Negation of $\false$ | $¬ \false = \true$                | $- (-∞) = +∞$                     |
+     | De Morgan            | $¬(p ∧ q) = ¬ p ∨ ¬ q$            | $-(m ↓ n) = -m ↑ -n$              |
+     |                      | $¬(p ∨ q) = ¬ p ∧ ¬ q$            | $-(m ↑ n) = -m ↓ -n$              |
+     |----------------------+-----------------------------------+-----------------------------------|
+     | Definition of ⇒      | $p ⇒ q ≡ p ∧ q ≡ p$               | $m ≤ n \,≡\, m ↓ n = m$           |
+     |                      | $p ⇒ q ≡ p ∨ q ≡ q$               | $m ≤ n \,≡\, m ↑ n = n$           |
+     | Consequence          | $p ⇐ q ≡ q ⇒ p$                   | $m ≥ n \,≡\, n ≤ m$               |
+     | ex falso quodlibet   | $\false ⇒ p ≡ \true$              | $-∞ ≤ n \,≡\, \true$              |
+     | Left-identity of ⇒   | $\true ⇒ p ≡ p$                   | $+∞ ≤ n \,≡\, n = +∞$             |
+     | Right-zero of ⇒      | $p ⇒ \true ≡ \true$               | $n ≤ +∞ \,≡\, \true$              |
+     | Definition of ¬      | $p ⇒ \false ≡ ¬ p$                | ─nope─                            |
+     |----------------------+-----------------------------------+-----------------------------------|
 ** ‘true’
    :PROPERTIES:
    :CUSTOM_ID: Equivalence-and-true
@@ -1480,14 +1724,27 @@ set of theorems, and many texts use different axioms.
    p$ does not depend on the value of $q$ and so we introduce the constant
    symbol /true/ is an abbreviation for $p ≡ p$.
 
-   #+begin_latex-definitions
-\newcommand{Law}[3][]{ #1\;\;\textbf{#2:}\quad #3 }
-   #+end_latex-definitions
-
   \[\Law[(3.4)]{Axiom, Identity of ≡}{\true ≡ p ≡ p}\]
 
   When this definition is read as $(\true ≡ p) = p$, and by symmetry of ≡ as $(p
   ≡ \true) = p$, we see that this new constant is an doc:Identity of ≡.
+
+  Since ≡ is associative, a formula can be read in multiple ways.
+  - $p ≡ p ≡ true$ can be read as the reflexitivty of ≡ or the definition
+    of true ---both being $(p ≡ p) ≡ true$ ---
+    or as an identity law --- $p ≡ (p ≡ true)$.
+  - The Golden Rule can also be read a way to define ∧ in-terms of ≡ and ∨,
+    or to define ∨ in terms of ≡ and ∨, or to phrase ≡ in terms of ≡, ∧, and ∨;
+    or to absorb an expression containing ≡,∨, ∧ down to a single subexpression:
+    $p ≡ (q ≡ p ∨ q ≡ p ∧ q)$.
+
+  #+begin_box (3.56) Parsing Heuristic ---Page 56
+  Exploit the ability to parse theorems like the ‘Golden Rule’
+  and the ‘Definition of true’ in many different ways.
+
+  For instance, in chains of equivalences, the use symmetry and associativity
+  of equivalence increases the number of parses.
+  #+end_box
 
   Using its definition, we can quickly show that
   $\true = \big(\true ≡ q ≡ q\big)$ and so by equanimity,
@@ -1537,7 +1794,21 @@ set of theorems, and many texts use different axioms.
   using Leibniz (equals for equals reasoning).
 
   Usually, you start with the more ‘complicated’ (more structured) side of the
-  equation and transform that to the ‘simpler’ side.
+  equation and transform that to the ‘simpler’ side. The (additional) structure
+  then narrows the number of applicable laws and thus guides the proof.
+  #+end_box
+
+  #+begin_box (3.34) Rabbit Avoidance ---Page 51
+  A “rabbit pulled out of hat” is a step in a proof that has little or no
+  motivation; e.g., it introduces more structure and it's not clear why that is
+  the case ---for instance, replacing $true$ with $p ∨ p ≡ p ∨ p$.
+
+  Structure proofs to minimise the number of rabbits pulled out of a hat ---make
+  each step seem obvious, based on the structure of the expression and the goal
+  of the manipulation.
+
+  E.g., when the driving goal of a proof is to simplify; then there should not
+  be any rabbits,
   #+end_box
 
   Finally, (3.4) gives us the following doc:Metatheorem.
@@ -1546,32 +1817,168 @@ set of theorems, and many texts use different axioms.
 
   Indeed, if $P$ is a theorem and $Q$ is a theorem, then by (3.4) we have $P ≡
   \true$ and $\true = Q$ and so by transitivity of ≡, we have $P ≡ Q$.
-*  Program Correctness
+
+  With true in-hand, one can now define false:
+  \[\Law[3.10]{Definition of false}{\false ≡ ¬ true}\]
+
+  Since ‘≡’ = ‘=’ on the Booleans, we can phrase this as $false ≠ true$,
+  which is a useful thing to know.
+
+  Moreover, we can then show that a Boolean expression not equal to true is
+  equal to false: ~(p ≢ true) ≡ (p ≡ false)~.
+
+** Double Negation Example.
+   :PROPERTIES:
+   :CUSTOM_ID: Double-Negation-Example
+   :END:
+
+ \[\Law[(3.12)]{Double negation}{¬ ¬ p ≡ p}\]
+
+ Double negation asserts that negation is its own inverse.
+
+ Double negation is used in English occasionally.
+ For example, one might say “That was not done unintentionally”
+ instead of “That was done intentionally”.
+
+** A remark on Axiom (3.9) “Commutativity of ¬ with ≡”: ¬ (p ≡ q) ≡ (¬ p ≡ q)
+   :PROPERTIES:
+   :CUSTOM_ID: A-remark-on-Axiom-3-9-Commutativity-of-with-p-q-p-q
+   :END:
+
+   \[\Law[(3.9)]{Commutativity of ¬ with ≡}{ ¬ (p ≡ q) ≡ (¬ p ≡ q)}\]
+
+   The left side says that /p/ and /q/ are different; but there are only two Boolean
+   values and so for /p/ and /q/ to be different, one must be the ‘flip’ (negation)
+   of the other.
+
+   Moreover, this rule says “differs from” (≠) on the Booleans can be expressed
+   directly in terms of equality (=) instead of a negation of an equality
+   ---which is the case in general.
+
+   The following laws uniquely define negation.
+
+   \[\Law[(3.8)]{Axiom, Definition of false}{\false ≡ ¬ \true}\]
+   \[\Law[(3.9)]{Axiom, Commutativity of ¬ with ≡}{¬ (p ≡ q) ≡ ¬ p ≡ q}\]
+
+   Indeed, suppose $f : 𝔹 → 𝔹$ also satisfies these laws, then we can
+   show $f(p) ≡ ¬ p$ ---in particular, $f(\true) = \false$ and $f(\false) = \true$.
+
+   That is, of the 4 possibly unary functions on the Booleans, only negation
+   satisfies these two properties.
+
+** TODO COMMENT 3.21 on p47; 3.22&23 and preceeding paragraph on p48; and footnote 10 on p58
+   :PROPERTIES:
+   :CUSTOM_ID: COMMENT-3-21-on-p47-3-22-23-and-preceeding-paragraph-on-p48-and-footnote-10-on-p58
+   :END:
+
+** Alternative definitions of ≡ and ≢
+   :PROPERTIES:
+   :CUSTOM_ID: Alternative-definitions-of-and
+   :END:
+
+  The following theorems are sometimes used to define ≡ and ≢.
+  The first theorem indicates that $p ≡ q$ holds exactly when $p$
+  and $q$ are both /true/ or both /false/. The second theorem indicates that
+  $p ≢ q$ holds exactly when one of them is /true/ and the other is /false/.
+
+  \[\Law[(3.52)]{Definition of ≡}{p ≡ q ≡ (p ∧ q) ∨ (¬ p ∧ ¬ q)}\]
+  \[\Law[(3.53)]{Exclusive or}{p ≢ q ≡ (¬ p ∧ q) ∨ (p ∧ ¬ q)}\]
+
+  In most propositional calculi equivalence is the last operator to be defined
+  and is defined as “mutual implication”.  Thus, (3.80) below typically is made
+  an axiom.  We down-play implication in our calculus because, as an unsymmetric
+  operator (by 3.72 and 3.73), it is harder to manipulate. Sometimes
+  (3.80) would be read as “(strong) antisymmetry of ⇒”.
+
+  \[\Law[(3.72)]{Right Zero of ⇒}{p ⇒ \true ≡ \true}\]
+  \[\Law[(3.73)]{Left Identity of ⇒}{\true ⇒ p ≡ p}\]
+
+  \[\Law[((3.80))]{(Mutual Implication)}{(p ⇒ q) ∧ (q ⇒ p) ≡ p ≡ q}\]
+
+** Contextual Rules ---Leibniz and Substitution
+   :PROPERTIES:
+   :CUSTOM_ID: Contextual-Rules-Leibniz-and-Substitution
+   :END:
+
+   With the implication operator available, the Leibniz inference
+   rule can be re-cast as an axiom.
+
+   \[\Law{Abbreviation}{E^z_F \;=\; E[z ≔ F]}\]
+   \[\Law[(3.83)]{Axiom, Leibniz}{(e = f) ⇒ E_e^z = E_f^z}\]
+   \[\Law[(3.84a)]{Substitution}{(e = f) ∧ E_e^z \quad≡\quad (e = f) ∧ E_f^z}\]
+   \[\Law[(4.84c)]{Substitution}{q ∧ (e = f) ⇒ E_e^z \quad≡\quad q ∧ (e = f) ⇒ E_f^z}\]
+
+   Replacing variables by Boolean constants.
+
+   \[\Law[(3.85)]{Replace by true}{q ∧ p ⇒ E^z_p \quad≡\quad q ∧ p ⇒ E^z_\true}\]
+   \[\Law[(3.86)]{Replace by false}{E^z_p ⇒ p ∨ q \quad≡\quad E^z_\false ⇒ p ∨ q}\]
+   \[\Law[(3.87)]{Replace by true}{p ∧ E_p^z \quad≡\quad p ∧ E_\true^z}\]
+   \[\Law[(3.88)]{Replace by false}{p ∨ E_p^z \quad≡\quad p ∨ E_\false^z}\]
+   \[\Law[(3.89)]{Shannon, Case analysis}{E_p^z \quad≡\quad (p ∧ E_\true^z) ∨ (¬  p ∧ E_\false^z)}\]
+
+** Disjunction
+   :PROPERTIES:
+   :CUSTOM_ID: Disjunction
+   :END:
+
+   The axioms (3.24)-(3.28) uniquely determine disjunction.
+
+   That is, of the 16 possibly binary functions on the Booleans, only
+   disjunction satisfies these properties.
+
+* COMMENT Induction ---Chapter 12
   :PROPERTIES:
-  :CUSTOM_ID: The-Assignment-Statement
+  :CUSTOM_ID: Induction
   :END:
 
-#+begin_latex-definitions
-\def\If#1{\,\;⇐\!\![#1]\;\;\,} % goal ⇐[command] provisos
-\def\Then#1{\,\;⇒\!\![#1]\;\;\,} % provisos ⇒[command] goal
-#+end_latex-definitions
+\[Law[(12.4)]{Induction}{(∀ n : ℕ • (∀ m : ℕ • m < n ⇒ P\, m) ⇒ P\, n) \quad≡\quad (∀ n : ℕ • P\, n)}\]
 
- # (load-file "~/Desktop/power-blocks.el")
+This says that to prove $P\, n$ for all natural numbers $n$ (the right side), we
+prove (the left side) that for any $n$, if $P\, 0, P\, 1, …, P\, (n - 1)$ holds,
+then so does $P\, n$. This is because, in principle ---given enough time and
+space--- we can prove $P\, N$ for any given $N$ by proving, in turn, $P\, 0, P\,
+1, …,$ and finally $P\, N$:
++ When $n = 0$, the left side simplifies to $P\, 0$, and so we conclude $P\, 0$.
++ From $P\, 0$ and $P\,0 ⇒ P\, 1$ (the left side with $n ≔ 1$), by Modus ponens
+  (3.77)
+  we conclude $P\, 1$.
++ ...
++ From $P\, 0 ∧ ⋯ ∧ P\, (N - 1)$ and $P\, 0 ∧ ⋯ ∧ P\, (N - 1) ⇒ P\, N$ (the left
+  side with $n ≔ N$) by Modus ponens (3.77) we conclude $P\, N$.
 
- Textual substitution is inextricably intertwined with equality.
 
- Likewise, assignment statements in programming can be reasoned
-   about using textual substitution.
+#+begin_box Exposing the Hypothesis Heuristic
+In the proof of $P\, n$, one aims to ‘split off a term’
+so as to expose $P\, i$, for $i < n$, and use that hypothesis
+to make progress in the proof of $P\, n$.
+#+end_box
 
-   The coincidence of notations is deliberate.
+*  Program Correctness
+   :PROPERTIES:
+   :CUSTOM_ID: The-Assignment-Statement
+   :END:
 
-   Rather than understanding how a program is /executed/,
-   we can also understand a program in terms of /syntactic substitution/.
+   #+begin_latex-definitions
+   \def\If#1{\,\;⇐\!\![#1]\;\;\,} % goal ⇐[command] provisos
+   \def\Then#1{\,\;⇒\!\![#1]\;\;\,} % provisos ⇒[command] goal
+   #+end_latex-definitions
 
-#+begin_center
-Focus is on goal-directed and calculational construction of algorithms as
-opposed to the traditional guess-and-verify methodology.
-#+end_center
+    # (load-file "~/Desktop/power-blocks.el")
+
+    Textual substitution is inextricably intertwined with equality.
+
+    Likewise, assignment statements in programming can be reasoned
+      about using textual substitution.
+
+      The coincidence of notations is deliberate.
+
+      Rather than understanding how a program is /executed/,
+      we can also understand a program in terms of /syntactic substitution/.
+
+   #+begin_center
+   Focus is on goal-directed and calculational construction of algorithms as
+   opposed to the traditional guess-and-verify methodology.
+   #+end_center
 
 ** From Comments to Hoare Triples
    :PROPERTIES:
@@ -2018,229 +2425,427 @@ Program ::=  skip
  | ~C ⍮ skip = C = skip ⍮ C~ |
  | ~skip = (x := x)~         |
 
-* Boolean Expressions and Laws
+* Induction
   :PROPERTIES:
-  :CUSTOM_ID: Boolean-Expressions-and-Laws
+  :CUSTOM_ID: Induction
   :END:
 
- The type of propositions is known as the *Booleans* and denoted 𝔹.
-    #+begin_src math
-𝔹 ::= true | false
-    #+end_src
+How we prove a theorem $P\, n$ ranging over natural numbers $n$?
 
-** Equality: “=” and “≡”
-   :PROPERTIES:
-   :CUSTOM_ID: Equality-and
-   :END:
+For instance, suppose the property $P$ is that using only 3 and 5 dollar bills,
+any amount of money that is at-least 8 dollars can be formed.
 
-   For instance, the notion of equality on any type τ is
-   typed ~_=_ : τ → τ → 𝔹~; i.e., equality takes two values of a type τ
-   and returns a propositional value.
+Since there are an infinite number of natural numbers, it is not possibly to
+verify $P\, n$ is true by /evaluating/ $P\, n$ at each natural number $n$.
 
-   #+begin_quote
-   In general, the “continued equality” $x = y = z$
-   is *read conjunctively*: Both $x = y$ /and/ $y = z$.
-   However, for the special case τ being 𝔹, the expression
-   $x = y = z$ could be *read associativity*: $(x = y) = z$.
+#+begin_box Knocking over dominos is induction
+The natural numbers are like an infinite number of dominoes ---i.e., standing
+tiles one after the other, in any arrangement. Can all dominoes be knocked over?
+That is, if we construe $P\, n$ to mean “the /n/-th domino can be knocked over”,
+then the question is “is $∀ n • P\, n$ true”. Then, clearly if we can knock over
+the first domino, $P\, 0$, and if when a domino is knocked over then it also
+knocks over the next domino, $P\, n ⇒ P\, (n + 1)$, then ‘clearly’ all dominoes
+will be knocked over. This ‘basic observation’ is known as /induction/.
+#+end_box
 
-   These two ways to read (parse) a continued equality
-   give different operators on 𝔹. The associative equality
-   is popularly written as ‘⇔’ but, unfortunately, not usually treated
-   as an equality at all! In this class, we write the associative equality
-   as ‘≡’ and read it as “equivales”.
+#+begin_box Climbing a ladder is induction
+The natural numbers are like an infinite ladder ascending to heaven.  Can we
+reach every step, rung, on the ladder?  That is, if we construe $P\, n$ to mean
+“the /n/-th rung is reachable”, then the question is “is $∀ n • P\, n$
+true”. Then, clearly if we can reach the first rung, $P\, 0$, and whenever we
+climb to a rung then we can reach up and grab the next rung, $P\, n ⇒ P\, (n +
+1)$, then ‘clearly’ all rungs of the ladder can be reached. This ‘basic
+observation’ is known as /induction/.
+#+end_box
 
-   See [[https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem][The associativity of equivalence and the Towers of Hanoi problem]].
-   #+end_quote
+#+begin_box Constant functions are induction
+A predicate $P : ℕ → 𝔹$ is a function. When is such a function constantly the
+value $\true$? That is, when is $∀ n • P\, n = \true$?  Clearly, if $P$ starts
+off being $\true$ ---i.e., /P 0/--- and it preserves truth at every step ---i.e.,
+/P n ⇒ P (n + 1)/--- then /P n/ will be true for any choice of $n$.
 
-The phrase $p ≡ q$ may be read as
-   - /p is equivalent to q/, or
-   - /p exactly when q/,
-   - /p if-and-only-if q/,
+That is, if we consider $(ℕ, ≤)$ and $(𝔹, ⇒)$ as ordered sets and $P$ starts at
+the ‘top’ of 𝔹 ---i.e., /P 0 = true/--- and it is ascending ---i.e., /P n ⇒ P (n +
+1)/--- and so ‘never goes down’, then clearly it must stay constantly at the top
+value of 𝔹. This ‘basic observation’ is known as /induction/.
+#+end_box
 
-   This operator is just equality on the Booleans:
-   | Definition of ≡ |   | ~(p ≡ q) = (p = q)~ |
+For the money problem, we need to start somewhere else besides 0.
+#+begin_box Principle of (“Weak”) Mathematical Induction
+To show that a property $P$ is true for all natural numbers starting with some
+number $n_0$, show the following two properties:
++ Base case :: Show that $P\, n₀$ is true.
++ Inductive Step :: Show that whenever (the *inductive hypothesis*) $n$ is a
+  natural number that such that $n ≥ n₀$ and $P\, n$ is true, then $P\, (n + 1)$
+  is also true.
+#+end_box
 
-   The need for a new name for an existing concept is that they have different
-   *notational conventions*: Firstly, “≡” has lower precedence than “=” and
-   secondly,
-   - = is conjunctive :: $\big(p = q = r\big) \quad=\quad \big( (p = q)
-     \;\land\; (q = r)\big)$
-   - ≡ is associative :: $\big(p ≡ q ≡ r\big) \quad=\quad \big((p ≡ q) ≡ r\big) \quad=\quad \big(p ≡ (q ≡ r)\big)$
+For the money problem, we need to be able to use the fact that to prove $P\,
+(n + 1)$ we must have already proven $P$ for all smaller values.
+#+begin_box Principle of (“Strong”) Mathematical Induction
+To show that a property $P$ is true for all natural numbers starting with some
+number $n_0$, show the following two properties:
++ Base case :: Show that $P\, n₀$ is true.
++ Inductive Step :: Show that whenever (the *inductive hypothesis*) $n$ is a
+  natural number that such that $n ≥ n₀$ and $P\, n_0, P\, (n_0 + 1), P\, (n_0 +
+  2), …, P\, n$ are true, then $P\, (n + 1)$ is also true.
+#+end_box
 
-   For example, $\false ≡ \true ≡ \false$ is $\true$, whereas
-   $\false = \true = \false$ is $\false$.
+These ‘strength’ of these principles refers to the strength of the inductive
+hypothesis. The principles are provably equivalent.
 
-   #+begin_quote
-For the Booleans, equality is equal to equivalence:
-| /(p = q) = (p ≡ q)/ for /p, q : 𝔹/ |
+:Hide:
+The money problem can now be proven by showing
+$P\,8, P\, 9\, P\, 10\, P\, 11, P\, 12$ are all true,
+then showing $P\, n$ for $n ≥ 12$ is true by using the inductive hypothesis
+on $n - 3 ≥ 12 - 3 = 8$ and so $n = (n - 3) + 3$ and so $n$ can be formed
+using 3s and 5s.
 
-For the Booleans, equality is equivalent to equivalence:
-| /(p = q) ≡ (p ≡ q)/ for /p, q : 𝔹/  |
-   #+end_quote
-
-** Useful Operators
-   :PROPERTIES:
-   :CUSTOM_ID: Useful-Operators
-   :END:
-The Booleans have a number of useful operators that model reasoning,
-   such as:
-   #+caption: Boolean operators and similar numeric operators
-   | Operator    | Booleans (𝔹)    | Numbers (ℤ)                 |
-   | /           | >               |                             |
-   |-------------+-----------------+-----------------------------|
-   | “and”       | =_∧_ : 𝔹 → 𝔹 → 𝔹= | “minimum” =_↓_ : ℤ → ℤ → ℤ=   |
-   | “or”        | =_∨_ : 𝔹 → 𝔹 → 𝔹= | “maximum” =_↑_ : ℤ → ℤ → ℤ=   |
-   | “not”       | =¬_ : 𝔹 → 𝔹=      | “negation” =-_ : ℤ → ℤ → ℤ=   |
-   | “implies”   | =_⇒_ : 𝔹 → 𝔹 → 𝔹= | “inclusion” =_≤_ : ℤ → ℤ → 𝔹= |
-   | [[https://www.researchgate.net/publication/220113201_The_associativity_of_equivalence_and_the_Towers_of_Hanoi_problem][“Equivales”]]  | =_≡_ : 𝔹 → 𝔹 → 𝔹= | “equality” =_=_ : ℤ → ℤ → 𝔹=  |
-
-   These operators can be defined /informally/, as done below, but we shall follow
-   an /axiomatic/ definition as done in LADM by providing an /interface/ of
-   properties that they satisfy instead of any particular /implementation/. Later
-   in the class when we get to the =if_then_else_fi= construct, we may provide
-   explicit implementations and prove them to be equal to the operations
-   specified axiomatically.
-
-   #+caption: Example explicit definitions ---not used in this class
-   | “p ∧ q” is “true” whenever both “p” and “q” are “true”, otherwise it is “false” |
-   | “m ↓ n” is “m” whenever “m ≤ n”, otherwise it is “n”                            |
-
-   #+caption: Meanings of Boolean operators
-   | Expression | Pronounced       | is $\true$ if                                        |
-   |------------+------------------+------------------------------------------------------|
-   | $p ≡ q$    | /p equivales q/    | exactly an even number of arguments is $\false$, (⋆) |
-   | $p ≢ q$    | /p differs from q/ | exactly an odd number of its arguments are $\true$   |
-   |------------+------------------+------------------------------------------------------|
-   | $x = y$    | /x equals y/       | exactly $x$ and $y$ simplify to the same expression  |
-   | $x ≠ y$    | /x differs from y/ | $x$ and $y$ do not simplify to the same expression   |
-   |------------+------------------+------------------------------------------------------|
-   | $p ∧ q$    | /p and q/          | all of its arguments are $\true$                     |
-   | $p ∨ q$    | /p or q/           | at least one of its arguments is $\true$             |
-   |------------+------------------+------------------------------------------------------|
-   | $p ⇒ q$    | /p implies q/      | either /q/ is $\true$ or /p/ is $\false$                 |
-   |            | /if p, then q/     |                                                      |
-   | $p ⇐ q$    | /p follows from q/ | either /p/ is $\true$ or /q/ is $\false$                 |
-   |            | /p if q/           |                                                      |
-   |------------+------------------+------------------------------------------------------|
-   | $¬ p$      | /not p/            | /p/ is $\false$; read “it is not the case that $p$”    |
-
-   For example,
-   |   | “p, even if q”                               |
-   | ≈ | $p ∧ (q ⇒ p)$                                |
-   |   | ( This is provably equivalent to just $p$. ) |
-
-   (⋆) Note that if an even number of arguments is /false/, then the /false/'s
-   cancel out and only /true/ remains. Note that since /true/ is the identity of
-   ‘≡’, we can simply cancel them out of a chain of equivalences.  When there
-   are /2 · n/ many elements in the chain, then if there are an even number of
-   /true/'s, say /k/-many, then there must be an even number of /false/'s: $\even (2 ·
-   n - k) = (\even (2 · n) ≡ \even (-k)) = \even k = \true$.
-
-   Also,
-   | $p ≡ q ≡ r$         | ≈ | /One or all of p,q, and r are true/     |
-   |---------------------+---+---------------------------------------|
-   | $p ≡ q$             | ≈ | /None or both of p and q is true/       |
-   |---------------------+---+---------------------------------------|
-   | $p ≢ q$             | ≈ | /Exactly one of p and q is true/        |
-   |                     |   | /Either p or q, but not both/           |
-   |---------------------+---+---------------------------------------|
-   | $p₀ ≡ p₁ ≡ ⋯ ≡ p₂ₙ$ | ≈ | /An even number of the pᵢ are true/ (⋆) |
-   |                     |   |                                       |
-
-#+begin_details (⋆) When is <em>p₀ ≡ p₁ ≡ ⋯ ≡ pₙ</em> true?
-When is /p₀ ≡ p₁ ≡ ⋯ ≡ pₙ/ true?
-
-Since /true/ is the identity of ‘≡’; any $pᵢ$ equal to $\true$ can be ‘cancelled
-out’. Hence, we are left with only $\false$'s. Since $(\false ≡ \false) ≡
-\true$, we can cancel out any pair of $\false$'s and so if there are an even
-number of $\false$'s the resulting expression is $\true$.
-
-However, if the number, say $k$, of $\false$'s is even, then
-\begin{calc}
-\text{the parity of trues}
-\step{ Formalise: The trues are the non-falses }
-\even(n - k)
-\step{ Even distributes over sums, subtractions }
-\even n ≡ \even (-k)
-\step{ Even is invariant under unary minus }
-\even n ≡ \even k
-\step{ By assumption, there are $k$-many falses}
-\even n ≡ \true
-\step{ Identity of equivalence }
-\even n
-\end{calc}
-
-Hence,
-|   | $p₀ ≡ p₁ ≡ ⋯ ≡ pₙ$                                                        |
-| ≈ | An even number of the arguments is false.                                 |
-| ≈ | The parity of trues is the same as the parity of the number of arguments. |
-
-For example,
-|   | $p ≡ q$                                     |
-| ≈ | None or both of $p$ and $q$ is true         |
-|---+---------------------------------------------|
-|   | $p ≡ q ≡ r$                                 |
-| ≈ | One or all of $p, q, r$ are true            |
-|---+---------------------------------------------|
-|   | $p ≡ q ≡ r ≡ s$                             |
-| ≈ | Zero, two, or four of $p, q, r, s$ are true |
-|---+---------------------------------------------|
-|   |                                             |
+#+begin_details Exercises
+1. the sum of the first $n$ natural numbers is $n · (n + 1) / 2$
+2. using only 3 and 5 dollar bills, any amount of money that is at-least 8
+   can be formed
+3. $7^n + 5$ is divisible by 3
 #+end_details
+:End:
 
-A Boolean expression not equal to true is equal to false ---indeed, it is a
-simple proof to show ~(p ≢ true) ≡ (p ≡ false)~.
+* Number Theory
+  :PROPERTIES:
+  :CUSTOM_ID: Number-Theory
+  :END:
 
-** Boolean Laws and Numeric Laws
+   #+begin_latex-definitions
+\newcommand{Law}[3][]{ #1\;\;\textbf{#2:}\quad #3 }
+\def\abs{\mathsf{abs}\,}
+   #+end_latex-definitions
+
+  Number Theory is concerned with the properties of whole numbers, such as 0,
+  42, and 1927 rather than fractional numbers such as 0.3, π, or 1/3.
+
+  Division is one of the most important concepts of number theory.  It is a
+  partial order on the naturals and its infimum, meet, is formed constructively
+  using Euclid's Greatest Common Divisor algorithm.
+
+  # Algorithms may provide constructive solutions to problems but they can also be
+  # used to /reason/ about the resulting constructions.
+
+  --------------------------------------------------------------------------------
+
+** COMMENT Integer Division
    :PROPERTIES:
-   :CUSTOM_ID: Boolean-Laws-and-Numeric-Laws
+   :CUSTOM_ID: Integer-Division
    :END:
-To better understand the 𝔹ooleans, it can be useful to compare their laws
-    with those on numbers. For instance, the =Definition of ⇒= at first glance is
-    tremendously cryptic: Why in the world would anyone define implication in
-    this way $p ⇒ q \,≡\, p ∧ q ≡ p$?  However, when compared to the similar law
-    for numbers that defines inclusion $m ≤ n \,≡\, m ↓ n = m$, the definition
-    becomes *“obvious”*: /p is included in (implies) q precisely when having both p
-    and q is the same as just having p/; i.e., /m is at-most n precisely when m is
-    the minimum of m and n./
 
-    #+caption: Properties of propositional operators and similar (familiar) numeric laws
-    | Law                  | Booleans (𝔹)                      | Numbers (ℤ with ±∞)               |
-    | /                    | >                                 |                                   |
-    |----------------------+-----------------------------------+-----------------------------------|
-    | Symmetry of ∧        | $p ∧ q ≡ q ∧ p$                   | $m ↓ n = n ↓ m$                   |
-    | Associativity of ∧   | $(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)$       | $m ↓ n = n ↓ m$                   |
-    | Idempotency of ∧     | $p ∧ p ≡ p$                       | $n ↓ n = n$                       |
-    | Identity of ∧        | $p ∧ \true ≡ p$                   | $n ↓ +∞ = n$                      |
-    | Zero of ∧            | $p ∧ \false ≡ \false$             | $n ↓ -∞ = -∞$                     |
-    | Contradiction        | $p ∧ ¬ p ≡ \false$                | ─nope─                            |
-    |----------------------+-----------------------------------+-----------------------------------|
-    | Symmetry of ∨        | $p ∨ q ≡ q ∨ p$                   | $m ↑ n = n ↑ m$                   |
-    | Associativity of ∨   | $(p ∨ q) ∨ r ≡ p ∨ (q ∨ r)$       | $m ↑ n = n ↑ m$                   |
-    | Idempotency of ∨     | $p ∨ p ≡ p$                       | $n ↑ n = n$                       |
-    | Identity of ∨        | $p ∨ \false ≡ p$                  | $n ↑ -∞ = n$                      |
-    | Zero of ∨            | $p ∨ \true ≡ p$                   | $n ↑ +∞ = +∞$                     |
-    | Excluded Middle      | $p ∨ ¬ p ≡ \false$                | ─nope─                            |
-    |----------------------+-----------------------------------+-----------------------------------|
-    | Golden Rule          | $p ∧ q ≡ p ≡ q ≡ p ∨ q$           | $m ↓ n = m \,≡\, n = m ↑ n$       |
-    | ∧/∨ Distributivity   | $p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)$ | $m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)$ |
-    | ∨/∧ Distributivity   | $p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)$ | $m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)$ |
-    |----------------------+-----------------------------------+-----------------------------------|
-    | Double negation      | $¬ ¬ p ≡ p$                       | $- - n = n$                       |
-    | Definition of $\false$ | $\false ≡ ¬ \true$                | $-∞ \,=\, - (+∞)$                 |
-    | Negation of $\false$ | $¬ \false = \true$                | $- (-∞) = +∞$                     |
-    | De Morgan            | $¬(p ∧ q) = ¬ p ∨ ¬ q$            | $-(m ↓ n) = -m ↑ -n$              |
-    |                      | $¬(p ∨ q) = ¬ p ∧ ¬ q$            | $-(m ↑ n) = -m ↓ -n$              |
-    |----------------------+-----------------------------------+-----------------------------------|
-    | Definition of ⇒      | $p ⇒ q ≡ p ∧ q ≡ p$               | $m ≤ n \,≡\, m ↓ n = m$           |
-    |                      | $p ⇒ q ≡ p ∨ q ≡ q$               | $m ≤ n \,≡\, m ↑ n = n$           |
-    | Consequence          | $p ⇐ q ≡ q ⇒ p$                   | $m ≥ n \,≡\, n ≤ m$               |
-    | ex falso quodlibet   | $\false ⇒ p ≡ \true$              | $-∞ ≤ n \,≡\, \true$              |
-    | Left-identity of ⇒   | $\true ⇒ p ≡ p$                   | $+∞ ≤ n \,≡\, n = +∞$             |
-    | Right-zero of ⇒      | $p ⇒ \true ≡ \true$               | $n ≤ +∞ \,≡\, \true$              |
-    | Definition of ¬      | $p ⇒ \false ≡ ¬ p$                | ─nope─                            |
-    |----------------------+-----------------------------------+-----------------------------------|
+  The integer division of $P$ by $Q$, denoted $P ÷ Q$, is specified by
+  the following Galois connection:
+  \[ k × Q ≤ P \quad≡\quad k ≤ P ÷ Q \]
 
+  Here, $Q$ is a natural number (otherwise, the inclusion might need to change)
+  and $P$ is any integer.
+
+  Replacing $k$ by $P ÷ Q$ yields,
+  \[ (P ÷ Q) × Q ≤ P \]
+
+  Replacing $k$ by 0 yields,
+  \[ 0 ≤ P \quad≡\quad 0 ≤ P ÷ Q \]
+
+  Using the law of indirect equality, one can show
+  \[ (a ÷ b) ÷ c \;=\; a ÷ (c × b) \]
+
+** COMMENT Deriving an imperative algorithm
+   :PROPERTIES:
+   :CUSTOM_ID: Deriving-an-imperative-algorithm
+   :END:
+
+  The characterisation of integer division
+  could also serve as a specification for an algorithm
+  that actually computes $x = P ÷ Q$.
+
+  \[ k × Q ≤ P \quad≡\quad k ≤ x \]
+
+  If a solution $x$ exists to this equation, then it is the largest integer with
+  $x × Q ≤ P$ (just take $k ≔ x$) and so is unique.
+  Moreover, taking $k ≔ x + 1$ yields $¬ (x + 1) × Q ≤ P$. Hence, we have the
+  problem:
+  \[ ? \Then{?} x × Q ≤ P \;∧\; ¬ (x + 1) × Q ≤ P\]
+
+  Since the first conjunct is easily truthified (by $x ≔ 0$ and additionally
+  requiring $0 ≤ P$), we take it to be the invariant and take the negation of
+  the second conjunct as the loop guard, thereby obtaining.
+
+  #+begin_latex-definitions
+\def\While#1{ \mathsf{while}\,#1\,\textbf{:}\, }
+  #+end_latex-definitions
+
+  \[ 0 ≤ P \Then{x := 0⍮ \While{(x + 1) × Q ≤ P} ?} x × Q ≤ P \;∧\; ¬ (x + 1) × Q ≤ P\]
+
+  Now ~?~ could only be an assignment to ~x~, and so we calculate such an assignment
+  /with the aim/ of preserving the invariant, wherein we know the loop guard also
+  holds.  That is, we want to solve for $A$ in the following equation.
+
+  \[ (x + 1) × Q ≤ P \;∧\; x × Q ≤ P \Then{x := A} x × Q ≤ P \]
+
+  By the assignment rule, it is clear that $A = x + 1$ works.
+
+  Hence, we have
+ \[ 0 ≤ P \Then{x := 0⍮ \While{(x + 1) × Q ≤ P} x := x + 1} x × Q ≤ P \;∧\; ¬ (x + 1) × Q ≤ P\]
+
+ To prove that the algorithm terminates, we have to define a /bound function/,
+ which is a natural-number-valued function of the program variables that
+ measures the size of the problem to be solved.  A guarantee that the value of
+ such a bound function is always decreased at each iteration is a guarantee that
+ the number of times the loop body is executed is at most the initial value of
+ the bound function.
+
+ It seems we can take $P - x$ to be the bound function.
+ However, for this function to be bounded below, we require
+ $0 < Q$.
+
+ In summary,
+ \[ 0 ≤ P \;∧\; 0 < Q \Then{x := 0⍮ \While{(x + 1) × Q ≤ P} x := x + 1} x × Q ≤ P \;∧\; ¬ (x + 1) × Q ≤ P\]
+
+ Notice that additional assumptions on $P$ and $Q$ emerged in the process of
+ constructing a correct program.
+
+ *Improvement:* As it stands, the algorithm computes $x + 1$ twice, let us /aim to
+ simplify the loop guard, possibly by introducing a new variable/.  Since
+ $(x + 1) × Q ≤ P \quad≡\quad Q ≤ P - x × Q$ we may introduce a variable $r$
+ whose purpose is to maintain the value $P - x × Q$; it's purpose is guaranteed
+ if we make it part of the invariant. This results in:
+ \[ 0 ≤ P \;∧\; 0 < Q \Then{x, r := 0, P⍮ \While{(x + 1) × Q ≤ P} x, r := x + 1,
+ B} x × Q ≤
+ P \;∧\; ¬ (x + 1) × Q ≤ P \;∧\; r = P - x × Q \]
+
+ To satisfy the invariant, $x × Q ≤ P \;∧\; r = P - x × Q$, we are forced to
+ initially set $r$ to $P$. Then we update $r$ via the yet unkwon $B$
+ so that the invariant is preserved:
+ \[ (x + 1) × Q ≤ P \;∧\; x × Q ≤ P \;∧\; r = P - x × Q \Then{x, r := x + 1, B}
+ x × Q ≤ P \;∧\; r = P - x × Q \]
+
+ The assignment rule quickly shows that $B = r - Q$.
+
+ In summary, \[ 0 ≤ P \;∧\; 0 < Q \Then{x, r := 0, P⍮ \While{(x + 1) × Q ≤ P} x,
+ r := x + 1, r - Q} x × Q ≤ P \;∧\; ¬ (x + 1) × Q ≤ P \;∧\; r = P - x × Q \]
+
+** COMMENT Deriving a recursive algorithm
+   :PROPERTIES:
+   :CUSTOM_ID: Deriving-a-recursive-algorithm
+   :END:
+
+   The characterisation of integer division as a Galois connection is so
+   versatile that it can also be used directly to obtain a recursive algorithm
+   for the definition of the new operation.
+
+   The first step is to express the new operation in terms
+   of itself but with an argument reduced.
+
+   \begin{calc}
+   k ≤ P ÷ Q
+   \step{ definition of ÷, using proviso $Q > 0$ }
+   k × Q ≤ P
+   \step{ cancellation; aiming to reduce an argument }
+   k × Q - Q ≤ P - Q
+   \step{ distributivity }
+   (k - 1) × Q ≤ P - Q
+   \step{ definition of ÷, using proviso $P - Q > 0$; i.e., $P ≥ Q > 0$ }
+    k - 1 ≤ (P - Q) ÷ Q
+   \step{ arithmetic }
+    k ≤ (P - Q) ÷ Q + 1
+   \end{calc}
+
+   Hence, by indirect equality, we have shown
+   \[ P ÷ Q \;=\; (P - Q) ÷ Q + 1  \quad⇐\quad  Q ≤ P \]
+
+   We have found a reduction in an argument, but it is conditional.  So let us
+   consider the negation of this condition so as to cover all possible cases.
+   Supposing, $P < Q$, we calculate:
+   \begin{calc}
+   k ≤ P ÷ Q
+   \step{ definition of ÷ }
+   k × Q ≤ P
+   \step{ transitivity using assumption }
+   k × Q < Q
+   \step{ cancellation using $0 < Q$ }
+   k < 1
+   \step{ integers }
+   k ≤ 0
+   \end{calc}
+
+  Hence, by indirect equality, we have shown
+  \[ P ÷ Q \;=\; 0  \quad⇐\quad  P < Q \]
+
+  Purring these two cases together, we have the following
+  recursive definition for natural $P$ and positive $Q$:
+  #+begin_src math
+P ÷ Q  |  P < Q  =  0
+P ÷ Q  |  Q ≤ P  =  (P - Q) ÷ Q + 1
+  #+end_src
+
+  This function clearly terminates since an argument, $P$, is being reduced at
+  each recursive call and stops when $P < Q$.
+
+** The Division Relation :ignore:
+   :PROPERTIES:
+   :CUSTOM_ID: The-Division-Relation
+   :END:
+
+   The division relation is the relation on integers defined to be the converse
+   of the “is-a-multiple-of” relation:
+   \[\Law{Definition of Divisibility}{m ╲ n  \,\;≡\;\, (∃ k : ℤ • n = k × m)}  \]
+
+   Although, the notation $m ∣ n$ is more common, the asymmetric ‘╲’ symbol is
+   more suggestive.  In /Concrete Mathematics/, p102, it is pointed out that
+   vertical bars are overused and $m ╲ n$ (read “m under n”) gives an impression
+   that $m$ is the denominator of the implied ratio ($k = {n \over m}$), and in
+   the order sense it implies that, well, $m$ is ‘under’ (or “at most”) $n$.
+
+   Since multiplication distributes over addition, divisibility is (almost)
+   preserved by linear combination.
+
+   \[ \Law{Divisibility preserves semi-linear
+   combinations}{k ╲ x \;∧\; k ╲ y \quad≡\quad k ╲ (x + a × y) \;∧\; k ╲ y} \]
+
+   That is,
+
+   \[ \Law{Divisibility preserves semi-linear combinations}{
+   k ╲ y \quad⇒\quad \big(k ╲ (x + a × y) \;≡\; k ╲ x\big)}\]
+
+   Often this theorem is
+   used in the /simpler, less generic/, shape “since /k/ divides /x/ and /y/, it also
+   divides their sum”.
+
+   Divisibility is invariant under additive inverse,
+   \[\Law{Divisibility is invariant under additive inverse}{ m ╲ n \quad≡\quad m ╲ (-n)} \]
+
+   Since multiplication has a unit and is associative, divisibility is reflexive
+   and transitive. That is, divisibility is a /preorder/ on the integers,
+   and an /order/ on the naturals; moreover, it has 0 as the greatest element and 1 as the smallest.
+   \[ \Law{Reflexivity of divisibility}{ m ╲ m} \]
+   \[ \Law{Transitivity of divisibility}{m ╲ n ╲ k \quad⇒\quad m ╲ k} \]
+   \[ \Law{Quasi-antisymmetry of divisibility}{m ╲ n \;∧\; n ╲ m \quad≡\quad \abs n = \abs m} \]
+   \[ \Law{Top of divisibility}{m ╲ 0} \]
+   \[ \Law{Bottom of divisibility}{1 ╲ m} \]
+
+   Multiplication interacts nicely with divisibility:
+   \[ \Law{Divisibility of multiples}{ m ╲ (c × m)} \]
+
+  ( Notice that ‘╲’ is very similar to ‘⇒’; e.g., $m ╲ 0$ is akin to $p ⇒
+   \true$, and $m ╲ m$ is akin to $p ⇒ p$.  Indeed, the similarly is due to the
+   fact that implication ‘⇒’ is also an order with least and greatest
+   elements. )
+
+   --------------------------------------------------------------------------------
+
+   Let's consider ℕatural numbers only …
+
+   The infimum (greatest lower bound) in the division ordering is denoted by ‘∇’
+   and characterised as follows.
+
+   \[\Law{Characterisation of gcd}{ k ╲ m \;∧\; k ╲ n \quad≡\quad k ╲ (m ∇ n)} \]
+
+   Taking $n ≔ m$ and $n ≔ 0$ gives us
+   \[ \Law{Idempotence of gcd}{m ∇ m = m} \]
+   \[ \Law{Identity of gcd}{m ∇ 0 = m} \]
+
+   Taking $k ≔ m ∇ n$ yields,
+   \[\Law{Gcd is a divisor of its arguments}{(m ∇ n)╲m \quad∧\quad (m ∇ n)╲n}\]
+
+   Of-course, the divisibility order can be ‘defined’ using meet (just take $k ≔
+   m$ and apply antisymmetry of divisibility):
+   \[ \Law{Definition of divisibility via gcd}{ m ╲ n \quad≡\quad m ∇ n = m } \]
+
+   Since conjunction is symmetric and doc-associative, so is the meet.
+   \[ \Law{Symmetry of gcd}{ m ∇ n = n ∇ m} \]
+   \[ \Law{Associative of gcd}{(m ∇ n) ∇ p = m ∇ (n ∇ p)} \]
+
+   Since divisibility is invariant under additive inverse,
+   \[ \Law{Gcd is invariant under additive inverse}{ (-m) ∇ n \;=\; m ∇ n} \]
+
+   Since divisibility is almost preserved by linear combinations, meets are
+   invariant under them.
+
+   \[ \Law{Gcd is invariant under semi-linear combinations}{(m + a × n) ∇ n \;=\; m ∇ n} \]
+
+   Taking $m ≔ 0$ yields,
+   \[ \Law{Gcd of multiples}{ (a × n) ∇ n \;=\; n} \]
+
+   #+begin_box “Greatest”
+   For positive integers, the “largest number wrt to the ╲-ordering that divides
+   both of the numbers” is the same as “the largest number wrt to the size
+   ≤-ordering that divides both of the numbers”.  Hence, we may refer to $m ∇ n$
+   as the greatest common divisor ---and the word ‘greatest’ causes no problems
+   in ambiguity, when the numbers are positive.
+
+   \[\Law{Inclusion of Positives}{ 0 < m \;∧\; 0 < n \quad⇒\quad m ╲ n \;⇒\; m ≤
+   n} \]
+   #+end_box
+
+   Just as ‘↓’ is used for minima, we use ‘∇’ for gcd.
+   Likewise, ‘↑’ for maxima and ‘Δ’ for lcm.
+
+   Multiplication interacts nicely with gcd:
+   \[ k ╲ (c × m) \;∧\; k ╲ (c × n) \quad≡\quad k ╲ (c × (m ∇ n)) \]
+
+   Taking $k ≔ m$ yields, \[ m ╲ (c × n) \quad≡\quad m ╲ (c × (m ∇ n))\] \[
+   \Law{Relative-Prime Cancellation for divisibility}{\big(m ╲ (c × n) \quad≡\quad m ╲
+   c\big) \quad⇐\quad m ∇ n = 1} \]
+   ( The second one above is also known as
+   “Euclid's Lemma” when the consequences is presented as an implication instead
+   of an equivalence. )
+
+   In particular, we can show that multiplication distributes over gcd:
+   For $c : ℕ$,
+   \[\Law{Multiplication distributes over gcd}{c × (m ∇ n) \quad≡\quad (c × m) ∇ (c × n)} \]
+
+   Consequently,
+   \[ \Law{Relative-Prime Cancellation for gcd}{ (m × p) ∇ n = m ∇ n \quad⇐\quad p ∇ n = 1} \]
+   # Super tiny proof: Start with RHS and replace m by m × 1 ;-)
+
+** COMMENT Deriving Euclid's Algorithm
+   :PROPERTIES:
+   :CUSTOM_ID: Deriving-Euclid's-Algorithm
+   :END:
+
+   The characterisation of the meet could act as a specification for an
+   imperative algorithm computing $x = m ∇ n$.
+
+   \[ (∀ k • k ╲ m \;∧\; k ╲ n \quad≡\quad k ╲ x) \]
+
+   Unfortunately, these is no explicit conjunction that we could truthify one
+   part easily and so take it as invariant, and leave the other conjunct for the
+   loop guard. For instance, the only variable we have is $x$ and the only
+   reasonable choices for it are $0, 1, m, n$ but none truthify anything.
+   So we add ‘another degree of freedom’: The following is an equivalent
+   re-statement, but now we have two variables to work with, $x$ and $y$.
+
+   \[ x = y \;∧\; (∀ k • k ╲ m \;∧\; k ╲ n \quad≡\quad k ╲ x \;∧\; k ╲ y) \]
+
+   Now an (∀)quantification is not something we want to consider for loop guard
+   and so we consider it for invariant. Indeed, taking $x,y ≔ m, n$ immediately
+   truthifies the right conjunct, and so the right conjunct is a good candidate
+   for invariant. So, we take $x ≠ y$ as loop guard.
+
+   In summary,
+   \[ 0 < m \,∧\, 0 < n \Then{x,y ≔ m, n ⍮ \While{x ≠ y} ?} x = y \,∧\, (∀ k • k ╲ m \;∧\; k ╲ n \quad≡\quad
+   k ╲ x \;∧\; k ╲ y) \]
+
+   We now need to alter $x$ and $y$ in such a way as to maintain the invariant
+   whilst making progress to a state satisfying $x = y$.  Similar considerations
+   as was done for the division algorithm lead us to the following algorithm
+   ---where conditionals have been absorbed into the top-level scope: $x ≠ y ≡ x
+   < y ∨ y < x$.
+
+   #+begin_src math
+{ 0 < m  ∧ 0 < n }
+x, y ≔ m, n ⍮
+{ Invariant: 0 < x  ∧  0 < y  ∧  (∀ k • k ╲ m  ∧  k ╲ n  ≡  k ╲ x  ∧  k ╲ y)
+  Bound function: x + y
+}
+do y < x ⟶ x := x - y
+❙  x < y ⟶ x := y - x
+od
+{ Invariant: 0 < x  ∧  0 < y  ∧  x = y  ∧  (∀ k • k ╲ m  ∧  k ╲ n  ≡  k ╲ x  ∧  k ╲ y) }
+   #+end_src
 * TODO COMMENT Quantification and Predicate Logic
   :PROPERTIES:
   :CUSTOM_ID: Quantification-and-Predicate-Logic
