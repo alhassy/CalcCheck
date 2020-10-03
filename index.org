@@ -170,7 +170,7 @@ Raymond Smullyan!
   :CUSTOM_ID: Links-to-docs-notes
   :END:
 
-#+begin_parallelNB
+#+begin_parallel
 
 {{{begin-box(pink,)}}}
 #+html: <h2>
@@ -178,7 +178,7 @@ Raymond Smullyan!
 #+html: </h2>
 {{{end-box}}}
 
-:columnbreak:
+#+columnbreak:
 
 {{{begin-box(pink, )}}}
 #+html: <h2>
@@ -186,7 +186,7 @@ Raymond Smullyan!
 #+html: </h2>
 {{{end-box}}}
 
-#+end_parallelNB
+#+end_parallel
 
 [[file:images/proof trees vs calculational proofs.png]]
 
@@ -257,8 +257,23 @@ Videos
 
    We also discuss formalisations of English phrases as propositional expressions.
 
-8. [[color:red][*not yet given*]]
+8. [[https://youtu.be/XXwKeFW8qBo][The Unfold-fold Heuristic and Induction]] kbd:Sep_25
 
+   When a new operation is introduced, one can reason about it by using its
+   definition to ‘see’ familiar operation, manipulate those, then invoke the
+   definition to ‘fold-up’.
+
+   To show a property P(n) ranging over natural numbers n : ℕ, it is not
+   reasonable to evaluate P at the infinitely many possible values for n.
+   Instead one uses mathematical induction.
+
+9. [[https://youtu.be/4oq6mybJvKo][Conjunction]] kbd:Sep_29
+10. [[https://youtu.be/exz_VWYUJ_k][Induction]] kbd:Oct_1
+11. [[https://youtu.be/zuZ6ETgdaDw][Replacement]] kbd:Oct_2
+
+    kbd:Oct_6 is the second midterm; it is online during class time.
+
+12. [[color:red][*not yet given*]]
 
 :Video_description:
  ─⟦Maths for Computing 𝓃⟧

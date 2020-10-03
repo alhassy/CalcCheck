@@ -1884,6 +1884,21 @@ set of theorems, and many texts use different axioms.
   \[\Law[(3.52)]{Definition of ≡}{p ≡ q ≡ (p ∧ q) ∨ (¬ p ∧ ¬ q)}\]
   \[\Law[(3.53)]{Exclusive or}{p ≢ q ≡ (¬ p ∧ q) ∨ (p ∧ ¬ q)}\]
 
+# (3.53b) ?
+#+begin_src math
+Theorem “xor” “≢ is one or the other, but not both”: (p ≢ q) ≡ (p ∨ q) ∧ ¬ (p ∧ q)
+Proof:
+    (p ∨ q) ∧ ¬ (p ∧ q)
+  =⟨ “De Morgan” ⟩
+    (p ∨ q) ∧ (¬ p ∨ ¬ q)
+  =⟨ “Distributivity of ∧ over ∨” ⟩
+     ((p ∨ q) ∧ ¬ p) ∨ ((p ∨ q) ∧ ¬ q)
+  =⟨ “Absorption” ⟩
+     (¬ p ∧ q) ∨ (¬ q ∧ p)
+  =⟨ “Alternative definition of ≢” ⟩
+     p ≢ q
+#+end_src
+
   In most propositional calculi equivalence is the last operator to be defined
   and is defined as “mutual implication”.  Thus, (3.80) below typically is made
   an axiom.  We down-play implication in our calculus because, as an unsymmetric
@@ -2471,6 +2486,7 @@ value of 𝔹. This ‘basic observation’ is known as /induction/.
 #+end_box
 
 For the money problem, we need to start somewhere else besides 0.
+
 #+begin_box Principle of (“Weak”) Mathematical Induction
 To show that a property $P$ is true for all natural numbers starting with some
 number $n_0$, show the following two properties:
@@ -2479,9 +2495,9 @@ number $n_0$, show the following two properties:
   natural number that such that $n ≥ n₀$ and $P\, n$ is true, then $P\, (n + 1)$
   is also true.
 #+end_box
-
 For the money problem, we need to be able to use the fact that to prove $P\,
 (n + 1)$ we must have already proven $P$ for all smaller values.
+
 #+begin_box Principle of (“Strong”) Mathematical Induction
 To show that a property $P$ is true for all natural numbers starting with some
 number $n_0$, show the following two properties:
@@ -2493,6 +2509,63 @@ number $n_0$, show the following two properties:
 
 These ‘strength’ of these principles refers to the strength of the inductive
 hypothesis. The principles are provably equivalent.
+
+# (It is also a way to say that ℕ has non-empty meets.)
+#+begin_box The Least Number Principle ---Another way to see induction
+Every non-empty subset of the natural numbers must have a least element,
+‘obviously’. This is (strong) induction.
+# Possibly infinite!
+
+#+begin_details Induction ⇒ LNP
+\begin{calc}
+(∃ x • x ∈ S)
+\step{ Double negation }
+¬ ¬ (∃ x • x ∈ S)
+\step{ De Morgan }
+¬ (∀ x • x ∉ S)
+\step{ Strong induction }
+¬ (∀ n ∣ (∀ m : ℕ ∣ m < n • m ∉ S) • n ∉ S)
+\step{ De Morgan and double negation }
+(∃ n ∣ (∀ m : ℕ ∣ m < n • m ∉ S) • n ∈ S)
+\step{ Definition of ‘least’ }
+\text{S has a least element}
+\end{calc}
+
+# neato observation
+#
+# 0 ∈ S ∨ (∃ n ∣ (∀ m : ℕ ∣ m < n • m ∉ S) • n ∈ S))
+# \stepmany{ \line{Since 0 is the least number, if 0 ∈ S then S would have a least
+# element.}
+# \line{The right disjunct says n ∈ S is a least element.}
+# \line{(⇒) In both cases, S has a least element.}
+# \line{Conversely, (⇐), if S has a least element,}
+# \line{then either it is 0 or the right disjunct is satisfied. }
+# }
+# \text{S has a least element}
+#
+#+end_details
+
+#+begin_details LNP ⇒ Induction
+\begin{calc}
+  (∀ n • P\, n)
+\step{ Double negation }
+  ¬ ¬ (∀ n • P\, n)
+\step{ De Morgan }
+  ¬ (∃ n • ¬ P\, n)
+\step{ Negation applied to both sides of LNP }
+¬ (\text{there is a least n with } ¬ P\, n)
+\step{ Formalise ‘least’ }
+¬ (∃ n ∣ (∀ m : ℕ ∣ m < n • ¬ (¬ P\, n)) • ¬ P\, n)
+\step{ De Morgan and double negation }
+(∀ n ∣ (∀ m : ℕ ∣ m < n • P\, n) • P\, n)
+\end{calc}
+#+end_details
+
+*Application of LNP to showing that algorithms terminate*:
+In particular, every decreasing non-negative sequence of integers
+$r₀ > r₁ > r₂ > ⋯$ must terminate.
+#+end_box
+
 
 :Hide:
 The money problem can now be proven by showing
@@ -2508,6 +2581,7 @@ using 3s and 5s.
 3. $7^n + 5$ is divisible by 3
 #+end_details
 :End:
+
 
 * Number Theory
   :PROPERTIES:
@@ -2674,7 +2748,7 @@ using 3s and 5s.
   Hence, by indirect equality, we have shown
   \[ P ÷ Q \;=\; 0  \quad⇐\quad  P < Q \]
 
-  Purring these two cases together, we have the following
+  Putting these two cases together, we have the following
   recursive definition for natural $P$ and positive $Q$:
   #+begin_src math
 P ÷ Q  |  P < Q  =  0
@@ -2683,6 +2757,49 @@ P ÷ Q  |  Q ≤ P  =  (P - Q) ÷ Q + 1
 
   This function clearly terminates since an argument, $P$, is being reduced at
   each recursive call and stops when $P < Q$.
+
+** Division Algorithm :ignore:
+   :PROPERTIES:
+   :CUSTOM_ID: Division-Algorithm
+   :END:
+
+#+begin_box The Division Algorithm
+For any integers $a$ and $b ≠ 0$, there are unique
+integers $q, r$ with $a = b · q + r$ and $0 ≤ r < \abs b$.
+
+Here is the algorithm for the positive /b/ case.
+#+begin_src math
+{ a ≥ 0  ∧  b > 0 }
+q, r := b, 0;
+while r ≥ m:  q, r := r - a, q + 1
+{ a = b · q + r  ∧  0 ≤ r < b }
+#+end_src
+
+We write $q, r$ as $a ÷ b$ and /a mod b/.
+
++ /a ÷ b/ : The quotient of /a/ and /b/ on dividing /a/ by /b/.
++ /a mod b/: The remainder of /a/ and /b/ on dividing /a/ by /b/.
+  - When /a mod b = 0/, one says “b divides a” or “a is a multiple of b”.
+    Equivalently, /b divides a ≡ (∃ c • a = b · c)/.
+#+end_box
+
+For instance, if we take $b = 3$, then the theorem says every integer is of the
+form $3 · q, 3 · q + 1$, or $3 · q + 2$.
+
+If today is Thursday, what weekday is 90 weekdays from today?  A week has 7 days
+and so by the division algorithm we have /90 = 12 · 7 + 6/. Since a weekly cycle
+(each 7 days) leaves us on the same weekday (today, Thursday), after 12 · 7 days
+it will again be Thursday, and so the weekday in 90 days is the same as the day
+6 days from now; which happens to be Wednesday.
+
+:More:
++ a ╲ b ⇒ (c × a) ╲ (c × b)  ─if b is a multiple of a, then c×b is a multiple of c×a
++ a ╲ b  ∧  a ╲ c  ⇒  a ╲ (b × x + c × y) ─if b and c are multiples of a, then
+  so is their linear combination.
++ a ╲ b  ∧  a ╲ (b + c)  ⇒  a ╲ c ─if b is a multiple of a, then for b+c to also
+  be a multiple, we need c to be a multiple of a; See “divisibility preserves
+  semi-linear combinations”.
+:End:
 
 ** The Division Relation :ignore:
    :PROPERTIES:
