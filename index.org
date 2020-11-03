@@ -273,7 +273,61 @@ Videos
 
     kbd:Oct_6 is the second midterm; it is online during class time.
 
-12. [[color:red][*not yet given*]]
+12. [[https://youtu.be/d2g7Ez-pU6o][Quantification/Loops and Extended Proof Style]] kbd:Oct_8 with “playground”
+
+    Quantification is a mathematical abstraction of loops:
+    ~int s = 0; for(int i = a; i != b; i++){s += f(i);}~
+    is an *implementation* of the quantification
+    ~(∑ i : ℤ ❙ a ≤ i ≠ b • f i)~.
+
+    We also discuss how *transitivity* can be used
+    to extend the calculational proof style
+    with other relations besides equality.
+
+13. Proof Techniques and Relaxed Proof Style kbd:Oct_9
+    - [[https://youtu.be/G-D7Na_h9BQ][Part 1]] and  [[https://youtu.be/JTeFnHFDK-Y][Part 2]]
+
+    We review how CalcCheck permits relaxed proofs
+    such as `with` for modus ponens and `Assuming`
+    for implication introduction.
+
+    We also quickly discuss `Using`, which is a way to *use theorems as proof
+    techniques*!
+
+    kbd:Oct_9_to_Oct_16 Reading Week, no classes.
+
+14. [[https://youtu.be/AtN03EujI2M][Quantification with ΣΠ∀∃ and Scope]] kbd:Oct_20
+
+    Quickly review basics of quantifiers and their implementations, loops; then
+    introduce ∃/∀ as quantifiers (loops, iterations) for ∨/∧; then wrap up with
+    the notion of scopes via examples of names in friend groups.
+
+15. [[https://youtu.be/WW1vJbGZ3I8][Midterm Prep: In-depth “Assuming” and some “∀”]] kbd:Oct_22
+
+16. [[https://youtu.be/fFvAa_LNOEo][Theorem Statements Suggest Proof Structure (•̀ᴗ•́)و]] kbd:Oct_23
+
+    We review, compare, and contrast proving theorems directly versus using a
+    relaxed proof style. Textual substitution on quantifiers is also reviewed
+    briefly.
+
+    # Hey, there are at least 3 ways to prove an implication `P ⇒ Q`:
+    # (1) `Assuming P: now prove Q`, (2) turn the whole thing into true `(P ⇒ Q) ≡
+    # true`, (3) start with `P` and ‘weaken’ by having ‘⇒’ in the left-column until you
+    # get to `Q`, (4) start with `Q~ and ‘strengthen’ by having ‘⇐’ in the left-column
+    # until you get to `P`.
+    #
+
+    kbd:Oct_27 is the second midterm; it is online during class time and the
+   ‘Midterm Prep’ was created to, well, prepare you for the midterm.
+
+17. Feedback Replies & Quantification
+    kbd:Oct_29
+
+    Let's discuss the entries posted on the feedback channel as well as
+    impressions of the previous midterm. Then let's continue with Quantification
+    and it's possible implementations via loops.
+
+18. [[color:red][*not yet given*]]
 
 :Video_description:
  ─⟦Maths for Computing 𝓃⟧

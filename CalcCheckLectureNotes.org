@@ -3,7 +3,7 @@
 #+title: Mathematics for Computing
 #+subtitle: Abridged Lecture Notes @@html:<br>@@ Based on “A Logical Approach to Discrete Math”
 #+author: Musa Al-hassy
-#+options: tags:nil d:nil toc:t
+#+options: tags:nil d:nil toc:nil
 #+PROPERTY: header-args:calccheck :tangle (concat (file-name-sans-extension (buffer-name)) ".calc") :comments nil
 
 #+Description: Abridged Lecture Notes Based on “A Logical Approach to Discrete Math”
@@ -236,7 +236,6 @@ doc:Calculational_Proof
   :CUSTOM_ID: Notational-Setup
   :END:
 :Calc_notation:
-
 \begin{calc}
 x
 \step[op]{ hint }
@@ -247,7 +246,9 @@ y
 
 #+name: startup-code
 #+begin_src emacs-lisp :exports none
-(load-file "~/Desktop/power-blocks.el")
+(require 'cl)
+  (load-file "~/Desktop/power-blocks.el")
+
 #+end_src
 
 #+BEGIN_export html
@@ -369,7 +370,7 @@ $$
 #+end_src
 
 #+RESULTS: startup-code
-: t
+: subtle-colors
 
 # $1 colour eg “pink” or “hsl(157 75% 20%)” or “#e5f5e5”; $2 title
 #+macro: begin-box (eval (concat "@@html: <div style=\"padding: 1em; background-color: " (subtle-colors $1) "; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;\"> <h3>" $2 "</h3>@@"))
@@ -1679,41 +1680,56 @@ set of theorems, and many texts use different axioms.
      the minimum of m and n./
 
      #+caption: Properties of propositional operators and similar (familiar) numeric laws
-     | Law                  | Booleans (𝔹)                      | Numbers (ℤ with ±∞)               |
-     | /                    | >                                 |                                   |
-     |----------------------+-----------------------------------+-----------------------------------|
-     | Symmetry of ∧        | $p ∧ q ≡ q ∧ p$                   | $m ↓ n = n ↓ m$                   |
-     | Associativity of ∧   | $(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)$       | $m ↓ n = n ↓ m$                   |
-     | Idempotency of ∧     | $p ∧ p ≡ p$                       | $n ↓ n = n$                       |
-     | Identity of ∧        | $p ∧ \true ≡ p$                   | $n ↓ +∞ = n$                      |
-     | Zero of ∧            | $p ∧ \false ≡ \false$             | $n ↓ -∞ = -∞$                     |
-     | Contradiction        | $p ∧ ¬ p ≡ \false$                | ─nope─                            |
-     |----------------------+-----------------------------------+-----------------------------------|
-     | Symmetry of ∨        | $p ∨ q ≡ q ∨ p$                   | $m ↑ n = n ↑ m$                   |
-     | Associativity of ∨   | $(p ∨ q) ∨ r ≡ p ∨ (q ∨ r)$       | $m ↑ n = n ↑ m$                   |
-     | Idempotency of ∨     | $p ∨ p ≡ p$                       | $n ↑ n = n$                       |
-     | Identity of ∨        | $p ∨ \false ≡ p$                  | $n ↑ -∞ = n$                      |
-     | Zero of ∨            | $p ∨ \true ≡ p$                   | $n ↑ +∞ = +∞$                     |
-     | Excluded Middle      | $p ∨ ¬ p ≡ \false$                | ─nope─                            |
-     |----------------------+-----------------------------------+-----------------------------------|
-     | Golden Rule          | $p ∧ q ≡ p ≡ q ≡ p ∨ q$           | $m ↓ n = m \,≡\, n = m ↑ n$       |
-     | ∧/∨ Distributivity   | $p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)$ | $m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)$ |
-     | ∨/∧ Distributivity   | $p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)$ | $m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)$ |
-     |----------------------+-----------------------------------+-----------------------------------|
-     | Double negation      | $¬ ¬ p ≡ p$                       | $- - n = n$                       |
-     | Definition of $\false$ | $\false ≡ ¬ \true$                | $-∞ \,=\, - (+∞)$                 |
-     | Negation of $\false$ | $¬ \false = \true$                | $- (-∞) = +∞$                     |
-     | De Morgan            | $¬(p ∧ q) = ¬ p ∨ ¬ q$            | $-(m ↓ n) = -m ↑ -n$              |
-     |                      | $¬(p ∨ q) = ¬ p ∧ ¬ q$            | $-(m ↑ n) = -m ↓ -n$              |
-     |----------------------+-----------------------------------+-----------------------------------|
-     | Definition of ⇒      | $p ⇒ q ≡ p ∧ q ≡ p$               | $m ≤ n \,≡\, m ↓ n = m$           |
-     |                      | $p ⇒ q ≡ p ∨ q ≡ q$               | $m ≤ n \,≡\, m ↑ n = n$           |
-     | Consequence          | $p ⇐ q ≡ q ⇒ p$                   | $m ≥ n \,≡\, n ≤ m$               |
-     | ex falso quodlibet   | $\false ⇒ p ≡ \true$              | $-∞ ≤ n \,≡\, \true$              |
-     | Left-identity of ⇒   | $\true ⇒ p ≡ p$                   | $+∞ ≤ n \,≡\, n = +∞$             |
-     | Right-zero of ⇒      | $p ⇒ \true ≡ \true$               | $n ≤ +∞ \,≡\, \true$              |
-     | Definition of ¬      | $p ⇒ \false ≡ ¬ p$                | ─nope─                            |
-     |----------------------+-----------------------------------+-----------------------------------|
+     | Law                       | Booleans (𝔹)                      | Numbers (ℤ with ±∞)               |
+     | /                         | >                                 |                                   |
+     |---------------------------+-----------------------------------+-----------------------------------|
+     | Symmetry of ∧             | $p ∧ q ≡ q ∧ p$                   | $m ↓ n = n ↓ m$                   |
+     | Associativity of ∧        | $(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)$       | $m ↓ n = n ↓ m$                   |
+     | Idempotency of ∧          | $p ∧ p ≡ p$                       | $n ↓ n = n$                       |
+     | Identity of ∧             | $p ∧ \true ≡ p$                   | $n ↓ +∞ = n$                      |
+     | Zero of ∧                 | $p ∧ \false ≡ \false$             | $n ↓ -∞ = -∞$                     |
+     | Contradiction             | $p ∧ ¬ p ≡ \false$                | ─nope─                            |
+     |---------------------------+-----------------------------------+-----------------------------------|
+     | Symmetry of ∨             | $p ∨ q ≡ q ∨ p$                   | $m ↑ n = n ↑ m$                   |
+     | Associativity of ∨        | $(p ∨ q) ∨ r ≡ p ∨ (q ∨ r)$       | $m ↑ n = n ↑ m$                   |
+     | Idempotency of ∨          | $p ∨ p ≡ p$                       | $n ↑ n = n$                       |
+     | Identity of ∨             | $p ∨ \false ≡ p$                  | $n ↑ -∞ = n$                      |
+     | Zero of ∨                 | $p ∨ \true ≡ p$                   | $n ↑ +∞ = +∞$                     |
+     | Excluded Middle           | $p ∨ ¬ p ≡ \false$                | ─nope─                            |
+     |---------------------------+-----------------------------------+-----------------------------------|
+     | Golden Rule               | $p ∧ q ≡ p ≡ q ≡ p ∨ q$           | $m ↓ n = m \,≡\, n = m ↑ n$       |
+     | ∧/∨ Distributivity        | $p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)$ | $m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)$ |
+     | ∨/∧ Distributivity        | $p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)$ | $m ↑ (n ↓ r) = (m ↑ n) ↓ (m ↑ r)$ |
+     |---------------------------+-----------------------------------+-----------------------------------|
+     | Absorption                | $(p ∨ q) ∧ ¬ p ≡ ¬ p ∧ q$         | ─nope─                            |
+     |                           | $(p ∧ q) ∨ ¬ p ≡ ¬ p ∨ q$         | ─nope─                            |
+     |                           | $(p ∨ q) ∧ p ≡ p$                 | $(m ↑ n) ↓ m = m$                 |
+     |                           | $(p ∧ q) ∨ p ≡ p$                 | $(m ↓ n) ↑ m = m$                 |
+     |---------------------------+-----------------------------------+-----------------------------------|
+     | Double negation           | $¬ ¬ p ≡ p$                       | $- - n = n$                       |
+     | Definition of $\false$    | $\false ≡ ¬ \true$                | $-∞ \,=\, - (+∞)$                 |
+     | Negation of $\false$      | $¬ \false = \true$                | $- (-∞) = +∞$                     |
+     | De Morgan                 | $¬(p ∧ q) = ¬ p ∨ ¬ q$            | $-(m ↓ n) = -m ↑ -n$              |
+     |                           | $¬(p ∨ q) = ¬ p ∧ ¬ q$            | $-(m ↑ n) = -m ↓ -n$              |
+     |---------------------------+-----------------------------------+-----------------------------------|
+     | Definition of ⇒           | $p ⇒ q ≡ p ∧ q ≡ p$               | $m ≤ n \,≡\, m ↓ n = m$           |
+     |                           | $p ⇒ q ≡ p ∨ q ≡ q$               | $m ≤ n \,≡\, m ↑ n = n$           |
+     | Consequence               | $p ⇐ q ≡ q ⇒ p$                   | $m ≥ n \,≡\, n ≤ m$               |
+     | ex falso quodlibet        | $\false ⇒ p ≡ \true$              | $-∞ ≤ n \,≡\, \true$              |
+     | Left-identity of ⇒        | $\true ⇒ p ≡ p$                   | $+∞ ≤ n \,≡\, n = +∞$             |
+     | Right-zero of ⇒           | $p ⇒ \true ≡ \true$               | $n ≤ +∞ \,≡\, \true$              |
+     | Definition of ¬           | $p ⇒ \false ≡ ¬ p$                | ─nope─                            |
+     | Contrapositive            | $p ⇒ q \,≡\, ¬ q ⇒ ¬ p$           | $m ≤ n \,≡\, -n ≤ -m$             |
+     |---------------------------+-----------------------------------+-----------------------------------|
+     | Weakening / Strengthening | $p ∧ q ⇒ p$                       | $m ↓ n ≤ m$                       |
+     |                           | $p ⇒ p ∨ q$                       | $m ≤ m ↑ n$                       |
+     |                           | $p ⇒ q \,≡\, p ⇒ p ∧ q$           | $m ≤ n \,≡\, m ≤ m ↓ n$           |
+     |---------------------------+-----------------------------------+-----------------------------------|
+
+     An *instance of absorption $(p ∨ q) ∧ ¬ p  \;≡\; ¬ p ∧ q$*:
+     /If I say “I have a dog or a cat, and I don't have a dog”, then I might as
+     well be saying “I don't have a dog but I have a cat”./
+
 ** ‘true’
    :PROPERTIES:
    :CUSTOM_ID: Equivalence-and-true
@@ -2582,11 +2598,16 @@ using 3s and 5s.
 #+end_details
 :End:
 
-
 * Number Theory
   :PROPERTIES:
   :CUSTOM_ID: Number-Theory
   :END:
+
+# =# _-_= is the gateway from ℕ to ℤ,
+# and =_/_= is the gateway from ℤ to ℚ.
+# But what are these operations by themselves /without/ looking at the extended
+# domains? Semicomplements and residuals (respectively)!
+# ( these are ‘truncated substitituion and division’ )
 
    #+begin_latex-definitions
 \newcommand{Law}[3][]{ #1\;\;\textbf{#2:}\quad #3 }
@@ -2603,7 +2624,7 @@ using 3s and 5s.
   # Algorithms may provide constructive solutions to problems but they can also be
   # used to /reason/ about the resulting constructions.
 
-  --------------------------------------------------------------------------------
+#  --------------------------------------------------------------------------------
 
 ** COMMENT Integer Division
    :PROPERTIES:
@@ -2767,6 +2788,8 @@ P ÷ Q  |  Q ≤ P  =  (P - Q) ÷ Q + 1
 For any integers $a$ and $b ≠ 0$, there are unique
 integers $q, r$ with $a = b · q + r$ and $0 ≤ r < \abs b$.
 
+That is, you /can/ divide one integer by another.
+
 Here is the algorithm for the positive /b/ case.
 #+begin_src math
 { a ≥ 0  ∧  b > 0 }
@@ -2778,10 +2801,43 @@ while r ≥ m:  q, r := r - a, q + 1
 We write $q, r$ as $a ÷ b$ and /a mod b/.
 
 + /a ÷ b/ : The quotient of /a/ and /b/ on dividing /a/ by /b/.
+
+  Division is successive subtraction:
+  /a ÷ b/ is the number of times we can subtract /b/ from
+  /a/ /before/ we hit a negative number; i.e., /a ÷ b/ is
+  the largest integer /k/ with /a - k × b ≥ 0/
+  i.e., /k × b ≤ a/ and so division can be defined in terms of multiplication.
+  - For example, to find /27 ÷ 7/ we look for the largest /k/ with
+    /27 - 7k ≥ 0/: We try /k=1/, then /k=2/, ..., to eventually find that /k=4/
+        gives a negative result and so /k=3/ is the answer;
+        and the /remainder/ /is r = a - (a ÷ b) = 27 - 7×3 = 2/.
+
+  :Well_order:
+  - By the well-ordering principle,
+    assuming T = {a - bk ❙ a - b k ≥ 0 } is non-empty,
+    there is a least element in T, call it r.
+    Then r = a - bq ≥ 0 for some q
+    and so 0 ≤ r. Moreover,
+
+      r ≥ b
+    = r - b ≥ 0
+    = a - bq - b ≥ 0
+    = a - b(q+1) ≥ 0
+    = a - b(q+1) ∈ T
+    = r > a - b(q+1) ∈ T
+    = r not the least element of T
+
+    Hence, r < b.
+    :End:
+
 + /a mod b/: The remainder of /a/ and /b/ on dividing /a/ by /b/.
   - When /a mod b = 0/, one says “b divides a” or “a is a multiple of b”.
     Equivalently, /b divides a ≡ (∃ c • a = b · c)/.
 #+end_box
+
+# If you refer to q as the quotient and r as the remainder, the theorem makes a lot of sense.
+# If you divide a by d, you get quotient q and remainder r. The theorem says the exist and are unique.
+# When we need these values, we will write a div b=q and a mod b=r.
 
 For instance, if we take $b = 3$, then the theorem says every integer is of the
 form $3 · q, 3 · q + 1$, or $3 · q + 2$.
@@ -2792,64 +2848,335 @@ and so by the division algorithm we have /90 = 12 · 7 + 6/. Since a weekly cycl
 it will again be Thursday, and so the weekday in 90 days is the same as the day
 6 days from now; which happens to be Wednesday.
 
-:More:
-+ a ╲ b ⇒ (c × a) ╲ (c × b)  ─if b is a multiple of a, then c×b is a multiple of c×a
-+ a ╲ b  ∧  a ╲ c  ⇒  a ╲ (b × x + c × y) ─if b and c are multiples of a, then
-  so is their linear combination.
-+ a ╲ b  ∧  a ╲ (b + c)  ⇒  a ╲ c ─if b is a multiple of a, then for b+c to also
-  be a multiple, we need c to be a multiple of a; See “divisibility preserves
-  semi-linear combinations”.
-:End:
-
 ** The Division Relation :ignore:
    :PROPERTIES:
    :CUSTOM_ID: The-Division-Relation
    :END:
 
+:MORE:
++ Absorption: m ∣ (n + m) ≡ m ∣ n
++ prime p ≡ (∀ i ❙ 1 ≤ i < p • p ∤ i)
++ prime p ⇒ (p ∣ (Π i • B) ≡ (∃ i • p ∣ B))
++ Euclid's Theorem: m ∣ n ⇐ m ∣ p·n ∧ m ∇ p = 1
++ prime p ⇒ (m ∇ p = 1 ≡ p ∤ m)
++ y ∣ z ⇒ (xy ∣ z ⇒ x ∣ {z \over y})  .... is this true, what of the inner-most converse?
++ prime p ∧ 1 ⇐ i < p ⇒ p ∣ \binom{p}{i} = {p! \over i! × (p-i)!}
++ composite m ≡ (∃ d ❙ 2 ≤ d < m • d ∣ m)
+  - composite (m + n) ≡ m ∣ n  provided 2 ≤ m and 1 ≤ n.
++ composite m ≢ prime m ≢ m = 1 ≢ m = 0  ... ?
++ The gcd of at least two consecutive numbers is equal to 1.
+  - m ∇ (m + 1) = 1
+  - (∇ i ❙ 0 ≤ i < N • m + i) = 1  ⇐  1 ≤ N
+
+--------------------------------------------------------------------------------
+:END:
+
    The division relation is the relation on integers defined to be the converse
    of the “is-a-multiple-of” relation:
-   \[\Law{Definition of Divisibility}{m ╲ n  \,\;≡\;\, (∃ k : ℤ • n = k × m)}  \]
+   \[\Law{Definition of Divisibility}{m ∣ n  \,\;≡\;\, (∃ k : ℤ • n = k × m)}  \]
 
-   Although, the notation $m ∣ n$ is more common, the asymmetric ‘╲’ symbol is
-   more suggestive.  In /Concrete Mathematics/, p102, it is pointed out that
-   vertical bars are overused and $m ╲ n$ (read “m under n”) gives an impression
-   that $m$ is the denominator of the implied ratio ($k = {n \over m}$), and in
-   the order sense it implies that, well, $m$ is ‘under’ (or “at most”) $n$.
+   # Although, the notation $m ∣ n$ is more common, the asymmetric ‘╲’ symbol is
+   # more suggestive.  In /Concrete Mathematics/, p102, it is pointed out that
+   # vertical bars are overused and $m ╲ n$ (read “m under n”) gives an impression
+   # that $m$ is the denominator of the implied ratio ($k = {n \over m}$), and in
+   # the order sense it implies that, well, $m$ is ‘under’ (or “at most”) $n$.
+
+   | d ∣ m                          |
+   | ≈ d is a divisor (factor) of m |
+   | ≈ m is a multiple of d         |
+
+   Be careful:
+   | ${n \over m},\; n/m$ | real division         | a number      |
+   | $n ÷ m$              | integer division      | a number      |
+   | $m ∣ n,\; m ∣ n$     | divisibility relation | a proposition |
 
    Since multiplication distributes over addition, divisibility is (almost)
    preserved by linear combination.
 
    \[ \Law{Divisibility preserves semi-linear
-   combinations}{k ╲ x \;∧\; k ╲ y \quad≡\quad k ╲ (x + a × y) \;∧\; k ╲ y} \]
+   combinations}{k ∣ x \;∧\; k ∣ y \quad≡\quad k ∣ (x + a × y) \;∧\; k ∣ y} \]
+
+   # That is, k is a factor of x and y precicely when it is a factor of
+   # x +ay and y.
 
    That is,
 
    \[ \Law{Divisibility preserves semi-linear combinations}{
-   k ╲ y \quad⇒\quad \big(k ╲ (x + a × y) \;≡\; k ╲ x\big)}\]
+   k ∣ y \quad⇒\quad \big(k ∣ (x + a × y) \;≡\; k ∣ x\big)}\]
 
-   Often this theorem is
-   used in the /simpler, less generic/, shape “since /k/ divides /x/ and /y/, it also
-   divides their sum”.
+   + Often this theorem is
+     used in the /simpler, less generic/, shape “since /k/ divides /x/ and /y/, it also
+     divides their sum”.
+     - If b and c are multiples of a, then so is their linear combination.
+       \[ \Law{Divisibility of Linear Combinations}{a ∣ b  ∧  a ∣ c  ⇒  a ∣ (b × x + c
+        × y)} \]
+
+        In particular, a ∣ (b · x) and a ∣ (b ± c).
+
+     - If b is a multiple of a, then for b+c to also be a multiple, we need c to be a
+       multiple of a.
+       \[\Law{Cancellation}{a ∣ b  ∧  a ∣ (b + c)  ⇒  a ∣ c}\]
+
+     - Application: Do there exist integers /x, y, z/ with
+       /6x + 9y + 15z = 107/?
+
+       :Soln:
+       6,9,15 clearly have 3 as a common divisor
+       and so 3 must divide their linear combination
+       3 ∣ (6x + 9y + 15z)
+       = 3 ∣ 107
+
+       but 3 ∣ 107 ≡ false, hence, no such integers could exist.
+       :End:
+
+     - Application: Is there an integer n with 7 ∣ (n² + n + 1) and 7 ∣ (n + 1)?
+       # No, otherwise 7 ∣ (n² + n +1 - n(n+1)) = 1 and so 7 = 1 and so false.
+
+     - Application: If m ∣ 4n+7 and m ∣ 3n+5, then m = 1.
+       # m ∣ (3·(4n+7) - 4·(3n+5)) = 1 and so m = 1.
+
+     # m ∣ (a + c) and m ∣ (b + c) then m ∣ (a + b).
+
+   If b is a multiple of a, then c×b is a multiple of c×a;
+   conversely if c is not-zero, we can divide-it-out.
+   \[ \Law{Isotonicity of Multiplication, “Cancellation”}{c ≠ 0 ⇒ (a ∣ b ≡ (c × a) ∣ (c × b))} \]
+   \[ \Law{Monotonicity of Multiplication}{m ∣ a ∧ n ∣ b ⇒ (m × n) ∣ (a × b)}\]
+   \[ \Law{Monotonicity of Absolute Value}{m ∣ n ⇒ \abs m ∣ \abs n}\]
 
    Divisibility is invariant under additive inverse,
-   \[\Law{Divisibility is invariant under additive inverse}{ m ╲ n \quad≡\quad m ╲ (-n)} \]
+   \[\Law{Divisibility is invariant under additive inverse}{ m ∣ n \quad≡\quad m ∣ (-n)} \]
 
    Since multiplication has a unit and is associative, divisibility is reflexive
    and transitive. That is, divisibility is a /preorder/ on the integers,
    and an /order/ on the naturals; moreover, it has 0 as the greatest element and 1 as the smallest.
-   \[ \Law{Reflexivity of divisibility}{ m ╲ m} \]
-   \[ \Law{Transitivity of divisibility}{m ╲ n ╲ k \quad⇒\quad m ╲ k} \]
-   \[ \Law{Quasi-antisymmetry of divisibility}{m ╲ n \;∧\; n ╲ m \quad≡\quad \abs n = \abs m} \]
-   \[ \Law{Top of divisibility}{m ╲ 0} \]
-   \[ \Law{Bottom of divisibility}{1 ╲ m} \]
+   \[ \Law{Transitivity of divisibility}{m ∣ n ∣ k \quad⇒\quad m ∣ k} \]
+   ( When a number is divisible by another number,
+   it is also divisible by the factors of the number. )
+
+   \[ \Law{Quasi-antisymmetry of divisibility}{m ∣ n \;∧\; n ∣ m \quad≡\quad \abs n = \abs m} \]
+   Indeed, 7 ∣ -7 and -7∣7 but 7 ≠ -7, instead abs 7 = abs (-7).
+   :Proof:
+     m ∣ n ∣ m
+   = n = sm ∧ m = tn
+   ⇒ m = stm
+   ⇒ 1 = st,  provided m ≠ 0 and so can be cancelled
+   ⇒ abs s = abs t = 1, since we're working with integers
+   ⇒ m = tn = (±1)n
+   ⇒ abs m = abs n
+
+   The case with m = 0 is just the bottom of divisibility (inlined) and so n = 0
+   and so abs m = abs n.
+   :End:
 
    Multiplication interacts nicely with divisibility:
-   \[ \Law{Divisibility of multiples}{ m ╲ (c × m)} \]
+   \[ \Law{Divisibility of multiples}{ m ∣ (c × m)} \]
 
-  ( Notice that ‘╲’ is very similar to ‘⇒’; e.g., $m ╲ 0$ is akin to $p ⇒
-   \true$, and $m ╲ m$ is akin to $p ⇒ p$.  Indeed, the similarly is due to the
+   From this, we may easily obtain the following, in order,
+   \[ \Law{Reflexivity of divisibility}{ m ∣ m} \]
+   \[ \Law{Top of divisibility}{m ∣ 0} \]
+   \[ \Law{Bottom of divisibility}{1 ∣ m} \]
+
+   Some texts insist that /m ≠ 0/ for the notation /m ∣ n/ to be meaningful.
+   However, if /m = 0/ and /m ∣ n/ then that means there is a /q/ with /n = q · m = q ·
+   0 = 0/ and so /n = 0/. Hence, the only divisibility statement we can make of the
+   shape /0 ∣ n/ is really just /0 ∣ 0/.  This observation is captured by the
+   following theorem. (Note: /0 ∣ n/ does not mean we are dividing by 0!
+   Divisibility, ‘∣’, is defined in-terms of multiplication ---not division!)
+
+   Then, using antisymmetry,
+   \[ \Law{Bottom of divisibility}{n ∣ 1 ≡ \abs n = 1} \]
+   \[ \Law{Top of divisibility}{0 ∣ n ≡ n = 0} \]
+
+   When a number is a factor of another number, it is also a factor
+   of any multiple of that number.
+   - For instance, 4 ∣ 36 ⇐ 4 ∣ (3 × 12) ⇐  4 ∣ 12 ⇐ 4 ∣ (3 × 4) ⇐ 4 ∣ 4 ⇐ true.
+   \[ \Law{∣-Weakening,Strengthening}{k ∣ n ⇒ k ∣ (m × n)} \]
+   :Proof:
+      k ∣ n
+   ⇒ n = kq
+   ⇒ m×n = k×q×m
+   ⇒ m×n = k × q′
+   ⇒ k ∣ m×n
+   :End:
+
+   Another fact,
+   \[ \Law{Sufficient Case Analysis}{a ∣ b  ∨  a ∣ c  ⇒  a ∣ (b × c)} }\]
+
+   Later, one can show an approximate converse.
+
+   Since for /positive/ integers /m, n/ we have that $m ≤ m × n$, we have:
+   \[ \Law{size-order inclusion}{m > 0 ∧ n > 0 \quad⇒\quad m ∣ n ⇒ m ≤ n} \]
+   :Proof:
+   If m > 0 and n > 0
+   then m ∣ n ⇒ n = mq ⇒ q > 0 ⇒ q ≥ 1 ⇒(monotonciity of multiplication) mq ≥ m
+   ⇒ n ≥ m.
+   :End:
+   ( Note that this is not true for n=0, since, eg, 99 ∣ 0 but 99 ≰ 0. )
+
+   As such,
+   \[ m ∣ n \quad⇒\quad \abs m ≤ \abs n \]
+
+   We can also compare divisibility and subset inclusion.
+   Let $Γ x = \{m ❙ m ∣ x \}$ be the set of all of the multiples of $x$;
+   then \[Γ n ⊆ Γ m \quad≡\quad m ∣ n \text{ (note the reversal) } \]
+   ( Many abstract algebra books write $(x)$ for $Γ x$
+   and then use $(a₀, a₁, …, aₙ)$ to mean $a₁ ∇ ⋯ ∇ aₙ$. )
+
+   \[ \Law{divisibility-and-precise-division}{m ∣ n \quad≡\quad (n / m) × m = n} \]
+   That is, m ∣ n precisely when n / m is an integer;
+   i.e., when n mod m = 0.
+
+   --------------------------------------------------------------------------------
+
+   How many numbers below n are divisible by m?
+   :Soln:
+   I.e., #{d : ℤ ❙ d ≤ n ∧ m ∣ d} = ?
+
+   Now,
+
+     d ≤ n ∧ m ∣ d
+   ={ ∣ includes ≤ }
+     m ≤ d ≤ n ∧ d ∣ m
+   ={ All numbers divisible by m are of the form m × q }
+     m ≤ m × q ≤ n
+   ={ arithmetic }
+     1 ≤ q ≤ n / m
+
+   Thus, there are n ÷ m many such integers.
+   :End:
+
+#   --------------------------------------------------------------------------------
+
+  :congruence:
+  |   | $a =_m b$                                           |
+  | ≈ | /a is congruent to b modulo m/                        |
+  | ≈ | /a and b have the same remainder after division by m/ |
+  | ≈ | $m ∣ (a - b)$                                        |
+
+  $$\def\mod{\,\mathsf{mod}\,}$$
+  Indeed, $a =_m b \quad≡\quad a \mod m = b \mod m$.
+
+  If a =_m b and c =_m d, then
+  - a ± c =_m b ± d
+  - a · c =_m b · d
+
+  As such, we can do “modular arithmetic”; and it can be used to show the
+  validity of a number of common divisibility tests.
+
+  Also: If c × a =_m c × b  ∧  c ∇ m = 1, then a =_m b
+  [ cf the cancellation lemma: m ⊥ z  and m ∣ yz implies m ∣ y
+   and m ⊥ z means z is invertible mod m. ]
+
+  + Casting out nines: An integer is divisible by 9 iff the sum
+    of its digits is divisible by 9.
+
+
+     N mod 9
+    ={ express N in base ten, with digits dᵢ ∈ 0..9 }
+     (∑ᵢ dᵢ × 10ⁱ) mod 9
+    ={ modular arithmetic }
+     ∑ᵢ (dᵢ mod 9) × (10ⁱ mod 9)
+    ={ 10 mod 9 = 1 and so 10ⁱ mod 9 = 1 }
+     ∑ᵢ (dᵢ mod 9) × (1 mod 9)
+    ={ modular arithmetic }
+     ∑ᵢ dᵢ mod 9
+
+     Hence, N is precisely as divisible by 9 as is the sum of its digits.
+
+  + Casting out threes: An integer is divisible by 3 iff the sum
+    of its digits is divisible by 3.
+
+    Proof is similar to above.
+
+    Eg 52563744 has the sum of its digits being
+    5 + 2 + 5 + 6 + 3 + 7 + 4 + 4  =  36, which is divisible by 3
+    and so the orginal number is too.
+
+  + Casting out elevens: An integer is divisible by 11 iff
+    the alternating sum of its digits is divisible by 11.
+
+    Since 10 = -1 mod 11, we have 10ⁱ = (-1)ⁱ mod 11.
+
+  + See https://lexique.netmath.ca/en/divisibility-rule/ for *more* divisibility rules
+  + Divisibility by 2: The units digit must be even.
+  + Divisibility by 4: The number formed by its last two digits must be divisible
+    by 4.
+  + Divisibility by 5: The units digit must be 0 or 5.
+  + Divisibility by 6: It must be even and divisible by 3.
+  + Divisibility by 7: When the units digit is doubled and subtracted
+    from the number formed by the remaining digits, the resulting number
+    must be divisible by 7; i.e., write N as 10a+b, with b < 10,
+    then 7 ∣ N  ≡  7 ∣ (a - 2b).
+  + Divisibility by 8: The number formed by its last 3 digits must be divisible
+    by 8.
+
+    Eg 52563744 has its last three digits being 744 which is divisible by 8,
+    and so the orginal number is too.
+
+  + Divisibility by 10: Its last digit must be 0.
+
+  A “linear congruence” is an expression of the form “a × x =_m b”
+  where x is the unknown, and all names are integers. E.g., does 8x =_4 2 have
+  any solutions in x, what about 8x =_7 2?
+
+  Theorem: ax =_m b has a solution in x iff (a ∇ m) ∣ b.
+  Moreover, when (a ∇ m) ∣ b and a ∇ m = sa + tm,
+  then the solutions are given by
+  x = sb/d + mu/d for any u : ℤ.
+
+    a ∇ m ∣ b
+  ≡{ divisibility }
+    b = q × (a ∇ m) for some q
+  ≡{ gcd is a linear combination }
+    b = q × (s×a + t×m) for some s and t
+  ={ multiplication }
+    b = q×s×a + q×t×m
+  ={ subtraction }
+    b - (q×s)×a = q×t×m
+  ={ divisibility }
+    m ∣ (b - qsa)
+  ={ defn of =_m }
+    a × (-qsa) =_m  b
+  ⇒{ ∃-intro }
+    a × x =_m b has a solution in x.
+
+  Now, the converse ... not as easy!
+
+  :End:
+
+  --------------------------------------------------------------------------------
+
+  Observation: By ∣-reflexivity and ∣-least-element, every number has at least
+  two divisors, itself and 1.
+
+  Numbers $p$ with the following property are known as *primes* (or ‘atoms’).
+  \[ d ∣ p \quad≡\quad d = 1 \quad≢\quad d = p \text{ (for any d)}\]
+
+  That is, p has exactly two divisors, 1 and itself;
+  numbers with more than two divisors are known as *composite* numbers.
+
+  In particular, 1 is neither prime nor composite since
+  it has only 1 divisor, itself.
+
+  --------------------------------------------------------------------------------
+
+  ( Notice that ‘∣’ is very similar to ‘⇒’; e.g., $m ∣ 0$ is akin to $p ⇒
+   \true$, and $m ∣ m$ is akin to $p ⇒ p$.  Indeed, the similarly is due to the
    fact that implication ‘⇒’ is also an order with least and greatest
    elements. )
+
+   --------------------------------------------------------------------------------
+
+   If we have /N/ consecutive integers $a_0, a_1, …, a_{N-1}$, then
+   $N$ divides ones of these.
+
+   Since the $a_i$ are consecutive, there is an $m$ with
+   $a_i = m + i$. By the division algorithm,
+   $m = q × N + r$ for some $q$ and $0 ≤ r < N$.
+   Then, $a_{N - r} = m + (N - r) = (q × N + r) + (N - r) = (q + 1) × N$
+   and so $N ∣ a_{N -r}$.
+
+   As such, the product of any /N/ consecutive integers is divisible by /N/.
 
    --------------------------------------------------------------------------------
 
@@ -2858,18 +3185,24 @@ it will again be Thursday, and so the weekday in 90 days is the same as the day
    The infimum (greatest lower bound) in the division ordering is denoted by ‘∇’
    and characterised as follows.
 
-   \[\Law{Characterisation of gcd}{ k ╲ m \;∧\; k ╲ n \quad≡\quad k ╲ (m ∇ n)} \]
+   \[\Law{Characterisation of gcd}{ k ∣ m \;∧\; k ∣ n \quad≡\quad k ∣ (m ∇ n)} \]
+
+   |   | /m ∇ n/                                  |
+   | ≈ | the greatest common divisor of /m/ and /n/ |
+   | ≈ | the highest common factor of /m/ and /n/   |
 
    Taking $n ≔ m$ and $n ≔ 0$ gives us
    \[ \Law{Idempotence of gcd}{m ∇ m = m} \]
    \[ \Law{Identity of gcd}{m ∇ 0 = m} \]
 
+   The second law is also due to the fact that 0 is the top element.
+
    Taking $k ≔ m ∇ n$ yields,
-   \[\Law{Gcd is a divisor of its arguments}{(m ∇ n)╲m \quad∧\quad (m ∇ n)╲n}\]
+   \[\Law{Gcd is a divisor of its arguments}{(m ∇ n)∣m \quad∧\quad (m ∇ n)∣n}\]
 
    Of-course, the divisibility order can be ‘defined’ using meet (just take $k ≔
    m$ and apply antisymmetry of divisibility):
-   \[ \Law{Definition of divisibility via gcd}{ m ╲ n \quad≡\quad m ∇ n = m } \]
+   \[ \Law{Definition of divisibility via gcd}{ m ∣ n \quad≡\quad m ∇ n = m } \]
 
    Since conjunction is symmetric and doc-associative, so is the meet.
    \[ \Law{Symmetry of gcd}{ m ∇ n = n ∇ m} \]
@@ -2886,14 +3219,20 @@ it will again be Thursday, and so the weekday in 90 days is the same as the day
    Taking $m ≔ 0$ yields,
    \[ \Law{Gcd of multiples}{ (a × n) ∇ n \;=\; n} \]
 
+   # In particular, if $g = (∇ i : 1..n • x_i)$ then the set of
+   # all common divisors of all of the $x_i$ is given by
+   #   /{d/m ❙ m ∈ ℤ and m ∣ d }/.
+   #
+   # Proof?
+
    #+begin_box “Greatest”
-   For positive integers, the “largest number wrt to the ╲-ordering that divides
+   For positive integers, the “largest number wrt to the ∣-ordering that divides
    both of the numbers” is the same as “the largest number wrt to the size
    ≤-ordering that divides both of the numbers”.  Hence, we may refer to $m ∇ n$
    as the greatest common divisor ---and the word ‘greatest’ causes no problems
    in ambiguity, when the numbers are positive.
 
-   \[\Law{Inclusion of Positives}{ 0 < m \;∧\; 0 < n \quad⇒\quad m ╲ n \;⇒\; m ≤
+   \[\Law{Inclusion of Positives}{ 0 < m \;∧\; 0 < n \quad⇒\quad m ∣ n \;⇒\; m ≤
    n} \]
    #+end_box
 
@@ -2901,22 +3240,181 @@ it will again be Thursday, and so the weekday in 90 days is the same as the day
    Likewise, ‘↑’ for maxima and ‘Δ’ for lcm.
 
    Multiplication interacts nicely with gcd:
-   \[ k ╲ (c × m) \;∧\; k ╲ (c × n) \quad≡\quad k ╲ (c × (m ∇ n)) \]
+   \[ k ∣ (c × m) \;∧\; k ∣ (c × n) \quad≡\quad k ∣ (c × (m ∇ n)) \]
 
-   Taking $k ≔ m$ yields, \[ m ╲ (c × n) \quad≡\quad m ╲ (c × (m ∇ n))\] \[
-   \Law{Relative-Prime Cancellation for divisibility}{\big(m ╲ (c × n) \quad≡\quad m ╲
+   Taking $k ≔ m$ yields, \[ m ∣ (c × n) \quad≡\quad m ∣ (c × (m ∇ n))\]
+
+   \[
+   \Law{Relative-Prime Cancellation for divisibility}{\big(m ∣ (c × n) \quad≡\quad m ∣
    c\big) \quad⇐\quad m ∇ n = 1} \]
    ( The second one above is also known as
    “Euclid's Lemma” when the consequences is presented as an implication instead
    of an equivalence. )
+   #
+   # This gives us a “cancellation” law for divisibility:
+   # \[ \Law{Cancellation}{k ∇ m = 1 ⇒ (k ∣ (m × n) ≡ k ∣ n)} \]
+   # :Proof:
+   #   k ∣ (m × n) ∧ k ∇ m = 1
+   # ⇒ m × n  ∇  k ∇ n  =  (m ∇ k) × n = 1 × n = n
+   #   but k ∣ (m × n) by assumption and k ∣ (k × n) clearly,
+   #   and so k ∣ ((k × n) ∇ (m × n))
+   # ⇒ substitution one equation for the other gives: k ∣ n
+   #
+   # Converse is due to ∣-weakening.
+   # :End:
+   ( this is like “if p ⇏ q, then (p ⇒ q ∨ r) ≡ (p ⇒ r)”
+   or “if a ≰ b, then a ≤ b ↓ c  ≡  a ≤ c”.
+   )
 
    In particular, we can show that multiplication distributes over gcd:
    For $c : ℕ$,
    \[\Law{Multiplication distributes over gcd}{c × (m ∇ n) \quad≡\quad (c × m) ∇ (c × n)} \]
 
    Consequently,
+   \[\Law{Division distributes over gcd}{(m ∇ n)/d \quad≡\quad (m / d) ∇ (n / d)
+   \qquad⇐\qquad d ∣ m ∧ d ∣ n} \]
+   # using divisibility-and-precise-division along with mult-distr-over-gcd
    \[ \Law{Relative-Prime Cancellation for gcd}{ (m × p) ∇ n = m ∇ n \quad⇐\quad p ∇ n = 1} \]
    # Super tiny proof: Start with RHS and replace m by m × 1 ;-)
+
+   When $p ∇ n = 1$, one says /p/ and /n/ are *relatively prime*
+   or ‘coprime’ ---this is similar to $A ∩ B = ∅$, for ‘disjoint’ collections.
+
+   ( Relative-primality is closely related to ‘invertability’:
+     $m ∇ n = 1 \quad≡\quad ∃ x •\; n × x \;\stackrel{\large =}{\tiny
+     m}\; 1$,
+     where $=_m$ denotes equality mod-$m$.
+
+     # Indeed, m ∇ n = 1 ⇒ ∃s,x • sm + nx = 1
+     # ⇒ ∃ nx =ₘ 1. Conversely, if nx =ₘ 1
+     # ⇒ ∃ y • nx = 1 + my
+     # ⇒ nx + m(-y) = 1
+     # ⇒ m ∇ n = 1.
+   )
+
+   Since 1 is the least element:
+   \[ \Law{1 is relatively prime (with all integers)}{ p ∇ 1 = 1} \]
+   \[\Law{Division distributes over gcd}{m/(m ∇ n) \;∇\; n/(m ∇ n) \;=\; 1}\]
+   # follows from div-ditrs-over-gcd.
+
+   \[ \Law{Example}{(7 × n + 1) ∇ (15 × n + 2) = 1} \]
+:Hide:
+   By indirect inclusion:
+#+begin_src math
+  d ∣ ((7 × n + 1) ∇ (15 × n + 2))
+≡ d ∣ (7 × n + 1)  ∧  d ∣ (15 × n + 2)
+≡ d ∣ (7 × n + 1)  ∧  d ∣ (2 × (7 × n + 1) + n)
+≡⟨ divisibility preserves siemi-linear combinations ⟩
+  d ∣ (7 × n + 1)  ∧  d ∣ n
+≡⟨ divisibility preserves siemi-linear combinations ⟩
+  d ∣ 1  ∧  d ∣ n
+≡⟨ 1 is the least element and substitution ⟩
+≡ d = 1   ∧  1 ∣ n
+≡⟨ 1 is the least element (twice) ⟩
+≡ d ∣ 1
+#+end_src
+:End:
+
+   \[ \Law{Common Relative-primes are closed under multiplication}{(a × b) ∇ m =
+   1 \quad⇐\quad a ∇ m = 1 = b ∇ m} \]
+
+   When a number is divisible by two or more co-prime numbers, it is also
+   divisible by their product.
+   \[ a ∣ c ∧ b ∣ c ∧ a ∇ b = 1 ⇒ (a × b) ∣ c \]
+
+   *Theorem:* The gcd is the least positive value of a polynomial:
+   $m ∇ n$ is the least positive value of $m × x + n × y$ as $x, y$ range over
+   ℤ; provided m,n are positive. As such, the gcd can be expressed as a linear
+   sum of its arguments. Moreover, this means we know that an equation
+   $a × x + b × y = c$ has integral solutions for $x, y$ precisely when
+   $c ∣ (a ∇ b)$.
+   # indeed, c = q × (a ∇ b) = q × (s×a + t×b) = a × (qs) + b × (qt).
+
+   :Proof_outline:
+   Let S = {mx + ny ❙ mx+ny > 0; x,y ∈ ℤ } and d = min S.
+
+   Then, d = mx + ny > 0 for some mx and ny.
+
+   By division algorithm, m = dq + r for 0 ≤ r < d,
+   and so r = m - dq = m - (mx + ny)q = m(1-x) + n(-yq).
+   Now, if r > 0 then r ∈ S and so r ≥ min S = d, which contradicts r < d;
+   hence r ≤ 0 but 0 ≤ r and so r = 0. Thus, d ∣ m. Likewise, d ∣ n;
+   and so d ∣ (m ∇ n). But since m > 0, n >0, we must have
+   m ∇ n > 0, but d > 0, and since divisibility includes size and d ∣ (m ∇ n)
+   we must have d ≤ m ∇ n.
+
+   Conversely, g = (m ∇ n) ⇒, by definition of gcd, ∃ b,c with m = gb ∧ n = gc,
+   and so d = mx + ny = gbx + gcy = g(bx + ny) and so g∣d.
+   Since g > 0, d >0, and g∣d, we have (since size contains divisibility)
+   that m ∇ n = g ≤ d.
+
+   Hence, by ≤-antisymmetry, m ∇ n = d = mx + ny.
+   :End:
+
+   Since divisibility preserves semi-linear combinations,
+   \[ \Law{Gcd Invariance}{ m ∇ n = m ∇ n = m ∇ (-n) = m ∇ (n + x × m)} \]
+
+   Since gcd can be expressed as a sum of its arguments, and divisibility is
+   invariant under linear expressions (and 1 is the least element):
+   \[ \Law{Relatively-prime Criterion}{m ∇ n = 1 \quad≡\quad ∃ s, t : ℤ • 1 = s
+   × m + t × n }\]
+
+   --------------------------------------------------------------------------------
+
+   + Golden Rule: m × n = (m ∇ n) × (m Δ n)
+   + Golden Rule: m + n = (m ↓ n) + (m ↑ n)
+   + Golden Rule: m ⊕ n = (m ⊓ n) ⊕ (m ⊔ n), in any total order and ⊕ symmetric
+
+   The next two rules may act as a ( computationally  expensive) algorithm
+   to compute the gcd: Compute the prime factorisation (which is expensive to
+   do) then form the number having the minimum of each exponent.
+   + $\exp_p (m ∇ n) = \exp_p m ↓ \exp_p n$
+   + $\exp_p (m Δ n) = \exp_p m ↑ \exp_p n$
+
+   --------------------------------------------------------------------------------
+
+   Moving to lcm.
+
+   If an integer is divisible by two or more different numbers, then is it also
+   divisible by the least common multiple of those numbers.
+   - 2 ∣ 24 ∧ 3 ∣ 24 ⇒ (2 Δ 3) ∣ 24 ⇒ 6 ∣ 24.
+
+** COMMENT A recursive algorithm for GCD
+   :PROPERTIES:
+   :CUSTOM_ID: A-recursive-algorithm-for-GCD
+   :END:
+
+   Theorem: a ∇ b = r ∇ b  ⇐  a = b × q + r
+
+   Proof: By indirect equality, show a,b have the same divisors as r,b.
+
+   Using this theorem we can compute gcd recursively:
+#+begin_src math
+a ∇ 0 = a
+a ∇ b = (a mod b) ∇ b
+#+end_src
+
+  Note that a control flow chart can act as both
+  a unified representation of an imperative algorithm as well
+  as a recursive algorithm.
+  - See: https://orgmode.org/worg/org-tutorials/org-dot-diagrams.html (nice!)
+#+begin_src dot :file del.png
+digraph {
+  Start [label="Start with a and b" style=filled fillcolor=orange]
+  Check [label="b = 0?" shape=diamond style=filled fillcolor=lightgreen]
+  Yes   [label="Answer is b" style=filled fillcolor=orange]
+  No    [label="b = a mod b" shape=square style=filled fillcolor=lightblue]
+  Start -> Check
+  Check -> No -> Start
+  nope [style=invisible]
+  No -> nope [style=invisible]
+  Yes -> nope [style=invisible]
+         Check -> Yes
+        }
+#+end_src
+
+#+RESULTS:
+[[file:del.png]]
 
 ** COMMENT Deriving Euclid's Algorithm
    :PROPERTIES:
@@ -2926,7 +3424,7 @@ it will again be Thursday, and so the weekday in 90 days is the same as the day
    The characterisation of the meet could act as a specification for an
    imperative algorithm computing $x = m ∇ n$.
 
-   \[ (∀ k • k ╲ m \;∧\; k ╲ n \quad≡\quad k ╲ x) \]
+   \[ (∀ k • k ∣ m \;∧\; k ∣ n \quad≡\quad k ∣ x) \]
 
    Unfortunately, these is no explicit conjunction that we could truthify one
    part easily and so take it as invariant, and leave the other conjunct for the
@@ -2935,7 +3433,7 @@ it will again be Thursday, and so the weekday in 90 days is the same as the day
    So we add ‘another degree of freedom’: The following is an equivalent
    re-statement, but now we have two variables to work with, $x$ and $y$.
 
-   \[ x = y \;∧\; (∀ k • k ╲ m \;∧\; k ╲ n \quad≡\quad k ╲ x \;∧\; k ╲ y) \]
+   \[ x = y \;∧\; (∀ k • k ∣ m \;∧\; k ∣ n \quad≡\quad k ∣ x \;∧\; k ∣ y) \]
 
    Now an (∀)quantification is not something we want to consider for loop guard
    and so we consider it for invariant. Indeed, taking $x,y ≔ m, n$ immediately
@@ -2943,8 +3441,8 @@ it will again be Thursday, and so the weekday in 90 days is the same as the day
    for invariant. So, we take $x ≠ y$ as loop guard.
 
    In summary,
-   \[ 0 < m \,∧\, 0 < n \Then{x,y ≔ m, n ⍮ \While{x ≠ y} ?} x = y \,∧\, (∀ k • k ╲ m \;∧\; k ╲ n \quad≡\quad
-   k ╲ x \;∧\; k ╲ y) \]
+   \[ 0 < m \,∧\, 0 < n \Then{x,y ≔ m, n ⍮ \While{x ≠ y} ?} x = y \,∧\, (∀ k • k ∣ m \;∧\; k ∣ n \quad≡\quad
+   k ∣ x \;∧\; k ∣ y) \]
 
    We now need to alter $x$ and $y$ in such a way as to maintain the invariant
    whilst making progress to a state satisfying $x = y$.  Similar considerations
@@ -2955,18 +3453,387 @@ it will again be Thursday, and so the weekday in 90 days is the same as the day
    #+begin_src math
 { 0 < m  ∧ 0 < n }
 x, y ≔ m, n ⍮
-{ Invariant: 0 < x  ∧  0 < y  ∧  (∀ k • k ╲ m  ∧  k ╲ n  ≡  k ╲ x  ∧  k ╲ y)
+{ Invariant: 0 < x  ∧  0 < y  ∧  (∀ k • k ∣ m  ∧  k ∣ n  ≡  k ∣ x  ∧  k ∣ y)
   Bound function: x + y
 }
 do y < x ⟶ x := x - y
 ❙  x < y ⟶ x := y - x
 od
-{ Invariant: 0 < x  ∧  0 < y  ∧  x = y  ∧  (∀ k • k ╲ m  ∧  k ╲ n  ≡  k ╲ x  ∧  k ╲ y) }
+{ Invariant: 0 < x  ∧  0 < y  ∧  x = y  ∧  (∀ k • k ∣ m  ∧  k ∣ n  ≡  k ∣ x  ∧  k ∣ y) }
    #+end_src
-* TODO COMMENT Quantification and Predicate Logic
+* Quantification and Predicate Logic
   :PROPERTIES:
   :CUSTOM_ID: Quantification-and-Predicate-Logic
   :END:
+
+     #+begin_latex-definitions
+\newcommand{Law}[3][]{ #1\;\;\textbf{#2:}\quad #3 }
+\def\abs{\mathsf{abs}\,}
+   #+end_latex-definitions
+
+1. Quantification let's us “sum a bunch of /numeric/ values” or “or a bunch of
+  /Boolean/ values”.
+
+** Types
+   :PROPERTIES:
+   :CUSTOM_ID: Types
+   :END:
+
+2. A /type/ denotes a set of values that can be associated with a variable.
+
+   - The introduction of types causes us to refine our notion of an expression.
+   - To be an expression, not only must a sequence of symbols satisfy the normal
+     rules of syntax concerning balanced parentheses, et., it
+     must also be /type correct/.
+   - Thus, some expressions that earlier seemed okay will no longer be called
+     expressions because they do not satisfy the typing rules.
+
+3. Every expression $E$ has a type τ, which we can declare by writing $E : τ$.
+   - In particular, every variable has a type, which is mentioned in the text
+     accompanying an expression that uses the variable, and sometimes it is
+     given in some sort of a declaration (as is the case in programming).
+
+4. Besides constants and variables, the only other kind of expression we have
+   encountered thus far is function application.
+
+   Each function $f$ has a type $τ₁ × ⋯ × τₙ → τ$, which describes the types of
+   its parameters (the τᵢ) and the type of its result (the final τ).
+
+   - For such a function $f$, the application $f(a₁, …, aₙ)$ is
+     defined to be an expression iff each argument $aᵢ$ has type τᵢ.
+
+   - The type of the function application is then τ.
+
+   In this way, “expressionhood”, as well as the types of expressions,
+   is determined from the types of its operands.
+
+5. It is important to recognise that type and type correectness
+   are *syntactic notions*: They depend only on the sequence of *symbols*,
+   in a proposed expression, and not on the *evaluation* of the proposed
+   expression (in a state).
+
+   - E.g., $(1 / x) : ℝ$ does not evaluate if $x = 0$, but it is still an
+     (useful) expression.
+
+6. With the notion of type, some restrictions are needed to ensure type
+   correectness during manipulations:
+
+   (8.3) In a textual substitution $E[x ≔ F]$, $x$ and $F$ must have the same
+   type. This ensures that textual substitution preserves expressionhood.
+
+** Syntax, p142
+   :PROPERTIES:
+   :CUSTOM_ID: Syntax-p142
+   :END:
+
+1. The notation $∑_{i = 1}^n f(i)$ is used to /abbreviate/ $f(1) + f(2) + ⋯ +
+   f(n)$.
+
+2. Instead, we use the /linear notation/ $(Σ i ❙ 1 ≤ i ≤ n • f\, i)$
+   or $(+ i ❙ 1 ≤ i ≤ n • f\, i)$
+   for several reasons.
+
+3. The parentheses make explicit the /scope/ of the /dummy/ or /quantified variable
+   i/: The places where /i/ can be referenced. The scope comprises the expressions
+   within the parentheses.
+
+   The “$Σ\,i$” (or “$+\, i$”) acts as a declaration, introducing *<<<dummy>>>* /i/.
+   - This dummy is not a variable in the usual sense, for it does not obtain a
+     value from the state in which the expression is evaluated.
+
+4. The linear notation makes it easier to write more general ranges for $i$.
+
+   We can write /any/ Boolean expression to describe the values of $i$
+   for which $f\, i$ should be summed. For example, to sum the evens
+   between 1 and 7:
+   \[ (Σ i ❙ 1 ≤ i ≤ 7 ∧ \mathsf{even}\, i • i) \;=\; 2 + 4 + 6\]
+
+5. The linear notation extends easily to allow more than one dummy, as shown in
+   the following example.  \[ (Σ i,j ❙ 1 ≤ i ≤ 2 ∧ 3 ≤ j ≤ 4 • i^j) \;=\; 1^3 +
+   1^4 + 2^3 + 2^4\] In determining which values $i^j$ are being summed, we
+   choose all combinations of $i$ and $j$ that satisfy the /range/ $1 ≤ i ≤ 2 ∧ 3
+   ≤ j ≤ 4$.
+
+6. In the summations about, our intent is that dummy $i$ ranges over integer
+   values, rather than real values (say). To make the type explicit, we can
+   write $(Σ i : ℤ ❙ 1 ≤ i ≤ 2 • f\, i)$.
+
+7. What has been said about summation generalises to other operators.
+
+   The general shape of a /quantification over monoidal operation $\_{}⊕\_{}$/
+      is exemplified by:
+      \[ (⊕ x : τ₁, y : τ₂ ❙ R • P) \]
+
+   - Distinct variables $x$ and $y$ are the /bound variables/ or /dummies/ of the
+     quantification. There may be one or more dummies.
+
+   - Boolean expression $R$ may depend on $x$ and $y$; it is the /range/ of the
+     quantification ---values assumed by $x$ and $y$ satisfy $R$.
+
+     When there are no constraints ---i.e., the range is as large as possible,
+     $R$ is /true/--- we may omit it:
+     \[ (⊕ x • P) \;=\; (⊕ x ❙ true • P)\]
+
+   - Expression $P$ is the /body/ of the quantification; it may refer to dummies
+     $x$ and $y$.
+
+   - The type of the result of the quantification is the type of $P$; i.e., if
+     $\_{}⊕\_{} : τ → τ → τ$ then $P : τ$ --whenever /x : τ₁, y : τ₁/--- and $(⊕
+     x : τ₁, y : τ₂ ❙ R • P) : τ$.
+
+8. *Expression $(⊕ x : τ ❙ R • P)$ denotes the application of operator ⊕ to the
+   values $P$ for all /x/ in τ for which range $R$ is true.*
+
+   Next, we will define the notation /axiomatically/ instead of relying on a
+   particular evaluation model, implementation.
+
+9. By convention quantifications for +, ·, ∨, ∧ are denoted by Σ, Π, ∃, ∀.
+
+# 10. See LADM p144
+
+** Rules about Quantification
+   :PROPERTIES:
+   :CUSTOM_ID: Rules-about-Quantification
+   :END:
+
+ # See LADM p148 for Leibniz rules for quantifiers.
+
+Suppose ⊕ is associative, symmetric, having unit $Id_⊕_$.
+
+*** Introduction & Elimination of quantifiers
+    :PROPERTIES:
+    :CUSTOM_ID: Introduction-Elimination-of-quantifiers
+    :END:
+
+| (8.13) Axiom, Empty Range    | $(⊕ x ❙ false • P) = Id_⊕$     |
+| (8.14) Axiom, One-point rule | $(⊕ x ❙ x = E • P) = P[x ≔ E]$ |
+
+*Proviso:* For (8.14), we need /x/ not to occur in /E/.
+
+Indeed, the LHS does not depend on /x/ (in the state in which it is evaluated),
+since all occurrences of $x$ are bound. Hence, for the equivalence to hold, the
+RHS also cannot depend on $x$, and this requires (in general) that $x$ not occur
+free in $E$.
+
+*** Generalised Symmetry
+    :PROPERTIES:
+    :CUSTOM_ID: Generalised-Symmetry
+    :END:
+
+| (8.15) Axiom, Distributivity (“Rearrangement”)          |
+| $(⊕ x ❙ R • P ⊕ Q) \;=\; (⊕ x ❙ R • P) ⊕ (⊕ x ❙ R • Q)$ |
+
+This holds since ⊕ is symmetric and associative, so that the order in which the
+operands are accumulated has no bearing on the result.
+- The dummies and ranges are all the same in each quantification in (8.15).
+
+*Proviso:* For (8.15), we need quantification to be defined.
+
+Otherwise, we could write $(Σ i • 0) = (Σ i • i - i) = (Σ i • i) + (Σ i • -i)$
+where the left-most is 0 but the rightmost is undefined since it is an unbounded
+sum.
+
+Quantifications with finite ranges are always defined, and quantifications using
+operator ∧ or ∨ are always defined.
+
+*** Range Split
+    :PROPERTIES:
+    :CUSTOM_ID: Range-Split
+    :END:
+
+The next axiom is called /range split/, because the range /R ∨ S/ in its LHS
+is split into two ranges $R$ and $S$ in its LHS.
+
+*(8.16) Axiom, Range Split:* Provided $R ∧ S ≡ false$, and each quantification is
+defined,
+\[ (⊕ x ❙ R ∨ S • P) \quad=\quad (⊕ x ❙ R • P) ⊕ (⊕ x ❙ S • P) \]
+
+For instance, suppose we have a bag of ‘R’ed numbers and ‘S’ilver numbers.  The
+LHS says we can sum them in any order we like, whereas the RHS says we sum the
+‘R’ed ones, sum the ‘S’ilver ones, then add the two sums.
+
+The restriction that $R ∧ S ≡ false$ ensures that an operand is not accumulated
+twice in the RHS ---once because a value $x$ satisfies $R$ and once because the
+same value $x$ satisfies $S$. The next axiom eliminates this restriction by
+adding to the LHS the accumulation $(⊕ s ❙ R ∧ S • P)$; thus, the values of $P$
+are accumulated twice because values for the dummies satisfy both $R$ and $S$
+are accumulated twice on both sides of the equation.
+
+*(8.17) Axiom, Range Split:* Provided each quantification is defined,
+\[ (⊕ x ❙ R ∨ S • P) ⊕ (⊕ x ❙ R ∧ S • P) \quad=\quad (⊕ x ❙ R • P) ⊕ (⊕ x ❙ S • P) \]
+
+On the other hand, if operator ⊕ is idempotent ---so that $e ⊕ e = e$ for all
+$e$, then it does not matter how many times $e$ is accumulated. Hence, we have
+
+*(8.18) Axiom, Range Split for Idempotent ⊕:* Provided each quantification is
+defined, \[ (⊕ x ❙ R ∨ S • P) \quad=\quad (⊕ x ❙ R • P) ⊕ (⊕ x ❙ S • P) \]
+
+*** Dummies
+    :PROPERTIES:
+    :CUSTOM_ID: Dummies
+    :END:
+
+The next three axioms concern dummies. The first indicates that nested
+quantifications with the same operator can be interchanged.  The second
+indicates how a single quantification over a list of dummies can be viewed as a
+nested quantification. The third shows that a dummy can be replaced (in a
+consistent fashion) by any fresh dummy.
+
+*(8.19) Axiom, Interchange of dummies:* Provided each quantification is defined,
+/y/ does not occur in /R/, and /x/ does not occur in /Q/,
+\[ (⊕ x ❙ R • (⊕ y ❙ S • P)) \quad=\quad (⊕ y ❙ S • (⊕ x ❙ R • P)) \]
+
+*(8.20) Axiom, Nesting:* Provided /y/ does not occur in /R/,
+\[ (⊕ x, y ❙ R ∧ S • P) \quad=\quad (⊕ x ❙ R • (⊕ y ❙ S • P)) \]
+
+*(8.21) Axiom, Dummy Renaming:* Provided /y/ does not occur in /R/ nor in /P/,
+\[ (⊕ x ❙ R • P) \quad=\quad (⊕ y ❙ R[x ≔ y] • P[x ≔ y]] \]
+
+The ‘occurs’ restrictions on these laws ensure that an expression that contains
+an occurrence of a dummy is not moved outside (or inside) the scope of the
+dummy.
+
+The next rule let's us “shuffle around the possible values being summed over”.
+
+*(8.22) Theorem, Permutative Law, Change of Dummy:* Provided
+/y/ does not occur in /R/ nor in /P/, and /f/ is a permutation (i.e., is invertible),
+\[ (⊕ x ❙ R • P) \quad=\quad (⊕ y ❙ R[x ≔ f\, y] • P[x ≔ f\, y]) \]
+
+A function /f/ is a permutation, or is invertible, if there is a function $f⁻¹$
+such that \[x = f\, y \quad≡\quad f⁻¹ x = y\]
+
+The proof in LADM, p151, is very nice.
+
+- This rule can be used to /simplify the range/ or to “eliminate a repeated
+  (permutation) expression $f$ from the quantification”.
+
+*** COMMENT Manipulating Ranges. §8.4
+    :PROPERTIES:
+    :CUSTOM_ID: COMMENT-Manipulating-Ranges-8-4
+    :END:
+
+*Theorem, Split off (nested) term:*
+
+\[ (⊕ i, j ❙ 0 ≤ i ≤ j < n + 1 • P)
+\quad=\quad (⊕ i, j ❙ 0 ≤ i ≤ j < n • P) ⊕ (⊕ i, j ❙ 0
+≤ i ≤ n • P[j ≔ n]) \]
+
+*** Trading Rules
+    :PROPERTIES:
+    :CUSTOM_ID: Trading-Rules
+    :END:
+
+Trading rules let us move a range into the body.
+
+*(8.t) Axiom, Trading:* $(⊕ x ❙ R • P) \;=\; (⊕ x • \mathsf{if}\, R
+\,\mathsf{then}\, P \,\mathsf{else}\, Id_⊕ \mathsf{fi})$
+
+*(8.t′) Theorem, Trading:* $(⊕ x ❙ Q ∧ R • P) \;=\; (⊕ x ❙ Q • \mathsf{if}\, R
+\,\mathsf{then}\, P \,\mathsf{else}\, Id_⊕ \mathsf{fi})$
+
+For instance: let $[\_{}] : 𝔹 → ℕ; [true] = 1, [false] = 0$, then,
+- *(8.t.Σ) Theorem, Trading:* $(Σ x ❙ Q ∧ R • P) = (Σ x ❙ Q • P · [R] )$
+- *(8.t.Π) Theorem, Trading:* $(Π x ❙ Q ∧ R • P) ≡ (Π x ❙ Q • P^{[R]})$
+- *(8.t.∀) (9.4) Theorem, Trading:* $(∀ x ❙ Q ∧ R • P) ≡ (∀ x ❙ Q • R ⇒ P)$
+# - *(9.4) Theorem, Trading:* $(∀ x ❙ Q ∧ R • P) ≡ (∀ x ❙ Q • R ⇒ P)$
+
+*** Contextual Rules
+    :PROPERTIES:
+    :CUSTOM_ID: Contextual-Rules
+    :END:
+
+   By contextual rules, and conditional rules,
+
+   *(8.c) Theorem, Context:* $(⊕ x ❙ R ∧ e = f • P[z ≔ e]) = (⊕ x ❙ R • P[z ≔ f])$
+
+   *(8.c′) Theorem, Context:* $(⊕ x ❙ R • P[z ≔ R]) = (⊕ x ❙ R • P[z ≔ true])$
+
+*** Distributivity Rules
+    :PROPERTIES:
+    :CUSTOM_ID: Distributivity-Rules
+    :END:
+
+ The following axiom shows how distributivity laws generalise to quantifiers.
+
+ *(8.d) Axiom, Distributivity of ⊗ over ⊕:* Provided /x/ does not occur in /P/,
+ and “⊗ distributes over ⊕” ---/a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)/ and /a ⊗ Id_⊕ =
+ Id_⊕/---
+ \[ P ⊗ (⊕ x ❙ R • Q) \quad=\quad (⊕ x ❙ R • P ⊗ Q) \]
+
+ The expression $P$ that is being moved out of the scope (or into it, depending
+ on your point of view) cannot contain $x$ as a free variable. This restriction
+ ensures that the LHS and the RHS of the axiom refer to the same free variables
+ ---otherwise, the LHS and RHS would, in general, not be equivalent.
+
+ For instance,
+ - (8.d.Σ) $P · (Σ x ❙ R • Q) \quad=\quad (Σ x ❙ R • P · Q)$.
+ - *(9.5) Distributivity of ∨ over ∀:*  $P ∨ (∀ x ❙ R • Q) \quad≡\quad (∀ x ❙ R • P ∨ Q)$.
+ - *(9.21) Distributivity of ∧ over ∃:*  $P ∧ (∃ x ❙ R • Q) \quad≡\quad (∃ x ❙ R • P ∧ Q)$.
+
+ # This allows us to prove the following theorems.
+ #
+ #  *# (9.6) Body Extraction:* Provided /x/ does not occur in /P/,
+ # $(⊕ x ❙ R • P) \;=\; (⊕ x • \mathsf{if}\, R
+ # \,\mathsf{then}\, P \,\mathsf{else}\, Id_⊕ \mathsf{fi})$
+ #
+ # \[ (⊕ x ❙ R • P) \;=\; P ⊗ (⊕ x • ) \]
+ #
+ # c.f., 9.22
+
+ *(8.d′) Distributivity of ⊗ over non-empty ⊕:* Provided /x/ does not occur in /P/,
+ and “⊗ distributes over non-empty ⊕” ---/a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)/ (but
+ maybe not /a ⊗ Id_⊕ = Id_⊕)/---
+ \[ (∃ x • R) \quad⇒\quad P ⊗ (⊕ x ❙ R • Q) \quad=\quad (⊕ x ❙ R • P ⊗ Q) \]
+
+ For instance,
+ - *(9.7) Distributivity of ∧ over ∀:*   $(∃ x • R) \quad⇒\quad P ∧ (∀ x ❙ R • Q)
+   \quad≡\quad (∀ x ❙ R • P ∧ Q)$
+ - *(9.23) Distributivity of ∨ over ∃:*   $(∃ x • R) \quad⇒\quad P ∨ (∃ x ❙ R • Q)
+   \quad≡\quad (∃ x ❙ R • P ∨ Q)$
+
+*** Unital Body
+    :PROPERTIES:
+    :CUSTOM_ID: Unital-Body
+    :END:
+
+*(8.u) Axiom, Unital Body:* $(⊕ x ❙ R • Id_⊕) = Id_⊕$
+
+For instance,
+- (8.u.Σ): $(Σ x ❙ R • 0) = 0$
+- (8.u.Π): $(Π x ❙ R • 1) = 1$
+- (8.u.∃) (9.8): $(∀ x ❙ R • true) ≡ true$
+- (8.u.∀) (9.24): $(∃ x ❙ R • false) = false$
+
+**  Predicate Calculus
+   :PROPERTIES:
+   :CUSTOM_ID: Predicate-Calculus
+   :END:
+
+1. /Predicate logic/ is an extension of propositional logic that allows the use of
+   variables of types other than 𝔹.
+
+2. This extension leafs to a logic with enhanced expressive and deductive power.
+
+3. A predicate-calculus formula is a Boolean expression in which some Boolean
+   variables may have been replaced by:
+
+   - /Predicates/, which are applications of Boolean functions whose arguments may
+     be of types other than 𝔹; e.g., $x < y$ is formed using the predicate
+     symbol ‘<’.
+
+   - Universal and existential quantification, as discussed in this section.
+
+*** Universal Quantification
+    :PROPERTIES:
+    :CUSTOM_ID: Universal-Quantification
+    :END:
+
+The general axioms of quantification hold for ∧, ∀, along with additional ones
+below.
+
+| /∀ x ❙ R • P/ | ≈ | “for all x satisfying R, P holds” |
+
+
 * TODO COMMENT Sets
   :PROPERTIES:
   :CUSTOM_ID: Sets
