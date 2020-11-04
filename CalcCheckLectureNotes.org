@@ -3178,7 +3178,10 @@ it will again be Thursday, and so the weekday in 90 days is the same as the day
 
    As such, the product of any /N/ consecutive integers is divisible by /N/.
 
-   --------------------------------------------------------------------------------
+** COMMENT ✓ gcd
+   :PROPERTIES:
+   :CUSTOM_ID: COMMENT-gcd
+   :END:
 
    Let's consider ℕatural numbers only …
 
@@ -3475,7 +3478,166 @@ od
 1. Quantification let's us “sum a bunch of /numeric/ values” or “or a bunch of
   /Boolean/ values”.
 
-** Types
+  Quantifiers allow one to denote the operation of applying some binary operator
+   (like addition or disjunction) to an arbitrary, possibly infinite, bag of
+   values. For programming, quantifiers specify iteration control structures
+   ---loops.
+
+  Quantifications are everywhere in mathematics, so we need basic tools to
+   handle them.  Herein we develop the notation and general techniques that make
+   summation user-friendly. We introduce a /uniform notation/ for quantifiers
+   ---and show instances for addition +/Σ, multiplication ·/Π, conjunction ∧/∀,
+   disjunction ∨/∃, and minima ↓ (which does not have a conventionally accepted
+   ‘large operator’ notation, but is nonetheless supported by the uniform
+   notation). We also compare the uniform notation with an existing notation.
+
+#+begin_quote
+It is a profoundly erroneous truism, repeated by all copybooks and by eminent
+people when they are making speeches, that we should cultivate the habit of
+thinking of what we are doing. The precise opposite is the case. Civilization
+advances by extending the number of important operations which we can perform
+without thinking about them. Operations of thought are like cavalry charges in a
+battle ---they are strictly limited in number, they require fresh horses, and
+must only be made at decisive moments.
+
+--- A. N. Whitehead
+
+Alfred North Whitehead, An Introduction to Mathematics. London and 503.
+New York, 1911.
+#+end_quote
+
+ # See LADM p148 for Leibniz rules for quantifiers.
+
+Suppose ⊕ is associative, symmetric, and has unit $\Id_⊕$.
+- ⇨ The laws of ⊕-quantifiers are *generalised* forms of the laws of the binary operations ⊕. ⇦
+- ( For finite ranges, the rules can be proven inductively. )
+
+*Side Condition.* A general side condition on all the rules is that their
+application should not result in the capture of free variables or release of
+bound variables, and should not result in a variable occurring more than once in
+a list of dummies. We will specialise this proviso for each rule as needed.
+
+|                | /Terse summary of a few quantifier rules/                             |
+|----------------+---------------------------------------------------------------------|
+| *Dummy Rules*    |                                                                     |
+| Renaming       | Dummy names are place-holders and don't matter                      |
+| Nesting        | A list of dummies abbreviates multiple quantifications              |
+| Permutation    | The order of variables in a list of dummies doesn't matter          |
+|----------------+---------------------------------------------------------------------|
+| *Range Rules*    |                                                                     |
+| Empty range    | The empty range is the do-nothing (“have no effect”) value          |
+| One-point rule | When there is only one option, a quantification is a “let clause”   |
+| Range Split    | The principle of inclusion-exclusion ---draw a Venn diagram!        |
+| Trading        | Range information can be moved to the body as a conditional         |
+|----------------+---------------------------------------------------------------------|
+| *Body Rules*     |                                                                     |
+| Rearranging    | The quantification notation distributes over the binary operation   |
+| Distributivity | Functions that distribute over ⊕ also distribute over ⊕-quantifiers |
+|----------------+---------------------------------------------------------------------|
+
+** Looking at sums, Σ
+   :PROPERTIES:
+   :CUSTOM_ID: Looking-at-sums-Σ
+   :END:
+2. The sum of the first /n/ integers is $1 + 2 + 3 + ⋯ + (n - 1) + n$.
+
+   The “⋯” tells us to complete the pattern established by the surrounding terms
+   ---a burden on the reader.
+
+   Sometimes such patterns are not clear, as in $1 + 2 + ⋯ + 16$: Is this the
+   sum of the first 16 integers or the sum of the first five powers of 2
+   ---i.e., $2⁰ + 2¹ + ⋯ + 2⁴$? To make the pattern clear, the latter requires
+   us to communicate the general shape (“$2^i$”) in a number instances.
+
+3. The three-dots notation has many uses, but it can be ambiguous and a bit long-winded.
+
+   # The three dots may show too much detail, which can be overwhelming.
+
+   Quantifier notation is compact, impressive to family and friends, and often
+   suggestive of manipulations that are not obvious in three-dots form.
+
+4. The notation $(Σ i\;❙\;1 ≤ i ≤ n • aₖ)$ is used to communicate sums $a₁ + a₂ +
+   ⋯ + aₙ$.
+
+   The index variable /i/ is said to be /bound/ to the Σ because any /i/ in /aᵢ/ is
+   unrelated to appearances of /i/ outside the Σ-notation. Any other letter could
+   be substituted for /i/ here without changing the meaning of the
+   quantification. ( The letter /i/ is often used perhaps because it stands for
+   “index”. )
+
+5. It turns out that a generalised quantification-notation is even more
+   useful than the delimited form: We simply write one or more
+   conditions in the /range/ position to specify the set of indices
+   over which summation should take place.
+
+   For example, the general form allows us to take sums over index sets that
+   aren't restricted to consecutive integers. For example, we can express the
+   sum of the squares of all odd positive integers below 100 as follows: \[(Σ i
+  \;❙\;1 ≤ k < 100 ∧ k \,\mathsf{odd} • k²)\]
+  Below is the delimited equivalent of this sum; it is more cumbersome
+  and less clear.
+  \[Σ k\;❙\;0 ≤ k ≤ 49 • (2 · k + 1)² \]
+
+  Sometimes no delimited form is possible; e.g.,
+  the sum of the first /n/ primes is
+  $(Σ p\;❙\;0 ≤ p ≤ n ∧ p \,\mathsf{prime} • p)$
+  ---yet there is no explicit formula for primes
+  and so we need to pick a notation for primes before a delimited
+  form could be phrased; e.g., $pₖ$ to denote the /k/-th prime.
+
+6. The biggest advantage of general quantification notation is that we can
+   manipulate it more easily than the delimited form ---since the range of the
+   index variable is allowed to be arbitrary propositions, and so, for example,
+   it is easy to manipulate the index variables since we don't have to worry
+   about boundary conditions.
+
+7. People are often tempted to write $(Σ i ❙ 2 ≤ i ≤ n - 1 • i · (i - 1))$
+   instead of $(Σ i ❙ 0 ≤ i < n • i · (i - 1) · (i - 2))$ because the terms for
+   $i = 0, 1$ are 0 and the former insists on inclusive bounds.
+
+   Somehow it seems more efficient to add up $n - 2$ terms instead of $n$
+   terms. But such temptations should be resisted; efficiency of computation is
+   not the same as efficiency of understanding!
+
+   We will find it advantageous to keep the range ---and, in turn, the bounds on
+   the index variable--- as simple as possible, because quantifications can be
+   manipulated much more easily when the bounds are simple.
+
+   (In Σs) Zero-valued terms cause no harm, and they often save a lot of
+   trouble.
+
+8. Kenneth Iverson introduced a wonderful idea in his programming language APL.
+   The idea is simply to enclose a true-or-false statement in brackets, and to
+   say that the result is 1 if the statement is true, 0 if the statement is
+   false. ( E.g., the Kronecker delta is then δᵢⱼ = [i = j]. )
+
+   Iverson brackets let one express sums with no constraints whatever on the
+   index of summation: $Σ_{R\, i} aᵢ \;=\; Σᵢ aᵢ · [R\, i]$.
+   If $R\, i$ is false, the term $aᵢ · [R\, i]$ is zero, so we can safely
+   include it among the terms being summed.
+
+
+| $(Σ i\;❙\;R • P)$ | ≈ | /“the sum of all terms P where i is an integer satisfying R”/ |
+
+** COMMENT Properties of Σ
+   :PROPERTIES:
+   :CUSTOM_ID: Properties-of-Σ
+   :END:
+
+Let's look at Σ first, a concrete case.
+
+The main advantage of a formal quantifier notation over the informal dotdotdot
+notation is that it is easier to formulate and use calculational rules.
+
+We formulate the rules in terms of each of the components of a quantification.
+So there are rules governing the use of dummies, rules exploiting the structure
+of the range, and rules exploiting the structure of the term.  Additionally,
+there is a so-called /trading/ rule that allows information to be moved to and
+from the range of a quantification.
+
+# --------------------------------------------------------------------------------
+
+** COMMENT Types :Relocate_to_section_on_expressions:
    :PROPERTIES:
    :CUSTOM_ID: Types
    :END:
@@ -3522,7 +3684,7 @@ od
    (8.3) In a textual substitution $E[x ≔ F]$, $x$ and $F$ must have the same
    type. This ensures that textual substitution preserves expressionhood.
 
-** Syntax, p142
+** Syntax :p142:
    :PROPERTIES:
    :CUSTOM_ID: Syntax-p142
    :END:
@@ -3592,23 +3754,10 @@ od
 
 # 10. See LADM p144
 
-** Rules about Quantification
+** Quantifier Introduction & Elimination
    :PROPERTIES:
-   :CUSTOM_ID: Rules-about-Quantification
+   :CUSTOM_ID: Introduction-Elimination-of-quantifiers
    :END:
-
- # See LADM p148 for Leibniz rules for quantifiers.
-
-Suppose ⊕ is associative, symmetric, having unit $\Id_⊕$.
-
-⇨ The laws of ⊕-quantifiers are *generalised* forms of the laws of the binary
-operations ⊕. ⇦
-( For finite ranges, the rules can be proven inductively. )
-
-*** Introduction & Elimination of quantifiers
-    :PROPERTIES:
-    :CUSTOM_ID: Introduction-Elimination-of-quantifiers
-    :END:
 
 | (8.13) Axiom, Empty Range    | $(⊕ x \;❙\; false • P) = \Id_⊕$    |
 | (8.14) Axiom, One-point rule | $(⊕ x \;❙\; x = E • P) = P[x ≔ E]$ |
@@ -3627,31 +3776,155 @@ For example,
 - (8.u.∃) (9.8): $(∀ x \;❙\; R • true) ≡ true$
 - (8.u.∀) (9.24): $(∃ x \;❙\; R • false) = false$
 
-*** Generalised Symmetry
-    :PROPERTIES:
-    :CUSTOM_ID: Generalised-Symmetry
-    :END:
+**  Dummy Renaming
+   :PROPERTIES:
+   :CUSTOM_ID: Dummy-Renaming
+   :END:
 
-| (8.15) Axiom, Distributivity (“Rearrangement”)          |
-| $(⊕ x \;❙\; R • P ⊕ Q) \;=\; (⊕ x \;❙\; R • P) ⊕ (⊕ x \;❙\; R • Q)$ |
+The first rule expresses the fact that a ‘dummy’ is just a place holder, the
+particular name chosen for the dummy is not relevant provided it does not clash
+with the names of other variables in the quantified expression.  Renaming is
+often used when performing other algebraic manipulations in order to avoid
+capture of free variables or release of bound variables.
 
-This holds since ⊕ is symmetric and associative, so that the order in which the
-operands are accumulated has no bearing on the result.
-- The dummies and ranges are all the same in each quantification in (8.15).
+Recall that $E[x ≔ F]$ denotes the expression obtained by replacing every /free/
+occurrence of /x/ in /E/ by /F/. Then,
++ (Axiom 8.21) Dummy Renaming :: Provided /y/ does not occur in /R/ nor in /P/,
+  \[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ y] • P[x ≔ y]] \]
 
-*Proviso:* For (8.15), we need quantification to be defined.
+Remember: The ‘occurs’ restrictions on these laws ensure that an expression that
+contains an occurrence of a dummy is not moved outside (or inside) the scope of
+the dummy.
 
-Otherwise, we could write $(Σ i • 0) = (Σ i • i - i) = (Σ i • i) + (Σ i • -i)$
-where the left-most is 0 but the rightmost is undefined since it is an unbounded
-sum.
+This rule is also known as “alpha renaming”.
 
-Quantifications with finite ranges are always defined, and quantifications using
-operator ∧ or ∨ are always defined.
+** Nesting
+   :PROPERTIES:
+   :CUSTOM_ID: Nesting
+   :END:
 
-*** Range Split
-    :PROPERTIES:
-    :CUSTOM_ID: Range-Split
-    :END:
+The terms of a sum might be specified by two or more indices, not just by one.
+Only one quantification is needed, although there is more than one index of
+summation, and so the quantification denotes a sum over /all combinations/ of
+indices that apply.
+
+That is, the second rule for dummies state, essentially, that the use of more than one
+dummy is a convenient abbreviation for a collection of quantifications.
+
++ (Axiom 8.20) Nesting :: Provided /y/ does not occur in /R/,
+  \[ (⊕ x, y \;❙\; R ∧ S • P) \quad=\quad (⊕ x \;❙\; R • (⊕ y \;❙\; S • P)) \]
+
+A sum that depends on more than one index can be summed first on any one of its
+indices. The rule says we can choose whichever is more convenient.
+
+This is also known as /interchanging the order of summation/ and
+it generalises the associative/distributive law for quantifications.
+
+See the “general distribute law” below for a useful result involving nesting.
+
+--------------------------------------------------------------------------------
+
++ When used left to right, this rule is known as /nesting/ and the proviso
+  ensures that bound variables are not released.
+
+  - Were $R$ to depend on /y/, that variable would be bound in the LHS but it would be
+  free in the RHS. The right side would, thus, be an expression that depends on
+  the value of this variable, whereas the left side does not.
+
+  It is always possible to avoid such complications by suitably renaming
+  bound variables before using this rule.
+
++ When used right to left, this rule is known as /unnesting/ ---since
+  quantifications become unnested.
+
+  - Notice that /the range of y could depend on the value of x/; i.e.,
+    /S may mention x/.
+
+--------------------------------------------------------------------------------
+
+Sometimes the range of an inner sum *depends on*
+the index variable of the outer sum ... !
+
+Then what ;-)
+
+Frequently in applications the dependent ranges are inclusions and then
+we have particularly useful factorisations:
+- $1 ≤ i ≤ j ≤ n \quad≡\quad 1 ≤ j ≤ n \,∧\, 1 ≤ i ≤ j$
+- $1 ≤ i ≤ j ≤ n \quad≡\quad 1 ≤ i ≤ n \,∧\, i ≤ j ≤ n$
+
+Then, nesting allows us to write
+\[(⊕ i, j\;❙\;1 ≤ i ≤ j ≤ n • P) \quad=\quad (⊕ j\;❙\;1 ≤ j ≤ n • (⊕ i\;❙\;1 ≤ i ≤ j • P))\]
+\[(⊕ i, j\;❙\;1 ≤ i ≤ j ≤ n • P) \quad=\quad (⊕ i\;❙\;1 ≤ i ≤ n • (⊕ j\;❙\;i ≤ j ≤ n • P))\]
+
+One of these two sums is usually easier to evaluate than the other;
+we can use these factorisations to switch from the hard one to the easy one.
+
+- If the body involves a phrase “$j - i$”, it may be helpful to replace /j/ by /j -
+  i/ ---using the permutative law below--- then apply the second factorisation
+  above.
+
+**  Dummy Rearrangment ---Generalised Symmetry & Associativity
+   :PROPERTIES:
+   :CUSTOM_ID: Rearranging-Dummy-List-Permutation
+   :END:
+
+The third rule is very powerful because, in combination with the nesting rule,
+it allows us to rearrange the order in which the values in a summation are added
+together. It simply states that the order in which the dummies are listed in a
+summation is irrelevant.
+
++ Rearranging, Dummy List Permutation ::
+  \[ (⊕ x, y \;❙\; R • P) \quad=\quad (⊕ y, x \;❙\; R • P) \]
+
+Here is an example of how the nesting and rearrangement rules are combined to
+change the order of the values being summed.  Nesting and rearrangement depend
+critically on the associativity and symmetry of the operation ⊕.  The
+parenthesisation corresponds to the nesting of summands.
+\begin{calc}
+(1 x 1 + 1 × 2 + 1 × 3) + (2 × 2 + 2 × 3) + (3 × 3)
+\step{ definition of Σ }
+(Σ i ❙ 1 ≤ i≤ 3 • (Σ j ❙ i ≤ j ≤ 3 • i × j))
+\step{ unnesting }
+(Σ i, j ❙ 1 ≤ i≤ 3 \,∧\, i ≤ j ≤ 3 • i × j)
+\step{ rearranging }
+ (Σ j, i ❙ 1 ≤ i≤ 3 \,∧\, i ≤ j ≤ 3 • i × j)
+\step{ nesting: $1 ≤ i ≤ 3 ∧ i ≤ j ≤ 3 \;≡\; 1 ≤ j ≤ 3 ∧ 1 ≤ i ≤ j$ }
+(Σ i ❙ 1 ≤ i≤ 3 • (Σ j ❙ i ≤ j ≤ 3 • i × j))
+\end{calc}
+
+The change of inclusions may not be familiar, so here is its proof.
+\begin{calc}
+a ≤ x ≤ b ∧ x ≤ y ≤ b
+\step{ conjunctional notation }
+a ≤ x ∧ x ≤ b ∧ x ≤ y ∧ y ≤ b
+\step{ Transitivity of ≤ : $a ≤ x ≤ y \;≡\; a ≤ x ≤ y \,∧\, a ≤ y$ }
+a ≤ x ∧ x ≤ b ∧ a ≤ y ∧ x ≤ y ∧ y ≤ b
+\step{ Transitivity of ≤: $x ≤ y ≤ b \,∧\, x ≤ b \;≡\; x ≤ y ≤ b$ }
+a ≤ x ∧ x ≤ y  \;∧\; a ≤ y ∧ y ≤ b
+\step{ conjunctional notation }
+a ≤ x ≤ y  ∧  a ≤ y ≤ b
+\end{calc}
+
+We may capture the unnesting-rearrangement-nesting pattern in the above example as a theorem.
++ (8.19) Interchange of dummies :: Provided each quantification is defined,
+  /y/ does not occur in /R/, and /x/ does not occur in /S/,
+  \[ (⊕ x \;❙\; R • (⊕ y \;❙\; S • P)) \quad=\quad (⊕ y \;❙\; S • (⊕ x \;❙\; R • P)) \]
+:Proof:
+\begin{calc}
+(⊕ x \;❙\; R • (⊕ y \;❙\; S • P))
+\step{ unnesting; assuming ‘y’ not in ‘R’ }
+(⊕ x, y \;❙\; R ∧ S • P)
+\step{ rearrangement and ∧-symmetry }
+(⊕ y, x \;❙\; S ∧ R • P)
+\step{ nesting; assuming ‘x’ not in ‘S’ }
+(⊕ y \;❙\; S • (⊕ x \;❙\; R • P))
+\end{calc}
+:end:
+
+** Range Split
+   :PROPERTIES:
+   :CUSTOM_ID: Range-Split
+   :END:
 
 The next axiom is called /range split/, because the range /R ∨ S/ in its LHS
 is split into two ranges $R$ and $S$ in its LHS.
@@ -3674,96 +3947,78 @@ are accumulated twice on both sides of the equation.
 *(8.17) Axiom, Range Split:* Provided each quantification is defined,
 \[ (⊕ x \;❙\; R ∨ S • P) ⊕ (⊕ x \;❙\; R ∧ S • P) \quad=\quad (⊕ x \;❙\; R • P) ⊕ (⊕ x \;❙\; S • P) \]
 
+--------------------------------------------------------------------------------
+
+- Range split can be used to combine adjacent disjoint intervals:
+  For $a ≤ b ≤ c$,
+  \[
+  (⊕ x ❙ a ≤ x < b • P) ⊕ (⊕ x ❙ b ≤ x < c) \;=\; (⊕ x ❙ a ≤ x < c • P)
+  \]
+
+  Notice the familiarity with $\int_a^b f(x) dx + \int_b^c f(x) dx = \int_a^c f(x)dx$.
+
+- It can also be used to split off a single term from a sum: For $0 ≤ n$,
+  \[
+  (⊕ x ❙ 0 ≤ i < n + 1 • P) \;=\; (⊕ x ❙ 0 ≤ i < n • P) ⊕ P[i ≔ n]
+  \]
+
+--------------------------------------------------------------------------------
+
 On the other hand, if operator ⊕ is idempotent ---so that $e ⊕ e = e$ for all
 $e$, then it does not matter how many times $e$ is accumulated. Hence, we have
 
 *(8.18) Axiom, Range Split for Idempotent ⊕:* Provided each quantification is
 defined, \[ (⊕ x \;❙\; R ∨ S • P) \quad=\quad (⊕ x \;❙\; R • P) ⊕ (⊕ x \;❙\; S • P) \]
 
-*** Dummies
-    :PROPERTIES:
-    :CUSTOM_ID: Dummies
-    :END:
+** Body Rearrangment ---Generalised Symmetry & Associativity
+   :PROPERTIES:
+   :CUSTOM_ID: Body-Rearrangment-Generalised-Symmetry-Associativity
+   :END:
 
-The next three axioms concern dummies. The first indicates that nested
-quantifications with the same operator can be interchanged.  The second
-indicates how a single quantification over a list of dummies can be viewed as a
-nested quantification. The third shows that a dummy can be replaced (in a
-consistent fashion) by any fresh dummy.
+Since ⊕ is symmetric and associative, the order in which the operands are
+accumulated has no bearing on the result.  Below is an example of how
+range-split can be used alongside the nesting and rearrangement rules to change
+the order of the values being summed.  Nesting and rearrangement depend
+critically on the associativity and symmetry of the operation ⊕.
+\begin{calc}
+(1 + 2^1) + (2 + 2^2) + (3 + 2^3)
+\step{ definition of Σ }
+(Σ x ❙ 1 ≤ x ≤ 3 • x + 2^x)
+\step{ definition of Σ: Let $P₀ = x, P₁ = 2^x$ }
+(Σ x ❙ 1 ≤ x ≤ 3 • (Σ i ❙ i = 0 ∨ i = 1 • Pᵢ))
+\step{ unnesting }
+(Σ x, i ❙ 1 ≤ x ≤ 3 ∧ (i = 0 ∨ i = 1) • Pᵢ)
+\step{ ∨ over ∧ }
+(Σ x, i ❙ (1 ≤ x ≤ 3 ∧ i = 0) ∨ (1 ≤ x ≤ 3 ∧ i = 1) • Pᵢ)
+\step{ disjoint range split: $1 ≤ x ≤ 3 ∧ i = 0 ∧ 1 ≤ x ≤ 3 ∧ i = 1 \;≡\; false$ }
+(Σ x, i ❙ 1 ≤ x ≤ 3 ∧ i = 0 • Pᵢ) + (Σ x, i ❙ 1 ≤ x ≤ 3 ∧ i = 1 • Pᵢ)
+\step{ nesting and one-point rule; definition of $Pᵢ$ }
+(Σ x ❙ 1 ≤ x ≤ 3 • x) + (Σ x, i ❙ 1 ≤ x ≤ 3 • 2^x)
+\step{ definition of Σ }
+(1 + 2 + 3) + (2^1 + 2^2 + 2^3)
+\end{calc}
 
-*(8.19) Axiom, Interchange of dummies:* Provided each quantification is defined,
-/y/ does not occur in /R/, and /x/ does not occur in /Q/,
-\[ (⊕ x \;❙\; R • (⊕ y \;❙\; S • P)) \quad=\quad (⊕ y \;❙\; S • (⊕ x \;❙\; R • P)) \]
+We may capture the nesting-rearranging pattern in the above example as a
+theorem.
++ (8.15) Distributivity, “Body Rearrangment” :: Provided each quantification is defined,
+  \[ (⊕ x \;❙\; R • P ⊕ Q) \quad=\quad (⊕ x \;❙\; R • P) \,⊕\, (⊕ x \;❙\; R • Q) \]
 
-*(8.20) Axiom, Nesting:* Provided /y/ does not occur in /R/,
-\[ (⊕ x, y \;❙\; R ∧ S • P) \quad=\quad (⊕ x \;❙\; R • (⊕ y \;❙\; S • P)) \]
+# Proof: Nesting and rearranging suffice since P₀ + P₁ = (⊕ i ❙ i = 0 ∨ i = 1 • Pᵢ)
 
-*(8.21) Axiom, Dummy Renaming:* Provided /y/ does not occur in /R/ nor in /P/,
-\[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ y] • P[x ≔ y]] \]
+This law allows us to break a quantification into two parts, or to combine
+two quantifications into one.
 
-The ‘occurs’ restrictions on these laws ensure that an expression that contains
-an occurrence of a dummy is not moved outside (or inside) the scope of the
-dummy.
+- The dummies and ranges are all the same in each quantification in (8.15).
+- Ignoring the proviso, we could write $(Σ i • 0) = (Σ i • i - i) = (Σ i • i) +
+  (Σ i • -i)$ where the left-most is 0 but the rightmost is undefined since it is an
+  unbounded sum.
+- Quantifications with finite ranges are always defined, and quantifications
+  using operator ∧ or ∨ are always defined.
 
-The next rule let's us “shuffle around the possible values being summed over”.
-
-*(8.22) Theorem, Permutative Law, Change of Dummy:* Provided
-/y/ does not occur in /R/ nor in /P/, and /f/ is a permutation (i.e., is invertible),
-\[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ f\, y] • P[x ≔ f\, y]) \]
-
-A function /f/ is a permutation, or is invertible, if there is a function $f⁻¹$
-such that \[x = f\, y \quad≡\quad f⁻¹ x = y\]
-
-The proof in LADM, p151, is very nice.
-
-- This rule can be used to /simplify the range/ or to “eliminate a repeated
-  (permutation) expression $f$ from the quantification”.
-
-*** COMMENT Manipulating Ranges. §8.4
-    :PROPERTIES:
-    :CUSTOM_ID: COMMENT-Manipulating-Ranges-8-4
-    :END:
-
-*Theorem, Split off (nested) term:*
-
-\[ (⊕ i, j \;❙\; 0 ≤ i ≤ j < n + 1 • P)
-\quad=\quad (⊕ i, j \;❙\; 0 ≤ i ≤ j < n • P) ⊕ (⊕ i, j \;❙\; 0
-≤ i ≤ n • P[j ≔ n]) \]
-
-*** Trading Rules
-    :PROPERTIES:
-    :CUSTOM_ID: Trading-Rules
-    :END:
-
-Trading rules let us move a range into the body.
-
-*(8.t) Axiom, Trading:* $(⊕ x \;❙\; R • P) \;=\; (⊕ x • \mathsf{if}\, R
-\,\mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi})$
-
-*(8.t′) Theorem, Trading:* $(⊕ x \;❙\; Q ∧ R • P) \;=\; (⊕ x \;❙\; Q • \mathsf{if}\, R
-\,\mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi})$
-
-For instance: let $[\_{}] : 𝔹 → ℕ; [true] = 1, [false] = 0$, then,
-- *(8.t.Σ) Theorem, Trading:* $(Σ x \;❙\; Q ∧ R • P) = (Σ x \;❙\; Q • P · [R] )$
-- *(8.t.Π) Theorem, Trading:* $(Π x \;❙\; Q ∧ R • P) ≡ (Π x \;❙\; Q • P^{[R]})$
-- *(8.t.∀) (9.4) Theorem, Trading:* $(∀ x \;❙\; Q ∧ R • P) ≡ (∀ x \;❙\; Q • R ⇒ P)$
-- *(8.t.∃) (9.20) Theorem, Trading:* $(∃ x \;❙\; Q ∧ R • P) ≡ (∃ x \;❙\; Q • R ∧ P)$
-
-*** Contextual Rules
-    :PROPERTIES:
-    :CUSTOM_ID: Contextual-Rules
-    :END:
-
-   By contextual rules, and conditional rules,
-
-   *(8.c) Theorem, Context:* $(⊕ x \;❙\; R ∧ e = f • P[z ≔ e]) = (⊕ x \;❙\; R • P[z ≔ f])$
-
-   *(8.c′) Theorem, Context:* $(⊕ x \;❙\; R • P[z ≔ R]) = (⊕ x \;❙\; R • P[z ≔ true])$
-
-*** Distributivity Rules
-    :PROPERTIES:
-    :CUSTOM_ID: Distributivity-Rules
-    :END:
+** Distributivity Rules
+   :PROPERTIES:
+   :CUSTOM_ID: Distributivity-Rules
+   :END:
 
  The following axiom shows how distributivity laws generalise to quantifiers.
 
@@ -3775,13 +4030,19 @@ For instance: let $[\_{}] : 𝔹 → ℕ; [true] = 1, [false] = 0$, then,
  - $\log (Π x\;❙\;R • P) \;=\; (Σ x\;❙\;R • \log P)$
  - “Power of sums”: $a ^{ (Σ x\;❙\;R • P)} \;=\; (Π x\;❙\;R • a^P)$
  - *Generalised De Morgan (9.18)*: $¬ (∀ x\;❙\;R • P) \;≡\; (∃ x\;❙\;R • ¬ P)$
+ - *Numeric De Morgan* (LADM Ch15): $- (↓ x\;❙\;R • P) \;=\; (↑ x\;❙\;R • - P)$
 
- *(8.d′) Theorem, Distributivity of ⊗ over ⊕:* Provided /x/ does not occur in /P/,
- and “⊗ distributes over ⊕” ---/a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)/ and /a ⊗ \Id_⊕ =
- \Id_⊕/---
+--------------------------------------------------------------------------------
+
+ *(8.d′) Theorem, Distributivity of ⊗ over ⊕:* Provided /x/ does not occur in /P/, and
+ “⊗ distributes over ⊕” ---/a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)/ and $a ⊗ \Id_⊕ =
+ \Id_⊕$.
  \[ P ⊗ (⊕ x \;❙\; R • Q) \quad=\quad (⊕ x \;❙\; R • P ⊗ Q) \]
 
  ( Proof: Use 8.d with $f(x) = a ⊗ x$. )
+
+ This form of the distributive law allows us to move constants in and out of a
+ quantification.
 
  The expression $P$ that is being moved out of the scope (or into it, depending
  on your point of view) cannot contain $x$ as a free variable. This restriction
@@ -3790,6 +4051,9 @@ For instance: let $[\_{}] : 𝔹 → ℕ; [true] = 1, [false] = 0$, then,
 
  For instance,
  - (8.d.Σ) $P · (Σ x \;❙\; R • Q) \quad=\quad (Σ x \;❙\; R • P · Q)$.
+ - (8.d.Π) $(Π x \;❙\; R • Q)^P \quad=\quad (Π x \;❙\; R • Q^P)$.
+ - (8.d.↓) $P + (↓ x \;❙\; R • Q) \quad=\quad (↓ x \;❙\; R • P + Q)$; likewise
+   for ↑ (see Ch15 LADM).
  - *(9.5)  Distributivity of ∨ over ∀:*  $P ∨ (∀ x \;❙\; R • Q) \quad≡\quad (∀ x \;❙\; R • P ∨ Q)$.
  - *(9.21) Distributivity of ∧ over ∃:*  $P ∧ (∃ x \;❙\; R • Q) \quad≡\quad (∃ x \;❙\; R • P ∧ Q)$.
 
@@ -3802,6 +4066,18 @@ For instance: let $[\_{}] : 𝔹 → ℕ; [true] = 1, [false] = 0$, then,
  # \[ (⊕ x \;❙\; R • P) \;=\; P ⊗ (⊕ x • ) \]
  #
  # c.f., 9.22
+
+--------------------------------------------------------------------------------
+
+ *(8.d′) Theorem, General Distributive Law of ⊗ over ⊕:* Provided /x/ does not occur
+ in /S/ nor /Q/; /y/ does not occur in /R/ nor /P/; and
+ “⊗ distributes over ⊕” ---/a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)/ and $a ⊗ \Id_⊕ =
+ \Id_⊕$.
+ \[ (⊕ x, y ❙ R ∧ S • P ⊗ Q) = (⊕ x ❙ R • P) ⊗ (⊕ y \;❙\; S • Q) \]
+
+ A sum of independent products is the product of sums.
+
+--------------------------------------------------------------------------------
 
  *(8.d″) Distributivity of ⊗ over non-empty ⊕:* Provided /x/ does not occur in /P/,
  and “⊗ distributes over non-empty ⊕” ---/a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)/ (but
@@ -3817,10 +4093,153 @@ quantification only if the range $R$ is not empty ---i.e., not everywhere /false
  - *(9.23) Distributivity of ∨ over ∃:*   $(∃ x • R) \quad⇒\quad P ∨ (∃ x \;❙\; R • Q)
    \quad≡\quad (∃ x \;❙\; R • P ∨ Q)$
 
-*** Order Rules
-    :PROPERTIES:
-    :CUSTOM_ID: Order-Rules
-    :END:
+** COMMENT Hello --------------------------------------------------------------------------------
+   :PROPERTIES:
+   :CUSTOM_ID: Hello
+   :END:
+** TODO COMMENT Dummies
+   :PROPERTIES:
+   :CUSTOM_ID: Dummies
+   :END:
+
+The next three axioms concern dummies. The first indicates that nested
+quantifications with the same operator can be interchanged.  The second
+indicates how a single quantification over a list of dummies can be viewed as a
+nested quantification. The third shows that a dummy can be replaced (in a
+consistent fashion) by any fresh dummy.
+
+** Permutative Law ---“Translation Rule”
+   :PROPERTIES:
+   :CUSTOM_ID: Permutative-Law-Translation-Rule
+   :END:
+Multiple quantification has an interesting connection with the general operation
+of changing the index of quantification in /single/ sums.
+
+If we try to replace /x/ by $f\, y$ using an /arbitrary function/ /f/ ---not
+necessarily an invertible function--- then the general formula for index
+replacement is:
+\[ (⊕ x \;❙\; R • (⊕ y ❙ f\, y = x • P)) \quad=\quad (⊕ y \;❙\; R[x ≔ f\, y] • P[x ≔ f\, y]) \]
+
+The inner sum of the LHS accounts for the number of values /y/ such that /f y = x/.
+When /f/ is a one-to-one correspondence, the number of such values is 1 and so the
+inner sum disappears ---we use /f/'s invertible to “solve for y” then use the
+one-point rule to get rid of the sum--- to give us the permutative law (8.22).
+
+The poof of the general index replacement rule is easy (once you've seen it!)
+- ( We omit the ranges for brevity, since they can always be traded into the body. )
+#+begin_src haskell
+  (⊕ y • P[x ≔ f y])
+={- One-point rule -}
+  ⊕ y • (⊕ x ❙ x = f y • P)
+={- Quantifier interchange -}
+  ⊕ x • ⊕ y ❙ x = f y • P
+#+end_src
+
++ Trick: If we have a double sum on index variables /i, j/ whose terms involve /j +
+  f i/, where /f/ is an arbitrary function, it's a good idea to try replacing /j/ by
+  /j - f i/ and sum on /i/.
+
+--------------------------------------------------------------------------------
+
+The next rule let's us “shuffle around the possible values being summed over”.
+It says that we can reorder the terms in any way we please; here $f$ is any
+permutation.
+
+*(8.22) Theorem, Permutative Law, Commutative Law, Change of Dummy:* Provided
+/y/ does not occur in /R/ nor in /P/, and /f/ is a permutation (i.e., is invertible),
+\[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ f\, y] • P[x ≔ f\, y]) \]
+
+A function /f/ is a permutation, or is invertible, if there is a function $f⁻¹$
+such that \[x = f\, y \quad≡\quad f⁻¹ x = y\]
+- Transformations like $f\, y = y + c$ or $f\, y = y - c$ are always
+  permutations, so they always work.
+
+- To see if /f/ is a permutation, start with the equation $x = f\, y$, then “
+  solve for /y/ ” to get $g\, x = y$, then the found /g/ is the inverse of /f/.
+
+The proof in LADM, p151, is very nice.
+
+- This rule can be used to /simplify the range/ or to “eliminate a repeated
+  (permutation) expression $f$ from the quantification”.
+
+--------------------------------------------------------------------------------
+
+We can relax the permutation restriction a little bit: We need to require only
+that there be exactly one value /j/ with /f j = i/ when /i/ satisfies /R/. If /i/ does not
+satisfy /R/, it doesn't matter how often /f j = i/ occurs, because such /j/ don't take
+part in the sum.
+
+That is, we need “ /f/ to be an invertible only for values satisfying /R/ ”; i.e.,
+there is a function $f⁻¹$ such that
+ \[R\, x  ∧  R\, y ⇒ \big( x = f\, y \quad≡\quad f⁻¹ x = y \big) \]
+
+ For example, doubling is not invertible, but it is when we are only considering
+ even integers:
+ \[ \even x ∧ \even y ⇒ \big(x = 2 · y \quad≡\quad x / 2 = y \big) \]
+
+As such,
+$(⊕ x\;❙\;R ∧ \even x • P) = (⊕ y\;❙\;R[x ≔ 2 · y] • P[x ≔ 2 · y])$.
+
+--------------------------------------------------------------------------------
+
+** COMMENT Manipulating Ranges. §8.4
+   :PROPERTIES:
+   :CUSTOM_ID: COMMENT-Manipulating-Ranges-8-4
+   :END:
+
+*Theorem, Split off (nested) term:*
+
+\[ (⊕ i, j \;❙\; 0 ≤ i ≤ j < n + 1 • P)
+\quad=\quad (⊕ i, j \;❙\; 0 ≤ i ≤ j < n • P) ⊕ (⊕ i, j \;❙\; 0
+≤ i ≤ n • P[j ≔ n]) \]
+
+** Trading and Contextual Rules ---Quantification and src_haskell[:exports code]{if-then-else}
+   :PROPERTIES:
+   :CUSTOM_ID: Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else
+   :END:
+
+Trading rules let us move a range into the body.
+
+*(8.t) Axiom, Trading:* $(⊕ x \;❙\; R • P) \;=\; (⊕ x • \mathsf{if}\, R
+\,\mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi})$
+
+# For brevity, we may define
+# \[ R ⇨ P \quad=\quad \mathsf{if}\, R \mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi} \]
+
+*(8.t′) Theorem, Trading:* $(⊕ x \;❙\; Q ∧ R • P) \;=\; (⊕ x \;❙\; Q • \mathsf{if}\, R
+\,\mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi})$
+
+Define the Iverson brackets, as follows.
+#+begin_src haskell
+[_] : 𝔹 → ℕ
+[ true  ] = 0
+[ false ] = 1
+#+end_src
+
+For instance:
+# let $[\_{}] : 𝔹 → ℕ; [true] = 1, [false] = 0$, then,
+- *(8.t.Σ) Theorem, Trading:* $(Σ x \;❙\; Q ∧ R • P) = (Σ x \;❙\; Q • P · [R] )$
+- *(8.t.Π) Theorem, Trading:* $(Π x \;❙\; Q ∧ R • P) = (Π x \;❙\; Q • P^{[R]})$
+  # - *(8.t.↓) Theorem, Trading:* $(↓ x \;❙\; Q ∧ R • P) = (↓ x \;❙\; Q • P / [R])$,
+  # where the special value $∞ := 1/0$ is the identity of minima ↓ and the zero
+  # of multiplication.
+  #
+  # Eek!
+- *(8.t.∀) (9.4) Theorem, Trading:* $(∀ x \;❙\; Q ∧ R • P) ≡ (∀ x \;❙\; Q • R ⇒ P)$
+- *(8.t.∃) (9.20) Theorem, Trading:* $(∃ x \;❙\; Q ∧ R • P) ≡ (∃ x \;❙\; Q • R ∧ P)$
+
+--------------------------------------------------------------------------------
+
+   By contextual rules, and conditional rules,
+
+   *(8.c) Theorem, Context:* $(⊕ x \;❙\; R ∧ e = f • P[z ≔ e]) = (⊕ x \;❙\; R • P[z ≔ f])$
+
+   *(8.c′) Theorem, Context:* $(⊕ x \;❙\; R • P[z ≔ R]) = (⊕ x \;❙\; R • P[z ≔ true])$
+
+** Order Rules
+   :PROPERTIES:
+   :CUSTOM_ID: Order-Rules
+   :END:
 Suppose we have an order $\_{}⊑\_{}$.
 
 *(8.m) Axiom, (Generalised) Monotonicity; Body Weakening/Strengthening:*
@@ -3835,14 +4254,14 @@ For example, this covers both of (9.12) and (9.27); consequently giving us
     :CUSTOM_ID: Antitonicity-Rules-for-Eliminatory
     :END:
 
-Suppose we have an order $\_{}⊑\_{}$
-and say the operation ⊕ is *eliminatory* iff /(a ⊕ b) ⊑ a/ for all /a, b/.
-- E.g., for 𝔹, conjunction is eliminatory.
-- Any meet, $\_{}⊓\_{}$ is eliminatory. (See A2; H10)
+ Suppose we have an order $\_{}⊑\_{}$
+ and say the operation ⊕ is *eliminatory* iff /(a ⊕ b) ⊑ a/ for all /a, b/.
+ - E.g., for 𝔹, conjunction is eliminatory.
+ - Any meet, $\_{}⊓\_{}$ is eliminatory. (See A2; H10)
 
-*(8.rws.e) Range Weakening/Strengthening for eliminatory-⊕:*
-$(⊕ x \;❙\; R ∨ Q • P) ⊑ (⊕ x \;❙\; R • P)$
-#+begin_src math
+ *(8.rws.e) Range Weakening/Strengthening for eliminatory-⊕:*
+ $(⊕ x \;❙\; R ∨ Q • P) ⊑ (⊕ x \;❙\; R • P)$
+ #+begin_src math
   (⊕ x ❙ R ∨ Q • P)
 ={- Absorption; to prepare for using range split -}
   (⊕ x ❙ R ∨ (Q ∧ ¬ R) • P)
@@ -3850,27 +4269,27 @@ $(⊕ x \;❙\; R ∨ Q • P) ⊑ (⊕ x \;❙\; R • P)$
   (⊕ x ❙ R • P) ⊕ (⊕ x ❙ Q ∧ ¬ R • P)
 ⊑{- ⊕ eliminatory -}
   (⊕ x ❙ R • P)
-#+end_src
+ #+end_src
 
-If ⊕ were /introductory/ instead, (see below), then the exact same proof would be
-used, but the last hint would be src_haskell[:exports code]{⊒{- ⊕ introductory
--}}.
+ If ⊕ were /introductory/ instead, (see below), then the exact same proof would be
+ used, but the last hint would be src_haskell[:exports code]{⊒{- ⊕ introductory
+ -}}.
 
-*(8.rws.e) Range Antitonicity, Weakening/Strengthening, for eliminatory-⊕:*
-\[(⊕ x \;❙\; R′ • P) ⊑ (⊕ x \;❙\; R • P)  \quad⇐\quad (∀ x • R ⇒ R′)\]
-Proof:
-#+begin_src math
+ *(8.rws.e) Range Antitonicity, Weakening/Strengthening, for eliminatory-⊕:*
+ \[(⊕ x \;❙\; R′ • P) ⊑ (⊕ x \;❙\; R • P)  \quad⇐\quad (∀ x • R ⇒ R′)\]
+ Proof:
+ #+begin_src math
   (⊕ x ❙ R′ • P)
 ={- Assumption R ⇒ R′ and definition of ⇒ -}
    (⊕ x ❙ R ∨ R′ • P)
 ⊑{- Range weakening for eliminatory-⊕ -}
    (⊕ x ❙ R • P)
-#+end_src
+ #+end_src
 
-*(8.i) Generalised Elimination (“Instantiation”) for eliminatory-⊕:*
-\[ (⊕ x • P) \;⊑\; P[x ≔ E] \]
-Proof:
-#+begin_src math
+ *(8.i) Generalised Elimination (“Instantiation”) for eliminatory-⊕:*
+ \[ (⊕ x • P) \;⊑\; P[x ≔ E] \]
+ Proof:
+ #+begin_src math
   (⊕ x • P)
 ={- Abbreviation; preparing to use one-point rule -}
   (⊕ x ❙ true • P)
@@ -3880,24 +4299,28 @@ Proof:
   (⊕ x ❙ x = E • P)
 ={- One-point rule -}
   P[x ≔ E]
-#+end_src
+ #+end_src
+
+ In the presence of meets, we may obtain an equality:
+ $(⊕ x • P) = (⊕ x • P) ⊓ P[x ≔ E]$.
+
 *** Monotonicity Rules for Introductory-⊕
     :PROPERTIES:
     :CUSTOM_ID: Monotonicity-Rules-for-Introductory
     :END:
 
-Suppose we have an order $\_{}⊑\_{}$
-and say the operation ⊕ is *introductory* iff /a ⊑ (a ⊕ b)/ for all /a, b/.
-- E.g., for ℕ, addition is introductory. (See H12!)
-- E.g., for 𝔹, disjunction is introductory.
-- Joins, $\_{}⊔\_{}$ is introductory. (See A2; H10)
+ Suppose we have an order $\_{}⊑\_{}$
+ and say the operation ⊕ is *introductory* iff /a ⊑ (a ⊕ b)/ for all /a, b/.
+ - E.g., for ℕ, addition is introductory. (See H12!)
+ - E.g., for 𝔹, disjunction is introductory.
+ - Joins, $\_{}⊔\_{}$ is introductory. (See A2; H10)
 
-# i.e., ⊕ is non-decreasing
+ # i.e., ⊕ is non-decreasing
 
-The rules are analogous to eliminatory-⊕ and proven similarly.
+ The rules are analogous to eliminatory-⊕ and proven similarly.
 
-- *(8.rws.i) Range Weakening/Strengthening:* $(⊕ x \;❙\; R • P) ⊑ (⊕ x \;❙\; R ∨ Q • P)$
-#+begin_src math :exports none
+ - *(8.rws.i) Range Weakening/Strengthening:* $(⊕ x \;❙\; R • P) ⊑ (⊕ x \;❙\; R ∨ Q • P)$
+ #+begin_src math :exports none
   (⊕ x\;❙\;R ∨ Q • P)
 ={- Absorption; to prepare for using range split -}
   (⊕ x\;❙\;R ∨ (Q ∧ ¬ R) • P)
@@ -3905,15 +4328,15 @@ The rules are analogous to eliminatory-⊕ and proven similarly.
   (⊕ x\;❙\;R • P) ⊕ (⊕ x\;❙\;Q ∧ ¬ R • P)
 ⊒{- ⊕ introductory -}
   (⊕ x\;❙\;R • P)
-#+end_src
+ #+end_src
 
-- *(8.rws.i) Range Monotonicity, Weakening/Strengthening, for introductory-⊕:*
-\[(⊕ x \;❙\; R • P) ⊑ (⊕ x \;❙\; R′ • P)  \quad⇐\quad (∀ x • R ⇒ R′)\]
+ - *(8.rws.i) Range Monotonicity, Weakening/Strengthening, for introductory-⊕:*
+ \[(⊕ x \;❙\; R • P) ⊑ (⊕ x \;❙\; R′ • P)  \quad⇐\quad (∀ x • R ⇒ R′)\]
 
-- *(8.e) Generalised Introduction (“⊕-Introduction”) for introductory-⊕:*
-   \[ P[x ≔ E] \;⊑\; (⊕ x • P) \]
-# Proof:
-#+begin_src math :exports none
+ - *(8.e) Generalised Introduction (“⊕-Introduction”) for introductory-⊕:*
+    \[ P[x ≔ E] \;⊑\; (⊕ x • P) \]
+ # Proof:
+ #+begin_src math :exports none
   (⊕ x • P)
 ={- Abbreviation; preparing to use one-point rule -}
   (⊕ x\;❙\;true • P)
@@ -3923,12 +4346,15 @@ The rules are analogous to eliminatory-⊕ and proven similarly.
   (⊕ x\;❙\;x = E • P)
 ={- One-point rule -}
   P[x ≔ E]
-#+end_src
+ #+end_src
 
-*** When are two quantifications equal?
-    :PROPERTIES:
-    :CUSTOM_ID: When-are-two-quantifications-equal
-    :END:
+ In the presence of joins, we may obtain an equality:
+ $(⊕ x • P) = (⊕ x • P) ⊔ P[x ≔ E]$.
+
+** When are two quantifications equal?
+   :PROPERTIES:
+   :CUSTOM_ID: When-are-two-quantifications-equal
+   :END:
 
     Two quantifications are equal when “each of their parts are equal”.
 
@@ -3940,6 +4366,35 @@ The rules are analogous to eliminatory-⊕ and proven similarly.
 #+end_src
 
 See, for example, (9.9).
+** COMMENT Range Part
+   :PROPERTIES:
+   :CUSTOM_ID: COMMENT-Range-Part
+   :END:
+
+There are four rules governing manipulation of the range part.
+
+The first two rules govern the case that the range part defines an empty
+collection, and the case that the range defined a collection with exactly one
+element.
+
+** COMMENT Sums and Recurrences
+   :PROPERTIES:
+   :CUSTOM_ID: COMMENT-Sums-and-Recurrences
+   :END:
+
+1. OK, we understand how to express sums with fancy notation.
+
+   But how does a person actually go about finding the value of a sum?
+
+   One way is to observe that there's an intimate relation between
+   sums and recurrences.
+
+   The sum $𝒮\, n \;=\; (Σ i ❙ 0 ≤ i < n • aᵢ)$
+   is equivalent to the recurrence
+   #+begin_src haskell
+𝒮 0       = 0          -- empty range
+𝒮 (n + 1) = 𝒮 n + aₙ   -- split off term
+   #+end_src
 
 **  Predicate Calculus
    :PROPERTIES:
@@ -3970,6 +4425,124 @@ along with an additional one below.
 $(∃ x\;❙\;R • (∀ y\;❙\;Q • P)) \quad⇒\quad (∀ x\;❙\;Q • (∃ x\;❙\;R • P))$.
 
 ( See LADM p166 for the proof. )
+
+** Specific theorems about Σ
+   :PROPERTIES:
+   :CUSTOM_ID: Specific-theorems-about-Σ
+   :END:
+
++ *“All numbers are obtained by adding 1”:* $(Σ i\;❙\;0 ≤ i < n • 1) = n$ ---for $0 ≤ n$.
+
+  More generally, *“Multiplication is iterated sum”*: $(Σ i\;❙\;0 ≤ i < n • P) = n · P$ /provided/ /i/ does not occur in
+  /P/ and $0 ≤ n$.
+  - An index variable that doesn't appear in the body (here /i/) can simply be
+    eliminated if we multiply what's left by the size of that variable's index
+    set (here /n/).
+
+  *“Superfluous quantification for idempotent ⊕”*:
+   For ⊕ idempotent, $(⊕ i\;❙\;0 ≤ i < n • P) = P$ /provided/ /i/ does not occur in
+   /P/ and $0 < n$ (i.e., the LHS is non-empty!)
+    - “When you can choose from P, or P, or P, or ... /n/-many times, then really
+      there is only /P/ to pick.” (E.g., this works for ↑, ↓, ∀, ∃.)
+
+    ( The /0 ≤ n/ proviso is to ensure that the LHS's range is not empty and so
+    the LHS is not just $\Id_⊕$, which may differ from the RHS. )
+
++ $2 · (Σ i\;❙\;0 ≤ i < n • i) = n · (n + 1)$.
+  - “The sum of the first /n/ integers is ${n · (n + 1) \over 2}$.”
+  - “The sum of the first /n/ even integers is $n · (n + 1)$.”
+
++ *Exponentiation is iterated product”:* $(Π i \;❙\; 0 ≤ i < n • P) = P^n$
+  /provided/ /i/ does not occur in /P/ and /0 < n/.
+
++ $(Π i \;❙\; 0 ≤ i < n • i) = n!$, the product of the first $n$ integers
+  is $n !$ (“n factorial”).
+
++ $(↓ i \;❙\; 0 ≤ i < n • i) = 0$, the smallest number among the first
+  /n/ non-negative integers is 0.
+
++ $(↑ i \;❙\; 0 ≤ i ≤ n • i) = n$, the largest number among the first
+  /n/ (inclusive) non-negative integers is /n/.
+
+** Infinite Sums
+   :PROPERTIES:
+   :CUSTOM_ID: Infinite-Sums
+   :END:
+
+   1. Everybody knows what a finite sum is: Add up a bunch of terms, one by one,
+      until they've all been added.
+
+      But what's an infinite sum?
+
+   2. In an completely ordered domain, *define* $(⊕ x ❙ R • P)$ to be the least upper bound
+      on all finite sub-quantifications; i.e., it is the least /𝒬/ such that $(⊕ x
+      ❙ F • P) ⊑ 𝒬$ for all /finite/ ranges /F/ with /∀ x • F ⇒ R/.
+
+      ( Completeness implies that the set of all such values 𝒬 always has a
+      least element. )
+
+      If there is no bounding constant 𝒬, we *define* $(⊕ x ❙ R • P) = ⊤$ ---the
+      “∞” of the ordered domain.  This means that if 𝒬 is an value, there's a
+      set of finitely many terms /P/ whose sum exceeds 𝒬.
+
+      --------------------------------------------------------------------------------
+
+      Formally,
+      $(⊕ x \;❙\; R • P) \quad=\quad (⊔ F \;❙\; F \,\text{finite-sub-range-of}\, R •
+      (⊕ x \;❙\; F • P))$
+
+      The completeness criterion means that the join in the RHS /always/
+      converges.
+
+      In-particular, a sum indexed by all the natural numbers
+      is the result of looking at partial sums.
+      \[ (⊕ i : ℕ • P) \quad=\quad (⊔ n : ℕ • (⊕ i : ℕ \;❙\; i ≤ n • P)) \]
+
+      :Nope:
+      Look at CM, p61
+
+      Hence, to prove a property holds for possibly infinite ranges, we can use
+      this reformation to let us only consider finite ranges. Then we may
+      manipulate the finite ranges ---say using induction, which is the basis of
+      all the finite quantification rules--- then use this definition to remove
+      the supremum operator, ‘⊔’, and get back to a top-level quantification.
+
+      - The good news is that the manipulation rules are perfectly valid whenever
+        we're dealing with sums that converge, as just defined.
+
+      - We verify this by showing that each transformation rule preserves the
+       value of all convergent sums. This means, more explicitly, that we must
+       prove the quantifier axioms hold for possibly infinite ranges; everything
+       else (the resulting theorems) have been derived from the axioms.
+
+      - For example, let's prove the nesting rule: Convergent sums over multiple
+        indices can always be summed first with respect to any one of those indices.
+
+        1. Suppose $(⊕ i, j ❙ I ∧ J • P)$ converges to $𝒬$.
+        2. Let us show that for each $i$, the sum $(⊕ j ❙ J • P)$ converges
+           to some value 𝒬ᵢ, and $(⊕ i ❙ I • 𝒬ᵢ)$ converges to 𝒬.
+
+        3. By assumption, $(⊕ i, j ❙ F • P) ⊑ 𝒬$ for all finite sub-ranges $F$
+           of $I ∧ J$. As such, for any $i$ satisfying $I$, and $Fᵢ$ a finite
+           sub-range of $F$, we have that $(⊕ j ❙ Fᵢ • P) ⊑ 𝒬$ ---provided ⊕ is
+           range-monotonic! [Maybe]
+
+        4. Hence, the finite sums $(⊕ j ❙ Fᵢ • P)$ are bounded above and so, by
+           definition, each $(⊕ j ❙ J • P)$ converges to a value, say, 𝒬ᵢ.
+
+        5. Next, we need to show that the sum of the 𝒬ᵢ is 𝒬.
+
+           1. Suppose /G/ is a finite sub-range of /J/.
+
+        :END:
+
+   3. Notice the definition for possibly infinite ranges /R/ has been formulated
+      to that it doesn't depend on any ordering of the terms ---after all, we
+      want to preserve the symmetry and associativity of ⊕ even for infinite
+      ranges.
+
+   # 4. Numerically this is just a limit: $(Σ_{i ≥ 0} aᵢ \;=\; \lim_{n → ∞} Σ^n_{i
+   #   = 0} aᵢ)$. See /Concrete Mathematics, §2.7/ for details.
 
 * TODO COMMENT Sets
   :PROPERTIES:
