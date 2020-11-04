@@ -3,7 +3,7 @@
 #+title: Mathematics for Computing
 #+subtitle: Abridged Lecture Notes @@html:<br>@@ Based on “A Logical Approach to Discrete Math”
 #+author: Musa Al-hassy
-#+options: tags:nil d:nil toc:nil
+#+options: tags:nil d:nil toc:t
 #+PROPERTY: header-args:calccheck :tangle (concat (file-name-sans-extension (buffer-name)) ".calc") :comments nil
 
 #+Description: Abridged Lecture Notes Based on “A Logical Approach to Discrete Math”
@@ -3469,6 +3469,7 @@ od
      #+begin_latex-definitions
 \newcommand{Law}[3][]{ #1\;\;\textbf{#2:}\quad #3 }
 \def\abs{\mathsf{abs}\,}
+\def\Id{\mathsf{Id}}
    #+end_latex-definitions
 
 1. Quantification let's us “sum a bunch of /numeric/ values” or “or a bunch of
@@ -3529,8 +3530,8 @@ od
 1. The notation $∑_{i = 1}^n f(i)$ is used to /abbreviate/ $f(1) + f(2) + ⋯ +
    f(n)$.
 
-2. Instead, we use the /linear notation/ $(Σ i ❙ 1 ≤ i ≤ n • f\, i)$
-   or $(+ i ❙ 1 ≤ i ≤ n • f\, i)$
+2. Instead, we use the /linear notation/ $(Σ i \;❙\; 1 ≤ i ≤ n • f\, i)$
+   or $(+ i \;❙\; 1 ≤ i ≤ n • f\, i)$
    for several reasons.
 
 3. The parentheses make explicit the /scope/ of the /dummy/ or /quantified variable
@@ -3546,23 +3547,23 @@ od
    We can write /any/ Boolean expression to describe the values of $i$
    for which $f\, i$ should be summed. For example, to sum the evens
    between 1 and 7:
-   \[ (Σ i ❙ 1 ≤ i ≤ 7 ∧ \mathsf{even}\, i • i) \;=\; 2 + 4 + 6\]
+   \[ (Σ i \;❙\; 1 ≤ i ≤ 7 ∧ \mathsf{even}\, i • i) \;=\; 2 + 4 + 6\]
 
 5. The linear notation extends easily to allow more than one dummy, as shown in
-   the following example.  \[ (Σ i,j ❙ 1 ≤ i ≤ 2 ∧ 3 ≤ j ≤ 4 • i^j) \;=\; 1^3 +
+   the following example.  \[ (Σ i,j \;❙\; 1 ≤ i ≤ 2 ∧ 3 ≤ j ≤ 4 • i^j) \;=\; 1^3 +
    1^4 + 2^3 + 2^4\] In determining which values $i^j$ are being summed, we
    choose all combinations of $i$ and $j$ that satisfy the /range/ $1 ≤ i ≤ 2 ∧ 3
    ≤ j ≤ 4$.
 
 6. In the summations about, our intent is that dummy $i$ ranges over integer
    values, rather than real values (say). To make the type explicit, we can
-   write $(Σ i : ℤ ❙ 1 ≤ i ≤ 2 • f\, i)$.
+   write $(Σ i : ℤ \;❙\; 1 ≤ i ≤ 2 • f\, i)$.
 
 7. What has been said about summation generalises to other operators.
 
    The general shape of a /quantification over monoidal operation $\_{}⊕\_{}$/
       is exemplified by:
-      \[ (⊕ x : τ₁, y : τ₂ ❙ R • P) \]
+      \[ (⊕ x : τ₁, y : τ₂ \;❙\; R • P) \]
 
    - Distinct variables $x$ and $y$ are the /bound variables/ or /dummies/ of the
      quantification. There may be one or more dummies.
@@ -3572,16 +3573,16 @@ od
 
      When there are no constraints ---i.e., the range is as large as possible,
      $R$ is /true/--- we may omit it:
-     \[ (⊕ x • P) \;=\; (⊕ x ❙ true • P)\]
+     \[ (⊕ x • P) \;=\; (⊕ x \;❙\; true • P)\]
 
    - Expression $P$ is the /body/ of the quantification; it may refer to dummies
      $x$ and $y$.
 
    - The type of the result of the quantification is the type of $P$; i.e., if
      $\_{}⊕\_{} : τ → τ → τ$ then $P : τ$ --whenever /x : τ₁, y : τ₁/--- and $(⊕
-     x : τ₁, y : τ₂ ❙ R • P) : τ$.
+     x : τ₁, y : τ₂ \;❙\; R • P) : τ$.
 
-8. *Expression $(⊕ x : τ ❙ R • P)$ denotes the application of operator ⊕ to the
+8. *Expression $(⊕ x : τ \;❙\; R • P)$ denotes the application of operator ⊕ to the
    values $P$ for all /x/ in τ for which range $R$ is true.*
 
    Next, we will define the notation /axiomatically/ instead of relying on a
@@ -3598,15 +3599,20 @@ od
 
  # See LADM p148 for Leibniz rules for quantifiers.
 
-Suppose ⊕ is associative, symmetric, having unit $Id_⊕_$.
+Suppose ⊕ is associative, symmetric, having unit $\Id_⊕$.
+
+⇨ The laws of ⊕-quantifiers are *generalised* forms of the laws of the binary
+operations ⊕. ⇦
+( For finite ranges, the rules can be proven inductively. )
 
 *** Introduction & Elimination of quantifiers
     :PROPERTIES:
     :CUSTOM_ID: Introduction-Elimination-of-quantifiers
     :END:
 
-| (8.13) Axiom, Empty Range    | $(⊕ x ❙ false • P) = Id_⊕$     |
-| (8.14) Axiom, One-point rule | $(⊕ x ❙ x = E • P) = P[x ≔ E]$ |
+| (8.13) Axiom, Empty Range    | $(⊕ x \;❙\; false • P) = \Id_⊕$    |
+| (8.14) Axiom, One-point rule | $(⊕ x \;❙\; x = E • P) = P[x ≔ E]$ |
+| (8.u) Axiom, Unital body     | $(⊕ x \;❙\; R • \Id_⊕) = \Id_⊕$    |
 
 *Proviso:* For (8.14), we need /x/ not to occur in /E/.
 
@@ -3615,13 +3621,19 @@ since all occurrences of $x$ are bound. Hence, for the equivalence to hold, the
 RHS also cannot depend on $x$, and this requires (in general) that $x$ not occur
 free in $E$.
 
+For example,
+- (8.u.Σ): $(Σ x \;❙\; R • 0) = 0$
+- (8.u.Π): $(Π x \;❙\; R • 1) = 1$
+- (8.u.∃) (9.8): $(∀ x \;❙\; R • true) ≡ true$
+- (8.u.∀) (9.24): $(∃ x \;❙\; R • false) = false$
+
 *** Generalised Symmetry
     :PROPERTIES:
     :CUSTOM_ID: Generalised-Symmetry
     :END:
 
 | (8.15) Axiom, Distributivity (“Rearrangement”)          |
-| $(⊕ x ❙ R • P ⊕ Q) \;=\; (⊕ x ❙ R • P) ⊕ (⊕ x ❙ R • Q)$ |
+| $(⊕ x \;❙\; R • P ⊕ Q) \;=\; (⊕ x \;❙\; R • P) ⊕ (⊕ x \;❙\; R • Q)$ |
 
 This holds since ⊕ is symmetric and associative, so that the order in which the
 operands are accumulated has no bearing on the result.
@@ -3646,7 +3658,7 @@ is split into two ranges $R$ and $S$ in its LHS.
 
 *(8.16) Axiom, Range Split:* Provided $R ∧ S ≡ false$, and each quantification is
 defined,
-\[ (⊕ x ❙ R ∨ S • P) \quad=\quad (⊕ x ❙ R • P) ⊕ (⊕ x ❙ S • P) \]
+\[ (⊕ x \;❙\; R ∨ S • P) \quad=\quad (⊕ x \;❙\; R • P) ⊕ (⊕ x \;❙\; S • P) \]
 
 For instance, suppose we have a bag of ‘R’ed numbers and ‘S’ilver numbers.  The
 LHS says we can sum them in any order we like, whereas the RHS says we sum the
@@ -3655,18 +3667,18 @@ LHS says we can sum them in any order we like, whereas the RHS says we sum the
 The restriction that $R ∧ S ≡ false$ ensures that an operand is not accumulated
 twice in the RHS ---once because a value $x$ satisfies $R$ and once because the
 same value $x$ satisfies $S$. The next axiom eliminates this restriction by
-adding to the LHS the accumulation $(⊕ s ❙ R ∧ S • P)$; thus, the values of $P$
+adding to the LHS the accumulation $(⊕ s \;❙\; R ∧ S • P)$; thus, the values of $P$
 are accumulated twice because values for the dummies satisfy both $R$ and $S$
 are accumulated twice on both sides of the equation.
 
 *(8.17) Axiom, Range Split:* Provided each quantification is defined,
-\[ (⊕ x ❙ R ∨ S • P) ⊕ (⊕ x ❙ R ∧ S • P) \quad=\quad (⊕ x ❙ R • P) ⊕ (⊕ x ❙ S • P) \]
+\[ (⊕ x \;❙\; R ∨ S • P) ⊕ (⊕ x \;❙\; R ∧ S • P) \quad=\quad (⊕ x \;❙\; R • P) ⊕ (⊕ x \;❙\; S • P) \]
 
 On the other hand, if operator ⊕ is idempotent ---so that $e ⊕ e = e$ for all
 $e$, then it does not matter how many times $e$ is accumulated. Hence, we have
 
 *(8.18) Axiom, Range Split for Idempotent ⊕:* Provided each quantification is
-defined, \[ (⊕ x ❙ R ∨ S • P) \quad=\quad (⊕ x ❙ R • P) ⊕ (⊕ x ❙ S • P) \]
+defined, \[ (⊕ x \;❙\; R ∨ S • P) \quad=\quad (⊕ x \;❙\; R • P) ⊕ (⊕ x \;❙\; S • P) \]
 
 *** Dummies
     :PROPERTIES:
@@ -3681,13 +3693,13 @@ consistent fashion) by any fresh dummy.
 
 *(8.19) Axiom, Interchange of dummies:* Provided each quantification is defined,
 /y/ does not occur in /R/, and /x/ does not occur in /Q/,
-\[ (⊕ x ❙ R • (⊕ y ❙ S • P)) \quad=\quad (⊕ y ❙ S • (⊕ x ❙ R • P)) \]
+\[ (⊕ x \;❙\; R • (⊕ y \;❙\; S • P)) \quad=\quad (⊕ y \;❙\; S • (⊕ x \;❙\; R • P)) \]
 
 *(8.20) Axiom, Nesting:* Provided /y/ does not occur in /R/,
-\[ (⊕ x, y ❙ R ∧ S • P) \quad=\quad (⊕ x ❙ R • (⊕ y ❙ S • P)) \]
+\[ (⊕ x, y \;❙\; R ∧ S • P) \quad=\quad (⊕ x \;❙\; R • (⊕ y \;❙\; S • P)) \]
 
 *(8.21) Axiom, Dummy Renaming:* Provided /y/ does not occur in /R/ nor in /P/,
-\[ (⊕ x ❙ R • P) \quad=\quad (⊕ y ❙ R[x ≔ y] • P[x ≔ y]] \]
+\[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ y] • P[x ≔ y]] \]
 
 The ‘occurs’ restrictions on these laws ensure that an expression that contains
 an occurrence of a dummy is not moved outside (or inside) the scope of the
@@ -3697,7 +3709,7 @@ The next rule let's us “shuffle around the possible values being summed over�
 
 *(8.22) Theorem, Permutative Law, Change of Dummy:* Provided
 /y/ does not occur in /R/ nor in /P/, and /f/ is a permutation (i.e., is invertible),
-\[ (⊕ x ❙ R • P) \quad=\quad (⊕ y ❙ R[x ≔ f\, y] • P[x ≔ f\, y]) \]
+\[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ f\, y] • P[x ≔ f\, y]) \]
 
 A function /f/ is a permutation, or is invertible, if there is a function $f⁻¹$
 such that \[x = f\, y \quad≡\quad f⁻¹ x = y\]
@@ -3714,8 +3726,8 @@ The proof in LADM, p151, is very nice.
 
 *Theorem, Split off (nested) term:*
 
-\[ (⊕ i, j ❙ 0 ≤ i ≤ j < n + 1 • P)
-\quad=\quad (⊕ i, j ❙ 0 ≤ i ≤ j < n • P) ⊕ (⊕ i, j ❙ 0
+\[ (⊕ i, j \;❙\; 0 ≤ i ≤ j < n + 1 • P)
+\quad=\quad (⊕ i, j \;❙\; 0 ≤ i ≤ j < n • P) ⊕ (⊕ i, j \;❙\; 0
 ≤ i ≤ n • P[j ≔ n]) \]
 
 *** Trading Rules
@@ -3725,17 +3737,17 @@ The proof in LADM, p151, is very nice.
 
 Trading rules let us move a range into the body.
 
-*(8.t) Axiom, Trading:* $(⊕ x ❙ R • P) \;=\; (⊕ x • \mathsf{if}\, R
-\,\mathsf{then}\, P \,\mathsf{else}\, Id_⊕ \mathsf{fi})$
+*(8.t) Axiom, Trading:* $(⊕ x \;❙\; R • P) \;=\; (⊕ x • \mathsf{if}\, R
+\,\mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi})$
 
-*(8.t′) Theorem, Trading:* $(⊕ x ❙ Q ∧ R • P) \;=\; (⊕ x ❙ Q • \mathsf{if}\, R
-\,\mathsf{then}\, P \,\mathsf{else}\, Id_⊕ \mathsf{fi})$
+*(8.t′) Theorem, Trading:* $(⊕ x \;❙\; Q ∧ R • P) \;=\; (⊕ x \;❙\; Q • \mathsf{if}\, R
+\,\mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi})$
 
 For instance: let $[\_{}] : 𝔹 → ℕ; [true] = 1, [false] = 0$, then,
-- *(8.t.Σ) Theorem, Trading:* $(Σ x ❙ Q ∧ R • P) = (Σ x ❙ Q • P · [R] )$
-- *(8.t.Π) Theorem, Trading:* $(Π x ❙ Q ∧ R • P) ≡ (Π x ❙ Q • P^{[R]})$
-- *(8.t.∀) (9.4) Theorem, Trading:* $(∀ x ❙ Q ∧ R • P) ≡ (∀ x ❙ Q • R ⇒ P)$
-# - *(9.4) Theorem, Trading:* $(∀ x ❙ Q ∧ R • P) ≡ (∀ x ❙ Q • R ⇒ P)$
+- *(8.t.Σ) Theorem, Trading:* $(Σ x \;❙\; Q ∧ R • P) = (Σ x \;❙\; Q • P · [R] )$
+- *(8.t.Π) Theorem, Trading:* $(Π x \;❙\; Q ∧ R • P) ≡ (Π x \;❙\; Q • P^{[R]})$
+- *(8.t.∀) (9.4) Theorem, Trading:* $(∀ x \;❙\; Q ∧ R • P) ≡ (∀ x \;❙\; Q • R ⇒ P)$
+- *(8.t.∃) (9.20) Theorem, Trading:* $(∃ x \;❙\; Q ∧ R • P) ≡ (∃ x \;❙\; Q • R ∧ P)$
 
 *** Contextual Rules
     :PROPERTIES:
@@ -3744,9 +3756,9 @@ For instance: let $[\_{}] : 𝔹 → ℕ; [true] = 1, [false] = 0$, then,
 
    By contextual rules, and conditional rules,
 
-   *(8.c) Theorem, Context:* $(⊕ x ❙ R ∧ e = f • P[z ≔ e]) = (⊕ x ❙ R • P[z ≔ f])$
+   *(8.c) Theorem, Context:* $(⊕ x \;❙\; R ∧ e = f • P[z ≔ e]) = (⊕ x \;❙\; R • P[z ≔ f])$
 
-   *(8.c′) Theorem, Context:* $(⊕ x ❙ R • P[z ≔ R]) = (⊕ x ❙ R • P[z ≔ true])$
+   *(8.c′) Theorem, Context:* $(⊕ x \;❙\; R • P[z ≔ R]) = (⊕ x \;❙\; R • P[z ≔ true])$
 
 *** Distributivity Rules
     :PROPERTIES:
@@ -3755,10 +3767,21 @@ For instance: let $[\_{}] : 𝔹 → ℕ; [true] = 1, [false] = 0$, then,
 
  The following axiom shows how distributivity laws generalise to quantifiers.
 
- *(8.d) Axiom, Distributivity of ⊗ over ⊕:* Provided /x/ does not occur in /P/,
- and “⊗ distributes over ⊕” ---/a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)/ and /a ⊗ Id_⊕ =
- Id_⊕/---
- \[ P ⊗ (⊕ x ❙ R • Q) \quad=\quad (⊕ x ❙ R • P ⊗ Q) \]
+ *(8.d) Axiom, Distributivity of f:* Provided /x/ does not occur in /P/,
+ and “f is ⊕-⊗-distributive” ---i.e., /f (x ⊕ y) = f x ⊗ f y/ and $f\, \Id_⊕ =  \Id_⊗$.
+ \[ f\, (⊕ x \;❙\; R • P) \quad=\quad (⊗ x \;❙\; R • f\, P) \]
+
+ For instance,
+ - $\log (Π x\;❙\;R • P) \;=\; (Σ x\;❙\;R • \log P)$
+ - “Power of sums”: $a ^{ (Σ x\;❙\;R • P)} \;=\; (Π x\;❙\;R • a^P)$
+ - *Generalised De Morgan (9.18)*: $¬ (∀ x\;❙\;R • P) \;≡\; (∃ x\;❙\;R • ¬ P)$
+
+ *(8.d′) Theorem, Distributivity of ⊗ over ⊕:* Provided /x/ does not occur in /P/,
+ and “⊗ distributes over ⊕” ---/a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)/ and /a ⊗ \Id_⊕ =
+ \Id_⊕/---
+ \[ P ⊗ (⊕ x \;❙\; R • Q) \quad=\quad (⊕ x \;❙\; R • P ⊗ Q) \]
+
+ ( Proof: Use 8.d with $f(x) = a ⊗ x$. )
 
  The expression $P$ that is being moved out of the scope (or into it, depending
  on your point of view) cannot contain $x$ as a free variable. This restriction
@@ -3766,43 +3789,157 @@ For instance: let $[\_{}] : 𝔹 → ℕ; [true] = 1, [false] = 0$, then,
  ---otherwise, the LHS and RHS would, in general, not be equivalent.
 
  For instance,
- - (8.d.Σ) $P · (Σ x ❙ R • Q) \quad=\quad (Σ x ❙ R • P · Q)$.
- - *(9.5) Distributivity of ∨ over ∀:*  $P ∨ (∀ x ❙ R • Q) \quad≡\quad (∀ x ❙ R • P ∨ Q)$.
- - *(9.21) Distributivity of ∧ over ∃:*  $P ∧ (∃ x ❙ R • Q) \quad≡\quad (∃ x ❙ R • P ∧ Q)$.
+ - (8.d.Σ) $P · (Σ x \;❙\; R • Q) \quad=\quad (Σ x \;❙\; R • P · Q)$.
+ - *(9.5)  Distributivity of ∨ over ∀:*  $P ∨ (∀ x \;❙\; R • Q) \quad≡\quad (∀ x \;❙\; R • P ∨ Q)$.
+ - *(9.21) Distributivity of ∧ over ∃:*  $P ∧ (∃ x \;❙\; R • Q) \quad≡\quad (∃ x \;❙\; R • P ∧ Q)$.
 
  # This allows us to prove the following theorems.
  #
  #  *# (9.6) Body Extraction:* Provided /x/ does not occur in /P/,
- # $(⊕ x ❙ R • P) \;=\; (⊕ x • \mathsf{if}\, R
- # \,\mathsf{then}\, P \,\mathsf{else}\, Id_⊕ \mathsf{fi})$
+ # $(⊕ x \;❙\; R • P) \;=\; (⊕ x • \mathsf{if}\, R
+ # \,\mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi})$
  #
- # \[ (⊕ x ❙ R • P) \;=\; P ⊗ (⊕ x • ) \]
+ # \[ (⊕ x \;❙\; R • P) \;=\; P ⊗ (⊕ x • ) \]
  #
  # c.f., 9.22
 
- *(8.d′) Distributivity of ⊗ over non-empty ⊕:* Provided /x/ does not occur in /P/,
+ *(8.d″) Distributivity of ⊗ over non-empty ⊕:* Provided /x/ does not occur in /P/,
  and “⊗ distributes over non-empty ⊕” ---/a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)/ (but
- maybe not /a ⊗ Id_⊕ = Id_⊕)/---
- \[ (∃ x • R) \quad⇒\quad P ⊗ (⊕ x ❙ R • Q) \quad=\quad (⊕ x ❙ R • P ⊗ Q) \]
+ maybe not $a ⊗ \Id_⊕ = \Id_⊕$.
+ \[ (∃ x • R) \quad⇒\quad P ⊗ (⊕ x \;❙\; R • Q) \quad=\quad (⊕ x \;❙\; R • P ⊗ Q) \]
+
+Be careful using this theorem. A term can be moved outside the scope of the
+quantification only if the range $R$ is not empty ---i.e., not everywhere /false/.
 
  For instance,
- - *(9.7) Distributivity of ∧ over ∀:*   $(∃ x • R) \quad⇒\quad P ∧ (∀ x ❙ R • Q)
-   \quad≡\quad (∀ x ❙ R • P ∧ Q)$
- - *(9.23) Distributivity of ∨ over ∃:*   $(∃ x • R) \quad⇒\quad P ∨ (∃ x ❙ R • Q)
-   \quad≡\quad (∃ x ❙ R • P ∨ Q)$
+ - *(9.7) Distributivity of ∧ over ∀:*   $(∃ x • R) \quad⇒\quad P ∧ (∀ x \;❙\; R • Q)
+   \quad≡\quad (∀ x \;❙\; R • P ∧ Q)$
+ - *(9.23) Distributivity of ∨ over ∃:*   $(∃ x • R) \quad⇒\quad P ∨ (∃ x \;❙\; R • Q)
+   \quad≡\quad (∃ x \;❙\; R • P ∨ Q)$
 
-*** Unital Body
+*** Order Rules
     :PROPERTIES:
-    :CUSTOM_ID: Unital-Body
+    :CUSTOM_ID: Order-Rules
+    :END:
+Suppose we have an order $\_{}⊑\_{}$.
+
+*(8.m) Axiom, (Generalised) Monotonicity; Body Weakening/Strengthening:*
+Provided ⊕ is monotonic ---/a ⊑ a′ ∧ b ⊑ b′  ⇒  a ⊕ b  ⊑  a′ ⊕ b′/---
+\[ (⊕ x\;❙\;R • P) ⊑ (⊕ x\;❙\;R • P′) \quad⇐\quad (∀ x\;❙\;R • P ⊑ P′) \]
+
+For example, this covers both of (9.12) and (9.27); consequently giving us
+(9.11) and (9.26) ---by weakening $p ∧ q ⇒ p$ and $p ⇒ p ∨ q$.
+
+*** Antitonicity Rules for Eliminatory-⊕
+    :PROPERTIES:
+    :CUSTOM_ID: Antitonicity-Rules-for-Eliminatory
     :END:
 
-*(8.u) Axiom, Unital Body:* $(⊕ x ❙ R • Id_⊕) = Id_⊕$
+Suppose we have an order $\_{}⊑\_{}$
+and say the operation ⊕ is *eliminatory* iff /(a ⊕ b) ⊑ a/ for all /a, b/.
+- E.g., for 𝔹, conjunction is eliminatory.
+- Any meet, $\_{}⊓\_{}$ is eliminatory. (See A2; H10)
 
-For instance,
-- (8.u.Σ): $(Σ x ❙ R • 0) = 0$
-- (8.u.Π): $(Π x ❙ R • 1) = 1$
-- (8.u.∃) (9.8): $(∀ x ❙ R • true) ≡ true$
-- (8.u.∀) (9.24): $(∃ x ❙ R • false) = false$
+*(8.rws.e) Range Weakening/Strengthening for eliminatory-⊕:*
+$(⊕ x \;❙\; R ∨ Q • P) ⊑ (⊕ x \;❙\; R • P)$
+#+begin_src math
+  (⊕ x ❙ R ∨ Q • P)
+={- Absorption; to prepare for using range split -}
+  (⊕ x ❙ R ∨ (Q ∧ ¬ R) • P)
+={- Range split; R ∧ (Q ∧ ¬ R) ≡ false by contradiction -}
+  (⊕ x ❙ R • P) ⊕ (⊕ x ❙ Q ∧ ¬ R • P)
+⊑{- ⊕ eliminatory -}
+  (⊕ x ❙ R • P)
+#+end_src
+
+If ⊕ were /introductory/ instead, (see below), then the exact same proof would be
+used, but the last hint would be src_haskell[:exports code]{⊒{- ⊕ introductory
+-}}.
+
+*(8.rws.e) Range Antitonicity, Weakening/Strengthening, for eliminatory-⊕:*
+\[(⊕ x \;❙\; R′ • P) ⊑ (⊕ x \;❙\; R • P)  \quad⇐\quad (∀ x • R ⇒ R′)\]
+Proof:
+#+begin_src math
+  (⊕ x ❙ R′ • P)
+={- Assumption R ⇒ R′ and definition of ⇒ -}
+   (⊕ x ❙ R ∨ R′ • P)
+⊑{- Range weakening for eliminatory-⊕ -}
+   (⊕ x ❙ R • P)
+#+end_src
+
+*(8.i) Generalised Elimination (“Instantiation”) for eliminatory-⊕:*
+\[ (⊕ x • P) \;⊑\; P[x ≔ E] \]
+Proof:
+#+begin_src math
+  (⊕ x • P)
+={- Abbreviation; preparing to use one-point rule -}
+  (⊕ x ❙ true • P)
+={- Zero of ∨ -}
+  (⊕ x ❙ x = E  ∨  true • P)
+⊑{- Range strengtheing for eliminatory ⊕ -}
+  (⊕ x ❙ x = E • P)
+={- One-point rule -}
+  P[x ≔ E]
+#+end_src
+*** Monotonicity Rules for Introductory-⊕
+    :PROPERTIES:
+    :CUSTOM_ID: Monotonicity-Rules-for-Introductory
+    :END:
+
+Suppose we have an order $\_{}⊑\_{}$
+and say the operation ⊕ is *introductory* iff /a ⊑ (a ⊕ b)/ for all /a, b/.
+- E.g., for ℕ, addition is introductory. (See H12!)
+- E.g., for 𝔹, disjunction is introductory.
+- Joins, $\_{}⊔\_{}$ is introductory. (See A2; H10)
+
+# i.e., ⊕ is non-decreasing
+
+The rules are analogous to eliminatory-⊕ and proven similarly.
+
+- *(8.rws.i) Range Weakening/Strengthening:* $(⊕ x \;❙\; R • P) ⊑ (⊕ x \;❙\; R ∨ Q • P)$
+#+begin_src math :exports none
+  (⊕ x\;❙\;R ∨ Q • P)
+={- Absorption; to prepare for using range split -}
+  (⊕ x\;❙\;R ∨ (Q ∧ ¬ R) • P)
+={- Range split; R ∧ (Q ∧ ¬ R) ≡ false by contradiction -}
+  (⊕ x\;❙\;R • P) ⊕ (⊕ x\;❙\;Q ∧ ¬ R • P)
+⊒{- ⊕ introductory -}
+  (⊕ x\;❙\;R • P)
+#+end_src
+
+- *(8.rws.i) Range Monotonicity, Weakening/Strengthening, for introductory-⊕:*
+\[(⊕ x \;❙\; R • P) ⊑ (⊕ x \;❙\; R′ • P)  \quad⇐\quad (∀ x • R ⇒ R′)\]
+
+- *(8.e) Generalised Introduction (“⊕-Introduction”) for introductory-⊕:*
+   \[ P[x ≔ E] \;⊑\; (⊕ x • P) \]
+# Proof:
+#+begin_src math :exports none
+  (⊕ x • P)
+={- Abbreviation; preparing to use one-point rule -}
+  (⊕ x\;❙\;true • P)
+={- Zero of ∨ -}
+  (⊕ x\;❙\;x = E  ∨  true • P)
+⊒{- Range weakening for introductory ⊕ -}
+  (⊕ x\;❙\;x = E • P)
+={- One-point rule -}
+  P[x ≔ E]
+#+end_src
+
+*** When are two quantifications equal?
+    :PROPERTIES:
+    :CUSTOM_ID: When-are-two-quantifications-equal
+    :END:
+
+    Two quantifications are equal when “each of their parts are equal”.
+
+#+begin_src haskell
+  (⊕ x\;❙\;R • P) = (⊕′ x\;❙\;R′ • P′)
+⇐     ⊕ = ⊕′             -- same operation
+  ∧  (∀ x • R ≡ R′)      -- same range
+  ∧  (∀ x\;❙\;R • P = P′)  -- same body
+#+end_src
+
+See, for example, (9.9).
 
 **  Predicate Calculus
    :PROPERTIES:
@@ -3823,16 +3960,16 @@ For instance,
 
    - Universal and existential quantification, as discussed in this section.
 
-*** Universal Quantification
-    :PROPERTIES:
-    :CUSTOM_ID: Universal-Quantification
-    :END:
+The general axioms of quantification hold for ∧/∀ and ∨/∃.
+along with an additional one below.
 
-The general axioms of quantification hold for ∧, ∀, along with additional ones
-below.
+| $∀ x \;❙\; R • P$ | ≈ | “for all x satisfying R, P holds”                  |
+| $∃ x \;❙\; R • P$ | ≈ | “there exists an /x/ satisfying /R/ such that /P/ holds” |
 
-| /∀ x ❙ R • P/ | ≈ | “for all x satisfying R, P holds” |
+*(9.29) Theorem, Interchange of quantifications:*
+$(∃ x\;❙\;R • (∀ y\;❙\;Q • P)) \quad⇒\quad (∀ x\;❙\;Q • (∃ x\;❙\;R • P))$.
 
+( See LADM p166 for the proof. )
 
 * TODO COMMENT Sets
   :PROPERTIES:
