@@ -3475,13 +3475,15 @@ od
 \def\Id{\mathsf{Id}}
    #+end_latex-definitions
 
-1. Quantification let's us “sum a bunch of /numeric/ values” or “or a bunch of
+ Quantification let's us “sum a bunch of /numeric/ values” or “or a bunch of
   /Boolean/ values”.
 
   Quantifiers allow one to denote the operation of applying some binary operator
    (like addition or disjunction) to an arbitrary, possibly infinite, bag of
    values. For programming, quantifiers specify iteration control structures
-   ---loops.
+   ---loops--- and also give way to speaking of “global (= free) variables” /and/
+   “local (= bound) variables”, such as, how quantifying over a global variable
+   makes it (i.e., “overshadows it as”) a local variable of the quantification.
 
   Quantifications are everywhere in mathematics, so we need basic tools to
    handle them.  Herein we develop the notation and general techniques that make
@@ -3759,22 +3761,56 @@ from the range of a quantification.
    :CUSTOM_ID: Introduction-Elimination-of-quantifiers
    :END:
 
-| (8.13) Axiom, Empty Range    | $(⊕ x \;❙\; false • P) = \Id_⊕$    |
-| (8.14) Axiom, One-point rule | $(⊕ x \;❙\; x = E • P) = P[x ≔ E]$ |
-| (8.u) Axiom, Unital body     | $(⊕ x \;❙\; R • \Id_⊕) = \Id_⊕$    |
+   *Proviso:* For (8.14), we need /x/ not to occur in /E/.
 
-*Proviso:* For (8.14), we need /x/ not to occur in /E/.
-
+#+begin_details (8.14) Proviso
 Indeed, the LHS does not depend on /x/ (in the state in which it is evaluated),
 since all occurrences of $x$ are bound. Hence, for the equivalence to hold, the
 RHS also cannot depend on $x$, and this requires (in general) that $x$ not occur
 free in $E$.
+#+end_details
 
-For example,
-- (8.u.Σ): $(Σ x \;❙\; R • 0) = 0$
-- (8.u.Π): $(Π x \;❙\; R • 1) = 1$
-- (8.u.∃) (9.8): $(∀ x \;❙\; R • true) ≡ true$
-- (8.u.∀) (9.24): $(∃ x \;❙\; R • false) = false$
+| (8.13) Axiom, Empty Range    | $(⊕ x \;❙\; false • P) = \Id_⊕$                               |
+| (8.14) Axiom, One-point rule | $(⊕ x \;❙\; x = E • P) = P[x ≔ E]$                            |
+| Axiom, Unital (Empty) Body   | $(⊕ x \;❙\; R • \Id_⊕) = \Id_⊕$                               |
+| Axiom, Zero Body             | $(⊕ x \;❙\; R • P) = 𝟘_⊕ \quad⇐\quad (∃ x \;❙\; R • P = 𝟘_⊕)$ |
+
+The first two rules governing manipulation of the range part; they govern the
+case that the range part defines an empty collection, and the case that the
+range defined a collection with exactly one element.
+
+| Empty Body Instances                    |
+|-----------------------------------------|
+| $(Σ x \;❙\; R • 0) = 0$                 |
+| $(Π x \;❙\; R • 1) = 1$                 |
+| (9.8): $(∀ x \;❙\; R • true) ≡ true$    |
+| (9.24): $(∃ x \;❙\; R • false) = false$ |
+
+The Zero Body rule applies when ⊕ has a /zero element/ $𝟘_⊕$; i.e., “a black-hole
+value that sucks-up everything”: $x ⊕ 𝟘_⊕ = 𝟘_⊕ ⊕ x = 𝟘_⊕$.
+
+| Zero Body Instances                      |
+|------------------------------------------|
+| $(Π i \;❙\; 0 ≤ i < 10 • 5 - i) = 0$     |
+| $(∀ p \;❙\; p) \,≡\, false$              |
+| $(∃ p \;❙\; p) \,≡\, true$               |
+
+Other extremely useful rules to get rid of a quantifier, or at least get one
+term out of it, are the “split off term” rules below.
+
+Ignoring the proviso/antecedent of the Zero Body rule quickly leads to trouble:
+\begin{calc}
+\Id_⊕
+\step{ empty range }
+(⊕ x \;❙\; false • 𝟘_⊕)
+\step{ zero body: ‘clearly we have a zero’ }
+𝟘_⊕
+\end{calc}
+The second step is invalid since it is /not enough/ to show some term is zero, but
+rather that some term ---i.e., dummy variable--- /satisfying/ the range is zero.
+Indeed, in the second step above we need to show $(∃ x \;❙\; false • 𝟘_⊕ = 𝟘_⊕)
+≡ true$, which by Empty Range for ∃ is the same as $false ≡ true$ ---and this is
+impossibly difficult to show, since it's just not true.
 
 **  Dummy Renaming
    :PROPERTIES:
@@ -3881,7 +3917,7 @@ change the order of the values being summed.  Nesting and rearrangement depend
 critically on the associativity and symmetry of the operation ⊕.  The
 parenthesisation corresponds to the nesting of summands.
 \begin{calc}
-(1 x 1 + 1 × 2 + 1 × 3) + (2 × 2 + 2 × 3) + (3 × 3)
+(1 × 1 + 1 × 2 + 1 × 3) + (2 × 2 + 2 × 3) + (3 × 3)
 \step{ definition of Σ }
 (Σ i ❙ 1 ≤ i≤ 3 • (Σ j ❙ i ≤ j ≤ 3 • i × j))
 \step{ unnesting }
@@ -3889,7 +3925,9 @@ parenthesisation corresponds to the nesting of summands.
 \step{ rearranging }
  (Σ j, i ❙ 1 ≤ i≤ 3 \,∧\, i ≤ j ≤ 3 • i × j)
 \step{ nesting: $1 ≤ i ≤ 3 ∧ i ≤ j ≤ 3 \;≡\; 1 ≤ j ≤ 3 ∧ 1 ≤ i ≤ j$ }
-(Σ i ❙ 1 ≤ i≤ 3 • (Σ j ❙ i ≤ j ≤ 3 • i × j))
+(Σ i ❙ 1 ≤ i ≤ 3 • (Σ j ❙ i ≤ j ≤ 3 • i × j))
+\step{ definition of Σ }
+1 × 1 + (1 × 2 + 2 × 2) + (1 × 3 + 2 × 3 + 3 × 3)
 \end{calc}
 
 The change of inclusions may not be familiar, so here is its proof.
@@ -4366,17 +4404,6 @@ For example, this covers both of (9.12) and (9.27); consequently giving us
 #+end_src
 
 See, for example, (9.9).
-** COMMENT Range Part
-   :PROPERTIES:
-   :CUSTOM_ID: COMMENT-Range-Part
-   :END:
-
-There are four rules governing manipulation of the range part.
-
-The first two rules govern the case that the range part defines an empty
-collection, and the case that the range defined a collection with exactly one
-element.
-
 ** COMMENT Sums and Recurrences
    :PROPERTIES:
    :CUSTOM_ID: COMMENT-Sums-and-Recurrences
@@ -4544,6 +4571,11 @@ $(∃ x\;❙\;R • (∀ y\;❙\;Q • P)) \quad⇒\quad (∀ x\;❙\;Q • (∃
    # 4. Numerically this is just a limit: $(Σ_{i ≥ 0} aᵢ \;=\; \lim_{n → ∞} Σ^n_{i
    #   = 0} aᵢ)$. See /Concrete Mathematics, §2.7/ for details.
 
+** COMMENT Monotone Convergence Theorem ---reason why ∀/∃ quantifications are always defined
+   :PROPERTIES:
+   :CUSTOM_ID: COMMENT-Monotone-Convergence-Theorem-reason-why-quantifications-are-always-defined
+   :END:
+   incidently, 𝔹 are a complete lattice, so yeah.
 * TODO COMMENT Sets
   :PROPERTIES:
   :CUSTOM_ID: Sets
