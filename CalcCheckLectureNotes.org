@@ -4458,15 +4458,46 @@ $(∃ x\;❙\;R • (∀ y\;❙\;Q • P)) \quad⇒\quad (∀ x\;❙\;Q • (∃
    :CUSTOM_ID: Specific-theorems-about-Σ
    :END:
 
-+ *“All numbers are obtained by adding 1”:* $(Σ i\;❙\;0 ≤ i < n • 1) = n$ ---for $0 ≤ n$.
+$\def\suc{\mathsf{suc}\,}$
 
-  More generally, *“Multiplication is iterated sum”*: $(Σ i\;❙\;0 ≤ i < n • P) = n · P$ /provided/ /i/ does not occur in
-  /P/ and $0 ≤ n$.
-  - An index variable that doesn't appear in the body (here /i/) can simply be
-    eliminated if we multiply what's left by the size of that variable's index
-    set (here /n/).
+The following can be proven by induction on $n : ℕ$, where $\suc x = x + 1$
+---many can be proven directly by using ⊕-distributivity laws.
 
-  *“Superfluous quantification for idempotent ⊕”*:
+   + Constant Sum: $(∑ i \;❙\; i < n • a) = a · n$
+     - “Multiplication is iterated sum”
+       * An index variable that doesn't appear in the body (here /i/) can simply
+         be eliminated if we multiply what's left by the size of that variable's
+         index set (here /n/).
+     - Sum of 1: $(∑ i \;❙\; i < n • 1) = n$
+       * “All numbers are obtained by adding 1”
+     - Sum of evens: $(∑ i : ℕ \;❙\; i ≤ n • 2 · i) = n · \suc n$
+       * i.e., + $2 · (Σ i\;❙\;0 ≤ i < n • i) = n · (n + 1)$.
+       * “The sum of the first /n/ integers is ${n · (n + 1) \over 2}$.”
+       * “The sum of the first /n/ even integers is $n · (n + 1)$.”
+     - Sum of odds:  $(∑ i : ℕ \;❙\; i < n • \suc i + i) = n · n$
+       * The sum of the first /n/ odd natural numbers is /n²/.
+   + Sum powers of two: $\suc (∑ i \;❙\; i < n • 2^i) = 2^n$
+
+   + Constant Product: $(Π i \;❙\; i < n • a) = a ^ n$
+     - “Exponentiation is iterated sum”
+   + Product of integers: $(Π i \;❙\; 0 ≤ i < n • i) = n!$
+     - The product of the first $n$ integers is $n !$ (“n factorial”)
+
+   # + Geometric Sum: a + r · (∑ i ❙ i < n • a · pow (suc r) i) = a · pow (suc r) n
+   # + Sum the factorials: suc (∑ i ❙ i < n • i · i !) = n !
+   # + Sum tagged elements / Sum the twos with an index: (∑ i ❙ i < n • i · pow 2 i) = n · pow 2 (suc n)
+   # + Sum Consecutive pairs: 3 · (∑ i ❙ i ≤ n • i · suc i) = n · suc n · suc suc n
+   # + Sum Consecutive triples: 4 · (∑ i ❙ i ≤ n • i · suc i · suc suc i) = n · suc n · suc suc n · suc suc suc n
+   # + Sum the squares: 6 · (∑ i : ℕ ❙ i ≤ n • pow i 2) = n · suc n · (2 · n + 1)
+   # + Sum the squares of `fib`: (∑ i : ℕ ❙ i ≤ n • pow (fib i) 2) = fib n · fib (suc n)
+   #   - Declaration: fib : ℕ → ℕ
+   #   - Axiom “Definition of `fib`”: fib 0 = 0
+   #   - Axiom “Definition of `fib`”: fib 1 = 1
+   #   - Axiom “Definition of `fib`”: fib (suc suc n) = fib (suc n) + fib n
+
+# --------------------------------------------------------------------------------
+
++  *“Superfluous quantification for idempotent ⊕”*:
    For ⊕ idempotent, $(⊕ i\;❙\;0 ≤ i < n • P) = P$ /provided/ /i/ does not occur in
    /P/ and $0 < n$ (i.e., the LHS is non-empty!)
     - “When you can choose from P, or P, or P, or ... /n/-many times, then really
@@ -4474,16 +4505,6 @@ $(∃ x\;❙\;R • (∀ y\;❙\;Q • P)) \quad⇒\quad (∀ x\;❙\;Q • (∃
 
     ( The /0 ≤ n/ proviso is to ensure that the LHS's range is not empty and so
     the LHS is not just $\Id_⊕$, which may differ from the RHS. )
-
-+ $2 · (Σ i\;❙\;0 ≤ i < n • i) = n · (n + 1)$.
-  - “The sum of the first /n/ integers is ${n · (n + 1) \over 2}$.”
-  - “The sum of the first /n/ even integers is $n · (n + 1)$.”
-
-+ *Exponentiation is iterated product”:* $(Π i \;❙\; 0 ≤ i < n • P) = P^n$
-  /provided/ /i/ does not occur in /P/ and /0 < n/.
-
-+ $(Π i \;❙\; 0 ≤ i < n • i) = n!$, the product of the first $n$ integers
-  is $n !$ (“n factorial”).
 
 + $(↓ i \;❙\; 0 ≤ i < n • i) = 0$, the smallest number among the first
   /n/ non-negative integers is 0.
