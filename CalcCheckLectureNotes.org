@@ -248,7 +248,6 @@ y
 #+begin_src emacs-lisp :exports none
 (require 'cl)
   (load-file "~/Desktop/power-blocks.el")
-
 #+end_src
 
 #+BEGIN_export html
@@ -304,6 +303,7 @@ $$
 
 # This snippet let's us, in an org file, do C-c C-x C-l to see the calculation
 # rendered prettily. It will not work if you do #+begin_calc … #+end_calc.
+#+name: startup-code
 #+begin_src emacs-lisp :exports none
 (add-to-list 'org-latex-packages-alist
   '("fleqn, leqno, block" "calculation" t))
