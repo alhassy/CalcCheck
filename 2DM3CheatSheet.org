@@ -37,7 +37,7 @@
 #+latex: \def\true{\mathsf{true}}
 #+latex: \def\false{\mathsf{false}}
 
-#+latex: \def\remark#1{\color{gray!80} #1}
+#+latex: \def\remark#1{{\color{gray!80} #1}}
 
 * Propositional Calculus
   :PROPERTIES:
@@ -548,6 +548,7 @@ a ⨾ (b ⊓ c)
 
 # The next set of rules dicate how we can distribute a meet into a division.
 *Modal and Dedekind rules:*
+\remark{\footnotesize ( ‘⊑’ instead of ‘=’ since ‘⨾’ may not be cancellable )}
 # Taking a ≔ a ˘ in the left side rules makes them look more like the right side
 # rules (•̀ᴗ•́)و
 | \remark{ (Axioms) }                         |   | \remark{ (Theorems) }                     |
@@ -610,7 +611,7 @@ Division for the special case $⨾ = ⊔$ in the /dual order/ (⊒) is known as 
 difference/ or /relative semi-complement/: Denoted $x - y$ (/“x without y”/), it is /the
 smallest piece that along with y ‘covers’ x/; i.e., it is the least value that
 ‘complements’ (“fill up together”) $y$ to include $x$.
-#+latex: {\remark{( Possibly for this reason, set difference is sometimes denoted $S ╲ T$ in other books! )}}
+#+latex: {\remark{\footnotesize ( Possibly for this reason, set difference is sometimes denoted $S ╲ T$ in other books! )}}
 #
 # # semi-complement:    x ⊔ b ⊒ a  ≡  x ⊒ a - b
 
