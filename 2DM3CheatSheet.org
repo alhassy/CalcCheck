@@ -1,5 +1,5 @@
 #+TITLE: Reference Sheet for Discrete Maths
-#+AUTHOR: [[http://www.cas.mcmaster.ca/~alhassm/][Musa Al-hassy]] and Wolfram Kahl
+#+AUTHOR: [[http://www.cas.mcmaster.ca/~alhassm/][Musa Al-hassy]] and  [[http://www.cas.mcmaster.ca/~kahl/][Wolfram Kahl]]
 #+EMAIL: alhassy@gmail.com
 #+DESCRIPTION: This document is written by Musa Al-hassy for his learning in the spring of 2018.
 #+STARTUP: hideblocks
@@ -435,7 +435,7 @@ The relationship between set comprehension and quantifier notation is:
 The following theorems serve to define ‘♯’ for the usual set theory operators.
 
 |                                  |                                             |
-| *Positive definite*                | $♯S ⊆ 0 \quad≡\quad S = ∅$                  |
+| *Positive definite*                | $♯S ≤ 0 \quad≡\quad S = ∅$                  |
 | *Power set size*                   | $♯ ℙ S = 2^{♯S}$                            |
 | *Principle of Inclusion-Exclusion* | $♯(S ∪ T) = ♯S + ♯T - ♯(S ∩ T)$             |
 | *Monotonicity*                     | $S ⊆ T ⇒ ♯S ≤ ♯T$                           |
@@ -800,6 +800,10 @@ Relations are sets of pairs ...
 
 # R╲S “right residual”
 
+/“u is related by ‘S *under* R’ to v precisely when everything S-*under* u is also
+R-*under* v.”/ This generalises extensional subset inclusion and indirect reasoning
+for orders.
+
 :Hide:
 /“Residuals arise from negating compositions”:/ By comparing symbol-by-symbol in
 the RHS of ‘⨾’ and ‘╱’, it is not difficult to see that $S ╱ R \;\;=\;\;
@@ -811,14 +815,14 @@ $\big(∼ T\big)˘ \;=\; ∼ \big(T ˘\big)$.
 # R╲S = ¬(R˘ ⨾ ¬S)
 
 #+latex: \def\E{\mathsf{E}}
-*Example:* Define $x 〔\E〕 X \;≡\; x ∈ X$, then $A 〔\E ╲ \E〕B \;≡\; A ⊆ B$.
+*Example:* Define $\E$ via $x 〔\E〕 X \;≡\; x ∈ X$, then $A 〔\E ╲ \E〕B \;≡\; A ⊆ B$.
 # Likewise, $X 〔\E ╲ \E \,∩\, ∼ \E ˘ ╱ ∼ \E ˘ 〕 Y \;≡\; Y = ∼ X$.
 # i.e., a symmetric quotient! Relationships of equalities are syqs!
 
-#+latex: \vspace{-0.7em}
+# +latex: \vspace{-0.7em}
 #+latex: \def\L{\mathsf{L}}
 *Example (Indirect inclusion):*
-Define $x 〔\L〕 y \;≡\; x ⊑ y$, then $\L ╲ \L = \L ╱ \L = \L$.
+Define $\L$ via $x 〔\L〕 y \;≡\; x ⊑ y$, then $\L ╲ \L = \L ╱ \L = \L$.
 
 :identity_rel:
 The identity relation on \ $B : \SET {t}$ \;
