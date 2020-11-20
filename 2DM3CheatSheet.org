@@ -479,6 +479,23 @@ $\binom{n}{r} \;=\; (Σ s : ℙ 1..n ❙ ♯s = r • 1)$
 *Theorem, Combination:*
 $\binom{n}{r} \;=\; n! / (r! · (n - r)!)$
 
+* Converse ---an over-approximation of inverse (A4)
+
+#+latex_header: \newunicodechar{˘}{\raise0.5ex\hbox{\tiny$\smallsmile$}}
+#+latex_header: \def\fcmp{\mathop{\fatsemi}}
+#+latex_header: \newunicodechar{⨾}{\ensuremath{\fcmp}}
+
+#+latex: {\color{white}.}\vspace{-1em}
+
+# Axioms,
+| *Co-distributivity*     | *˘˘, Involutive* | *Monotonicity*        |
+| $(x ⨾ y) ˘ = y ˘ ⨾ x$ | $x ˘ ˘ = x$    | $x ⊑ y ⇒ x ˘ ⊑ y ˘$ |
+
+# Theorems,
+
+| *Identity*      | *Isotonicity* | *Connection*              | *Elimination*             |
+| $\Id ˘ = \Id$ | $x ⊑ y \;≡\; x ˘ ⊑ y ˘$            | $a ˘ ⊑ b \;≡\; a ⊑ b ˘$ | $x ˘ = y ˘ \;≡\; x = y$ |
+
 * Residuals, Division
 #+begin_export latex
 \def\univalent{\mathsf{univalent}\,}
@@ -499,33 +516,47 @@ operations “under ╲” and “over ╱” specified as follows.
 | *Characterisation of ╱*             |   | *Characterisation of ╲*             |
 | $a ⨾ b ⊑ c \quad≡\quad a ⊑ c ╱ b$ |   | $a ⨾ b ⊑ c \quad≡\quad b ⊑ a ╲ c$ |
 
-When ⨾ is symmetric, as in the special cases $⨾ = ⊓$, the divisions
-coincide: $x ╱ y \;=\; y ╲ x$.
+#+latex: {\remark{When ⨾ is symmetric, as in the special cases $⨾ = ⊓$, the divisions coincide: $x ╱ y \;=\; y ╲ x$.}}
 
 #
-|                       |                                 |                                 |
-| *Cancellation*          | $(a ╱ b) ⨾ b ⊑ a$               | $a ⨾ (a ╲ b) ⊑ b$               |
-| *Dividing a division*   | $(a ╱ b) ╱ c \;=\; a ╱ (c ⨾ b)$ | $a ╲ (b ╲ c) \;=\; (b ⨾ a) ╲ c$ |
-| *Division of multiples* | $a ⊑ (a ⨾ b) ╱ b$               | $b ⊑ a ╲ (a ⨾ b)$               |
-|                       |                                 |                                 |
+|                       |                                 |   |                                 |
+| *Cancellation*          | $(a ╱ b) ⨾ b ⊑ a$               |   | $a ⨾ (a ╲ b) ⊑ b$               |
+| *Dividing a division*   | $(a ╱ b) ╱ c \;=\; a ╱ (c ⨾ b)$ |   | $a ╲ (b ╲ c) \;=\; (b ⨾ a) ╲ c$ |
+| *Division of multiples* | $a ⊑ (a ⨾ b) ╱ b$               |   | $b ⊑ a ╲ (a ⨾ b)$               |
+|                       |                                 |   |                                 |
 #
 
-| *Monotonicity of ⨾* | $a ⊑ a′ ∧ b ⊑ b′ ⇒ a ⨾ b ⊑ a′ ⨾ b′$ |
+| *Monotonicity of ⨾*             | $a ⊑ a′ ∧ b ⊑ b′ ⇒ a ⨾ b ⊑ a′ ⨾ b′$ |
+| *Subdistributivity of ⨾ over ⊓* | $a ⨾ (b ⊓ c) \;⊏\; a ⨾ b ⊓ a ⨾ c$   |
+
+:Subdist_pf:
+a ⨾ (b ⊓ c)
+= a ⨾ (b ⊓ c)  ⊓ a ⨾ (b ⊓ c)   -- ⊓ idemp
+⊏ a ⨾ b  ⊓  a ⨾ c              -- monotonicity of ⨾ and weakening x ⊓ y ⊏ x
+:End:
 
 #
-|                          |                           |                            |
-| *Numerator monotonicity*   | $b ⊑ b′ ⇒ a ╲ b ⊑ a ╲ b′$ | $b ⊑ b′  ⇒ b ╱ a ⊑ b′ ╱ a$ |
-| *Denominator antitonicity* | $a′ ⊑ a ⇒ a ╲ b ⊑ a′ ╲ b$ | $a′ ⊑ a  ⇒ b ╱ a ⊑ b ╱ a′$ |
-| *Self-reflexivity*         | $\Id ⊑ a ╲ a$             | $\Id ⊑ a ╱ a$              |
-| *Denominator Identity*     | $\Id ╲ a = a$             | $a ╱ \Id = a$              |
-| *Numerator Zero*           | $a ╲ ⊤ = ⊤$               | $⊤ ╱ a = ⊤$                |
-| *Wraparound rule*          | $⊥ ╲ a = ⊤$               | $a ╱ ⊥ = ⊤$                |
+|                          |                           | |                            |
+| *Numerator monotonicity*   | $b ⊑ b′ ⇒ a ╲ b ⊑ a ╲ b′$ | | $b ⊑ b′  ⇒ b ╱ a ⊑ b′ ╱ a$ |
+| *Denominator antitonicity* | $a′ ⊑ a ⇒ a ╲ b ⊑ a′ ╲ b$ | | $a′ ⊑ a  ⇒ b ╱ a ⊑ b ╱ a′$ |
+# | *Self-reflexivity*         | $\Id ⊑ a ╲ a$             | $\Id ⊑ a ╱ a$              |
+# | *Denominator Identity*     | $\Id ╲ a = a$             | $a ╱ \Id = a$              |
+# | *Numerator Zero*           | $a ╲ ⊤ = ⊤$               | $⊤ ╱ a = ⊤$                |
+# | *Wraparound rule*          | $⊥ ╲ a = ⊤$               | $a ╱ ⊥ = ⊤$                |
+| *Exact division* | $(∃ z • y = x ⨾ z)$ | ≡ | $x ⨾ (x ╲ y) = y$ |
+| *Exact division* | $(∃ z • y = x ╲ z)$ | ≡ | $x ╲ (x ⨾ y) = y$ |
 
-#+latex: \vspace{1em}
+# The next set of rules dicate how we can distribute a meet into a division.
+*Modal and Dedekind rules:*
+# Taking a ≔ a ˘ in the left side rules makes them look more like the right side
+# rules (•̀ᴗ•́)و
+| \remark{ (Axioms) }                         |   | \remark{ (Theorems) }                     |
+| $a ⨾ b ⊓ c \;⊑\; a ⨾ (b ⊓ a ˘ ⨾ c)$         |   | $a ╲ b ⊓ c \;⊑\; a ╲ (b ⊓ a ⨾ c)$         |
+| $a ⨾ b ⊓ c \;⊑\; (a ⊓ c ⨾ b ˘) ⨾ b$         |   | $a ╲ b ⊓ c \;⊑\; (a ⊓ c ╲ b) ╲ b$         |
+| $a ⨾ b ⊓ c \;⊑\; (a ⊓ c ⨾ b˘)⨾(b ⊓ a˘ ⨾ c)$ |   | $a ╲ b ⊓ c \;⊑\; (a ⊓ c ╲ b)╲(b ⊓ a ⨾ c)$ |
 
-*Exact division:*
-| $(∃ z • y = x ⨾ z)$  | ≡ | $x ⨾ (x ╲ y) = y$  |
-| $(∃ z • y = x ╲ z)$ | ≡ | $x ╲ (x ⨾ y) = y$ |
+# In the presence of complements, Dedekind ⇔ Schroder Equivalences ⇔ Division
+# characterisations (•̀ᴗ•́)و
 
 #+latex: \vspace{0.5em}
 
@@ -579,7 +610,7 @@ Division for the special case $⨾ = ⊔$ in the /dual order/ (⊒) is known as 
 difference/ or /relative semi-complement/: Denoted $x - y$ (/“x without y”/), it is /the
 smallest piece that along with y ‘covers’ x/; i.e., it is the least value that
 ‘complements’ (“fill up together”) $y$ to include $x$.
-( Possibly for this reason, set difference is sometimes denoted $S ╲ T$ in other books! )
+#+latex: {\remark{( Possibly for this reason, set difference is sometimes denoted $S ╲ T$ in other books! )}}
 #
 # # semi-complement:    x ⊔ b ⊒ a  ≡  x ⊒ a - b
 
@@ -589,6 +620,10 @@ smallest piece that along with y ‘covers’ x/; i.e., it is the least value th
 
 # In a Boolean lattice,  a - b  =  ¬ a ⊓ b  and  a ⇨ b  =  ¬ a ⊔ b
 
+\columnbreak
+
+# +latex: \vspace{-5cm}
+
 ** COMMENT Residuals are stronger than converse
 
  With residuals, we can prove modal rules
@@ -596,25 +631,6 @@ smallest piece that along with y ‘covers’ x/; i.e., it is the least value th
  whereas with modal rules we cannot generally produce residuals ---which
  secretly hide negations ;-)
 
-* Converse ---an over-approximation of inverse (A4)
-
-#+latex_header: \newunicodechar{˘}{\raise0.5ex\hbox{\tiny$\smallsmile$}}
-#+latex_header: \def\fcmp{\mathop{\fatsemi}}
-#+latex_header: \newunicodechar{⨾}{\ensuremath{\fcmp}}
-
-# Axioms,
-| *Co-distributivity*     | *˘˘, Involutive* | *Monotonicity*        |
-| $(x ⨾ y) ˘ = y ˘ ⨾ x$ | $x ˘ ˘ = x$    | $x ⊑ y ⇒ x ˘ ⊑ y ˘$ |
-
-# Theorems,
-
-| *Identity*      | *Isotonicity* | *Connection*              | *Elimination*             |
-| $\Id ˘ = \Id$ | $x ⊑ y \;≡\; x ˘ ⊑ y ˘$            | $a ˘ ⊑ b \;≡\; a ⊑ b ˘$ | $x ˘ = y ˘ \;≡\; x = y$ |
-
-
-\columnbreak
-
-#+latex: \vspace{-5cm}
 * Named Properties
 
 #+begin_export  latex
@@ -764,29 +780,32 @@ Relations are sets of pairs ...
 # RA and PL
 # The Axioms of Set Theory --- Applied to Binary Relations
 #+latex: \vspace{-0.7em}
-|                  |                                  |   |                                                      |
-| Tortoise         | $x 〔 R 〕 y$                    | ≡ | $⟨x, y⟩ ∈ R$                                         |
-| Extensionality   | $R = S$                          | ≡ | $(\forall\ x,y \;•\;  x〔 R〕y \equiv x〔S〕y)$      |
-| Inclusion        | $R \subseteq S$                  | ≡ | $(\forall\ x,y \;•\;  x 〔R〕y \implies x〔S〕y)$    |
-| Empty            | $u 〔\emptyset〕 v$              | ≡ | $\false$                                             |
-| Universe         | $u 〔A \times B〕 v$             | ≡ | $u \in A \;\land\; v \in B$                          |
-| Complement       | $u 〔∼ S〕 v$                 | ≡ | $\lnot (u 〔S〕 v)$                                  |
-| Union            | $u 〔S ∪ T〕 v$                  | ≡ | $u 〔S〕 v \;\lor\; u〔T〕v$                         |
-| Intersection     | $u〔S ∩ T〕v$                    | ≡ | $u〔S〕 v \;\land\; u〔T〕v$                         |
-| Difference       | $u〔S - T〕 v$                   | ≡ | $u〔S〕v \;\land\; \lnot(u〔T〕v)$                   |
-| PseudoComplement | $u〔S \rightarrowtriangle T〕 v$ | ≡ | $u〔S〕v \;\implies\; u〔T〕v$                       |
-| /An/ Identity      | $u 〔𝕀 \ A〕 \, v$               | ≡ | $u = v \in A$                                        |
-| /The/ Identity     | $u 〔\Id〕 \, v$                 | ≡ | $u = v$                                              |
-| Converse         | $u〔 R˘〕 v$                     | ≡ | $v〔 R〕 u$                                          |
-| Composition      | $u〔R \fcmp S〕 v$               | ≡ | $(\exists\ x \;•\;\;  u〔R〕x \;\land\; x〔S〕v)$    |
-| Over Division    | $u〔S ╱ R〕 v$                   | ≡ | $(\forall\ x \;•\;\;  v〔R〕x \;\implies\; u〔S〕x)$ |
-| Under Division   | $u〔R ╲ S〕 v$                   | ≡ | $(\forall\ x \;•\;\;  x〔R〕u \;\implies\; x〔S〕v)$ |
+|                  |                                  |   |                                                   |
+| Tortoise         | $x 〔 R 〕 y$                    | ≡ | $⟨x, y⟩ ∈ R$                                      |
+| Extensionality   | $R = S$                          | ≡ | $(\forall\ x,y \;•\;  x〔 R〕y \equiv x〔S〕y)$   |
+| Inclusion        | $R \subseteq S$                  | ≡ | $(\forall\ x,y \;•\;  x 〔R〕y \implies x〔S〕y)$ |
+| Empty            | $u 〔\emptyset〕 v$              | ≡ | $\false$                                          |
+| Universe         | $u 〔A \times B〕 v$             | ≡ | $u \in A \;\land\; v \in B$                       |
+| Complement       | $u 〔∼ S〕 v$                    | ≡ | $\lnot (u 〔S〕 v)$                               |
+| Union            | $u 〔S ∪ T〕 v$                  | ≡ | $u 〔S〕 v \;\lor\; u〔T〕v$                      |
+| Intersection     | $u〔S ∩ T〕v$                    | ≡ | $u〔S〕 v \;\land\; u〔T〕v$                      |
+| Difference       | $u〔S - T〕 v$                   | ≡ | $u〔S〕v \;\land\; \lnot(u〔T〕v)$                |
+| PseudoComplement | $u〔S \rightarrowtriangle T〕 v$ | ≡ | $u〔S〕v \;\implies\; u〔T〕v$                    |
+| /An/ Identity      | $u 〔𝕀 \ A〕 \, v$               | ≡ | $u = v \in A$                                     |
+| /The/ Identity     | $u 〔\Id〕 \, v$                 | ≡ | $u = v$                                           |
+| Converse         | $u〔 R˘〕 v$                     | ≡ | $v〔 R〕 u$                                       |
+| Composition      | $u〔R \fcmp S〕 v$               | ≡ | $(\exists\ x \;•\;\;  u〔R〕x \;\land\; x〔S〕v)$ |
+| Under Division   | $u 〔 S ╲ R 〕 v$                 | ≡ | $(∀ x • x 〔S〕 u  ⇒  x  〔R〕 v)$                |
+| Over Division    | $u 〔 R ╱ S 〕 v$                  | ≡ | $(∀ y • v 〔S〕 y  ⇒  u 〔R〕 y)$                       |
+
 # R╲S “right residual”
 
+:Hide:
 /“Residuals arise from negating compositions”:/ By comparing symbol-by-symbol in
 the RHS of ‘⨾’ and ‘╱’, it is not difficult to see that $S ╱ R \;\;=\;\;
 ∼\big(R ⨾ ∼ S ˘\big)˘ \;\;=\;\; ∼\big(∼ S ⨾ R ˘\big)$ ---note
 $\big(∼ T\big)˘ \;=\; ∼ \big(T ˘\big)$.
+:End:
 
 # S╱R = ¬(¬S ⨾ R˘)
 # R╲S = ¬(R˘ ⨾ ¬S)
