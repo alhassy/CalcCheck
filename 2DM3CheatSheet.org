@@ -864,6 +864,9 @@ We will interpret the named properties using
 #+latex: \vspace{2.1cm}
 * Properties of a relationship flavour
 
+The following properties are what one may ascribe to a /comparative relationship/,
+such as equality or inclusion.
+
 | $\refl$    | $R$ | ≡ | $(\forall\ b  \;•\; b\infixREL{R}b )$                                                          |
 |            |     |   | \remark{Every node in a graph has a ‘loop’, a line to itself}                                  |
 |            |     |   | \remark{(Thus, paths can always be increased in length: $R ⊆ R⨾R$)}                            |
@@ -887,7 +890,8 @@ We will interpret the named properties using
 |            |     |   | \remark{Paths can always be shortened (but nonempty)}                                          |
 |            |     |   |                                                                                                |
 | $\idemp$   | $R$ | ≡ | \remark{Lengths of paths can be changed arbitrarily (nonzero)}                                 |
-|            |     |   |                                                                                                |
+|            |     |   | \remark{Prog: Outputs fed back into the program don't change.}
+|            |     |   | \remark{Ex: Pressing ‘send’ on an email only sends it once.}                                    |
 
 # | trans              |     |   | \remark{In the graph, any 2-step path can be replaced with a 1-step path}                 |
 
@@ -917,6 +921,8 @@ Treating $R$ as a graph:
 |                    |                                                                          |
 
 * Properties of an operational flavour
+
+The following properties are what one may ascribe to a /process/ or an /operation/.
 
 | $\univalent$  | $R$ | ≡ | $(∀ b, c, c′ \;•\; b 〔R〕 c \,∧\, b 〔R〕 c′ \;⇒\; c = c′)$ \remark{---aka “partial function” } |
 |               |     |   | \remark{Graph: Every node has at most one outgoing edge}                                         |
