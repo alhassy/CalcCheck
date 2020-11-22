@@ -165,12 +165,30 @@ Raymond Smullyan!
 
 {{{end-box}}}
 
+* COMMENT Resources on Calculational Notation or Discrete Mathematics
+  :PROPERTIES:
+  :CUSTOM_ID: COMMENT-Resources-on-Calculational-Notation-or-Discrete-Mathematics
+  :END:
+
+- [[https://core.ac.uk/download/pdf/55749779.pdf][Functional Declarative Language Design and Predicate Calculus: A Practical
+  Approach]] by Raymond Boute.
+
+  Super neato slides:
+  - [[https://www.researchgate.net/publication/294124459_Formal_Calculation_with_Functions_Predicates_and_Quantifiers][Formal Calculation with Functions, Predicates and Quantifiers]]
+
+- [[https://www.cs.yale.edu/homes/aspnes/classes/202/notes.pdf][Notes on Discrete Mathematics]] by James Aspnes
+
+- [[https://www.researchgate.net/publication/221440117_Exercises_in_Quantifier_Manipulation][Exercises in Quantifier Manipulation]] by Roland Backhouse and Diethard
+  Michaelis
+
+- [[http://www.cse.unsw.edu.au/~carrollm/probs/Papers/Morgan-12.pdf][Elementary probability theory in the Eindhoven style]] by Carroll Morgan
+
 * Links to docs & notes :ignore:
   :PROPERTIES:
   :CUSTOM_ID: Links-to-docs-notes
   :END:
 
-#+begin_parallel
+#+begin_parallelNB
 
 {{{begin-box(pink,)}}}
 #+html: <h2>
@@ -186,7 +204,18 @@ Raymond Smullyan!
 #+html: </h2>
 {{{end-box}}}
 
-#+end_parallel
+#+end_parallelNB
+
+{{{begin-box(cyan, )}}}
+#+html: <h2>
+Reference Material
+#+html: </h2>
+| [[http://alhassy.github.io/CalcCheck/2DM3CheatSheet.pdf][PDF “2DM3CheatSheet”]] | /Short/ *4 page* summarise of core material; uses informal names.           |
+|                      |                                                                         |
+| [[http://alhassy.github.io/CalcCheck/TheoremList.html][HTML Theorem List]]    | Uses kbd:CalcCheck names and refers to specific homework and exercises. |
+
+{{{end-box}}}
+
 
 [[file:images/proof trees vs calculational proofs.png]]
 
