@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-11-08 Sun 15:10 -->
+<!-- 2020-11-22 Sun 09:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mathematics for Computing</title>
+<title>Theorem List</title>
 <meta name="generator" content="Org mode" />
-<meta name="author" content="Musa Al-hassy" />
+<meta name="author" content="Musa Al-hassy and Wolfram Kahl" />
 <meta name="description" content="List of theorems introduced in McMaster's 2DM3 in the fall of 2020."
  />
 <style type="text/css">
@@ -312,9 +312,9 @@
 </head>
 <body>
 <div id="content">
-<h1 class="title">Mathematics for Computing
+<h1 class="title">Theorem List
 <br />
-<span class="subtitle">[INCOMPLETE] Theorem List for CS/SE 2DM3, Fall 2020</span>
+<span class="subtitle"><a href="https://alhassy.github.io/CalcCheck/">Mathematics for Computing, CS/SE 2DM3, Fall 2020</a></span>
 </h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -392,6 +392,31 @@
 <li><a href="#Inclusion">10.1. <a href="#Inclusion">Inclusion</a></a></li>
 <li><a href="#Complement">10.2. <a href="#Complement">Complement</a></a></li>
 <li><a href="#Union-and-Intersection">10.3. <a href="#Union-and-Intersection">Union and Intersection</a></a></li>
+</ul>
+</li>
+<li><a href="#Relations">11. <a href="#Relations">Relations</a></a>
+<ul>
+<li><a href="#Relations-via-Set-Theory">11.1. <a href="#Relations-via-Set-Theory">Relations via Set Theory</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Homework">Homework</span>&#xa0;<span class="17">17</span></span></a>
+<ul>
+<li><a href="#Domain-and-Range">11.1.1. <a href="#Domain-and-Range">Domain and Range</a></a></li>
+<li><a href="#Relation-Converse">11.1.2. <a href="#Relation-Converse">Relation Converse</a></a></li>
+<li><a href="#Relation-Composition">11.1.3. <a href="#Relation-Composition">Relation Composition</a></a></li>
+<li><a href="#Polymorphic-Identity">11.1.4. <a href="#Polymorphic-Identity">Polymorphic Identity</a></a></li>
+<li><a href="#Reflexivity">11.1.5. <a href="#Reflexivity">Reflexivity</a></a></li>
+<li><a href="#Transitivity">11.1.6. <a href="#Transitivity">Transitivity</a></a></li>
+</ul>
+</li>
+<li><a href="#Relations-via-Set-Theory-I-Properties-of-the-Basic-Operators">11.2. <a href="#Relations-via-Set-Theory-I-Properties-of-the-Basic-Operators">Relations via Set Theory I: Properties of the Basic Operators</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Exercise">Exercise</span>&#xa0;<span class="10_1">10_1</span></span></a></li>
+<li><a href="#Relations-via-Set-Theory-II-Properties-of-the-Basic-Operators">11.3. <a href="#Relations-via-Set-Theory-II-Properties-of-the-Basic-Operators">Relations via Set Theory II: Properties of the Basic Operators</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Exercise">Exercise</span>&#xa0;<span class="10_2">10_2</span></span></a></li>
+<li><a href="#Relations-via-Set-Theory-Counterexamples-for-Non-Properties-of-the-Basic-Operators">11.4. <a href="#Relations-via-Set-Theory-Counterexamples-for-Non-Properties-of-the-Basic-Operators">Relations via Set Theory: Counterexamples for Non-Properties of the Basic Operators</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Exercise">Exercise</span>&#xa0;<span class="10_3">10_3</span></span></a></li>
+<li><a href="#Relations-via-Set-Theory-Heterogeneous-Relation-Properties-starting-from-Relation-Algebraic-Formulations">11.5. <a href="#Relations-via-Set-Theory-Heterogeneous-Relation-Properties-starting-from-Relation-Algebraic-Formulations">Relations via Set Theory: Heterogeneous Relation Properties, starting from Relation-Algebraic Formulations</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Homework">Homework</span>&#xa0;<span class="18">18</span></span></a>
+<ul>
+<li><a href="#Univalence">11.5.1. <a href="#Univalence">Univalence</a></a></li>
+<li><a href="#Totality">11.5.2. <a href="#Totality">Totality</a></a></li>
+<li><a href="#Injectivity">11.5.3. <a href="#Injectivity">Injectivity</a></a></li>
+<li><a href="#Surjectivity">11.5.4. <a href="#Surjectivity">Surjectivity</a></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -4045,10 +4070,416 @@ The <b>complement</b> of a set <code>S</code>, written <code>~ S</code>, is the 
 </div>
 </div>
 </div>
+
+<div id="outline-container-Relations" class="outline-2">
+<h2 id="Relations"><span class="section-number-2">11</span> <a href="#Relations">Relations</a></h2>
+<div class="outline-text-2" id="text-Relations">
+</div>
+<div id="outline-container-Relations-via-Set-Theory" class="outline-3">
+<h3 id="Relations-via-Set-Theory"><span class="section-number-3">11.1</span> <a href="#Relations-via-Set-Theory">Relations via Set Theory</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Homework">Homework</span>&#xa0;<span class="17">17</span></span></h3>
+<div class="outline-text-3" id="text-Relations-via-Set-Theory">
+</div>
+
+<div id="outline-container-Domain-and-Range" class="outline-4">
+<h4 id="Domain-and-Range"><span class="section-number-4">11.1.1</span> <a href="#Domain-and-Range">Domain and Range</a></h4>
+<div class="outline-text-4" id="text-Domain-and-Range">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span>  <span style="color: #b58900; font-style: italic;">Dom</span> <span style="color: #b58900; font-style: italic;">:</span> (<span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">B</span>) <span style="color: #268bd2;">&#8594;</span> set <span style="color: #b58900; font-style: italic;">A</span>
+<span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span>  <span style="color: #b58900; font-style: italic;">Ran</span> <span style="color: #b58900; font-style: italic;">:</span> (<span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">B</span>) <span style="color: #268bd2;">&#8594;</span> set <span style="color: #b58900; font-style: italic;">B</span>
+
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Membership</span> <span style="color: #859900; font-weight: bold;">in</span> <span style="color: #268bd2;">`Dom`</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+  x <span style="color: #268bd2;">&#8712;</span> <span style="color: #b58900; font-style: italic;">Dom</span> <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8801;</span>  <span style="color: #268bd2;">&#8707;</span> y <span style="color: #268bd2;">&#8226;</span> x &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; y
+
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Membership</span> <span style="color: #859900; font-weight: bold;">in</span> <span style="color: #268bd2;">`Ran`</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+  y <span style="color: #268bd2;">&#8712;</span> <span style="color: #b58900; font-style: italic;">Ran</span> <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8801;</span>  <span style="color: #268bd2;">&#8707;</span> x <span style="color: #268bd2;">&#8226;</span> x &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; y
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Domain</span> <span style="color: #859900; font-weight: bold;">of</span> union&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">Dom</span> (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">S</span>) <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">Dom</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">Dom</span> <span style="color: #b58900; font-style: italic;">S</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Domain</span> <span style="color: #859900; font-weight: bold;">of</span> intersection&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">Dom</span> (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">S</span>) <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">Dom</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">Dom</span> <span style="color: #b58900; font-style: italic;">S</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Relation-Converse" class="outline-4">
+<h4 id="Relation-Converse"><span class="section-number-4">11.1.2</span> <a href="#Relation-Converse">Relation Converse</a></h4>
+<div class="outline-text-4" id="text-Relation-Converse">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> <span style="color: #859900; font-weight: bold;">_</span><span style="color: #268bd2;">&#728;</span> <span style="color: #b58900; font-style: italic;">:</span> (<span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">B</span>) <span style="color: #268bd2;">&#8594;</span> (<span style="color: #b58900; font-style: italic;">B</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">A</span>)
+
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Relation</span> converse&#8221; &#8220;<span style="color: #b58900; font-style: italic;">Relationship</span> <span style="color: #859900; font-weight: bold;">via</span> <span style="color: #268bd2;">&#728;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    y &#10647; <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span> &#10648; x  <span style="color: #268bd2;">&#8801;</span>  x &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; y
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Self</span><span style="color: #268bd2;">-</span>inverse <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#728;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>   <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span> <span style="color: #268bd2;">&#728;</span>  <span style="color: #268bd2;">=</span>  <span style="color: #b58900; font-style: italic;">R</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Monotonicity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#728;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">S</span>      <span style="color: #268bd2;">&#8658;</span>  <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#728;</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Isotonicity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#728;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">S</span>   <span style="color: #268bd2;">&#8801;</span>   <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#728;</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Domain</span> <span style="color: #859900; font-weight: bold;">of</span> converse&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">Dom</span> (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>) <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">Ran</span> <span style="color: #b58900; font-style: italic;">R</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Converse</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#8745;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>     (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">S</span>) <span style="color: #268bd2;">&#728;</span>  <span style="color: #268bd2;">=</span>  <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span> <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#728;</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Relation-Composition" class="outline-4">
+<h4 id="Relation-Composition"><span class="section-number-4">11.1.3</span> <a href="#Relation-Composition">Relation Composition</a></h4>
+<div class="outline-text-4" id="text-Relation-Composition">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> <span style="color: #859900; font-weight: bold;">_</span><span style="color: #268bd2;">&#10814;</span><span style="color: #859900; font-weight: bold;">_</span> <span style="color: #b58900; font-style: italic;">:</span> (<span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">B</span>) <span style="color: #268bd2;">&#8594;</span> (<span style="color: #b58900; font-style: italic;">B</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">C</span>) <span style="color: #268bd2;">&#8594;</span> (<span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">C</span>)
+
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Relation</span> composition&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    a &#10647; <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span> &#10648; c  <span style="color: #268bd2;">&#8801;</span>  <span style="color: #268bd2;">&#8707;</span> b <span style="color: #268bd2;">&#8226;</span> a &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; b <span style="color: #268bd2;">&#8743;</span> b &#10647; <span style="color: #b58900; font-style: italic;">S</span> &#10648; c
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Converse</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>    (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>) <span style="color: #268bd2;">&#728;</span>    <span style="color: #268bd2;">=</span>  <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#728;</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Polymorphic-Identity" class="outline-4">
+<h4 id="Polymorphic-Identity"><span class="section-number-4">11.1.4</span> <a href="#Polymorphic-Identity">Polymorphic Identity</a></h4>
+<div class="outline-text-4" id="text-Polymorphic-Identity">
+<p>
+The only new item introduced in this section is the polymorphic identity relation <code>Id</code>.
+</p>
+
+<p>
+Similar to how equality <code>_=_</code> can be used at type <code>A → A → 𝔹</code> for any type <code>A</code>,
+this new <code>Id</code> can be used at type <code>A ↔ A</code> at any type <code>A</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> <span style="color: #b58900; font-style: italic;">Id</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">A</span>
+</pre>
+</div>
+
+
+
+<p>
+The lecture slides present <code>Id</code> as abbreviation for <code>𝕀 𝐔</code>.
+</p>
+
+<p>
+(Remember that the blackboard-bold I symbol <code>𝕀</code> is obtained by typing <code>\II</code>,
+two upper-case i letters as in identity.)
+</p>
+
+<p>
+Where this is used at type <code>A ↔ A</code>,
+it has also been written informally on the lecture slides as <code>𝕀 ⌞ A ⌟</code>,
+using the convention that <code>⌞ A ⌟</code> stands for <code>𝐔 : set A</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Definition</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">`Id`</span> <span style="color: #859900; font-weight: bold;">via</span> <span style="color: #b58900; font-style: italic;">&#120128;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">Id</span> <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">&#120128;</span> <span style="color: #b58900; font-style: italic;">&#119828;</span>
+</pre>
+</div>
+
+<p>
+With that, the direct correspondence between `Id` and `_=_` is easy to derive,
+and does not need to mention the type (that is, the “`A`” mentioned so far):
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Identity</span> relation&#8221; &#8220;<span style="color: #b58900; font-style: italic;">Relationship</span> <span style="color: #859900; font-weight: bold;">via</span> <span style="color: #268bd2;">`Id`</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    x &#10647; <span style="color: #b58900; font-style: italic;">Id</span> &#10648; y  <span style="color: #268bd2;">&#8801;</span>  x <span style="color: #268bd2;">=</span> y
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Converse</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">`Id`</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">Id</span> <span style="color: #268bd2;">&#728;</span>        <span style="color: #268bd2;">=</span>  <span style="color: #b58900; font-style: italic;">Id</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Left</span><span style="color: #268bd2;">-</span>identity <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span>&#8221; &#8220;<span style="color: #b58900; font-style: italic;">Identity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    <span style="color: #b58900; font-style: italic;">Id</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">R</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Right</span><span style="color: #268bd2;">-</span>identity <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span>&#8221; &#8220;<span style="color: #b58900; font-style: italic;">Identity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">Id</span> <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">R</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Reflexivity" class="outline-4">
+<h4 id="Reflexivity"><span class="section-number-4">11.1.5</span> <a href="#Reflexivity">Reflexivity</a></h4>
+<div class="outline-text-4" id="text-Reflexivity">
+<p>
+We define the reflexivity predicate for relations using the predicate-logic formulation:
+</p>
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> reflexive <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">A</span>  <span style="color: #268bd2;">&#8594;</span>  <span style="color: #b58900; font-style: italic;">&#120121;</span>
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Definition</span> <span style="color: #859900; font-weight: bold;">of</span> reflexivity&#8221;<span style="color: #b58900; font-style: italic;">:</span>  reflexive <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8801;</span>  <span style="color: #268bd2;">&#8704;</span> x <span style="color: #268bd2;">&#8226;</span> x &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; x
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #268bd2;">`Id`</span> is reflexive&#8221;<span style="color: #b58900; font-style: italic;">:</span> reflexive <span style="color: #b58900; font-style: italic;">Id</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Reflexivity</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>  reflexive <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8801;</span>  <span style="color: #b58900; font-style: italic;">Id</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">R</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Composition</span> <span style="color: #859900; font-weight: bold;">of</span> reflexive relations&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+  reflexive <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8658;</span> reflexive <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#8658;</span> reflexive (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>)
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Converse</span> <span style="color: #859900; font-weight: bold;">of</span> reflexive relations&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+  reflexive <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8658;</span> reflexive (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>)
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Converse</span> reflects reflectivity&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+  reflexive (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>) <span style="color: #268bd2;">&#8658;</span> reflexive <span style="color: #b58900; font-style: italic;">R</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Transitivity" class="outline-4">
+<h4 id="Transitivity"><span class="section-number-4">11.1.6</span> <a href="#Transitivity">Transitivity</a></h4>
+<div class="outline-text-4" id="text-Transitivity">
+<p>
+We define the transitivity predicate for relations using the predicate-logic formulation:
+</p>
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> transitive <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">A</span>  <span style="color: #268bd2;">&#8594;</span>  <span style="color: #b58900; font-style: italic;">&#120121;</span>
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Definition</span> <span style="color: #859900; font-weight: bold;">of</span> transitivity&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    transitive <span style="color: #b58900; font-style: italic;">R</span>   <span style="color: #268bd2;">&#8801;</span>  <span style="color: #268bd2;">&#8704;</span> x <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8704;</span> y <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8704;</span> z <span style="color: #268bd2;">&#8226;</span>
+                        x &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; y &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; z  <span style="color: #268bd2;">&#8658;</span>  x &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; z
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Converse</span> <span style="color: #859900; font-weight: bold;">of</span> transitive relations&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    transitive <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8658;</span> transitive (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-Relations-via-Set-Theory-I-Properties-of-the-Basic-Operators" class="outline-3">
+<h3 id="Relations-via-Set-Theory-I-Properties-of-the-Basic-Operators"><span class="section-number-3">11.2</span> <a href="#Relations-via-Set-Theory-I-Properties-of-the-Basic-Operators">Relations via Set Theory I: Properties of the Basic Operators</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Exercise">Exercise</span>&#xa0;<span class="10_1">10_1</span></span></h3>
+<div class="outline-text-3" id="text-Relations-via-Set-Theory-I-Properties-of-the-Basic-Operators">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Converse</span> <span style="color: #859900; font-weight: bold;">of</span> {}&#8221;<span style="color: #b58900; font-style: italic;">:</span>     {} <span style="color: #268bd2;">&#728;</span>  <span style="color: #268bd2;">=</span>  {}
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Converse</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#8746;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>     (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">S</span>) <span style="color: #268bd2;">&#728;</span>  <span style="color: #268bd2;">=</span>  <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span> <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#728;</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Distributivity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span> over <span style="color: #268bd2;">&#8746;</span> to the right&#8221;
+        &#8220;<span style="color: #b58900; font-style: italic;">Distributivity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span> over <span style="color: #268bd2;">&#8746;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">S</span>)  <span style="color: #268bd2;">=</span>  <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8746;</span>  <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Sub</span><span style="color: #268bd2;">-</span>distributivity <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span> over <span style="color: #268bd2;">&#8745;</span> to the right&#8221;
+        &#8220;<span style="color: #b58900; font-style: italic;">Sub</span><span style="color: #268bd2;">-</span>distributivity <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span> over <span style="color: #268bd2;">&#8745;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+     <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">S</span>)  <span style="color: #268bd2;">&#8838;</span>  <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8745;</span>  <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Associativity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span> (<span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span>) <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>)
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Monotonicity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #859900; font-weight: bold;">in</span> first argument&#8221; &#8220;<span style="color: #b58900; font-style: italic;">Monotonicity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8658;</span>  <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Monotonicity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #859900; font-weight: bold;">in</span> second argument&#8221; &#8220;<span style="color: #b58900; font-style: italic;">Monotonicity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">S</span>  <span style="color: #268bd2;">&#8658;</span>  <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Characterisation</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#8745;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">S</span>   <span style="color: #268bd2;">&#8801;</span>   <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8743;</span> <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#8838;</span> (<span style="color: #b58900; font-style: italic;">S</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">B</span>)
+</pre>
+</div>
+
+<p>
+The modal rule can be seen as a kind of over-approximation
+of multiplicative inverse with respect to composition “~⨾~”.
+</p>
+
+<p>
+In a field, for example in ℝ, if <code>a</code> has an inverse <code>a⁻¹</code>
+(that is, if <code>a · a⁻¹ = 1</code>, which requires <code>a ≠ 0</code>),
+then you have:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell">      a <span style="color: #268bd2;">&#183;</span> b <span style="color: #268bd2;">+</span> c  <span style="color: #268bd2;">=</span>  a <span style="color: #268bd2;">&#183;</span> (b <span style="color: #268bd2;">+</span> a<span style="color: #268bd2;">&#8315;</span>&#185; <span style="color: #268bd2;">&#183;</span> c)
+</pre>
+</div>
+<p>
+Relation converse in general does not produce inverses,
+but still an “over-approximation to an inverse”,
+since the equation above turns into a relation inclusion:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Modal</span> rule&#8221;<span style="color: #b58900; font-style: italic;">:</span>    (<span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span>) <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#728;</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>)
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Modal</span> rule&#8221;<span style="color: #b58900; font-style: italic;">:</span>    (<span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span>) <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#8838;</span> (<span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>) <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Restricted</span> identity property for <span style="color: #b58900; font-style: italic;">&#120128;</span><span style="color: #268bd2;">-</span><span style="color: #b58900; font-style: italic;">Dom</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+     <span style="color: #b58900; font-style: italic;">&#120128;</span> (<span style="color: #b58900; font-style: italic;">Dom</span> <span style="color: #b58900; font-style: italic;">R</span>) <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">R</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-Relations-via-Set-Theory-II-Properties-of-the-Basic-Operators" class="outline-3">
+<h3 id="Relations-via-Set-Theory-II-Properties-of-the-Basic-Operators"><span class="section-number-3">11.3</span> <a href="#Relations-via-Set-Theory-II-Properties-of-the-Basic-Operators">Relations via Set Theory II: Properties of the Basic Operators</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Exercise">Exercise</span>&#xa0;<span class="10_2">10_2</span></span></h3>
+<div class="outline-text-3" id="text-Relations-via-Set-Theory-II-Properties-of-the-Basic-Operators">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> <span style="color: #b58900; font-style: italic;">P</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">Type</span>
+<span style="color: #b58900; font-style: italic;">Explanation</span><span style="color: #b58900;">:</span> <span style="color: #b58900; font-style: italic;">P</span> <span style="color: #268bd2;">&#8788;</span> &#8220;<span style="color: #b58900; font-style: italic;">Type</span> <span style="color: #859900; font-weight: bold;">of</span> persons&#8221;
+
+  <span style="color: #b58900; font-style: italic;">We</span> declare relations <span style="color: #268bd2;">`C`</span> and <span style="color: #268bd2;">`B`</span> with the following meanings<span style="color: #b58900; font-style: italic;">:</span>
+
+  <span style="color: #268bd2;">-</span> `p &#10647; <span style="color: #b58900; font-style: italic;">C</span> &#10648; q` means &#8220;<span style="color: #268bd2;">`p`</span> called <span style="color: #268bd2;">`q`</span> (by phone)&#8221;
+  <span style="color: #268bd2;">-</span> `p &#10647; <span style="color: #b58900; font-style: italic;">B</span> &#10648; q` means &#8220;<span style="color: #268bd2;">`p`</span> is a brother <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">`q`</span>&#8221;
+
+<span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> <span style="color: #b58900; font-style: italic;">C</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">P</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">P</span>
+<span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> <span style="color: #b58900; font-style: italic;">B</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">P</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">P</span>
+
+<span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> <span style="color: #b58900; font-style: italic;">Helen</span>, <span style="color: #b58900; font-style: italic;">Aos</span>, <span style="color: #b58900; font-style: italic;">Jun</span>, <span style="color: #b58900; font-style: italic;">Obama</span>, <span style="color: #b58900; font-style: italic;">Shirley</span>, <span style="color: #b58900; font-style: italic;">Alex</span>, <span style="color: #b58900; font-style: italic;">Jim</span>, <span style="color: #b58900; font-style: italic;">Jane</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">P</span>
+
+<span style="color: #268bd2; font-weight: bold;">### Relationship to Predicate Logic</span>
+
+  <span style="color: #b58900; font-style: italic;">From</span> the following relationship statements,
+  calculate &#8220;readable&#8221; predicate logic statements<span style="color: #b58900; font-style: italic;">:</span>
+
+<span style="color: #b58900; font-style: italic;">Calculation</span><span style="color: #b58900;">:</span>
+    <span style="color: #b58900; font-style: italic;">Aos</span> &#10647; <span style="color: #b58900; font-style: italic;">C</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">B</span> &#10648; <span style="color: #b58900; font-style: italic;">Jun</span>
+
+<span style="color: #b58900; font-style: italic;">Calculation</span><span style="color: #b58900;">:</span>
+    <span style="color: #b58900; font-style: italic;">Aos</span> &#10647; <span style="color: #268bd2;">~</span> (<span style="color: #b58900; font-style: italic;">C</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #268bd2;">~</span> <span style="color: #b58900; font-style: italic;">B</span>) &#10648; <span style="color: #b58900; font-style: italic;">Jun</span>
+
+<span style="color: #b58900; font-style: italic;">Calculation</span><span style="color: #b58900;">:</span>
+    <span style="color: #b58900; font-style: italic;">Aos</span> &#10647; <span style="color: #268bd2;">~</span> (<span style="color: #268bd2;">~</span> <span style="color: #b58900; font-style: italic;">C</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">B</span>) &#10648; <span style="color: #b58900; font-style: italic;">Jun</span>
+
+<span style="color: #b58900; font-style: italic;">Calculation</span><span style="color: #b58900;">:</span>
+    <span style="color: #b58900; font-style: italic;">Aos</span> &#10647; <span style="color: #268bd2;">~</span> ((<span style="color: #b58900; font-style: italic;">C</span> <span style="color: #268bd2;">&#8745;</span> <span style="color: #268bd2;">~</span> (<span style="color: #b58900; font-style: italic;">B</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">C</span> <span style="color: #268bd2;">&#728;</span>)) <span style="color: #268bd2;">&#10814;</span> <span style="color: #268bd2;">~</span> <span style="color: #b58900; font-style: italic;">B</span>) &#10648; <span style="color: #b58900; font-style: italic;">Jun</span>
+
+<span style="color: #b58900; font-style: italic;">Calculation</span><span style="color: #b58900;">:</span>
+    (<span style="color: #b58900; font-style: italic;">B</span> <span style="color: #268bd2;">&#10814;</span> ({ <span style="color: #b58900; font-style: italic;">Jun</span> } <span style="color: #268bd2;">&#215;</span> <span style="color: #b58900; font-style: italic;">&#119828;</span>)) <span style="color: #268bd2;">&#8745;</span> (<span style="color: #b58900; font-style: italic;">C</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">C</span> <span style="color: #268bd2;">&#728;</span>)  <span style="color: #268bd2;">&#8838;</span>  <span style="color: #b58900; font-style: italic;">Id</span>
+
+<span style="color: #268bd2; font-weight: bold;">### Formalise Relation-Algebraically</span>
+
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Helen</span> called somebody who called her&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #268bd2;">?</span>
+
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Aos</span> called everybody who called a brother <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #b58900; font-style: italic;">Jun</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #268bd2;">?</span>
+
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Aos</span> hasn't called anybody who has called <span style="color: #b58900; font-style: italic;">Jun</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #268bd2;">?</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-Relations-via-Set-Theory-Counterexamples-for-Non-Properties-of-the-Basic-Operators" class="outline-3">
+<h3 id="Relations-via-Set-Theory-Counterexamples-for-Non-Properties-of-the-Basic-Operators"><span class="section-number-3">11.4</span> <a href="#Relations-via-Set-Theory-Counterexamples-for-Non-Properties-of-the-Basic-Operators">Relations via Set Theory: Counterexamples for Non-Properties of the Basic Operators</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Exercise">Exercise</span>&#xa0;<span class="10_3">10_3</span></span></h3>
+<div class="outline-text-3" id="text-Relations-via-Set-Theory-Counterexamples-for-Non-Properties-of-the-Basic-Operators">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Lemma</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Membership</span> <span style="color: #859900; font-weight: bold;">in</span> two<span style="color: #268bd2;">-</span>element set enumeration&#8221;<span style="color: #b58900; font-style: italic;">:</span> x <span style="color: #268bd2;">&#8712;</span> {x, y}
+<span style="color: #b58900; font-style: italic;">Lemma</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Membership</span> <span style="color: #859900; font-weight: bold;">in</span> set enumeration&#8221;<span style="color: #b58900; font-style: italic;">:</span> x <span style="color: #268bd2;">&#8712;</span> {u <span style="color: #268bd2;">&#10073;</span> u <span style="color: #268bd2;">=</span> x <span style="color: #268bd2;">&#8744;</span> <span style="color: #b58900; font-style: italic;">R</span>}
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Non</span><span style="color: #268bd2;">-</span><span style="color: #b58900; font-style: italic;">Isotonicity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #859900; font-weight: bold;">in</span> first argument&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    <span style="color: #268bd2;">&#172;</span>(<span style="color: #268bd2;">&#8704;</span> <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8704;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8704;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">&#120121;</span>
+      <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>  <span style="color: #268bd2;">&#8658;</span>  <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">R</span>)
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Non</span><span style="color: #268bd2;">-</span>distributivity <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span> over <span style="color: #268bd2;">&#8745;</span> to the right&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    <span style="color: #268bd2;">&#172;</span> (<span style="color: #268bd2;">&#8704;</span> <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8704;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8704;</span> <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8745;</span>  <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>  <span style="color: #268bd2;">&#8838;</span>  <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8745;</span> <span style="color: #b58900; font-style: italic;">S</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-Relations-via-Set-Theory-Heterogeneous-Relation-Properties-starting-from-Relation-Algebraic-Formulations" class="outline-3">
+<h3 id="Relations-via-Set-Theory-Heterogeneous-Relation-Properties-starting-from-Relation-Algebraic-Formulations"><span class="section-number-3">11.5</span> <a href="#Relations-via-Set-Theory-Heterogeneous-Relation-Properties-starting-from-Relation-Algebraic-Formulations">Relations via Set Theory: Heterogeneous Relation Properties, starting from Relation-Algebraic Formulations</a>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Homework">Homework</span>&#xa0;<span class="18">18</span></span></h3>
+<div class="outline-text-3" id="text-Relations-via-Set-Theory-Heterogeneous-Relation-Properties-starting-from-Relation-Algebraic-Formulations">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Monotonicity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#8746;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">A</span>&#8321; <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">A</span>&#8322; <span style="color: #268bd2;">&#8658;</span> (<span style="color: #b58900; font-style: italic;">A</span>&#8321; <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">B</span>) <span style="color: #268bd2;">&#8838;</span> (<span style="color: #b58900; font-style: italic;">A</span>&#8322; <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">B</span>)
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Monotonicity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#8746;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">A</span>&#8321; <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">A</span>&#8322; <span style="color: #268bd2;">&#8658;</span> <span style="color: #b58900; font-style: italic;">B</span>&#8321; <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">B</span>&#8322; <span style="color: #268bd2;">&#8658;</span> (<span style="color: #b58900; font-style: italic;">A</span>&#8321; <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">B</span>&#8321;) <span style="color: #268bd2;">&#8838;</span> (<span style="color: #b58900; font-style: italic;">A</span>&#8322; <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">B</span>&#8322;)
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Distributivity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span> over <span style="color: #268bd2;">&#8746;</span> to the left&#8221;
+        &#8220;<span style="color: #b58900; font-style: italic;">Distributivity</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #268bd2;">&#10814;</span> over <span style="color: #268bd2;">&#8746;</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    (<span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">R</span>) <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>  <span style="color: #268bd2;">=</span>  <span style="color: #b58900; font-style: italic;">Q</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>  <span style="color: #268bd2;">&#8746;</span>  <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-Univalence" class="outline-4">
+<h4 id="Univalence"><span class="section-number-4">11.5.1</span> <a href="#Univalence">Univalence</a></h4>
+<div class="outline-text-4" id="text-Univalence">
+<p>
+A relation is univalent iff it relates each argument with at most one result.
+</p>
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> is<span style="color: #268bd2;">-</span>univalent <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">B</span>  <span style="color: #268bd2;">&#8594;</span>  <span style="color: #b58900; font-style: italic;">&#120121;</span>
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Definition</span> <span style="color: #859900; font-weight: bold;">of</span> univalence&#8221;<span style="color: #b58900; font-style: italic;">:</span>    is<span style="color: #268bd2;">-</span>univalent <span style="color: #b58900; font-style: italic;">R</span>   <span style="color: #268bd2;">&#8801;</span>  <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">Id</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Univalence</span> <span style="color: #859900; font-weight: bold;">of</span> composition&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+     is<span style="color: #268bd2;">-</span>univalent <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8658;</span> is<span style="color: #268bd2;">-</span>univalent <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#8658;</span> is<span style="color: #268bd2;">-</span>univalent (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">S</span>)
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Univalence</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+      is<span style="color: #268bd2;">-</span>univalent <span style="color: #b58900; font-style: italic;">R</span>
+   <span style="color: #268bd2;">&#8801;</span>  <span style="color: #268bd2;">&#8704;</span> b&#8321; <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8704;</span> b&#8322; <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8704;</span> a <span style="color: #268bd2;">&#8226;</span> a &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; b&#8321; <span style="color: #268bd2;">&#8743;</span> a &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; b&#8322; <span style="color: #268bd2;">&#8658;</span> b&#8321; <span style="color: #268bd2;">=</span> b&#8322;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Totality" class="outline-4">
+<h4 id="Totality"><span class="section-number-4">11.5.2</span> <a href="#Totality">Totality</a></h4>
+<div class="outline-text-4" id="text-Totality">
+<p>
+A relation is total if it relates each argument with at least one result.
+</p>
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> is<span style="color: #268bd2;">-</span>total <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">B</span>  <span style="color: #268bd2;">&#8594;</span>  <span style="color: #b58900; font-style: italic;">&#120121;</span>
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Definition</span> <span style="color: #859900; font-weight: bold;">of</span> totality&#8221;<span style="color: #b58900; font-style: italic;">:</span>      is<span style="color: #268bd2;">-</span>total <span style="color: #b58900; font-style: italic;">R</span>       <span style="color: #268bd2;">&#8801;</span>  <span style="color: #b58900; font-style: italic;">Id</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Totality</span> <span style="color: #859900; font-weight: bold;">of</span> union&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    is<span style="color: #268bd2;">-</span>total <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8658;</span> is<span style="color: #268bd2;">-</span>total <span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">&#8658;</span> is<span style="color: #268bd2;">-</span>total (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8746;</span> <span style="color: #b58900; font-style: italic;">S</span>)
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Totality</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span> is<span style="color: #268bd2;">-</span>total <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8801;</span>  <span style="color: #268bd2;">&#8704;</span> a <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8707;</span> b <span style="color: #268bd2;">&#8226;</span> a &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; b
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Domain</span> <span style="color: #859900; font-weight: bold;">of</span> total relations&#8221;<span style="color: #b58900; font-style: italic;">:</span>   is<span style="color: #268bd2;">-</span>total <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8801;</span>  <span style="color: #b58900; font-style: italic;">&#119828;</span> <span style="color: #268bd2;">&#8838;</span> <span style="color: #b58900; font-style: italic;">Dom</span> <span style="color: #b58900; font-style: italic;">R</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Domain</span> <span style="color: #859900; font-weight: bold;">of</span> total relations&#8221;<span style="color: #b58900; font-style: italic;">:</span>  is<span style="color: #268bd2;">-</span>total <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8801;</span>  <span style="color: #b58900; font-style: italic;">Dom</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">&#119828;</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Injectivity" class="outline-4">
+<h4 id="Injectivity"><span class="section-number-4">11.5.3</span> <a href="#Injectivity">Injectivity</a></h4>
+<div class="outline-text-4" id="text-Injectivity">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> is<span style="color: #268bd2;">-</span>injective <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">B</span>  <span style="color: #268bd2;">&#8594;</span>  <span style="color: #b58900; font-style: italic;">&#120121;</span>
+
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Definition</span> <span style="color: #859900; font-weight: bold;">of</span> injectivity&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    is<span style="color: #268bd2;">-</span>injective <span style="color: #b58900; font-style: italic;">R</span>    <span style="color: #268bd2;">&#8801;</span>   <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>  <span style="color: #268bd2;">&#8838;</span>  <span style="color: #b58900; font-style: italic;">Id</span>
+</pre>
+</div>
+<p>
+Injectivity is dual (with respect to the direction of composition)
+to univalence, so the dualisation operator “`_˘`” (converse)
+converts between the two:
+</p>
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Injectivity</span> <span style="color: #859900; font-weight: bold;">of</span> converse&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    is<span style="color: #268bd2;">-</span>injective (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>) <span style="color: #268bd2;">&#8801;</span>  is<span style="color: #268bd2;">-</span>univalent <span style="color: #b58900; font-style: italic;">R</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Univalence</span> <span style="color: #859900; font-weight: bold;">of</span> converse&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    is<span style="color: #268bd2;">-</span>univalent (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>)  <span style="color: #268bd2;">&#8801;</span>  is<span style="color: #268bd2;">-</span>injective <span style="color: #b58900; font-style: italic;">R</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Injectivity</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+       is<span style="color: #268bd2;">-</span>injective <span style="color: #b58900; font-style: italic;">R</span>
+    <span style="color: #268bd2;">&#8801;</span>  <span style="color: #268bd2;">&#8704;</span> a&#8321; <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8704;</span> a&#8322; <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8704;</span> b <span style="color: #268bd2;">&#8226;</span> a&#8321; &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; b <span style="color: #268bd2;">&#8743;</span> a&#8322; &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; b <span style="color: #268bd2;">&#8658;</span> a&#8321; <span style="color: #268bd2;">=</span> a&#8322;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-Surjectivity" class="outline-4">
+<h4 id="Surjectivity"><span class="section-number-4">11.5.4</span> <a href="#Surjectivity">Surjectivity</a></h4>
+<div class="outline-text-4" id="text-Surjectivity">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #b58900; font-style: italic;">Declaration</span><span style="color: #b58900;">:</span> is<span style="color: #268bd2;">-</span>surjective <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">A</span> <span style="color: #268bd2;">&#8596;</span> <span style="color: #b58900; font-style: italic;">B</span>  <span style="color: #268bd2;">&#8594;</span>  <span style="color: #b58900; font-style: italic;">&#120121;</span>
+
+<span style="color: #b58900; font-style: italic;">Axiom</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Definition</span> <span style="color: #859900; font-weight: bold;">of</span> surjectivity&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    is<span style="color: #268bd2;">-</span>surjective <span style="color: #b58900; font-style: italic;">R</span>    <span style="color: #268bd2;">&#8801;</span>   <span style="color: #b58900; font-style: italic;">Id</span>  <span style="color: #268bd2;">&#8838;</span>  <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span> <span style="color: #268bd2;">&#10814;</span> <span style="color: #b58900; font-style: italic;">R</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Totality</span> <span style="color: #859900; font-weight: bold;">of</span> converse&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    is<span style="color: #268bd2;">-</span>total (<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#728;</span>)  <span style="color: #268bd2;">&#8801;</span>  is<span style="color: #268bd2;">-</span>surjective <span style="color: #b58900; font-style: italic;">R</span>
+
+<span style="color: #b58900; font-style: italic;">Theorem</span> <span style="color: #b58900;">&#8220;</span><span style="color: #b58900; font-style: italic;">Surjectivity</span>&#8221;<span style="color: #b58900; font-style: italic;">:</span>
+    is<span style="color: #268bd2;">-</span>surjective <span style="color: #b58900; font-style: italic;">R</span>  <span style="color: #268bd2;">&#8801;</span>  (<span style="color: #268bd2;">&#8704;</span> b <span style="color: #268bd2;">&#8226;</span> (<span style="color: #268bd2;">&#8707;</span> a <span style="color: #268bd2;">&#8226;</span> a &#10647; <span style="color: #b58900; font-style: italic;">R</span> &#10648; b))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-11-08 Sun 15:10</p>
+<p class="author">Author: Musa Al-hassy and Wolfram Kahl</p>
+<p class="date">Created: 2020-11-22 Sun 09:00</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
