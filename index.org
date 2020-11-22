@@ -346,7 +346,7 @@ Videos
     # until you get to `P`.
     #
 
-    kbd:Oct_27 is the second midterm; it is online during class time and the
+    kbd:Oct_27 is the third midterm; it is online during class time and the
    ‘Midterm Prep’ was created to, well, prepare you for the midterm.
 
 17. Feedback Replies & Quantification
@@ -356,7 +356,68 @@ Videos
     impressions of the previous midterm. Then let's continue with Quantification
     and it's possible implementations via loops.
 
-18. [[color:red][*not yet given*]]
+:hide:
+18. ?
+    kbd:Nov_3
+
+19. ?
+    kbd:Nov_5
+
+20. ?
+    kbd:Nov_6
+
+    kbd:Nov_10 is the fourth midterm; it is online during class time.
+
+21. ?
+    kbd:Nov_12
+
+22. ?
+    kbd:Nov_13
+:End:
+
+23. [[https://youtu.be/cuCy3jprIFY][A ‘Brutal’ Introduction to Relations]]    kbd:Nov_17
+
+    We conclude Set Theory with an example of “division of sets” known as the
+    pseudo-complement: We show how it's defining universal property can be used
+    to calculate an explicit definition. Assuming ⊆ and ∈, the same idea applies
+    to other concepts defined by universal properties, such as ╱, ╲, ∪, ∩, and
+    -.
+
+    Next, we look at specific kinds of sets, namely sets of pairs.  Just as sets
+    “hide singe quantified variables” involving ∀ via = and ⊆, and hide ∃ via ∈;
+    relations allows us to “hide two quantified variables”.  More generally,
+    “n-ary relations” with n = 0 are propositions, n = 1 are predicates/sets,
+    and with n = 2 are simple relations, as shown here.
+
+    Compare with “A ‘Gentle’ Introduction to Relations (Nov 19)”.
+
+24. [[https://youtu.be/9U9bn047egY][A ‘Gentle’ Introduction to Relations]]      kbd:Nov_19
+
+    Relations are just sets of pairs, but there are interesting interpretations
+    of such sets: Matrices, Graphs, Programs.  As such, there are interesting
+    operations on these particular kinds of sets such as converse and
+    composition.
+
+    Operations on relations, such as composition, “hide quantified dummy
+    variables” and so “wide, lengthy, statements” take on more compact forms.  A
+    useful law involving quantifier-free calculations is the Dedekind rule and
+    the Modal laws.  An example involving the distributivity of univalent
+    relations over intersection is shown.
+
+    Compare with “A ‘Brutal’ Introduction to Relations (Nov 17)”.
+
+25. [[https://youtu.be/co-EEY222EI][Wrapping up Relations]]      kbd:Nov_20
+
+    Concluding our discussion on relations by considering how “relation
+    division” appears ---either the shape of residuals “R ╱ S” or via converse
+    “R ⨾ S˘” and the Modal & Dedekind rules.
+
+    We then look at how this allows us to read the Z ISO standard, and begin
+    combinatorics by counting the size of certain kinds of arrows.
+
+    kbd:Nov_24 is the fifth midterm; it is online during class time.
+
+26. [[color:red][*not yet given*]]
 
 :Video_description:
  ─⟦Maths for Computing 𝓃⟧
