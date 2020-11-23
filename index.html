@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-11-22 Sun 13:52 -->
+<!-- 2020-11-23 Mon 10:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Calculational Mathematics and <code>CalcCheck</code></title>
@@ -287,6 +287,28 @@
     /*]]>*///-->
 // @license-end
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
@@ -1958,7 +1980,7 @@ Reference Material
 <tbody>
 <tr>
 <td class="org-left"><a href="http://alhassy.github.io/CalcCheck/2DM3CheatSheet.pdf">PDF “2DM3CheatSheet”</a></td>
-<td class="org-left"><i>Short</i> <b>4 page</b> summarise of core material; uses informal names.</td>
+<td class="org-left"><i>Short</i> <b>4 page</b> summary of core material; uses informal names.</td>
 </tr>
 
 <tr>
@@ -1979,7 +2001,7 @@ Reference Material
 
 
 
-<div id="org488509a" class="figure">
+<div id="org93fcbcd" class="figure">
 <p><img src="images/proof trees vs calculational proofs.png" alt="proof trees vs calculational proofs.png" />
 </p>
 </div>
@@ -2103,10 +2125,39 @@ reasonable to evaluate P at the infinitely many possible values for n.
 Instead one uses mathematical induction.
 </p></li>
 
-<li><a href="https://youtu.be/4oq6mybJvKo">Conjunction</a> <kbd> Sep 29 </kbd></li>
-<li><a href="https://youtu.be/exz_VWYUJ_k">Induction</a> <kbd> Oct 1 </kbd></li>
+<li><p>
+<a href="https://youtu.be/4oq6mybJvKo">Conjunction</a> <kbd> Sep 29 </kbd>
+</p>
+
+<p>
+Starting from the Golden Rule, as a definition of conjunction, we see how to
+derive a few properties of ∧ then move on to consider examples involving
+Ladies and Tigers. We wrap up with a brief look at induction.
+</p></li>
+
+<li><p>
+<a href="https://youtu.be/exz_VWYUJ_k">Induction</a> <kbd> Oct 1 </kbd>
+</p>
+
+<p>
+We consider a few inductively defined functions and prove properties about
+them.  Of note is ‘monus’, subtraction, which is defined inductively on
+multiple arguments. Then, we consider a few ‘advanced’ implication theorems.
+</p></li>
+
 <li><p>
 <a href="https://youtu.be/zuZ6ETgdaDw">Replacement</a> <kbd> Oct 2 </kbd>
+</p>
+
+<p>
+With implication in-hand, we can express the Leibniz inference rule as an
+axiom &#x2014;the notes contain a discussion on the relationship between
+inference rules and axioms.
+</p>
+
+<p>
+Continuing with the assignments on Order Theory, we discuss how implication
+is itself an order &#x2014;as well as an operation&#x2014; on the 𝔹ooleans.
 </p>
 
 <p>
@@ -2189,11 +2240,89 @@ Let's discuss the entries posted on the feedback channel as well as
 impressions of the previous midterm. Then let's continue with Quantification
 and it's possible implementations via loops.
 </p></li>
-</ol>
 
-<ol class="org-ol">
 <li><p>
-<a href="https://youtu.be/cuCy3jprIFY">A ‘Brutal’ Introduction to Relations</a>    <kbd> Nov 17 </kbd>
+Monotonicity: From ∧/∨ to ∀/∃ <kbd> Nov 3 </kbd>
+</p>
+
+<p>
+<a href="https://youtu.be/RYXFOSevpvM">Part 1</a> and <a href="https://youtu.be/PFYrBrmd-1k">Part 2</a>
+</p>
+
+<p>
+We discuss order preservation rules then move on to talk about (general)
+induction and how it can be invoked with CalcCheck's “Using” mechanism
+&#x2014;which allows a theorem to be used as a proof technique.
+</p></li>
+
+<li><p>
+<a href="https://youtu.be/Qm6o0gn8xz8">Sequences and Induction</a> <kbd> Nov 5 </kbd>
+</p>
+
+<p>
+The idea behind induction is that if a property holds for atomic
+constructions and the property is preserved by compound constructions then
+&#x2014;since everything under consideration is formed from these possible
+constructions&#x2014; everything has the property begin discussed.
+</p>
+
+<p>
+Incidentally, induction can also be phrased more compactly as follows:
+<i>Predicates starting at ‘true’ and preserving truth, are constantly ‘true’</i>:
+Suppose \(P : τ → 𝔹\) is a predicate on an ordered space, then
+\[P\, ⊥ \;∧\; (∀ x,y : τ \,❙\, x ⊑ y • P\, x \,⇒\, P\, y) \;⇒\; (∀ x : τ • P\, x) \]
+</p></li>
+
+<li><p>
+<a href="https://youtu.be/tY_kwfU3Vjo">“Typed” Set Theory 𝑰</a> <kbd> Nov 6 </kbd>
+</p>
+
+<p>
+Sets are like any other data structure, such as ℕumbers or sequences.
+However, there is a particular ‘reflection’ of types-as-sets: Every type is
+a set, but not the other way around. ( Likewise, every sequence yields a
+set, but no canonical choice the other way around. )
+</p>
+
+<p>
+<b>Types make sure things don't go wrong, such as multiplying a set by a
+letter!</b>
+</p>
+
+<p>
+<kbd> Nov 10 </kbd> is the fourth midterm; it is online during class time.
+</p></li>
+
+<li><p>
+<a href="https://youtu.be/RlGEVZ-5tGo">“Typed” Set Theory 𝑰𝑰</a> <kbd> Nov 12 </kbd>
+</p>
+
+<p>
+Continuing part 𝑰.
+</p></li>
+
+<li><p>
+<a href="https://youtu.be/0bb9-I5RC74">Cartesian Products, a theory of records</a> <kbd> Nov 13 </kbd>
+</p>
+
+<p>
+We look at Cartesian Products and projections, which can be thought of as
+the mathematical underpinning of “records/classes and fields” found in
+programming.
+</p>
+
+<p>
+We also quickly take a look at Currying &#x2014;yet another instance of the
+“Programming ≈ Proving” slogan repeated throughout these lectures.
+</p>
+
+<p>
+Finally, we consider sets of pairs, ‘relations’, as a form of
+non-deterministic computing.
+</p></li>
+
+<li><p>
+<a href="https://youtu.be/cuCy3jprIFY">A ‘Brutal’ Introduction to Relations</a> <kbd> Nov 17 </kbd>
 </p>
 
 <p>
@@ -2217,7 +2346,7 @@ Compare with “A ‘Gentle’ Introduction to Relations (Nov 19)”.
 </p></li>
 
 <li><p>
-<a href="https://youtu.be/9U9bn047egY">A ‘Gentle’ Introduction to Relations</a>      <kbd> Nov 19 </kbd>
+<a href="https://youtu.be/9U9bn047egY">A ‘Gentle’ Introduction to Relations</a> <kbd> Nov 19 </kbd>
 </p>
 
 <p>
@@ -2240,7 +2369,7 @@ Compare with “A ‘Brutal’ Introduction to Relations (Nov 17)”.
 </p></li>
 
 <li><p>
-<a href="https://youtu.be/co-EEY222EI">Wrapping up Relations</a>      <kbd> Nov 20 </kbd>
+<a href="https://youtu.be/co-EEY222EI">Wrapping up Relations</a> <kbd> Nov 20 </kbd>
 </p>
 
 <p>
@@ -2280,7 +2409,7 @@ combinatorics by counting the size of certain kinds of arrows.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-11-22 Sun 13:52</p>
+<p class="date">Created: 2020-11-23 Mon 10:45</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

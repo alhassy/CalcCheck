@@ -210,7 +210,7 @@ Raymond Smullyan!
 #+html: <h2>
 Reference Material
 #+html: </h2>
-| [[http://alhassy.github.io/CalcCheck/2DM3CheatSheet.pdf][PDF “2DM3CheatSheet”]] | /Short/ *4 page* summarise of core material; uses informal names.           |
+| [[http://alhassy.github.io/CalcCheck/2DM3CheatSheet.pdf][PDF “2DM3CheatSheet”]] | /Short/ *4 page* summary of core material; uses informal names.             |
 |                      |                                                                         |
 | [[http://alhassy.github.io/CalcCheck/TheoremList.html][HTML Theorem List]]    | Uses kbd:CalcCheck names and refers to specific homework and exercises. |
 
@@ -297,8 +297,25 @@ Videos
    Instead one uses mathematical induction.
 
 9. [[https://youtu.be/4oq6mybJvKo][Conjunction]] kbd:Sep_29
+
+   Starting from the Golden Rule, as a definition of conjunction, we see how to
+   derive a few properties of ∧ then move on to consider examples involving
+   Ladies and Tigers. We wrap up with a brief look at induction.
+
 10. [[https://youtu.be/exz_VWYUJ_k][Induction]] kbd:Oct_1
+
+    We consider a few inductively defined functions and prove properties about
+    them.  Of note is ‘monus’, subtraction, which is defined inductively on
+    multiple arguments. Then, we consider a few ‘advanced’ implication theorems.
+
 11. [[https://youtu.be/zuZ6ETgdaDw][Replacement]] kbd:Oct_2
+
+    With implication in-hand, we can express the Leibniz inference rule as an
+    axiom ---the notes contain a discussion on the relationship between
+    inference rules and axioms.
+
+    Continuing with the assignments on Order Theory, we discuss how implication
+    is itself an order ---as well as an operation--- on the 𝔹ooleans.
 
     kbd:Oct_6 is the second midterm; it is online during class time.
 
@@ -356,26 +373,55 @@ Videos
     impressions of the previous midterm. Then let's continue with Quantification
     and it's possible implementations via loops.
 
-:hide:
-18. ?
-    kbd:Nov_3
+19. Monotonicity: From ∧/∨ to ∀/∃ kbd:Nov_3
 
-19. ?
-    kbd:Nov_5
+    [[https://youtu.be/RYXFOSevpvM][Part 1]] and [[https://youtu.be/PFYrBrmd-1k][Part 2]]
 
-20. ?
-    kbd:Nov_6
+    We discuss order preservation rules then move on to talk about (general)
+    induction and how it can be invoked with CalcCheck's “Using” mechanism
+    ---which allows a theorem to be used as a proof technique.
+
+20. [[https://youtu.be/Qm6o0gn8xz8][Sequences and Induction]] kbd:Nov_5
+
+    The idea behind induction is that if a property holds for atomic
+    constructions and the property is preserved by compound constructions then
+    ---since everything under consideration is formed from these possible
+    constructions--- everything has the property begin discussed.
+
+    Incidentally, induction can also be phrased more compactly as follows:
+    /Predicates starting at ‘true’ and preserving truth, are constantly ‘true’/:
+    Suppose $P : τ → 𝔹$ is a predicate on an ordered space, then
+    \[P\, ⊥ \;∧\; (∀ x,y : τ \,❙\, x ⊑ y • P\, x \,⇒\, P\, y) \;⇒\; (∀ x : τ • P\, x) \]
+
+21. [[https://youtu.be/tY_kwfU3Vjo][“Typed” Set Theory 𝑰]] kbd:Nov_6
+
+    Sets are like any other data structure, such as ℕumbers or sequences.
+    However, there is a particular ‘reflection’ of types-as-sets: Every type is
+    a set, but not the other way around. ( Likewise, every sequence yields a
+    set, but no canonical choice the other way around. )
+
+    *Types make sure things don't go wrong, such as multiplying a set by a
+    letter!*
 
     kbd:Nov_10 is the fourth midterm; it is online during class time.
 
-21. ?
-    kbd:Nov_12
+22. [[https://youtu.be/RlGEVZ-5tGo][“Typed” Set Theory 𝑰𝑰]] kbd:Nov_12
 
-22. ?
-    kbd:Nov_13
-:End:
+    Continuing part 𝑰.
 
-23. [[https://youtu.be/cuCy3jprIFY][A ‘Brutal’ Introduction to Relations]]    kbd:Nov_17
+23. [[https://youtu.be/0bb9-I5RC74][Cartesian Products, a theory of records]] kbd:Nov_13
+
+    We look at Cartesian Products and projections, which can be thought of as
+    the mathematical underpinning of “records/classes and fields” found in
+    programming.
+
+    We also quickly take a look at Currying ---yet another instance of the
+    “Programming ≈ Proving” slogan repeated throughout these lectures.
+
+    Finally, we consider sets of pairs, ‘relations’, as a form of
+    non-deterministic computing.
+
+24. [[https://youtu.be/cuCy3jprIFY][A ‘Brutal’ Introduction to Relations]] kbd:Nov_17
 
     We conclude Set Theory with an example of “division of sets” known as the
     pseudo-complement: We show how it's defining universal property can be used
@@ -391,7 +437,7 @@ Videos
 
     Compare with “A ‘Gentle’ Introduction to Relations (Nov 19)”.
 
-24. [[https://youtu.be/9U9bn047egY][A ‘Gentle’ Introduction to Relations]]      kbd:Nov_19
+25. [[https://youtu.be/9U9bn047egY][A ‘Gentle’ Introduction to Relations]] kbd:Nov_19
 
     Relations are just sets of pairs, but there are interesting interpretations
     of such sets: Matrices, Graphs, Programs.  As such, there are interesting
@@ -406,7 +452,7 @@ Videos
 
     Compare with “A ‘Brutal’ Introduction to Relations (Nov 17)”.
 
-25. [[https://youtu.be/co-EEY222EI][Wrapping up Relations]]      kbd:Nov_20
+26. [[https://youtu.be/co-EEY222EI][Wrapping up Relations]] kbd:Nov_20
 
     Concluding our discussion on relations by considering how “relation
     division” appears ---either the shape of residuals “R ╱ S” or via converse
@@ -417,7 +463,7 @@ Videos
 
     kbd:Nov_24 is the fifth midterm; it is online during class time.
 
-26. [[color:red][*not yet given*]]
+27. [[color:red][*not yet given*]]
 
 :Video_description:
  ─⟦Maths for Computing 𝓃⟧
