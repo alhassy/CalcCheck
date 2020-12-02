@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-11-30 Mon 19:36 -->
+<!-- 2020-12-02 Wed 08:56 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mathematics for Computing</title>
@@ -265,34 +265,6 @@
                       color:red;
                       text-decoration: none;}
         </style>
-
-<style>
-/* From: https://endlessparentheses.com/public/css/endless.css */
-/* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
-kbd
-{
-  -moz-border-radius: 6px;
-  -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
-  -webkit-border-radius: 6px;
-  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
-  background-color: #f7f7f7;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
-  color: #333;
-  display: inline-block;
-  font-family: 'Droid Sans Mono', monospace;
-  font-size: 80%;
-  font-weight: normal;
-  line-height: inherit;
-  margin: 0 .1em;
-  padding: .08em .4em;
-  text-shadow: 0 1px 0 #fff;
-  word-spacing: -4px;
-
-  box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
-}
-</style>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -414,7 +386,7 @@ kbd
 <li><a href="#Body-Rearrangment-Generalised-Symmetry-Associativity">8.8. <a href="#Body-Rearrangment-Generalised-Symmetry-Associativity">Body Rearrangment &#x2014;Generalised Symmetry &amp; Associativity</a></a></li>
 <li><a href="#Distributivity-Rules">8.9. <a href="#Distributivity-Rules">Distributivity Rules</a></a></li>
 <li><a href="#Permutative-Law-Translation-Rule">8.10. <a href="#Permutative-Law-Translation-Rule">Permutative Law &#x2014;“Translation Rule”</a></a></li>
-<li><a href="#Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else">8.11. <a href="#Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else">Trading and Contextual Rules &#x2014;Quantification and <code class="src src-haskell"><span style="color: #3a81c3; font-weight: bold;">if</span><span style="color: #6c3163; font-weight: bold;">-</span><span style="color: #3a81c3; font-weight: bold;">then</span><span style="color: #715ab1;">-</span><span style="color: #3a81c3; font-weight: bold;">else</span></code></a></a></li>
+<li><a href="#Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else">8.11. <a href="#Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else">Trading and Contextual Rules &#x2014;Quantification and <code class="src src-haskell"><span style="color: #859900; font-weight: bold;">if</span><span style="color: #b58900;">-</span><span style="color: #859900; font-weight: bold;">then</span><span style="color: #268bd2;">-</span><span style="color: #859900; font-weight: bold;">else</span></code></a></a></li>
 <li><a href="#Order-Rules">8.12. <a href="#Order-Rules">Order Rules</a></a>
 <ul>
 <li><a href="#Antitonicity-Rules-for-Eliminatory">8.12.1. <a href="#Antitonicity-Rules-for-Eliminatory">Antitonicity Rules for Eliminatory-⊕</a></a></li>
@@ -437,12 +409,24 @@ kbd
 <li><a href="#Discrete-Probability">10. <a href="#Discrete-Probability">Discrete Probability</a></a></li>
 <li><a href="#Relations">11. <a href="#Relations">Relations</a></a>
 <ul>
-<li><a href="#Graphs-first-encounter">11.1. <a href="#Graphs-first-encounter">Graphs, first encounter</a></a></li>
-<li><a href="#Domain-and-Range">11.2. <a href="#Domain-and-Range">Domain and Range</a></a></li>
-<li><a href="#Converse">11.3. <a href="#Converse">Converse</a></a></li>
+<li><a href="#Graphs-first-encounter">11.1. <a href="#Graphs-first-encounter">Graphs, first encounter</a></a>
+<ul>
+<li><a href="#Loops">11.1.1. <a href="#Loops">Loops</a></a></li>
+</ul>
+</li>
+<li><a href="#Domain-and-Range">11.2. <a href="#Domain-and-Range">Domain and Range</a></a>
+<ul>
+<li><a href="#Restriction">11.2.1. <a href="#Restriction">Restriction</a></a></li>
+<li><a href="#Antirestriction">11.2.2. <a href="#Antirestriction">Antirestriction</a></a></li>
+<li><a href="#Relational-Image">11.2.3. <a href="#Relational-Image">Relational Image</a></a></li>
+<li><a href="#Theorems">11.2.4. <a href="#Theorems">Theorems</a></a></li>
+</ul>
+</li>
+<li><a href="#Converse">11.3. <a href="#Converse">Converse &#x2014;“Transpose”</a></a></li>
 <li><a href="#Constructing-new-relations-from-existing-relations">11.4. <a href="#Constructing-new-relations-from-existing-relations">Constructing new relations from existing relations</a></a></li>
-<li><a href="#Equivalence-Relations">11.5. <a href="#Equivalence-Relations">Equivalence Relations</a></a></li>
-<li><a href="#Closures">11.6. <a href="#Closures">Closures</a></a></li>
+<li><a href="#Properties-of-Relations">11.5. <a href="#Properties-of-Relations">Properties of Relations</a></a></li>
+<li><a href="#Equivalence-Relations">11.6. <a href="#Equivalence-Relations">Equivalence Relations</a></a></li>
+<li><a href="#Closures">11.7. <a href="#Closures">Closures</a></a></li>
 </ul>
 </li>
 </ul>
@@ -2409,12 +2393,12 @@ we define expressions in terms of how they can be manipulated.
 </p>
 
 <p>
-A <b><a id="org29dc1af">calculus</a></b> is a method or process of reasoning by calculation with
+A <b><a id="orgeb058d5">calculus</a></b> is a method or process of reasoning by calculation with
 symbols.
 A Boolean variable that can denote a proposition is sometimes called a
-<i><a href="#org0309f44">propositional</a> variable</i>.
-A <b><a id="org2379c7c">propositional calculus</a></b> is so named beacuse it is a method
-of calculating with expressions that involve <a href="#org0309f44">propositional</a> variables.
+<i><a href="#org355aeab">propositional</a> variable</i>.
+A <b><a id="org9eeb70b">propositional calculus</a></b> is so named beacuse it is a method
+of calculating with expressions that involve <a href="#org355aeab">propositional</a> variables.
 </p>
 
 <p>
@@ -2424,15 +2408,15 @@ of calculating with expressions that involve <a href="#org0309f44">propositional
    For example, the axiom \(p ∨ q ≡ q ∨ p\) indicates (semantically)
    that the value of a disjunction doesn't depend on the order of its arguments
    and (syntactically) we may swap their order when manipulating expressions.
-   The other part of this <a href="#org29dc1af">calculus</a> are the 3 inference rules Substitution,
+   The other part of this <a href="#orgeb058d5">calculus</a> are the 3 inference rules Substitution,
    Leibniz, and Transitivity.
 </p>
 
 <p>
-   A <b><a id="org1e150f5">theorem</a></b> of this <a href="#org29dc1af">calculus</a> is either an axiom, the conclusion
+   A <b><a id="orgca438ab">theorem</a></b> of this <a href="#orgeb058d5">calculus</a> is either an axiom, the conclusion
    of an inference rule whose premises are theorems, or a Boolean expression
    that, using the inference rules, is proved equal to an axiom or a previously
-   proved <a href="#org1e150f5">theorem</a>.
+   proved <a href="#orgca438ab">theorem</a>.
  </div>
 </p>
 
@@ -2540,15 +2524,15 @@ in Computer Science and Software Engineering
 <li><b>Goal</b>: Understand the mechanics of mathematical expressions and proof.</li>
 
 <li><p>
-<a id="org0309f44">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
+<a id="org355aeab">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
 </p>
 
 <p>
-<a id="org0afb05a">Predicate</a>: <a href="#org0309f44">Propositional</a> statement about some subjects.
+<a id="orge117d04">Predicate</a>: <a href="#org355aeab">Propositional</a> statement about some subjects.
 </p></li>
 
 <li><p>
-<a id="org7f36ed2">Calculus</a>: Formalised reasoning through calculation.
+<a id="orgc119959">Calculus</a>: Formalised reasoning through calculation.
 </p>
 
 <p>
@@ -2838,7 +2822,7 @@ preserve truth</i>. Here are some examples of <i>clearly obviously true things</
 
 <p>
 Equipollence means if we show something is equal to ‘true’ (a particular
-<a href="#org1e150f5">theorem</a>), then it is a <a href="#org1e150f5">theorem</a>. Consequently, this means all theorems are
+<a href="#orgca438ab">theorem</a>), then it is a <a href="#orgca438ab">theorem</a>. Consequently, this means all theorems are
 equivalent.
 </p>
 
@@ -2883,7 +2867,7 @@ How do you ‘read’ (<i>parse</i>) the expression \(6 - x + 7\)?
 </div>
 
 
-<div id="org01f0cf6" class="figure">
+<div id="org9ab18ce" class="figure">
 <p><img src="images/6-x+7_third_time.png" alt="6-x+7_third_time.png" />
 </p>
 </div>
@@ -2897,7 +2881,7 @@ It can be generated from its parts in two different ways:
 Both \(6\) and \(x + 7\) are expressions, so \(6 - x + 7\) is an expression.
 </p>
 
-<div id="orgfc9c283" class="figure">
+<div id="org99c1b62" class="figure">
 <p><img src="images/6-x+7_parse2.png" alt="6-x+7_parse2.png" />
 </p>
 </div></li>
@@ -2905,7 +2889,7 @@ Both \(6\) and \(x + 7\) are expressions, so \(6 - x + 7\) is an expression.
 <li>and also both \(6 - x\) and \(7\) are expressions, so \(6 - x + 7\) is an expression.</li>
 </ol>
 
-<div id="org3cb2b05" class="figure">
+<div id="orgdaa3cd9" class="figure">
 <p><img src="images/6-x+7_parse1.png" alt="6-x+7_parse1.png" />
 </p>
 </div>
@@ -3042,14 +3026,14 @@ then a <b>meta-variable</b> is simply a normal variable of type <code>Expr τ</c
 </p>
 
 <p>
-Likewise, a <b><a href="#org1e150f5">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
-whereas a <b>meta-<a href="#org1e150f5">theorem</a></b> is a general statement about our logic that we prove
+Likewise, a <b><a href="#orgca438ab">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
+whereas a <b>meta-<a href="#orgca438ab">theorem</a></b> is a general statement about our logic that we prove
 to be true. That is, if 𝑬 is collection of rules that allows us to find
-truths, then a <i><a href="#org1e150f5">theorem</a></i> is a truth found using those rules; whereas a
-<i>meta-<a href="#org1e150f5">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
+truths, then a <i><a href="#orgca438ab">theorem</a></i> is a truth found using those rules; whereas a
+<i>meta-<a href="#orgca438ab">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
 That is, theorems are <span class="underline">in</span> 𝑬 and meta-theorems are <span class="underline">about</span> 𝑬.  For example, here
-is a meta-<a href="#org1e150f5">theorem</a> that the equational logic 𝑬 has (as do many other theories,
-such as lattices): An <i>equational</i> <a href="#org1e150f5">theorem</a> is true precisely when its ‘dual’ is
+is a meta-<a href="#orgca438ab">theorem</a> that the equational logic 𝑬 has (as do many other theories,
+such as lattices): An <i>equational</i> <a href="#orgca438ab">theorem</a> is true precisely when its ‘dual’ is
 true. Such metatheorems can be helpful to discover new theorems.
 </p>
 
@@ -3144,29 +3128,29 @@ yield \(1\).
 </p>
 
 <p>
-A Boolean expression \(P\) is <b><a id="org1fcd90d">satisfied</a></b> in a state if its value is <i>true</i>
-in that state; \(P\) is <b><a id="org5ffbcc3">satisfiable</a></b> if there is a state in which it is
-<a href="#org1fcd90d">satisfied</a>; and \(P\) is <b><a id="org21fff7e">valid</a></b> (or is a <b><a id="orge0db1cd">tautology</a></b>) if it is
-<a href="#org1fcd90d">satisfied</a> in every state.
+A Boolean expression \(P\) is <b><a id="orge092ef7">satisfied</a></b> in a state if its value is <i>true</i>
+in that state; \(P\) is <b><a id="org50508ea">satisfiable</a></b> if there is a state in which it is
+<a href="#orge092ef7">satisfied</a>; and \(P\) is <b><a id="org299dd47">valid</a></b> (or is a <b><a id="org68a089f">tautology</a></b>) if it is
+<a href="#orge092ef7">satisfied</a> in every state.
 </p>
 
 <hr />
 
 <p>
-All theorems of the <a href="#org0309f44">propositional</a> <a href="#org29dc1af">calculus</a> 𝑬 are <a href="#org21fff7e">valid</a>. This can be checked by checking
+All theorems of the <a href="#org355aeab">propositional</a> <a href="#orgeb058d5">calculus</a> 𝑬 are <a href="#org299dd47">valid</a>. This can be checked by checking
 that each axiom with a truth table and arguing for each inference rule that
-if its premises are <a href="#org21fff7e">valid</a> then so is its conclusion.
+if its premises are <a href="#org299dd47">valid</a> then so is its conclusion.
 </p>
 
 <p>
 For example, let's show that the Substitution rule preserves validity.  Let
 us write \(s(E)\) to denote the value of expression \(E\) in state \(s\).  If \(E\)
-is <a href="#org21fff7e">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
+is <a href="#org299dd47">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
 true in any state. So, given a state \(s\), let \(s′\) be the ‘updated’ state
 that assigns the same values to all the variables as does \(s\) <i>except</i> that
-the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#org21fff7e">valid</a>,
+the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#org299dd47">valid</a>,
 \(s′(E)\) is true but \(s′(E)\) is just \(s\big(E[x ≔ F]\big)\) and so the
-resulting substitution is also <a href="#org21fff7e">valid</a>.
+resulting substitution is also <a href="#org299dd47">valid</a>.
 </p>
 
 <p>
@@ -3177,8 +3161,8 @@ then the updated state \(s′\) &#x2014;having <i>s′(x) = s(F)</i>&#x2014; wil
 </p>
 
 <p>
-Not only are all theorems <a href="#org21fff7e">valid</a>, but all <a href="#org21fff7e">valid</a> expressions are theorems of
-our <a href="#org29dc1af">calculus</a> (although we do not prove this fact). Theoremhood and validity
+Not only are all theorems <a href="#org299dd47">valid</a>, but all <a href="#org299dd47">valid</a> expressions are theorems of
+our <a href="#orgeb058d5">calculus</a> (although we do not prove this fact). Theoremhood and validity
 are one and the same.
 </p>
 
@@ -3223,7 +3207,7 @@ Later we see that theorems correspond to expressions that are true in all states
 <div class="outline-text-3" id="text-Logics-and-Inference-Rules">
 <p>
 Formally, a “proof” is obtained by applying a number of “rules” to known
-results to obtain new results; a “<a href="#org1e150f5">theorem</a>” is the conclusion of a “proof”.
+results to obtain new results; a “<a href="#orgca438ab">theorem</a>” is the conclusion of a “proof”.
 An “axiom” is a rule that does not need to be applied to any existing
 results: It's just a known result.
 </p>
@@ -3340,7 +3324,7 @@ axioms \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\).
 </p>
 
 <p>
-The inference rule says “if the \(Pᵢ\) are all <a href="#org21fff7e">valid</a>, i.e., true in <i>all
+The inference rule says “if the \(Pᵢ\) are all <a href="#org299dd47">valid</a>, i.e., true in <i>all
 states</i>, then so is \(C\)”; the axiom, on the other hand, says “if the \(Pᵢ\)
 are true in <i>a state</i>, then \(C\) is true in <i>that state</i>.” Thus the rule and
 the axiom are not quite the same.
@@ -3349,24 +3333,24 @@ the axiom are not quite the same.
 <p>
 Moreover, the rule is not a Boolean expression.  Rules are thus more
 general, allowing us to construct systems of reasoning that have no
-concrete notions of ‘truth’ &#x2014;see the logic <a href="#org77cdab3">𝑾𝑩</a> below.
+concrete notions of ‘truth’ &#x2014;see the logic <a href="#org8da0aa9">𝑾𝑩</a> below.
 </p>
 
 <p>
 Finally, the rule asserts that \(C\) follows from \(P₁, …, Pₙ\).
 The formula \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\), on the other hand, is a Boolean
-expression (but it need not be a <a href="#org1e150f5">theorem</a>).
+expression (but it need not be a <a href="#orgca438ab">theorem</a>).
 </p>
 
 <p>
 An example of this relationship between rules and operators
-may be observed by comparing the logics <a href="#org77cdab3">𝑾𝑩</a> and <a href="#orgf5291fe">𝑴𝑺𝑯</a>, below.
+may be observed by comparing the logics <a href="#org8da0aa9">𝑾𝑩</a> and <a href="#org6198cf9">𝑴𝑺𝑯</a>, below.
 One could read “◇” as “and”, and “⟶” as “implies”.
 </p>
 
 
 <p>
-A “<a href="#org1e150f5">theorem</a>” is a syntactic concept: Can we play the game of moving symbols to
+A “<a href="#orgca438ab">theorem</a>” is a syntactic concept: Can we play the game of moving symbols to
 get this? Not “is the meaning of this true”!
 ‘Semantic concepts’ rely on ‘states’, assignments of values to variables
 so that we can ‘evaluate, simplify’ statements to deduce if they are true.
@@ -3384,7 +3368,7 @@ Syntax is like static analysis; semantics is like actually running the program
 <h3 id="water-bucket-logics"><span class="section-number-3">3.3</span> <a href="#water-bucket-logics">[Optional] Strange Logics</a></h3>
 <div class="outline-text-3" id="text-water-bucket-logics">
 <p>
-Here is an example logic, call it <a id="org77cdab3">𝑾𝑩</a>:
+Here is an example logic, call it <a id="org8da0aa9">𝑾𝑩</a>:
 </p>
 <ul class="org-ul">
 <li>The symbols are the usual numbers, along with <code>+</code> and <code>-</code> and
@@ -3415,10 +3399,10 @@ from numbers, +, and -.
 </p>
 
 <p>
-<b>Exercise <a href="#water-bucket-logics">3.3</a>.1</b>: Using this logic, prove the <a href="#org1e150f5">theorem</a> <code>0, 4</code>.
+<b>Exercise <a href="#water-bucket-logics">3.3</a>.1</b>: Using this logic, prove the <a href="#orgca438ab">theorem</a> <code>0, 4</code>.
 </p>
 <ul class="org-ul">
-<li>Notice that the <a href="#org1e150f5">theorem</a> has nothing to do with ‘truth’! &#x2014;At least not
+<li>Notice that the <a href="#orgca438ab">theorem</a> has nothing to do with ‘truth’! &#x2014;At least not
 explicitly, or intuitively.</li>
 </ul>
 
@@ -3472,7 +3456,7 @@ a way that makes the inference rules true?
                   </summary>
 
 <p>
-The logic <a href="#org77cdab3">𝑾𝑩</a> <i>could be</i> interpreted as modelling two ‘water buckets’, the first
+The logic <a href="#org8da0aa9">𝑾𝑩</a> <i>could be</i> interpreted as modelling two ‘water buckets’, the first
 can contain 3 litres while the second can contain 5 litres, along with an
 unlimited water supply.
 </p>
@@ -3487,7 +3471,7 @@ the other, such that the first is emptied <b>or</b> the second is filled.
 </ol>
 
 <p>
-Then the <a href="#org1e150f5">theorem</a> says we can measure 4 litres of water &#x2014;using only a 3 and 5
+Then the <a href="#orgca438ab">theorem</a> says we can measure 4 litres of water &#x2014;using only a 3 and 5
 litre buckets and an unlimited water supply.
 </p>
 
@@ -3498,14 +3482,14 @@ litre buckets and an unlimited water supply.
 <hr />
 
 <p>
-Here is another example logic, call it <a id="orgf5291fe">𝑴𝑺𝑯</a>:
+Here is another example logic, call it <a id="org6198cf9">𝑴𝑺𝑯</a>:
 </p>
 <ul class="org-ul">
 <li>The symbols are the usual numbers, along with <code>+, -, ◇, ⟶</code>.</li>
 <li>A formula is of the form \(x ◇ y ⟶ x′ ◇ y′\) where ◇ binds tightest
 and \(x, y, x′, y′\) are terms formed from numbers, <code>+</code>, and <code>-</code>.</li>
 <li><p>
-In contrast to <a href="#org77cdab3">𝑾𝑩</a>, this logic has only 1 non-axiom inference rule!
+In contrast to <a href="#org8da0aa9">𝑾𝑩</a>, this logic has only 1 non-axiom inference rule!
 </p>
 
 <p>
@@ -3523,7 +3507,7 @@ In contrast to <a href="#org77cdab3">𝑾𝑩</a>, this logic has only 1 non-axi
 
 <p>
 <b>Exercise <a href="#water-bucket-logics">3.3</a>.3:</b> Finish reading this section, then come back and
-prove the <a href="#org1e150f5">theorem</a> <code>0 ◇ 0 ⟶ 0 ◇ 4</code> using a <i>calculational proof</i>.
+prove the <a href="#orgca438ab">theorem</a> <code>0 ◇ 0 ⟶ 0 ◇ 4</code> using a <i>calculational proof</i>.
 </p>
 
 <details class="code-details"
@@ -3584,14 +3568,14 @@ related, via the relation, to the last term.
                   </summary>
 
 <p>
-We <i>may</i> think of <a href="#orgf5291fe">𝑴𝑺𝑯</a> as a ‘machine’ with two memory banks: A computer with memory
+We <i>may</i> think of <a href="#org6198cf9">𝑴𝑺𝑯</a> as a ‘machine’ with two memory banks: A computer with memory
 state \(x\) and \(y\) is executed and it terminates in memory state \(x′\) and \(y′\).
 That is, \(x ◇ y ⟶ x′ ◇ y′\) is “starting from \((x, y)\), the computer finishes
 with \((x′, y′)\)”.
 </p>
 
 <p>
-The <a href="#org1e150f5">theorem</a> then says that it is possible for the computer to start at \((0, 0)\)
+The <a href="#orgca438ab">theorem</a> then says that it is possible for the computer to start at \((0, 0)\)
 and finish with memory store \((0, 4)\).
 </p>
 
@@ -3601,7 +3585,7 @@ is witnessed by the <a href="https://alhassy.github.io/PrologCheatSheet/CheatShe
 </p>
 
 <p>
-Of-course, we could also re-use the water buckets interpretation of <a href="#org77cdab3">𝑾𝑩</a>.
+Of-course, we could also re-use the water buckets interpretation of <a href="#org8da0aa9">𝑾𝑩</a>.
 </p>
 
 
@@ -3635,12 +3619,12 @@ The following rules define equality by how it can be used, manipulated.
 <li><p>
 The <b>Substitution inference rule</b>
 says that a substitution \(E[\vec x ≔ \vec F]\) is
-a <a href="#org1e150f5">theorem</a> <i>whenever</i> \(E\) is a <a href="#org1e150f5">theorem</a>.
+a <a href="#orgca438ab">theorem</a> <i>whenever</i> \(E\) is a <a href="#orgca438ab">theorem</a>.
 </p>
 
 <p>
 Within CalcCheck, this rule is realised as the <kbd> with </kbd> clause: The phrase <code>E
-    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#org1e150f5">theorem</a>
+    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#orgca438ab">theorem</a>
 \(E[\vec x ≔ \vec F]\). The rule is applied <i>implicitly</i>, unless <code>rigid matching</code>
 is activated &#x2014;e.g., to get students <b>thinking correctly about applying
 theorems</b> instead of just putting random theorems that look similar and hoping
@@ -3684,7 +3668,7 @@ from one must be the same when extracted from the other.
 
 <p>
 Again: Unlike the Substitution rule, which allows us to instantiate <i>any</i>
-<a href="#org1e150f5">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
+<a href="#orgca438ab">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
 within expressions</b>. Later on, we will look at ‘monotonicity rules’ which will
 let us apply inclusion (≤, ⇒, ⊑) theorems deep within expressions.
 </p>
@@ -3751,7 +3735,7 @@ Instead, we may use a more ‘linear’ proof format:
 
 <p>
 In this equational style, instead of a <b>tree</b> (on the left)
-we use a <b><a href="#org195da2a">sequential</a> chain of equalities</b> (on the right):
+we use a <b><a href="#org699a78e">sequential</a> chain of equalities</b> (on the right):
 </p>
 
 
@@ -3843,7 +3827,7 @@ inference rules must be mentioned explicitly.
 
 <p>
 Leibniz is often used with Substitution, as follows
-&#x2014;supposing we know the <a href="#org1e150f5">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
+&#x2014;supposing we know the <a href="#orgca438ab">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
 </p>
 
 \begin{calc}
@@ -3854,9 +3838,9 @@ Leibniz is often used with Substitution, as follows
 
 <p>
 We are using Leibniz with the premise \(2 · j / 2 = j\).
-We can use this premise only if it is a <a href="#org1e150f5">theorem</a>. It is, because
-\(2 · x / 2 = x\) is a <a href="#org1e150f5">theorem</a> and, therefore, by Substitution,
-\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#org1e150f5">theorem</a>.
+We can use this premise only if it is a <a href="#orgca438ab">theorem</a>. It is, because
+\(2 · x / 2 = x\) is a <a href="#orgca438ab">theorem</a> and, therefore, by Substitution,
+\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#orgca438ab">theorem</a>.
 </p>
 
 <p>
@@ -3868,7 +3852,7 @@ off the indication “with \(x ≔ j\)”.
 </div>
 
 <div id="outline-container-Propositional-Calculus" class="outline-2">
-<h2 id="Propositional-Calculus"><span class="section-number-2">4</span> <a href="#Propositional-Calculus"> <a href="#org0309f44">Propositional</a> <a href="#org29dc1af">Calculus</a></a></h2>
+<h2 id="Propositional-Calculus"><span class="section-number-2">4</span> <a href="#Propositional-Calculus"> <a href="#org355aeab">Propositional</a> <a href="#orgeb058d5">Calculus</a></a></h2>
 <div class="outline-text-2" id="text-Propositional-Calculus">
 <p>
 Often operations are defined by how they are evaluated (“operationally”), we
@@ -3889,14 +3873,14 @@ cleanly possible; e.g., given an ordering ‘≤’(‘⇒, ⊆, ⊑’) we can 
 </p>
 
 <p>
-A <i><a href="#org29dc1af">calculus</a></i> is a method or process of reasoning by calculation with symbols. A
-<i><a href="#org0309f44">propositional</a> <a href="#org29dc1af">calculus</a></i> is a method of calculating with Boolean (or
-<a href="#org0309f44">propositional</a>) expressions.
+A <i><a href="#orgeb058d5">calculus</a></i> is a method or process of reasoning by calculation with symbols. A
+<i><a href="#org355aeab">propositional</a> <a href="#orgeb058d5">calculus</a></i> is a method of calculating with Boolean (or
+<a href="#org355aeab">propositional</a>) expressions.
 </p>
 
 <p>
-A <i><a href="#org1e150f5">theorem</a></i> is a syntactic object, a string of symbols with a particular property.
-A <i><a href="#org1e150f5">theorem</a></i> of a <a href="#org29dc1af">calculus</a> is either an axiom or the conclusion of an inference
+A <i><a href="#orgca438ab">theorem</a></i> is a syntactic object, a string of symbols with a particular property.
+A <i><a href="#orgca438ab">theorem</a></i> of a <a href="#orgeb058d5">calculus</a> is either an axiom or the conclusion of an inference
 rule whose premises are theorems. Different axioms could lead to the same
 set of theorems, and many texts use different axioms.
 </p>
@@ -3920,7 +3904,7 @@ The type of propositions is known as the <b>Booleans</b> and denoted 𝔹.
 <p>
 For instance, the notion of equality on any type τ is
 typed <code>_=_ : τ → τ → 𝔹</code>; i.e., equality takes two values of a type τ
-and returns a <a href="#org0309f44">propositional</a> value.
+and returns a <a href="#org355aeab">propositional</a> value.
 </p>
 
 <blockquote>
@@ -4463,7 +4447,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 7:</span> Properties of <a href="#org0309f44">propositional</a> operators and similar (familiar) numeric laws</caption>
+<caption class="t-above"><span class="table-number">Table 7:</span> Properties of <a href="#org355aeab">propositional</a> operators and similar (familiar) numeric laws</caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -4759,7 +4743,7 @@ of equivalence increases the number of parses.
 <p>
 Using its definition, we can quickly show that
 \(\true = \big(\true ≡ q ≡ q\big)\) and so by equanimity,
-since the right side is a <a href="#org1e150f5">theorem</a>, then the left side is also a <a href="#org1e150f5">theorem</a>.
+since the right side is a <a href="#orgca438ab">theorem</a>, then the left side is also a <a href="#orgca438ab">theorem</a>.
 Hence,
 </p>
 
@@ -4768,24 +4752,24 @@ Hence,
 </p>
 
 <p>
-What is the benefit of this <a href="#org1e150f5">theorem</a>?
+What is the benefit of this <a href="#orgca438ab">theorem</a>?
 </p>
 
 <p>
-By equanimity, this means that to prove \(P\) is a <a href="#org1e150f5">theorem</a>, it is
+By equanimity, this means that to prove \(P\) is a <a href="#orgca438ab">theorem</a>, it is
 enough to show that \(P ≡ \true\)! This is an ‘expected’ result :-)
 </p>
 
 <p>
-( We can phrase this observation as a <a href="#org1e150f5">theorem</a> itself as \((P ≡ \true) ≡ P\), but
+( We can phrase this observation as a <a href="#orgca438ab">theorem</a> itself as \((P ≡ \true) ≡ P\), but
 this is essentially the definition of true, above! )
 </p>
 
 <p>
-Here is an impressive benefit of this <a href="#org1e150f5">theorem</a>.  Suppose we want to prove an
+Here is an impressive benefit of this <a href="#orgca438ab">theorem</a>.  Suppose we want to prove an
 equation \(L = R\) is true; if our proof only alters \(L\) to make it the same as
 \(R\) so that we obtain \(R = R\), then we may the definition of \(\true\) to
-obtain, well, \(\true\), but since this is a <a href="#org1e150f5">theorem</a> then so too is \(L = R\).
+obtain, well, \(\true\), but since this is a <a href="#orgca438ab">theorem</a> then so too is \(L = R\).
 That is,
 </p>
 \begin{calc}
@@ -4812,13 +4796,13 @@ R
 
 <p>
 That is, (3.4) gives us a new proof method &#x2014;which is always a bonus result
-from a <a href="#org1e150f5">theorem</a>.
+from a <a href="#orgca438ab">theorem</a>.
 </p>
 
 
 <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>(3.6) Simplifiction Proof Method ---Page 45</h3>
 <p>
-To prove \(L = R\) is a <a href="#org1e150f5">theorem</a>, transform \(L\) to \(R\) or \(R\) to \(L\)
+To prove \(L = R\) is a <a href="#orgca438ab">theorem</a>, transform \(L\) to \(R\) or \(R\) to \(L\)
 using Leibniz (equals for equals reasoning).
 </p>
 
@@ -4862,7 +4846,7 @@ Finally, (3.4) gives us the following <abbr class="tooltip" title="A <em>theorem
 </p>
 
 <p>
-Indeed, if \(P\) is a <a href="#org1e150f5">theorem</a> and \(Q\) is a <a href="#org1e150f5">theorem</a>, then by (3.4) we have \(P ≡
+Indeed, if \(P\) is a <a href="#orgca438ab">theorem</a> and \(Q\) is a <a href="#orgca438ab">theorem</a>, then by (3.4) we have \(P ≡
   \true\) and \(\true = Q\) and so by transitivity of ≡, we have \(P ≡ Q\).
 </p>
 
@@ -4947,8 +4931,8 @@ satisfies these two properties.
 <div class="outline-text-3" id="text-Alternative-definitions-of-and">
 <p>
 The following theorems are sometimes used to define ≡ and ≢.
-The first <a href="#org1e150f5">theorem</a> indicates that \(p ≡ q\) holds exactly when \(p\)
-and \(q\) are both <i>true</i> or both <i>false</i>. The second <a href="#org1e150f5">theorem</a> indicates that
+The first <a href="#orgca438ab">theorem</a> indicates that \(p ≡ q\) holds exactly when \(p\)
+and \(q\) are both <i>true</i> or both <i>false</i>. The second <a href="#orgca438ab">theorem</a> indicates that
 \(p ≢ q\) holds exactly when one of them is <i>true</i> and the other is <i>false</i>.
 </p>
 
@@ -4973,9 +4957,9 @@ Proof:
 </div>
 
 <p>
-In most <a href="#org0309f44">propositional</a> calculi equivalence is the last operator to be defined
+In most <a href="#org355aeab">propositional</a> calculi equivalence is the last operator to be defined
 and is defined as “mutual implication”.  Thus, (3.80) below typically is made
-an axiom.  We down-play implication in our <a href="#org29dc1af">calculus</a> because, as an unsymmetric
+an axiom.  We down-play implication in our <a href="#orgeb058d5">calculus</a> because, as an unsymmetric
 operator (by 3.72 and 3.73), it is harder to manipulate. Sometimes
 (3.80) would be read as “(strong) antisymmetry of ⇒”.
 </p>
@@ -5117,7 +5101,7 @@ is true at that point in the program's execution.
 
 <p>
 An expression of the form <code>{ R } C { G }</code>, where \(R, G\) are properties of the program
-variables and \(C\) is a program command, is called a <a id="org4016f31">Hoare triple</a>.
+variables and \(C\) is a program command, is called a <a id="org5bb0258">Hoare triple</a>.
 </p>
 
 <p>
@@ -5271,7 +5255,7 @@ formalise the claim as
  x = X \;∧\; y = Y \;\Then{x,y := y, x}\; x = Y \;∧\; y = Y
  \]
 We refer to variables that never appear in program text
-as <span class="underline"><a id="org29621e7">ghost variables</a></span>; their function is to relate the final values of the
+as <span class="underline"><a id="org7f1c99d">ghost variables</a></span>; their function is to relate the final values of the
 program variables to their initial values.
 </p>
 
@@ -5279,8 +5263,8 @@ program variables to their initial values.
 <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Definition of Hoare Triples</h3>
 <p>
 In general, an expression <code>{ R } C { G }</code>, with \(R, G\) predicates on a collection
-of program variables and <a href="#org29621e7">ghost variables</a>, means that, <i>forall possible values of
-the <a href="#org29621e7">ghost variables</a>,</i> if the program variables satisfy property \(R\) before
+of program variables and <a href="#org7f1c99d">ghost variables</a>, means that, <i>forall possible values of
+the <a href="#org7f1c99d">ghost variables</a>,</i> if the program variables satisfy property \(R\) before
 execution of the command <code>C</code>, execution of <code>C</code> is guaranteed to terminate, and,
 afterwards, the program variables will satisfy property \(G\).
 </p>
@@ -5303,7 +5287,7 @@ States may be represented by predicates on variables and so <b>imperative
 commands are relations on predicates</b>: <i>Given two propositions \(G, R\) making</i>
 <i>use of program variables, we write \(R \Then{C} G\) to mean “in a state \(R\), the
 execution of command \(C\) terminates in state \(G\)”</i>.
-( This is also known as a <i><a href="#org4016f31">Hoare Triple</a></i> and written <code>{R} C {G}</code>. )
+( This is also known as a <i><a href="#org5bb0258">Hoare Triple</a></i> and written <code>{R} C {G}</code>. )
 </p>
 
 <p>
@@ -5424,7 +5408,7 @@ as ‘fixed’ or ‘constant’ and so cannot appear in the program command \(C
 
 <p>
 However, this convention only reduces ambiguity about what variables can be
-meddled with; and so <a href="#org29621e7">ghost variables</a> are still required.  For instance, consider
+meddled with; and so <a href="#org7f1c99d">ghost variables</a> are still required.  For instance, consider
 the example specification “set \(z\) to its own absolute value”, it is formalised
 with the help of a ghost variable: \(z = Z \Then{?} z = |Z|\).
 </p>
@@ -5532,7 +5516,7 @@ It is defined by the <i>shape</i> of the possible commands <code>C</code>.
 </p>
 
 <p>
-For example, the <b><a id="org195da2a">sequential</a> command</b> <code>C₁ ⍮ C₂</code> is executed by first
+For example, the <b><a id="org699a78e">sequential</a> command</b> <code>C₁ ⍮ C₂</code> is executed by first
 executing <code>C₁</code> then by executing <code>C₂</code>. As such, to obtain a goal state \(G\), we
 may construct a partial program \(C₂\) which in-turn requires an intermediary
 state \(I\); then to establish state \(I\), we may construct a program <code>C₁</code> which
@@ -5566,7 +5550,7 @@ and this is what makes programming interesting!
 <h3 id="We-define-assignment-using-textual-substitution"><span class="section-number-3">5.5</span> <a href="#We-define-assignment-using-textual-substitution">We define assignment using textual substitution</a></h3>
 <div class="outline-text-3" id="text-We-define-assignment-using-textual-substitution">
 <p>
-The <a id="orgcb2d8e5">assignment statement</a>
+The <a id="org9d689c6">assignment statement</a>
 <code>x := E</code> evaluates expression <code>E</code> (which we assume “never crashes”)
 and stores the result in variable <code>x</code>.
 The statement is read “ <code>x</code> becomes <code>E</code> ”.
@@ -5662,7 +5646,7 @@ When will the assignment <code>x := x - 1</code> ensure the goal state \(x² + 2
 \end{calc}
 <p>
 Hence, if \(x\) is positive or negative 2, then the assignment
-<code>x := x - 1</code> will ensure that \(x\) satisfies the <a href="#org0afb05a">predicate</a> state \(x² + 2 · x =
+<code>x := x - 1</code> will ensure that \(x\) satisfies the <a href="#orge117d04">predicate</a> state \(x² + 2 · x =
    3\)
 &#x2014;incidentally, after the assignment \(x\) will have its value being
 positive 1 or negative 3, which are both solutions to the equation
@@ -5685,7 +5669,7 @@ minutes of this <a href="https://youtu.be/JxRZC2UMJb0">this video lecture</a> fo
 </p>
 
 <p>
-When \(I \;⇒[C]\;\; I\), one says that “state \(I\) is <b><a id="org8d998b5">invariant</a></b> for
+When \(I \;⇒[C]\;\; I\), one says that “state \(I\) is <b><a id="orgf2ff633">invariant</a></b> for
 command \(C\)” or that “\(C\) <i>maintains</i> \(I\)”.
 </p>
 </div>
@@ -5695,9 +5679,9 @@ command \(C\)” or that “\(C\) <i>maintains</i> \(I\)”.
 <h3 id="Calculating-Assignments"><span class="section-number-3">5.7</span> <a href="#Calculating-Assignments">Calculating Assignments</a></h3>
 <div class="outline-text-3" id="text-Calculating-Assignments">
 <p>
-It is <i>often</i> possible to <b>calculate</b> an <a href="#orgcb2d8e5">assignment statement</a> that satisfies a
+It is <i>often</i> possible to <b>calculate</b> an <a href="#org9d689c6">assignment statement</a> that satisfies a
 given precondition-postcondition specification.
-Many examples involve a property that is to be maintained <a href="#org8d998b5">invariant</a> whilst
+Many examples involve a property that is to be maintained <a href="#orgf2ff633">invariant</a> whilst
 progress is made by incrementing (or decrementing) a counter.
 </p>
 
@@ -5845,7 +5829,7 @@ and that it can be defined in terms of assignments.
 <h2 id="Induction"><span class="section-number-2">6</span> <a href="#Induction">Induction</a></h2>
 <div class="outline-text-2" id="text-Induction">
 <p>
-How we prove a <a href="#org1e150f5">theorem</a> \(P\, n\) ranging over natural numbers \(n\)?
+How we prove a <a href="#orgca438ab">theorem</a> \(P\, n\) ranging over natural numbers \(n\)?
 </p>
 
 <p>
@@ -5891,7 +5875,7 @@ observation’ is known as <i>induction</i>.
 
 <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Constant functions are induction</h3>
 <p>
-A <a href="#org0afb05a">predicate</a> \(P : ℕ → 𝔹\) is a function. When is such a function constantly the
+A <a href="#orge117d04">predicate</a> \(P : ℕ → 𝔹\) is a function. When is such a function constantly the
 value \(\true\)? That is, when is \(∀ n • P\, n = \true\)?  Clearly, if \(P\) starts
 off being \(\true\) &#x2014;i.e., <i>P 0</i>&#x2014; and it preserves truth at every step &#x2014;i.e.,
 <i>P n ⇒ P (n + 1)</i>&#x2014; then <i>P n</i> will be true for any choice of \(n\).
@@ -6110,7 +6094,7 @@ Equivalently, <i>b divides a ≡ (∃ c • a = b · c)</i>.</li>
 
 
 <p>
-For instance, if we take \(b = 3\), then the <a href="#org1e150f5">theorem</a> says every integer is of the
+For instance, if we take \(b = 3\), then the <a href="#orgca438ab">theorem</a> says every integer is of the
 form \(3 · q, 3 · q + 1\), or \(3 · q + 2\).
 </p>
 
@@ -6202,7 +6186,7 @@ That is,
 </p>
 
 <ul class="org-ul">
-<li>Often this <a href="#org1e150f5">theorem</a> is
+<li>Often this <a href="#orgca438ab">theorem</a> is
 used in the <i>simpler, less generic</i>, shape “since <i>k</i> divides <i>x</i> and <i>y</i>, it also
 divides their sum”.
 <ul class="org-ul">
@@ -6238,7 +6222,7 @@ conversely if c is not-zero, we can divide-it-out.
 </p>
 
 <p>
-Divisibility is <a href="#org8d998b5">invariant</a> under additive inverse,
+Divisibility is <a href="#orgf2ff633">invariant</a> under additive inverse,
 \[\Law{Divisibility is invariant under additive inverse}{ m ∣ n \quad≡\quad m ∣ (-n)} \]
 </p>
 
@@ -6272,7 +6256,7 @@ Some texts insist that <i>m ≠ 0</i> for the notation <i>m ∣ n</i> to be mean
 However, if <i>m = 0</i> and <i>m ∣ n</i> then that means there is a <i>q</i> with <i>n = q · m = q ·
 0 = 0</i> and so <i>n = 0</i>. Hence, the only divisibility statement we can make of the
 shape <i>0 ∣ n</i> is really just <i>0 ∣ 0</i>.  This observation is captured by the
-following <a href="#org1e150f5">theorem</a>. (Note: <i>0 ∣ n</i> does not mean we are dividing by 0!
+following <a href="#orgca438ab">theorem</a>. (Note: <i>0 ∣ n</i> does not mean we are dividing by 0!
 Divisibility, ‘∣’, is defined in-terms of multiplication &#x2014;not division!)
 </p>
 
@@ -6387,7 +6371,7 @@ As such, the product of any <i>N</i> consecutive integers is divisible by <i>N</
 </div>
 
 <div id="outline-container-Quantification-and-Predicate-Logic" class="outline-2">
-<h2 id="Quantification-and-Predicate-Logic"><span class="section-number-2">8</span> <a href="#Quantification-and-Predicate-Logic">Quantification and <a href="#org0afb05a">Predicate</a> Logic</a></h2>
+<h2 id="Quantification-and-Predicate-Logic"><span class="section-number-2">8</span> <a href="#Quantification-and-Predicate-Logic">Quantification and <a href="#orge117d04">Predicate</a> Logic</a></h2>
 <div class="outline-text-2" id="text-Quantification-and-Predicate-Logic">
 <p style="display:none">\[\newcommand{Law}[3][]{ #1\;\;\textbf{#2:}\quad #3 }
 \def\abs{\mathsf{abs}\,}
@@ -6514,13 +6498,13 @@ a list of dummies. We will specialise this proviso for each rule as needed.
 </thead>
 <tbody>
 <tr>
-<td class="org-left"><b><a href="#orgcbd87f6">Dummy</a> Rules</b></td>
+<td class="org-left"><b><a href="#org363338f">Dummy</a> Rules</b></td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">Renaming</td>
-<td class="org-left"><a href="#orgcbd87f6">Dummy</a> names are place-holders and don't matter</td>
+<td class="org-left"><a href="#org363338f">Dummy</a> names are place-holders and don't matter</td>
 </tr>
 
 <tr>
@@ -6724,16 +6708,16 @@ or \((+ i \;❙\; 1 ≤ i ≤ n • f\, i)\)
 for several reasons.</li>
 
 <li><p>
-The parentheses make explicit the <i>scope</i> of the <i><a href="#orgcbd87f6">dummy</a></i> or <i>quantified variable
+The parentheses make explicit the <i>scope</i> of the <i><a href="#org363338f">dummy</a></i> or <i>quantified variable
 i</i>: The places where <i>i</i> can be referenced. The scope comprises the expressions
 within the parentheses.
 </p>
 
 <p>
-The “\(Σ\,i\)” (or “\(+\, i\)”) acts as a declaration, introducing <b><a id="orgcbd87f6">dummy</a></b> <i>i</i>.
+The “\(Σ\,i\)” (or “\(+\, i\)”) acts as a declaration, introducing <b><a id="org363338f">dummy</a></b> <i>i</i>.
 </p>
 <ul class="org-ul">
-<li>This <a href="#orgcbd87f6">dummy</a> is not a variable in the usual sense, for it does not obtain a
+<li>This <a href="#org363338f">dummy</a> is not a variable in the usual sense, for it does not obtain a
 value from the state in which the expression is evaluated.</li>
 </ul></li>
 
@@ -6748,13 +6732,13 @@ between 1 and 7:
 \[ (Σ i \;❙\; 1 ≤ i ≤ 7 ∧ \mathsf{even}\, i • i) \;=\; 2 + 4 + 6\]
 </p></li>
 
-<li>The linear notation extends easily to allow more than one <a href="#orgcbd87f6">dummy</a>, as shown in
+<li>The linear notation extends easily to allow more than one <a href="#org363338f">dummy</a>, as shown in
 the following example.  \[ (Σ i,j \;❙\; 1 ≤ i ≤ 2 ∧ 3 ≤ j ≤ 4 • i^j) \;=\; 1^3 +
    1^4 + 2^3 + 2^4\] In determining which values \(i^j\) are being summed, we
 choose all combinations of \(i\) and \(j\) that satisfy the <i>range</i> \(1 ≤ i ≤ 2 ∧ 3
    ≤ j ≤ 4\).</li>
 
-<li>In the summations about, our intent is that <a href="#orgcbd87f6">dummy</a> \(i\) ranges over integer
+<li>In the summations about, our intent is that <a href="#org363338f">dummy</a> \(i\) ranges over integer
 values, rather than real values (say). To make the type explicit, we can
 write \((Σ i : ℤ \;❙\; 1 ≤ i ≤ 2 • f\, i)\).</li>
 
@@ -6955,7 +6939,7 @@ Ignoring the proviso/antecedent of the Zero Body rule quickly leads to trouble:
 \end{calc}
 <p>
 The second step is invalid since it is <i>not enough</i> to show some term is zero, but
-rather that some term &#x2014;i.e., <a href="#orgcbd87f6">dummy</a> variable&#x2014; <i>satisfying</i> the range is zero.
+rather that some term &#x2014;i.e., <a href="#org363338f">dummy</a> variable&#x2014; <i>satisfying</i> the range is zero.
 Indeed, in the second step above we need to show \((∃ x \;❙\; false • 𝟘_⊕ = 𝟘_⊕)
 ≡ true\), which by Empty Range for ∃ is the same as \(false ≡ true\) &#x2014;and this is
 impossibly difficult to show, since it's just not true.
@@ -6964,11 +6948,11 @@ impossibly difficult to show, since it's just not true.
 </div>
 
 <div id="outline-container-Dummy-Renaming" class="outline-3">
-<h3 id="Dummy-Renaming"><span class="section-number-3">8.4</span> <a href="#Dummy-Renaming"> <a href="#orgcbd87f6">Dummy</a> Renaming</a></h3>
+<h3 id="Dummy-Renaming"><span class="section-number-3">8.4</span> <a href="#Dummy-Renaming"> <a href="#org363338f">Dummy</a> Renaming</a></h3>
 <div class="outline-text-3" id="text-Dummy-Renaming">
 <p>
-The first rule expresses the fact that a ‘<a href="#orgcbd87f6">dummy</a>’ is just a place holder, the
-particular name chosen for the <a href="#orgcbd87f6">dummy</a> is not relevant provided it does not clash
+The first rule expresses the fact that a ‘<a href="#org363338f">dummy</a>’ is just a place holder, the
+particular name chosen for the <a href="#org363338f">dummy</a> is not relevant provided it does not clash
 with the names of other variables in the quantified expression.  Renaming is
 often used when performing other algebraic manipulations in order to avoid
 capture of free variables or release of bound variables.
@@ -6979,14 +6963,14 @@ Recall that \(E[x ≔ F]\) denotes the expression obtained by replacing every <i
 occurrence of <i>x</i> in <i>E</i> by <i>F</i>. Then,
 </p>
 <dl class="org-dl">
-<dt>(Axiom 8.21) <a href="#orgcbd87f6">Dummy</a> Renaming</dt><dd>Provided <i>y</i> does not occur in <i>R</i> nor in <i>P</i>,
+<dt>(Axiom 8.21) <a href="#org363338f">Dummy</a> Renaming</dt><dd>Provided <i>y</i> does not occur in <i>R</i> nor in <i>P</i>,
 \[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ y] • P[x ≔ y]] \]</dd>
 </dl>
 
 <p>
 Remember: The ‘occurs’ restrictions on these laws ensure that an expression that
-contains an occurrence of a <a href="#orgcbd87f6">dummy</a> is not moved outside (or inside) the scope of
-the <a href="#orgcbd87f6">dummy</a>.
+contains an occurrence of a <a href="#org363338f">dummy</a> is not moved outside (or inside) the scope of
+the <a href="#org363338f">dummy</a>.
 </p>
 
 <p>
@@ -7007,7 +6991,7 @@ indices that apply.
 
 <p>
 That is, the second rule for dummies state, essentially, that the use of more than one
-<a href="#orgcbd87f6">dummy</a> is a convenient abbreviation for a collection of quantifications.
+<a href="#org363338f">dummy</a> is a convenient abbreviation for a collection of quantifications.
 </p>
 
 <dl class="org-dl">
@@ -7099,7 +7083,7 @@ above.</li>
 </div>
 
 <div id="outline-container-Rearranging-Dummy-List-Permutation" class="outline-3">
-<h3 id="Rearranging-Dummy-List-Permutation"><span class="section-number-3">8.6</span> <a href="#Rearranging-Dummy-List-Permutation"> <a href="#orgcbd87f6">Dummy</a> Rearrangment &#x2014;Generalised Symmetry &amp; Associativity</a></h3>
+<h3 id="Rearranging-Dummy-List-Permutation"><span class="section-number-3">8.6</span> <a href="#Rearranging-Dummy-List-Permutation"> <a href="#org363338f">Dummy</a> Rearrangment &#x2014;Generalised Symmetry &amp; Associativity</a></h3>
 <div class="outline-text-3" id="text-Rearranging-Dummy-List-Permutation">
 <p>
 The third rule is very powerful because, in combination with the nesting rule,
@@ -7109,7 +7093,7 @@ summation is irrelevant.
 </p>
 
 <dl class="org-dl">
-<dt>Rearranging, <a href="#orgcbd87f6">Dummy</a> List Permutation</dt><dd>\[ (⊕ x, y \;❙\; R • P) \quad=\quad (⊕ y, x \;❙\; R • P) \]</dd>
+<dt>Rearranging, <a href="#org363338f">Dummy</a> List Permutation</dt><dd>\[ (⊕ x, y \;❙\; R • P) \quad=\quad (⊕ y, x \;❙\; R • P) \]</dd>
 </dl>
 
 <p>
@@ -7148,7 +7132,7 @@ a ≤ x ≤ y  ∧  a ≤ y ≤ b
 \end{calc}
 
 <p>
-We may capture the unnesting-rearrangement-nesting pattern in the above example as a <a href="#org1e150f5">theorem</a>.
+We may capture the unnesting-rearrangement-nesting pattern in the above example as a <a href="#orgca438ab">theorem</a>.
 </p>
 <dl class="org-dl">
 <dt>(8.19) Interchange of dummies</dt><dd>Provided each quantification is defined,
@@ -7257,7 +7241,7 @@ critically on the associativity and symmetry of the operation ⊕.
 
 <p>
 We may capture the nesting-rearranging pattern in the above example as a
-<a href="#org1e150f5">theorem</a>.
+<a href="#orgca438ab">theorem</a>.
 </p>
 <dl class="org-dl">
 <dt>(8.15) Distributivity, “Body Rearrangment”</dt><dd>Provided each quantification is defined,
@@ -7306,7 +7290,7 @@ For instance,
 <hr />
 
 <p>
-<b>(8.d′) <a href="#org1e150f5">Theorem</a>, Distributivity of ⊗ over ⊕:</b> Provided <i>x</i> does not occur in <i>P</i>, and
+<b>(8.d′) <a href="#orgca438ab">Theorem</a>, Distributivity of ⊗ over ⊕:</b> Provided <i>x</i> does not occur in <i>P</i>, and
 “⊗ distributes over ⊕” ---<i>a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)</i> and \(a ⊗ \Id_⊕ =
  \Id_⊕\).
 \[ P ⊗ (⊕ x \;❙\; R • Q) \quad=\quad (⊕ x \;❙\; R • P ⊗ Q) \]
@@ -7343,7 +7327,7 @@ for ↑ (see Ch15 LADM).</li>
 <hr />
 
 <p>
-<b>(8.d′) <a href="#org1e150f5">Theorem</a>, General Distributive Law of ⊗ over ⊕:</b> Provided <i>x</i> does not occur
+<b>(8.d′) <a href="#orgca438ab">Theorem</a>, General Distributive Law of ⊗ over ⊕:</b> Provided <i>x</i> does not occur
 in <i>S</i> nor <i>Q</i>; <i>y</i> does not occur in <i>R</i> nor <i>P</i>; and
 “⊗ distributes over ⊕” ---<i>a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)</i> and \(a ⊗ \Id_⊕ =
  \Id_⊕\).
@@ -7364,7 +7348,7 @@ maybe not \(a ⊗ \Id_⊕ = \Id_⊕\).
 </p>
 
 <p>
-Be careful using this <a href="#org1e150f5">theorem</a>. A term can be moved outside the scope of the
+Be careful using this <a href="#orgca438ab">theorem</a>. A term can be moved outside the scope of the
 quantification only if the range \(R\) is not empty &#x2014;i.e., not everywhere <i>false</i>.
 </p>
 
@@ -7409,11 +7393,11 @@ The poof of the general index replacement rule is easy (once you've seen it!)
 <li>( We omit the ranges for brevity, since they can always be traded into the body. )</li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-haskell">  (<span style="color: #715ab1;">&#8853;</span> y <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">P</span>[x <span style="color: #715ab1;">&#8788;</span> f y])
-<span style="color: #715ab1;">=</span><span style="color: #2aa1ae; background-color: #ecf3ec;">{- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">One-point rule -}</span>
-  <span style="color: #715ab1;">&#8853;</span> y <span style="color: #715ab1;">&#8226;</span> (<span style="color: #715ab1;">&#8853;</span> x <span style="color: #715ab1;">&#10073;</span> x <span style="color: #715ab1;">=</span> f y <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">P</span>)
-<span style="color: #715ab1;">=</span><span style="color: #2aa1ae; background-color: #ecf3ec;">{- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Quantifier interchange -}</span>
-  <span style="color: #715ab1;">&#8853;</span> x <span style="color: #715ab1;">&#8226;</span> <span style="color: #715ab1;">&#8853;</span> y <span style="color: #715ab1;">&#10073;</span> x <span style="color: #715ab1;">=</span> f y <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">P</span>
+<pre class="src src-haskell">  (<span style="color: #268bd2;">&#8853;</span> y <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">P</span>[x <span style="color: #268bd2;">&#8788;</span> f y])
+<span style="color: #268bd2;">=</span><span style="color: #96A7A9; font-style: italic;">{- </span><span style="color: #96A7A9; font-style: italic;">One-point rule -}</span>
+  <span style="color: #268bd2;">&#8853;</span> y <span style="color: #268bd2;">&#8226;</span> (<span style="color: #268bd2;">&#8853;</span> x <span style="color: #268bd2;">&#10073;</span> x <span style="color: #268bd2;">=</span> f y <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">P</span>)
+<span style="color: #268bd2;">=</span><span style="color: #96A7A9; font-style: italic;">{- </span><span style="color: #96A7A9; font-style: italic;">Quantifier interchange -}</span>
+  <span style="color: #268bd2;">&#8853;</span> x <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8853;</span> y <span style="color: #268bd2;">&#10073;</span> x <span style="color: #268bd2;">=</span> f y <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">P</span>
 </pre>
 </div>
 
@@ -7432,7 +7416,7 @@ permutation.
 </p>
 
 <p>
-<b>(8.22) <a href="#org1e150f5">Theorem</a>, Permutative Law, Commutative Law, Change of <a href="#orgcbd87f6">Dummy</a>:</b> Provided
+<b>(8.22) <a href="#orgca438ab">Theorem</a>, Permutative Law, Commutative Law, Change of <a href="#org363338f">Dummy</a>:</b> Provided
 <i>y</i> does not occur in <i>R</i> nor in <i>P</i>, and <i>f</i> is a permutation (i.e., is invertible),
 \[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ f\, y] • P[x ≔ f\, y]) \]
 </p>
@@ -7489,7 +7473,7 @@ As such,
 </div>
 
 <div id="outline-container-Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else" class="outline-3">
-<h3 id="Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else"><span class="section-number-3">8.11</span> <a href="#Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else">Trading and Contextual Rules &#x2014;Quantification and <code class="src src-haskell"><span style="color: #3a81c3; font-weight: bold;">if</span><span style="color: #6c3163; font-weight: bold;">-</span><span style="color: #3a81c3; font-weight: bold;">then</span><span style="color: #715ab1;">-</span><span style="color: #3a81c3; font-weight: bold;">else</span></code></a></h3>
+<h3 id="Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else"><span class="section-number-3">8.11</span> <a href="#Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else">Trading and Contextual Rules &#x2014;Quantification and <code class="src src-haskell"><span style="color: #859900; font-weight: bold;">if</span><span style="color: #b58900;">-</span><span style="color: #859900; font-weight: bold;">then</span><span style="color: #268bd2;">-</span><span style="color: #859900; font-weight: bold;">else</span></code></a></h3>
 <div class="outline-text-3" id="text-Trading-and-Contextual-Rules-Quantification-and-src-haskell-exports-code-if-then-else">
 <p>
 Trading rules let us move a range into the body.
@@ -7501,7 +7485,7 @@ Trading rules let us move a range into the body.
 </p>
 
 <p>
-<b>(8.t′) <a href="#org1e150f5">Theorem</a>, Trading:</b> \((⊕ x \;❙\; Q ∧ R • P) \;=\; (⊕ x \;❙\; Q • \mathsf{if}\, R
+<b>(8.t′) <a href="#orgca438ab">Theorem</a>, Trading:</b> \((⊕ x \;❙\; Q ∧ R • P) \;=\; (⊕ x \;❙\; Q • \mathsf{if}\, R
 \,\mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi})\)
 </p>
 
@@ -7509,9 +7493,9 @@ Trading rules let us move a range into the body.
 Define the Iverson brackets, as follows.
 </p>
 <div class="org-src-container">
-<pre class="src src-haskell">[<span style="color: #3a81c3; font-weight: bold;">_</span>] <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120121;</span> <span style="color: #715ab1;">&#8594;</span> <span style="color: #ba2f59; font-weight: bold;">&#8469;</span>
-[ true  ] <span style="color: #715ab1;">=</span> 0
-[ false ] <span style="color: #715ab1;">=</span> 1
+<pre class="src src-haskell">[<span style="color: #859900; font-weight: bold;">_</span>] <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120121;</span> <span style="color: #268bd2;">&#8594;</span> <span style="color: #b58900; font-style: italic;">&#8469;</span>
+[ true  ] <span style="color: #268bd2;">=</span> 0
+[ false ] <span style="color: #268bd2;">=</span> 1
 </pre>
 </div>
 
@@ -7520,10 +7504,10 @@ For instance:
 </p>
 
 <ul class="org-ul">
-<li><b>(8.t.Σ) <a href="#org1e150f5">Theorem</a>, Trading:</b> \((Σ x \;❙\; Q ∧ R • P) = (Σ x \;❙\; Q • P · [R] )\)</li>
-<li><b>(8.t.Π) <a href="#org1e150f5">Theorem</a>, Trading:</b> \((Π x \;❙\; Q ∧ R • P) = (Π x \;❙\; Q • P^{[R]})\)</li>
-<li><b>(8.t.∀) (9.4) <a href="#org1e150f5">Theorem</a>, Trading:</b> \((∀ x \;❙\; Q ∧ R • P) ≡ (∀ x \;❙\; Q • R ⇒ P)\)</li>
-<li><b>(8.t.∃) (9.20) <a href="#org1e150f5">Theorem</a>, Trading:</b> \((∃ x \;❙\; Q ∧ R • P) ≡ (∃ x \;❙\; Q • R ∧ P)\)</li>
+<li><b>(8.t.Σ) <a href="#orgca438ab">Theorem</a>, Trading:</b> \((Σ x \;❙\; Q ∧ R • P) = (Σ x \;❙\; Q • P · [R] )\)</li>
+<li><b>(8.t.Π) <a href="#orgca438ab">Theorem</a>, Trading:</b> \((Π x \;❙\; Q ∧ R • P) = (Π x \;❙\; Q • P^{[R]})\)</li>
+<li><b>(8.t.∀) (9.4) <a href="#orgca438ab">Theorem</a>, Trading:</b> \((∀ x \;❙\; Q ∧ R • P) ≡ (∀ x \;❙\; Q • R ⇒ P)\)</li>
+<li><b>(8.t.∃) (9.20) <a href="#orgca438ab">Theorem</a>, Trading:</b> \((∃ x \;❙\; Q ∧ R • P) ≡ (∃ x \;❙\; Q • R ∧ P)\)</li>
 </ul>
 
 <hr />
@@ -7533,11 +7517,11 @@ By contextual rules, and conditional rules,
 </p>
 
 <p>
-<b>(8.c) <a href="#org1e150f5">Theorem</a>, Context:</b> \((⊕ x \;❙\; R ∧ e = f • P[z ≔ e]) = (⊕ x \;❙\; R • P[z ≔ f])\)
+<b>(8.c) <a href="#orgca438ab">Theorem</a>, Context:</b> \((⊕ x \;❙\; R ∧ e = f • P[z ≔ e]) = (⊕ x \;❙\; R • P[z ≔ f])\)
 </p>
 
 <p>
-<b>(8.c′) <a href="#org1e150f5">Theorem</a>, Context:</b> \((⊕ x \;❙\; R • P[z ≔ R]) = (⊕ x \;❙\; R • P[z ≔ true])\)
+<b>(8.c′) <a href="#orgca438ab">Theorem</a>, Context:</b> \((⊕ x \;❙\; R • P[z ≔ R]) = (⊕ x \;❙\; R • P[z ≔ true])\)
 </p>
 </div>
 </div>
@@ -7590,7 +7574,7 @@ and say the operation ⊕ is <b>eliminatory</b> iff <i>(a ⊕ b) ⊑ a</i> for a
 
 <p>
 If ⊕ were <i>introductory</i> instead, (see below), then the exact same proof would be
-used, but the last hint would be <code class="src src-haskell"><span style="color: #715ab1;">&#8850;</span><span style="color: #2aa1ae; background-color: #ecf3ec;">{- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#8853; introductory -}</span></code>.
+used, but the last hint would be <code class="src src-haskell"><span style="color: #268bd2;">&#8850;</span><span style="color: #96A7A9; font-style: italic;">{- </span><span style="color: #96A7A9; font-style: italic;">&#8853; introductory -}</span></code>.
 </p>
 
 <p>
@@ -7678,10 +7662,10 @@ Two quantifications are equal when “each of their parts are equal”.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell">  (<span style="color: #715ab1;">&#8853;</span> x<span style="color: #715ab1;">\</span>;<span style="color: #715ab1;">&#10073;\</span>;<span style="color: #ba2f59; font-weight: bold;">R</span> <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">P</span>) <span style="color: #715ab1;">=</span> (<span style="color: #715ab1;">&#8853;&#8242;</span> x<span style="color: #715ab1;">\</span>;<span style="color: #715ab1;">&#10073;\</span>;<span style="color: #ba2f59; font-weight: bold;">R</span><span style="color: #715ab1;">&#8242;</span> <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">P</span><span style="color: #715ab1;">&#8242;</span>)
-<span style="color: #715ab1;">&#8656;</span>     <span style="color: #715ab1;">&#8853;</span> <span style="color: #715ab1;">=</span> <span style="color: #715ab1;">&#8853;&#8242;</span>             <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">same operation</span>
-  <span style="color: #715ab1;">&#8743;</span>  (<span style="color: #715ab1;">&#8704;</span> x <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">R</span> <span style="color: #715ab1;">&#8801;</span> <span style="color: #ba2f59; font-weight: bold;">R</span><span style="color: #715ab1;">&#8242;</span>)      <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">same range</span>
-  <span style="color: #715ab1;">&#8743;</span>  (<span style="color: #715ab1;">&#8704;</span> x<span style="color: #715ab1;">\</span>;<span style="color: #715ab1;">&#10073;\</span>;<span style="color: #ba2f59; font-weight: bold;">R</span> <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">P</span> <span style="color: #715ab1;">=</span> <span style="color: #ba2f59; font-weight: bold;">P</span><span style="color: #715ab1;">&#8242;</span>)  <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">same body</span>
+<pre class="src src-haskell">  (<span style="color: #268bd2;">&#8853;</span> x<span style="color: #268bd2;">\</span>;<span style="color: #268bd2;">&#10073;\</span>;<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">P</span>) <span style="color: #268bd2;">=</span> (<span style="color: #268bd2;">&#8853;&#8242;</span> x<span style="color: #268bd2;">\</span>;<span style="color: #268bd2;">&#10073;\</span>;<span style="color: #b58900; font-style: italic;">R</span><span style="color: #268bd2;">&#8242;</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">P</span><span style="color: #268bd2;">&#8242;</span>)
+<span style="color: #268bd2;">&#8656;</span>     <span style="color: #268bd2;">&#8853;</span> <span style="color: #268bd2;">=</span> <span style="color: #268bd2;">&#8853;&#8242;</span>             <span style="color: #96A7A9; font-style: italic;">-- </span><span style="color: #96A7A9; font-style: italic;">same operation</span>
+  <span style="color: #268bd2;">&#8743;</span>  (<span style="color: #268bd2;">&#8704;</span> x <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8801;</span> <span style="color: #b58900; font-style: italic;">R</span><span style="color: #268bd2;">&#8242;</span>)      <span style="color: #96A7A9; font-style: italic;">-- </span><span style="color: #96A7A9; font-style: italic;">same range</span>
+  <span style="color: #268bd2;">&#8743;</span>  (<span style="color: #268bd2;">&#8704;</span> x<span style="color: #268bd2;">\</span>;<span style="color: #268bd2;">&#10073;\</span>;<span style="color: #b58900; font-style: italic;">R</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">P</span> <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">P</span><span style="color: #268bd2;">&#8242;</span>)  <span style="color: #96A7A9; font-style: italic;">-- </span><span style="color: #96A7A9; font-style: italic;">same body</span>
 </pre>
 </div>
 
@@ -7691,20 +7675,20 @@ See, for example, (9.9).
 </div>
 </div>
 <div id="outline-container-Predicate-Calculus" class="outline-3">
-<h3 id="Predicate-Calculus"><span class="section-number-3">8.14</span> <a href="#Predicate-Calculus"> <a href="#org0afb05a">Predicate</a> <a href="#org29dc1af">Calculus</a></a></h3>
+<h3 id="Predicate-Calculus"><span class="section-number-3">8.14</span> <a href="#Predicate-Calculus"> <a href="#orge117d04">Predicate</a> <a href="#orgeb058d5">Calculus</a></a></h3>
 <div class="outline-text-3" id="text-Predicate-Calculus">
 <ol class="org-ol">
-<li><i><a href="#org0afb05a">Predicate</a> logic</i> is an extension of <a href="#org0309f44">propositional</a> logic that allows the use of
+<li><i><a href="#orge117d04">Predicate</a> logic</i> is an extension of <a href="#org355aeab">propositional</a> logic that allows the use of
 variables of types other than 𝔹.</li>
 
 <li>This extension leafs to a logic with enhanced expressive and deductive power.</li>
 
-<li>A <a href="#org0afb05a">predicate</a>-<a href="#org29dc1af">calculus</a> formula is a Boolean expression in which some Boolean
+<li>A <a href="#orge117d04">predicate</a>-<a href="#orgeb058d5">calculus</a> formula is a Boolean expression in which some Boolean
 variables may have been replaced by:
 
 <ul class="org-ul">
 <li><i>Predicates</i>, which are applications of Boolean functions whose arguments may
-be of types other than 𝔹; e.g., \(x < y\) is formed using the <a href="#org0afb05a">predicate</a>
+be of types other than 𝔹; e.g., \(x < y\) is formed using the <a href="#orge117d04">predicate</a>
 symbol ‘&lt;’.</li>
 
 <li>Universal and existential quantification, as discussed in this section.</li>
@@ -7742,7 +7726,7 @@ along with an additional one below.
 </table>
 
 <p>
-<b>(9.29) <a href="#org1e150f5">Theorem</a>, Interchange of quantifications:</b>
+<b>(9.29) <a href="#orgca438ab">Theorem</a>, Interchange of quantifications:</b>
 \((∃ x\;❙\;R • (∀ y\;❙\;Q • P)) \quad⇒\quad (∀ x\;❙\;Q • (∃ x\;❙\;R • P))\).
 </p>
 
@@ -7917,26 +7901,26 @@ How many 4-digit numbers are there that do not start with ‘12’?
 <i>More formally:</i>
 </p>
 <div class="org-src-container">
-<pre class="src src-haskell">  <span style="color: #715ab1;">&#8721;</span> ds <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">Seq</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#10073;</span> <span style="color: #715ab1;">#</span>ds <span style="color: #715ab1;">=</span> 4 <span style="color: #715ab1;">&#8743;</span> ds <span style="color: #715ab1;">&#8252;</span> 0 <span style="color: #715ab1;">&#8800;</span> 0 <span style="color: #715ab1;">&#8743;</span> <span style="color: #715ab1;">&#172;</span> (ds <span style="color: #715ab1;">&#8252;</span> 0 <span style="color: #715ab1;">=</span> 1 <span style="color: #715ab1;">&#8743;</span> ds <span style="color: #715ab1;">&#8252;</span> 1 <span style="color: #715ab1;">=</span> 2) <span style="color: #715ab1;">&#8226;</span> 1
-<span style="color: #715ab1;">=</span>&#10216; <span style="color: #ba2f59; font-weight: bold;">Pattern</span> <span style="color: #ba2f59; font-weight: bold;">Matching</span> &#10217;
-  <span style="color: #715ab1;">&#8721;</span> a, b, c, d <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#10073;</span> a <span style="color: #715ab1;">&#8800;</span> 0 <span style="color: #715ab1;">&#8743;</span> <span style="color: #715ab1;">&#172;</span> (a <span style="color: #715ab1;">=</span> 1 <span style="color: #715ab1;">&#8743;</span> b <span style="color: #715ab1;">=</span> 2) <span style="color: #715ab1;">&#8226;</span> 1
-<span style="color: #715ab1;">=</span>&#10216; <span style="color: #ba2f59; font-weight: bold;">Range</span> <span style="color: #ba2f59; font-weight: bold;">Split</span> &#10217;
-    (<span style="color: #715ab1;">&#8721;</span> a, b, c, d <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#10073;</span> a <span style="color: #715ab1;">&#8800;</span> 0 <span style="color: #715ab1;">&#8226;</span> 1)
-  <span style="color: #715ab1;">-</span> (<span style="color: #715ab1;">&#8721;</span> a, b, c, d <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#10073;</span> a <span style="color: #715ab1;">&#8800;</span> 0 <span style="color: #715ab1;">&#8743;</span> a <span style="color: #715ab1;">=</span> 1 <span style="color: #715ab1;">&#8743;</span> b <span style="color: #715ab1;">=</span> 2 <span style="color: #715ab1;">&#8226;</span> 1)
-<span style="color: #715ab1;">=</span>&#10216; <span style="color: #ba2f59; font-weight: bold;">Cardinality</span> <span style="color: #3a81c3; font-weight: bold;">of</span> <span style="color: #ba2f59; font-weight: bold;">Universe</span> &#10217;
-    (<span style="color: #715ab1;">&#9839;</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">-</span> 1) <span style="color: #715ab1;">&#215;</span> <span style="color: #715ab1;">#</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> &#179; <span style="color: #715ab1;">-</span> <span style="color: #715ab1;">&#9839;</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> &#178;
-<span style="color: #715ab1;">=</span>&#10216; <span style="color: #ba2f59; font-weight: bold;">Digits</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> has 10 elements &#10217;
-   9 <span style="color: #715ab1;">&#215;</span> 10 &#179; <span style="color: #715ab1;">-</span> 10 &#178;
-<span style="color: #715ab1;">=</span>&#10216; <span style="color: #ba2f59; font-weight: bold;">Arithmetic</span> &#10217;
+<pre class="src src-haskell">  <span style="color: #268bd2;">&#8721;</span> ds <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">Seq</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#10073;</span> <span style="color: #268bd2;">#</span>ds <span style="color: #268bd2;">=</span> 4 <span style="color: #268bd2;">&#8743;</span> ds <span style="color: #268bd2;">&#8252;</span> 0 <span style="color: #268bd2;">&#8800;</span> 0 <span style="color: #268bd2;">&#8743;</span> <span style="color: #268bd2;">&#172;</span> (ds <span style="color: #268bd2;">&#8252;</span> 0 <span style="color: #268bd2;">=</span> 1 <span style="color: #268bd2;">&#8743;</span> ds <span style="color: #268bd2;">&#8252;</span> 1 <span style="color: #268bd2;">=</span> 2) <span style="color: #268bd2;">&#8226;</span> 1
+<span style="color: #268bd2;">=</span>&#10216; <span style="color: #b58900; font-style: italic;">Pattern</span> <span style="color: #b58900; font-style: italic;">Matching</span> &#10217;
+  <span style="color: #268bd2;">&#8721;</span> a, b, c, d <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#10073;</span> a <span style="color: #268bd2;">&#8800;</span> 0 <span style="color: #268bd2;">&#8743;</span> <span style="color: #268bd2;">&#172;</span> (a <span style="color: #268bd2;">=</span> 1 <span style="color: #268bd2;">&#8743;</span> b <span style="color: #268bd2;">=</span> 2) <span style="color: #268bd2;">&#8226;</span> 1
+<span style="color: #268bd2;">=</span>&#10216; <span style="color: #b58900; font-style: italic;">Range</span> <span style="color: #b58900; font-style: italic;">Split</span> &#10217;
+    (<span style="color: #268bd2;">&#8721;</span> a, b, c, d <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#10073;</span> a <span style="color: #268bd2;">&#8800;</span> 0 <span style="color: #268bd2;">&#8226;</span> 1)
+  <span style="color: #268bd2;">-</span> (<span style="color: #268bd2;">&#8721;</span> a, b, c, d <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#10073;</span> a <span style="color: #268bd2;">&#8800;</span> 0 <span style="color: #268bd2;">&#8743;</span> a <span style="color: #268bd2;">=</span> 1 <span style="color: #268bd2;">&#8743;</span> b <span style="color: #268bd2;">=</span> 2 <span style="color: #268bd2;">&#8226;</span> 1)
+<span style="color: #268bd2;">=</span>&#10216; <span style="color: #b58900; font-style: italic;">Cardinality</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #b58900; font-style: italic;">Universe</span> &#10217;
+    (<span style="color: #268bd2;">&#9839;</span><span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">-</span> 1) <span style="color: #268bd2;">&#215;</span> <span style="color: #268bd2;">#</span><span style="color: #b58900; font-style: italic;">&#120123;</span> &#179; <span style="color: #268bd2;">-</span> <span style="color: #268bd2;">&#9839;</span><span style="color: #b58900; font-style: italic;">&#120123;</span> &#178;
+<span style="color: #268bd2;">=</span>&#10216; <span style="color: #b58900; font-style: italic;">Digits</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> has 10 elements &#10217;
+   9 <span style="color: #268bd2;">&#215;</span> 10 &#179; <span style="color: #268bd2;">-</span> 10 &#178;
+<span style="color: #268bd2;">=</span>&#10216; <span style="color: #b58900; font-style: italic;">Arithmetic</span> &#10217;
    8900
 </pre>
 </div>
 
 <p>
-The <code>Range Split</code> refers to the <a href="#org1e150f5">theorem</a>
+The <code>Range Split</code> refers to the <a href="#orgca438ab">theorem</a>
 \[(Σ x \;❙\; R ∧ ¬ R′ \;•\; E) \quad=\quad (Σ x \;❙\; R \;•\; E) \,-\, (Σ x
 \;❙\; R ∧ R′ \;•\; E)\]
-This <a href="#org1e150f5">theorem</a> is also known as <code>Counting Complements</code>.
+This <a href="#orgca438ab">theorem</a> is also known as <code>Counting Complements</code>.
 ( Taking R ≔ true is useful. )
 </p>
 <p>
@@ -7949,8 +7933,8 @@ digit is 2; e.g., both “1111” and “2222” are discounted by this formalis
 For extra confidence, we can run a little Haskell program:
 </p>
 <div class="org-src-container">
-<pre class="src src-haskell">&#955;<span style="color: #6c3163; font-weight: bold;">&gt;</span>  length [ [a, b, c, d] <span style="color: #715ab1;">|</span> a <span style="color: #715ab1;">&lt;-</span> [0<span style="color: #715ab1;">..</span>9], b <span style="color: #715ab1;">&lt;-</span> [0<span style="color: #715ab1;">..</span>9], c <span style="color: #715ab1;">&lt;-</span> [0<span style="color: #715ab1;">..</span>9], d <span style="color: #715ab1;">&lt;-</span> [0<span style="color: #715ab1;">..</span>9], a <span style="color: #715ab1;">/=</span> 0, not(a <span style="color: #715ab1;">==</span> 1 <span style="color: #715ab1;">&amp;&amp;</span> b <span style="color: #715ab1;">==</span> 2)]
-&#955;<span style="color: #6c3163; font-weight: bold;">&gt;</span>  8900
+<pre class="src src-haskell">&#955;<span style="color: #b58900;">&gt;</span>  length [ [a, b, c, d] <span style="color: #268bd2;">|</span> a <span style="color: #268bd2;">&lt;-</span> [0<span style="color: #268bd2;">..</span>9], b <span style="color: #268bd2;">&lt;-</span> [0<span style="color: #268bd2;">..</span>9], c <span style="color: #268bd2;">&lt;-</span> [0<span style="color: #268bd2;">..</span>9], d <span style="color: #268bd2;">&lt;-</span> [0<span style="color: #268bd2;">..</span>9], a <span style="color: #268bd2;">/=</span> 0, not(a <span style="color: #268bd2;">==</span> 1 <span style="color: #268bd2;">&amp;&amp;</span> b <span style="color: #268bd2;">==</span> 2)]
+&#955;<span style="color: #b58900;">&gt;</span>  8900
 </pre>
 </div>
 </div>
@@ -8006,14 +7990,14 @@ subsets of \(1..n\) which also counts the complements which are sets of size
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell">        <span style="color: #715ab1;">&#8721;</span> r <span style="color: #ba2f59; font-weight: bold;">:</span> 0<span style="color: #715ab1;">..</span>n <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">C</span>(n,r)
-      <span style="color: #715ab1;">=</span>&#10216; un<span style="color: #715ab1;">-</span>formalise &#10217;
-       the sum <span style="color: #3a81c3; font-weight: bold;">of</span> the number <span style="color: #3a81c3; font-weight: bold;">of</span> ways to choose r items from n distinct, for r <span style="color: #3a81c3; font-weight: bold;">in</span> 0<span style="color: #715ab1;">..</span>n &#10217;
-      <span style="color: #715ab1;">=</span>&#10216; rephrase &#10217;
-        the number <span style="color: #3a81c3; font-weight: bold;">of</span> combinations possible from n distinct elements
-      <span style="color: #715ab1;">=</span>&#10216; rewrite &#10217;
-        for each <span style="color: #3a81c3; font-weight: bold;">of</span> the n elements, we can either pick it <span style="color: #3a81c3; font-weight: bold;">in</span> our collection or not
-      <span style="color: #715ab1;">=</span>&#10216; product rule &#10217;
+<pre class="src src-haskell">        <span style="color: #268bd2;">&#8721;</span> r <span style="color: #b58900; font-style: italic;">:</span> 0<span style="color: #268bd2;">..</span>n <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">C</span>(n,r)
+      <span style="color: #268bd2;">=</span>&#10216; un<span style="color: #268bd2;">-</span>formalise &#10217;
+       the sum <span style="color: #859900; font-weight: bold;">of</span> the number <span style="color: #859900; font-weight: bold;">of</span> ways to choose r items from n distinct, for r <span style="color: #859900; font-weight: bold;">in</span> 0<span style="color: #268bd2;">..</span>n &#10217;
+      <span style="color: #268bd2;">=</span>&#10216; rephrase &#10217;
+        the number <span style="color: #859900; font-weight: bold;">of</span> combinations possible from n distinct elements
+      <span style="color: #268bd2;">=</span>&#10216; rewrite &#10217;
+        for each <span style="color: #859900; font-weight: bold;">of</span> the n elements, we can either pick it <span style="color: #859900; font-weight: bold;">in</span> our collection or not
+      <span style="color: #268bd2;">=</span>&#10216; product rule &#10217;
         2&#8319;
 </pre>
 </div></li>
@@ -8096,7 +8080,7 @@ Iterating Pascal’s Formula yields,
 </p></li>
 
 <li><p>
-<b>The Binomial <a href="#org1e150f5">Theorem</a>:</b>
+<b>The Binomial <a href="#orgca438ab">Theorem</a>:</b>
 \(n \in ℕ \implies (x+y)^n = \sum_{k=0}^n \binom{n}{k}x^{n-k}y^k\)
 </p>
 
@@ -8114,7 +8098,7 @@ Alternatively the proof is simple after we prove the auxiliary result
 
 <p>
 Multiplying by \(x\) and/or performing successive differentiations
-on the binomial <a href="#org1e150f5">theorem</a> is a simple way to obtain some identities.
+on the binomial <a href="#orgca438ab">theorem</a> is a simple way to obtain some identities.
 </p>
 
 <p>
@@ -8151,7 +8135,7 @@ Corollary: \(\binom{2n}{n} = \sum_{k=0}^n \binom{n}{k}^2\).
 </p>
 
 <p>
-Algebraic Proof: Letting \(x=y=1\) in the binomial <a href="#org1e150f5">theorem</a>,
+Algebraic Proof: Letting \(x=y=1\) in the binomial <a href="#orgca438ab">theorem</a>,
 yields \(\sum_{k=1}^n \binom{n}{k}=2^n\).
 </p>
 
@@ -8260,9 +8244,9 @@ some compartment receives more than \(k\) of the objects.
 
 <p>
 It is argued that since (0) does not explicitly mention \(n\) and \(k\) explicitly,
-this eases application of th <a href="#org1e150f5">theorem</a> since a user would not need to hunt them
+this eases application of th <a href="#orgca438ab">theorem</a> since a user would not need to hunt them
 down explicitly. Moreover, (1) is ‘operational’: It requires users identity
-objects, compartments, and a distribution process &#x2014;but (0) is <a href="#org21fff7e">valid</a> when no
+objects, compartments, and a distribution process &#x2014;but (0) is <a href="#org299dd47">valid</a> when no
 process of distribution is involved. Perhaps the worst offence of
 (1) is that it forces us to treat numbers not as independent entities but rather
 as a tool that serve to count objects &#x2014;which is not a useful interpretation to
@@ -8349,7 +8333,7 @@ Anyhow, (0′) is a familiar property of summation.
 
 <ul class="org-ul">
 <li><p>
-<b><a href="#org1e150f5">Theorem</a>:</b> If \(n+1\) objects are distributed into \(n\) boxes, then
+<b><a href="#orgca438ab">Theorem</a>:</b> If \(n+1\) objects are distributed into \(n\) boxes, then
 at least one box contains two or more of the objects.
 </p>
 <blockquote>
@@ -8413,19 +8397,19 @@ We’ll show that no such \(C\) exists.
 resulting compressed file. Hence, for <i>any other</i> file \(G\),
 </p>
 <div class="org-src-container">
-<pre class="src src-haskell">  len <span style="color: #ba2f59; font-weight: bold;">G</span> <span style="color: #715ab1;">=</span> <span style="color: #ba2f59; font-weight: bold;">N</span>
-<span style="color: #715ab1;">&#8658;</span>&#10216; <span style="color: #ba2f59; font-weight: bold;">Properties</span> <span style="color: #3a81c3; font-weight: bold;">of</span> <span style="color: #ba2f59; font-weight: bold;">N</span> &#10217;
-  len <span style="color: #ba2f59; font-weight: bold;">G</span> <span style="color: #715ab1;">=</span> <span style="color: #ba2f59; font-weight: bold;">N</span> <span style="color: #715ab1;">=</span> len <span style="color: #ba2f59; font-weight: bold;">C</span>(<span style="color: #ba2f59; font-weight: bold;">F</span>) <span style="color: #715ab1;">&lt;</span> len <span style="color: #ba2f59; font-weight: bold;">F</span>
-<span style="color: #715ab1;">&#8658;</span>&#10216; <span style="color: #ba2f59; font-weight: bold;">Transitivity</span> &#10217;
-  len <span style="color: #ba2f59; font-weight: bold;">G</span> <span style="color: #715ab1;">&lt;</span> len <span style="color: #ba2f59; font-weight: bold;">F</span>
-<span style="color: #715ab1;">&#8658;</span>&#10216; <span style="color: #ba2f59; font-weight: bold;">Defining</span> <span style="color: #ba2f59; font-weight: bold;">Property</span> <span style="color: #3a81c3; font-weight: bold;">of</span> <span style="color: #ba2f59; font-weight: bold;">F</span> &#10217;
-  len <span style="color: #ba2f59; font-weight: bold;">C</span>(<span style="color: #ba2f59; font-weight: bold;">G</span>) <span style="color: #715ab1;">&lt;</span> len <span style="color: #ba2f59; font-weight: bold;">G</span> is false <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">since F is the shortest with such a property</span>
-<span style="color: #715ab1;">=</span>&#10216; negation &#10217;
-  len <span style="color: #ba2f59; font-weight: bold;">G</span> <span style="color: #715ab1;">&#8804;</span> len <span style="color: #ba2f59; font-weight: bold;">C</span>(<span style="color: #ba2f59; font-weight: bold;">G</span>)
-<span style="color: #715ab1;">=</span>&#10216; <span style="color: #ba2f59; font-weight: bold;">Compressions:</span> len <span style="color: #ba2f59; font-weight: bold;">C</span>(<span style="color: #ba2f59; font-weight: bold;">X</span>) <span style="color: #715ab1;">&#8804;</span> len <span style="color: #ba2f59; font-weight: bold;">X</span> &#10217;
-  len <span style="color: #ba2f59; font-weight: bold;">C</span>(<span style="color: #ba2f59; font-weight: bold;">G</span>) <span style="color: #715ab1;">=</span> len <span style="color: #ba2f59; font-weight: bold;">G</span>
-<span style="color: #715ab1;">=</span>&#10216; un<span style="color: #715ab1;">-</span>formalise &#10217;
-  <span style="color: #ba2f59; font-weight: bold;">G</span> does not get compressed
+<pre class="src src-haskell">  len <span style="color: #b58900; font-style: italic;">G</span> <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">N</span>
+<span style="color: #268bd2;">&#8658;</span>&#10216; <span style="color: #b58900; font-style: italic;">Properties</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #b58900; font-style: italic;">N</span> &#10217;
+  len <span style="color: #b58900; font-style: italic;">G</span> <span style="color: #268bd2;">=</span> <span style="color: #b58900; font-style: italic;">N</span> <span style="color: #268bd2;">=</span> len <span style="color: #b58900; font-style: italic;">C</span>(<span style="color: #b58900; font-style: italic;">F</span>) <span style="color: #268bd2;">&lt;</span> len <span style="color: #b58900; font-style: italic;">F</span>
+<span style="color: #268bd2;">&#8658;</span>&#10216; <span style="color: #b58900; font-style: italic;">Transitivity</span> &#10217;
+  len <span style="color: #b58900; font-style: italic;">G</span> <span style="color: #268bd2;">&lt;</span> len <span style="color: #b58900; font-style: italic;">F</span>
+<span style="color: #268bd2;">&#8658;</span>&#10216; <span style="color: #b58900; font-style: italic;">Defining</span> <span style="color: #b58900; font-style: italic;">Property</span> <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #b58900; font-style: italic;">F</span> &#10217;
+  len <span style="color: #b58900; font-style: italic;">C</span>(<span style="color: #b58900; font-style: italic;">G</span>) <span style="color: #268bd2;">&lt;</span> len <span style="color: #b58900; font-style: italic;">G</span> is false <span style="color: #96A7A9; font-style: italic;">-- </span><span style="color: #96A7A9; font-style: italic;">since F is the shortest with such a property</span>
+<span style="color: #268bd2;">=</span>&#10216; negation &#10217;
+  len <span style="color: #b58900; font-style: italic;">G</span> <span style="color: #268bd2;">&#8804;</span> len <span style="color: #b58900; font-style: italic;">C</span>(<span style="color: #b58900; font-style: italic;">G</span>)
+<span style="color: #268bd2;">=</span>&#10216; <span style="color: #b58900; font-style: italic;">Compressions:</span> len <span style="color: #b58900; font-style: italic;">C</span>(<span style="color: #b58900; font-style: italic;">X</span>) <span style="color: #268bd2;">&#8804;</span> len <span style="color: #b58900; font-style: italic;">X</span> &#10217;
+  len <span style="color: #b58900; font-style: italic;">C</span>(<span style="color: #b58900; font-style: italic;">G</span>) <span style="color: #268bd2;">=</span> len <span style="color: #b58900; font-style: italic;">G</span>
+<span style="color: #268bd2;">=</span>&#10216; un<span style="color: #268bd2;">-</span>formalise &#10217;
+  <span style="color: #b58900; font-style: italic;">G</span> does not get compressed
 </pre>
 </div>
 
@@ -8516,19 +8500,19 @@ all subsets \(A ⊆ 𝑼\).
 <b>Example.</b>
 </p>
 <div class="org-src-container">
-<pre class="src src-haskell">   <span style="color: #2d9574;">"the probability of rolling doubles with fair dice"</span>
-<span style="color: #715ab1;">=</span>&#10216; foramlise &#10217;
-   <span style="color: #ba2f59; font-weight: bold;">Pr</span> {(x, y) <span style="color: #715ab1;">&#8712;</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#215;</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#10073;</span> x <span style="color: #715ab1;">=</span> y}
-<span style="color: #715ab1;">=</span>&#10216; definition &#10217;
-   <span style="color: #ba2f59; font-weight: bold;">&#931;</span> x, y <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#10073;</span> x <span style="color: #715ab1;">=</span> y <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">Pr</span> (x, y)
-<span style="color: #715ab1;">=</span>&#10216; definition &#10217;
-   <span style="color: #ba2f59; font-weight: bold;">&#931;</span> x, y <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#10073;</span> x <span style="color: #715ab1;">=</span> y <span style="color: #715ab1;">&#8226;</span> 1<span style="color: #715ab1;">/</span>36
-<span style="color: #715ab1;">=</span>&#10216; one<span style="color: #715ab1;">-</span>point rule &#10217;
-   <span style="color: #715ab1;">&#8721;</span> x <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> 1<span style="color: #715ab1;">/</span>36
-<span style="color: #715ab1;">=</span>&#10216; constant sum &#10217;
-   <span style="color: #715ab1;">#</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#215;</span> 1<span style="color: #715ab1;">/</span>36
-<span style="color: #715ab1;">=</span>&#10216; arithmetic; <span style="color: #715ab1;">#</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">=</span> 6 &#10217;
-   1 <span style="color: #715ab1;">/</span> 6
+<pre class="src src-haskell">   <span style="color: #2aa198;">"the probability of rolling doubles with fair dice"</span>
+<span style="color: #268bd2;">=</span>&#10216; foramlise &#10217;
+   <span style="color: #b58900; font-style: italic;">Pr</span> {(x, y) <span style="color: #268bd2;">&#8712;</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#215;</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#10073;</span> x <span style="color: #268bd2;">=</span> y}
+<span style="color: #268bd2;">=</span>&#10216; definition &#10217;
+   <span style="color: #b58900; font-style: italic;">&#931;</span> x, y <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#10073;</span> x <span style="color: #268bd2;">=</span> y <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">Pr</span> (x, y)
+<span style="color: #268bd2;">=</span>&#10216; definition &#10217;
+   <span style="color: #b58900; font-style: italic;">&#931;</span> x, y <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#10073;</span> x <span style="color: #268bd2;">=</span> y <span style="color: #268bd2;">&#8226;</span> 1<span style="color: #268bd2;">/</span>36
+<span style="color: #268bd2;">=</span>&#10216; one<span style="color: #268bd2;">-</span>point rule &#10217;
+   <span style="color: #268bd2;">&#8721;</span> x <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> 1<span style="color: #268bd2;">/</span>36
+<span style="color: #268bd2;">=</span>&#10216; constant sum &#10217;
+   <span style="color: #268bd2;">#</span><span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#215;</span> 1<span style="color: #268bd2;">/</span>36
+<span style="color: #268bd2;">=</span>&#10216; arithmetic; <span style="color: #268bd2;">#</span><span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">=</span> 6 &#10217;
+   1 <span style="color: #268bd2;">/</span> 6
 </pre>
 </div></li>
 
@@ -8566,21 +8550,21 @@ likelihood, that function X will output x”.
 <b>Example.</b>
 </p>
 <div class="org-src-container">
-<pre class="src src-haskell">  <span style="color: #2d9574;">"the probability of rolling a total of 7"</span>
-<span style="color: #715ab1;">=</span>&#10216; formalise; <span style="color: #ba2f59; font-weight: bold;">S</span>(x, y) <span style="color: #715ab1;">=</span> x <span style="color: #715ab1;">+</span> y &#10217;
-  <span style="color: #ba2f59; font-weight: bold;">Pr</span> (<span style="color: #ba2f59; font-weight: bold;">S</span> <span style="color: #715ab1;">=</span> 7)
-<span style="color: #715ab1;">=</span>&#10216; definition &#10217;
-  <span style="color: #715ab1;">&#8721;</span> e <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#119932;</span> <span style="color: #715ab1;">&#10073;</span> <span style="color: #ba2f59; font-weight: bold;">S</span> e <span style="color: #715ab1;">=</span> 7 <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">Pr</span> e
-<span style="color: #715ab1;">=</span>&#10216; definition and unpairing &#10217;
-  <span style="color: #715ab1;">&#8721;</span> x, y <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#10073;</span> <span style="color: #ba2f59; font-weight: bold;">S</span> (x, y) <span style="color: #715ab1;">=</span> y <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">Pr</span> e
-<span style="color: #715ab1;">=</span>&#10216; definition <span style="color: #3a81c3; font-weight: bold;">of</span> <span style="color: #ba2f59; font-weight: bold;">Pr</span> &#10217;
-  <span style="color: #715ab1;">&#8721;</span> x, y <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#10073;</span> <span style="color: #ba2f59; font-weight: bold;">S</span> (x, y) <span style="color: #715ab1;">=</span> y <span style="color: #715ab1;">&#8226;</span> 1<span style="color: #715ab1;">/</span>36
-<span style="color: #715ab1;">=</span>&#10216; definition <span style="color: #3a81c3; font-weight: bold;">of</span> <span style="color: #ba2f59; font-weight: bold;">S</span> &#10217;
-  <span style="color: #715ab1;">&#8721;</span> x, y <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#10073;</span> x <span style="color: #715ab1;">+</span> y <span style="color: #715ab1;">=</span> 7 <span style="color: #715ab1;">&#8226;</span> 1<span style="color: #715ab1;">/</span>36
-<span style="color: #715ab1;">=</span>&#10216; one<span style="color: #715ab1;">-</span>point rule and constant sum &#10217;
-  <span style="color: #715ab1;">#</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#215;</span> 1<span style="color: #715ab1;">/</span>36
-<span style="color: #715ab1;">=</span>&#10216; arithmetic; <span style="color: #715ab1;">#</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">=</span> 6 &#10217;
-  1<span style="color: #715ab1;">/</span>6
+<pre class="src src-haskell">  <span style="color: #2aa198;">"the probability of rolling a total of 7"</span>
+<span style="color: #268bd2;">=</span>&#10216; formalise; <span style="color: #b58900; font-style: italic;">S</span>(x, y) <span style="color: #268bd2;">=</span> x <span style="color: #268bd2;">+</span> y &#10217;
+  <span style="color: #b58900; font-style: italic;">Pr</span> (<span style="color: #b58900; font-style: italic;">S</span> <span style="color: #268bd2;">=</span> 7)
+<span style="color: #268bd2;">=</span>&#10216; definition &#10217;
+  <span style="color: #268bd2;">&#8721;</span> e <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#119932;</span> <span style="color: #268bd2;">&#10073;</span> <span style="color: #b58900; font-style: italic;">S</span> e <span style="color: #268bd2;">=</span> 7 <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">Pr</span> e
+<span style="color: #268bd2;">=</span>&#10216; definition and unpairing &#10217;
+  <span style="color: #268bd2;">&#8721;</span> x, y <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#10073;</span> <span style="color: #b58900; font-style: italic;">S</span> (x, y) <span style="color: #268bd2;">=</span> y <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">Pr</span> e
+<span style="color: #268bd2;">=</span>&#10216; definition <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #b58900; font-style: italic;">Pr</span> &#10217;
+  <span style="color: #268bd2;">&#8721;</span> x, y <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#10073;</span> <span style="color: #b58900; font-style: italic;">S</span> (x, y) <span style="color: #268bd2;">=</span> y <span style="color: #268bd2;">&#8226;</span> 1<span style="color: #268bd2;">/</span>36
+<span style="color: #268bd2;">=</span>&#10216; definition <span style="color: #859900; font-weight: bold;">of</span> <span style="color: #b58900; font-style: italic;">S</span> &#10217;
+  <span style="color: #268bd2;">&#8721;</span> x, y <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#10073;</span> x <span style="color: #268bd2;">+</span> y <span style="color: #268bd2;">=</span> 7 <span style="color: #268bd2;">&#8226;</span> 1<span style="color: #268bd2;">/</span>36
+<span style="color: #268bd2;">=</span>&#10216; one<span style="color: #268bd2;">-</span>point rule and constant sum &#10217;
+  <span style="color: #268bd2;">#</span><span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#215;</span> 1<span style="color: #268bd2;">/</span>36
+<span style="color: #268bd2;">=</span>&#10216; arithmetic; <span style="color: #268bd2;">#</span><span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">=</span> 6 &#10217;
+  1<span style="color: #268bd2;">/</span>6
 </pre>
 </div></li>
 
@@ -8598,7 +8582,7 @@ proportional to, well, its likelihood of occurring. We define the
 </p>
 
 <p>
-This is a potentially infinite sum, but by change-of-<a href="#orgcbd87f6">dummy</a>, we have a nicer
+This is a potentially infinite sum, but by change-of-<a href="#org363338f">dummy</a>, we have a nicer
 form in-terms of events: \[\E X \;=\; (∑ e : 𝑼 \;•\; X(e) · \Pr e)\]
 </p>
 
@@ -8606,26 +8590,26 @@ form in-terms of events: \[\E X \;=\; (∑ e : 𝑼 \;•\; X(e) · \Pr e)\]
 <b>Example.</b>
 </p>
 <div class="org-src-container">
-<pre class="src src-haskell">  <span style="color: #2d9574;">"the average sum when rolling a pair of dice"</span>
-<span style="color: #715ab1;">=</span>&#10216; formalise; <span style="color: #ba2f59; font-weight: bold;">S</span> (x, y) <span style="color: #715ab1;">=</span> x <span style="color: #715ab1;">+</span> y &#10217;
-  <span style="color: #ba2f59; font-weight: bold;">E</span> <span style="color: #ba2f59; font-weight: bold;">S</span>
-<span style="color: #715ab1;">=</span>&#10216; definition; simplify quantifiers &#10217;
-  <span style="color: #715ab1;">&#8721;</span> x, y <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> <span style="color: #ba2f59; font-weight: bold;">S</span>(x, y) <span style="color: #715ab1;">&#183;</span> <span style="color: #ba2f59; font-weight: bold;">Pr</span> (x, y)
-<span style="color: #715ab1;">=</span>&#10216; definitions &#10217;
-  <span style="color: #715ab1;">&#8721;</span> x, y <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> (x <span style="color: #715ab1;">+</span> y) <span style="color: #715ab1;">&#183;</span> 1<span style="color: #715ab1;">/</span>36
-<span style="color: #715ab1;">=</span>&#10216; distributivity and nesting &#10217;
-  1<span style="color: #715ab1;">/</span>36 <span style="color: #715ab1;">&#183;</span> <span style="color: #715ab1;">&#8721;</span> x <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> <span style="color: #715ab1;">&#8721;</span> y <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> (x <span style="color: #715ab1;">+</span> y)
-<span style="color: #715ab1;">=</span>&#10216; distributivity &#10217;
-  1<span style="color: #715ab1;">/</span>36 <span style="color: #715ab1;">&#183;</span> <span style="color: #715ab1;">&#8721;</span> x <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> ((<span style="color: #715ab1;">&#8721;</span> y <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> x) <span style="color: #715ab1;">+</span> (<span style="color: #715ab1;">&#8721;</span> y <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> y))
-<span style="color: #715ab1;">=</span>&#10216; constant sum and sum over <span style="color: #ba2f59; font-weight: bold;">&#120123;:</span> i<span style="color: #715ab1;">.</span>e<span style="color: #715ab1;">.</span>, <span style="color: #715ab1;">&#8721;</span> 1<span style="color: #715ab1;">..</span>6 <span style="color: #715ab1;">=</span> 21 &#10217;
-  1<span style="color: #715ab1;">/</span>36 <span style="color: #715ab1;">&#183;</span> <span style="color: #715ab1;">&#8721;</span> x <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> (<span style="color: #715ab1;">#</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#183;</span> x <span style="color: #715ab1;">+</span> 21)
-<span style="color: #715ab1;">=</span>&#10216; distributivity &#10217;
-  1<span style="color: #715ab1;">/</span>36 <span style="color: #715ab1;">&#183;</span>( (<span style="color: #715ab1;">&#8721;</span> x <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> <span style="color: #715ab1;">#</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#183;</span> x) <span style="color: #715ab1;">+</span> (<span style="color: #715ab1;">&#8721;</span> x <span style="color: #ba2f59; font-weight: bold;">:</span> <span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#8226;</span> 21))
-<span style="color: #715ab1;">=</span>&#10216; distributivity, sum over <span style="color: #ba2f59; font-weight: bold;">&#120123;</span>, and constant sum &#10217;
-  1<span style="color: #715ab1;">/</span>36 <span style="color: #715ab1;">&#183;</span> (<span style="color: #715ab1;">&#9839;</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">&#183;</span> 21 <span style="color: #715ab1;">+</span> 21 <span style="color: #715ab1;">&#183;</span> <span style="color: #715ab1;">&#9839;</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span>)
-<span style="color: #715ab1;">=</span>&#10216; arithmetic; <span style="color: #715ab1;">#</span><span style="color: #ba2f59; font-weight: bold;">&#120123;</span> <span style="color: #715ab1;">=</span> 6 &#10217;
-  1<span style="color: #715ab1;">/</span>36 <span style="color: #715ab1;">&#183;</span> 2 <span style="color: #715ab1;">&#183;</span> 6 <span style="color: #715ab1;">&#183;</span> 21
-<span style="color: #715ab1;">=</span>&#10216; arithmetic &#10217;
+<pre class="src src-haskell">  <span style="color: #2aa198;">"the average sum when rolling a pair of dice"</span>
+<span style="color: #268bd2;">=</span>&#10216; formalise; <span style="color: #b58900; font-style: italic;">S</span> (x, y) <span style="color: #268bd2;">=</span> x <span style="color: #268bd2;">+</span> y &#10217;
+  <span style="color: #b58900; font-style: italic;">E</span> <span style="color: #b58900; font-style: italic;">S</span>
+<span style="color: #268bd2;">=</span>&#10216; definition; simplify quantifiers &#10217;
+  <span style="color: #268bd2;">&#8721;</span> x, y <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #b58900; font-style: italic;">S</span>(x, y) <span style="color: #268bd2;">&#183;</span> <span style="color: #b58900; font-style: italic;">Pr</span> (x, y)
+<span style="color: #268bd2;">=</span>&#10216; definitions &#10217;
+  <span style="color: #268bd2;">&#8721;</span> x, y <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> (x <span style="color: #268bd2;">+</span> y) <span style="color: #268bd2;">&#183;</span> 1<span style="color: #268bd2;">/</span>36
+<span style="color: #268bd2;">=</span>&#10216; distributivity and nesting &#10217;
+  1<span style="color: #268bd2;">/</span>36 <span style="color: #268bd2;">&#183;</span> <span style="color: #268bd2;">&#8721;</span> x <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">&#8721;</span> y <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> (x <span style="color: #268bd2;">+</span> y)
+<span style="color: #268bd2;">=</span>&#10216; distributivity &#10217;
+  1<span style="color: #268bd2;">/</span>36 <span style="color: #268bd2;">&#183;</span> <span style="color: #268bd2;">&#8721;</span> x <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> ((<span style="color: #268bd2;">&#8721;</span> y <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> x) <span style="color: #268bd2;">+</span> (<span style="color: #268bd2;">&#8721;</span> y <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> y))
+<span style="color: #268bd2;">=</span>&#10216; constant sum and sum over <span style="color: #b58900; font-style: italic;">&#120123;:</span> i<span style="color: #268bd2;">.</span>e<span style="color: #268bd2;">.</span>, <span style="color: #268bd2;">&#8721;</span> 1<span style="color: #268bd2;">..</span>6 <span style="color: #268bd2;">=</span> 21 &#10217;
+  1<span style="color: #268bd2;">/</span>36 <span style="color: #268bd2;">&#183;</span> <span style="color: #268bd2;">&#8721;</span> x <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> (<span style="color: #268bd2;">#</span><span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#183;</span> x <span style="color: #268bd2;">+</span> 21)
+<span style="color: #268bd2;">=</span>&#10216; distributivity &#10217;
+  1<span style="color: #268bd2;">/</span>36 <span style="color: #268bd2;">&#183;</span>( (<span style="color: #268bd2;">&#8721;</span> x <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> <span style="color: #268bd2;">#</span><span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#183;</span> x) <span style="color: #268bd2;">+</span> (<span style="color: #268bd2;">&#8721;</span> x <span style="color: #b58900; font-style: italic;">:</span> <span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#8226;</span> 21))
+<span style="color: #268bd2;">=</span>&#10216; distributivity, sum over <span style="color: #b58900; font-style: italic;">&#120123;</span>, and constant sum &#10217;
+  1<span style="color: #268bd2;">/</span>36 <span style="color: #268bd2;">&#183;</span> (<span style="color: #268bd2;">&#9839;</span><span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">&#183;</span> 21 <span style="color: #268bd2;">+</span> 21 <span style="color: #268bd2;">&#183;</span> <span style="color: #268bd2;">&#9839;</span><span style="color: #b58900; font-style: italic;">&#120123;</span>)
+<span style="color: #268bd2;">=</span>&#10216; arithmetic; <span style="color: #268bd2;">#</span><span style="color: #b58900; font-style: italic;">&#120123;</span> <span style="color: #268bd2;">=</span> 6 &#10217;
+  1<span style="color: #268bd2;">/</span>36 <span style="color: #268bd2;">&#183;</span> 2 <span style="color: #268bd2;">&#183;</span> 6 <span style="color: #268bd2;">&#183;</span> 21
+<span style="color: #268bd2;">=</span>&#10216; arithmetic &#10217;
   7
 </pre>
 </div>
@@ -8690,6 +8674,39 @@ E.g., \(R = \{x, y : ℝ \;❙\; x² + y² = 1 • ⟨x, y⟩\}\) is a homogeneo
 It is the set of points on the unit circle; the circle with centre (0, 0) and
 radius 1. E.g., <i>1 R 0</i> and <i>1 R̸ 4</i>.
 </p>
+
+<p>
+In ordinary language, ‘relation’ is used to indicate an aspect that connects two
+or more things, and the mathematical version is similar in spirit.
+</p>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>The Type of Relations</h3>
+<p>
+If \(X\) and \(Y\) are sets, then \(X ↔ Y\) denotes the set of all relations between
+\(X\) and \(Y\).
+\[ X ↔ Y \qquad=\quad ℙ(X × Y)\]
+Any element of \(X ↔ Y\) is a set of ordered pairs in which the first element is
+drawn from \(X\), and the second from \(Y\): That is, a subset of the Cartesian
+product set \(X × Y\).
+</p>
+
+<hr />
+
+<p>
+One says that \(X\) and \(Y\) are the <i>source</i> and <i>target</i> sets of \(R\).  The choice of
+terminology reminds us that relations are directional: They relate objects of
+one set <b>to</b> objects of another.
+</p>
+
+<hr />
+
+<p>
+<a href="http://www.usingz.com/usingz.pdf"><b>Using Z</b> </a> (online PDF) is an excellent, and <i>tremendously accessible</i>, resource on relations.
+</p>
+
+
+</div>
 </div>
 
 <div id="outline-container-Graphs-first-encounter" class="outline-3">
@@ -8745,6 +8762,111 @@ It then has <i>♯R</i>-many edges and <i>♯A</i>-many dots.
 <p>
 <b>Relations are a theory of simple graphs!</b>
 </p>
+
+<ul class="org-ul">
+<li>A graph is said to be <b>empty</b> or <b>complete</b>, if its associated relation
+is the empty relation or the universal relation, respectively.</li>
+<li>Concerning the graph on the empty set, there is a paper by F. Harary and
+<ol class="org-ol">
+<li>C. Read entitled "Is the null-graph a pointless concept?" .</li>
+<li><a href="https://link.springer.com/chapter/10.1007/BFb0066433">springer link</a> ; <a href="https://www.reddit.com/r/math/comments/48wva0/is_the_nullgraph_a_pointless_concept/">reddit</a></li>
+</ol></li>
+</ul>
+</div>
+<div id="outline-container-Loops" class="outline-4">
+<h4 id="Loops"><span class="section-number-4">11.1.1</span> <a href="#Loops">Loops</a></h4>
+<div class="outline-text-4" id="text-Loops">
+<p>
+Besides the empty and the universal, particular relations on a set are
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Identity</td>
+<td class="org-left">\(\Id_X = \{x, y \;❙\; x ∈ X   ∧ x = y \}\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Diversity</td>
+<td class="org-left">\(\sim\Id_X = \{x, y \;❙\; x ∈ X ∧ x ≠ y \}\)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+That is, \(\Id_X\) associates each element of \(X\) with itself, and makes no other
+associations. We write just “ \(\Id\) ” to abbreviate \(\Id_𝑼\), and call it “the
+identity (on the universe)”.
+</p>
+
+<p>
+E.g., the relation ‘≤’ on ℕumbers is reflexive; the relation ‘&lt;’ is not.
+</p>
+
+<p>
+E.g., \(\sim \Id_{1..n}\) is called the <b><i>n</i>-clique</b>: Every member of the clique
+“knows” every other member.
+</p>
+
+<p>
+These two relations are helpful in defining properties about arbitrary relations.
+</p>
+
+<p>
+In a graph, a <b>loop</b> is an arrow that starts and ends at the same vertex.
+</p>
+
+<p>
+<b>Definition:</b>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><i>R</i> is <b>reflexive</b></td>
+<td class="org-left">\(=\)</td>
+<td class="org-left">\(\Id ⊆ R\)</td>
+<td class="org-left">\(=\)</td>
+<td class="org-left">\(∀ x \spot x 〔 R 〕 x\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>R</i> is <b>irreflexive</b></td>
+<td class="org-left">\(=\)</td>
+<td class="org-left">\(\sim \Id ⊆ R\)</td>
+<td class="org-left">\(=\)</td>
+<td class="org-left">\(∀ x \spot x 〔 \sim R〕 x\)</td>
+</tr>
+
+<tr>
+<td class="org-left">(loop-free)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
@@ -8761,19 +8883,198 @@ dots may not have an arrow coming into them.
 <p>
 The <b>domain of R</b> is the collection of dots that have an arrow going <i>out of</i> them;
 i.e., \(\Dom R \;=\; \{a : A \;❙\; (∃ b : B • a 〔R〕b)\} \;=\; \{a :A; b : B \;❙\; a 〔R〕
-b • a\}\).
+b • a\}\). That is, the domain of \(R : A ↔ B\) is the set of elements in \(A\)
+related to something in \(B\).
 </p>
 
 <p>
 The <b>range of R</b> is the collection of dots that have an arrow going <i>into</i> them;
 i.e., \(\Ran R \;=\; \{b : B \;❙\; (∃ a : A • a 〔R〕b)\} \;=\; \{a :A; b : B \;❙\; a 〔R〕
-b • b\}\).
+b • b\}\). That is, the range of \(R : A ↔ B\) is the set of elements of \(B\)
+to which some element of \(A\) is related.
 </p>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Types and theorems</h3>
+<ul class="org-ul">
+<li>\(\Dom : (A ↔ B) → ℙ A\)</li>
+<li>\(\Ran : (A ↔ B) → ℙ B\)</li>
+</ul>
+
+</div>
+</div>
+
+
+<div id="outline-container-Restriction" class="outline-4">
+<h4 id="Restriction"><span class="section-number-4">11.2.1</span> <a href="#Restriction">Restriction</a></h4>
+<div class="outline-text-4" id="text-Restriction">
+<p>
+We may focus upon part of the domain, or part of the range, by considering a
+subset of the relation. That is, in the graph, we ‘restrict’ our attention to only
+edges touching certain nodes.
+</p>
+<dl class="org-dl">
+<dt>Domain Restriction</dt><dd><p>
+For any subset \(X\) of \(A\), define
+\(X ◁ R \;=\; \{a : A ; b : B \;❙\; a 〔 R〕 b ∧ a ∈ X • ⟨a, b⟩ \}\).
+</p>
+
+<p>
+Notice that any pair whose <i>first</i> element lies outside of \(X\) is ignored.
+</p></dd>
+
+<dt>Range Restriction</dt><dd><p>
+For any subset \(Y\) of \(B\), define
+\(R ▷ Y \;=\; \{a : A ; b : B \;❙\; a 〔 R〕 b ∧ b ∈ Y • ⟨a, b⟩ \}\).
+</p>
+
+<p>
+Notice that any pair whose <i>second</i> element lies outside of \(Y\) is ignored.
+</p></dd>
+
+<dt>(no term)</dt><dd>Mnemonic: Domain restriction is a triangle to the left since arguments of the
+domain appear on the left; likewise, range restriction is to the right since
+range arguments appear to the right.</dd>
+</dl>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>The types</h3>
+<ul class="org-ul">
+<li>\(\_{}◁\_{} : ℙ A → (A ↔ B) → (A ↔ B)\)</li>
+<li>\(\_{}▷\_{} : (A ↔ B) → ℙ B → (A ↔ B)\)</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-Antirestriction" class="outline-4">
+<h4 id="Antirestriction"><span class="section-number-4">11.2.2</span> <a href="#Antirestriction">Antirestriction</a></h4>
+<div class="outline-text-4" id="text-Antirestriction">
+<p>
+To exclude the set $X4 from the domain of a relation, we could consider
+the domain restriction \((\sim X) ◁ R\). However, this occurs so frequently that an
+abbreviated form is provided.
+</p>
+
+<dl class="org-dl">
+<dt>Domain subtraction/antirestriction</dt><dd><p>
+\(X ⩤ R \;=\; \{a : A ; b : B \;❙\; a
+  〔 R〕 b ∧ a ∉ X • ⟨a, b⟩ \}\).
+</p>
+
+<p>
+This includes only those edges that <i>do not start in \(X\).</i>
+</p></dd>
+
+<dt>Range subtraction/antirestriction</dt><dd><p>
+\(R ⩥ Y \;=\; \{a : A ; b : B \;❙\; a 〔 R〕 b ∧ b ∉ Y • ⟨a, b⟩ \}\).
+</p>
+
+<p>
+This includes only those edges that <i>do not end in \(Y\).</i>
+</p></dd>
+</dl>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>The types</h3>
+<ul class="org-ul">
+<li>\(\_{}⩤\_{} : ℙ A → (A ↔ B) → (A ↔ B)\)</li>
+<li>\(\_{}⩥\_{} : (A ↔ B) → ℙ B → (A ↔ B)\)</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-Relational-Image" class="outline-4">
+<h4 id="Relational-Image"><span class="section-number-4">11.2.3</span> <a href="#Relational-Image">Relational Image</a></h4>
+<div class="outline-text-4" id="text-Relational-Image">
+<p>
+It may be that we are interested in the effect of a relation upon a particular
+set of elements. The <i>relational image</i> of a set \(X : ℙ A\) under \(R : A ↔ B\) is
+the set \(R⦇X⦈\) of all elements in \(B\) to which some element of \(X\) is related;
+i.e., it is the range of \(R\) domain restricted to \(X\).
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R⦇X⦈\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\Ran (X ◁ R)\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\{a :A; b : B \;❙\; a 〔R〕 b  ∧ a ∈ X • b\}\)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+As a graph, \(R⦇X⦈\) is the end-points of all edges that start in the set of nodes
+\(X\).  That is, \(R⦇X⦈\) is the ‘successors’ of \(X\).
+</p>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>The type</h3>
+<p>
+\(\_{}⦇\_{}⦈ : (A ↔ B) → ℙ A → ℙ B\)
+</p>
+
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-Theorems" class="outline-4">
+<h4 id="Theorems"><span class="section-number-4">11.2.4</span> <a href="#Theorems">Theorems</a></h4>
+<div class="outline-text-4" id="text-Theorems">
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3></h3>
+<ol class="org-ol">
+<li>\(\Dom R ◁ R = R\)</li>
+<li>\(X ◁ R = R ∩ (X × 𝑼)\) &#x2014;recall that ‘×’ distributes over both ‘∪’ and ‘∩’</li>
+<li>\(X ⩤ R = R ∩ (\sim X × 𝑼)\)</li>
+<li>\(R ▷ Y = R ∩ (𝑼 × Y)\)</li>
+<li>\(R ⩥ Y = R ∩ (𝑼 × \sim Y)\)</li>
+<li>\((X ∩ Y) ◁ R = (X ◁ R) ∩ (Y ◁ R)\)</li>
+<li>\(X ◁ (R ∪ S) = (X ◁ R) ∪ (Y ◁ S)\)</li>
+<li>\(R ▷ Y = (Y ◁ R ˘) ˘\)</li>
+<li>\(X ◁ R = (R ˘ ▷ X) ˘\)</li>
+<li>\(R ▷ (X ∩ Y) = (R ▷ X) ∩ (R ▷ Y)\)</li>
+<li>\((R ∪ S) ▷ Y = (R ▷ Y) ∪ (S ▷ Y)\)</li>
+<li>\(\Ran (R ▷ Y) = \Ran R ∩ Y\)</li>
+<li>★ \(X ◁ R = \Id_X ⨾ R\)</li>
+<li>★ \(R ▷ Y = R ⨾ \Id_Y\)</li>
+<li>“Switcheroo”: \((R ▷ Y) ⨾ S = R ⨾ (Y ◁ S)\)
+<ul class="org-ul">
+<li>By extensionality, this requires some work, but by (★)
+this is trivial!</li>
+</ul></li>
+<li>“Mutual associativity of ⨾ with ▷”: \((R ⨾ S) ▷ Z = R ⨾ (S ▷ Z)\)</li>
+</ol>
+
+</div>
+</div>
 </div>
 </div>
 
 <div id="outline-container-Converse" class="outline-3">
-<h3 id="Converse"><span class="section-number-3">11.3</span> <a href="#Converse">Converse</a></h3>
+<h3 id="Converse"><span class="section-number-3">11.3</span> <a href="#Converse">Converse &#x2014;“Transpose”</a></h3>
 <div class="outline-text-3" id="text-Converse">
 <p>
 Viewed as a simple bipartite graph, a relation “naturally comes with an
@@ -8801,16 +9102,36 @@ Intuitively,
 <li>\(R ˘ ˘ = R\)</li>
 <li>\(\Dom (R ˘) = \Ran R\)</li>
 <li>\(\Ran (R ˘) = \Dom R\).</li>
+<li>(CCC) Converse commutes with complementation: \((\sim R)˘ \;=\; \sim (R ˘)\)</li>
+<li>\(R ⊆ S \;≡\; R ˘ ⊆ S˘\)</li>
+<li>Converse commutes with joins and meets: \((R ∩ S)˘ \;=\; R ˘ ∩ S˘\)
+and \((R ∪ S)˘ \;=\; R ˘ ∪ S˘\)</li>
+<li>Identity, empty, and universal relations stay the same when transposed:
+\(\Id ˘ = \Id, \; ⊥˘ = ⊥,\; ⊤ ˘ = ⊤\).</li>
 </ul>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>The type</h3>
+<p>
+\(\_{}˘ : (A ↔ B) → (B ↔ A)\)
+</p>
+
+<p>
+Relations are directed and converse <i>changes</i> the direction.
+</p>
+
 </div>
 </div>
+</div>
+
 
 <div id="outline-container-Constructing-new-relations-from-existing-relations" class="outline-3">
 <h3 id="Constructing-new-relations-from-existing-relations"><span class="section-number-3">11.4</span> <a href="#Constructing-new-relations-from-existing-relations">Constructing new relations from existing relations</a></h3>
 <div class="outline-text-3" id="text-Constructing-new-relations-from-existing-relations">
 <p>
-The usual set theory operations can be used to construct new relations
-from existing ones.
+Since relations are sets of pairs, the usual set theory operations
+&#x2014;intersection, union, complement, inclusion&#x2014; can be used to construct new
+relations from existing ones.
 </p>
 
 <p>
@@ -8842,11 +9163,316 @@ inductive data type.
 <ul class="org-ul">
 <li>For more on this idea, see <a href="https://alhassy.github.io/PathCat.html">Graphs are to categories as lists are to monoids</a>.</li>
 </ul>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>The type</h3>
+<p>
+\(\_{}⨾\_{} : (A ↔ B) → (B ↔ C) → (A ↔ C)\)
+</p>
+
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-Properties-of-Relations" class="outline-3">
+<h3 id="Properties-of-Relations"><span class="section-number-3">11.5</span> <a href="#Properties-of-Relations">Properties of Relations</a></h3>
+<div class="outline-text-3" id="text-Properties-of-Relations">
+<dl class="org-dl">
+<dt>Reflexive</dt><dd><p>
+<i>Elements are related to themselves</i>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is reflexive</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x • x 〔R〕 x</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\Id ⊆ R\)</td>
+</tr>
+</tbody>
+</table></dd>
+
+<dt>Symmetric</dt><dd><p>
+<i>The relationship is mutual.</i>
+</p>
+
+<p>
+( A relation is symmetric if it includes its converse: If <i>x</i> is related to <i>y</i>, then <i>y</i> is also related to <i>x</i>. )
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is symmetric</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x, y • x 〔R〕 y ⇒ y 〔 R〕 x</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R ˘ ⊆ R\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R ∩ R˘ ⊆ R\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R ˘ = R\)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+As graphs, symmetric relations contains either exactly two arrows &#x2014;in
+opposite directions&#x2014; between any two elements or none at all.  As such, for
+clarity, one prefers “squeezing any two arrows in opposite directions” into
+one ‘undirected’ line and so obtains <b>undirected graphs</b>.
+</p>
+<ul class="org-ul">
+<li>Undirected edges represent pairs of arrows pointing in opposite directions.</li>
+</ul></dd>
+
+<dt>Antisymmetric</dt><dd><p>
+<i>Different elements cannot be mutually related.</i>
+</p>
+
+<p>
+Such relations allow us to prove equality between two elements;
+we have only to show that the relationship holds in both directions.
+</p>
+<ul class="org-ul">
+<li>E.g, one often shows two sets are equal by using the antisymmetry of ‘⊆’.</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is antisymmetric</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x, y • x 〔R〕 y  ∧  y 〔 R〕 x ⇒ x = y</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x, y •  x ≠ y  ⇒  ¬ (x 〔R〕 y  ∧  y 〔 R〕 x)</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x, y •  x ≠ y  ⇒  x 〔R̸〕 y  ∨  y 〔 R̸〕 x</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R ∩ R ˘ ⊆ \Id\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R ˘ ⊆ \sim R ∪ \Id\)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+( As a simple graph, an antisymmetric relation has <i>at most</i> one arrow between
+any two different nodes. )
+</p></dd>
+
+<dt>Asymmetric</dt><dd><p>
+<i>The relationship is mutually exclusive.</i>
+</p>
+
+<p>
+( That is, \(x 〔 R〕 y\) and \(y 〔R〕 x\) cannot both be true.
+</p>
+
+<p>
+Reflexive relations &#x2014;when <i>x = y</i>&#x2014; are thus not asymmetric. )
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is asymmetric</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x, y • x 〔R〕 y  ⇒  ¬ y 〔 R〕 x</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x, y • x 〔R〕 y  ≢  y 〔 R〕 x</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R ∩ R ˘ ⊆ ⊥\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R ˘ ⊆ \sim R\)</td>
+</tr>
+</tbody>
+</table></dd>
+</dl>
+
+<p>
+Notice that a relation need not be any of Symmetric, Antisymmetric, nor
+Asymmetric (i.e., \(R ∩ R˘\) need not be included in \(R\), \(\Id\), nor in \(\bot\);
+equivalently: \(R˘\) need not be included in $R, &sim; R ∪ \Id,$ nor in \(\sim R\));
+e.g., the relationship <i>likes = { ⟨Louise, Martin⟩, ⟨Martin, Louise⟩, ⟨Martin,
+Natalie⟩ }</i> is not symmetric &#x2014;Martin likes Matalie but Natalie does not like
+Martin&#x2014;.  is not antisymmetric &#x2014;Martin and Louise like each other, but they
+are not the same person&#x2014;, and it is not asymmetric &#x2014;since Martin and Louise
+like each other.
+</p>
+
+<dl class="org-dl">
+<dt>Linear</dt><dd><p>
+<i>Any two (possibly identical) members are related</i>; (the associated graph can be drawn
+similar to a line).
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is linear</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x, y • x 〔R〕 y  ∨  y 〔R〕 x</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(⊤ ⊆ R ∪ R ˘\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\sim R ⊆ R ˘\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\sim R\) is asymmetric</td>
+</tr>
+</tbody>
+</table></dd>
+
+<dt>Semilinear</dt><dd><p>
+<i>Any two different members are related</i>; (the associated graph can be drawn
+similar to a line).
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is semilinear</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x, y • x ≠ y  ⇒  x 〔R〕 y  ∨  y 〔R〕 x</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\sim\Id ⊆ R ∪ R ˘\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\sim R ⊆ R ˘ ∪ \Id\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\sim R\) is antisymmetric</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+A relation without incomparable elements is semilinear.
+</p></dd>
+</dl>
 </div>
 </div>
 
 <div id="outline-container-Equivalence-Relations" class="outline-3">
-<h3 id="Equivalence-Relations"><span class="section-number-3">11.5</span> <a href="#Equivalence-Relations">Equivalence Relations</a></h3>
+<h3 id="Equivalence-Relations"><span class="section-number-3">11.6</span> <a href="#Equivalence-Relations">Equivalence Relations</a></h3>
 <div class="outline-text-3" id="text-Equivalence-Relations">
 <p>
 Relations \(R\) that <i>model</i>
@@ -8882,15 +9508,6 @@ the other, then the other should be similar to the first.</i>
 </ul>
 
 <p>
-In particular, these kinds of relations occur all the time in real life.  E.g.,
-“anyone who has these skills is good enough for the job” and so people are
-(mostly) ‘indistinguishable’ <i>from the perspective</i> of the employer.  When a
-company has multiple jobs to fill, then “people are indistinguishable” when they
-have the same skill set for the same job.
-( We're making a lot of assumptions in this example; in real life, people are distinguishable! )
-</p>
-
-<p>
 For example, “2 + 2” and “4” are clearly *not the same*”: The first is a string
 of 3 symbols, whereas the latter is a string of a single symbol.  However, they
 are <b>equivalent</b> when we evaluate them and so we want to pretend they are the same,
@@ -8898,10 +9515,19 @@ not by using equality, but by using an equivalence relation.
 </p>
 
 <p>
-In general, “sharing the same feature 𝒇” is an equivalence relation.  That is,
-if \(f : A → B\) is a function, then \(\sim_f\) is an equivalence relation defined by \(a₁
-\sim_f a₂ \;≡\; f(a₁) = f(a₂)\). In databases, one uses essentially this idea:
-“Two tables are the same if the have the same primary keys.”
+These kinds of relations occur all the time in real life.  E.g.,
+the relation “same zodiac sign” is an equivalence relation.  As such, “I'm
+looking for a Leo” means <i>anyone</i> who has the Leo zodiac sign is “good enough”
+&#x2014;all such people are essentially ‘indefatigable’ since their distinguishing
+feature, at the moment, is their zodiac sing.
+</p>
+
+<p>
+Generalising the previous two examples, “sharing the same feature 𝒇” is an
+equivalence relation.  That is, if \(f : A → B\) is a function, then \(\sim_f\) is
+an equivalence relation defined by \(a₁ \sim_f a₂ \;≡\; f(a₁) = f(a₂)\). In
+databases, one uses essentially this idea: “Two tables are the same if the have
+the same primary keys.”
 </p>
 
 <p>
@@ -9034,11 +9660,11 @@ relations. However, equivalence relations are preserved by union.
 </div>
 
 <div id="outline-container-Closures" class="outline-3">
-<h3 id="Closures"><span class="section-number-3">11.6</span> <a href="#Closures">Closures</a></h3>
+<h3 id="Closures"><span class="section-number-3">11.7</span> <a href="#Closures">Closures</a></h3>
 <div class="outline-text-3" id="text-Closures">
 <p>
 Given an ordered set (τ, ⊑),
-let φ be any <i>property</i>; i.e., a <a href="#org0afb05a">predicate</a> <i>τ → 𝔹</i>.
+let φ be any <i>property</i>; i.e., a <a href="#orge117d04">predicate</a> <i>τ → 𝔹</i>.
 </p>
 
 <p>
@@ -9065,6 +9691,32 @@ Equivalently, we have the following <b>characterisation</b>:
 <p>
 \[φ(\bar{q}) \;∧\; ∀ p \;❙\; φ(p) • \bar{q} ⊑ p  ≡  q ⊑ p\]
 </p></li>
+
+<li><p>
+\(\bar{q} \;=\; (⊓ p \;❙\; q ⊑ p \,∧\, φ(p))\), provided both sides exist.
+</p>
+
+<p>
+This <b>reads like the definition</b>:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><i>The closure of q is the minimal element containing q and satisfying φ!</i></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Notice that this meet/infimum has a <i>descriptive</i> character as it is the meet of
+<i>all</i> members in question, but it does not offer a <i>constructive</i> formulation
+and indeed sometimes closures simply do not exist.
+</p></li>
 </ul>
 
 <p>
@@ -9072,12 +9724,20 @@ For example, the reflexive closure of a relation \(R\) is obtained
 “by adding in just enough elements to make the result reflexive”;
 i.e., the closure is \(\Id ∪ R\).
 </p>
+<ul class="org-ul">
+<li>Indeed, a relation is reflexive princely when \(\Id ⊆ R\),
+but inclusions can be expressed as unions and so this is the same as
+\(\Id ∪ R = R\)! Super simple fun stuff!</li>
+</ul>
 
 <p>
 For example, the symmetric closure of a relation \(R\) is obtained
 “by adding in just enough elements to make the result symmetric”;
 i.e., the closure is \(R˘ ∪ R\).
 </p>
+<ul class="org-ul">
+<li>Same reasoning as reflexive closure.</li>
+</ul>
 
 <p>
 Now, most interestingly, the transitive closure.  A relation \(S\) is transitive
@@ -9110,13 +9770,21 @@ That is,
 \[ R^* \;=\; (∪ n : ℕ \;❙\; n ≤ ♯A • Rⁿ) \text{ provided } R : A ↔ A \text { and $A$
 is finite }\]
 </p>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>The type</h3>
+<p>
+\(\_{}^* : (A ↔ B) → (A ↔ B)\)
+</p>
+
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-11-30 Mon 19:36</p>
+<p class="date">Created: 2020-12-02 Wed 08:56</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
