@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-12-02 Wed 08:56 -->
+<!-- 2020-12-03 Thu 10:05 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mathematics for Computing</title>
@@ -411,7 +411,7 @@
 <ul>
 <li><a href="#Graphs-first-encounter">11.1. <a href="#Graphs-first-encounter">Graphs, first encounter</a></a>
 <ul>
-<li><a href="#Loops">11.1.1. <a href="#Loops">Loops</a></a></li>
+<li><a href="#Loops">11.1.1. <a href="#Loops">Loops and Subidentities</a></a></li>
 </ul>
 </li>
 <li><a href="#Domain-and-Range">11.2. <a href="#Domain-and-Range">Domain and Range</a></a>
@@ -427,6 +427,8 @@
 <li><a href="#Properties-of-Relations">11.5. <a href="#Properties-of-Relations">Properties of Relations</a></a></li>
 <li><a href="#Equivalence-Relations">11.6. <a href="#Equivalence-Relations">Equivalence Relations</a></a></li>
 <li><a href="#Closures">11.7. <a href="#Closures">Closures</a></a></li>
+<li><a href="#Kernels">11.8. <a href="#Kernels">Kernels</a></a></li>
+<li><a href="#C-Interplay-between-composition-conversion-complement-and-containment">11.9. <a href="#C-Interplay-between-composition-conversion-complement-and-containment">C⁴: Interplay between composition, conversion, complement, and containment</a></a></li>
 </ul>
 </li>
 </ul>
@@ -2393,12 +2395,12 @@ we define expressions in terms of how they can be manipulated.
 </p>
 
 <p>
-A <b><a id="orgeb058d5">calculus</a></b> is a method or process of reasoning by calculation with
+A <b><a id="org38f50b7">calculus</a></b> is a method or process of reasoning by calculation with
 symbols.
 A Boolean variable that can denote a proposition is sometimes called a
-<i><a href="#org355aeab">propositional</a> variable</i>.
-A <b><a id="org9eeb70b">propositional calculus</a></b> is so named beacuse it is a method
-of calculating with expressions that involve <a href="#org355aeab">propositional</a> variables.
+<i><a href="#org1bf221c">propositional</a> variable</i>.
+A <b><a id="org6ddc465">propositional calculus</a></b> is so named beacuse it is a method
+of calculating with expressions that involve <a href="#org1bf221c">propositional</a> variables.
 </p>
 
 <p>
@@ -2408,15 +2410,15 @@ of calculating with expressions that involve <a href="#org355aeab">propositional
    For example, the axiom \(p ∨ q ≡ q ∨ p\) indicates (semantically)
    that the value of a disjunction doesn't depend on the order of its arguments
    and (syntactically) we may swap their order when manipulating expressions.
-   The other part of this <a href="#orgeb058d5">calculus</a> are the 3 inference rules Substitution,
+   The other part of this <a href="#org38f50b7">calculus</a> are the 3 inference rules Substitution,
    Leibniz, and Transitivity.
 </p>
 
 <p>
-   A <b><a id="orgca438ab">theorem</a></b> of this <a href="#orgeb058d5">calculus</a> is either an axiom, the conclusion
+   A <b><a id="org96cc9b0">theorem</a></b> of this <a href="#org38f50b7">calculus</a> is either an axiom, the conclusion
    of an inference rule whose premises are theorems, or a Boolean expression
    that, using the inference rules, is proved equal to an axiom or a previously
-   proved <a href="#orgca438ab">theorem</a>.
+   proved <a href="#org96cc9b0">theorem</a>.
  </div>
 </p>
 
@@ -2524,15 +2526,15 @@ in Computer Science and Software Engineering
 <li><b>Goal</b>: Understand the mechanics of mathematical expressions and proof.</li>
 
 <li><p>
-<a id="org355aeab">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
+<a id="org1bf221c">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
 </p>
 
 <p>
-<a id="orge117d04">Predicate</a>: <a href="#org355aeab">Propositional</a> statement about some subjects.
+<a id="org9cac0ac">Predicate</a>: <a href="#org1bf221c">Propositional</a> statement about some subjects.
 </p></li>
 
 <li><p>
-<a id="orgc119959">Calculus</a>: Formalised reasoning through calculation.
+<a id="orga6f990e">Calculus</a>: Formalised reasoning through calculation.
 </p>
 
 <p>
@@ -2822,7 +2824,7 @@ preserve truth</i>. Here are some examples of <i>clearly obviously true things</
 
 <p>
 Equipollence means if we show something is equal to ‘true’ (a particular
-<a href="#orgca438ab">theorem</a>), then it is a <a href="#orgca438ab">theorem</a>. Consequently, this means all theorems are
+<a href="#org96cc9b0">theorem</a>), then it is a <a href="#org96cc9b0">theorem</a>. Consequently, this means all theorems are
 equivalent.
 </p>
 
@@ -2867,7 +2869,7 @@ How do you ‘read’ (<i>parse</i>) the expression \(6 - x + 7\)?
 </div>
 
 
-<div id="org9ab18ce" class="figure">
+<div id="org4ac617a" class="figure">
 <p><img src="images/6-x+7_third_time.png" alt="6-x+7_third_time.png" />
 </p>
 </div>
@@ -2881,7 +2883,7 @@ It can be generated from its parts in two different ways:
 Both \(6\) and \(x + 7\) are expressions, so \(6 - x + 7\) is an expression.
 </p>
 
-<div id="org99c1b62" class="figure">
+<div id="org8a32216" class="figure">
 <p><img src="images/6-x+7_parse2.png" alt="6-x+7_parse2.png" />
 </p>
 </div></li>
@@ -2889,7 +2891,7 @@ Both \(6\) and \(x + 7\) are expressions, so \(6 - x + 7\) is an expression.
 <li>and also both \(6 - x\) and \(7\) are expressions, so \(6 - x + 7\) is an expression.</li>
 </ol>
 
-<div id="orgdaa3cd9" class="figure">
+<div id="org96dbc9d" class="figure">
 <p><img src="images/6-x+7_parse1.png" alt="6-x+7_parse1.png" />
 </p>
 </div>
@@ -3026,14 +3028,14 @@ then a <b>meta-variable</b> is simply a normal variable of type <code>Expr τ</c
 </p>
 
 <p>
-Likewise, a <b><a href="#orgca438ab">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
-whereas a <b>meta-<a href="#orgca438ab">theorem</a></b> is a general statement about our logic that we prove
+Likewise, a <b><a href="#org96cc9b0">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
+whereas a <b>meta-<a href="#org96cc9b0">theorem</a></b> is a general statement about our logic that we prove
 to be true. That is, if 𝑬 is collection of rules that allows us to find
-truths, then a <i><a href="#orgca438ab">theorem</a></i> is a truth found using those rules; whereas a
-<i>meta-<a href="#orgca438ab">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
+truths, then a <i><a href="#org96cc9b0">theorem</a></i> is a truth found using those rules; whereas a
+<i>meta-<a href="#org96cc9b0">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
 That is, theorems are <span class="underline">in</span> 𝑬 and meta-theorems are <span class="underline">about</span> 𝑬.  For example, here
-is a meta-<a href="#orgca438ab">theorem</a> that the equational logic 𝑬 has (as do many other theories,
-such as lattices): An <i>equational</i> <a href="#orgca438ab">theorem</a> is true precisely when its ‘dual’ is
+is a meta-<a href="#org96cc9b0">theorem</a> that the equational logic 𝑬 has (as do many other theories,
+such as lattices): An <i>equational</i> <a href="#org96cc9b0">theorem</a> is true precisely when its ‘dual’ is
 true. Such metatheorems can be helpful to discover new theorems.
 </p>
 
@@ -3128,29 +3130,29 @@ yield \(1\).
 </p>
 
 <p>
-A Boolean expression \(P\) is <b><a id="orge092ef7">satisfied</a></b> in a state if its value is <i>true</i>
-in that state; \(P\) is <b><a id="org50508ea">satisfiable</a></b> if there is a state in which it is
-<a href="#orge092ef7">satisfied</a>; and \(P\) is <b><a id="org299dd47">valid</a></b> (or is a <b><a id="org68a089f">tautology</a></b>) if it is
-<a href="#orge092ef7">satisfied</a> in every state.
+A Boolean expression \(P\) is <b><a id="org12766c5">satisfied</a></b> in a state if its value is <i>true</i>
+in that state; \(P\) is <b><a id="org9ee8b0d">satisfiable</a></b> if there is a state in which it is
+<a href="#org12766c5">satisfied</a>; and \(P\) is <b><a id="org45bc42d">valid</a></b> (or is a <b><a id="org49b1934">tautology</a></b>) if it is
+<a href="#org12766c5">satisfied</a> in every state.
 </p>
 
 <hr />
 
 <p>
-All theorems of the <a href="#org355aeab">propositional</a> <a href="#orgeb058d5">calculus</a> 𝑬 are <a href="#org299dd47">valid</a>. This can be checked by checking
+All theorems of the <a href="#org1bf221c">propositional</a> <a href="#org38f50b7">calculus</a> 𝑬 are <a href="#org45bc42d">valid</a>. This can be checked by checking
 that each axiom with a truth table and arguing for each inference rule that
-if its premises are <a href="#org299dd47">valid</a> then so is its conclusion.
+if its premises are <a href="#org45bc42d">valid</a> then so is its conclusion.
 </p>
 
 <p>
 For example, let's show that the Substitution rule preserves validity.  Let
 us write \(s(E)\) to denote the value of expression \(E\) in state \(s\).  If \(E\)
-is <a href="#org299dd47">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
+is <a href="#org45bc42d">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
 true in any state. So, given a state \(s\), let \(s′\) be the ‘updated’ state
 that assigns the same values to all the variables as does \(s\) <i>except</i> that
-the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#org299dd47">valid</a>,
+the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#org45bc42d">valid</a>,
 \(s′(E)\) is true but \(s′(E)\) is just \(s\big(E[x ≔ F]\big)\) and so the
-resulting substitution is also <a href="#org299dd47">valid</a>.
+resulting substitution is also <a href="#org45bc42d">valid</a>.
 </p>
 
 <p>
@@ -3161,8 +3163,8 @@ then the updated state \(s′\) &#x2014;having <i>s′(x) = s(F)</i>&#x2014; wil
 </p>
 
 <p>
-Not only are all theorems <a href="#org299dd47">valid</a>, but all <a href="#org299dd47">valid</a> expressions are theorems of
-our <a href="#orgeb058d5">calculus</a> (although we do not prove this fact). Theoremhood and validity
+Not only are all theorems <a href="#org45bc42d">valid</a>, but all <a href="#org45bc42d">valid</a> expressions are theorems of
+our <a href="#org38f50b7">calculus</a> (although we do not prove this fact). Theoremhood and validity
 are one and the same.
 </p>
 
@@ -3207,7 +3209,7 @@ Later we see that theorems correspond to expressions that are true in all states
 <div class="outline-text-3" id="text-Logics-and-Inference-Rules">
 <p>
 Formally, a “proof” is obtained by applying a number of “rules” to known
-results to obtain new results; a “<a href="#orgca438ab">theorem</a>” is the conclusion of a “proof”.
+results to obtain new results; a “<a href="#org96cc9b0">theorem</a>” is the conclusion of a “proof”.
 An “axiom” is a rule that does not need to be applied to any existing
 results: It's just a known result.
 </p>
@@ -3324,7 +3326,7 @@ axioms \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\).
 </p>
 
 <p>
-The inference rule says “if the \(Pᵢ\) are all <a href="#org299dd47">valid</a>, i.e., true in <i>all
+The inference rule says “if the \(Pᵢ\) are all <a href="#org45bc42d">valid</a>, i.e., true in <i>all
 states</i>, then so is \(C\)”; the axiom, on the other hand, says “if the \(Pᵢ\)
 are true in <i>a state</i>, then \(C\) is true in <i>that state</i>.” Thus the rule and
 the axiom are not quite the same.
@@ -3333,24 +3335,24 @@ the axiom are not quite the same.
 <p>
 Moreover, the rule is not a Boolean expression.  Rules are thus more
 general, allowing us to construct systems of reasoning that have no
-concrete notions of ‘truth’ &#x2014;see the logic <a href="#org8da0aa9">𝑾𝑩</a> below.
+concrete notions of ‘truth’ &#x2014;see the logic <a href="#org8ce5745">𝑾𝑩</a> below.
 </p>
 
 <p>
 Finally, the rule asserts that \(C\) follows from \(P₁, …, Pₙ\).
 The formula \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\), on the other hand, is a Boolean
-expression (but it need not be a <a href="#orgca438ab">theorem</a>).
+expression (but it need not be a <a href="#org96cc9b0">theorem</a>).
 </p>
 
 <p>
 An example of this relationship between rules and operators
-may be observed by comparing the logics <a href="#org8da0aa9">𝑾𝑩</a> and <a href="#org6198cf9">𝑴𝑺𝑯</a>, below.
+may be observed by comparing the logics <a href="#org8ce5745">𝑾𝑩</a> and <a href="#orgb2fd772">𝑴𝑺𝑯</a>, below.
 One could read “◇” as “and”, and “⟶” as “implies”.
 </p>
 
 
 <p>
-A “<a href="#orgca438ab">theorem</a>” is a syntactic concept: Can we play the game of moving symbols to
+A “<a href="#org96cc9b0">theorem</a>” is a syntactic concept: Can we play the game of moving symbols to
 get this? Not “is the meaning of this true”!
 ‘Semantic concepts’ rely on ‘states’, assignments of values to variables
 so that we can ‘evaluate, simplify’ statements to deduce if they are true.
@@ -3368,7 +3370,7 @@ Syntax is like static analysis; semantics is like actually running the program
 <h3 id="water-bucket-logics"><span class="section-number-3">3.3</span> <a href="#water-bucket-logics">[Optional] Strange Logics</a></h3>
 <div class="outline-text-3" id="text-water-bucket-logics">
 <p>
-Here is an example logic, call it <a id="org8da0aa9">𝑾𝑩</a>:
+Here is an example logic, call it <a id="org8ce5745">𝑾𝑩</a>:
 </p>
 <ul class="org-ul">
 <li>The symbols are the usual numbers, along with <code>+</code> and <code>-</code> and
@@ -3399,10 +3401,10 @@ from numbers, +, and -.
 </p>
 
 <p>
-<b>Exercise <a href="#water-bucket-logics">3.3</a>.1</b>: Using this logic, prove the <a href="#orgca438ab">theorem</a> <code>0, 4</code>.
+<b>Exercise <a href="#water-bucket-logics">3.3</a>.1</b>: Using this logic, prove the <a href="#org96cc9b0">theorem</a> <code>0, 4</code>.
 </p>
 <ul class="org-ul">
-<li>Notice that the <a href="#orgca438ab">theorem</a> has nothing to do with ‘truth’! &#x2014;At least not
+<li>Notice that the <a href="#org96cc9b0">theorem</a> has nothing to do with ‘truth’! &#x2014;At least not
 explicitly, or intuitively.</li>
 </ul>
 
@@ -3456,7 +3458,7 @@ a way that makes the inference rules true?
                   </summary>
 
 <p>
-The logic <a href="#org8da0aa9">𝑾𝑩</a> <i>could be</i> interpreted as modelling two ‘water buckets’, the first
+The logic <a href="#org8ce5745">𝑾𝑩</a> <i>could be</i> interpreted as modelling two ‘water buckets’, the first
 can contain 3 litres while the second can contain 5 litres, along with an
 unlimited water supply.
 </p>
@@ -3471,7 +3473,7 @@ the other, such that the first is emptied <b>or</b> the second is filled.
 </ol>
 
 <p>
-Then the <a href="#orgca438ab">theorem</a> says we can measure 4 litres of water &#x2014;using only a 3 and 5
+Then the <a href="#org96cc9b0">theorem</a> says we can measure 4 litres of water &#x2014;using only a 3 and 5
 litre buckets and an unlimited water supply.
 </p>
 
@@ -3482,14 +3484,14 @@ litre buckets and an unlimited water supply.
 <hr />
 
 <p>
-Here is another example logic, call it <a id="org6198cf9">𝑴𝑺𝑯</a>:
+Here is another example logic, call it <a id="orgb2fd772">𝑴𝑺𝑯</a>:
 </p>
 <ul class="org-ul">
 <li>The symbols are the usual numbers, along with <code>+, -, ◇, ⟶</code>.</li>
 <li>A formula is of the form \(x ◇ y ⟶ x′ ◇ y′\) where ◇ binds tightest
 and \(x, y, x′, y′\) are terms formed from numbers, <code>+</code>, and <code>-</code>.</li>
 <li><p>
-In contrast to <a href="#org8da0aa9">𝑾𝑩</a>, this logic has only 1 non-axiom inference rule!
+In contrast to <a href="#org8ce5745">𝑾𝑩</a>, this logic has only 1 non-axiom inference rule!
 </p>
 
 <p>
@@ -3507,7 +3509,7 @@ In contrast to <a href="#org8da0aa9">𝑾𝑩</a>, this logic has only 1 non-axi
 
 <p>
 <b>Exercise <a href="#water-bucket-logics">3.3</a>.3:</b> Finish reading this section, then come back and
-prove the <a href="#orgca438ab">theorem</a> <code>0 ◇ 0 ⟶ 0 ◇ 4</code> using a <i>calculational proof</i>.
+prove the <a href="#org96cc9b0">theorem</a> <code>0 ◇ 0 ⟶ 0 ◇ 4</code> using a <i>calculational proof</i>.
 </p>
 
 <details class="code-details"
@@ -3568,14 +3570,14 @@ related, via the relation, to the last term.
                   </summary>
 
 <p>
-We <i>may</i> think of <a href="#org6198cf9">𝑴𝑺𝑯</a> as a ‘machine’ with two memory banks: A computer with memory
+We <i>may</i> think of <a href="#orgb2fd772">𝑴𝑺𝑯</a> as a ‘machine’ with two memory banks: A computer with memory
 state \(x\) and \(y\) is executed and it terminates in memory state \(x′\) and \(y′\).
 That is, \(x ◇ y ⟶ x′ ◇ y′\) is “starting from \((x, y)\), the computer finishes
 with \((x′, y′)\)”.
 </p>
 
 <p>
-The <a href="#orgca438ab">theorem</a> then says that it is possible for the computer to start at \((0, 0)\)
+The <a href="#org96cc9b0">theorem</a> then says that it is possible for the computer to start at \((0, 0)\)
 and finish with memory store \((0, 4)\).
 </p>
 
@@ -3585,7 +3587,7 @@ is witnessed by the <a href="https://alhassy.github.io/PrologCheatSheet/CheatShe
 </p>
 
 <p>
-Of-course, we could also re-use the water buckets interpretation of <a href="#org8da0aa9">𝑾𝑩</a>.
+Of-course, we could also re-use the water buckets interpretation of <a href="#org8ce5745">𝑾𝑩</a>.
 </p>
 
 
@@ -3619,12 +3621,12 @@ The following rules define equality by how it can be used, manipulated.
 <li><p>
 The <b>Substitution inference rule</b>
 says that a substitution \(E[\vec x ≔ \vec F]\) is
-a <a href="#orgca438ab">theorem</a> <i>whenever</i> \(E\) is a <a href="#orgca438ab">theorem</a>.
+a <a href="#org96cc9b0">theorem</a> <i>whenever</i> \(E\) is a <a href="#org96cc9b0">theorem</a>.
 </p>
 
 <p>
 Within CalcCheck, this rule is realised as the <kbd> with </kbd> clause: The phrase <code>E
-    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#orgca438ab">theorem</a>
+    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#org96cc9b0">theorem</a>
 \(E[\vec x ≔ \vec F]\). The rule is applied <i>implicitly</i>, unless <code>rigid matching</code>
 is activated &#x2014;e.g., to get students <b>thinking correctly about applying
 theorems</b> instead of just putting random theorems that look similar and hoping
@@ -3668,7 +3670,7 @@ from one must be the same when extracted from the other.
 
 <p>
 Again: Unlike the Substitution rule, which allows us to instantiate <i>any</i>
-<a href="#orgca438ab">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
+<a href="#org96cc9b0">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
 within expressions</b>. Later on, we will look at ‘monotonicity rules’ which will
 let us apply inclusion (≤, ⇒, ⊑) theorems deep within expressions.
 </p>
@@ -3735,7 +3737,7 @@ Instead, we may use a more ‘linear’ proof format:
 
 <p>
 In this equational style, instead of a <b>tree</b> (on the left)
-we use a <b><a href="#org699a78e">sequential</a> chain of equalities</b> (on the right):
+we use a <b><a href="#orga72a777">sequential</a> chain of equalities</b> (on the right):
 </p>
 
 
@@ -3827,7 +3829,7 @@ inference rules must be mentioned explicitly.
 
 <p>
 Leibniz is often used with Substitution, as follows
-&#x2014;supposing we know the <a href="#orgca438ab">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
+&#x2014;supposing we know the <a href="#org96cc9b0">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
 </p>
 
 \begin{calc}
@@ -3838,9 +3840,9 @@ Leibniz is often used with Substitution, as follows
 
 <p>
 We are using Leibniz with the premise \(2 · j / 2 = j\).
-We can use this premise only if it is a <a href="#orgca438ab">theorem</a>. It is, because
-\(2 · x / 2 = x\) is a <a href="#orgca438ab">theorem</a> and, therefore, by Substitution,
-\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#orgca438ab">theorem</a>.
+We can use this premise only if it is a <a href="#org96cc9b0">theorem</a>. It is, because
+\(2 · x / 2 = x\) is a <a href="#org96cc9b0">theorem</a> and, therefore, by Substitution,
+\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#org96cc9b0">theorem</a>.
 </p>
 
 <p>
@@ -3852,7 +3854,7 @@ off the indication “with \(x ≔ j\)”.
 </div>
 
 <div id="outline-container-Propositional-Calculus" class="outline-2">
-<h2 id="Propositional-Calculus"><span class="section-number-2">4</span> <a href="#Propositional-Calculus"> <a href="#org355aeab">Propositional</a> <a href="#orgeb058d5">Calculus</a></a></h2>
+<h2 id="Propositional-Calculus"><span class="section-number-2">4</span> <a href="#Propositional-Calculus"> <a href="#org1bf221c">Propositional</a> <a href="#org38f50b7">Calculus</a></a></h2>
 <div class="outline-text-2" id="text-Propositional-Calculus">
 <p>
 Often operations are defined by how they are evaluated (“operationally”), we
@@ -3873,14 +3875,14 @@ cleanly possible; e.g., given an ordering ‘≤’(‘⇒, ⊆, ⊑’) we can 
 </p>
 
 <p>
-A <i><a href="#orgeb058d5">calculus</a></i> is a method or process of reasoning by calculation with symbols. A
-<i><a href="#org355aeab">propositional</a> <a href="#orgeb058d5">calculus</a></i> is a method of calculating with Boolean (or
-<a href="#org355aeab">propositional</a>) expressions.
+A <i><a href="#org38f50b7">calculus</a></i> is a method or process of reasoning by calculation with symbols. A
+<i><a href="#org1bf221c">propositional</a> <a href="#org38f50b7">calculus</a></i> is a method of calculating with Boolean (or
+<a href="#org1bf221c">propositional</a>) expressions.
 </p>
 
 <p>
-A <i><a href="#orgca438ab">theorem</a></i> is a syntactic object, a string of symbols with a particular property.
-A <i><a href="#orgca438ab">theorem</a></i> of a <a href="#orgeb058d5">calculus</a> is either an axiom or the conclusion of an inference
+A <i><a href="#org96cc9b0">theorem</a></i> is a syntactic object, a string of symbols with a particular property.
+A <i><a href="#org96cc9b0">theorem</a></i> of a <a href="#org38f50b7">calculus</a> is either an axiom or the conclusion of an inference
 rule whose premises are theorems. Different axioms could lead to the same
 set of theorems, and many texts use different axioms.
 </p>
@@ -3904,7 +3906,7 @@ The type of propositions is known as the <b>Booleans</b> and denoted 𝔹.
 <p>
 For instance, the notion of equality on any type τ is
 typed <code>_=_ : τ → τ → 𝔹</code>; i.e., equality takes two values of a type τ
-and returns a <a href="#org355aeab">propositional</a> value.
+and returns a <a href="#org1bf221c">propositional</a> value.
 </p>
 
 <blockquote>
@@ -4447,7 +4449,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 7:</span> Properties of <a href="#org355aeab">propositional</a> operators and similar (familiar) numeric laws</caption>
+<caption class="t-above"><span class="table-number">Table 7:</span> Properties of <a href="#org1bf221c">propositional</a> operators and similar (familiar) numeric laws</caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -4743,7 +4745,7 @@ of equivalence increases the number of parses.
 <p>
 Using its definition, we can quickly show that
 \(\true = \big(\true ≡ q ≡ q\big)\) and so by equanimity,
-since the right side is a <a href="#orgca438ab">theorem</a>, then the left side is also a <a href="#orgca438ab">theorem</a>.
+since the right side is a <a href="#org96cc9b0">theorem</a>, then the left side is also a <a href="#org96cc9b0">theorem</a>.
 Hence,
 </p>
 
@@ -4752,24 +4754,24 @@ Hence,
 </p>
 
 <p>
-What is the benefit of this <a href="#orgca438ab">theorem</a>?
+What is the benefit of this <a href="#org96cc9b0">theorem</a>?
 </p>
 
 <p>
-By equanimity, this means that to prove \(P\) is a <a href="#orgca438ab">theorem</a>, it is
+By equanimity, this means that to prove \(P\) is a <a href="#org96cc9b0">theorem</a>, it is
 enough to show that \(P ≡ \true\)! This is an ‘expected’ result :-)
 </p>
 
 <p>
-( We can phrase this observation as a <a href="#orgca438ab">theorem</a> itself as \((P ≡ \true) ≡ P\), but
+( We can phrase this observation as a <a href="#org96cc9b0">theorem</a> itself as \((P ≡ \true) ≡ P\), but
 this is essentially the definition of true, above! )
 </p>
 
 <p>
-Here is an impressive benefit of this <a href="#orgca438ab">theorem</a>.  Suppose we want to prove an
+Here is an impressive benefit of this <a href="#org96cc9b0">theorem</a>.  Suppose we want to prove an
 equation \(L = R\) is true; if our proof only alters \(L\) to make it the same as
 \(R\) so that we obtain \(R = R\), then we may the definition of \(\true\) to
-obtain, well, \(\true\), but since this is a <a href="#orgca438ab">theorem</a> then so too is \(L = R\).
+obtain, well, \(\true\), but since this is a <a href="#org96cc9b0">theorem</a> then so too is \(L = R\).
 That is,
 </p>
 \begin{calc}
@@ -4796,13 +4798,13 @@ R
 
 <p>
 That is, (3.4) gives us a new proof method &#x2014;which is always a bonus result
-from a <a href="#orgca438ab">theorem</a>.
+from a <a href="#org96cc9b0">theorem</a>.
 </p>
 
 
 <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>(3.6) Simplifiction Proof Method ---Page 45</h3>
 <p>
-To prove \(L = R\) is a <a href="#orgca438ab">theorem</a>, transform \(L\) to \(R\) or \(R\) to \(L\)
+To prove \(L = R\) is a <a href="#org96cc9b0">theorem</a>, transform \(L\) to \(R\) or \(R\) to \(L\)
 using Leibniz (equals for equals reasoning).
 </p>
 
@@ -4846,7 +4848,7 @@ Finally, (3.4) gives us the following <abbr class="tooltip" title="A <em>theorem
 </p>
 
 <p>
-Indeed, if \(P\) is a <a href="#orgca438ab">theorem</a> and \(Q\) is a <a href="#orgca438ab">theorem</a>, then by (3.4) we have \(P ≡
+Indeed, if \(P\) is a <a href="#org96cc9b0">theorem</a> and \(Q\) is a <a href="#org96cc9b0">theorem</a>, then by (3.4) we have \(P ≡
   \true\) and \(\true = Q\) and so by transitivity of ≡, we have \(P ≡ Q\).
 </p>
 
@@ -4931,8 +4933,8 @@ satisfies these two properties.
 <div class="outline-text-3" id="text-Alternative-definitions-of-and">
 <p>
 The following theorems are sometimes used to define ≡ and ≢.
-The first <a href="#orgca438ab">theorem</a> indicates that \(p ≡ q\) holds exactly when \(p\)
-and \(q\) are both <i>true</i> or both <i>false</i>. The second <a href="#orgca438ab">theorem</a> indicates that
+The first <a href="#org96cc9b0">theorem</a> indicates that \(p ≡ q\) holds exactly when \(p\)
+and \(q\) are both <i>true</i> or both <i>false</i>. The second <a href="#org96cc9b0">theorem</a> indicates that
 \(p ≢ q\) holds exactly when one of them is <i>true</i> and the other is <i>false</i>.
 </p>
 
@@ -4957,9 +4959,9 @@ Proof:
 </div>
 
 <p>
-In most <a href="#org355aeab">propositional</a> calculi equivalence is the last operator to be defined
+In most <a href="#org1bf221c">propositional</a> calculi equivalence is the last operator to be defined
 and is defined as “mutual implication”.  Thus, (3.80) below typically is made
-an axiom.  We down-play implication in our <a href="#orgeb058d5">calculus</a> because, as an unsymmetric
+an axiom.  We down-play implication in our <a href="#org38f50b7">calculus</a> because, as an unsymmetric
 operator (by 3.72 and 3.73), it is harder to manipulate. Sometimes
 (3.80) would be read as “(strong) antisymmetry of ⇒”.
 </p>
@@ -5101,7 +5103,7 @@ is true at that point in the program's execution.
 
 <p>
 An expression of the form <code>{ R } C { G }</code>, where \(R, G\) are properties of the program
-variables and \(C\) is a program command, is called a <a id="org5bb0258">Hoare triple</a>.
+variables and \(C\) is a program command, is called a <a id="org565f530">Hoare triple</a>.
 </p>
 
 <p>
@@ -5255,7 +5257,7 @@ formalise the claim as
  x = X \;∧\; y = Y \;\Then{x,y := y, x}\; x = Y \;∧\; y = Y
  \]
 We refer to variables that never appear in program text
-as <span class="underline"><a id="org7f1c99d">ghost variables</a></span>; their function is to relate the final values of the
+as <span class="underline"><a id="org86906f6">ghost variables</a></span>; their function is to relate the final values of the
 program variables to their initial values.
 </p>
 
@@ -5263,8 +5265,8 @@ program variables to their initial values.
 <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Definition of Hoare Triples</h3>
 <p>
 In general, an expression <code>{ R } C { G }</code>, with \(R, G\) predicates on a collection
-of program variables and <a href="#org7f1c99d">ghost variables</a>, means that, <i>forall possible values of
-the <a href="#org7f1c99d">ghost variables</a>,</i> if the program variables satisfy property \(R\) before
+of program variables and <a href="#org86906f6">ghost variables</a>, means that, <i>forall possible values of
+the <a href="#org86906f6">ghost variables</a>,</i> if the program variables satisfy property \(R\) before
 execution of the command <code>C</code>, execution of <code>C</code> is guaranteed to terminate, and,
 afterwards, the program variables will satisfy property \(G\).
 </p>
@@ -5287,7 +5289,7 @@ States may be represented by predicates on variables and so <b>imperative
 commands are relations on predicates</b>: <i>Given two propositions \(G, R\) making</i>
 <i>use of program variables, we write \(R \Then{C} G\) to mean “in a state \(R\), the
 execution of command \(C\) terminates in state \(G\)”</i>.
-( This is also known as a <i><a href="#org5bb0258">Hoare Triple</a></i> and written <code>{R} C {G}</code>. )
+( This is also known as a <i><a href="#org565f530">Hoare Triple</a></i> and written <code>{R} C {G}</code>. )
 </p>
 
 <p>
@@ -5408,7 +5410,7 @@ as ‘fixed’ or ‘constant’ and so cannot appear in the program command \(C
 
 <p>
 However, this convention only reduces ambiguity about what variables can be
-meddled with; and so <a href="#org7f1c99d">ghost variables</a> are still required.  For instance, consider
+meddled with; and so <a href="#org86906f6">ghost variables</a> are still required.  For instance, consider
 the example specification “set \(z\) to its own absolute value”, it is formalised
 with the help of a ghost variable: \(z = Z \Then{?} z = |Z|\).
 </p>
@@ -5516,7 +5518,7 @@ It is defined by the <i>shape</i> of the possible commands <code>C</code>.
 </p>
 
 <p>
-For example, the <b><a id="org699a78e">sequential</a> command</b> <code>C₁ ⍮ C₂</code> is executed by first
+For example, the <b><a id="orga72a777">sequential</a> command</b> <code>C₁ ⍮ C₂</code> is executed by first
 executing <code>C₁</code> then by executing <code>C₂</code>. As such, to obtain a goal state \(G\), we
 may construct a partial program \(C₂\) which in-turn requires an intermediary
 state \(I\); then to establish state \(I\), we may construct a program <code>C₁</code> which
@@ -5550,7 +5552,7 @@ and this is what makes programming interesting!
 <h3 id="We-define-assignment-using-textual-substitution"><span class="section-number-3">5.5</span> <a href="#We-define-assignment-using-textual-substitution">We define assignment using textual substitution</a></h3>
 <div class="outline-text-3" id="text-We-define-assignment-using-textual-substitution">
 <p>
-The <a id="org9d689c6">assignment statement</a>
+The <a id="org60ed4a5">assignment statement</a>
 <code>x := E</code> evaluates expression <code>E</code> (which we assume “never crashes”)
 and stores the result in variable <code>x</code>.
 The statement is read “ <code>x</code> becomes <code>E</code> ”.
@@ -5646,7 +5648,7 @@ When will the assignment <code>x := x - 1</code> ensure the goal state \(x² + 2
 \end{calc}
 <p>
 Hence, if \(x\) is positive or negative 2, then the assignment
-<code>x := x - 1</code> will ensure that \(x\) satisfies the <a href="#orge117d04">predicate</a> state \(x² + 2 · x =
+<code>x := x - 1</code> will ensure that \(x\) satisfies the <a href="#org9cac0ac">predicate</a> state \(x² + 2 · x =
    3\)
 &#x2014;incidentally, after the assignment \(x\) will have its value being
 positive 1 or negative 3, which are both solutions to the equation
@@ -5669,7 +5671,7 @@ minutes of this <a href="https://youtu.be/JxRZC2UMJb0">this video lecture</a> fo
 </p>
 
 <p>
-When \(I \;⇒[C]\;\; I\), one says that “state \(I\) is <b><a id="orgf2ff633">invariant</a></b> for
+When \(I \;⇒[C]\;\; I\), one says that “state \(I\) is <b><a id="org618b14f">invariant</a></b> for
 command \(C\)” or that “\(C\) <i>maintains</i> \(I\)”.
 </p>
 </div>
@@ -5679,9 +5681,9 @@ command \(C\)” or that “\(C\) <i>maintains</i> \(I\)”.
 <h3 id="Calculating-Assignments"><span class="section-number-3">5.7</span> <a href="#Calculating-Assignments">Calculating Assignments</a></h3>
 <div class="outline-text-3" id="text-Calculating-Assignments">
 <p>
-It is <i>often</i> possible to <b>calculate</b> an <a href="#org9d689c6">assignment statement</a> that satisfies a
+It is <i>often</i> possible to <b>calculate</b> an <a href="#org60ed4a5">assignment statement</a> that satisfies a
 given precondition-postcondition specification.
-Many examples involve a property that is to be maintained <a href="#orgf2ff633">invariant</a> whilst
+Many examples involve a property that is to be maintained <a href="#org618b14f">invariant</a> whilst
 progress is made by incrementing (or decrementing) a counter.
 </p>
 
@@ -5829,7 +5831,7 @@ and that it can be defined in terms of assignments.
 <h2 id="Induction"><span class="section-number-2">6</span> <a href="#Induction">Induction</a></h2>
 <div class="outline-text-2" id="text-Induction">
 <p>
-How we prove a <a href="#orgca438ab">theorem</a> \(P\, n\) ranging over natural numbers \(n\)?
+How we prove a <a href="#org96cc9b0">theorem</a> \(P\, n\) ranging over natural numbers \(n\)?
 </p>
 
 <p>
@@ -5875,7 +5877,7 @@ observation’ is known as <i>induction</i>.
 
 <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Constant functions are induction</h3>
 <p>
-A <a href="#orge117d04">predicate</a> \(P : ℕ → 𝔹\) is a function. When is such a function constantly the
+A <a href="#org9cac0ac">predicate</a> \(P : ℕ → 𝔹\) is a function. When is such a function constantly the
 value \(\true\)? That is, when is \(∀ n • P\, n = \true\)?  Clearly, if \(P\) starts
 off being \(\true\) &#x2014;i.e., <i>P 0</i>&#x2014; and it preserves truth at every step &#x2014;i.e.,
 <i>P n ⇒ P (n + 1)</i>&#x2014; then <i>P n</i> will be true for any choice of \(n\).
@@ -6094,7 +6096,7 @@ Equivalently, <i>b divides a ≡ (∃ c • a = b · c)</i>.</li>
 
 
 <p>
-For instance, if we take \(b = 3\), then the <a href="#orgca438ab">theorem</a> says every integer is of the
+For instance, if we take \(b = 3\), then the <a href="#org96cc9b0">theorem</a> says every integer is of the
 form \(3 · q, 3 · q + 1\), or \(3 · q + 2\).
 </p>
 
@@ -6186,7 +6188,7 @@ That is,
 </p>
 
 <ul class="org-ul">
-<li>Often this <a href="#orgca438ab">theorem</a> is
+<li>Often this <a href="#org96cc9b0">theorem</a> is
 used in the <i>simpler, less generic</i>, shape “since <i>k</i> divides <i>x</i> and <i>y</i>, it also
 divides their sum”.
 <ul class="org-ul">
@@ -6222,7 +6224,7 @@ conversely if c is not-zero, we can divide-it-out.
 </p>
 
 <p>
-Divisibility is <a href="#orgf2ff633">invariant</a> under additive inverse,
+Divisibility is <a href="#org618b14f">invariant</a> under additive inverse,
 \[\Law{Divisibility is invariant under additive inverse}{ m ∣ n \quad≡\quad m ∣ (-n)} \]
 </p>
 
@@ -6256,7 +6258,7 @@ Some texts insist that <i>m ≠ 0</i> for the notation <i>m ∣ n</i> to be mean
 However, if <i>m = 0</i> and <i>m ∣ n</i> then that means there is a <i>q</i> with <i>n = q · m = q ·
 0 = 0</i> and so <i>n = 0</i>. Hence, the only divisibility statement we can make of the
 shape <i>0 ∣ n</i> is really just <i>0 ∣ 0</i>.  This observation is captured by the
-following <a href="#orgca438ab">theorem</a>. (Note: <i>0 ∣ n</i> does not mean we are dividing by 0!
+following <a href="#org96cc9b0">theorem</a>. (Note: <i>0 ∣ n</i> does not mean we are dividing by 0!
 Divisibility, ‘∣’, is defined in-terms of multiplication &#x2014;not division!)
 </p>
 
@@ -6371,7 +6373,7 @@ As such, the product of any <i>N</i> consecutive integers is divisible by <i>N</
 </div>
 
 <div id="outline-container-Quantification-and-Predicate-Logic" class="outline-2">
-<h2 id="Quantification-and-Predicate-Logic"><span class="section-number-2">8</span> <a href="#Quantification-and-Predicate-Logic">Quantification and <a href="#orge117d04">Predicate</a> Logic</a></h2>
+<h2 id="Quantification-and-Predicate-Logic"><span class="section-number-2">8</span> <a href="#Quantification-and-Predicate-Logic">Quantification and <a href="#org9cac0ac">Predicate</a> Logic</a></h2>
 <div class="outline-text-2" id="text-Quantification-and-Predicate-Logic">
 <p style="display:none">\[\newcommand{Law}[3][]{ #1\;\;\textbf{#2:}\quad #3 }
 \def\abs{\mathsf{abs}\,}
@@ -6498,13 +6500,13 @@ a list of dummies. We will specialise this proviso for each rule as needed.
 </thead>
 <tbody>
 <tr>
-<td class="org-left"><b><a href="#org363338f">Dummy</a> Rules</b></td>
+<td class="org-left"><b><a href="#org24af0a0">Dummy</a> Rules</b></td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">Renaming</td>
-<td class="org-left"><a href="#org363338f">Dummy</a> names are place-holders and don't matter</td>
+<td class="org-left"><a href="#org24af0a0">Dummy</a> names are place-holders and don't matter</td>
 </tr>
 
 <tr>
@@ -6708,16 +6710,16 @@ or \((+ i \;❙\; 1 ≤ i ≤ n • f\, i)\)
 for several reasons.</li>
 
 <li><p>
-The parentheses make explicit the <i>scope</i> of the <i><a href="#org363338f">dummy</a></i> or <i>quantified variable
+The parentheses make explicit the <i>scope</i> of the <i><a href="#org24af0a0">dummy</a></i> or <i>quantified variable
 i</i>: The places where <i>i</i> can be referenced. The scope comprises the expressions
 within the parentheses.
 </p>
 
 <p>
-The “\(Σ\,i\)” (or “\(+\, i\)”) acts as a declaration, introducing <b><a id="org363338f">dummy</a></b> <i>i</i>.
+The “\(Σ\,i\)” (or “\(+\, i\)”) acts as a declaration, introducing <b><a id="org24af0a0">dummy</a></b> <i>i</i>.
 </p>
 <ul class="org-ul">
-<li>This <a href="#org363338f">dummy</a> is not a variable in the usual sense, for it does not obtain a
+<li>This <a href="#org24af0a0">dummy</a> is not a variable in the usual sense, for it does not obtain a
 value from the state in which the expression is evaluated.</li>
 </ul></li>
 
@@ -6732,13 +6734,13 @@ between 1 and 7:
 \[ (Σ i \;❙\; 1 ≤ i ≤ 7 ∧ \mathsf{even}\, i • i) \;=\; 2 + 4 + 6\]
 </p></li>
 
-<li>The linear notation extends easily to allow more than one <a href="#org363338f">dummy</a>, as shown in
+<li>The linear notation extends easily to allow more than one <a href="#org24af0a0">dummy</a>, as shown in
 the following example.  \[ (Σ i,j \;❙\; 1 ≤ i ≤ 2 ∧ 3 ≤ j ≤ 4 • i^j) \;=\; 1^3 +
    1^4 + 2^3 + 2^4\] In determining which values \(i^j\) are being summed, we
 choose all combinations of \(i\) and \(j\) that satisfy the <i>range</i> \(1 ≤ i ≤ 2 ∧ 3
    ≤ j ≤ 4\).</li>
 
-<li>In the summations about, our intent is that <a href="#org363338f">dummy</a> \(i\) ranges over integer
+<li>In the summations about, our intent is that <a href="#org24af0a0">dummy</a> \(i\) ranges over integer
 values, rather than real values (say). To make the type explicit, we can
 write \((Σ i : ℤ \;❙\; 1 ≤ i ≤ 2 • f\, i)\).</li>
 
@@ -6939,7 +6941,7 @@ Ignoring the proviso/antecedent of the Zero Body rule quickly leads to trouble:
 \end{calc}
 <p>
 The second step is invalid since it is <i>not enough</i> to show some term is zero, but
-rather that some term &#x2014;i.e., <a href="#org363338f">dummy</a> variable&#x2014; <i>satisfying</i> the range is zero.
+rather that some term &#x2014;i.e., <a href="#org24af0a0">dummy</a> variable&#x2014; <i>satisfying</i> the range is zero.
 Indeed, in the second step above we need to show \((∃ x \;❙\; false • 𝟘_⊕ = 𝟘_⊕)
 ≡ true\), which by Empty Range for ∃ is the same as \(false ≡ true\) &#x2014;and this is
 impossibly difficult to show, since it's just not true.
@@ -6948,11 +6950,11 @@ impossibly difficult to show, since it's just not true.
 </div>
 
 <div id="outline-container-Dummy-Renaming" class="outline-3">
-<h3 id="Dummy-Renaming"><span class="section-number-3">8.4</span> <a href="#Dummy-Renaming"> <a href="#org363338f">Dummy</a> Renaming</a></h3>
+<h3 id="Dummy-Renaming"><span class="section-number-3">8.4</span> <a href="#Dummy-Renaming"> <a href="#org24af0a0">Dummy</a> Renaming</a></h3>
 <div class="outline-text-3" id="text-Dummy-Renaming">
 <p>
-The first rule expresses the fact that a ‘<a href="#org363338f">dummy</a>’ is just a place holder, the
-particular name chosen for the <a href="#org363338f">dummy</a> is not relevant provided it does not clash
+The first rule expresses the fact that a ‘<a href="#org24af0a0">dummy</a>’ is just a place holder, the
+particular name chosen for the <a href="#org24af0a0">dummy</a> is not relevant provided it does not clash
 with the names of other variables in the quantified expression.  Renaming is
 often used when performing other algebraic manipulations in order to avoid
 capture of free variables or release of bound variables.
@@ -6963,14 +6965,14 @@ Recall that \(E[x ≔ F]\) denotes the expression obtained by replacing every <i
 occurrence of <i>x</i> in <i>E</i> by <i>F</i>. Then,
 </p>
 <dl class="org-dl">
-<dt>(Axiom 8.21) <a href="#org363338f">Dummy</a> Renaming</dt><dd>Provided <i>y</i> does not occur in <i>R</i> nor in <i>P</i>,
+<dt>(Axiom 8.21) <a href="#org24af0a0">Dummy</a> Renaming</dt><dd>Provided <i>y</i> does not occur in <i>R</i> nor in <i>P</i>,
 \[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ y] • P[x ≔ y]] \]</dd>
 </dl>
 
 <p>
 Remember: The ‘occurs’ restrictions on these laws ensure that an expression that
-contains an occurrence of a <a href="#org363338f">dummy</a> is not moved outside (or inside) the scope of
-the <a href="#org363338f">dummy</a>.
+contains an occurrence of a <a href="#org24af0a0">dummy</a> is not moved outside (or inside) the scope of
+the <a href="#org24af0a0">dummy</a>.
 </p>
 
 <p>
@@ -6991,7 +6993,7 @@ indices that apply.
 
 <p>
 That is, the second rule for dummies state, essentially, that the use of more than one
-<a href="#org363338f">dummy</a> is a convenient abbreviation for a collection of quantifications.
+<a href="#org24af0a0">dummy</a> is a convenient abbreviation for a collection of quantifications.
 </p>
 
 <dl class="org-dl">
@@ -7083,7 +7085,7 @@ above.</li>
 </div>
 
 <div id="outline-container-Rearranging-Dummy-List-Permutation" class="outline-3">
-<h3 id="Rearranging-Dummy-List-Permutation"><span class="section-number-3">8.6</span> <a href="#Rearranging-Dummy-List-Permutation"> <a href="#org363338f">Dummy</a> Rearrangment &#x2014;Generalised Symmetry &amp; Associativity</a></h3>
+<h3 id="Rearranging-Dummy-List-Permutation"><span class="section-number-3">8.6</span> <a href="#Rearranging-Dummy-List-Permutation"> <a href="#org24af0a0">Dummy</a> Rearrangment &#x2014;Generalised Symmetry &amp; Associativity</a></h3>
 <div class="outline-text-3" id="text-Rearranging-Dummy-List-Permutation">
 <p>
 The third rule is very powerful because, in combination with the nesting rule,
@@ -7093,7 +7095,7 @@ summation is irrelevant.
 </p>
 
 <dl class="org-dl">
-<dt>Rearranging, <a href="#org363338f">Dummy</a> List Permutation</dt><dd>\[ (⊕ x, y \;❙\; R • P) \quad=\quad (⊕ y, x \;❙\; R • P) \]</dd>
+<dt>Rearranging, <a href="#org24af0a0">Dummy</a> List Permutation</dt><dd>\[ (⊕ x, y \;❙\; R • P) \quad=\quad (⊕ y, x \;❙\; R • P) \]</dd>
 </dl>
 
 <p>
@@ -7132,7 +7134,7 @@ a ≤ x ≤ y  ∧  a ≤ y ≤ b
 \end{calc}
 
 <p>
-We may capture the unnesting-rearrangement-nesting pattern in the above example as a <a href="#orgca438ab">theorem</a>.
+We may capture the unnesting-rearrangement-nesting pattern in the above example as a <a href="#org96cc9b0">theorem</a>.
 </p>
 <dl class="org-dl">
 <dt>(8.19) Interchange of dummies</dt><dd>Provided each quantification is defined,
@@ -7241,7 +7243,7 @@ critically on the associativity and symmetry of the operation ⊕.
 
 <p>
 We may capture the nesting-rearranging pattern in the above example as a
-<a href="#orgca438ab">theorem</a>.
+<a href="#org96cc9b0">theorem</a>.
 </p>
 <dl class="org-dl">
 <dt>(8.15) Distributivity, “Body Rearrangment”</dt><dd>Provided each quantification is defined,
@@ -7290,7 +7292,7 @@ For instance,
 <hr />
 
 <p>
-<b>(8.d′) <a href="#orgca438ab">Theorem</a>, Distributivity of ⊗ over ⊕:</b> Provided <i>x</i> does not occur in <i>P</i>, and
+<b>(8.d′) <a href="#org96cc9b0">Theorem</a>, Distributivity of ⊗ over ⊕:</b> Provided <i>x</i> does not occur in <i>P</i>, and
 “⊗ distributes over ⊕” ---<i>a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)</i> and \(a ⊗ \Id_⊕ =
  \Id_⊕\).
 \[ P ⊗ (⊕ x \;❙\; R • Q) \quad=\quad (⊕ x \;❙\; R • P ⊗ Q) \]
@@ -7327,7 +7329,7 @@ for ↑ (see Ch15 LADM).</li>
 <hr />
 
 <p>
-<b>(8.d′) <a href="#orgca438ab">Theorem</a>, General Distributive Law of ⊗ over ⊕:</b> Provided <i>x</i> does not occur
+<b>(8.d′) <a href="#org96cc9b0">Theorem</a>, General Distributive Law of ⊗ over ⊕:</b> Provided <i>x</i> does not occur
 in <i>S</i> nor <i>Q</i>; <i>y</i> does not occur in <i>R</i> nor <i>P</i>; and
 “⊗ distributes over ⊕” ---<i>a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)</i> and \(a ⊗ \Id_⊕ =
  \Id_⊕\).
@@ -7348,7 +7350,7 @@ maybe not \(a ⊗ \Id_⊕ = \Id_⊕\).
 </p>
 
 <p>
-Be careful using this <a href="#orgca438ab">theorem</a>. A term can be moved outside the scope of the
+Be careful using this <a href="#org96cc9b0">theorem</a>. A term can be moved outside the scope of the
 quantification only if the range \(R\) is not empty &#x2014;i.e., not everywhere <i>false</i>.
 </p>
 
@@ -7416,7 +7418,7 @@ permutation.
 </p>
 
 <p>
-<b>(8.22) <a href="#orgca438ab">Theorem</a>, Permutative Law, Commutative Law, Change of <a href="#org363338f">Dummy</a>:</b> Provided
+<b>(8.22) <a href="#org96cc9b0">Theorem</a>, Permutative Law, Commutative Law, Change of <a href="#org24af0a0">Dummy</a>:</b> Provided
 <i>y</i> does not occur in <i>R</i> nor in <i>P</i>, and <i>f</i> is a permutation (i.e., is invertible),
 \[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ f\, y] • P[x ≔ f\, y]) \]
 </p>
@@ -7485,7 +7487,7 @@ Trading rules let us move a range into the body.
 </p>
 
 <p>
-<b>(8.t′) <a href="#orgca438ab">Theorem</a>, Trading:</b> \((⊕ x \;❙\; Q ∧ R • P) \;=\; (⊕ x \;❙\; Q • \mathsf{if}\, R
+<b>(8.t′) <a href="#org96cc9b0">Theorem</a>, Trading:</b> \((⊕ x \;❙\; Q ∧ R • P) \;=\; (⊕ x \;❙\; Q • \mathsf{if}\, R
 \,\mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi})\)
 </p>
 
@@ -7504,10 +7506,10 @@ For instance:
 </p>
 
 <ul class="org-ul">
-<li><b>(8.t.Σ) <a href="#orgca438ab">Theorem</a>, Trading:</b> \((Σ x \;❙\; Q ∧ R • P) = (Σ x \;❙\; Q • P · [R] )\)</li>
-<li><b>(8.t.Π) <a href="#orgca438ab">Theorem</a>, Trading:</b> \((Π x \;❙\; Q ∧ R • P) = (Π x \;❙\; Q • P^{[R]})\)</li>
-<li><b>(8.t.∀) (9.4) <a href="#orgca438ab">Theorem</a>, Trading:</b> \((∀ x \;❙\; Q ∧ R • P) ≡ (∀ x \;❙\; Q • R ⇒ P)\)</li>
-<li><b>(8.t.∃) (9.20) <a href="#orgca438ab">Theorem</a>, Trading:</b> \((∃ x \;❙\; Q ∧ R • P) ≡ (∃ x \;❙\; Q • R ∧ P)\)</li>
+<li><b>(8.t.Σ) <a href="#org96cc9b0">Theorem</a>, Trading:</b> \((Σ x \;❙\; Q ∧ R • P) = (Σ x \;❙\; Q • P · [R] )\)</li>
+<li><b>(8.t.Π) <a href="#org96cc9b0">Theorem</a>, Trading:</b> \((Π x \;❙\; Q ∧ R • P) = (Π x \;❙\; Q • P^{[R]})\)</li>
+<li><b>(8.t.∀) (9.4) <a href="#org96cc9b0">Theorem</a>, Trading:</b> \((∀ x \;❙\; Q ∧ R • P) ≡ (∀ x \;❙\; Q • R ⇒ P)\)</li>
+<li><b>(8.t.∃) (9.20) <a href="#org96cc9b0">Theorem</a>, Trading:</b> \((∃ x \;❙\; Q ∧ R • P) ≡ (∃ x \;❙\; Q • R ∧ P)\)</li>
 </ul>
 
 <hr />
@@ -7517,11 +7519,11 @@ By contextual rules, and conditional rules,
 </p>
 
 <p>
-<b>(8.c) <a href="#orgca438ab">Theorem</a>, Context:</b> \((⊕ x \;❙\; R ∧ e = f • P[z ≔ e]) = (⊕ x \;❙\; R • P[z ≔ f])\)
+<b>(8.c) <a href="#org96cc9b0">Theorem</a>, Context:</b> \((⊕ x \;❙\; R ∧ e = f • P[z ≔ e]) = (⊕ x \;❙\; R • P[z ≔ f])\)
 </p>
 
 <p>
-<b>(8.c′) <a href="#orgca438ab">Theorem</a>, Context:</b> \((⊕ x \;❙\; R • P[z ≔ R]) = (⊕ x \;❙\; R • P[z ≔ true])\)
+<b>(8.c′) <a href="#org96cc9b0">Theorem</a>, Context:</b> \((⊕ x \;❙\; R • P[z ≔ R]) = (⊕ x \;❙\; R • P[z ≔ true])\)
 </p>
 </div>
 </div>
@@ -7675,20 +7677,20 @@ See, for example, (9.9).
 </div>
 </div>
 <div id="outline-container-Predicate-Calculus" class="outline-3">
-<h3 id="Predicate-Calculus"><span class="section-number-3">8.14</span> <a href="#Predicate-Calculus"> <a href="#orge117d04">Predicate</a> <a href="#orgeb058d5">Calculus</a></a></h3>
+<h3 id="Predicate-Calculus"><span class="section-number-3">8.14</span> <a href="#Predicate-Calculus"> <a href="#org9cac0ac">Predicate</a> <a href="#org38f50b7">Calculus</a></a></h3>
 <div class="outline-text-3" id="text-Predicate-Calculus">
 <ol class="org-ol">
-<li><i><a href="#orge117d04">Predicate</a> logic</i> is an extension of <a href="#org355aeab">propositional</a> logic that allows the use of
+<li><i><a href="#org9cac0ac">Predicate</a> logic</i> is an extension of <a href="#org1bf221c">propositional</a> logic that allows the use of
 variables of types other than 𝔹.</li>
 
 <li>This extension leafs to a logic with enhanced expressive and deductive power.</li>
 
-<li>A <a href="#orge117d04">predicate</a>-<a href="#orgeb058d5">calculus</a> formula is a Boolean expression in which some Boolean
+<li>A <a href="#org9cac0ac">predicate</a>-<a href="#org38f50b7">calculus</a> formula is a Boolean expression in which some Boolean
 variables may have been replaced by:
 
 <ul class="org-ul">
 <li><i>Predicates</i>, which are applications of Boolean functions whose arguments may
-be of types other than 𝔹; e.g., \(x < y\) is formed using the <a href="#orge117d04">predicate</a>
+be of types other than 𝔹; e.g., \(x < y\) is formed using the <a href="#org9cac0ac">predicate</a>
 symbol ‘&lt;’.</li>
 
 <li>Universal and existential quantification, as discussed in this section.</li>
@@ -7726,7 +7728,7 @@ along with an additional one below.
 </table>
 
 <p>
-<b>(9.29) <a href="#orgca438ab">Theorem</a>, Interchange of quantifications:</b>
+<b>(9.29) <a href="#org96cc9b0">Theorem</a>, Interchange of quantifications:</b>
 \((∃ x\;❙\;R • (∀ y\;❙\;Q • P)) \quad⇒\quad (∀ x\;❙\;Q • (∃ x\;❙\;R • P))\).
 </p>
 
@@ -7917,10 +7919,10 @@ How many 4-digit numbers are there that do not start with ‘12’?
 </div>
 
 <p>
-The <code>Range Split</code> refers to the <a href="#orgca438ab">theorem</a>
+The <code>Range Split</code> refers to the <a href="#org96cc9b0">theorem</a>
 \[(Σ x \;❙\; R ∧ ¬ R′ \;•\; E) \quad=\quad (Σ x \;❙\; R \;•\; E) \,-\, (Σ x
 \;❙\; R ∧ R′ \;•\; E)\]
-This <a href="#orgca438ab">theorem</a> is also known as <code>Counting Complements</code>.
+This <a href="#org96cc9b0">theorem</a> is also known as <code>Counting Complements</code>.
 ( Taking R ≔ true is useful. )
 </p>
 <p>
@@ -8080,7 +8082,7 @@ Iterating Pascal’s Formula yields,
 </p></li>
 
 <li><p>
-<b>The Binomial <a href="#orgca438ab">Theorem</a>:</b>
+<b>The Binomial <a href="#org96cc9b0">Theorem</a>:</b>
 \(n \in ℕ \implies (x+y)^n = \sum_{k=0}^n \binom{n}{k}x^{n-k}y^k\)
 </p>
 
@@ -8098,7 +8100,7 @@ Alternatively the proof is simple after we prove the auxiliary result
 
 <p>
 Multiplying by \(x\) and/or performing successive differentiations
-on the binomial <a href="#orgca438ab">theorem</a> is a simple way to obtain some identities.
+on the binomial <a href="#org96cc9b0">theorem</a> is a simple way to obtain some identities.
 </p>
 
 <p>
@@ -8135,7 +8137,7 @@ Corollary: \(\binom{2n}{n} = \sum_{k=0}^n \binom{n}{k}^2\).
 </p>
 
 <p>
-Algebraic Proof: Letting \(x=y=1\) in the binomial <a href="#orgca438ab">theorem</a>,
+Algebraic Proof: Letting \(x=y=1\) in the binomial <a href="#org96cc9b0">theorem</a>,
 yields \(\sum_{k=1}^n \binom{n}{k}=2^n\).
 </p>
 
@@ -8244,9 +8246,9 @@ some compartment receives more than \(k\) of the objects.
 
 <p>
 It is argued that since (0) does not explicitly mention \(n\) and \(k\) explicitly,
-this eases application of th <a href="#orgca438ab">theorem</a> since a user would not need to hunt them
+this eases application of th <a href="#org96cc9b0">theorem</a> since a user would not need to hunt them
 down explicitly. Moreover, (1) is ‘operational’: It requires users identity
-objects, compartments, and a distribution process &#x2014;but (0) is <a href="#org299dd47">valid</a> when no
+objects, compartments, and a distribution process &#x2014;but (0) is <a href="#org45bc42d">valid</a> when no
 process of distribution is involved. Perhaps the worst offence of
 (1) is that it forces us to treat numbers not as independent entities but rather
 as a tool that serve to count objects &#x2014;which is not a useful interpretation to
@@ -8333,7 +8335,7 @@ Anyhow, (0′) is a familiar property of summation.
 
 <ul class="org-ul">
 <li><p>
-<b><a href="#orgca438ab">Theorem</a>:</b> If \(n+1\) objects are distributed into \(n\) boxes, then
+<b><a href="#org96cc9b0">Theorem</a>:</b> If \(n+1\) objects are distributed into \(n\) boxes, then
 at least one box contains two or more of the objects.
 </p>
 <blockquote>
@@ -8582,7 +8584,7 @@ proportional to, well, its likelihood of occurring. We define the
 </p>
 
 <p>
-This is a potentially infinite sum, but by change-of-<a href="#org363338f">dummy</a>, we have a nicer
+This is a potentially infinite sum, but by change-of-<a href="#org24af0a0">dummy</a>, we have a nicer
 form in-terms of events: \[\E X \;=\; (∑ e : 𝑼 \;•\; X(e) · \Pr e)\]
 </p>
 
@@ -8774,7 +8776,7 @@ is the empty relation or the universal relation, respectively.</li>
 </ul>
 </div>
 <div id="outline-container-Loops" class="outline-4">
-<h4 id="Loops"><span class="section-number-4">11.1.1</span> <a href="#Loops">Loops</a></h4>
+<h4 id="Loops"><span class="section-number-4">11.1.1</span> <a href="#Loops">Loops and Subidentities</a></h4>
 <div class="outline-text-4" id="text-Loops">
 <p>
 Besides the empty and the universal, particular relations on a set are
@@ -8790,12 +8792,7 @@ Besides the empty and the universal, particular relations on a set are
 <tbody>
 <tr>
 <td class="org-left">Identity</td>
-<td class="org-left">\(\Id_X = \{x, y \;❙\; x ∈ X   ∧ x = y \}\)</td>
-</tr>
-
-<tr>
-<td class="org-left">Diversity</td>
-<td class="org-left">\(\sim\Id_X = \{x, y \;❙\; x ∈ X ∧ x ≠ y \}\)</td>
+<td class="org-left">\(\Id_X = \{x, y \;❙\; x ∈ X   ∧ x = y • ⟨x, y⟩\}\)</td>
 </tr>
 </tbody>
 </table>
@@ -8803,7 +8800,9 @@ Besides the empty and the universal, particular relations on a set are
 <p>
 That is, \(\Id_X\) associates each element of \(X\) with itself, and makes no other
 associations. We write just “ \(\Id\) ” to abbreviate \(\Id_𝑼\), and call it “the
-identity (on the universe)”.
+identity (on the universe)”. As matrices, \(\Id\) has 1s all along the diagonal
+and 0s everywhere else; whereas \(\Id_X\) is similar but does not have the entire
+diagonal covered in 1s, only part of it.
 </p>
 
 <p>
@@ -8812,11 +8811,11 @@ E.g., the relation ‘≤’ on ℕumbers is reflexive; the relation ‘&lt;’ 
 
 <p>
 E.g., \(\sim \Id_{1..n}\) is called the <b><i>n</i>-clique</b>: Every member of the clique
-“knows” every other member.
+“knows” every other member. ( \(\sim\Id\) is the <i>diversity</i> relationship. )
 </p>
 
 <p>
-These two relations are helpful in defining properties about arbitrary relations.
+This relation is helpful in defining properties about arbitrary relations.
 </p>
 
 <p>
@@ -8846,7 +8845,7 @@ In a graph, a <b>loop</b> is an arrow that starts and ends at the same vertex.
 <td class="org-left">\(=\)</td>
 <td class="org-left">\(\Id ⊆ R\)</td>
 <td class="org-left">\(=\)</td>
-<td class="org-left">\(∀ x \spot x 〔 R 〕 x\)</td>
+<td class="org-left">\(∀ x • x 〔 R 〕 x\)</td>
 </tr>
 
 <tr>
@@ -8854,7 +8853,7 @@ In a graph, a <b>loop</b> is an arrow that starts and ends at the same vertex.
 <td class="org-left">\(=\)</td>
 <td class="org-left">\(\sim \Id ⊆ R\)</td>
 <td class="org-left">\(=\)</td>
-<td class="org-left">\(∀ x \spot x 〔 \sim R〕 x\)</td>
+<td class="org-left">\(∀ x • x 〔 \sim R〕 x\)</td>
 </tr>
 
 <tr>
@@ -8866,6 +8865,27 @@ In a graph, a <b>loop</b> is an arrow that starts and ends at the same vertex.
 </tr>
 </tbody>
 </table>
+
+<hr />
+
+<p>
+The operation sending a set \(X : ℙ A\) to a relation \(\Id_X : A ↔ B\) gives us a
+nice way <b>to view sets as if they were relations</b>.  Sometimes one refers to
+\(\Id_X\) as a <b>co-reflexive</b> (“core”) since \(\Id_X ⊆ \Id\) or as a <b>monotype</b>;
+they are also referred to as <b>sub-identities</b>.
+</p>
+
+<p>
+In-fact, \(\Id_{(-)}\) lifts the ‘structure’ of sets into the
+‘structure’ of relations. E.g., \(\Id_X ⨾ \Id_Y \;=\; \Id_{X ∩ Y} \;=\; \Id_X ∩ \Id_Y\)
+and \(\Id_X ∪ \Id_Y = \Id_{X ∪ Y}\).
+</p>
+
+<p>
+Moreover, co-reflexives are idempotent: \(R ⊆ \Id \quad⇒\quad R ⨾ R = R\).
+In contrast, the compositions \(R ⨾ S\) and \(S ⨾ R\) are simultaneously
+co-diverse: \(R ⨾ S ⊆ \sim \Id \quad≡\quad R ⨾ S ⊆ \sim \Id\).
+</p>
 </div>
 </div>
 </div>
@@ -8902,8 +8922,12 @@ to which some element of \(A\) is related.
 </ul>
 
 </div>
-</div>
 
+
+<p>
+Interestingly, \(\Id_{\Dom R} = R ⨾ ⊤ ∩ \Id\).
+</p>
+</div>
 
 <div id="outline-container-Restriction" class="outline-4">
 <h4 id="Restriction"><span class="section-number-4">11.2.1</span> <a href="#Restriction">Restriction</a></h4>
@@ -9095,6 +9119,63 @@ we may as well define <i>childOf = parentOf˘</i>. That is,
 <b>Converse</b> means to change the order of the related items.
 </p>
 
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Examples</h3>
+<p>
+Colloquially, converse is often expressed using separate wordings:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Bob “is taller than” Chris</td>
+<td class="org-left">≡</td>
+<td class="org-left">Chris “is shorter than” Bob</td>
+</tr>
+
+<tr>
+<td class="org-left">Jasim “is the boss of” Jason</td>
+<td class="org-left">≡</td>
+<td class="org-left">Jason “is an employee of” Jasim</td>
+</tr>
+
+<tr>
+<td class="org-left">Mariam “buys from” Mary</td>
+<td class="org-left">≡</td>
+<td class="org-left">Mary “sells to” Mariam</td>
+</tr>
+
+<tr>
+<td class="org-left">Musa “is the parent of” Yusuf</td>
+<td class="org-left">≡</td>
+<td class="org-left">Yusuf “is the child of” Musa</td>
+</tr>
+
+<tr>
+<td class="org-left">Wolfram “works with” Jacques</td>
+<td class="org-left">≡</td>
+<td class="org-left">Jacques “works with” Musa</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Notice that the final example, intuitively, has a relation that is its own
+converse &#x2014;i.e., <i>R ˘ = R</i>&#x2014; we will return to these later as ‘symmetric
+relationships’.
+</p>
+
+</div>
+
+
 <p>
 Intuitively,
 </p>
@@ -9149,8 +9230,47 @@ The <b>composition</b> is defined by \(a 〔R ⨾ S〕c \;≡\; (∃ b : B • a
 </p>
 
 <p>
-Intuitively, composition is an associative operation: \(Q ⨾ (R ⨾ S) = (Q ⨾ R) ⨾ S\).
+Intuitively,
 </p>
+<ul class="org-ul">
+<li>Composition is an associative operation: \(Q ⨾ (R ⨾ S) = (Q ⨾ R) ⨾ S\).</li>
+<li>It has the identity relation (loops only) as unit element and
+the empty relation (no edges at all) as the zero element:
+\(\Id ⨾ R = R ⨾ \Id = R\) and \(⊥ ⨾ R = R ⨾ ⊥ = ⊥\).</li>
+<li>Composition preserves containment: \(R ⊆ R′ ∧ S ⊆ S′ ⇒ R ⨾ S ⊆ R′ ⨾ S′\)</li>
+<li><p>
+Composition distributes over unions, but only <b>sub</b>-distributes over
+intersections: \(Q ⨾ (R ∩ S) \quad⊆\quad Q ⨾ R ∩ Q ⨾ S\).
+</p>
+
+<p>
+We have sub-distributivity since otherwise the following little calculation
+would give \(⊥ = ⊤\): \(⊥ = ⊤ ⨾ ⊥ = ⊤ ⨾ (\Id ∩ \sim\Id) ⊆ ⊤⨾\Id ∩ ⊤⨾\sim\Id = ⊤ ∩ ⊤ = ⊤\).
+</p></li>
+
+<li><p>
+<b>Tarski rule:</b> Non-empty relations actually relate things; i.e.,
+\(R ≠ ⊥ ≡ ⊤ ⨾ R ⨾ ⊤ = ⊤\) &#x2014;equivalently,
+every relation relates any source element to some target element
+<i>or</i> does not relate a target element to any source:
+\(R ⨾ ⊤ = ⊤ ∨ ⊤ ⨾ \sim R = ⊤\).
+</p>
+
+<p>
+Consequently, the universal relation is annihilated by the empty relation
+only: \(R ⨾ ⊤ = ⊥ \quad≡\quad R = ⊥\).
+</p>
+
+<p>
+( Likewise, \(R ≠ ⊥ ≡ R ˘ ⨾ R ≠ ⊥\). )
+</p>
+
+<p>
+Moreover, since \(⊤ ⨾ ⊤ ⨾ ⊤ = ⊤\), Tarski's rule shows that \(⊤ ≠ ⊥\).
+( Tarski's rule assumes a non-empty universe. Indeed, in the extreme case that the universe is empty, then, and only then,
+do we have the degenerate case with \(⊤ = ⊥\). )
+</p></li>
+</ul>
 
 <p>
 When \(R\) is homogeneous, then we define \(R¹ = R\) and \(Rⁿ⁺¹ = R ⨾ Rⁿ\).
@@ -9168,6 +9288,54 @@ inductive data type.
 <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>The type</h3>
 <p>
 \(\_{}⨾\_{} : (A ↔ B) → (B ↔ C) → (A ↔ C)\)
+</p>
+
+<p>
+The composition of relations is a generalisation of the composition of mappings.
+In contrast to mappings, however, relations associates <i>sets</i> of values with
+elements. These sets may be empty, or contain one, or more, elements.
+</p>
+
+<p>
+Think <i>f(x)</i> versues \(R⦇\{x\}⦈\).
+</p>
+<ul class="org-ul">
+<li>\((f ∘ g)(x) \;=\; f (g(x))\)</li>
+<li>\((R ⨾ S)⦇\{x\}⦈ \;=\; (∪ y ❙ x 〔R〕 y • S⦇\{y\}⦈)\)
+<ul class="org-ul">
+<li>When \(R\) is a mapping, the range becomes an equality and the one-point rule
+applies thereby eliminating the union and we get closer to the mapping
+composition.  If \(S\) is also a mapping, then the relational image is a
+singleton and we have mapping composition again.</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<p>
+The semicolon ‘⨾’ has a similar meaning as that of composing, sequencing,
+programs in a programming language.
+</p>
+
+</div>
+
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Matrix Multiplication = Relation Composition</h3>
+<p>
+Matrix product and relation product <b>are the same</b> when we write \(R_{xy}, ·, +\)
+in-place of \(x 〔R〕y, ∧, ∨\), and use classical notation: \[ (R ⨾ S)_{xz}
+\;=\; \substack{{\Huge\exists} \\ \\ {}_{y}} \, R_{xy} ∧ S_{yz} \] \[ (A ·
+B)_{ik} \;=\; \sum_j \, A_{ij} · B_{jk} \]
+</p>
+
+<hr />
+
+
+<p>
+Many matrix laws are true for relations; e.g.,
+the transpose matrix rule \((A · B)^T = B^T · A^T\)
+is the same as the relation converse rule \((R ⨾ S)˘ = S ˘ ⨾ R ˘\).
 </p>
 
 </div>
@@ -9664,7 +9832,7 @@ relations. However, equivalence relations are preserved by union.
 <div class="outline-text-3" id="text-Closures">
 <p>
 Given an ordered set (τ, ⊑),
-let φ be any <i>property</i>; i.e., a <a href="#orge117d04">predicate</a> <i>τ → 𝔹</i>.
+let φ be any <i>property</i>; i.e., a <a href="#org9cac0ac">predicate</a> <i>τ → 𝔹</i>.
 </p>
 
 <p>
@@ -9725,7 +9893,7 @@ For example, the reflexive closure of a relation \(R\) is obtained
 i.e., the closure is \(\Id ∪ R\).
 </p>
 <ul class="org-ul">
-<li>Indeed, a relation is reflexive princely when \(\Id ⊆ R\),
+<li>Indeed, a relation is reflexive precisely when \(\Id ⊆ R\),
 but inclusions can be expressed as unions and so this is the same as
 \(\Id ∪ R = R\)! Super simple fun stuff!</li>
 </ul>
@@ -9780,11 +9948,201 @@ is finite }\]
 </div>
 </div>
 </div>
+
+<div id="outline-container-Kernels" class="outline-3">
+<h3 id="Kernels"><span class="section-number-3">11.8</span> <a href="#Kernels">Kernels</a></h3>
+<div class="outline-text-3" id="text-Kernels">
+<p>
+Dual to closures are kernels&#x2026;
+</p>
+
+<p>
+Given an ordered set (τ, ⊑),
+let φ be any <i>property</i>; i.e., a <a href="#org9cac0ac">predicate</a> <i>τ → 𝔹</i>.
+</p>
+
+<p>
+Sometimes a member does not have the property φ, but
+we would like to know “the largest part of it” that
+does satisfy φ.
+</p>
+
+<p>
+<b>Definition:</b> Say \(\underline{q}\) is the <b>φ-kernel</b> of \(q\)
+precisely when \(\underline{q}\) is the largest part of \(q\)
+satisfying φ. Clearly, if \(q\) satisfies φ then its kernel is just itself:
+\(\underline{q}= q\).
+</p>
+
+<ul class="org-ul">
+<li><p>
+Formally, \(φ(\underline{q}) \;∧\; \underline{q} ⊑ q \;∧\; ∀ p • φ(p) \,∧\, p ⊑
+  q ⇒ p ⊑ \underline{q}\)
+</p>
+
+<p>
+Equivalently, we have the following <b>characterisation</b>:
+</p>
+
+<p>
+\[φ(\underline{q}) \;∧\; ∀ p \;❙\; φ(p) • p ⊑ \underline{q}  ≡  p ⊑ q\]
+</p></li>
+
+<li><p>
+\(\underline{q} \;=\; (⊔ p \;❙\; p ⊑ q \,∧\, φ(p))\), provided both sides exist.
+</p>
+
+<p>
+This <b>reads like the definition</b>:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><i>The kernel of q is the maximal element contained in q and satisfying φ!</i></td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+
+<p>
+For example, the symmetric kernel of a relation \(R\) is
+“the largest subpart of <i>R</i> that is reflexive”; i.e.,
+i.e., the kernel is \(R˘ ∩ R\).
+</p>
+<ul class="org-ul">
+<li>Indeed, a relation is reflexive precisely when \(\Id ⊆ R\), but inclusions can
+be expressed as intersections and so this is the same as \(\Id ∩ R = R\)! Super
+simple fun stuff!</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-C-Interplay-between-composition-conversion-complement-and-containment" class="outline-3">
+<h3 id="C-Interplay-between-composition-conversion-complement-and-containment"><span class="section-number-3">11.9</span> <a href="#C-Interplay-between-composition-conversion-complement-and-containment">C⁴: Interplay between composition, conversion, complement, and containment</a></h3>
+<div class="outline-text-3" id="text-C-Interplay-between-composition-conversion-complement-and-containment">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">⇨ <b>All the theorems in the boxes within this section are equivalent!</b> ⇦</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+That is, only one of them needs to be proven using quantifiers and <a href="#org24af0a0">dummy</a>
+variables, and then it can be used to prove the rest using only
+relation-algebraic reasoning &#x2014;i.e., without resorting to “unfolding ‘⊆’ or ‘⨾’
+into quantifiers.”
+</p>
+
+<p>
+Proofs not involving quantifiers are usually shorter and more transparent,
+hence also easier to check and more capable of being performed by a machine.
+</p>
+
+<hr />
+
+<p>
+Just as contraposition and shunting give us \(p ∧ q ⇒ r \quad≡\quad p ∧ ¬ r ⇒ ¬ q\), we have
+for relations:
+</p>
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Schröder Equivalences</h3>
+<p>
+\(Q ⨾ R ⊆ S \quad⇔\quad Q˘ ⨾ \sim S ⊆ \sim R \quad⇔\quad \sim S ⨾ R ˘ ⊆ \sim Q\)
+</p>
+
+<p>
+The transition from one containment to another can be memorised as follows:
+Transpose the first (or second) relation and complement, and permute the other two.
+</p>
+
+</div>
+
+
+<p>
+The Schröder Equivalences speak about containing a composition; in contrast, by
+Dedekind, we have the following technique for showing when a composition
+contains another relation.
+\[Q ⊆ R ⨾ S \quad⇐\quad ∃ X • X ⊆ S ∧ Q ⊆ ⊤ ⨾ X ∧ Q ⨾ X˘ ⊆ R \]
+</p>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Dedekind Formula</h3>
+<p>
+\(Q ⨾ R ∩ S \quad⊆\quad (Q ∩ S ⨾ R˘) ⨾ (R ∩ Q ˘ ⨾ S)\)
+</p>
+
+<p>
+This rule does not involve the complement and can be advantageous
+for giving proofs in the form of a chain of containments.
+</p>
+
+</div>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Solving Linear Equations ---Residuals</h3>
+<p>
+\(R ⨾ X = S\) is solvable in \(X\) iff \(S ⊆ R ⨾ (R ╲ S)\) iff \(S = R ⨾ (R ╲ S)\)
+where \(R ╲ S = \sim(R ˘ ⨾ \sim S)\); moreover, if solutions exist, then every
+solution is contained in the special solution \(R ╲ S\).
+</p>
+
+<p>
+That is, \(R ⨾ X = S \quad≡\quad X = R ╲ S\).
+</p>
+
+<p>
+Proof: If \(R ⨾ X = S\) then \(R ⨾ X ⊆ S ⇔ R ˘ ⨾ \sim S ⊆ \sim X ⇔ X ⊆ \sim(R ˘ ⨾
+\sim S)\) by Schröder and antitonicity of complement. Hence, if a solution \(X\)
+exists, it is included in \(R ╲ S\). Moreover, \(S = R ⨾ X ⊆ R ⨾ (R ╲ S)\).
+The reverse containment \(R ⨾ (R ╲ S) ⊆ S\) is, by definition of ‘╲’ and Schröder,
+always true.
+</p>
+
+<hr />
+
+<p>
+The division \(R ╲ S\) is the <i>largest</i> solution to \(R ⨾ X ⊆ S\) and is therefore
+also the largest solution to \(R ⨾ X = S\) <i>if</i> this equation is solvable.
+</p>
+
+<p>
+Likewise, \(R ╱ S = \sim(\sim S ⨾ R ˘)\).
+</p>
+
+</div>
+
+
+<p>
+In the presence of complements, we can replace converse by residuals
+since \(\sim R ╱ \sim \Id = \sim(\sim \sim \Id ⨾ \sim R ˘) = \sim \sim R ˘ = R ˘\).
+</p>
+
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>The Middle-Exchange Rule</h3>
+<p>
+\[ P ⨾ Q ⨾ R ⊆ S \quad≡\quad P ˘ ⨾ \sim S ⨾ R ˘ ⊆ \sim Q \]
+</p>
+
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-12-02 Wed 08:56</p>
+<p class="date">Created: 2020-12-03 Thu 10:05</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
