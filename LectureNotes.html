@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-12-08 Tue 11:26 -->
+<!-- 2020-12-09 Wed 09:17 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mathematics for Computing</title>
@@ -429,9 +429,10 @@
 <li><a href="#Converse">11.3. <a href="#Converse">Converse &#x2014;“Transpose”</a></a></li>
 <li><a href="#Constructing-new-relations-from-existing-relations">11.4. <a href="#Constructing-new-relations-from-existing-relations">Constructing new relations from existing relations</a></a></li>
 <li><a href="#Properties-of-Homogeneous-Relations">11.5. <a href="#Properties-of-Homogeneous-Relations">Properties of <i>Homogeneous</i> Relations</a></a></li>
-<li><a href="#Equivalence-Relations">11.6. <a href="#Equivalence-Relations">Equivalence Relations</a></a></li>
-<li><a href="#Closures">11.7. <a href="#Closures">Closures</a></a></li>
-<li><a href="#C-Interplay-between-composition-conversion-complement-and-containment">11.8. <a href="#C-Interplay-between-composition-conversion-complement-and-containment">C⁴: Interplay between composition, conversion, complement, and containment</a></a></li>
+<li><a href="#COMMENT-Properties-of-Heterogeneous-Relations">11.6. <a href="#COMMENT-Properties-of-Heterogeneous-Relations">Properties of <i>Heterogeneous</i> Relations</a></a></li>
+<li><a href="#Equivalence-Relations">11.7. <a href="#Equivalence-Relations">Equivalence Relations</a></a></li>
+<li><a href="#Closures">11.8. <a href="#Closures">Closures</a></a></li>
+<li><a href="#C-Interplay-between-composition-conversion-complement-and-containment">11.9. <a href="#C-Interplay-between-composition-conversion-complement-and-containment">C⁴: Interplay between composition, conversion, complement, and containment</a></a></li>
 </ul>
 </li>
 <li><a href="#Graphs">12. <a href="#Graphs">Graphs</a></a>
@@ -439,6 +440,7 @@
 <li><a href="#Traversing-a-graph-depth-first">12.1. <a href="#Traversing-a-graph-depth-first">Traversing a graph depth-first</a></a></li>
 <li><a href="#DAGs-and-Topological-Sort">12.2. <a href="#DAGs-and-Topological-Sort">DAGs and Topological Sort</a></a></li>
 <li><a href="#201-Practice-Graphs">12.3. <a href="#201-Practice-Graphs">201 Practice Graphs</a></a></li>
+<li><a href="#Graph-Theory-in-general">12.4. <a href="#Graph-Theory-in-general">Graph Theory, in general</a></a></li>
 </ul>
 </li>
 </ul>
@@ -2064,23 +2066,7 @@ document.body.style.background='#90ee90'">lightgreen</button>
 </div>
 
 
-<details> <summary> Details; emacs-lisp </summary> <pre> ;; The “show-graph” method is defined below in this article ;-)
-(show-graph '((Logics PropositionalCalculus)
-              (PropositionalCalculus Quantifiers/PredicateLogic)
-              (SetTheory DiscreteProbability Combinatorics Relations/Graphs)
-              (Induction/Recursion Combinatorics DataStructures Quantifiers/PredicateLogic)
-              (DataStructures ProgramCorrectness)
-              (Relations/Graphs ProgramCorrectness)
-              (Quantifiers/PredicateLogic NumberTheory SetTheory Relations/Graphs Induction/Recursion)
-              )
-            :file "images/course_overview.png"
-            :text "⟅ Discrete Maths ⟆ \n ⟅ Overview of CS/SE 2DM3 ⟆ \n "
-            )
- </pre></details>
-
-
-
-<div id="orgf1e5aa8" class="figure">
+<div id="org05e09ab" class="figure">
 <p><img src="images/course_overview.png" alt="course_overview.png" />
 </p>
 </div>
@@ -2426,12 +2412,12 @@ we define expressions in terms of how they can be manipulated.
 </p>
 
 <p>
-A <b><a id="orgf9f5db8">calculus</a></b> is a method or process of reasoning by calculation with
+A <b><a id="orgcb3e028">calculus</a></b> is a method or process of reasoning by calculation with
 symbols.
 A Boolean variable that can denote a proposition is sometimes called a
-<i><a href="#org89dd682">propositional</a> variable</i>.
-A <b><a id="org9aa169a">propositional calculus</a></b> is so named beacuse it is a method
-of calculating with expressions that involve <a href="#org89dd682">propositional</a> variables.
+<i><a href="#org535edc9">propositional</a> variable</i>.
+A <b><a id="org05449cc">propositional calculus</a></b> is so named beacuse it is a method
+of calculating with expressions that involve <a href="#org535edc9">propositional</a> variables.
 </p>
 
 <p>
@@ -2441,15 +2427,15 @@ of calculating with expressions that involve <a href="#org89dd682">propositional
    For example, the axiom \(p ∨ q ≡ q ∨ p\) indicates (semantically)
    that the value of a disjunction doesn't depend on the order of its arguments
    and (syntactically) we may swap their order when manipulating expressions.
-   The other part of this <a href="#orgf9f5db8">calculus</a> are the 3 inference rules Substitution,
+   The other part of this <a href="#orgcb3e028">calculus</a> are the 3 inference rules Substitution,
    Leibniz, and Transitivity.
 </p>
 
 <p>
-   A <b><a id="org015fd34">theorem</a></b> of this <a href="#orgf9f5db8">calculus</a> is either an axiom, the conclusion
+   A <b><a id="org5686845">theorem</a></b> of this <a href="#orgcb3e028">calculus</a> is either an axiom, the conclusion
    of an inference rule whose premises are theorems, or a Boolean expression
    that, using the inference rules, is proved equal to an axiom or a previously
-   proved <a href="#org015fd34">theorem</a>.
+   proved <a href="#org5686845">theorem</a>.
  </div>
 </p>
 
@@ -2557,15 +2543,15 @@ in Computer Science and Software Engineering
 <li><b>Goal</b>: Understand the mechanics of mathematical expressions and proof.</li>
 
 <li><p>
-<a id="org89dd682">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
+<a id="org535edc9">Propositional</a>: Statements that can be either <i>true</i> or <i>false</i>; not numbers.
 </p>
 
 <p>
-<a id="orgba40e7f">Predicate</a>: <a href="#org89dd682">Propositional</a> statement about some subjects.
+<a id="org41d44d1">Predicate</a>: <a href="#org535edc9">Propositional</a> statement about some subjects.
 </p></li>
 
 <li><p>
-<a id="orgc1b4bd9">Calculus</a>: Formalised reasoning through calculation.
+<a id="org13fbb4e">Calculus</a>: Formalised reasoning through calculation.
 </p>
 
 <p>
@@ -2855,7 +2841,7 @@ preserve truth</i>. Here are some examples of <i>clearly obviously true things</
 
 <p>
 Equipollence means if we show something is equal to ‘true’ (a particular
-<a href="#org015fd34">theorem</a>), then it is a <a href="#org015fd34">theorem</a>. Consequently, this means all theorems are
+<a href="#org5686845">theorem</a>), then it is a <a href="#org5686845">theorem</a>. Consequently, this means all theorems are
 equivalent.
 </p>
 
@@ -2900,7 +2886,7 @@ How do you ‘read’ (<i>parse</i>) the expression \(6 - x + 7\)?
 </div>
 
 
-<div id="orgfd8046d" class="figure">
+<div id="org999d7f7" class="figure">
 <p><img src="images/6-x+7_third_time.png" alt="6-x+7_third_time.png" />
 </p>
 </div>
@@ -2913,7 +2899,7 @@ It can be generated from its parts in two different ways:
 <li>Both \(6\) and \(x + 7\) are expressions, so \(6 - x + 7\) is an expression.</li>
 </ol>
 
-<div id="org33841f8" class="figure">
+<div id="org5fd8963" class="figure">
 <p><img src="images/6-x+7_parse2.png" alt="6-x+7_parse2.png" />
 </p>
 </div>
@@ -3055,14 +3041,14 @@ then a <b>meta-variable</b> is simply a normal variable of type <code>Expr τ</c
 </p>
 
 <p>
-Likewise, a <b><a href="#org015fd34">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
-whereas a <b>meta-<a href="#org015fd34">theorem</a></b> is a general statement about our logic that we prove
+Likewise, a <b><a href="#org5686845">theorem</a></b> is a Boolean expression that is proved equal to an axiom;
+whereas a <b>meta-<a href="#org5686845">theorem</a></b> is a general statement about our logic that we prove
 to be true. That is, if 𝑬 is collection of rules that allows us to find
-truths, then a <i><a href="#org015fd34">theorem</a></i> is a truth found using those rules; whereas a
-<i>meta-<a href="#org015fd34">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
+truths, then a <i><a href="#org5686845">theorem</a></i> is a truth found using those rules; whereas a
+<i>meta-<a href="#org5686845">theorem</a></i> is property of 𝑬 itself, such as what theorems it can have.
 That is, theorems are <span class="underline">in</span> 𝑬 and meta-theorems are <span class="underline">about</span> 𝑬.  For example, here
-is a meta-<a href="#org015fd34">theorem</a> that the equational logic 𝑬 has (as do many other theories,
-such as lattices): An <i>equational</i> <a href="#org015fd34">theorem</a> is true precisely when its ‘dual’ is
+is a meta-<a href="#org5686845">theorem</a> that the equational logic 𝑬 has (as do many other theories,
+such as lattices): An <i>equational</i> <a href="#org5686845">theorem</a> is true precisely when its ‘dual’ is
 true. Such metatheorems can be helpful to discover new theorems.
 </p>
 
@@ -3157,29 +3143,29 @@ yield \(1\).
 </p>
 
 <p>
-A Boolean expression \(P\) is <b><a id="org2a93573">satisfied</a></b> in a state if its value is <i>true</i>
-in that state; \(P\) is <b><a id="org6d4e150">satisfiable</a></b> if there is a state in which it is
-<a href="#org2a93573">satisfied</a>; and \(P\) is <b><a id="orge63af20">valid</a></b> (or is a <b><a id="org03153b2">tautology</a></b>) if it is
-<a href="#org2a93573">satisfied</a> in every state.
+A Boolean expression \(P\) is <b><a id="orgaa572fc">satisfied</a></b> in a state if its value is <i>true</i>
+in that state; \(P\) is <b><a id="orgdfc5519">satisfiable</a></b> if there is a state in which it is
+<a href="#orgaa572fc">satisfied</a>; and \(P\) is <b><a id="orgcd4e5f6">valid</a></b> (or is a <b><a id="org4f77bcd">tautology</a></b>) if it is
+<a href="#orgaa572fc">satisfied</a> in every state.
 </p>
 
 <hr />
 
 <p>
-All theorems of the <a href="#org89dd682">propositional</a> <a href="#orgf9f5db8">calculus</a> 𝑬 are <a href="#orge63af20">valid</a>. This can be checked by checking
+All theorems of the <a href="#org535edc9">propositional</a> <a href="#orgcb3e028">calculus</a> 𝑬 are <a href="#orgcd4e5f6">valid</a>. This can be checked by checking
 that each axiom with a truth table and arguing for each inference rule that
-if its premises are <a href="#orge63af20">valid</a> then so is its conclusion.
+if its premises are <a href="#orgcd4e5f6">valid</a> then so is its conclusion.
 </p>
 
 <p>
 For example, let's show that the Substitution rule preserves validity.  Let
 us write \(s(E)\) to denote the value of expression \(E\) in state \(s\).  If \(E\)
-is <a href="#orge63af20">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
+is <a href="#orgcd4e5f6">valid</a>, then it is true in any state, let's argue that \(E[x ≔ F]\) is also
 true in any state. So, given a state \(s\), let \(s′\) be the ‘updated’ state
 that assigns the same values to all the variables as does \(s\) <i>except</i> that
-the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#orge63af20">valid</a>,
+the variable \(x\) is assigned the value \(s(F)\).  Then, since \(E\) is <a href="#orgcd4e5f6">valid</a>,
 \(s′(E)\) is true but \(s′(E)\) is just \(s\big(E[x ≔ F]\big)\) and so the
-resulting substitution is also <a href="#orge63af20">valid</a>.
+resulting substitution is also <a href="#orgcd4e5f6">valid</a>.
 </p>
 
 <p>
@@ -3190,8 +3176,8 @@ then the updated state \(s′\) &#x2014;having <i>s′(x) = s(F)</i>&#x2014; wil
 </p>
 
 <p>
-Not only are all theorems <a href="#orge63af20">valid</a>, but all <a href="#orge63af20">valid</a> expressions are theorems of
-our <a href="#orgf9f5db8">calculus</a> (although we do not prove this fact). Theoremhood and validity
+Not only are all theorems <a href="#orgcd4e5f6">valid</a>, but all <a href="#orgcd4e5f6">valid</a> expressions are theorems of
+our <a href="#orgcb3e028">calculus</a> (although we do not prove this fact). Theoremhood and validity
 are one and the same.
 </p>
 
@@ -3236,7 +3222,7 @@ Later we see that theorems correspond to expressions that are true in all states
 <div class="outline-text-3" id="text-Logics-and-Inference-Rules">
 <p>
 Formally, a “proof” is obtained by applying a number of “rules” to known
-results to obtain new results; a “<a href="#org015fd34">theorem</a>” is the conclusion of a “proof”.
+results to obtain new results; a “<a href="#org5686845">theorem</a>” is the conclusion of a “proof”.
 An “axiom” is a rule that does not need to be applied to any existing
 results: It's just a known result.
 </p>
@@ -3353,7 +3339,7 @@ axioms \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\).
 </p>
 
 <p>
-The inference rule says “if the \(Pᵢ\) are all <a href="#orge63af20">valid</a>, i.e., true in <i>all
+The inference rule says “if the \(Pᵢ\) are all <a href="#orgcd4e5f6">valid</a>, i.e., true in <i>all
 states</i>, then so is \(C\)”; the axiom, on the other hand, says “if the \(Pᵢ\)
 are true in <i>a state</i>, then \(C\) is true in <i>that state</i>.” Thus the rule and
 the axiom are not quite the same.
@@ -3362,24 +3348,24 @@ the axiom are not quite the same.
 <p>
 Moreover, the rule is not a Boolean expression.  Rules are thus more
 general, allowing us to construct systems of reasoning that have no
-concrete notions of ‘truth’ &#x2014;see the logic <a href="#org8e7caed">𝑾𝑩</a> below.
+concrete notions of ‘truth’ &#x2014;see the logic <a href="#org9360e8e">𝑾𝑩</a> below.
 </p>
 
 <p>
 Finally, the rule asserts that \(C\) follows from \(P₁, …, Pₙ\).
 The formula \(P₁ \,∧\, ⋯ \,∧\, Pₙ \,⇒\, C\), on the other hand, is a Boolean
-expression (but it need not be a <a href="#org015fd34">theorem</a>).
+expression (but it need not be a <a href="#org5686845">theorem</a>).
 </p>
 
 <p>
 An example of this relationship between rules and operators
-may be observed by comparing the logics <a href="#org8e7caed">𝑾𝑩</a> and <a href="#orga69eb0e">𝑴𝑺𝑯</a>, below.
+may be observed by comparing the logics <a href="#org9360e8e">𝑾𝑩</a> and <a href="#orgad8767f">𝑴𝑺𝑯</a>, below.
 One could read “◇” as “and”, and “⟶” as “implies”.
 </p>
 
 
 <p>
-A “<a href="#org015fd34">theorem</a>” is a syntactic concept: Can we play the game of moving symbols to
+A “<a href="#org5686845">theorem</a>” is a syntactic concept: Can we play the game of moving symbols to
 get this? Not “is the meaning of this true”!
 ‘Semantic concepts’ rely on ‘states’, assignments of values to variables
 so that we can ‘evaluate, simplify’ statements to deduce if they are true.
@@ -3397,7 +3383,7 @@ Syntax is like static analysis; semantics is like actually running the program
 <h3 id="water-bucket-logics"><span class="section-number-3">3.3</span> <a href="#water-bucket-logics">[Optional] Strange Logics</a></h3>
 <div class="outline-text-3" id="text-water-bucket-logics">
 <p>
-Here is an example logic, call it <a id="org8e7caed">𝑾𝑩</a>:
+Here is an example logic, call it <a id="org9360e8e">𝑾𝑩</a>:
 </p>
 <ul class="org-ul">
 <li>The symbols are the usual numbers, along with <code>+</code> and <code>-</code> and
@@ -3428,10 +3414,10 @@ from numbers, +, and -.
 </p>
 
 <p>
-<b>Exercise <a href="#water-bucket-logics">3.3</a>.1</b>: Using this logic, prove the <a href="#org015fd34">theorem</a> <code>0, 4</code>.
+<b>Exercise <a href="#water-bucket-logics">3.3</a>.1</b>: Using this logic, prove the <a href="#org5686845">theorem</a> <code>0, 4</code>.
 </p>
 <ul class="org-ul">
-<li>Notice that the <a href="#org015fd34">theorem</a> has nothing to do with ‘truth’! &#x2014;At least not
+<li>Notice that the <a href="#org5686845">theorem</a> has nothing to do with ‘truth’! &#x2014;At least not
 explicitly, or intuitively.</li>
 </ul>
 
@@ -3485,7 +3471,7 @@ a way that makes the inference rules true?
                   </summary>
 
 <p>
-The logic <a href="#org8e7caed">𝑾𝑩</a> <i>could be</i> interpreted as modelling two ‘water buckets’, the first
+The logic <a href="#org9360e8e">𝑾𝑩</a> <i>could be</i> interpreted as modelling two ‘water buckets’, the first
 can contain 3 litres while the second can contain 5 litres, along with an
 unlimited water supply.
 </p>
@@ -3500,7 +3486,7 @@ the other, such that the first is emptied <b>or</b> the second is filled.
 </ol>
 
 <p>
-Then the <a href="#org015fd34">theorem</a> says we can measure 4 litres of water &#x2014;using only a 3 and 5
+Then the <a href="#org5686845">theorem</a> says we can measure 4 litres of water &#x2014;using only a 3 and 5
 litre buckets and an unlimited water supply.
 </p>
 
@@ -3511,14 +3497,14 @@ litre buckets and an unlimited water supply.
 <hr />
 
 <p>
-Here is another example logic, call it <a id="orga69eb0e">𝑴𝑺𝑯</a>:
+Here is another example logic, call it <a id="orgad8767f">𝑴𝑺𝑯</a>:
 </p>
 <ul class="org-ul">
 <li>The symbols are the usual numbers, along with <code>+, -, ◇, ⟶</code>.</li>
 <li>A formula is of the form \(x ◇ y ⟶ x′ ◇ y′\) where ◇ binds tightest
 and \(x, y, x′, y′\) are terms formed from numbers, <code>+</code>, and <code>-</code>.</li>
 <li><p>
-In contrast to <a href="#org8e7caed">𝑾𝑩</a>, this logic has only 1 non-axiom inference rule!
+In contrast to <a href="#org9360e8e">𝑾𝑩</a>, this logic has only 1 non-axiom inference rule!
 </p>
 
 <p>
@@ -3536,7 +3522,7 @@ In contrast to <a href="#org8e7caed">𝑾𝑩</a>, this logic has only 1 non-axi
 
 <p>
 <b>Exercise <a href="#water-bucket-logics">3.3</a>.3:</b> Finish reading this section, then come back and
-prove the <a href="#org015fd34">theorem</a> <code>0 ◇ 0 ⟶ 0 ◇ 4</code> using a <i>calculational proof</i>.
+prove the <a href="#org5686845">theorem</a> <code>0 ◇ 0 ⟶ 0 ◇ 4</code> using a <i>calculational proof</i>.
 </p>
 
 <details class="code-details"
@@ -3597,14 +3583,14 @@ related, via the relation, to the last term.
                   </summary>
 
 <p>
-We <i>may</i> think of <a href="#orga69eb0e">𝑴𝑺𝑯</a> as a ‘machine’ with two memory banks: A computer with memory
+We <i>may</i> think of <a href="#orgad8767f">𝑴𝑺𝑯</a> as a ‘machine’ with two memory banks: A computer with memory
 state \(x\) and \(y\) is executed and it terminates in memory state \(x′\) and \(y′\).
 That is, \(x ◇ y ⟶ x′ ◇ y′\) is “starting from \((x, y)\), the computer finishes
 with \((x′, y′)\)”.
 </p>
 
 <p>
-The <a href="#org015fd34">theorem</a> then says that it is possible for the computer to start at \((0, 0)\)
+The <a href="#org5686845">theorem</a> then says that it is possible for the computer to start at \((0, 0)\)
 and finish with memory store \((0, 4)\).
 </p>
 
@@ -3614,7 +3600,7 @@ is witnessed by the <a href="https://alhassy.github.io/PrologCheatSheet/CheatShe
 </p>
 
 <p>
-Of-course, we could also re-use the water buckets interpretation of <a href="#org8e7caed">𝑾𝑩</a>.
+Of-course, we could also re-use the water buckets interpretation of <a href="#org9360e8e">𝑾𝑩</a>.
 </p>
 
 
@@ -3648,12 +3634,12 @@ The following rules define equality by how it can be used, manipulated.
 <li><p>
 The <b>Substitution inference rule</b>
 says that a substitution \(E[\vec x ≔ \vec F]\) is
-a <a href="#org015fd34">theorem</a> <i>whenever</i> \(E\) is a <a href="#org015fd34">theorem</a>.
+a <a href="#org5686845">theorem</a> <i>whenever</i> \(E\) is a <a href="#org5686845">theorem</a>.
 </p>
 
 <p>
 Within CalcCheck, this rule is realised as the <kbd> with </kbd> clause: The phrase <code>E
-    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#org015fd34">theorem</a>
+    with `x₁, x₂, …, xₙ ≔ F₁, F₂, …, Fₙ`</code> is tantamount to invoking the <a href="#org5686845">theorem</a>
 \(E[\vec x ≔ \vec F]\). The rule is applied <i>implicitly</i>, unless <code>rigid matching</code>
 is activated &#x2014;e.g., to get students <b>thinking correctly about applying
 theorems</b> instead of just putting random theorems that look similar and hoping
@@ -3697,7 +3683,7 @@ from one must be the same when extracted from the other.
 
 <p>
 Again: Unlike the Substitution rule, which allows us to instantiate <i>any</i>
-<a href="#org015fd34">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
+<a href="#org5686845">theorem</a>, the Leibniz rule is meant for <b>applying equational theorems deeper
 within expressions</b>. Later on, we will look at ‘monotonicity rules’ which will
 let us apply inclusion (≤, ⇒, ⊑) theorems deep within expressions.
 </p>
@@ -3764,7 +3750,7 @@ Instead, we may use a more ‘linear’ proof format:
 
 <p>
 In this equational style, instead of a <b>tree</b> (on the left)
-we use a <b><a href="#org2fb7087">sequential</a> chain of equalities</b> (on the right):
+we use a <b><a href="#orgaf07f89">sequential</a> chain of equalities</b> (on the right):
 </p>
 
 
@@ -3856,7 +3842,7 @@ inference rules must be mentioned explicitly.
 
 <p>
 Leibniz is often used with Substitution, as follows
-&#x2014;supposing we know the <a href="#org015fd34">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
+&#x2014;supposing we know the <a href="#org5686845">theorem</a> <code>“Half”</code> \(2 · x / 2 = x\):
 </p>
 
 \begin{calc}
@@ -3867,9 +3853,9 @@ Leibniz is often used with Substitution, as follows
 
 <p>
 We are using Leibniz with the premise \(2 · j / 2 = j\).
-We can use this premise only if it is a <a href="#org015fd34">theorem</a>. It is, because
-\(2 · x / 2 = x\) is a <a href="#org015fd34">theorem</a> and, therefore, by Substitution,
-\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#org015fd34">theorem</a>.
+We can use this premise only if it is a <a href="#org5686845">theorem</a>. It is, because
+\(2 · x / 2 = x\) is a <a href="#org5686845">theorem</a> and, therefore, by Substitution,
+\((2 · x / 2 = x)[x ≔ j]\) is a <a href="#org5686845">theorem</a>.
 </p>
 
 <p>
@@ -3881,7 +3867,7 @@ off the indication “with \(x ≔ j\)”.
 </div>
 
 <div id="outline-container-Propositional-Calculus" class="outline-2">
-<h2 id="Propositional-Calculus"><span class="section-number-2">4</span> <a href="#Propositional-Calculus"> <a href="#org89dd682">Propositional</a> <a href="#orgf9f5db8">Calculus</a></a></h2>
+<h2 id="Propositional-Calculus"><span class="section-number-2">4</span> <a href="#Propositional-Calculus"> <a href="#org535edc9">Propositional</a> <a href="#orgcb3e028">Calculus</a></a></h2>
 <div class="outline-text-2" id="text-Propositional-Calculus">
 <p>
 Often operations are defined by how they are evaluated (“operationally”), we
@@ -3902,14 +3888,14 @@ cleanly possible; e.g., given an ordering ‘≤’(‘⇒, ⊆, ⊑’) we can 
 </p>
 
 <p>
-A <i><a href="#orgf9f5db8">calculus</a></i> is a method or process of reasoning by calculation with symbols. A
-<i><a href="#org89dd682">propositional</a> <a href="#orgf9f5db8">calculus</a></i> is a method of calculating with Boolean (or
-<a href="#org89dd682">propositional</a>) expressions.
+A <i><a href="#orgcb3e028">calculus</a></i> is a method or process of reasoning by calculation with symbols. A
+<i><a href="#org535edc9">propositional</a> <a href="#orgcb3e028">calculus</a></i> is a method of calculating with Boolean (or
+<a href="#org535edc9">propositional</a>) expressions.
 </p>
 
 <p>
-A <i><a href="#org015fd34">theorem</a></i> is a syntactic object, a string of symbols with a particular property.
-A <i><a href="#org015fd34">theorem</a></i> of a <a href="#orgf9f5db8">calculus</a> is either an axiom or the conclusion of an inference
+A <i><a href="#org5686845">theorem</a></i> is a syntactic object, a string of symbols with a particular property.
+A <i><a href="#org5686845">theorem</a></i> of a <a href="#orgcb3e028">calculus</a> is either an axiom or the conclusion of an inference
 rule whose premises are theorems. Different axioms could lead to the same
 set of theorems, and many texts use different axioms.
 </p>
@@ -3933,7 +3919,7 @@ The type of propositions is known as the <b>Booleans</b> and denoted 𝔹.
 <p>
 For instance, the notion of equality on any type τ is
 typed <code>_=_ : τ → τ → 𝔹</code>; i.e., equality takes two values of a type τ
-and returns a <a href="#org89dd682">propositional</a> value.
+and returns a <a href="#org535edc9">propositional</a> value.
 </p>
 
 <blockquote>
@@ -4476,7 +4462,7 @@ To better understand the 𝔹ooleans, it can be useful to compare their laws
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 7:</span> Properties of <a href="#org89dd682">propositional</a> operators and similar (familiar) numeric laws</caption>
+<caption class="t-above"><span class="table-number">Table 7:</span> Properties of <a href="#org535edc9">propositional</a> operators and similar (familiar) numeric laws</caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -4772,7 +4758,7 @@ of equivalence increases the number of parses.
 <p>
 Using its definition, we can quickly show that
 \(\true = \big(\true ≡ q ≡ q\big)\) and so by equanimity,
-since the right side is a <a href="#org015fd34">theorem</a>, then the left side is also a <a href="#org015fd34">theorem</a>.
+since the right side is a <a href="#org5686845">theorem</a>, then the left side is also a <a href="#org5686845">theorem</a>.
 Hence,
 </p>
 
@@ -4781,24 +4767,24 @@ Hence,
 </p>
 
 <p>
-What is the benefit of this <a href="#org015fd34">theorem</a>?
+What is the benefit of this <a href="#org5686845">theorem</a>?
 </p>
 
 <p>
-By equanimity, this means that to prove \(P\) is a <a href="#org015fd34">theorem</a>, it is
+By equanimity, this means that to prove \(P\) is a <a href="#org5686845">theorem</a>, it is
 enough to show that \(P ≡ \true\)! This is an ‘expected’ result :-)
 </p>
 
 <p>
-( We can phrase this observation as a <a href="#org015fd34">theorem</a> itself as \((P ≡ \true) ≡ P\), but
+( We can phrase this observation as a <a href="#org5686845">theorem</a> itself as \((P ≡ \true) ≡ P\), but
 this is essentially the definition of true, above! )
 </p>
 
 <p>
-Here is an impressive benefit of this <a href="#org015fd34">theorem</a>.  Suppose we want to prove an
+Here is an impressive benefit of this <a href="#org5686845">theorem</a>.  Suppose we want to prove an
 equation \(L = R\) is true; if our proof only alters \(L\) to make it the same as
 \(R\) so that we obtain \(R = R\), then we may the definition of \(\true\) to
-obtain, well, \(\true\), but since this is a <a href="#org015fd34">theorem</a> then so too is \(L = R\).
+obtain, well, \(\true\), but since this is a <a href="#org5686845">theorem</a> then so too is \(L = R\).
 That is,
 </p>
 \begin{calc}
@@ -4825,13 +4811,13 @@ R
 
 <p>
 That is, (3.4) gives us a new proof method &#x2014;which is always a bonus result
-from a <a href="#org015fd34">theorem</a>.
+from a <a href="#org5686845">theorem</a>.
 </p>
 
 
 <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>(3.6) Simplifiction Proof Method ---Page 45</h3>
 <p>
-To prove \(L = R\) is a <a href="#org015fd34">theorem</a>, transform \(L\) to \(R\) or \(R\) to \(L\)
+To prove \(L = R\) is a <a href="#org5686845">theorem</a>, transform \(L\) to \(R\) or \(R\) to \(L\)
 using Leibniz (equals for equals reasoning).
 </p>
 
@@ -4875,7 +4861,7 @@ Finally, (3.4) gives us the following <abbr class="tooltip" title="A <em>theorem
 </p>
 
 <p>
-Indeed, if \(P\) is a <a href="#org015fd34">theorem</a> and \(Q\) is a <a href="#org015fd34">theorem</a>, then by (3.4) we have \(P ≡
+Indeed, if \(P\) is a <a href="#org5686845">theorem</a> and \(Q\) is a <a href="#org5686845">theorem</a>, then by (3.4) we have \(P ≡
   \true\) and \(\true = Q\) and so by transitivity of ≡, we have \(P ≡ Q\).
 </p>
 
@@ -4960,8 +4946,8 @@ satisfies these two properties.
 <div class="outline-text-3" id="text-Alternative-definitions-of-and">
 <p>
 The following theorems are sometimes used to define ≡ and ≢.
-The first <a href="#org015fd34">theorem</a> indicates that \(p ≡ q\) holds exactly when \(p\)
-and \(q\) are both <i>true</i> or both <i>false</i>. The second <a href="#org015fd34">theorem</a> indicates that
+The first <a href="#org5686845">theorem</a> indicates that \(p ≡ q\) holds exactly when \(p\)
+and \(q\) are both <i>true</i> or both <i>false</i>. The second <a href="#org5686845">theorem</a> indicates that
 \(p ≢ q\) holds exactly when one of them is <i>true</i> and the other is <i>false</i>.
 </p>
 
@@ -4985,9 +4971,9 @@ Proof:
 
 
 <p>
-In most <a href="#org89dd682">propositional</a> calculi equivalence is the last operator to be defined
+In most <a href="#org535edc9">propositional</a> calculi equivalence is the last operator to be defined
 and is defined as “mutual implication”.  Thus, (3.80) below typically is made
-an axiom.  We down-play implication in our <a href="#orgf9f5db8">calculus</a> because, as an unsymmetric
+an axiom.  We down-play implication in our <a href="#orgcb3e028">calculus</a> because, as an unsymmetric
 operator (by 3.72 and 3.73), it is harder to manipulate. Sometimes
 (3.80) would be read as “(strong) antisymmetry of ⇒”.
 </p>
@@ -5129,7 +5115,7 @@ is true at that point in the program's execution.
 
 <p>
 An expression of the form <code>{ R } C { G }</code>, where \(R, G\) are properties of the program
-variables and \(C\) is a program command, is called a <a id="org1de4cbb">Hoare triple</a>.
+variables and \(C\) is a program command, is called a <a id="org1bcee63">Hoare triple</a>.
 </p>
 
 <p>
@@ -5283,7 +5269,7 @@ formalise the claim as
  x = X \;∧\; y = Y \;\Then{x,y := y, x}\; x = Y \;∧\; y = Y
  \]
 We refer to variables that never appear in program text
-as <span class="underline"><a id="org1346831">ghost variables</a></span>; their function is to relate the final values of the
+as <span class="underline"><a id="org1a31a9d">ghost variables</a></span>; their function is to relate the final values of the
 program variables to their initial values.
 </p>
 
@@ -5291,8 +5277,8 @@ program variables to their initial values.
 <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Definition of Hoare Triples</h3>
 <p>
 In general, an expression <code>{ R } C { G }</code>, with \(R, G\) predicates on a collection
-of program variables and <a href="#org1346831">ghost variables</a>, means that, <i>forall possible values of
-the <a href="#org1346831">ghost variables</a>,</i> if the program variables satisfy property \(R\) before
+of program variables and <a href="#org1a31a9d">ghost variables</a>, means that, <i>forall possible values of
+the <a href="#org1a31a9d">ghost variables</a>,</i> if the program variables satisfy property \(R\) before
 execution of the command <code>C</code>, execution of <code>C</code> is guaranteed to terminate, and,
 afterwards, the program variables will satisfy property \(G\).
 </p>
@@ -5315,7 +5301,7 @@ States may be represented by predicates on variables and so <b>imperative
 commands are relations on predicates</b>: <i>Given two propositions \(G, R\) making</i>
 <i>use of program variables, we write \(R \Then{C} G\) to mean “in a state \(R\), the
 execution of command \(C\) terminates in state \(G\)”</i>.
-( This is also known as a <i><a href="#org1de4cbb">Hoare Triple</a></i> and written <code>{R} C {G}</code>. )
+( This is also known as a <i><a href="#org1bcee63">Hoare Triple</a></i> and written <code>{R} C {G}</code>. )
 </p>
 
 <p>
@@ -5436,7 +5422,7 @@ as ‘fixed’ or ‘constant’ and so cannot appear in the program command \(C
 
 <p>
 However, this convention only reduces ambiguity about what variables can be
-meddled with; and so <a href="#org1346831">ghost variables</a> are still required.  For instance, consider
+meddled with; and so <a href="#org1a31a9d">ghost variables</a> are still required.  For instance, consider
 the example specification “set \(z\) to its own absolute value”, it is formalised
 with the help of a ghost variable: \(z = Z \Then{?} z = |Z|\).
 </p>
@@ -5544,7 +5530,7 @@ It is defined by the <i>shape</i> of the possible commands <code>C</code>.
 </p>
 
 <p>
-For example, the <b><a id="org2fb7087">sequential</a> command</b> <code>C₁ ⍮ C₂</code> is executed by first
+For example, the <b><a id="orgaf07f89">sequential</a> command</b> <code>C₁ ⍮ C₂</code> is executed by first
 executing <code>C₁</code> then by executing <code>C₂</code>. As such, to obtain a goal state \(G\), we
 may construct a partial program \(C₂\) which in-turn requires an intermediary
 state \(I\); then to establish state \(I\), we may construct a program <code>C₁</code> which
@@ -5578,7 +5564,7 @@ and this is what makes programming interesting!
 <h3 id="We-define-assignment-using-textual-substitution"><span class="section-number-3">5.5</span> <a href="#We-define-assignment-using-textual-substitution">We define assignment using textual substitution</a></h3>
 <div class="outline-text-3" id="text-We-define-assignment-using-textual-substitution">
 <p>
-The <a id="orgb2006b5">assignment statement</a>
+The <a id="orgf964cd7">assignment statement</a>
 <code>x := E</code> evaluates expression <code>E</code> (which we assume “never crashes”)
 and stores the result in variable <code>x</code>.
 The statement is read “ <code>x</code> becomes <code>E</code> ”.
@@ -5674,7 +5660,7 @@ When will the assignment <code>x := x - 1</code> ensure the goal state \(x² + 2
 \end{calc}
 <p>
 Hence, if \(x\) is positive or negative 2, then the assignment
-<code>x := x - 1</code> will ensure that \(x\) satisfies the <a href="#orgba40e7f">predicate</a> state \(x² + 2 · x =
+<code>x := x - 1</code> will ensure that \(x\) satisfies the <a href="#org41d44d1">predicate</a> state \(x² + 2 · x =
    3\)
 &#x2014;incidentally, after the assignment \(x\) will have its value being
 positive 1 or negative 3, which are both solutions to the equation
@@ -5697,7 +5683,7 @@ minutes of this <a href="https://youtu.be/JxRZC2UMJb0">this video lecture</a> fo
 </p>
 
 <p>
-When \(I \;⇒[C]\;\; I\), one says that “state \(I\) is <b><a id="orgf00f2f2">invariant</a></b> for
+When \(I \;⇒[C]\;\; I\), one says that “state \(I\) is <b><a id="orge91b31e">invariant</a></b> for
 command \(C\)” or that “\(C\) <i>maintains</i> \(I\)”.
 </p>
 </div>
@@ -5707,9 +5693,9 @@ command \(C\)” or that “\(C\) <i>maintains</i> \(I\)”.
 <h3 id="Calculating-Assignments"><span class="section-number-3">5.7</span> <a href="#Calculating-Assignments">Calculating Assignments</a></h3>
 <div class="outline-text-3" id="text-Calculating-Assignments">
 <p>
-It is <i>often</i> possible to <b>calculate</b> an <a href="#orgb2006b5">assignment statement</a> that satisfies a
+It is <i>often</i> possible to <b>calculate</b> an <a href="#orgf964cd7">assignment statement</a> that satisfies a
 given precondition-postcondition specification.
-Many examples involve a property that is to be maintained <a href="#orgf00f2f2">invariant</a> whilst
+Many examples involve a property that is to be maintained <a href="#orge91b31e">invariant</a> whilst
 progress is made by incrementing (or decrementing) a counter.
 </p>
 
@@ -5857,7 +5843,7 @@ and that it can be defined in terms of assignments.
 <h2 id="Induction"><span class="section-number-2">6</span> <a href="#Induction">Induction</a></h2>
 <div class="outline-text-2" id="text-Induction">
 <p>
-How we prove a <a href="#org015fd34">theorem</a> \(P\, n\) ranging over natural numbers \(n\)?
+How we prove a <a href="#org5686845">theorem</a> \(P\, n\) ranging over natural numbers \(n\)?
 </p>
 
 <p>
@@ -5903,7 +5889,7 @@ observation’ is known as <i>induction</i>.
 
 <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Constant functions are induction</h3>
 <p>
-A <a href="#orgba40e7f">predicate</a> \(P : ℕ → 𝔹\) is a function. When is such a function constantly the
+A <a href="#org41d44d1">predicate</a> \(P : ℕ → 𝔹\) is a function. When is such a function constantly the
 value \(\true\)? That is, when is \(∀ n • P\, n = \true\)?  Clearly, if \(P\) starts
 off being \(\true\) &#x2014;i.e., <i>P 0</i>&#x2014; and it preserves truth at every step &#x2014;i.e.,
 <i>P n ⇒ P (n + 1)</i>&#x2014; then <i>P n</i> will be true for any choice of \(n\).
@@ -6122,7 +6108,7 @@ Equivalently, <i>b divides a ≡ (∃ c • a = b · c)</i>.</li>
 
 
 <p>
-For instance, if we take \(b = 3\), then the <a href="#org015fd34">theorem</a> says every integer is of the
+For instance, if we take \(b = 3\), then the <a href="#org5686845">theorem</a> says every integer is of the
 form \(3 · q, 3 · q + 1\), or \(3 · q + 2\).
 </p>
 
@@ -6214,7 +6200,7 @@ That is,
 </p>
 
 <ul class="org-ul">
-<li>Often this <a href="#org015fd34">theorem</a> is
+<li>Often this <a href="#org5686845">theorem</a> is
 used in the <i>simpler, less generic</i>, shape “since <i>k</i> divides <i>x</i> and <i>y</i>, it also
 divides their sum”.
 <ul class="org-ul">
@@ -6250,7 +6236,7 @@ conversely if c is not-zero, we can divide-it-out.
 </p>
 
 <p>
-Divisibility is <a href="#orgf00f2f2">invariant</a> under additive inverse,
+Divisibility is <a href="#orge91b31e">invariant</a> under additive inverse,
 \[\Law{Divisibility is invariant under additive inverse}{ m ∣ n \quad≡\quad m ∣ (-n)} \]
 </p>
 
@@ -6284,7 +6270,7 @@ Some texts insist that <i>m ≠ 0</i> for the notation <i>m ∣ n</i> to be mean
 However, if <i>m = 0</i> and <i>m ∣ n</i> then that means there is a <i>q</i> with <i>n = q · m = q ·
 0 = 0</i> and so <i>n = 0</i>. Hence, the only divisibility statement we can make of the
 shape <i>0 ∣ n</i> is really just <i>0 ∣ 0</i>.  This observation is captured by the
-following <a href="#org015fd34">theorem</a>. (Note: <i>0 ∣ n</i> does not mean we are dividing by 0!
+following <a href="#org5686845">theorem</a>. (Note: <i>0 ∣ n</i> does not mean we are dividing by 0!
 Divisibility, ‘∣’, is defined in-terms of multiplication &#x2014;not division!)
 </p>
 
@@ -6399,7 +6385,7 @@ As such, the product of any <i>N</i> consecutive integers is divisible by <i>N</
 </div>
 
 <div id="outline-container-Quantification-and-Predicate-Logic" class="outline-2">
-<h2 id="Quantification-and-Predicate-Logic"><span class="section-number-2">8</span> <a href="#Quantification-and-Predicate-Logic">Quantification and <a href="#orgba40e7f">Predicate</a> Logic</a></h2>
+<h2 id="Quantification-and-Predicate-Logic"><span class="section-number-2">8</span> <a href="#Quantification-and-Predicate-Logic">Quantification and <a href="#org41d44d1">Predicate</a> Logic</a></h2>
 <div class="outline-text-2" id="text-Quantification-and-Predicate-Logic">
 <p style="display:none">\[\newcommand{Law}[3][]{ #1\;\;\textbf{#2:}\quad #3 }
 \def\abs{\mathsf{abs}\,}
@@ -6526,13 +6512,13 @@ a list of dummies. We will specialise this proviso for each rule as needed.
 </thead>
 <tbody>
 <tr>
-<td class="org-left"><b><a href="#orgbf53884">Dummy</a> Rules</b></td>
+<td class="org-left"><b><a href="#orgb02298d">Dummy</a> Rules</b></td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">Renaming</td>
-<td class="org-left"><a href="#orgbf53884">Dummy</a> names are place-holders and don't matter</td>
+<td class="org-left"><a href="#orgb02298d">Dummy</a> names are place-holders and don't matter</td>
 </tr>
 
 <tr>
@@ -6736,16 +6722,16 @@ or \((+ i \;❙\; 1 ≤ i ≤ n • f\, i)\)
 for several reasons.</li>
 
 <li><p>
-The parentheses make explicit the <i>scope</i> of the <i><a href="#orgbf53884">dummy</a></i> or <i>quantified variable
+The parentheses make explicit the <i>scope</i> of the <i><a href="#orgb02298d">dummy</a></i> or <i>quantified variable
 i</i>: The places where <i>i</i> can be referenced. The scope comprises the expressions
 within the parentheses.
 </p>
 
 <p>
-The “\(Σ\,i\)” (or “\(+\, i\)”) acts as a declaration, introducing <b><a id="orgbf53884">dummy</a></b> <i>i</i>.
+The “\(Σ\,i\)” (or “\(+\, i\)”) acts as a declaration, introducing <b><a id="orgb02298d">dummy</a></b> <i>i</i>.
 </p>
 <ul class="org-ul">
-<li>This <a href="#orgbf53884">dummy</a> is not a variable in the usual sense, for it does not obtain a
+<li>This <a href="#orgb02298d">dummy</a> is not a variable in the usual sense, for it does not obtain a
 value from the state in which the expression is evaluated.</li>
 </ul></li>
 
@@ -6760,13 +6746,13 @@ between 1 and 7:
 \[ (Σ i \;❙\; 1 ≤ i ≤ 7 ∧ \mathsf{even}\, i • i) \;=\; 2 + 4 + 6\]
 </p></li>
 
-<li>The linear notation extends easily to allow more than one <a href="#orgbf53884">dummy</a>, as shown in
+<li>The linear notation extends easily to allow more than one <a href="#orgb02298d">dummy</a>, as shown in
 the following example.  \[ (Σ i,j \;❙\; 1 ≤ i ≤ 2 ∧ 3 ≤ j ≤ 4 • i^j) \;=\; 1^3 +
    1^4 + 2^3 + 2^4\] In determining which values \(i^j\) are being summed, we
 choose all combinations of \(i\) and \(j\) that satisfy the <i>range</i> \(1 ≤ i ≤ 2 ∧ 3
    ≤ j ≤ 4\).</li>
 
-<li>In the summations about, our intent is that <a href="#orgbf53884">dummy</a> \(i\) ranges over integer
+<li>In the summations about, our intent is that <a href="#orgb02298d">dummy</a> \(i\) ranges over integer
 values, rather than real values (say). To make the type explicit, we can
 write \((Σ i : ℤ \;❙\; 1 ≤ i ≤ 2 • f\, i)\).</li>
 
@@ -6967,7 +6953,7 @@ Ignoring the proviso/antecedent of the Zero Body rule quickly leads to trouble:
 \end{calc}
 <p>
 The second step is invalid since it is <i>not enough</i> to show some term is zero, but
-rather that some term &#x2014;i.e., <a href="#orgbf53884">dummy</a> variable&#x2014; <i>satisfying</i> the range is zero.
+rather that some term &#x2014;i.e., <a href="#orgb02298d">dummy</a> variable&#x2014; <i>satisfying</i> the range is zero.
 Indeed, in the second step above we need to show \((∃ x \;❙\; false • 𝟘_⊕ = 𝟘_⊕)
 ≡ true\), which by Empty Range for ∃ is the same as \(false ≡ true\) &#x2014;and this is
 impossibly difficult to show, since it's just not true.
@@ -6976,11 +6962,11 @@ impossibly difficult to show, since it's just not true.
 </div>
 
 <div id="outline-container-Dummy-Renaming" class="outline-3">
-<h3 id="Dummy-Renaming"><span class="section-number-3">8.4</span> <a href="#Dummy-Renaming"> <a href="#orgbf53884">Dummy</a> Renaming</a></h3>
+<h3 id="Dummy-Renaming"><span class="section-number-3">8.4</span> <a href="#Dummy-Renaming"> <a href="#orgb02298d">Dummy</a> Renaming</a></h3>
 <div class="outline-text-3" id="text-Dummy-Renaming">
 <p>
-The first rule expresses the fact that a ‘<a href="#orgbf53884">dummy</a>’ is just a place holder, the
-particular name chosen for the <a href="#orgbf53884">dummy</a> is not relevant provided it does not clash
+The first rule expresses the fact that a ‘<a href="#orgb02298d">dummy</a>’ is just a place holder, the
+particular name chosen for the <a href="#orgb02298d">dummy</a> is not relevant provided it does not clash
 with the names of other variables in the quantified expression.  Renaming is
 often used when performing other algebraic manipulations in order to avoid
 capture of free variables or release of bound variables.
@@ -6991,14 +6977,14 @@ Recall that \(E[x ≔ F]\) denotes the expression obtained by replacing every <i
 occurrence of <i>x</i> in <i>E</i> by <i>F</i>. Then,
 </p>
 <dl class="org-dl">
-<dt>(Axiom 8.21) <a href="#orgbf53884">Dummy</a> Renaming</dt><dd>Provided <i>y</i> does not occur in <i>R</i> nor in <i>P</i>,
+<dt>(Axiom 8.21) <a href="#orgb02298d">Dummy</a> Renaming</dt><dd>Provided <i>y</i> does not occur in <i>R</i> nor in <i>P</i>,
 \[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ y] • P[x ≔ y]] \]</dd>
 </dl>
 
 <p>
 Remember: The ‘occurs’ restrictions on these laws ensure that an expression that
-contains an occurrence of a <a href="#orgbf53884">dummy</a> is not moved outside (or inside) the scope of
-the <a href="#orgbf53884">dummy</a>.
+contains an occurrence of a <a href="#orgb02298d">dummy</a> is not moved outside (or inside) the scope of
+the <a href="#orgb02298d">dummy</a>.
 </p>
 
 <p>
@@ -7019,7 +7005,7 @@ indices that apply.
 
 <p>
 That is, the second rule for dummies state, essentially, that the use of more than one
-<a href="#orgbf53884">dummy</a> is a convenient abbreviation for a collection of quantifications.
+<a href="#orgb02298d">dummy</a> is a convenient abbreviation for a collection of quantifications.
 </p>
 
 <dl class="org-dl">
@@ -7111,7 +7097,7 @@ above.</li>
 </div>
 
 <div id="outline-container-Rearranging-Dummy-List-Permutation" class="outline-3">
-<h3 id="Rearranging-Dummy-List-Permutation"><span class="section-number-3">8.6</span> <a href="#Rearranging-Dummy-List-Permutation"> <a href="#orgbf53884">Dummy</a> Rearrangment &#x2014;Generalised Symmetry &amp; Associativity</a></h3>
+<h3 id="Rearranging-Dummy-List-Permutation"><span class="section-number-3">8.6</span> <a href="#Rearranging-Dummy-List-Permutation"> <a href="#orgb02298d">Dummy</a> Rearrangment &#x2014;Generalised Symmetry &amp; Associativity</a></h3>
 <div class="outline-text-3" id="text-Rearranging-Dummy-List-Permutation">
 <p>
 The third rule is very powerful because, in combination with the nesting rule,
@@ -7121,7 +7107,7 @@ summation is irrelevant.
 </p>
 
 <dl class="org-dl">
-<dt>Rearranging, <a href="#orgbf53884">Dummy</a> List Permutation</dt><dd>\[ (⊕ x, y \;❙\; R • P) \quad=\quad (⊕ y, x \;❙\; R • P) \]</dd>
+<dt>Rearranging, <a href="#orgb02298d">Dummy</a> List Permutation</dt><dd>\[ (⊕ x, y \;❙\; R • P) \quad=\quad (⊕ y, x \;❙\; R • P) \]</dd>
 </dl>
 
 <p>
@@ -7160,7 +7146,7 @@ a ≤ x ≤ y  ∧  a ≤ y ≤ b
 \end{calc}
 
 <p>
-We may capture the unnesting-rearrangement-nesting pattern in the above example as a <a href="#org015fd34">theorem</a>.
+We may capture the unnesting-rearrangement-nesting pattern in the above example as a <a href="#org5686845">theorem</a>.
 </p>
 <dl class="org-dl">
 <dt>(8.19) Interchange of dummies</dt><dd>Provided each quantification is defined,
@@ -7269,7 +7255,7 @@ critically on the associativity and symmetry of the operation ⊕.
 
 <p>
 We may capture the nesting-rearranging pattern in the above example as a
-<a href="#org015fd34">theorem</a>.
+<a href="#org5686845">theorem</a>.
 </p>
 <dl class="org-dl">
 <dt>(8.15) Distributivity, “Body Rearrangment”</dt><dd>Provided each quantification is defined,
@@ -7318,7 +7304,7 @@ For instance,
 <hr />
 
 <p>
-<b>(8.d′) <a href="#org015fd34">Theorem</a>, Distributivity of ⊗ over ⊕:</b> Provided <i>x</i> does not occur in <i>P</i>, and
+<b>(8.d′) <a href="#org5686845">Theorem</a>, Distributivity of ⊗ over ⊕:</b> Provided <i>x</i> does not occur in <i>P</i>, and
 “⊗ distributes over ⊕” ---<i>a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)</i> and \(a ⊗ \Id_⊕ =
  \Id_⊕\).
 \[ P ⊗ (⊕ x \;❙\; R • Q) \quad=\quad (⊕ x \;❙\; R • P ⊗ Q) \]
@@ -7355,7 +7341,7 @@ for ↑ (see Ch15 LADM).</li>
 <hr />
 
 <p>
-<b>(8.d′) <a href="#org015fd34">Theorem</a>, General Distributive Law of ⊗ over ⊕:</b> Provided <i>x</i> does not occur
+<b>(8.d′) <a href="#org5686845">Theorem</a>, General Distributive Law of ⊗ over ⊕:</b> Provided <i>x</i> does not occur
 in <i>S</i> nor <i>Q</i>; <i>y</i> does not occur in <i>R</i> nor <i>P</i>; and
 “⊗ distributes over ⊕” ---<i>a ⊗ (b ⊕ c) = (a ⊗ b) ⊕ (a ⊗ c)</i> and \(a ⊗ \Id_⊕ =
  \Id_⊕\).
@@ -7376,7 +7362,7 @@ maybe not \(a ⊗ \Id_⊕ = \Id_⊕\).
 </p>
 
 <p>
-Be careful using this <a href="#org015fd34">theorem</a>. A term can be moved outside the scope of the
+Be careful using this <a href="#org5686845">theorem</a>. A term can be moved outside the scope of the
 quantification only if the range \(R\) is not empty &#x2014;i.e., not everywhere <i>false</i>.
 </p>
 
@@ -7444,7 +7430,7 @@ permutation.
 </p>
 
 <p>
-<b>(8.22) <a href="#org015fd34">Theorem</a>, Permutative Law, Commutative Law, Change of <a href="#orgbf53884">Dummy</a>:</b> Provided
+<b>(8.22) <a href="#org5686845">Theorem</a>, Permutative Law, Commutative Law, Change of <a href="#orgb02298d">Dummy</a>:</b> Provided
 <i>y</i> does not occur in <i>R</i> nor in <i>P</i>, and <i>f</i> is a permutation (i.e., is invertible),
 \[ (⊕ x \;❙\; R • P) \quad=\quad (⊕ y \;❙\; R[x ≔ f\, y] • P[x ≔ f\, y]) \]
 </p>
@@ -7513,7 +7499,7 @@ Trading rules let us move a range into the body.
 </p>
 
 <p>
-<b>(8.t′) <a href="#org015fd34">Theorem</a>, Trading:</b> \((⊕ x \;❙\; Q ∧ R • P) \;=\; (⊕ x \;❙\; Q • \mathsf{if}\, R
+<b>(8.t′) <a href="#org5686845">Theorem</a>, Trading:</b> \((⊕ x \;❙\; Q ∧ R • P) \;=\; (⊕ x \;❙\; Q • \mathsf{if}\, R
 \,\mathsf{then}\, P \,\mathsf{else}\, \Id_⊕ \mathsf{fi})\)
 </p>
 
@@ -7532,10 +7518,10 @@ For instance:
 </p>
 
 <ul class="org-ul">
-<li><b>(8.t.Σ) <a href="#org015fd34">Theorem</a>, Trading:</b> \((Σ x \;❙\; Q ∧ R • P) = (Σ x \;❙\; Q • P · [R] )\)</li>
-<li><b>(8.t.Π) <a href="#org015fd34">Theorem</a>, Trading:</b> \((Π x \;❙\; Q ∧ R • P) = (Π x \;❙\; Q • P^{[R]})\)</li>
-<li><b>(8.t.∀) (9.4) <a href="#org015fd34">Theorem</a>, Trading:</b> \((∀ x \;❙\; Q ∧ R • P) ≡ (∀ x \;❙\; Q • R ⇒ P)\)</li>
-<li><b>(8.t.∃) (9.20) <a href="#org015fd34">Theorem</a>, Trading:</b> \((∃ x \;❙\; Q ∧ R • P) ≡ (∃ x \;❙\; Q • R ∧ P)\)</li>
+<li><b>(8.t.Σ) <a href="#org5686845">Theorem</a>, Trading:</b> \((Σ x \;❙\; Q ∧ R • P) = (Σ x \;❙\; Q • P · [R] )\)</li>
+<li><b>(8.t.Π) <a href="#org5686845">Theorem</a>, Trading:</b> \((Π x \;❙\; Q ∧ R • P) = (Π x \;❙\; Q • P^{[R]})\)</li>
+<li><b>(8.t.∀) (9.4) <a href="#org5686845">Theorem</a>, Trading:</b> \((∀ x \;❙\; Q ∧ R • P) ≡ (∀ x \;❙\; Q • R ⇒ P)\)</li>
+<li><b>(8.t.∃) (9.20) <a href="#org5686845">Theorem</a>, Trading:</b> \((∃ x \;❙\; Q ∧ R • P) ≡ (∃ x \;❙\; Q • R ∧ P)\)</li>
 </ul>
 
 <hr />
@@ -7545,11 +7531,11 @@ By contextual rules, and conditional rules,
 </p>
 
 <p>
-<b>(8.c) <a href="#org015fd34">Theorem</a>, Context:</b> \((⊕ x \;❙\; R ∧ e = f • P[z ≔ e]) = (⊕ x \;❙\; R • P[z ≔ f])\)
+<b>(8.c) <a href="#org5686845">Theorem</a>, Context:</b> \((⊕ x \;❙\; R ∧ e = f • P[z ≔ e]) = (⊕ x \;❙\; R • P[z ≔ f])\)
 </p>
 
 <p>
-<b>(8.c′) <a href="#org015fd34">Theorem</a>, Context:</b> \((⊕ x \;❙\; R • P[z ≔ R]) = (⊕ x \;❙\; R • P[z ≔ true])\)
+<b>(8.c′) <a href="#org5686845">Theorem</a>, Context:</b> \((⊕ x \;❙\; R • P[z ≔ R]) = (⊕ x \;❙\; R • P[z ≔ true])\)
 </p>
 </div>
 </div>
@@ -7729,20 +7715,20 @@ See, for example, (9.9).
 </div>
 </div>
 <div id="outline-container-Predicate-Calculus" class="outline-3">
-<h3 id="Predicate-Calculus"><span class="section-number-3">8.14</span> <a href="#Predicate-Calculus"> <a href="#orgba40e7f">Predicate</a> <a href="#orgf9f5db8">Calculus</a></a></h3>
+<h3 id="Predicate-Calculus"><span class="section-number-3">8.14</span> <a href="#Predicate-Calculus"> <a href="#org41d44d1">Predicate</a> <a href="#orgcb3e028">Calculus</a></a></h3>
 <div class="outline-text-3" id="text-Predicate-Calculus">
 <ol class="org-ol">
-<li><i><a href="#orgba40e7f">Predicate</a> logic</i> is an extension of <a href="#org89dd682">propositional</a> logic that allows the use of
+<li><i><a href="#org41d44d1">Predicate</a> logic</i> is an extension of <a href="#org535edc9">propositional</a> logic that allows the use of
 variables of types other than 𝔹.</li>
 
 <li>This extension leafs to a logic with enhanced expressive and deductive power.</li>
 
-<li>A <a href="#orgba40e7f">predicate</a>-<a href="#orgf9f5db8">calculus</a> formula is a Boolean expression in which some Boolean
+<li>A <a href="#org41d44d1">predicate</a>-<a href="#orgcb3e028">calculus</a> formula is a Boolean expression in which some Boolean
 variables may have been replaced by:
 
 <ul class="org-ul">
 <li><i>Predicates</i>, which are applications of Boolean functions whose arguments may
-be of types other than 𝔹; e.g., \(x < y\) is formed using the <a href="#orgba40e7f">predicate</a>
+be of types other than 𝔹; e.g., \(x < y\) is formed using the <a href="#org41d44d1">predicate</a>
 symbol ‘&lt;’.</li>
 
 <li>Universal and existential quantification, as discussed in this section.</li>
@@ -7780,7 +7766,7 @@ along with an additional one below.
 </table>
 
 <p>
-<b>(9.29) <a href="#org015fd34">Theorem</a>, Interchange of quantifications:</b>
+<b>(9.29) <a href="#org5686845">Theorem</a>, Interchange of quantifications:</b>
 \((∃ x\;❙\;R • (∀ y\;❙\;Q • P)) \quad⇒\quad (∀ x\;❙\;Q • (∃ x\;❙\;R • P))\).
 </p>
 
@@ -7971,10 +7957,10 @@ How many 4-digit numbers are there that do not start with ‘12’?
 
 
 <p>
-The <code>Range Split</code> refers to the <a href="#org015fd34">theorem</a>
+The <code>Range Split</code> refers to the <a href="#org5686845">theorem</a>
 \[(Σ x \;❙\; R ∧ ¬ R′ \;•\; E) \quad=\quad (Σ x \;❙\; R \;•\; E) \,-\, (Σ x
 \;❙\; R ∧ R′ \;•\; E)\]
-This <a href="#org015fd34">theorem</a> is also known as <code>Counting Complements</code>.
+This <a href="#org5686845">theorem</a> is also known as <code>Counting Complements</code>.
 ( Taking R ≔ true is useful. )
 </p>
 <p>
@@ -8132,7 +8118,7 @@ Iterating Pascal’s Formula yields,
 </p></li>
 
 <li><p>
-<b>The Binomial <a href="#org015fd34">Theorem</a>:</b>
+<b>The Binomial <a href="#org5686845">Theorem</a>:</b>
 \(n \in ℕ \implies (x+y)^n = \sum_{k=0}^n \binom{n}{k}x^{n-k}y^k\)
 </p>
 
@@ -8150,7 +8136,7 @@ Alternatively the proof is simple after we prove the auxiliary result
 
 <p>
 Multiplying by \(x\) and/or performing successive differentiations
-on the binomial <a href="#org015fd34">theorem</a> is a simple way to obtain some identities.
+on the binomial <a href="#org5686845">theorem</a> is a simple way to obtain some identities.
 </p>
 
 <p>
@@ -8187,7 +8173,7 @@ Corollary: \(\binom{2n}{n} = \sum_{k=0}^n \binom{n}{k}^2\).
 </p>
 
 <p>
-Algebraic Proof: Letting \(x=y=1\) in the binomial <a href="#org015fd34">theorem</a>,
+Algebraic Proof: Letting \(x=y=1\) in the binomial <a href="#org5686845">theorem</a>,
 yields \(\sum_{k=1}^n \binom{n}{k}=2^n\).
 </p>
 
@@ -8296,9 +8282,9 @@ some compartment receives more than \(k\) of the objects.
 
 <p>
 It is argued that since (0) does not explicitly mention \(n\) and \(k\) explicitly,
-this eases application of th <a href="#org015fd34">theorem</a> since a user would not need to hunt them
+this eases application of th <a href="#org5686845">theorem</a> since a user would not need to hunt them
 down explicitly. Moreover, (1) is ‘operational’: It requires users identity
-objects, compartments, and a distribution process &#x2014;but (0) is <a href="#orge63af20">valid</a> when no
+objects, compartments, and a distribution process &#x2014;but (0) is <a href="#orgcd4e5f6">valid</a> when no
 process of distribution is involved. Perhaps the worst offence of
 (1) is that it forces us to treat numbers not as independent entities but rather
 as a tool that serve to count objects &#x2014;which is not a useful interpretation to
@@ -8385,7 +8371,7 @@ Anyhow, (0′) is a familiar property of summation.
 
 <ul class="org-ul">
 <li><p>
-<b><a href="#org015fd34">Theorem</a>:</b> If \(n+1\) objects are distributed into \(n\) boxes, then
+<b><a href="#org5686845">Theorem</a>:</b> If \(n+1\) objects are distributed into \(n\) boxes, then
 at least one box contains two or more of the objects.
 </p>
 <blockquote>
@@ -8638,7 +8624,7 @@ proportional to, well, its likelihood of occurring. We define the
 </p>
 
 <p>
-This is a potentially infinite sum, but by change-of-<a href="#orgbf53884">dummy</a>, we have a nicer
+This is a potentially infinite sum, but by change-of-<a href="#orgb02298d">dummy</a>, we have a nicer
 form in-terms of events: \[\E X \;=\; (∑ e : 𝑼 \;•\; X(e) · \Pr e)\]
 </p>
 
@@ -8724,7 +8710,14 @@ is a subset of \(A × B\); i.e., \(R ⊆ A × B\). If \(⟨x, y⟩ ∈ R\) one s
 <li>The smallest and largest subsets of <i>A × B</i> are known as the <b>empty relation</b> ∅
 which does not relates any items, and the <b>universal relation</b> ⊤ which relates all
 items (and so provides ‘no information’).</li>
-<li>When <i>A = B</i>, one speaks of <b>homogeneous relations</b>; otherwise <b>heterogeneous relations</b>.</li>
+<li><p>
+When <i>A = B</i>, one speaks of <b>homogeneous relations</b>; otherwise <b>heterogeneous relations</b>.
+</p>
+
+<p>
+In terms of matrices this amount to passing from square matrices to general
+rectangular ones.
+</p></li>
 </ul>
 
 <p>
@@ -9390,6 +9383,13 @@ The <b>composition</b> is defined by \(a 〔R ⨾ S〕c \;≡\; (∃ b : B • a
 Intuitively,
 </p>
 <ul class="org-ul">
+<li>For \(R : A ↔ B\), the elements of \(A\) affected by \(R\) are captured by the
+relation \(R ⨾ ⊤\), whereas \(R˘ ⨾ ⊤\) refers to the elements of \(B\) affected by
+\(R\).
+<ul class="org-ul">
+<li>Later we will see relations of the form \(Q ⨾ ⊤\) as “vectors”; i.e.,
+<b>sets disguised as relations</b>.</li>
+</ul></li>
 <li>Composition is an associative operation: \(Q ⨾ (R ⨾ S) = (Q ⨾ R) ⨾ S\).</li>
 <li>It has the identity relation (loops only) as unit element and
 the empty relation (no edges at all) as the zero element:
@@ -10011,8 +10011,364 @@ A relation without incomparable elements is semilinear.
 </div>
 </div>
 
+<div id="outline-container-COMMENT-Properties-of-Heterogeneous-Relations" class="outline-3">
+<h3 id="COMMENT-Properties-of-Heterogeneous-Relations"><span class="section-number-3">11.6</span> <a href="#COMMENT-Properties-of-Heterogeneous-Relations">Properties of <i>Heterogeneous</i> Relations</a></h3>
+<div class="outline-text-3" id="text-COMMENT-Properties-of-Heterogeneous-Relations">
+<ul class="org-ul">
+<li><p>
+<b>Univalent (partially defined function):</b> <i>Equal elements are related to equal elements; i.e., an element
+cannot be related to two different elements.</i>
+</p>
+
+<p>
+<i>That is, every source value x is associated <b>*at most</b> one* target value y.</i>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is univalent</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x, y, y′  • x 〔 R 〕 y ∧ x 〔R〕 y′  ⇒ y = y′</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R ˘ ⨾ R  ⊆ \Id\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R ⨾ \sim \Id \;⊆\; \sim R\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(∀ S • R ⨾ \sim S \;⊆\; \sim (R ⨾ S)\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ S • R ⨾ ∼ S = R ⨾ ⊤ ∩ ∼(R ⨾ S)</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ Q, S •  R ⨾ (Q ∩ S) = R ⨾ Q ∩ R ⨾ S</i>   &#x2014;c.f., ⨾ sub-distributes over ∩</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ Q, S • Q⨾R ∩ S = (Q ∩ S ⨾ R˘)⨾R</i>       &#x2014;c.f., the Dedekind rule</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The formula \(R ⨾ \sim \Id \;⊆ \sim R\) reads “If <i>x</i> is <i>R</i>-related to a value
+different from <i>y</i>, then it is not <i>R</i>-related to <i>y</i>.”
+It continues to hold when we replace the identity by an arbitrary relation.
+</p>
+
+<p>
+The 5th row reads, <i>the preimage of the complement is the same as the complement
+of the preimage intersected with the domain</i>.
+</p>
+
+<p>
+For a map \(f\), the 6th row becomes: \(f(A ∩ B) \;=\; f(A) ∩ f(B)\),
+using conventional direct image notation; i.e.,
+<i>for a function, the preimage of an intersection is the intersection of preimages</i>.
+</p>
+
+<p>
+Likewise, for a map \(f\), we have /the intersection of \(B\) with a function's
+image is the same as the image of an intersection involving the preimage of
+$B$/; i.e., \(f(A) ∩ B = f(A ∩ f^{-1}(B))\).
+</p></li>
+
+<li><p>
+<b>Total:</b> <i>Every source value x is associated <b>at least one</b> target value y.</i>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is total</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ x • ∃ y • x 〔 R 〕 y</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(⊤ = R ⨾ ⊤\) (“defined everywhere”)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(⊥ = \sim (R ⨾ ⊤)\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\Id ⊆ R ⨾ R ˘\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\sim R \;⊆\; R ⨾ \sim \Id\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(∀ S • \sim (R ⨾ S) \;⊆\; R ⨾ \sim S\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(∀ Q • Q ⨾ R = ⊥ ≡ Q = ⊥\)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The formula \(\sim R \;⊆\; R ⨾ \sim \Id\) reads “If <i>x</i> is not <i>R</i>-related to
+<i>y</i>, then <i>x</i> is <i>R/related to some element different from /y</i>.”
+It continues to hold when we replace the identity by an arbitrary relation.
+</p>
+
+<p>
+The final formula says that \(R\) is post-annihilated by the empty relation only.
+</p>
+
+<ul class="org-ul">
+<li><p>
+Note: \(\sim(R ⨾ ⊤) = ⊤ \;≡\; R = ⊥\), for any \(R\).
+</p>
+
+<p>
+<i>The complement of a relation's domain is everything precisely when the
+relation is empty.</i>
+</p></li>
+</ul></li>
+
+<li><p>
+<b>Map (totally defined function):</b> <i>Every source value x is associated <b>exactly one</b>
+target value y.</i>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(F\) is a map</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(F\) is total and univalent</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(F ⨾ \sim \Id \;=\; \sim F\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(∀ S • F ⨾ \sim S \;=\; \sim (F ⨾ S)\)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The final rule says <i>the preimage of the complement is the complement of the
+preimage</i>; or, using conventional direct image notation, \(f⁻¹(\sim A) \;=\;
+  \sim f⁻¹(A)\).
+</p>
+
+<p>
+<b>Shunting rule:</b> If \(F\) is a map, then
+\[R ⊆ S ⨾ F ˘ \quad≡\quad R ⨾ F ⊆ S \]
+</p>
+
+<p>
+In conventional direct image notation, this amount to a Galois connection:
+\(A ⊆ f⁻¹(B) \quad≡\quad f(A) ⊆ B\).
+</p></li>
+
+<li><p>
+<b>Surjective:</b> <i>Every source value y is associated <b>at least</b> one source value x.</i>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is surjective</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R˘\) is total</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(⊤ ⨾ R = ⊤\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\Id ⊆ R ˘ ⨾ R\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\sim R \;⊆\; \sim \Id ⨾ R\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left"><i>∀ S • R ⨾ S = ⊥ ≡ S = ⊥</i></td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>
+<b>Injective:</b> <i>Every source value y is associated <b>at most</b> one source value x.</i>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is injective</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R˘\) is univalent</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R  ⨾ R ˘ ⊆ \Id\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(\sim \Id ⨾ R \;⊆\; \sim R\)</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>
+<b>Bijective:</b> <i>Every source value y is associated <b>exactly one</b> source value x.</i>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">\(R\) is bijective</td>
+</tr>
+
+<tr>
+<td class="org-left"><i>=</i></td>
+<td class="org-left">\(R\) is injective and surjective</td>
+</tr>
+</tbody>
+</table></li>
+
+<li>An <b>iso</b> is a bijective mapping, also known as a <b>permutation.</b></li>
+
+<li><p>
+If \(R\) is finite, then
+\[ R ⨾ R ˘ = \Id \quad≡\quad  (∃ m • Rᵐ = \Id ∧ Rᵐ⁻¹ = R ˘) \]
+</p>
+
+<p>
+For the nontrivial direction “⇒”, since \(X\) and \(Y\) are finite
+that means \(X ↔ Y\) is finite and so among all powers of \(R\),
+at least two coincide &#x2014;by the pigeon-hole principle.
+Say, \(Rⁱ = Rʲ\) for some \(i > j\). Then
+</p>
+
+\begin{calc}
+Rⁱ⁻ʲ
+\step{ Negative powers as powers of converse }
+Rⁱ ⨾ (R ˘)ʲ
+\step{ Assumption $Rⁱ = Rʲ$ }
+Rⁱ ⨾ (R ˘)ⁱ
+\step{ $R ⨾ R˘ = \Id$ and so, apply induction }
+\Id
+\end{calc}
+
+<p>
+Hence, \(Rᵐ = \Id\) where \(m = i - j\).
+</p>
+
+<p>
+Then, \(Rᵐ⁻¹ = Rᵐ⁻¹ ⨾ \Id = Rᵐ⁻¹ ⨾ R ⨾ R ˘ = Rᵐ ⨾ R˘ = \Id ⨾ R˘ = R˘\) ♥‿♥
+</p></li>
+</ul>
+</div>
+</div>
+
+
 <div id="outline-container-Equivalence-Relations" class="outline-3">
-<h3 id="Equivalence-Relations"><span class="section-number-3">11.6</span> <a href="#Equivalence-Relations">Equivalence Relations</a></h3>
+<h3 id="Equivalence-Relations"><span class="section-number-3">11.7</span> <a href="#Equivalence-Relations">Equivalence Relations</a></h3>
 <div class="outline-text-3" id="text-Equivalence-Relations">
 <p>
 Relations \(R\) that <i>model</i>
@@ -10214,6 +10570,26 @@ Notice:
   = ⊤\).</li>
 </ul>
 
+
+<div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>Surjections (“Colourings”) ≈ Equivalences ≈ Partitions</h3>
+<p>
+Surjective functions correspond precisely to equivalence relations:
+\[ f \text{ surjective } \quad≡\quad \sim_f \text{ equivalence } \]
+\[ [\_]_Ξ \text{surjective} \quad≡\quad Ξ \text{ equivalence } \]
+</p>
+
+<p>
+A surjective function, or partition, can be thought of as a
+“a classification”; e.g., in graph theory,
+an <i>n</i>-partite graph is a graph that can be coloured with at most <i>n</i> colours
+(in such a way that related points have distinct colours).
+</p>
+
+</div>
+
+
+
+
 <hr />
 
 <p>
@@ -10262,7 +10638,7 @@ preorder \(E_Ξ = Ξ ⨾ E ⨾ Ξ\) on the equivalence classes; i.e.,
 </p>
 
 <p>
-In particular, taking \(Ξ = E ∩ E˘\) truthifies the hypotheses of the <a href="#org015fd34">theorem</a>
+In particular, taking \(Ξ = E ∩ E˘\) truthifies the hypotheses of the <a href="#org5686845">theorem</a>
 and so every preorder \(E\) induces an ordering on the equivalence classes of
 \(E ∩ E˘\).
 </p></li>
@@ -10276,11 +10652,11 @@ and so every preorder \(E\) induces an ordering on the equivalence classes of
 
 
 <div id="outline-container-Closures" class="outline-3">
-<h3 id="Closures"><span class="section-number-3">11.7</span> <a href="#Closures">Closures</a></h3>
+<h3 id="Closures"><span class="section-number-3">11.8</span> <a href="#Closures">Closures</a></h3>
 <div class="outline-text-3" id="text-Closures">
 <p>
 Given an ordered set (τ, ⊑),
-let φ be any <i>property</i>; i.e., a <a href="#orgba40e7f">predicate</a> <i>τ → 𝔹</i>.
+let φ be any <i>property</i>; i.e., a <a href="#org41d44d1">predicate</a> <i>τ → 𝔹</i>.
 </p>
 
 <p>
@@ -10479,7 +10855,7 @@ equivalence relation.
 </div>
 
 <div id="outline-container-C-Interplay-between-composition-conversion-complement-and-containment" class="outline-3">
-<h3 id="C-Interplay-between-composition-conversion-complement-and-containment"><span class="section-number-3">11.8</span> <a href="#C-Interplay-between-composition-conversion-complement-and-containment">C⁴: Interplay between composition, conversion, complement, and containment</a></h3>
+<h3 id="C-Interplay-between-composition-conversion-complement-and-containment"><span class="section-number-3">11.9</span> <a href="#C-Interplay-between-composition-conversion-complement-and-containment">C⁴: Interplay between composition, conversion, complement, and containment</a></h3>
 <div class="outline-text-3" id="text-C-Interplay-between-composition-conversion-complement-and-containment">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -10495,7 +10871,7 @@ equivalence relation.
 </table>
 
 <p>
-That is, only one of them needs to be proven using quantifiers and <a href="#orgbf53884">dummy</a>
+That is, only one of them needs to be proven using quantifiers and <a href="#orgb02298d">dummy</a>
 variables, and then it can be used to prove the rest using only
 relation-algebraic reasoning &#x2014;i.e., without resorting to “unfolding ‘⊆’ or ‘⨾’
 into quantifiers.”
@@ -10945,7 +11321,7 @@ represented as a vertex with more than one incoming arc.
 
 
 
-<div id="org4d27f20" class="figure">
+<div id="orga787ae7" class="figure">
 <p><img src="images/dags-allow-sharing.png" alt="dags-allow-sharing.png" />
 </p>
 </div>
@@ -10971,7 +11347,7 @@ reflexive-transitive closure gives the properer containment on the power set
 
 
 
-<div id="orge0632bf" class="figure">
+<div id="org4047509" class="figure">
 <p><img src="order.png" alt="order.png" />
 </p>
 </div>
@@ -10992,7 +11368,7 @@ courses. Course C3, for example, requires courses C1 and C2 as prerequisites.
 
 <div class="org-center">
 
-<div id="orgf3cd711" class="figure">
+<div id="orgb5def8a" class="figure">
 <p><img src="images/top-sort.png" alt="top-sort.png" />
 </p>
 </div>
@@ -11074,7 +11450,7 @@ topological sort is a constructive proof of the following theorem&#x2026;
 </p>
 
 <p>
-<a href="#org015fd34">Theorem</a>: Every partial order can be extended to a linear order.
+<a href="#org5686845">Theorem</a>: Every partial order can be extended to a linear order.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -11104,11 +11480,37 @@ directed arc <b>from</b> <code>x</code> <b>to</b> <code>y</code>.
 </p>
 
 <p>
-Try to determined if the relation is total, univalent, injective, and/or surjective.
+Try to determine if the relation is total, univalent, injective, and/or surjective.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Please use the <b>Course Help</b> if you want to discuss <i>why</i> a certain graph has a property.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Hint: Look at the <code>prop</code> Lisp code below ;-) <i>Or</i> Look at the 2DM3CheatSheet ;-)
 </p>
 
 <p>
-Hint: Look at the <abbr class="tooltip" title="Check if R : 1..n ↔ 1..n has certain properties.<br>Returns an alist, not a plist, of properties.">prop</abbr> Lisp code below ;-) <i>Or</i> Look at the 2DM3CheatSheet ;-)
+The answers are <b>hidden</b> so you can solve the problem; <b>
+
+<span style="color:green;">
+
+hover
+
+</span>
+
+</b> on the
+hidden answer to see it.
 </p>
 
 </div>
@@ -11189,7 +11591,7 @@ Returns an alist, not a plist, of properties."
 </p>
 
 
-<div id="org348a7b1" class="figure">
+<div id="org88419b6" class="figure">
 <p><img src="images/practice_graph_0.png" alt="practice_graph_0.png" />
 </p>
 </div>
@@ -11214,7 +11616,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org652586d" class="figure">
+<div id="org72e57ed" class="figure">
 <p><img src="images/practice_graph_1.png" alt="practice_graph_1.png" />
 </p>
 </div>
@@ -11239,7 +11641,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orgde3b7c0" class="figure">
+<div id="orgc156ccb" class="figure">
 <p><img src="images/practice_graph_2.png" alt="practice_graph_2.png" />
 </p>
 </div>
@@ -11264,7 +11666,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org6537b6f" class="figure">
+<div id="orgae132c2" class="figure">
 <p><img src="images/practice_graph_3.png" alt="practice_graph_3.png" />
 </p>
 </div>
@@ -11289,7 +11691,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgf29b045" class="figure">
+<div id="org83406be" class="figure">
 <p><img src="images/practice_graph_4.png" alt="practice_graph_4.png" />
 </p>
 </div>
@@ -11314,7 +11716,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org36558b5" class="figure">
+<div id="orge8d53d5" class="figure">
 <p><img src="images/practice_graph_5.png" alt="practice_graph_5.png" />
 </p>
 </div>
@@ -11339,7 +11741,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org298ce82" class="figure">
+<div id="org4ee7a7a" class="figure">
 <p><img src="images/practice_graph_6.png" alt="practice_graph_6.png" />
 </p>
 </div>
@@ -11364,7 +11766,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org13f3fc7" class="figure">
+<div id="orgb428756" class="figure">
 <p><img src="images/practice_graph_7.png" alt="practice_graph_7.png" />
 </p>
 </div>
@@ -11389,7 +11791,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="org7094ce3" class="figure">
+<div id="org093cf29" class="figure">
 <p><img src="images/practice_graph_8.png" alt="practice_graph_8.png" />
 </p>
 </div>
@@ -11414,7 +11816,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orge344cda" class="figure">
+<div id="org2c2975a" class="figure">
 <p><img src="images/practice_graph_9.png" alt="practice_graph_9.png" />
 </p>
 </div>
@@ -11439,7 +11841,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orgb458e40" class="figure">
+<div id="orgb047207" class="figure">
 <p><img src="images/practice_graph_10.png" alt="practice_graph_10.png" />
 </p>
 </div>
@@ -11464,7 +11866,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org9297146" class="figure">
+<div id="org50e5abd" class="figure">
 <p><img src="images/practice_graph_11.png" alt="practice_graph_11.png" />
 </p>
 </div>
@@ -11489,7 +11891,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgdab2ddd" class="figure">
+<div id="org1e4b6f8" class="figure">
 <p><img src="images/practice_graph_12.png" alt="practice_graph_12.png" />
 </p>
 </div>
@@ -11514,7 +11916,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgb605425" class="figure">
+<div id="org29ae6e3" class="figure">
 <p><img src="images/practice_graph_13.png" alt="practice_graph_13.png" />
 </p>
 </div>
@@ -11539,7 +11941,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="org707645c" class="figure">
+<div id="orgc16e46d" class="figure">
 <p><img src="images/practice_graph_14.png" alt="practice_graph_14.png" />
 </p>
 </div>
@@ -11564,7 +11966,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orge85f742" class="figure">
+<div id="org250a65f" class="figure">
 <p><img src="images/practice_graph_15.png" alt="practice_graph_15.png" />
 </p>
 </div>
@@ -11589,7 +11991,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org15aa9b0" class="figure">
+<div id="orge9c6a9b" class="figure">
 <p><img src="images/practice_graph_16.png" alt="practice_graph_16.png" />
 </p>
 </div>
@@ -11614,7 +12016,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org3af1dcd" class="figure">
+<div id="orge14090b" class="figure">
 <p><img src="images/practice_graph_17.png" alt="practice_graph_17.png" />
 </p>
 </div>
@@ -11639,7 +12041,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org4d60e17" class="figure">
+<div id="org76470fb" class="figure">
 <p><img src="images/practice_graph_18.png" alt="practice_graph_18.png" />
 </p>
 </div>
@@ -11664,7 +12066,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="orga36a29a" class="figure">
+<div id="org43d2caa" class="figure">
 <p><img src="images/practice_graph_19.png" alt="practice_graph_19.png" />
 </p>
 </div>
@@ -11689,7 +12091,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org1de0883" class="figure">
+<div id="org1b7d99a" class="figure">
 <p><img src="images/practice_graph_20.png" alt="practice_graph_20.png" />
 </p>
 </div>
@@ -11714,7 +12116,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org4cbfa0d" class="figure">
+<div id="org1e8c9da" class="figure">
 <p><img src="images/practice_graph_21.png" alt="practice_graph_21.png" />
 </p>
 </div>
@@ -11739,7 +12141,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org7c84e9c" class="figure">
+<div id="org2b861a2" class="figure">
 <p><img src="images/practice_graph_22.png" alt="practice_graph_22.png" />
 </p>
 </div>
@@ -11764,7 +12166,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org7838514" class="figure">
+<div id="org4b061d5" class="figure">
 <p><img src="images/practice_graph_23.png" alt="practice_graph_23.png" />
 </p>
 </div>
@@ -11789,7 +12191,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org6b87369" class="figure">
+<div id="orgdd5c4c9" class="figure">
 <p><img src="images/practice_graph_24.png" alt="practice_graph_24.png" />
 </p>
 </div>
@@ -11814,7 +12216,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org61fefdd" class="figure">
+<div id="org9ebcd10" class="figure">
 <p><img src="images/practice_graph_25.png" alt="practice_graph_25.png" />
 </p>
 </div>
@@ -11839,7 +12241,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orgf83a0cc" class="figure">
+<div id="org11fcae4" class="figure">
 <p><img src="images/practice_graph_26.png" alt="practice_graph_26.png" />
 </p>
 </div>
@@ -11864,7 +12266,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org828ae37" class="figure">
+<div id="org044c9fd" class="figure">
 <p><img src="images/practice_graph_27.png" alt="practice_graph_27.png" />
 </p>
 </div>
@@ -11889,7 +12291,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgf9f7107" class="figure">
+<div id="orgca77d0b" class="figure">
 <p><img src="images/practice_graph_28.png" alt="practice_graph_28.png" />
 </p>
 </div>
@@ -11914,7 +12316,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org372c7a2" class="figure">
+<div id="orgbc2c933" class="figure">
 <p><img src="images/practice_graph_29.png" alt="practice_graph_29.png" />
 </p>
 </div>
@@ -11939,7 +12341,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org054db7f" class="figure">
+<div id="org58eb3ff" class="figure">
 <p><img src="images/practice_graph_30.png" alt="practice_graph_30.png" />
 </p>
 </div>
@@ -11964,7 +12366,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgad6141b" class="figure">
+<div id="orgfc92a0a" class="figure">
 <p><img src="images/practice_graph_31.png" alt="practice_graph_31.png" />
 </p>
 </div>
@@ -11989,7 +12391,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgee8b3cb" class="figure">
+<div id="org8f9c664" class="figure">
 <p><img src="images/practice_graph_32.png" alt="practice_graph_32.png" />
 </p>
 </div>
@@ -12014,7 +12416,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org3a86fc9" class="figure">
+<div id="orga66140e" class="figure">
 <p><img src="images/practice_graph_33.png" alt="practice_graph_33.png" />
 </p>
 </div>
@@ -12039,7 +12441,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org1d51eb1" class="figure">
+<div id="org2406e5f" class="figure">
 <p><img src="images/practice_graph_34.png" alt="practice_graph_34.png" />
 </p>
 </div>
@@ -12064,7 +12466,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orga251e68" class="figure">
+<div id="org375abb4" class="figure">
 <p><img src="images/practice_graph_35.png" alt="practice_graph_35.png" />
 </p>
 </div>
@@ -12089,7 +12491,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org4799849" class="figure">
+<div id="org3c106ba" class="figure">
 <p><img src="images/practice_graph_36.png" alt="practice_graph_36.png" />
 </p>
 </div>
@@ -12114,7 +12516,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="org38acb68" class="figure">
+<div id="org15f1f11" class="figure">
 <p><img src="images/practice_graph_37.png" alt="practice_graph_37.png" />
 </p>
 </div>
@@ -12139,7 +12541,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org2996b83" class="figure">
+<div id="orgba1dc8d" class="figure">
 <p><img src="images/practice_graph_38.png" alt="practice_graph_38.png" />
 </p>
 </div>
@@ -12164,7 +12566,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org1d0430e" class="figure">
+<div id="org4a58a75" class="figure">
 <p><img src="images/practice_graph_39.png" alt="practice_graph_39.png" />
 </p>
 </div>
@@ -12189,7 +12591,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orgdb6bbae" class="figure">
+<div id="orgdbb4b42" class="figure">
 <p><img src="images/practice_graph_40.png" alt="practice_graph_40.png" />
 </p>
 </div>
@@ -12214,7 +12616,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orga4659b1" class="figure">
+<div id="org2fd1e01" class="figure">
 <p><img src="images/practice_graph_41.png" alt="practice_graph_41.png" />
 </p>
 </div>
@@ -12239,7 +12641,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orga3184b3" class="figure">
+<div id="orgf7eca28" class="figure">
 <p><img src="images/practice_graph_42.png" alt="practice_graph_42.png" />
 </p>
 </div>
@@ -12264,7 +12666,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgac22791" class="figure">
+<div id="org8929132" class="figure">
 <p><img src="images/practice_graph_43.png" alt="practice_graph_43.png" />
 </p>
 </div>
@@ -12289,7 +12691,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org05768fa" class="figure">
+<div id="orgf49c0d8" class="figure">
 <p><img src="images/practice_graph_44.png" alt="practice_graph_44.png" />
 </p>
 </div>
@@ -12314,7 +12716,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org82f4e42" class="figure">
+<div id="orge05347f" class="figure">
 <p><img src="images/practice_graph_45.png" alt="practice_graph_45.png" />
 </p>
 </div>
@@ -12339,7 +12741,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orge652e97" class="figure">
+<div id="org7c46786" class="figure">
 <p><img src="images/practice_graph_46.png" alt="practice_graph_46.png" />
 </p>
 </div>
@@ -12364,7 +12766,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org7abb13d" class="figure">
+<div id="org861bbb1" class="figure">
 <p><img src="images/practice_graph_47.png" alt="practice_graph_47.png" />
 </p>
 </div>
@@ -12389,7 +12791,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orgece428a" class="figure">
+<div id="orgeafab09" class="figure">
 <p><img src="images/practice_graph_48.png" alt="practice_graph_48.png" />
 </p>
 </div>
@@ -12414,7 +12816,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org280c434" class="figure">
+<div id="org66d3069" class="figure">
 <p><img src="images/practice_graph_49.png" alt="practice_graph_49.png" />
 </p>
 </div>
@@ -12439,7 +12841,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="orga3f4e2b" class="figure">
+<div id="org3f8b364" class="figure">
 <p><img src="images/practice_graph_50.png" alt="practice_graph_50.png" />
 </p>
 </div>
@@ -12464,7 +12866,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org2564e6d" class="figure">
+<div id="orgee8ae16" class="figure">
 <p><img src="images/practice_graph_51.png" alt="practice_graph_51.png" />
 </p>
 </div>
@@ -12489,7 +12891,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgfbd618b" class="figure">
+<div id="org7a793ed" class="figure">
 <p><img src="images/practice_graph_52.png" alt="practice_graph_52.png" />
 </p>
 </div>
@@ -12514,7 +12916,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgc45ab1c" class="figure">
+<div id="orgcf36b53" class="figure">
 <p><img src="images/practice_graph_53.png" alt="practice_graph_53.png" />
 </p>
 </div>
@@ -12539,7 +12941,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org2b749d0" class="figure">
+<div id="org55aef46" class="figure">
 <p><img src="images/practice_graph_54.png" alt="practice_graph_54.png" />
 </p>
 </div>
@@ -12564,7 +12966,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org23640d5" class="figure">
+<div id="org21d63db" class="figure">
 <p><img src="images/practice_graph_55.png" alt="practice_graph_55.png" />
 </p>
 </div>
@@ -12589,7 +12991,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgdd713dd" class="figure">
+<div id="orgc508519" class="figure">
 <p><img src="images/practice_graph_56.png" alt="practice_graph_56.png" />
 </p>
 </div>
@@ -12614,7 +13016,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org68f746a" class="figure">
+<div id="org8b3bc26" class="figure">
 <p><img src="images/practice_graph_57.png" alt="practice_graph_57.png" />
 </p>
 </div>
@@ -12639,7 +13041,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgba1ac7e" class="figure">
+<div id="org7b611dc" class="figure">
 <p><img src="images/practice_graph_58.png" alt="practice_graph_58.png" />
 </p>
 </div>
@@ -12664,7 +13066,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="org4251f3e" class="figure">
+<div id="orgb5a421f" class="figure">
 <p><img src="images/practice_graph_59.png" alt="practice_graph_59.png" />
 </p>
 </div>
@@ -12689,7 +13091,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orga6dadfb" class="figure">
+<div id="org39489fc" class="figure">
 <p><img src="images/practice_graph_60.png" alt="practice_graph_60.png" />
 </p>
 </div>
@@ -12714,7 +13116,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="orga000406" class="figure">
+<div id="orgcbc43ed" class="figure">
 <p><img src="images/practice_graph_61.png" alt="practice_graph_61.png" />
 </p>
 </div>
@@ -12739,7 +13141,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgea292a0" class="figure">
+<div id="orgc8ed42b" class="figure">
 <p><img src="images/practice_graph_62.png" alt="practice_graph_62.png" />
 </p>
 </div>
@@ -12764,7 +13166,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgc4f7904" class="figure">
+<div id="org6579213" class="figure">
 <p><img src="images/practice_graph_63.png" alt="practice_graph_63.png" />
 </p>
 </div>
@@ -12789,7 +13191,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orge4f476d" class="figure">
+<div id="orgd135794" class="figure">
 <p><img src="images/practice_graph_64.png" alt="practice_graph_64.png" />
 </p>
 </div>
@@ -12814,7 +13216,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org1810c42" class="figure">
+<div id="org10939de" class="figure">
 <p><img src="images/practice_graph_65.png" alt="practice_graph_65.png" />
 </p>
 </div>
@@ -12839,7 +13241,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org3609884" class="figure">
+<div id="org032dbec" class="figure">
 <p><img src="images/practice_graph_66.png" alt="practice_graph_66.png" />
 </p>
 </div>
@@ -12864,7 +13266,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orga085d6d" class="figure">
+<div id="org5a525d6" class="figure">
 <p><img src="images/practice_graph_67.png" alt="practice_graph_67.png" />
 </p>
 </div>
@@ -12889,7 +13291,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgcacfe1f" class="figure">
+<div id="orgd80ff7c" class="figure">
 <p><img src="images/practice_graph_68.png" alt="practice_graph_68.png" />
 </p>
 </div>
@@ -12914,7 +13316,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org68e753f" class="figure">
+<div id="org3f71392" class="figure">
 <p><img src="images/practice_graph_69.png" alt="practice_graph_69.png" />
 </p>
 </div>
@@ -12939,7 +13341,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org1e54ad6" class="figure">
+<div id="orgf68d49b" class="figure">
 <p><img src="images/practice_graph_70.png" alt="practice_graph_70.png" />
 </p>
 </div>
@@ -12964,7 +13366,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org6a45c38" class="figure">
+<div id="orgdfb282d" class="figure">
 <p><img src="images/practice_graph_71.png" alt="practice_graph_71.png" />
 </p>
 </div>
@@ -12989,7 +13391,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org3e7a91c" class="figure">
+<div id="org346f944" class="figure">
 <p><img src="images/practice_graph_72.png" alt="practice_graph_72.png" />
 </p>
 </div>
@@ -13014,7 +13416,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org68d77d0" class="figure">
+<div id="org89a14b7" class="figure">
 <p><img src="images/practice_graph_73.png" alt="practice_graph_73.png" />
 </p>
 </div>
@@ -13039,7 +13441,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org6a465cb" class="figure">
+<div id="org6d943e2" class="figure">
 <p><img src="images/practice_graph_74.png" alt="practice_graph_74.png" />
 </p>
 </div>
@@ -13064,7 +13466,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orga649ba9" class="figure">
+<div id="orgdfa5dbc" class="figure">
 <p><img src="images/practice_graph_75.png" alt="practice_graph_75.png" />
 </p>
 </div>
@@ -13089,7 +13491,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org332db43" class="figure">
+<div id="org7ea4de6" class="figure">
 <p><img src="images/practice_graph_76.png" alt="practice_graph_76.png" />
 </p>
 </div>
@@ -13114,7 +13516,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org332ae18" class="figure">
+<div id="org5923f1d" class="figure">
 <p><img src="images/practice_graph_77.png" alt="practice_graph_77.png" />
 </p>
 </div>
@@ -13139,7 +13541,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org8845270" class="figure">
+<div id="org692da1c" class="figure">
 <p><img src="images/practice_graph_78.png" alt="practice_graph_78.png" />
 </p>
 </div>
@@ -13164,7 +13566,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orgce8f716" class="figure">
+<div id="org052975a" class="figure">
 <p><img src="images/practice_graph_79.png" alt="practice_graph_79.png" />
 </p>
 </div>
@@ -13189,7 +13591,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgd386824" class="figure">
+<div id="orgfee2119" class="figure">
 <p><img src="images/practice_graph_80.png" alt="practice_graph_80.png" />
 </p>
 </div>
@@ -13214,7 +13616,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orge07bbc1" class="figure">
+<div id="org5ddb1c9" class="figure">
 <p><img src="images/practice_graph_81.png" alt="practice_graph_81.png" />
 </p>
 </div>
@@ -13239,7 +13641,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgd94aefe" class="figure">
+<div id="org4a8ebb3" class="figure">
 <p><img src="images/practice_graph_82.png" alt="practice_graph_82.png" />
 </p>
 </div>
@@ -13264,7 +13666,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgadf7ead" class="figure">
+<div id="org838c274" class="figure">
 <p><img src="images/practice_graph_83.png" alt="practice_graph_83.png" />
 </p>
 </div>
@@ -13289,7 +13691,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org230d364" class="figure">
+<div id="org76e65d6" class="figure">
 <p><img src="images/practice_graph_84.png" alt="practice_graph_84.png" />
 </p>
 </div>
@@ -13314,7 +13716,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgd01f265" class="figure">
+<div id="orgcf19df2" class="figure">
 <p><img src="images/practice_graph_85.png" alt="practice_graph_85.png" />
 </p>
 </div>
@@ -13339,7 +13741,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgca00099" class="figure">
+<div id="org8630254" class="figure">
 <p><img src="images/practice_graph_86.png" alt="practice_graph_86.png" />
 </p>
 </div>
@@ -13364,7 +13766,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="org43f12b5" class="figure">
+<div id="org7c3c215" class="figure">
 <p><img src="images/practice_graph_87.png" alt="practice_graph_87.png" />
 </p>
 </div>
@@ -13389,7 +13791,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org4c4ba69" class="figure">
+<div id="org3b20b5a" class="figure">
 <p><img src="images/practice_graph_88.png" alt="practice_graph_88.png" />
 </p>
 </div>
@@ -13414,7 +13816,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgbd6f668" class="figure">
+<div id="orgf38e100" class="figure">
 <p><img src="images/practice_graph_89.png" alt="practice_graph_89.png" />
 </p>
 </div>
@@ -13439,7 +13841,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org3544c29" class="figure">
+<div id="org8487bfa" class="figure">
 <p><img src="images/practice_graph_90.png" alt="practice_graph_90.png" />
 </p>
 </div>
@@ -13464,7 +13866,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgf3fe054" class="figure">
+<div id="orgaf01162" class="figure">
 <p><img src="images/practice_graph_91.png" alt="practice_graph_91.png" />
 </p>
 </div>
@@ -13489,7 +13891,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org7846320" class="figure">
+<div id="orgc61e8ec" class="figure">
 <p><img src="images/practice_graph_92.png" alt="practice_graph_92.png" />
 </p>
 </div>
@@ -13514,7 +13916,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org88ec853" class="figure">
+<div id="orge174e96" class="figure">
 <p><img src="images/practice_graph_93.png" alt="practice_graph_93.png" />
 </p>
 </div>
@@ -13539,7 +13941,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org501d520" class="figure">
+<div id="org6be8549" class="figure">
 <p><img src="images/practice_graph_94.png" alt="practice_graph_94.png" />
 </p>
 </div>
@@ -13564,7 +13966,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgf4608ac" class="figure">
+<div id="org610d830" class="figure">
 <p><img src="images/practice_graph_95.png" alt="practice_graph_95.png" />
 </p>
 </div>
@@ -13589,7 +13991,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org06603e0" class="figure">
+<div id="org5bbf38f" class="figure">
 <p><img src="images/practice_graph_96.png" alt="practice_graph_96.png" />
 </p>
 </div>
@@ -13614,7 +14016,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org4339d35" class="figure">
+<div id="org4e8163b" class="figure">
 <p><img src="images/practice_graph_97.png" alt="practice_graph_97.png" />
 </p>
 </div>
@@ -13639,7 +14041,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org15f2332" class="figure">
+<div id="org0198731" class="figure">
 <p><img src="images/practice_graph_98.png" alt="practice_graph_98.png" />
 </p>
 </div>
@@ -13664,7 +14066,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="org1e3a016" class="figure">
+<div id="org10f1d7a" class="figure">
 <p><img src="images/practice_graph_99.png" alt="practice_graph_99.png" />
 </p>
 </div>
@@ -13689,7 +14091,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org92c1528" class="figure">
+<div id="orgb7a98e1" class="figure">
 <p><img src="images/practice_graph_100.png" alt="practice_graph_100.png" />
 </p>
 </div>
@@ -13714,7 +14116,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgfdd19f3" class="figure">
+<div id="org15a7828" class="figure">
 <p><img src="images/practice_graph_101.png" alt="practice_graph_101.png" />
 </p>
 </div>
@@ -13739,7 +14141,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orge843164" class="figure">
+<div id="org6c72698" class="figure">
 <p><img src="images/practice_graph_102.png" alt="practice_graph_102.png" />
 </p>
 </div>
@@ -13764,7 +14166,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org371bd10" class="figure">
+<div id="org453024c" class="figure">
 <p><img src="images/practice_graph_103.png" alt="practice_graph_103.png" />
 </p>
 </div>
@@ -13789,7 +14191,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org98e504f" class="figure">
+<div id="orgd10a09f" class="figure">
 <p><img src="images/practice_graph_104.png" alt="practice_graph_104.png" />
 </p>
 </div>
@@ -13814,7 +14216,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="org5e8c25f" class="figure">
+<div id="orgabcb33e" class="figure">
 <p><img src="images/practice_graph_105.png" alt="practice_graph_105.png" />
 </p>
 </div>
@@ -13839,7 +14241,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orge06c31f" class="figure">
+<div id="orge2a9e91" class="figure">
 <p><img src="images/practice_graph_106.png" alt="practice_graph_106.png" />
 </p>
 </div>
@@ -13864,7 +14266,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgcc9227e" class="figure">
+<div id="org09f9a8f" class="figure">
 <p><img src="images/practice_graph_107.png" alt="practice_graph_107.png" />
 </p>
 </div>
@@ -13889,7 +14291,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org7069f95" class="figure">
+<div id="org54f8eda" class="figure">
 <p><img src="images/practice_graph_108.png" alt="practice_graph_108.png" />
 </p>
 </div>
@@ -13914,7 +14316,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org395baa9" class="figure">
+<div id="org4a99667" class="figure">
 <p><img src="images/practice_graph_109.png" alt="practice_graph_109.png" />
 </p>
 </div>
@@ -13939,7 +14341,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org107c53e" class="figure">
+<div id="org48da99e" class="figure">
 <p><img src="images/practice_graph_110.png" alt="practice_graph_110.png" />
 </p>
 </div>
@@ -13964,7 +14366,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org03d6128" class="figure">
+<div id="org7ddd846" class="figure">
 <p><img src="images/practice_graph_111.png" alt="practice_graph_111.png" />
 </p>
 </div>
@@ -13989,7 +14391,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org81010f6" class="figure">
+<div id="orgc156dcf" class="figure">
 <p><img src="images/practice_graph_112.png" alt="practice_graph_112.png" />
 </p>
 </div>
@@ -14014,7 +14416,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org75cb8aa" class="figure">
+<div id="org232a030" class="figure">
 <p><img src="images/practice_graph_113.png" alt="practice_graph_113.png" />
 </p>
 </div>
@@ -14039,7 +14441,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org1c39237" class="figure">
+<div id="orge240766" class="figure">
 <p><img src="images/practice_graph_114.png" alt="practice_graph_114.png" />
 </p>
 </div>
@@ -14064,7 +14466,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org792a0f8" class="figure">
+<div id="org118e875" class="figure">
 <p><img src="images/practice_graph_115.png" alt="practice_graph_115.png" />
 </p>
 </div>
@@ -14089,7 +14491,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orge1879b8" class="figure">
+<div id="orgcd4dc37" class="figure">
 <p><img src="images/practice_graph_116.png" alt="practice_graph_116.png" />
 </p>
 </div>
@@ -14114,7 +14516,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org0c8b946" class="figure">
+<div id="org79aecf1" class="figure">
 <p><img src="images/practice_graph_117.png" alt="practice_graph_117.png" />
 </p>
 </div>
@@ -14139,7 +14541,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orga52e51c" class="figure">
+<div id="org159de7a" class="figure">
 <p><img src="images/practice_graph_118.png" alt="practice_graph_118.png" />
 </p>
 </div>
@@ -14164,7 +14566,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org1afae18" class="figure">
+<div id="org7479053" class="figure">
 <p><img src="images/practice_graph_119.png" alt="practice_graph_119.png" />
 </p>
 </div>
@@ -14189,7 +14591,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orge3c2506" class="figure">
+<div id="orgf38173a" class="figure">
 <p><img src="images/practice_graph_120.png" alt="practice_graph_120.png" />
 </p>
 </div>
@@ -14214,7 +14616,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orga623864" class="figure">
+<div id="org531a441" class="figure">
 <p><img src="images/practice_graph_121.png" alt="practice_graph_121.png" />
 </p>
 </div>
@@ -14239,7 +14641,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org239caea" class="figure">
+<div id="org7ae8374" class="figure">
 <p><img src="images/practice_graph_122.png" alt="practice_graph_122.png" />
 </p>
 </div>
@@ -14264,7 +14666,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="org0b5c45c" class="figure">
+<div id="orgf17c2d3" class="figure">
 <p><img src="images/practice_graph_123.png" alt="practice_graph_123.png" />
 </p>
 </div>
@@ -14289,7 +14691,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="org84e1547" class="figure">
+<div id="orga0d12f2" class="figure">
 <p><img src="images/practice_graph_124.png" alt="practice_graph_124.png" />
 </p>
 </div>
@@ -14314,7 +14716,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org7259f20" class="figure">
+<div id="orgbd00fde" class="figure">
 <p><img src="images/practice_graph_125.png" alt="practice_graph_125.png" />
 </p>
 </div>
@@ -14339,7 +14741,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="org88908c9" class="figure">
+<div id="orgc54222f" class="figure">
 <p><img src="images/practice_graph_126.png" alt="practice_graph_126.png" />
 </p>
 </div>
@@ -14364,7 +14766,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orga27b1cd" class="figure">
+<div id="org2a2db53" class="figure">
 <p><img src="images/practice_graph_127.png" alt="practice_graph_127.png" />
 </p>
 </div>
@@ -14389,7 +14791,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org77cc08d" class="figure">
+<div id="org0f1a4b1" class="figure">
 <p><img src="images/practice_graph_128.png" alt="practice_graph_128.png" />
 </p>
 </div>
@@ -14414,7 +14816,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org9f04956" class="figure">
+<div id="orgcac0894" class="figure">
 <p><img src="images/practice_graph_129.png" alt="practice_graph_129.png" />
 </p>
 </div>
@@ -14439,7 +14841,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org169831a" class="figure">
+<div id="org13e6e4f" class="figure">
 <p><img src="images/practice_graph_130.png" alt="practice_graph_130.png" />
 </p>
 </div>
@@ -14464,7 +14866,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orga89d914" class="figure">
+<div id="orgac33297" class="figure">
 <p><img src="images/practice_graph_131.png" alt="practice_graph_131.png" />
 </p>
 </div>
@@ -14489,7 +14891,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgef1969a" class="figure">
+<div id="orgfc54729" class="figure">
 <p><img src="images/practice_graph_132.png" alt="practice_graph_132.png" />
 </p>
 </div>
@@ -14514,7 +14916,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgebc0102" class="figure">
+<div id="orgb78dd89" class="figure">
 <p><img src="images/practice_graph_133.png" alt="practice_graph_133.png" />
 </p>
 </div>
@@ -14539,7 +14941,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgbda30f0" class="figure">
+<div id="org9ded69e" class="figure">
 <p><img src="images/practice_graph_134.png" alt="practice_graph_134.png" />
 </p>
 </div>
@@ -14564,7 +14966,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org9daa97b" class="figure">
+<div id="orgf2134c1" class="figure">
 <p><img src="images/practice_graph_135.png" alt="practice_graph_135.png" />
 </p>
 </div>
@@ -14589,7 +14991,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org3fa1dbc" class="figure">
+<div id="orga2d2b2b" class="figure">
 <p><img src="images/practice_graph_136.png" alt="practice_graph_136.png" />
 </p>
 </div>
@@ -14614,7 +15016,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org7f4b6be" class="figure">
+<div id="org37336ce" class="figure">
 <p><img src="images/practice_graph_137.png" alt="practice_graph_137.png" />
 </p>
 </div>
@@ -14639,7 +15041,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgb4fcab0" class="figure">
+<div id="org54ab1c7" class="figure">
 <p><img src="images/practice_graph_138.png" alt="practice_graph_138.png" />
 </p>
 </div>
@@ -14664,7 +15066,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgf8f03fb" class="figure">
+<div id="orgfda9a2c" class="figure">
 <p><img src="images/practice_graph_139.png" alt="practice_graph_139.png" />
 </p>
 </div>
@@ -14689,7 +15091,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org29efcae" class="figure">
+<div id="orgcf206c1" class="figure">
 <p><img src="images/practice_graph_140.png" alt="practice_graph_140.png" />
 </p>
 </div>
@@ -14714,7 +15116,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org44425ff" class="figure">
+<div id="orgcf65c49" class="figure">
 <p><img src="images/practice_graph_141.png" alt="practice_graph_141.png" />
 </p>
 </div>
@@ -14739,7 +15141,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgbc54862" class="figure">
+<div id="orgfa26b84" class="figure">
 <p><img src="images/practice_graph_142.png" alt="practice_graph_142.png" />
 </p>
 </div>
@@ -14764,7 +15166,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgbac3423" class="figure">
+<div id="org8e922b2" class="figure">
 <p><img src="images/practice_graph_143.png" alt="practice_graph_143.png" />
 </p>
 </div>
@@ -14789,7 +15191,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org75574f9" class="figure">
+<div id="org7439a22" class="figure">
 <p><img src="images/practice_graph_144.png" alt="practice_graph_144.png" />
 </p>
 </div>
@@ -14814,7 +15216,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org2d46b1f" class="figure">
+<div id="orgc2d1909" class="figure">
 <p><img src="images/practice_graph_145.png" alt="practice_graph_145.png" />
 </p>
 </div>
@@ -14839,7 +15241,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org72e7e75" class="figure">
+<div id="org09e5d28" class="figure">
 <p><img src="images/practice_graph_146.png" alt="practice_graph_146.png" />
 </p>
 </div>
@@ -14864,7 +15266,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="org2566784" class="figure">
+<div id="org39e16e7" class="figure">
 <p><img src="images/practice_graph_147.png" alt="practice_graph_147.png" />
 </p>
 </div>
@@ -14889,7 +15291,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="orgd030047" class="figure">
+<div id="orgc0f38e3" class="figure">
 <p><img src="images/practice_graph_148.png" alt="practice_graph_148.png" />
 </p>
 </div>
@@ -14914,7 +15316,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org0623276" class="figure">
+<div id="orgfe914e1" class="figure">
 <p><img src="images/practice_graph_149.png" alt="practice_graph_149.png" />
 </p>
 </div>
@@ -14939,7 +15341,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org4b10dab" class="figure">
+<div id="org3cb49d9" class="figure">
 <p><img src="images/practice_graph_150.png" alt="practice_graph_150.png" />
 </p>
 </div>
@@ -14964,7 +15366,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org67d5ca0" class="figure">
+<div id="orgc8aad42" class="figure">
 <p><img src="images/practice_graph_151.png" alt="practice_graph_151.png" />
 </p>
 </div>
@@ -14989,7 +15391,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgb750f0b" class="figure">
+<div id="orga89af2c" class="figure">
 <p><img src="images/practice_graph_152.png" alt="practice_graph_152.png" />
 </p>
 </div>
@@ -15014,7 +15416,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org8c5b60f" class="figure">
+<div id="orgf35b602" class="figure">
 <p><img src="images/practice_graph_153.png" alt="practice_graph_153.png" />
 </p>
 </div>
@@ -15039,7 +15441,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org9bad573" class="figure">
+<div id="org550c81a" class="figure">
 <p><img src="images/practice_graph_154.png" alt="practice_graph_154.png" />
 </p>
 </div>
@@ -15064,7 +15466,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="org9f2eeb5" class="figure">
+<div id="orge60d9ff" class="figure">
 <p><img src="images/practice_graph_155.png" alt="practice_graph_155.png" />
 </p>
 </div>
@@ -15089,7 +15491,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgaad41c5" class="figure">
+<div id="org29af08a" class="figure">
 <p><img src="images/practice_graph_156.png" alt="practice_graph_156.png" />
 </p>
 </div>
@@ -15114,7 +15516,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org50b35ce" class="figure">
+<div id="orgfa9cc6f" class="figure">
 <p><img src="images/practice_graph_157.png" alt="practice_graph_157.png" />
 </p>
 </div>
@@ -15139,7 +15541,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgb6b8875" class="figure">
+<div id="org3aefded" class="figure">
 <p><img src="images/practice_graph_158.png" alt="practice_graph_158.png" />
 </p>
 </div>
@@ -15164,7 +15566,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="org300118d" class="figure">
+<div id="org28521e2" class="figure">
 <p><img src="images/practice_graph_159.png" alt="practice_graph_159.png" />
 </p>
 </div>
@@ -15189,7 +15591,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org57714d3" class="figure">
+<div id="org92a19f1" class="figure">
 <p><img src="images/practice_graph_160.png" alt="practice_graph_160.png" />
 </p>
 </div>
@@ -15214,7 +15616,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org1a8f112" class="figure">
+<div id="orgbf01d50" class="figure">
 <p><img src="images/practice_graph_161.png" alt="practice_graph_161.png" />
 </p>
 </div>
@@ -15239,7 +15641,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orga3025e0" class="figure">
+<div id="orgf082ea1" class="figure">
 <p><img src="images/practice_graph_162.png" alt="practice_graph_162.png" />
 </p>
 </div>
@@ -15264,7 +15666,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org92c5220" class="figure">
+<div id="org225236b" class="figure">
 <p><img src="images/practice_graph_163.png" alt="practice_graph_163.png" />
 </p>
 </div>
@@ -15289,7 +15691,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orge532b3a" class="figure">
+<div id="orgf3dacf4" class="figure">
 <p><img src="images/practice_graph_164.png" alt="practice_graph_164.png" />
 </p>
 </div>
@@ -15314,7 +15716,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgd5473b4" class="figure">
+<div id="org7c47c67" class="figure">
 <p><img src="images/practice_graph_165.png" alt="practice_graph_165.png" />
 </p>
 </div>
@@ -15339,7 +15741,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org08b1aae" class="figure">
+<div id="orgcdc3e6a" class="figure">
 <p><img src="images/practice_graph_166.png" alt="practice_graph_166.png" />
 </p>
 </div>
@@ -15364,7 +15766,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org1fd688c" class="figure">
+<div id="org2876e09" class="figure">
 <p><img src="images/practice_graph_167.png" alt="practice_graph_167.png" />
 </p>
 </div>
@@ -15389,7 +15791,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org852fdc6" class="figure">
+<div id="org5a0c02f" class="figure">
 <p><img src="images/practice_graph_168.png" alt="practice_graph_168.png" />
 </p>
 </div>
@@ -15414,7 +15816,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgeec6617" class="figure">
+<div id="org70c94d1" class="figure">
 <p><img src="images/practice_graph_169.png" alt="practice_graph_169.png" />
 </p>
 </div>
@@ -15439,7 +15841,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgb9f5ee8" class="figure">
+<div id="orgbee9c7f" class="figure">
 <p><img src="images/practice_graph_170.png" alt="practice_graph_170.png" />
 </p>
 </div>
@@ -15464,7 +15866,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgdc1a60d" class="figure">
+<div id="orgffedb34" class="figure">
 <p><img src="images/practice_graph_171.png" alt="practice_graph_171.png" />
 </p>
 </div>
@@ -15489,7 +15891,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> Yes
 </p>
 
 
-<div id="org956cfe5" class="figure">
+<div id="org72e3027" class="figure">
 <p><img src="images/practice_graph_172.png" alt="practice_graph_172.png" />
 </p>
 </div>
@@ -15514,7 +15916,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org500953c" class="figure">
+<div id="orgea090ba" class="figure">
 <p><img src="images/practice_graph_173.png" alt="practice_graph_173.png" />
 </p>
 </div>
@@ -15539,7 +15941,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="orgfafe16a" class="figure">
+<div id="org76ee45b" class="figure">
 <p><img src="images/practice_graph_174.png" alt="practice_graph_174.png" />
 </p>
 </div>
@@ -15564,7 +15966,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgdd5ea0c" class="figure">
+<div id="org128d0b8" class="figure">
 <p><img src="images/practice_graph_175.png" alt="practice_graph_175.png" />
 </p>
 </div>
@@ -15589,7 +15991,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org97df53a" class="figure">
+<div id="orgc81994a" class="figure">
 <p><img src="images/practice_graph_176.png" alt="practice_graph_176.png" />
 </p>
 </div>
@@ -15614,7 +16016,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org8d19c3e" class="figure">
+<div id="org3a4a610" class="figure">
 <p><img src="images/practice_graph_177.png" alt="practice_graph_177.png" />
 </p>
 </div>
@@ -15639,7 +16041,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org7769c9e" class="figure">
+<div id="org069b792" class="figure">
 <p><img src="images/practice_graph_178.png" alt="practice_graph_178.png" />
 </p>
 </div>
@@ -15664,7 +16066,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org7f2beec" class="figure">
+<div id="orgfbd74ea" class="figure">
 <p><img src="images/practice_graph_179.png" alt="practice_graph_179.png" />
 </p>
 </div>
@@ -15689,7 +16091,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgad80e48" class="figure">
+<div id="orgddc913c" class="figure">
 <p><img src="images/practice_graph_180.png" alt="practice_graph_180.png" />
 </p>
 </div>
@@ -15714,7 +16116,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orge02a53f" class="figure">
+<div id="org9d69262" class="figure">
 <p><img src="images/practice_graph_181.png" alt="practice_graph_181.png" />
 </p>
 </div>
@@ -15739,7 +16141,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org3d24b15" class="figure">
+<div id="org2833e27" class="figure">
 <p><img src="images/practice_graph_182.png" alt="practice_graph_182.png" />
 </p>
 </div>
@@ -15764,7 +16166,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> Yes 
 </p>
 
 
-<div id="org07f679d" class="figure">
+<div id="org2932513" class="figure">
 <p><img src="images/practice_graph_183.png" alt="practice_graph_183.png" />
 </p>
 </div>
@@ -15789,7 +16191,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org90dd813" class="figure">
+<div id="orgfe84012" class="figure">
 <p><img src="images/practice_graph_184.png" alt="practice_graph_184.png" />
 </p>
 </div>
@@ -15814,7 +16216,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgafcb0f1" class="figure">
+<div id="orge126e52" class="figure">
 <p><img src="images/practice_graph_185.png" alt="practice_graph_185.png" />
 </p>
 </div>
@@ -15839,7 +16241,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org65c87f6" class="figure">
+<div id="orgdd78439" class="figure">
 <p><img src="images/practice_graph_186.png" alt="practice_graph_186.png" />
 </p>
 </div>
@@ -15864,7 +16266,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org471d29e" class="figure">
+<div id="orgada0bad" class="figure">
 <p><img src="images/practice_graph_187.png" alt="practice_graph_187.png" />
 </p>
 </div>
@@ -15889,7 +16291,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org3e1928f" class="figure">
+<div id="orgee78161" class="figure">
 <p><img src="images/practice_graph_188.png" alt="practice_graph_188.png" />
 </p>
 </div>
@@ -15914,7 +16316,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="orgfa5f061" class="figure">
+<div id="org1c30177" class="figure">
 <p><img src="images/practice_graph_189.png" alt="practice_graph_189.png" />
 </p>
 </div>
@@ -15939,7 +16341,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org4d2cb6c" class="figure">
+<div id="orgabe0bf7" class="figure">
 <p><img src="images/practice_graph_190.png" alt="practice_graph_190.png" />
 </p>
 </div>
@@ -15964,7 +16366,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org1a46081" class="figure">
+<div id="orgeda52bd" class="figure">
 <p><img src="images/practice_graph_191.png" alt="practice_graph_191.png" />
 </p>
 </div>
@@ -15989,7 +16391,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org2feb3a6" class="figure">
+<div id="orgbdca556" class="figure">
 <p><img src="images/practice_graph_192.png" alt="practice_graph_192.png" />
 </p>
 </div>
@@ -16014,7 +16416,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org2da4518" class="figure">
+<div id="org6892802" class="figure">
 <p><img src="images/practice_graph_193.png" alt="practice_graph_193.png" />
 </p>
 </div>
@@ -16039,7 +16441,7 @@ total: <span class="spoiler"> Yes </span>; univalent: <span class="spoiler"> No 
 </p>
 
 
-<div id="org92b6e84" class="figure">
+<div id="orgb166f74" class="figure">
 <p><img src="images/practice_graph_194.png" alt="practice_graph_194.png" />
 </p>
 </div>
@@ -16064,7 +16466,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orga4aa148" class="figure">
+<div id="org78a72e9" class="figure">
 <p><img src="images/practice_graph_195.png" alt="practice_graph_195.png" />
 </p>
 </div>
@@ -16089,7 +16491,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orgf07ba04" class="figure">
+<div id="org1da3ebd" class="figure">
 <p><img src="images/practice_graph_196.png" alt="practice_graph_196.png" />
 </p>
 </div>
@@ -16114,7 +16516,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orga72acba" class="figure">
+<div id="orgd33de17" class="figure">
 <p><img src="images/practice_graph_197.png" alt="practice_graph_197.png" />
 </p>
 </div>
@@ -16139,7 +16541,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="orge381565" class="figure">
+<div id="org96095f5" class="figure">
 <p><img src="images/practice_graph_198.png" alt="practice_graph_198.png" />
 </p>
 </div>
@@ -16164,7 +16566,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org09054f7" class="figure">
+<div id="orgc64aa3e" class="figure">
 <p><img src="images/practice_graph_199.png" alt="practice_graph_199.png" />
 </p>
 </div>
@@ -16189,7 +16591,7 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 
 
-<div id="org47c859d" class="figure">
+<div id="org3332958" class="figure">
 <p><img src="images/practice_graph_200.png" alt="practice_graph_200.png" />
 </p>
 </div>
@@ -16200,11 +16602,233 @@ total: <span class="spoiler"> No </span>; univalent: <span class="spoiler"> No <
 </p>
 </div>
 </div>
+
+
+<div id="outline-container-Graph-Theory-in-general" class="outline-3">
+<h3 id="Graph-Theory-in-general"><span class="section-number-3">12.4</span> <a href="#Graph-Theory-in-general">Graph Theory, in general</a></h3>
+<div class="outline-text-3" id="text-Graph-Theory-in-general">
+<p style="display:none">\[\def\src{\mathsf{src}\,}
+\def\tgt{\mathsf{tgt}\,}
+\def\inc{\mathsf{inc}\,}
+\def\deg{\mathsf{deg}}
+\def\adj{\mathsf{adj}\,}
+\]</p>
+
+
+<ol class="org-ol">
+<li>Graphs are models for relations.</li>
+
+<li>In general, a <b>Graph</b> \(G = (V, E, \src, \tgt)\)
+consists of:
+<ul class="org-ul">
+<li>\(V\), a set of “points, nodes, vertices”</li>
+<li>\(E\), a set of “arcs, edges”</li>
+<li>\(\src, \tgt : E ↔ V\), a pair of <b>univalent</b> relations
+known as the “ingoing incidence” and “outgoing incidence”, respectively.</li>
+</ul></li>
+
+<li><p>
+Since \(\src, \tgt\) are univalent &#x2014;partial functions&#x2014; every arc is
+associated either
+</p>
+<ul class="org-ul">
+<li>a pair consisting of a ‘starting point’ and an ‘endpoint’, or</li>
+<li>just a starting point <i>or</i> an endpoint, or</li>
+<li>no point at all.</li>
+</ul>
+
+<p>
+The first two scenarios are very common: The first being how we treated
+relations as simple graphs, and the second being an approach to describe
+automata &#x2014;e.g., an arc that has no start point but has an endpoint \(q₀\)
+could mean that \(q₀\) is the “starting state of the automaton”, multiple such
+initial-point-less arcs could then mean we have multiple inputs to our
+automaton; likewise, arcs without endpoints could be seen as “outputs, or
+final states, of an automaton” ♥‿♥
+</p>
+
+<p>
+To emphasise that \(\src, \tgt\) need not be total, one may speak of a <b>partial
+Graph</b>. Such a graph is <b>total</b> when \(\src\) and \(\tgt\) are total; i.e., when
+\(\Id ⊆ \src ⨾ \src ˘ ∩ \tgt ⨾ \tgt˘\); i.e., when every arc has precisely one
+starting point and one endpoint.
+</p>
+<ul class="org-ul">
+<li>Note that \(Ξ = \src ⨾ \src ˘ ∩ \tgt ⨾ \tgt˘\) is an equivalence relation, which
+may be aptly called “arc parallelism”: Two arcs are related when they have
+the same starting point and the same ending point, which both exist.</li>
+
+<li><p>
+<a href="#org5686845">Theorem</a>: A graph is total <i>and</i> has no parallel arcs <b>exactly when</b> \(Ξ = \Id\).
+</p>
+
+<p>
+Indeed, Ξ is the identity precisely when each arc parallel equivalence
+class contains one arc and so there are no distinct parallel arcs.
+</p>
+
+<p>
+That is, “total ≡ \(\Id ⊆ Ξ\)” and “no parallel arrows ≡ \(Ξ ⊆ \Id\)”.
+</p></li>
+</ul>
+
+<hr />
+
+<p>
+Graph theory owes its name to the method of representing its objects
+graphically.
+</p>
+
+<p>
+In contrast to simple graphs &#x2014;i.e., relations&#x2014; wherein arcs <i>denote</i> pairs
+in the relation, the general definition of a graph allows arcs as independent
+mathematical objects <i>which may happen</i> to have starting and ending points.  In
+a pictorial representing, “naked, floating” arrows that are not incident to
+any point may appear troubling, but treating them as, say, pairs of Boolean
+tuples \((𝔹^{♯E})²\) &#x2014;with at most one “true” in each tuple to identify a
+starting node, if any, and an ending node, if any&#x2014; presents nothing
+unusual.
+</p>
+
+<p>
+Nonetheless, every such (partial) graph has an <b>associated simple graph</b> \((V,
+   R)\) where \(R = \src˘ ⨾ \tgt : V ↔ V\): Any two points are joined by a directed arc
+precisely when the first is the starting point of <i>some</i> arc which happens to
+have the second as its endpoint. Now there are no more “naked” arcs.
+Different graphs could have the same associated simple graph.
+</p>
+
+<ul class="org-ul">
+<li>One uses the associated relation to study properties not involving partial
+or parallel arrows.</li>
+
+<li>E.g., \(\src ∩ \tgt = ⊥ \;≡\; R \;⊆\; \sim\Id\) has the left side read
+<i>no arc has the same starting and ending point</i> whereas the right side
+reads <i>the associated simple graph is loop-free</i>.</li>
+
+<li>E.g., \(\sim \Id ∩ R \;=\; \src˘ ⨾ (\tgt ∩ \sim\src)\) has the left side read
+<i>two distinct points, x and y, are related by an edge</i> whereas the right
+reads <i>x is the start of an edge which happens to have y as endpoint and
+which does not have y as the starting point.</i></li>
+
+<li><p>
+E.g., a point \(x\) is <b>initial/source</b> when \(R˘⦇\{x\}⦈ = ∅\); i.e., it has no
+predecessor. Likewise \(x\) is called <b>terminal/sink</b> when \(R⦇\{x\}⦈ = ∅\);
+i.e., it has no successors.
+</p>
+
+<p>
+That is, a terminal point is a point from which it is <i>not</i> possible to
+proceed <i>any</i> further along \(R\), and so \(\sim(R ⨾ ⊤)\) is precisely the
+terminal points &#x2014;whereas \(\sim(R˘ ⨾ ⊤)\) is exactly the initial points.
+</p>
+
+<p>
+( Points that are both initial <i>and</i> terminal are not incident with any edge;
+not even a self-loop. A point that is only incident with a self-loop is
+called <i>isolated</i>. )
+</p></li>
+
+<li><p>
+Interestingly, when the graph is total and has no parallel arcs; i.e., \(Ξ =
+     \Id\), then we can regain \(\src\) and \(\tgt\) from just \(R\) and this
+reconstruction is unique up to graph isomorphism.
+</p>
+
+<p>
+As such, homogeneous relations are the theory of total graphs without
+parallel arcs.
+</p></li>
+</ul></li>
+
+<li>One defines for a node \(x\) and arc \(a\),
+<dl class="org-dl">
+<dt>indegree</dt><dd>\(\deg_\src x = ♯ src ⦇\{x\}⦈ = \text{ number of arcs with
+     starting point } x\).</dd>
+<dt>outdegree</dt><dd>\(\deg_\tgt x = ♯ tgt ⦇\{x\}⦈ = \text{ number of arcs with
+     endpoint } x\).</dd>
+<dt>\(a\) is a loop</dt><dd>\(\src ⦇\{a\}⦈ = \tgt ⦇\{a\}⦈ ≠ ∅\)</dd>
+</dl></li>
+
+<li><p>
+The relation \(\inc = \src ∪ \tgt : E ↔ V\) is known as the <b>incidence relation</b>;
+it relates edges to their starting and ending points.
+</p>
+
+<ul class="org-ul">
+<li>One uses incidence when “direction” is not important to the matter at hand;
+instead one is only interested in which points are incident with which arcs
+&#x2014;this is known as a <i>hypergraph</i>.</li>
+
+<li>E.g., when \(\src\) and \(\tgt\) are <i>total</i>, \(\src ∩ \tgt = ⊥ \;≡\; \inc ⨾ \sim
+    \Id = ⊤\) has the left side read <i>no arc has the same starting and ending
+point</i> whereas the right side reads <i>for any given point y, every arc is
+incident with a point different from y</i> &#x2014;i.e., every arc is incident with
+only <i>distinct</i> points.</li>
+</ul>
+
+<p>
+The nonvanishing diagonal elements of the products \(\src˘ ⨾ \src\) and \(\tgt ⨾
+   \tgt˘\) determine those points which are starting points or endpoints,
+respectively, of at least one arc. However, these non-isolated points are
+precisely the points that are incident with some arc and so we have \[ \Id ∩
+   \inc˘ ⨾ \inc \quad=\quad \Id ∩ (\src ˘ ⨾ \src ∪ \tgt ˘ ⨾ \tgt) \] The left
+side reads <i>“x is incident to some arc”</i> whereas the right side reads /“x is
+the starting point, or endpoint, of some arc”.
+</p>
+
+<p>
+Analogously, the diagonal elements of \(\src ⨾ \src˘\) and \(\tgt ⨾ \tgt˘\)
+determine those arcs that possess starting points or endpoints.  However,
+these non-naked arrows are precisely the arcs that are incident with some
+point and so we have
+\[ \Id ∩ \inc ⨾ \inc ˘ \quad=\quad \Id ∩ (\src ⨾ \src ˘ ∩ \tgt ⨾ \tgt˘) \]
+The left side reads <i>“edge e is incident with some point”</i> whereas
+the right side reads <i>“edge e has some point as its starting or ending point”.</i>
+</p>
+
+<hr />
+
+<p>
+<b>“Reading”:</b> Since \(x 〔 \Id ∩ R ⨾ R˘ 〕 y \quad≡\quad x = y ∧ (∃ z • x 〔R〕
+   z)\), the formula \(\Id ∩ R ⨾ R˘\) reads <i>“(a given) x is R-related to some point (z)”</i>.
+( C.f., total relations! )
+</p></li>
+
+<li>Incidence is between a point and an arc, whereas <i>adjaceny</i> is between
+points or between arcs.
+
+<dl class="org-dl">
+<dt>(Point-)adjacency</dt><dd><p>
+\(\adj_V \;=\; \sim\Id ∩ \inc˘ ⨾ \inc\)
+</p>
+
+<p>
+Two <i>distinct</i> points are adjacent if there is an arc indecent with both of them.
+</p>
+
+<p>
+If \(R = \src ˘ ⨾ \tgt\) is the associated simple graph, then &#x2014; from the
+univalence of \(\src\) \(\tgt\) &#x2014;
+\[ \sim\Id ∩ \inc˘ ⨾ \inc \;=\; \adj_V \;=\; \sim\Id ∩ (R ∪ R˘) \]
+</p></dd>
+
+<dt>Edge-adjacency</dt><dd><p>
+\(\adj_E \;=\; \sim\Id ∩ \inc ⨾ \inc\)
+</p>
+
+<p>
+Two <i>distinct</i> edges are adjacent if there is a point indecent with both of them.
+</p></dd>
+</dl></li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-12-08 Tue 11:26</p>
+<p class="date">Created: 2020-12-09 Wed 09:17</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
