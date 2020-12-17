@@ -76,6 +76,10 @@ nil
 #+end_src
 :End:
 
++ doc:graph
+
+--------------------------------------------------------------------------------
+
 + doc:Expression
 + doc:induction
 + doc:textual_substitution
@@ -874,6 +878,8 @@ modern test setup: the simple fundamental principles are hidden and almost
 invisible under a mass of technical details. — Hermann Weyl
   #+end_quote
 
+A /logic/ is a formal system of reasoning.
+
 ** Syntax vs. Semantics
    :PROPERTIES:
    :CUSTOM_ID: Syntax-vs-Semantics
@@ -1044,7 +1050,6 @@ so that we can ‘evaluate, simplify’ statements to deduce if they are true.
 
 Syntax is like static analysis; semantics is like actually running the program
 (on some, or all possible inputs).
-
 
 ** [Optional] Strange Logics
    :PROPERTIES:
@@ -1903,20 +1908,69 @@ Proof:
 
     # (load-file "~/Desktop/power-blocks.el")
 
-    Textual substitution is inextricably intertwined with equality.
-
-    Likewise, assignment statements in programming can be reasoned
-      about using textual substitution.
-
-      The coincidence of notations is deliberate.
-
-      Rather than understanding how a program is /executed/,
-      we can also understand a program in terms of /syntactic substitution/.
+    Textual substitution is inextricably intertwined with equality.  Likewise,
+    assignment statements in programming can be reasoned about using textual
+    substitution.  The coincidence of notations is deliberate.  Rather than
+    understanding how a program is /executed/, we can also understand a program in
+    terms of /syntactic substitution/.
 
    #+begin_center
    Focus is on goal-directed and calculational construction of algorithms as
    opposed to the traditional guess-and-verify methodology.
    #+end_center
+
+** Logics of Programs
+   :PROPERTIES:
+   :CUSTOM_ID: Logics-of-Programs
+   :END:
+
+This section follows /Logics of Programs/ by Dexter Kozen and Jerzy Tiuryn.
+
+--------------------------------------------------------------------------------
+
+[[doc:logic][Logics]] for programming differ from classical logics in that truth is /dynamic/
+rather than /static/.
+
+In classical predicate logic, the truth value of a formula φ is determined by a
+valuation of its free variables over some structure. The valuation and the truth
+value of Φ it induces are regarded as immutable; there is no formalism relating
+to any other valuations or truth values.
+
+In program logics, there are explicit syntactic constructs called /programs/ to
+change the values of variables, thereby changing the truth values of formulas.
+For example, the program ~x ≔ x + 1~ changes the truth value of the formula /“x is
+even”/. Such changes occur on a metalogical level in classical predicate logic,
+for example in the Tarski definition of truth of a formula: If $u : Vars → ℕ$ is
+a valuation of variables over the natural numbers ℕ, then the formula /“∃ x • x²
+= y”/ is defined to be true under the valuation $u$ iff there exists a natural
+number /n : ℕ/ such that the formula /x² = y/ is true under the valuation $u[x ≔ n]$
+---where $u[x ≔ n]$ agrees with $u$ everywhere except $x$, on which it takes the
+value /n/. This definition involves a metalogical operation which produces $u[x ≔
+n]$ from $u$ for all possible values $n : ℕ$. This operation becomes explicit in
+Dynamic Logic (DL).
+
+The following DL formula is true and reads /if x = X and y = Y then whenever the program x,y
+≔ y, x terminates, then we are ensured x = Y and y = Y/.  \[x = X \;∧\; y = Y
+\;\Then{x,y := y, x}\; x = Y \;∧\; y = X\]
+
+In contrast, the classical formula $x = X \;∧\; y = Y \;⇒\; x = Y \;∧\; y = Y$
+is not always true.
+
+In DL, one has the constructs
++ /⟨P⟩Φ/ : /It is possible to execute program P and terminate in a state
+  satisfying Φ/. (“Total correctness”)
++ /[P]Φ/ : /Whenever program P terminates, it must do so in a state satisfying Φ/.
+  (“Partial correctness”)
+
+Since one is usually interested in pre- and post-conditions of programs, one
+defines
++ “the total correctness Hoare triple” $\{Ψ\} P \{Φ\} \;≡\; Ψ ⇒ ⟨P⟩φ$
++ “the partial correctness Hoare triple” $Ψ \{P\} Φ   \;≡\; Ψ ⇒ [P]φ$
+
+  We will mostly be using this form in this class and to avoid actually
+  discussing DL, we will instead define a relation $\_{}⇒\!\!\![\_{}]\_{} :
+  \mathsf{Formula} → \mathsf{Program} → \mathsf{Formula} → 𝔹$ /inductively/ over
+  the shape of possible programs.
 
 ** From Comments to Hoare Triples
    :PROPERTIES:
@@ -2009,7 +2063,7 @@ Proof:
  to denote the /values/ of the program variables ~x, y~. Then, we can
  formalise the claim as
  \[
- x = X \;∧\; y = Y \;\Then{x,y := y, x}\; x = Y \;∧\; y = Y
+ x = X \;∧\; y = Y \;\Then{x,y := y, x}\; x = Y \;∧\; y = X
  \]
  We refer to variables that never appear in program text
  as _<<<ghost variables>>>_; their function is to relate the final values of the
@@ -2032,9 +2086,9 @@ Proof:
    :END:
    States may be represented by predicates on variables and so *imperative
    commands are relations on predicates*: /Given two propositions $G, R$ making/
-   /use of program variables, we write $R \Then{C} G$ to mean “in a state $R$, the
-   execution of command $C$ terminates in state $G$”/.
-   ( This is also known as a /Hoare Triple/ and written ={R} C {G}=. )
+   /use of program variables, we write $R \Then{C} G$ to mean “starting in a/
+   /state $R$, whenever execution of command $C$ terminates, it must do so in
+   state $G$”/.
 
    For  example,
    | ~v = 5 ∧ w = 4 ∧ x = 8   ⇒[ v := v + w ]   v = 9 ∧ w = 4 ∧ x = 8~ |
@@ -2062,10 +2116,8 @@ Proof:
    :CUSTOM_ID: Hi
    :END:
 
- A /specification is an equation of a certain shape.
- /Programming/ is the activity of solving a specification
- for its unknown. Its unknown is called a /program/.
-
+ A /specification is an equation of a certain shape.  /Programming/ is the activity
+ of solving a specification for its unknown. Its unknown is called a /program/.
  One says “program =C= is specified by precondition $R$ and postcondition $G$”
  whenever $R \Then{C} G$. One also says this is a /specification of =C=./
 
@@ -2073,8 +2125,8 @@ Proof:
  Tony Hoare's 1969 landmark paper /An axiomatic basis for computer programming/
  proposed to define the meaning of programs by how they transform state
  (predicates on the program variables; i.e., stores). It defined $R \,\{C\}\, G$
- to mean /partial correctness/; whereas the modern notations $\{ R\}\, C\, \{G\}$
- and $R \Then{C} G$ denote /total correctness/, which has the additional
+ to mean /partial correctness/; whereas the modern notation $\{ R\}\, C\, \{G\}$
+ denotes /total correctness/, which has the additional
  requirement of the /termination/ of $C$.
  #+end_box
 
@@ -2117,7 +2169,7 @@ Proof:
  \[N ≥ 0 \Then{?} (∃ i : ℕ • x = 2^i) ∧ x ≤ N ∧ N < 2 · x\]
 
  The first conjunct states that $x$ is a power of 2. The second states that $x4
- is at most $N4, while the third states that the next power of 2 exceeds $N$.
+ is at most $N$, while the third states that the next power of 2 exceeds $N$.
 
  This is /the integer-logarithm base-2/ problem; the postcondition is equivalent to
  $∃ i : ℕ \,•\, i = \lg_2 x \,∧\, i ≤ \lg_2 N < 1 + i$.
@@ -2241,10 +2293,8 @@ Proof:
    positive 1 or negative 3, which are both solutions to the equation
     $x² + 2 · x = 3$.
 
-    kbd:Begin_Warning [[color:red][*At the moment, in CalcCheck notebooks, to keep things
-   clear, we are using =R ⇒[C] G= and /not (yet)/ using ~G ⇐[C] R~.*]] See the first 5
-   minutes of this [[https://youtu.be/JxRZC2UMJb0][this video lecture]] for a taste of ‘working backwards’.
-   kbd:End_Warning
+    See the first 5 minutes of this [[https://youtu.be/JxRZC2UMJb0][this video lecture]] for a taste of ‘working
+   backwards’.
 
  When $I \;⇒[C]\;\; I$, one says that “state $I$ is *<<<invariant>>>* for
  command $C$” or that “$C$ /maintains/ $I$”.
@@ -5276,7 +5326,7 @@ $$\def\Pr{\mathsf{Pr}\,} \def\E{\mathsf{E}\,}$$
 +   1 / 6 -- Arithmetic; ♯𝔻 = 6
    #+end_calc
 
-4. Here are a few basic theorems, provable via summation laws.
+4. [@4] Here are a few basic theorems, provable via summation laws.
 
    - /Likelihood of the absurd:/ $\Pr{\emptyset} = 0$
    - /Likelihood of the certain:/ $\Pr{𝑼} = 1$
@@ -5288,7 +5338,7 @@ $$\def\Pr{\mathsf{Pr}\,} \def\E{\mathsf{E}\,}$$
      It is common to see “or” and “and” in probability texts, instead of “∨/∪”
      or “∧/∩”.
 
-5. Just as set theory has /predicates/, Boolean functions on 𝑼, probability theory
+5. [@5] Just as set theory has /predicates/, Boolean functions on 𝑼, probability theory
    has /random variables/ which is just a name for functions on 𝑼; i.e., any $X :
    𝑼 → ℝ$; i.e., $X$ is an ‘observation’ about the possible events.
 
@@ -5300,25 +5350,25 @@ $$\def\Pr{\mathsf{Pr}\,} \def\E{\mathsf{E}\,}$$
 #+begin_calc
 + \text{the probability of rolling a total of 7}
 +  \Pr (S = 7) --  Formalise; $S(x, y) = x + y$
-+  ∑ e : 𝑼 \;❙\; S e = 7 • Pr e --  definition
-+  ∑ x, y : 𝔻 \;❙\; S (x, y) = y • Pr e  --  definition and unpairing
++  ∑ e : 𝑼 \;❙\; S e = 7 • \Pr e --  definition
++  ∑ x, y : 𝔻 \;❙\; S (x, y) = y • \Pr e  --  definition and unpairing
 +  ∑ x, y : 𝔻 \;❙\; S (x, y) = y • 1/36 --  definition of $\Pr$
 +  ∑ x, y : 𝔻 \;❙\; x + y = 7 • 1/36 --  definition of $S$
 +  ♯𝔻 × 1/36 --  one-point rule and constant sum
 +  1/6 --  arithmetic; $♯𝔻 = 6$
 #+end_calc
 
-6. To understand the typical behaviour of a random variable, we speak of its
+6. [@6] To understand the typical behaviour of a random variable, we speak of its
    “average value”.
 
    If we repeat an experiment over and over again, making independent trials,
    then we would expect each observation of X to occur with a frequency
    proportional to, well, its likelihood of occurring. We define the
    /mean, average, expected value/ of a random variable to be
-   \[\E X \;=\; (∑ x : ℝ \;•\; x · \Pr(X = x)) \]
+   \[\E X \;=\; \left(∑ x : ℝ \;•\; x · \Pr\left(X = x\right)\right) \]
 
    This is a potentially infinite sum, but by change-of-dummy, we have a nicer
-   form in-terms of events: \[\E X \;=\; (∑ e : 𝑼 \;•\; X(e) · \Pr e)\]
+   form in-terms of events: \[\E X \;=\; \left(∑ e : 𝑼 \;•\; X\left(e\right) · \Pr e\right)\]
 
    *Example.*
    #+begin_calc
@@ -7785,7 +7835,7 @@ Theorem: Every partial order can be extended to a linear order.
    :END:
 
 #+html_head: <style>
-#+html_head: .spoiler {color: grey; background-color:grey;}
+#+html_head: .spoiler {color: pink; background-color:pink;}
 #+html_head: .spoiler:hover {color: black; background-color:white;}
 #+html_head: <style>
 # Example use: <span class="spoiler"> test </span>
@@ -7873,1407 +7923,1407 @@ Returns an alist, not a plist, of properties."
 
  [[file:images/practice_graph_0.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-1 @@html: <strong>Practice Graph ♯ 1 </strong>@@
 
  [[file:images/practice_graph_1.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-2 @@html: <strong>Practice Graph ♯ 2 </strong>@@
 
  [[file:images/practice_graph_2.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-3 @@html: <strong>Practice Graph ♯ 3 </strong>@@
 
  [[file:images/practice_graph_3.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-4 @@html: <strong>Practice Graph ♯ 4 </strong>@@
 
  [[file:images/practice_graph_4.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-5 @@html: <strong>Practice Graph ♯ 5 </strong>@@
 
  [[file:images/practice_graph_5.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-6 @@html: <strong>Practice Graph ♯ 6 </strong>@@
 
  [[file:images/practice_graph_6.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-7 @@html: <strong>Practice Graph ♯ 7 </strong>@@
 
  [[file:images/practice_graph_7.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-8 @@html: <strong>Practice Graph ♯ 8 </strong>@@
 
  [[file:images/practice_graph_8.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-9 @@html: <strong>Practice Graph ♯ 9 </strong>@@
 
  [[file:images/practice_graph_9.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-10 @@html: <strong>Practice Graph ♯ 10 </strong>@@
 
  [[file:images/practice_graph_10.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-11 @@html: <strong>Practice Graph ♯ 11 </strong>@@
 
  [[file:images/practice_graph_11.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-12 @@html: <strong>Practice Graph ♯ 12 </strong>@@
 
  [[file:images/practice_graph_12.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-13 @@html: <strong>Practice Graph ♯ 13 </strong>@@
 
  [[file:images/practice_graph_13.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-14 @@html: <strong>Practice Graph ♯ 14 </strong>@@
 
  [[file:images/practice_graph_14.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-15 @@html: <strong>Practice Graph ♯ 15 </strong>@@
 
  [[file:images/practice_graph_15.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-16 @@html: <strong>Practice Graph ♯ 16 </strong>@@
 
  [[file:images/practice_graph_16.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-17 @@html: <strong>Practice Graph ♯ 17 </strong>@@
 
  [[file:images/practice_graph_17.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-18 @@html: <strong>Practice Graph ♯ 18 </strong>@@
 
  [[file:images/practice_graph_18.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-19 @@html: <strong>Practice Graph ♯ 19 </strong>@@
 
  [[file:images/practice_graph_19.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-20 @@html: <strong>Practice Graph ♯ 20 </strong>@@
 
  [[file:images/practice_graph_20.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-21 @@html: <strong>Practice Graph ♯ 21 </strong>@@
 
  [[file:images/practice_graph_21.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-22 @@html: <strong>Practice Graph ♯ 22 </strong>@@
 
  [[file:images/practice_graph_22.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-23 @@html: <strong>Practice Graph ♯ 23 </strong>@@
 
  [[file:images/practice_graph_23.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-24 @@html: <strong>Practice Graph ♯ 24 </strong>@@
 
  [[file:images/practice_graph_24.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-25 @@html: <strong>Practice Graph ♯ 25 </strong>@@
 
  [[file:images/practice_graph_25.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-26 @@html: <strong>Practice Graph ♯ 26 </strong>@@
 
  [[file:images/practice_graph_26.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-27 @@html: <strong>Practice Graph ♯ 27 </strong>@@
 
  [[file:images/practice_graph_27.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-28 @@html: <strong>Practice Graph ♯ 28 </strong>@@
 
  [[file:images/practice_graph_28.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-29 @@html: <strong>Practice Graph ♯ 29 </strong>@@
 
  [[file:images/practice_graph_29.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-30 @@html: <strong>Practice Graph ♯ 30 </strong>@@
 
  [[file:images/practice_graph_30.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-31 @@html: <strong>Practice Graph ♯ 31 </strong>@@
 
  [[file:images/practice_graph_31.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-32 @@html: <strong>Practice Graph ♯ 32 </strong>@@
 
  [[file:images/practice_graph_32.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-33 @@html: <strong>Practice Graph ♯ 33 </strong>@@
 
  [[file:images/practice_graph_33.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-34 @@html: <strong>Practice Graph ♯ 34 </strong>@@
 
  [[file:images/practice_graph_34.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-35 @@html: <strong>Practice Graph ♯ 35 </strong>@@
 
  [[file:images/practice_graph_35.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-36 @@html: <strong>Practice Graph ♯ 36 </strong>@@
 
  [[file:images/practice_graph_36.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-37 @@html: <strong>Practice Graph ♯ 37 </strong>@@
 
  [[file:images/practice_graph_37.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-38 @@html: <strong>Practice Graph ♯ 38 </strong>@@
 
  [[file:images/practice_graph_38.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-39 @@html: <strong>Practice Graph ♯ 39 </strong>@@
 
  [[file:images/practice_graph_39.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-40 @@html: <strong>Practice Graph ♯ 40 </strong>@@
 
  [[file:images/practice_graph_40.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-41 @@html: <strong>Practice Graph ♯ 41 </strong>@@
 
  [[file:images/practice_graph_41.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-42 @@html: <strong>Practice Graph ♯ 42 </strong>@@
 
  [[file:images/practice_graph_42.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-43 @@html: <strong>Practice Graph ♯ 43 </strong>@@
 
  [[file:images/practice_graph_43.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-44 @@html: <strong>Practice Graph ♯ 44 </strong>@@
 
  [[file:images/practice_graph_44.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-45 @@html: <strong>Practice Graph ♯ 45 </strong>@@
 
  [[file:images/practice_graph_45.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-46 @@html: <strong>Practice Graph ♯ 46 </strong>@@
 
  [[file:images/practice_graph_46.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-47 @@html: <strong>Practice Graph ♯ 47 </strong>@@
 
  [[file:images/practice_graph_47.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-48 @@html: <strong>Practice Graph ♯ 48 </strong>@@
 
  [[file:images/practice_graph_48.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-49 @@html: <strong>Practice Graph ♯ 49 </strong>@@
 
  [[file:images/practice_graph_49.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-50 @@html: <strong>Practice Graph ♯ 50 </strong>@@
 
  [[file:images/practice_graph_50.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-51 @@html: <strong>Practice Graph ♯ 51 </strong>@@
 
  [[file:images/practice_graph_51.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-52 @@html: <strong>Practice Graph ♯ 52 </strong>@@
 
  [[file:images/practice_graph_52.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-53 @@html: <strong>Practice Graph ♯ 53 </strong>@@
 
  [[file:images/practice_graph_53.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-54 @@html: <strong>Practice Graph ♯ 54 </strong>@@
 
  [[file:images/practice_graph_54.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-55 @@html: <strong>Practice Graph ♯ 55 </strong>@@
 
  [[file:images/practice_graph_55.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-56 @@html: <strong>Practice Graph ♯ 56 </strong>@@
 
  [[file:images/practice_graph_56.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-57 @@html: <strong>Practice Graph ♯ 57 </strong>@@
 
  [[file:images/practice_graph_57.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-58 @@html: <strong>Practice Graph ♯ 58 </strong>@@
 
  [[file:images/practice_graph_58.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-59 @@html: <strong>Practice Graph ♯ 59 </strong>@@
 
  [[file:images/practice_graph_59.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-60 @@html: <strong>Practice Graph ♯ 60 </strong>@@
 
  [[file:images/practice_graph_60.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-61 @@html: <strong>Practice Graph ♯ 61 </strong>@@
 
  [[file:images/practice_graph_61.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-62 @@html: <strong>Practice Graph ♯ 62 </strong>@@
 
  [[file:images/practice_graph_62.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-63 @@html: <strong>Practice Graph ♯ 63 </strong>@@
 
  [[file:images/practice_graph_63.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-64 @@html: <strong>Practice Graph ♯ 64 </strong>@@
 
  [[file:images/practice_graph_64.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-65 @@html: <strong>Practice Graph ♯ 65 </strong>@@
 
  [[file:images/practice_graph_65.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-66 @@html: <strong>Practice Graph ♯ 66 </strong>@@
 
  [[file:images/practice_graph_66.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-67 @@html: <strong>Practice Graph ♯ 67 </strong>@@
 
  [[file:images/practice_graph_67.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-68 @@html: <strong>Practice Graph ♯ 68 </strong>@@
 
  [[file:images/practice_graph_68.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-69 @@html: <strong>Practice Graph ♯ 69 </strong>@@
 
  [[file:images/practice_graph_69.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-70 @@html: <strong>Practice Graph ♯ 70 </strong>@@
 
  [[file:images/practice_graph_70.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-71 @@html: <strong>Practice Graph ♯ 71 </strong>@@
 
  [[file:images/practice_graph_71.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-72 @@html: <strong>Practice Graph ♯ 72 </strong>@@
 
  [[file:images/practice_graph_72.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-73 @@html: <strong>Practice Graph ♯ 73 </strong>@@
 
  [[file:images/practice_graph_73.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-74 @@html: <strong>Practice Graph ♯ 74 </strong>@@
 
  [[file:images/practice_graph_74.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-75 @@html: <strong>Practice Graph ♯ 75 </strong>@@
 
  [[file:images/practice_graph_75.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-76 @@html: <strong>Practice Graph ♯ 76 </strong>@@
 
  [[file:images/practice_graph_76.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-77 @@html: <strong>Practice Graph ♯ 77 </strong>@@
 
  [[file:images/practice_graph_77.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-78 @@html: <strong>Practice Graph ♯ 78 </strong>@@
 
  [[file:images/practice_graph_78.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-79 @@html: <strong>Practice Graph ♯ 79 </strong>@@
 
  [[file:images/practice_graph_79.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-80 @@html: <strong>Practice Graph ♯ 80 </strong>@@
 
  [[file:images/practice_graph_80.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-81 @@html: <strong>Practice Graph ♯ 81 </strong>@@
 
  [[file:images/practice_graph_81.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-82 @@html: <strong>Practice Graph ♯ 82 </strong>@@
 
  [[file:images/practice_graph_82.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-83 @@html: <strong>Practice Graph ♯ 83 </strong>@@
 
  [[file:images/practice_graph_83.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-84 @@html: <strong>Practice Graph ♯ 84 </strong>@@
 
  [[file:images/practice_graph_84.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-85 @@html: <strong>Practice Graph ♯ 85 </strong>@@
 
  [[file:images/practice_graph_85.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-86 @@html: <strong>Practice Graph ♯ 86 </strong>@@
 
  [[file:images/practice_graph_86.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-87 @@html: <strong>Practice Graph ♯ 87 </strong>@@
 
  [[file:images/practice_graph_87.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-88 @@html: <strong>Practice Graph ♯ 88 </strong>@@
 
  [[file:images/practice_graph_88.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-89 @@html: <strong>Practice Graph ♯ 89 </strong>@@
 
  [[file:images/practice_graph_89.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-90 @@html: <strong>Practice Graph ♯ 90 </strong>@@
 
  [[file:images/practice_graph_90.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-91 @@html: <strong>Practice Graph ♯ 91 </strong>@@
 
  [[file:images/practice_graph_91.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-92 @@html: <strong>Practice Graph ♯ 92 </strong>@@
 
  [[file:images/practice_graph_92.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-93 @@html: <strong>Practice Graph ♯ 93 </strong>@@
 
  [[file:images/practice_graph_93.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-94 @@html: <strong>Practice Graph ♯ 94 </strong>@@
 
  [[file:images/practice_graph_94.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-95 @@html: <strong>Practice Graph ♯ 95 </strong>@@
 
  [[file:images/practice_graph_95.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-96 @@html: <strong>Practice Graph ♯ 96 </strong>@@
 
  [[file:images/practice_graph_96.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-97 @@html: <strong>Practice Graph ♯ 97 </strong>@@
 
  [[file:images/practice_graph_97.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-98 @@html: <strong>Practice Graph ♯ 98 </strong>@@
 
  [[file:images/practice_graph_98.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-99 @@html: <strong>Practice Graph ♯ 99 </strong>@@
 
  [[file:images/practice_graph_99.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-100 @@html: <strong>Practice Graph ♯ 100 </strong>@@
 
  [[file:images/practice_graph_100.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-101 @@html: <strong>Practice Graph ♯ 101 </strong>@@
 
  [[file:images/practice_graph_101.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-102 @@html: <strong>Practice Graph ♯ 102 </strong>@@
 
  [[file:images/practice_graph_102.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-103 @@html: <strong>Practice Graph ♯ 103 </strong>@@
 
  [[file:images/practice_graph_103.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-104 @@html: <strong>Practice Graph ♯ 104 </strong>@@
 
  [[file:images/practice_graph_104.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-105 @@html: <strong>Practice Graph ♯ 105 </strong>@@
 
  [[file:images/practice_graph_105.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-106 @@html: <strong>Practice Graph ♯ 106 </strong>@@
 
  [[file:images/practice_graph_106.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-107 @@html: <strong>Practice Graph ♯ 107 </strong>@@
 
  [[file:images/practice_graph_107.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-108 @@html: <strong>Practice Graph ♯ 108 </strong>@@
 
  [[file:images/practice_graph_108.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-109 @@html: <strong>Practice Graph ♯ 109 </strong>@@
 
  [[file:images/practice_graph_109.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-110 @@html: <strong>Practice Graph ♯ 110 </strong>@@
 
  [[file:images/practice_graph_110.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-111 @@html: <strong>Practice Graph ♯ 111 </strong>@@
 
  [[file:images/practice_graph_111.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-112 @@html: <strong>Practice Graph ♯ 112 </strong>@@
 
  [[file:images/practice_graph_112.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-113 @@html: <strong>Practice Graph ♯ 113 </strong>@@
 
  [[file:images/practice_graph_113.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-114 @@html: <strong>Practice Graph ♯ 114 </strong>@@
 
  [[file:images/practice_graph_114.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-115 @@html: <strong>Practice Graph ♯ 115 </strong>@@
 
  [[file:images/practice_graph_115.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-116 @@html: <strong>Practice Graph ♯ 116 </strong>@@
 
  [[file:images/practice_graph_116.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-117 @@html: <strong>Practice Graph ♯ 117 </strong>@@
 
  [[file:images/practice_graph_117.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-118 @@html: <strong>Practice Graph ♯ 118 </strong>@@
 
  [[file:images/practice_graph_118.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-119 @@html: <strong>Practice Graph ♯ 119 </strong>@@
 
  [[file:images/practice_graph_119.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-120 @@html: <strong>Practice Graph ♯ 120 </strong>@@
 
  [[file:images/practice_graph_120.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-121 @@html: <strong>Practice Graph ♯ 121 </strong>@@
 
  [[file:images/practice_graph_121.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-122 @@html: <strong>Practice Graph ♯ 122 </strong>@@
 
  [[file:images/practice_graph_122.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-123 @@html: <strong>Practice Graph ♯ 123 </strong>@@
 
  [[file:images/practice_graph_123.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-124 @@html: <strong>Practice Graph ♯ 124 </strong>@@
 
  [[file:images/practice_graph_124.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-125 @@html: <strong>Practice Graph ♯ 125 </strong>@@
 
  [[file:images/practice_graph_125.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-126 @@html: <strong>Practice Graph ♯ 126 </strong>@@
 
  [[file:images/practice_graph_126.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-127 @@html: <strong>Practice Graph ♯ 127 </strong>@@
 
  [[file:images/practice_graph_127.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-128 @@html: <strong>Practice Graph ♯ 128 </strong>@@
 
  [[file:images/practice_graph_128.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-129 @@html: <strong>Practice Graph ♯ 129 </strong>@@
 
  [[file:images/practice_graph_129.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-130 @@html: <strong>Practice Graph ♯ 130 </strong>@@
 
  [[file:images/practice_graph_130.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-131 @@html: <strong>Practice Graph ♯ 131 </strong>@@
 
  [[file:images/practice_graph_131.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-132 @@html: <strong>Practice Graph ♯ 132 </strong>@@
 
  [[file:images/practice_graph_132.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-133 @@html: <strong>Practice Graph ♯ 133 </strong>@@
 
  [[file:images/practice_graph_133.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-134 @@html: <strong>Practice Graph ♯ 134 </strong>@@
 
  [[file:images/practice_graph_134.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-135 @@html: <strong>Practice Graph ♯ 135 </strong>@@
 
  [[file:images/practice_graph_135.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-136 @@html: <strong>Practice Graph ♯ 136 </strong>@@
 
  [[file:images/practice_graph_136.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-137 @@html: <strong>Practice Graph ♯ 137 </strong>@@
 
  [[file:images/practice_graph_137.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-138 @@html: <strong>Practice Graph ♯ 138 </strong>@@
 
  [[file:images/practice_graph_138.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-139 @@html: <strong>Practice Graph ♯ 139 </strong>@@
 
  [[file:images/practice_graph_139.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-140 @@html: <strong>Practice Graph ♯ 140 </strong>@@
 
  [[file:images/practice_graph_140.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-141 @@html: <strong>Practice Graph ♯ 141 </strong>@@
 
  [[file:images/practice_graph_141.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-142 @@html: <strong>Practice Graph ♯ 142 </strong>@@
 
  [[file:images/practice_graph_142.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-143 @@html: <strong>Practice Graph ♯ 143 </strong>@@
 
  [[file:images/practice_graph_143.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-144 @@html: <strong>Practice Graph ♯ 144 </strong>@@
 
  [[file:images/practice_graph_144.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-145 @@html: <strong>Practice Graph ♯ 145 </strong>@@
 
  [[file:images/practice_graph_145.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-146 @@html: <strong>Practice Graph ♯ 146 </strong>@@
 
  [[file:images/practice_graph_146.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-147 @@html: <strong>Practice Graph ♯ 147 </strong>@@
 
  [[file:images/practice_graph_147.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-148 @@html: <strong>Practice Graph ♯ 148 </strong>@@
 
  [[file:images/practice_graph_148.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-149 @@html: <strong>Practice Graph ♯ 149 </strong>@@
 
  [[file:images/practice_graph_149.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-150 @@html: <strong>Practice Graph ♯ 150 </strong>@@
 
  [[file:images/practice_graph_150.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-151 @@html: <strong>Practice Graph ♯ 151 </strong>@@
 
  [[file:images/practice_graph_151.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-152 @@html: <strong>Practice Graph ♯ 152 </strong>@@
 
  [[file:images/practice_graph_152.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-153 @@html: <strong>Practice Graph ♯ 153 </strong>@@
 
  [[file:images/practice_graph_153.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-154 @@html: <strong>Practice Graph ♯ 154 </strong>@@
 
  [[file:images/practice_graph_154.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-155 @@html: <strong>Practice Graph ♯ 155 </strong>@@
 
  [[file:images/practice_graph_155.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-156 @@html: <strong>Practice Graph ♯ 156 </strong>@@
 
  [[file:images/practice_graph_156.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-157 @@html: <strong>Practice Graph ♯ 157 </strong>@@
 
  [[file:images/practice_graph_157.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-158 @@html: <strong>Practice Graph ♯ 158 </strong>@@
 
  [[file:images/practice_graph_158.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-159 @@html: <strong>Practice Graph ♯ 159 </strong>@@
 
  [[file:images/practice_graph_159.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-160 @@html: <strong>Practice Graph ♯ 160 </strong>@@
 
  [[file:images/practice_graph_160.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-161 @@html: <strong>Practice Graph ♯ 161 </strong>@@
 
  [[file:images/practice_graph_161.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-162 @@html: <strong>Practice Graph ♯ 162 </strong>@@
 
  [[file:images/practice_graph_162.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-163 @@html: <strong>Practice Graph ♯ 163 </strong>@@
 
  [[file:images/practice_graph_163.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-164 @@html: <strong>Practice Graph ♯ 164 </strong>@@
 
  [[file:images/practice_graph_164.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-165 @@html: <strong>Practice Graph ♯ 165 </strong>@@
 
  [[file:images/practice_graph_165.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-166 @@html: <strong>Practice Graph ♯ 166 </strong>@@
 
  [[file:images/practice_graph_166.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-167 @@html: <strong>Practice Graph ♯ 167 </strong>@@
 
  [[file:images/practice_graph_167.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-168 @@html: <strong>Practice Graph ♯ 168 </strong>@@
 
  [[file:images/practice_graph_168.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-169 @@html: <strong>Practice Graph ♯ 169 </strong>@@
 
  [[file:images/practice_graph_169.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-170 @@html: <strong>Practice Graph ♯ 170 </strong>@@
 
  [[file:images/practice_graph_170.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-171 @@html: <strong>Practice Graph ♯ 171 </strong>@@
 
  [[file:images/practice_graph_171.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-172 @@html: <strong>Practice Graph ♯ 172 </strong>@@
 
  [[file:images/practice_graph_172.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-173 @@html: <strong>Practice Graph ♯ 173 </strong>@@
 
  [[file:images/practice_graph_173.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-174 @@html: <strong>Practice Graph ♯ 174 </strong>@@
 
  [[file:images/practice_graph_174.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-175 @@html: <strong>Practice Graph ♯ 175 </strong>@@
 
  [[file:images/practice_graph_175.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-176 @@html: <strong>Practice Graph ♯ 176 </strong>@@
 
  [[file:images/practice_graph_176.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-177 @@html: <strong>Practice Graph ♯ 177 </strong>@@
 
  [[file:images/practice_graph_177.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-178 @@html: <strong>Practice Graph ♯ 178 </strong>@@
 
  [[file:images/practice_graph_178.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-179 @@html: <strong>Practice Graph ♯ 179 </strong>@@
 
  [[file:images/practice_graph_179.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-180 @@html: <strong>Practice Graph ♯ 180 </strong>@@
 
  [[file:images/practice_graph_180.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-181 @@html: <strong>Practice Graph ♯ 181 </strong>@@
 
  [[file:images/practice_graph_181.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-182 @@html: <strong>Practice Graph ♯ 182 </strong>@@
 
  [[file:images/practice_graph_182.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((Yes)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((Yes)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-183 @@html: <strong>Practice Graph ♯ 183 </strong>@@
 
  [[file:images/practice_graph_183.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-184 @@html: <strong>Practice Graph ♯ 184 </strong>@@
 
  [[file:images/practice_graph_184.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-185 @@html: <strong>Practice Graph ♯ 185 </strong>@@
 
  [[file:images/practice_graph_185.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-186 @@html: <strong>Practice Graph ♯ 186 </strong>@@
 
  [[file:images/practice_graph_186.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-187 @@html: <strong>Practice Graph ♯ 187 </strong>@@
 
  [[file:images/practice_graph_187.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-188 @@html: <strong>Practice Graph ♯ 188 </strong>@@
 
  [[file:images/practice_graph_188.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-189 @@html: <strong>Practice Graph ♯ 189 </strong>@@
 
  [[file:images/practice_graph_189.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-190 @@html: <strong>Practice Graph ♯ 190 </strong>@@
 
  [[file:images/practice_graph_190.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-191 @@html: <strong>Practice Graph ♯ 191 </strong>@@
 
  [[file:images/practice_graph_191.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-192 @@html: <strong>Practice Graph ♯ 192 </strong>@@
 
  [[file:images/practice_graph_192.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-193 @@html: <strong>Practice Graph ♯ 193 </strong>@@
 
  [[file:images/practice_graph_193.png]]
  #+begin_spoiler
- total: ((Yes)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((Yes)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-194 @@html: <strong>Practice Graph ♯ 194 </strong>@@
 
  [[file:images/practice_graph_194.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-195 @@html: <strong>Practice Graph ♯ 195 </strong>@@
 
  [[file:images/practice_graph_195.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-196 @@html: <strong>Practice Graph ♯ 196 </strong>@@
 
  [[file:images/practice_graph_196.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-197 @@html: <strong>Practice Graph ♯ 197 </strong>@@
 
  [[file:images/practice_graph_197.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((Yes))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-198 @@html: <strong>Practice Graph ♯ 198 </strong>@@
 
  [[file:images/practice_graph_198.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-199 @@html: <strong>Practice Graph ♯ 199 </strong>@@
 
  [[file:images/practice_graph_199.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((No)); surjective: ((No))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((No)); doc:surjective: ((No))
  #+end_spoiler
 
  @@html: <hr>@@ link-here:practice-graph-200 @@html: <strong>Practice Graph ♯ 200 </strong>@@
 
  [[file:images/practice_graph_200.png]]
  #+begin_spoiler
- total: ((No)); univalent: ((No)); injective: ((Yes)); surjective: ((Yes))
+ doc:total: ((No)); doc:univalent: ((No)); doc:injective: ((Yes)); doc:surjective: ((Yes))
  #+end_spoiler
 
 ** Graph Theory, in general
