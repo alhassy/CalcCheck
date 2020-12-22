@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-11-23 Mon 10:45 -->
+<!-- 2020-12-22 Tue 11:08 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Calculational Mathematics and <code>CalcCheck</code></title>
@@ -54,7 +54,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -1932,9 +1932,7 @@ document.body.style.background='#90ee90'">lightgreen</button>
 </div>
 </div>
 
-<div style="column-rule-style:none;column-count:2;"<p>
-
-</p>
+<div style="column-rule-style: none;column-count: 2;">
 
 <p>
  <div style="padding: 1em; background-color: pink; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
@@ -1949,6 +1947,10 @@ document.body.style.background='#90ee90'">lightgreen</button>
 </p>
 
 <p>
+<p><br>
+</p>
+
+<p>
  <div style="padding: 1em; background-color: pink; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
 </p>
 <h2>
@@ -1959,7 +1961,10 @@ document.body.style.background='#90ee90'">lightgreen</button>
 <p>
  </div>
 </p>
+
+
 </div>
+
 
 <p>
  <div style="padding: 1em; background-color: cyan; border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <h3></h3>
@@ -2001,7 +2006,7 @@ Reference Material
 
 
 
-<div id="org93fcbcd" class="figure">
+<div id="orgf12ef65" class="figure">
 <p><img src="images/proof trees vs calculational proofs.png" alt="proof trees vs calculational proofs.png" />
 </p>
 </div>
@@ -2231,7 +2236,7 @@ briefly.
 </p></li>
 
 <li><p>
-Feedback Replies &amp; Quantification
+<a href="https://youtu.be/h6I-K2vmGcM">Feedback Replies &amp; Quantification</a>
 <kbd> Oct 29 </kbd>
 </p>
 
@@ -2385,9 +2390,116 @@ combinatorics by counting the size of certain kinds of arrows.
 
 <p>
 <kbd> Nov 24 </kbd> is the fifth midterm; it is online during class time.
+</p>
+
+<hr /></li>
+
+<li><p>
+<a href="https://youtu.be/AiU67vfxCJI">ISO Z Standard &amp; Combinatorics</a>
+<kbd> Nov 26 </kbd>
+</p>
+
+<p>
+Since Midterm 5 showed that not everyone is very comfortable with relations,
+the plan is not to “bulldoze onward” to new material but instead to
+“ping-pong” between new material, and to connect it back to relations to
+reinforce the concepts therein. A few fun graphs are shown.
+</p></li>
+</ol>
+
+
+<details class="code-details"
+                 style ="padding: 1em;
+                          background-color: #e5f5e5;
+                          /* background-color: pink; */
+                          border-radius: 15px;
+                          color: hsl(157 75%);
+                          font-size: 0.9em;
+                          box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;">
+                  <summary>
+                    <strong>
+                      <font face="Courier" size="3" color="green">
+                         Sequences vs Sets vs Bags
+                      </font>
+                    </strong>
+                  </summary>
+<ul class="org-ul">
+<li>Sequence: [x₀, x₁, …, xₙ] &#x2026; order and multiplicity matter</li>
+<li>Set     : {x₀, x₁, …, xₙ} &#x2026; neither order nor multiplicity matter</li>
+<li>Bag     : ⦃x₀, x₁, …, xₙ⦄ or ⟅x₀, …, xₙ⟆  order doesn't matter but multiplicity does</li>
+</ul>
+
+<ul class="org-ul">
+<li>Sets ≈ exitence is enough  &#x2026;. “∈” is the key!!</li>
+<li>Bags ≈ I <b>need</b> to know which one &#x2026; “♯” “how many times is it there?”</li>
+<li>Bags ≈ multi-relations = multi-sets</li>
+</ul>
+
+
+</details>
+
+
+<ol class="org-ol">
+<li value="27"><p>
+<a href="https://youtu.be/RcpgzDvMKxA">Multirelations!</a>
+<kbd> Nov 27 </kbd>
+</p>
+
+<p>
+We speak of people in Toronto sharing the same number of hair, multiple
+edges in a graph, and how bags account for “mor information” by yielding the
+number of times an element occurs whereas sets only care “whether it's there
+or not” &#x2014;this is reminicient of classical vs constructive maths.  A few
+fun graphs are shown.
 </p></li>
 
-<li><span style="color:red;"><b>not yet given</b></span></li>
+<li><p>
+<a href="https://youtu.be/H0FE-0WiAPI">Reachability</a>
+<kbd> Dec 1 </kbd>
+</p>
+
+<p>
+We quickly review bags &#x2014;multisets&#x2014; and then talk about closures, which
+capture the idea of “add just enough so the result has the deisred
+property”.  This then leads us to talk about transitive closures which can
+be used to to <b>elegantly</b> express proeprties on graphs that would otherwise be
+a nightmare to work with (if quantifiers, ∀∃, were used).
+</p></li>
+
+<li><p>
+<a href="https://youtu.be/0LO1SkdmRBU">Trees</a>
+<kbd> Dec 3 </kbd>
+</p>
+
+<p>
+Directed, acyclic, connected graphs are known as trees.  They have the
+particular property that they can be expressed as inductive data types:
+Whereas a sequence is either empty ε or has a right-child <code>x ◁ r</code>, a tree is
+either empty ◬ or has <b>two</b> children <code>l ◿ x ◺ r</code>. We also look at other examples
+of inductively defined structures and briefly mention topological sort.
+</p></li>
+
+<li><p>
+<a href="https://youtu.be/kR_Xl1oM4Cg">Wrapping up the term: Closures, Topological Sort, Probability Theory</a>
+<kbd> Dec 4 </kbd>
+</p>
+
+<p>
+We finish the discussion on closures and kerneal that was started last time.
+We look at DAGs and how they allow ‘sharing’ of structure and how we can
+traverse graphs: We show visitation and topological sorting.  Finally, we
+wrap up with a terse introduction to probability theory as “Σ in disguise”
+and close with inference rules/trees and structural induction (•̀ᴗ•́)و
+</p></li>
+
+<li><p>
+<a href="https://youtu.be/BSnCxcpCEK0">Closing off with some induction example in <b>Agda</b></a>
+<kbd> Dec 8 </kbd>
+</p>
+
+<p>
+<i>All the best with exams!</i>
+</p></li>
 </ol>
 
 <p>
@@ -2406,10 +2518,16 @@ combinatorics by counting the size of certain kinds of arrows.
 </tr>
 </tbody>
 </table>
+
+
+<div id="org5363ad9" class="figure">
+<p><img src="images/course_overview.png" alt="course_overview.png" />
+</p>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Musa Al-hassy</p>
-<p class="date">Created: 2020-11-23 Mon 10:45</p>
+<p class="date">Created: 2020-12-22 Tue 11:08</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

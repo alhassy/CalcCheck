@@ -39,6 +39,20 @@
 
 #+latex: \def\remark#1{{\color{gray!80} #1}}
 
+Complements
+
+x ⊑ y  ⇔  ⊤ = ∼ x ⊔ y  ⇔  ⊥ = x ⊓ ∼ y
+
+Or using pseudo- and semi-complements:
+∼ x = ⊤ - x = x ⇨ ⊥.
+
+
+--------------------------------------------------------------------------------
+
+R ⨾ R ˘ ⊆ \Id means that no two distinct elements have a successor in common.
+
+Graphs containing /no/ isolated points are characterised by $(R ∪ R˘) ⨾ ⊤ = ⊤$.
+
 * Propositional Calculus
   :PROPERTIES:
   :CUSTOM_ID: Propositional-Calculus
@@ -218,7 +232,7 @@ An order is /bounded/ if there are elements $⊤, ⊥ : τ$ being the lower and 
 |                |                     |   |                   |                     |
 | *Top Element*    | $a \,⊑\, ⊤$         |   | *Bottom Element*    | $⊥ \,⊑\, a$         |
 |                |                     |   |                   |                     |
-| *Top is maximal* | $⊤ ⊑ a \;≡\; a = ⊤$ |   | *Bottom is minimal* | $a ⊑ ⊥ \;≡\; a = ⊤$ |
+| *Top is maximal* | $⊤ ⊑ a \;≡\; a = ⊤$ |   | *Bottom is minimal* | $a ⊑ ⊥ \;≡\; a = ⊥$  |
 
 * Lattices
   :PROPERTIES:
@@ -489,14 +503,14 @@ $\binom{n}{r} \;=\; n! / (r! · (n - r)!)$
 
 # Axioms,
 | *Co-distributivity*     | *˘˘, Involutive* | *Monotonicity*        |
-| $(x ⨾ y) ˘ = y ˘ ⨾ x$ | $x ˘ ˘ = x$    | $x ⊑ y ⇒ x ˘ ⊑ y ˘$ |
+| $(x ⨾ y) ˘ = y ˘ ⨾ x ˘$ | $x ˘ ˘ = x$    | $x ⊑ y ⇒ x ˘ ⊑ y ˘$ |
 
 # Theorems,
 
 | *Identity*      | *Isotonicity* | *Connection*              | *Elimination*             |
 | $\Id ˘ = \Id$ | $x ⊑ y \;≡\; x ˘ ⊑ y ˘$            | $a ˘ ⊑ b \;≡\; a ⊑ b ˘$ | $x ˘ = y ˘ \;≡\; x = y$ |
 
-* Residuals, Division
+* Regular Algebra ---Residuals, Division
 #+begin_export latex
 \def\univalent{\mathsf{univalent}\,}
 \def\surjective{\mathsf{surjective}\,}
@@ -509,10 +523,16 @@ $\binom{n}{r} \;=\; n! / (r! · (n - r)!)$
 
 # + latex_header: \newunicodechar{╱}
 
-Suppose we have an associative operation ~_⨾_~ with identity $\Id$ and two
-operations “under ╲” and “over ╱” specified as follows.
+# Suppose we have an associative operation ~_⨾_~ with identity $\Id$ and two
+# operations “under ╲” and “over ╱” specified as follows.
+A monoid ~(τ, _⨾_, Id)~ that happens to be a complete lattice and admits
+factorisation ---i.e., there are operations “under ╲” and “over ╱” specified as
+below--- is called a /regular algebra/.
+# This is equivalent to Conway's Standard Kleene Algebra (S-algebra).
+# See Conway's thin book “Regular algebra and finite machines”
+# Aka “Unital Quantale”
 
-|                                   |   |                                   |
+# |                                   |   |                                   |
 | *Characterisation of ╱*             |   | *Characterisation of ╲*             |
 | $a ⨾ b ⊑ c \quad≡\quad a ⊑ c ╱ b$ |   | $a ⨾ b ⊑ c \quad≡\quad b ⊑ a ╲ c$ |
 
@@ -527,7 +547,7 @@ operations “under ╲” and “over ╱” specified as follows.
 #
 
 | *Monotonicity of ⨾*             | $a ⊑ a′ ∧ b ⊑ b′ ⇒ a ⨾ b ⊑ a′ ⨾ b′$ |
-| *Subdistributivity of ⨾ over ⊓* | $a ⨾ (b ⊓ c) \;⊏\; a ⨾ b ⊓ a ⨾ c$   |
+| *Subdistributivity of ⨾ over ⊓* | $a ⨾ (b ⊓ c) \;⊑\; a ⨾ b ⊓ a ⨾ c$   |
 
 :Subdist_pf:
 a ⨾ (b ⊓ c)
@@ -631,6 +651,71 @@ smallest piece that along with y ‘covers’ x/; i.e., it is the least value th
 
  whereas with modal rules we cannot generally produce residuals ---which
  secretly hide negations ;-)
+
+* COMMENT Examples of Regular Algebras
+
+The conjunctive 𝔹oolean monoid ordered by implication
+is a complete lattice with disjunction as join
+and it admits factorisation with “only-if” (“⇒”) as the ‘under’
+and “if” (“⇐”) as the ‘over’ operator since
+- p ∧ q ⇒ r  ≡  q ⇒ (p ⇒ r)
+- p ∧ q ⇒ r  ≡  p ⇒ (r ⇐ p)
+
+Square matrices over a regular algebra ---i.e., functions I × I → τ for some
+possibly infinite index set I--- where the matrix product is defined by $i (A
+⨾ B) k = (⊔ j • i A j ⨾ j B k)$ and matrices are ordered pointwise $A ⊑ B ≡ (∀
+i, j • i A j ⊑ i B j)$, and so the superemum is pointwise, and the identity
+matrix 𝕀 is defined by ~i 𝕀 j = if i = j then ⊤ else ⊥ fi~. The factors are
+defined by specific formulae; see [Bachouse06, Theorem 4.20].
+
+In particular, homogeneous binary relations are an instance of such matrix
+regular algebras: Relations are the matrices over the regular algebra
+of conjunctive 𝔹ooleans.
+
+The *Kleene star* is sometimes so simple that it is not considered.  E.g., the
+star for the conjunctive 𝔹ooleans is p* = true for all p, but the star of a
+relation is the reflexive, transtivie closure of the relation.
+
+The languages over a given alphabet form a regular algebra ---where a given set
+Σ is just called an /alphabet/, its elements are called /letters/ or /symbols/,
+sequences over Σ are called /words/, and sets of words L ⊆ Σ* are known as /languages/.
+
+More generally, given any monoid (τ, _⨾,_, Id), its powerset is a regular algebra
+with product extended set-wise $X ⨾ Y = {x ⨾ y ❙ x ∈ X ∧ y ∈ Y}$ and identity
+$\{Id\}$ and the usual subset inclusion as order and so is a complete lattice
+since sets are a complete lattice. Under is given my an infimum of /derivatives/
+and over is given by /anti-derivatives/.
+# As with relations-matrices, we can view sets-as-predicates.
+
+In particular, the conjunctive 𝔹ooleans arise as the powerset algebra
+of the trivial monoid consisting of a single element.
+
+In a powerset regular algebra, X* = (X ∩ ¬Id)*.
+# Lemma 135, Factor Theory
+
+⇨ Anyhow, a language is regular ≡ it has finitely many factors!
+
+That is, given a language E, the set {L, R • L ╲ E ╱ R} is finite ≡ E is regular.
+
+* COMMENT Kleene Star
+
+In a regular algebra, the “Kleene star” operator can be defined in several ways.
+
+Perhaps the most convenient definition of x* is the least-fixed point
+of the function y ↦ Id ⊔ x ⊔ y⨾y; consequently:
+
+1. x = x* ≡ x ⊒ Id ⊔ x ⨾ x
+
+   x* is the reflexive (x* ⊒ Id) and transitive (x* ⊒ x* ⨾ x*)
+   closure (x* ⊒ x) of x.
+
+2. x* = (⊔ n : ℕ • xⁿ)
+
+3. x* = μ y • Id ⊔ x ⨾ y
+
+   μ f is the least fixed point of function f.
+
+4. x* = μ y • Id ⊔ y ⨾ x
 
 * Named Properties
 
@@ -846,6 +931,25 @@ ie
 $\langle x, y \rangle \ \in\ B \times C \quad\equiv\quad x \in B \land y \in C$
 :End:
 
+# Axiom “Forced path”: x ⦗ { ⟨ u , v ⟩ } ⨾ Q ⦘ y  ≡  x = u  ∧ v ⦗ Q ⦘ y
+# Axiom “Forced path”: x ⦗ Q ⨾ { ⟨ u , v ⟩ } ⦘ y  ≡  x  ⦗ Q ⦘ u  ∧  v = y
+# Axiom “Membership as inclusion”: e ∈ Q  ≡  { e } ⊆ Q
+#
+
+# x (R ╲ S) y  ≡  R x ⊆ S y
+# x (S ╱ T) y  ≡  x S ⊇ y T
+
+* COMMENT more on relations
+
+Functions, mappings, F assign a unique y to every x
+and we denote this unique y by the name “F x”.
+
+x (f ⨾ R ⨾ g ˘) y  ≡  (f x) R (g y)
+
+Taking R = g = Id is a nice way to remember how functions are treated as
+relations:
+x f y  ≡  f x = y.
+
 * newpage :ignore:
 #+latex: \newpage
 
@@ -880,8 +984,8 @@ such as equality or inclusion.
 |            |     |   | \remark{The graph is undirected; we have a symmetric matrix}                                   |
 |            |     |   |                                                                                                |
 | $\antisym$ | $R$ | ≡ | $(\forall\ b, c  \;•\; b\infixREL{R}c \land c\infixREL{R}b \;\implies\; b = c )$               |
-|            |     |   | \remark{Mutually related nodes are necessairly self-loops}                                     |
-|            |     |   | \remark{“Mutually related items are necessairly indistinguishable”}                            |
+|            |     |   | \remark{Mutually related nodes are necessarily self-loops}                                     |
+|            |     |   | \remark{“Mutually related items are necessarily indistinguishable”}                            |
 |            |     |   |                                                                                                |
 | $\asym$    | $R$ | ≡ | $(\forall\ b, c  \;•\; b\infixREL{R}c \;\implies\; \lnot ( c\infixREL{R}b ) )$                 |
 |            |     |   | @@latex:\remark{\hspace{-.0em}At most 1 edge (regardless of direction) relating any 2 nodes}@@ |
@@ -896,8 +1000,18 @@ such as equality or inclusion.
 # | trans              |     |   | \remark{In the graph, any 2-step path can be replaced with a 1-step path}                 |
 
 #+latex: \vfill
+
+#+latex: \vspace{0.5em}\hrule
+
 /Intuitively/, by considering the interpretations only, we find
-\[\refl R \;∧\; \trans R \;⇒\; \idemp R\] Super cool stuff!
+\[\refl R \;∧\; \trans R \;⇒\; \idemp R\]
+# Super cool stuff!
+
+#+latex: \vspace{0.5em}\hrule
+
+/Intuitively/, by considering the interpretations only, we find /a simple graph
+that is total or surjective, is necessarily connected:/ There are no isolated
+(“forever alone”) nodes.
 
 
 #+latex: \vfill{\color{white}.}\columnbreak

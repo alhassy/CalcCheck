@@ -19,6 +19,9 @@
    (format "<details> <summary> %s </summary> <pre> %s </pre></details>" (or title (concat "Details; " lang)) raw-contents))
 #+end_src
 
+#+RESULTS: startup-code
+nil
+
 #+RESULTS:
 nil
 nil
@@ -9343,7 +9346,7 @@ This section follows Schmidt and Ströhlein's /Relations and Graphs/.
 \def\adj{\mathsf{adj}\,}
 #+end_latex-definitions
 
-Graphs are models for relations.
+[[doc:graph][Graphs]] are models for relations.
 
 In general, a *Graph* $G = (V, E, \src, \tgt)$
    consists of:
@@ -9371,9 +9374,15 @@ Since $\src, \tgt$ are doc:univalent ---partial functions---, but not
    Graph*. Such a graph is *total* when $\src$ and $\tgt$ are total; i.e., when
    $\Id ⊆ \src ⨾ \src ˘ ∩ \tgt ⨾ \tgt˘$; i.e., when every arc has precisely one
    starting point and one endpoint.
-   - Note that $Ξ = \src ⨾ \src ˘ ∩ \tgt ⨾ \tgt˘$ is an doc:Equivalence relation, which
+   - Note that $Ξ = \src ⨾ \src ˘ ∩ \tgt ⨾ \tgt˘$ is /almost/ an doc:Equivalence relation, which
      may be aptly called “arc parallelism”: Two arcs are related when they have
      the same starting point and the same ending point, which both exist.
+
+     This relation is ‘clearly’ symmetric and transitive.
+
+     It is /not/ an equivalence since it may not be reflexive: Partial edges are
+     not parallel with each other nor themselves! ---Since parallelism requires
+     the /existence/ of /both/ start and end points.
 
    - Theorem: A graph is total /and/ has no parallel arcs *exactly when* $Ξ = \Id$.
 
@@ -9382,8 +9391,9 @@ Since $\src, \tgt$ are doc:univalent ---partial functions---, but not
 
      That is, “total ≡ $\Id ⊆ Ξ$” and “no parallel arrows ≡ $Ξ ⊆ \Id$”.
 
-   - Simple graphs ---i.e., those without parallel edges--- are obtained as
-        the quotient of total graphs over Ξ being edge-parallelism.
+   # Inaccruate and imprecise...
+   # - Simple graphs ---i.e., those without parallel edges--- are obtained as
+   #     the quotient of total graphs over Ξ being edge-parallelism.
 
    - Finally, note that $\src$ and $\tgt$ are source/target saturated by
      edge-parallelism:

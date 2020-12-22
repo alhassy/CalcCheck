@@ -188,7 +188,7 @@ Raymond Smullyan!
   :CUSTOM_ID: Links-to-docs-notes
   :END:
 
-#+begin_parallelNB
+#+begin_parallel :bar nil
 
 {{{begin-box(pink,)}}}
 #+html: <h2>
@@ -204,7 +204,7 @@ Raymond Smullyan!
 #+html: </h2>
 {{{end-box}}}
 
-#+end_parallelNB
+#+end_parallel
 
 {{{begin-box(cyan, )}}}
 #+html: <h2>
@@ -366,14 +366,14 @@ Videos
     kbd:Oct_27 is the third midterm; it is online during class time and the
    ‘Midterm Prep’ was created to, well, prepare you for the midterm.
 
-17. Feedback Replies & Quantification
+17. [[https://youtu.be/h6I-K2vmGcM][Feedback Replies & Quantification]]
     kbd:Oct_29
 
     Let's discuss the entries posted on the feedback channel as well as
     impressions of the previous midterm. Then let's continue with Quantification
     and it's possible implementations via loops.
 
-19. Monotonicity: From ∧/∨ to ∀/∃ kbd:Nov_3
+18. Monotonicity: From ∧/∨ to ∀/∃ kbd:Nov_3
 
     [[https://youtu.be/RYXFOSevpvM][Part 1]] and [[https://youtu.be/PFYrBrmd-1k][Part 2]]
 
@@ -381,7 +381,7 @@ Videos
     induction and how it can be invoked with CalcCheck's “Using” mechanism
     ---which allows a theorem to be used as a proof technique.
 
-20. [[https://youtu.be/Qm6o0gn8xz8][Sequences and Induction]] kbd:Nov_5
+19. [[https://youtu.be/Qm6o0gn8xz8][Sequences and Induction]] kbd:Nov_5
 
     The idea behind induction is that if a property holds for atomic
     constructions and the property is preserved by compound constructions then
@@ -393,7 +393,7 @@ Videos
     Suppose $P : τ → 𝔹$ is a predicate on an ordered space, then
     \[P\, ⊥ \;∧\; (∀ x,y : τ \,❙\, x ⊑ y • P\, x \,⇒\, P\, y) \;⇒\; (∀ x : τ • P\, x) \]
 
-21. [[https://youtu.be/tY_kwfU3Vjo][“Typed” Set Theory 𝑰]] kbd:Nov_6
+20. [[https://youtu.be/tY_kwfU3Vjo][“Typed” Set Theory 𝑰]] kbd:Nov_6
 
     Sets are like any other data structure, such as ℕumbers or sequences.
     However, there is a particular ‘reflection’ of types-as-sets: Every type is
@@ -405,11 +405,11 @@ Videos
 
     kbd:Nov_10 is the fourth midterm; it is online during class time.
 
-22. [[https://youtu.be/RlGEVZ-5tGo][“Typed” Set Theory 𝑰𝑰]] kbd:Nov_12
+21. [[https://youtu.be/RlGEVZ-5tGo][“Typed” Set Theory 𝑰𝑰]] kbd:Nov_12
 
     Continuing part 𝑰.
 
-23. [[https://youtu.be/0bb9-I5RC74][Cartesian Products, a theory of records]] kbd:Nov_13
+22. [[https://youtu.be/0bb9-I5RC74][Cartesian Products, a theory of records]] kbd:Nov_13
 
     We look at Cartesian Products and projections, which can be thought of as
     the mathematical underpinning of “records/classes and fields” found in
@@ -421,7 +421,7 @@ Videos
     Finally, we consider sets of pairs, ‘relations’, as a form of
     non-deterministic computing.
 
-24. [[https://youtu.be/cuCy3jprIFY][A ‘Brutal’ Introduction to Relations]] kbd:Nov_17
+23. [[https://youtu.be/cuCy3jprIFY][A ‘Brutal’ Introduction to Relations]] kbd:Nov_17
 
     We conclude Set Theory with an example of “division of sets” known as the
     pseudo-complement: We show how it's defining universal property can be used
@@ -437,7 +437,7 @@ Videos
 
     Compare with “A ‘Gentle’ Introduction to Relations (Nov 19)”.
 
-25. [[https://youtu.be/9U9bn047egY][A ‘Gentle’ Introduction to Relations]] kbd:Nov_19
+24. [[https://youtu.be/9U9bn047egY][A ‘Gentle’ Introduction to Relations]] kbd:Nov_19
 
     Relations are just sets of pairs, but there are interesting interpretations
     of such sets: Matrices, Graphs, Programs.  As such, there are interesting
@@ -452,7 +452,7 @@ Videos
 
     Compare with “A ‘Brutal’ Introduction to Relations (Nov 17)”.
 
-26. [[https://youtu.be/co-EEY222EI][Wrapping up Relations]] kbd:Nov_20
+25. [[https://youtu.be/co-EEY222EI][Wrapping up Relations]] kbd:Nov_20
 
     Concluding our discussion on relations by considering how “relation
     division” appears ---either the shape of residuals “R ╱ S” or via converse
@@ -463,7 +463,67 @@ Videos
 
     kbd:Nov_24 is the fifth midterm; it is online during class time.
 
-27. [[color:red][*not yet given*]]
+    ------------------------------------------------------------------------------------------
+
+26. [[https://youtu.be/AiU67vfxCJI][ISO Z Standard & Combinatorics]]
+    kbd:Nov_26
+
+    Since Midterm 5 showed that not everyone is very comfortable with relations,
+    the plan is not to “bulldoze onward” to new material but instead to
+    “ping-pong” between new material, and to connect it back to relations to
+    reinforce the concepts therein. A few fun graphs are shown.
+
+    #+begin_details Sequences vs Sets vs Bags
+    - Sequence: [x₀, x₁, …, xₙ] ... order and multiplicity matter
+    - Set     : {x₀, x₁, …, xₙ} ... neither order nor multiplicity matter
+    - Bag     : ⦃x₀, x₁, …, xₙ⦄ or ⟅x₀, …, xₙ⟆  order doesn't matter but multiplicity does
+
+    #
+    -  Sets ≈ exitence is enough  .... “∈” is the key!!
+    -  Bags ≈ I *need* to know which one ... “♯” “how many times is it there?”
+    -  Bags ≈ multi-relations = multi-sets
+    #+end_details
+
+27. [@27] [[https://youtu.be/RcpgzDvMKxA][Multirelations!]]
+    kbd:Nov_27
+
+    We speak of people in Toronto sharing the same number of hair, multiple
+    edges in a graph, and how bags account for “mor information” by yielding the
+    number of times an element occurs whereas sets only care “whether it's there
+    or not” ---this is reminicient of classical vs constructive maths.  A few
+    fun graphs are shown.
+
+28. [[https://youtu.be/H0FE-0WiAPI][Reachability]]
+    kbd:Dec_1
+
+    We quickly review bags ---multisets--- and then talk about closures, which
+    capture the idea of “add just enough so the result has the deisred
+    property”.  This then leads us to talk about transitive closures which can
+    be used to to *elegantly* express proeprties on graphs that would otherwise be
+    a nightmare to work with (if quantifiers, ∀∃, were used).
+
+29. [[https://youtu.be/0LO1SkdmRBU][Trees]]
+    kbd:Dec_3
+
+    Directed, acyclic, connected graphs are known as trees.  They have the
+    particular property that they can be expressed as inductive data types:
+    Whereas a sequence is either empty ε or has a right-child ~x ◁ r~, a tree is
+    either empty ◬ or has *two* children ~l ◿ x ◺ r~. We also look at other examples
+    of inductively defined structures and briefly mention topological sort.
+
+30. [[https://youtu.be/kR_Xl1oM4Cg][Wrapping up the term: Closures, Topological Sort, Probability Theory]]
+    kbd:Dec_4
+
+    We finish the discussion on closures and kerneal that was started last time.
+    We look at DAGs and how they allow ‘sharing’ of structure and how we can
+    traverse graphs: We show visitation and topological sorting.  Finally, we
+    wrap up with a terse introduction to probability theory as “Σ in disguise”
+    and close with inference rules/trees and structural induction (•̀ᴗ•́)و
+
+31. [[https://youtu.be/BSnCxcpCEK0][Closing off with some induction example in *Agda*]]
+    kbd:Dec_8
+
+    /All the best with exams!/
 
 :Video_description:
  ─⟦Maths for Computing 𝓃⟧
@@ -476,3 +536,5 @@ Associated notes: https://alhassy.github.io/CalcCheck/
 {{{end-box}}}
 
 | ⇨ [[https://github.com/alhassy/CalcCheck][Github Repository]] ⇦ |
+
+[[file:images/course_overview.png]]
